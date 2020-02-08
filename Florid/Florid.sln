@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Droid", "Droid", "{E129E994-3B21-4463-925D-CC8BB2644460}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IOS", "IOS", "{F2F00306-DDD4-4A5B-BBEA-C38C5CB8B790}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C122B49A-AB04-4881-8D5F-C189CC59E91C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Florid.Droid", "Florid.Droid\Florid.Droid.csproj", "{7447EDBE-1647-4AB7-B27E-091F77D982CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Florid.Core", "Florid.Core\Florid.Core.csproj", "{90724680-1978-4627-90EE-7BBF62345E54}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{90724680-1978-4627-90EE-7BBF62345E54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90724680-1978-4627-90EE-7BBF62345E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90724680-1978-4627-90EE-7BBF62345E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90724680-1978-4627-90EE-7BBF62345E54}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7447EDBE-1647-4AB7-B27E-091F77D982CE} = {E129E994-3B21-4463-925D-CC8BB2644460}
+		{90724680-1978-4627-90EE-7BBF62345E54} = {C122B49A-AB04-4881-8D5F-C189CC59E91C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F1618A72-3A47-41D1-87BC-E21547529477}
+	EndGlobalSection
+EndGlobal
