@@ -5,10 +5,10 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90724680-1978-4627-90EE-7BBF62345E54}</ProjectGuid>
+    <ProjectGuid>{FB9D4177-71CF-4471-8F03-10D0C9A8CF29}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Florid.Core</RootNamespace>
-    <AssemblyName>Florid.Core</AssemblyName>
+    <RootNamespace>Florid.Schema</RootNamespace>
+    <AssemblyName>Florid.Schema</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -34,27 +34,12 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\BaseNormalRepository.cs" />
-    <Compile Include="Repositories\BaseRepository.cs" />
-    <Compile Include="ServiceLocator.cs" />
-    <Compile Include="Services\IBaseRepository.cs" />
-    <Compile Include="Services\IUserRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Florid.Schema\Florid.Schema.csproj">
-      <Project>{fb9d4177-71cf-4471-8f03-10d0c9a8cf29}</Project>
-      <Name>Florid.Schema</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

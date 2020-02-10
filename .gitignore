@@ -1,4 +1,11 @@
 Florid/Florid.Core/obj/
-Florid/Florid.Droid/bin/
-Florid/Florid.Droid/obj/
+Florid/Florid.Core/bin/
 Florid/.vs/
+Florid/Florid.Staff.Droid/obj/
+Florid/Florid.Staff.Droid/bin/
+Florid/Florid.Droid.Lib/obj/
+Florid/Florid.Droid.Lib/bin/
+Florid/packages/
+Florid/Florid.Schema/obj/
+Florid/Florid.Schema/bin/
+

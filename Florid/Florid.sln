@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Droid", "Droid", "{E129E994-3B21-4463-925D-CC8BB2644460}"
 EndProject
@@ -9,9 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IOS", "IOS", "{F2F00306-DDD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C122B49A-AB04-4881-8D5F-C189CC59E91C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Florid.Droid", "Florid.Droid\Florid.Droid.csproj", "{7447EDBE-1647-4AB7-B27E-091F77D982CE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Florid.Core", "Florid.Core\Florid.Core.csproj", "{90724680-1978-4627-90EE-7BBF62345E54}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Florid.Staff.Droid", "Florid.Staff.Droid\Florid.Staff.Droid.csproj", "{7656A6C6-FAEA-4FB0-8F81-C6714E360C8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Florid.Schema", "Florid.Schema\Florid.Schema.csproj", "{FB9D4177-71CF-4471-8F03-10D0C9A8CF29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{C1FF14B6-D43D-485B-B449-A0231AE9E38F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Florid.Droid.Lib", "Florid.Droid.Lib\Florid.Droid.Lib.csproj", "{8D84DA70-9605-4B39-A280-E6C1EF0181B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,23 +25,34 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7447EDBE-1647-4AB7-B27E-091F77D982CE}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{90724680-1978-4627-90EE-7BBF62345E54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90724680-1978-4627-90EE-7BBF62345E54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90724680-1978-4627-90EE-7BBF62345E54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90724680-1978-4627-90EE-7BBF62345E54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7656A6C6-FAEA-4FB0-8F81-C6714E360C8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7656A6C6-FAEA-4FB0-8F81-C6714E360C8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7656A6C6-FAEA-4FB0-8F81-C6714E360C8C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7656A6C6-FAEA-4FB0-8F81-C6714E360C8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7656A6C6-FAEA-4FB0-8F81-C6714E360C8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7656A6C6-FAEA-4FB0-8F81-C6714E360C8C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FB9D4177-71CF-4471-8F03-10D0C9A8CF29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9D4177-71CF-4471-8F03-10D0C9A8CF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9D4177-71CF-4471-8F03-10D0C9A8CF29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9D4177-71CF-4471-8F03-10D0C9A8CF29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D84DA70-9605-4B39-A280-E6C1EF0181B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D84DA70-9605-4B39-A280-E6C1EF0181B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D84DA70-9605-4B39-A280-E6C1EF0181B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D84DA70-9605-4B39-A280-E6C1EF0181B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7447EDBE-1647-4AB7-B27E-091F77D982CE} = {E129E994-3B21-4463-925D-CC8BB2644460}
 		{90724680-1978-4627-90EE-7BBF62345E54} = {C122B49A-AB04-4881-8D5F-C189CC59E91C}
+		{7656A6C6-FAEA-4FB0-8F81-C6714E360C8C} = {E129E994-3B21-4463-925D-CC8BB2644460}
+		{FB9D4177-71CF-4471-8F03-10D0C9A8CF29} = {C122B49A-AB04-4881-8D5F-C189CC59E91C}
+		{C1FF14B6-D43D-485B-B449-A0231AE9E38F} = {C122B49A-AB04-4881-8D5F-C189CC59E91C}
+		{8D84DA70-9605-4B39-A280-E6C1EF0181B1} = {C1FF14B6-D43D-485B-B449-A0231AE9E38F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F1618A72-3A47-41D1-87BC-E21547529477}

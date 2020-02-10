@@ -1,0 +1,9 @@
+(gốc  + tiền điều chỉnh ) - discount + phụ phí = giá điều chỉnh
+
+cách tích điểm: 100k được cộng 1 điểm, 1 điêm tương đương với 1k, sau khi đổi diểm, điểm được cộng được quy đổi bằng thành tiền sau khi trừ điểm đổi.
+
+Standard member : 5tr  discount 5%
+Vip member : 10tr discount 10%
+VVIP : 30tr discount 15%
+
+ko áp dụng đổi điểm và discount thành viên khi áp dụng khuyến mãi theo đợt
