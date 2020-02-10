@@ -26,6 +26,1613 @@ namespace Florid.Staff.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Florid.Droid.Lib.Resource.Animation.abc_fade_in = global::Florid.Staff.Droid.Resource.Animation.abc_fade_in;
+			global::Florid.Droid.Lib.Resource.Animation.abc_fade_out = global::Florid.Staff.Droid.Resource.Animation.abc_fade_out;
+			global::Florid.Droid.Lib.Resource.Animation.abc_grow_fade_in_from_bottom = global::Florid.Staff.Droid.Resource.Animation.abc_grow_fade_in_from_bottom;
+			global::Florid.Droid.Lib.Resource.Animation.abc_popup_enter = global::Florid.Staff.Droid.Resource.Animation.abc_popup_enter;
+			global::Florid.Droid.Lib.Resource.Animation.abc_popup_exit = global::Florid.Staff.Droid.Resource.Animation.abc_popup_exit;
+			global::Florid.Droid.Lib.Resource.Animation.abc_shrink_fade_out_from_bottom = global::Florid.Staff.Droid.Resource.Animation.abc_shrink_fade_out_from_bottom;
+			global::Florid.Droid.Lib.Resource.Animation.abc_slide_in_bottom = global::Florid.Staff.Droid.Resource.Animation.abc_slide_in_bottom;
+			global::Florid.Droid.Lib.Resource.Animation.abc_slide_in_top = global::Florid.Staff.Droid.Resource.Animation.abc_slide_in_top;
+			global::Florid.Droid.Lib.Resource.Animation.abc_slide_out_bottom = global::Florid.Staff.Droid.Resource.Animation.abc_slide_out_bottom;
+			global::Florid.Droid.Lib.Resource.Animation.abc_slide_out_top = global::Florid.Staff.Droid.Resource.Animation.abc_slide_out_top;
+			global::Florid.Droid.Lib.Resource.Animation.abc_tooltip_enter = global::Florid.Staff.Droid.Resource.Animation.abc_tooltip_enter;
+			global::Florid.Droid.Lib.Resource.Animation.abc_tooltip_exit = global::Florid.Staff.Droid.Resource.Animation.abc_tooltip_exit;
+			global::Florid.Droid.Lib.Resource.Attribute.actionBarDivider = global::Florid.Staff.Droid.Resource.Attribute.actionBarDivider;
+			global::Florid.Droid.Lib.Resource.Attribute.actionBarItemBackground = global::Florid.Staff.Droid.Resource.Attribute.actionBarItemBackground;
+			global::Florid.Droid.Lib.Resource.Attribute.actionBarPopupTheme = global::Florid.Staff.Droid.Resource.Attribute.actionBarPopupTheme;
+			global::Florid.Droid.Lib.Resource.Attribute.actionBarSize = global::Florid.Staff.Droid.Resource.Attribute.actionBarSize;
+			global::Florid.Droid.Lib.Resource.Attribute.actionBarSplitStyle = global::Florid.Staff.Droid.Resource.Attribute.actionBarSplitStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionBarStyle = global::Florid.Staff.Droid.Resource.Attribute.actionBarStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionBarTabBarStyle = global::Florid.Staff.Droid.Resource.Attribute.actionBarTabBarStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionBarTabStyle = global::Florid.Staff.Droid.Resource.Attribute.actionBarTabStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionBarTabTextStyle = global::Florid.Staff.Droid.Resource.Attribute.actionBarTabTextStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionBarTheme = global::Florid.Staff.Droid.Resource.Attribute.actionBarTheme;
+			global::Florid.Droid.Lib.Resource.Attribute.actionBarWidgetTheme = global::Florid.Staff.Droid.Resource.Attribute.actionBarWidgetTheme;
+			global::Florid.Droid.Lib.Resource.Attribute.actionButtonStyle = global::Florid.Staff.Droid.Resource.Attribute.actionButtonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionDropDownStyle = global::Florid.Staff.Droid.Resource.Attribute.actionDropDownStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionLayout = global::Florid.Staff.Droid.Resource.Attribute.actionLayout;
+			global::Florid.Droid.Lib.Resource.Attribute.actionMenuTextAppearance = global::Florid.Staff.Droid.Resource.Attribute.actionMenuTextAppearance;
+			global::Florid.Droid.Lib.Resource.Attribute.actionMenuTextColor = global::Florid.Staff.Droid.Resource.Attribute.actionMenuTextColor;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModeBackground = global::Florid.Staff.Droid.Resource.Attribute.actionModeBackground;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModeCloseButtonStyle = global::Florid.Staff.Droid.Resource.Attribute.actionModeCloseButtonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModeCloseDrawable = global::Florid.Staff.Droid.Resource.Attribute.actionModeCloseDrawable;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModeCopyDrawable = global::Florid.Staff.Droid.Resource.Attribute.actionModeCopyDrawable;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModeCutDrawable = global::Florid.Staff.Droid.Resource.Attribute.actionModeCutDrawable;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModeFindDrawable = global::Florid.Staff.Droid.Resource.Attribute.actionModeFindDrawable;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModePasteDrawable = global::Florid.Staff.Droid.Resource.Attribute.actionModePasteDrawable;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModePopupWindowStyle = global::Florid.Staff.Droid.Resource.Attribute.actionModePopupWindowStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModeSelectAllDrawable = global::Florid.Staff.Droid.Resource.Attribute.actionModeSelectAllDrawable;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModeShareDrawable = global::Florid.Staff.Droid.Resource.Attribute.actionModeShareDrawable;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModeSplitBackground = global::Florid.Staff.Droid.Resource.Attribute.actionModeSplitBackground;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModeStyle = global::Florid.Staff.Droid.Resource.Attribute.actionModeStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionModeWebSearchDrawable = global::Florid.Staff.Droid.Resource.Attribute.actionModeWebSearchDrawable;
+			global::Florid.Droid.Lib.Resource.Attribute.actionOverflowButtonStyle = global::Florid.Staff.Droid.Resource.Attribute.actionOverflowButtonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionOverflowMenuStyle = global::Florid.Staff.Droid.Resource.Attribute.actionOverflowMenuStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.actionProviderClass = global::Florid.Staff.Droid.Resource.Attribute.actionProviderClass;
+			global::Florid.Droid.Lib.Resource.Attribute.actionViewClass = global::Florid.Staff.Droid.Resource.Attribute.actionViewClass;
+			global::Florid.Droid.Lib.Resource.Attribute.activityChooserViewStyle = global::Florid.Staff.Droid.Resource.Attribute.activityChooserViewStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.alertDialogButtonGroupStyle = global::Florid.Staff.Droid.Resource.Attribute.alertDialogButtonGroupStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.alertDialogCenterButtons = global::Florid.Staff.Droid.Resource.Attribute.alertDialogCenterButtons;
+			global::Florid.Droid.Lib.Resource.Attribute.alertDialogStyle = global::Florid.Staff.Droid.Resource.Attribute.alertDialogStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.alertDialogTheme = global::Florid.Staff.Droid.Resource.Attribute.alertDialogTheme;
+			global::Florid.Droid.Lib.Resource.Attribute.allowStacking = global::Florid.Staff.Droid.Resource.Attribute.allowStacking;
+			global::Florid.Droid.Lib.Resource.Attribute.alpha = global::Florid.Staff.Droid.Resource.Attribute.alpha;
+			global::Florid.Droid.Lib.Resource.Attribute.alphabeticModifiers = global::Florid.Staff.Droid.Resource.Attribute.alphabeticModifiers;
+			global::Florid.Droid.Lib.Resource.Attribute.arrowHeadLength = global::Florid.Staff.Droid.Resource.Attribute.arrowHeadLength;
+			global::Florid.Droid.Lib.Resource.Attribute.arrowShaftLength = global::Florid.Staff.Droid.Resource.Attribute.arrowShaftLength;
+			global::Florid.Droid.Lib.Resource.Attribute.autoCompleteTextViewStyle = global::Florid.Staff.Droid.Resource.Attribute.autoCompleteTextViewStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.autoSizeMaxTextSize = global::Florid.Staff.Droid.Resource.Attribute.autoSizeMaxTextSize;
+			global::Florid.Droid.Lib.Resource.Attribute.autoSizeMinTextSize = global::Florid.Staff.Droid.Resource.Attribute.autoSizeMinTextSize;
+			global::Florid.Droid.Lib.Resource.Attribute.autoSizePresetSizes = global::Florid.Staff.Droid.Resource.Attribute.autoSizePresetSizes;
+			global::Florid.Droid.Lib.Resource.Attribute.autoSizeStepGranularity = global::Florid.Staff.Droid.Resource.Attribute.autoSizeStepGranularity;
+			global::Florid.Droid.Lib.Resource.Attribute.autoSizeTextType = global::Florid.Staff.Droid.Resource.Attribute.autoSizeTextType;
+			global::Florid.Droid.Lib.Resource.Attribute.background = global::Florid.Staff.Droid.Resource.Attribute.background;
+			global::Florid.Droid.Lib.Resource.Attribute.backgroundSplit = global::Florid.Staff.Droid.Resource.Attribute.backgroundSplit;
+			global::Florid.Droid.Lib.Resource.Attribute.backgroundStacked = global::Florid.Staff.Droid.Resource.Attribute.backgroundStacked;
+			global::Florid.Droid.Lib.Resource.Attribute.backgroundTint = global::Florid.Staff.Droid.Resource.Attribute.backgroundTint;
+			global::Florid.Droid.Lib.Resource.Attribute.backgroundTintMode = global::Florid.Staff.Droid.Resource.Attribute.backgroundTintMode;
+			global::Florid.Droid.Lib.Resource.Attribute.barLength = global::Florid.Staff.Droid.Resource.Attribute.barLength;
+			global::Florid.Droid.Lib.Resource.Attribute.borderlessButtonStyle = global::Florid.Staff.Droid.Resource.Attribute.borderlessButtonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonBarButtonStyle = global::Florid.Staff.Droid.Resource.Attribute.buttonBarButtonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonBarNegativeButtonStyle = global::Florid.Staff.Droid.Resource.Attribute.buttonBarNegativeButtonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonBarNeutralButtonStyle = global::Florid.Staff.Droid.Resource.Attribute.buttonBarNeutralButtonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonBarPositiveButtonStyle = global::Florid.Staff.Droid.Resource.Attribute.buttonBarPositiveButtonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonBarStyle = global::Florid.Staff.Droid.Resource.Attribute.buttonBarStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonGravity = global::Florid.Staff.Droid.Resource.Attribute.buttonGravity;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonIconDimen = global::Florid.Staff.Droid.Resource.Attribute.buttonIconDimen;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonPanelSideLayout = global::Florid.Staff.Droid.Resource.Attribute.buttonPanelSideLayout;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonStyle = global::Florid.Staff.Droid.Resource.Attribute.buttonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonStyleSmall = global::Florid.Staff.Droid.Resource.Attribute.buttonStyleSmall;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonTint = global::Florid.Staff.Droid.Resource.Attribute.buttonTint;
+			global::Florid.Droid.Lib.Resource.Attribute.buttonTintMode = global::Florid.Staff.Droid.Resource.Attribute.buttonTintMode;
+			global::Florid.Droid.Lib.Resource.Attribute.checkboxStyle = global::Florid.Staff.Droid.Resource.Attribute.checkboxStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.checkedTextViewStyle = global::Florid.Staff.Droid.Resource.Attribute.checkedTextViewStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.closeIcon = global::Florid.Staff.Droid.Resource.Attribute.closeIcon;
+			global::Florid.Droid.Lib.Resource.Attribute.closeItemLayout = global::Florid.Staff.Droid.Resource.Attribute.closeItemLayout;
+			global::Florid.Droid.Lib.Resource.Attribute.collapseContentDescription = global::Florid.Staff.Droid.Resource.Attribute.collapseContentDescription;
+			global::Florid.Droid.Lib.Resource.Attribute.collapseIcon = global::Florid.Staff.Droid.Resource.Attribute.collapseIcon;
+			global::Florid.Droid.Lib.Resource.Attribute.color = global::Florid.Staff.Droid.Resource.Attribute.color;
+			global::Florid.Droid.Lib.Resource.Attribute.colorAccent = global::Florid.Staff.Droid.Resource.Attribute.colorAccent;
+			global::Florid.Droid.Lib.Resource.Attribute.colorBackgroundFloating = global::Florid.Staff.Droid.Resource.Attribute.colorBackgroundFloating;
+			global::Florid.Droid.Lib.Resource.Attribute.colorButtonNormal = global::Florid.Staff.Droid.Resource.Attribute.colorButtonNormal;
+			global::Florid.Droid.Lib.Resource.Attribute.colorControlActivated = global::Florid.Staff.Droid.Resource.Attribute.colorControlActivated;
+			global::Florid.Droid.Lib.Resource.Attribute.colorControlHighlight = global::Florid.Staff.Droid.Resource.Attribute.colorControlHighlight;
+			global::Florid.Droid.Lib.Resource.Attribute.colorControlNormal = global::Florid.Staff.Droid.Resource.Attribute.colorControlNormal;
+			global::Florid.Droid.Lib.Resource.Attribute.colorError = global::Florid.Staff.Droid.Resource.Attribute.colorError;
+			global::Florid.Droid.Lib.Resource.Attribute.colorPrimary = global::Florid.Staff.Droid.Resource.Attribute.colorPrimary;
+			global::Florid.Droid.Lib.Resource.Attribute.colorPrimaryDark = global::Florid.Staff.Droid.Resource.Attribute.colorPrimaryDark;
+			global::Florid.Droid.Lib.Resource.Attribute.colorSwitchThumbNormal = global::Florid.Staff.Droid.Resource.Attribute.colorSwitchThumbNormal;
+			global::Florid.Droid.Lib.Resource.Attribute.commitIcon = global::Florid.Staff.Droid.Resource.Attribute.commitIcon;
+			global::Florid.Droid.Lib.Resource.Attribute.contentDescription = global::Florid.Staff.Droid.Resource.Attribute.contentDescription;
+			global::Florid.Droid.Lib.Resource.Attribute.contentInsetEnd = global::Florid.Staff.Droid.Resource.Attribute.contentInsetEnd;
+			global::Florid.Droid.Lib.Resource.Attribute.contentInsetEndWithActions = global::Florid.Staff.Droid.Resource.Attribute.contentInsetEndWithActions;
+			global::Florid.Droid.Lib.Resource.Attribute.contentInsetLeft = global::Florid.Staff.Droid.Resource.Attribute.contentInsetLeft;
+			global::Florid.Droid.Lib.Resource.Attribute.contentInsetRight = global::Florid.Staff.Droid.Resource.Attribute.contentInsetRight;
+			global::Florid.Droid.Lib.Resource.Attribute.contentInsetStart = global::Florid.Staff.Droid.Resource.Attribute.contentInsetStart;
+			global::Florid.Droid.Lib.Resource.Attribute.contentInsetStartWithNavigation = global::Florid.Staff.Droid.Resource.Attribute.contentInsetStartWithNavigation;
+			global::Florid.Droid.Lib.Resource.Attribute.controlBackground = global::Florid.Staff.Droid.Resource.Attribute.controlBackground;
+			global::Florid.Droid.Lib.Resource.Attribute.coordinatorLayoutStyle = global::Florid.Staff.Droid.Resource.Attribute.coordinatorLayoutStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.customNavigationLayout = global::Florid.Staff.Droid.Resource.Attribute.customNavigationLayout;
+			global::Florid.Droid.Lib.Resource.Attribute.defaultQueryHint = global::Florid.Staff.Droid.Resource.Attribute.defaultQueryHint;
+			global::Florid.Droid.Lib.Resource.Attribute.dialogCornerRadius = global::Florid.Staff.Droid.Resource.Attribute.dialogCornerRadius;
+			global::Florid.Droid.Lib.Resource.Attribute.dialogPreferredPadding = global::Florid.Staff.Droid.Resource.Attribute.dialogPreferredPadding;
+			global::Florid.Droid.Lib.Resource.Attribute.dialogTheme = global::Florid.Staff.Droid.Resource.Attribute.dialogTheme;
+			global::Florid.Droid.Lib.Resource.Attribute.displayOptions = global::Florid.Staff.Droid.Resource.Attribute.displayOptions;
+			global::Florid.Droid.Lib.Resource.Attribute.divider = global::Florid.Staff.Droid.Resource.Attribute.divider;
+			global::Florid.Droid.Lib.Resource.Attribute.dividerHorizontal = global::Florid.Staff.Droid.Resource.Attribute.dividerHorizontal;
+			global::Florid.Droid.Lib.Resource.Attribute.dividerPadding = global::Florid.Staff.Droid.Resource.Attribute.dividerPadding;
+			global::Florid.Droid.Lib.Resource.Attribute.dividerVertical = global::Florid.Staff.Droid.Resource.Attribute.dividerVertical;
+			global::Florid.Droid.Lib.Resource.Attribute.drawableSize = global::Florid.Staff.Droid.Resource.Attribute.drawableSize;
+			global::Florid.Droid.Lib.Resource.Attribute.drawerArrowStyle = global::Florid.Staff.Droid.Resource.Attribute.drawerArrowStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.dropdownListPreferredItemHeight = global::Florid.Staff.Droid.Resource.Attribute.dropdownListPreferredItemHeight;
+			global::Florid.Droid.Lib.Resource.Attribute.dropDownListViewStyle = global::Florid.Staff.Droid.Resource.Attribute.dropDownListViewStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.editTextBackground = global::Florid.Staff.Droid.Resource.Attribute.editTextBackground;
+			global::Florid.Droid.Lib.Resource.Attribute.editTextColor = global::Florid.Staff.Droid.Resource.Attribute.editTextColor;
+			global::Florid.Droid.Lib.Resource.Attribute.editTextStyle = global::Florid.Staff.Droid.Resource.Attribute.editTextStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.elevation = global::Florid.Staff.Droid.Resource.Attribute.elevation;
+			global::Florid.Droid.Lib.Resource.Attribute.expandActivityOverflowButtonDrawable = global::Florid.Staff.Droid.Resource.Attribute.expandActivityOverflowButtonDrawable;
+			global::Florid.Droid.Lib.Resource.Attribute.firstBaselineToTopHeight = global::Florid.Staff.Droid.Resource.Attribute.firstBaselineToTopHeight;
+			global::Florid.Droid.Lib.Resource.Attribute.font = global::Florid.Staff.Droid.Resource.Attribute.font;
+			global::Florid.Droid.Lib.Resource.Attribute.fontFamily = global::Florid.Staff.Droid.Resource.Attribute.fontFamily;
+			global::Florid.Droid.Lib.Resource.Attribute.fontProviderAuthority = global::Florid.Staff.Droid.Resource.Attribute.fontProviderAuthority;
+			global::Florid.Droid.Lib.Resource.Attribute.fontProviderCerts = global::Florid.Staff.Droid.Resource.Attribute.fontProviderCerts;
+			global::Florid.Droid.Lib.Resource.Attribute.fontProviderFetchStrategy = global::Florid.Staff.Droid.Resource.Attribute.fontProviderFetchStrategy;
+			global::Florid.Droid.Lib.Resource.Attribute.fontProviderFetchTimeout = global::Florid.Staff.Droid.Resource.Attribute.fontProviderFetchTimeout;
+			global::Florid.Droid.Lib.Resource.Attribute.fontProviderPackage = global::Florid.Staff.Droid.Resource.Attribute.fontProviderPackage;
+			global::Florid.Droid.Lib.Resource.Attribute.fontProviderQuery = global::Florid.Staff.Droid.Resource.Attribute.fontProviderQuery;
+			global::Florid.Droid.Lib.Resource.Attribute.fontStyle = global::Florid.Staff.Droid.Resource.Attribute.fontStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.fontVariationSettings = global::Florid.Staff.Droid.Resource.Attribute.fontVariationSettings;
+			global::Florid.Droid.Lib.Resource.Attribute.fontWeight = global::Florid.Staff.Droid.Resource.Attribute.fontWeight;
+			global::Florid.Droid.Lib.Resource.Attribute.gapBetweenBars = global::Florid.Staff.Droid.Resource.Attribute.gapBetweenBars;
+			global::Florid.Droid.Lib.Resource.Attribute.goIcon = global::Florid.Staff.Droid.Resource.Attribute.goIcon;
+			global::Florid.Droid.Lib.Resource.Attribute.height = global::Florid.Staff.Droid.Resource.Attribute.height;
+			global::Florid.Droid.Lib.Resource.Attribute.hideOnContentScroll = global::Florid.Staff.Droid.Resource.Attribute.hideOnContentScroll;
+			global::Florid.Droid.Lib.Resource.Attribute.homeAsUpIndicator = global::Florid.Staff.Droid.Resource.Attribute.homeAsUpIndicator;
+			global::Florid.Droid.Lib.Resource.Attribute.homeLayout = global::Florid.Staff.Droid.Resource.Attribute.homeLayout;
+			global::Florid.Droid.Lib.Resource.Attribute.icon = global::Florid.Staff.Droid.Resource.Attribute.icon;
+			global::Florid.Droid.Lib.Resource.Attribute.iconifiedByDefault = global::Florid.Staff.Droid.Resource.Attribute.iconifiedByDefault;
+			global::Florid.Droid.Lib.Resource.Attribute.iconTint = global::Florid.Staff.Droid.Resource.Attribute.iconTint;
+			global::Florid.Droid.Lib.Resource.Attribute.iconTintMode = global::Florid.Staff.Droid.Resource.Attribute.iconTintMode;
+			global::Florid.Droid.Lib.Resource.Attribute.imageButtonStyle = global::Florid.Staff.Droid.Resource.Attribute.imageButtonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.indeterminateProgressStyle = global::Florid.Staff.Droid.Resource.Attribute.indeterminateProgressStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.initialActivityCount = global::Florid.Staff.Droid.Resource.Attribute.initialActivityCount;
+			global::Florid.Droid.Lib.Resource.Attribute.isLightTheme = global::Florid.Staff.Droid.Resource.Attribute.isLightTheme;
+			global::Florid.Droid.Lib.Resource.Attribute.itemPadding = global::Florid.Staff.Droid.Resource.Attribute.itemPadding;
+			global::Florid.Droid.Lib.Resource.Attribute.keylines = global::Florid.Staff.Droid.Resource.Attribute.keylines;
+			global::Florid.Droid.Lib.Resource.Attribute.lastBaselineToBottomHeight = global::Florid.Staff.Droid.Resource.Attribute.lastBaselineToBottomHeight;
+			global::Florid.Droid.Lib.Resource.Attribute.layout = global::Florid.Staff.Droid.Resource.Attribute.layout;
+			global::Florid.Droid.Lib.Resource.Attribute.layout_anchor = global::Florid.Staff.Droid.Resource.Attribute.layout_anchor;
+			global::Florid.Droid.Lib.Resource.Attribute.layout_anchorGravity = global::Florid.Staff.Droid.Resource.Attribute.layout_anchorGravity;
+			global::Florid.Droid.Lib.Resource.Attribute.layout_behavior = global::Florid.Staff.Droid.Resource.Attribute.layout_behavior;
+			global::Florid.Droid.Lib.Resource.Attribute.layout_dodgeInsetEdges = global::Florid.Staff.Droid.Resource.Attribute.layout_dodgeInsetEdges;
+			global::Florid.Droid.Lib.Resource.Attribute.layout_insetEdge = global::Florid.Staff.Droid.Resource.Attribute.layout_insetEdge;
+			global::Florid.Droid.Lib.Resource.Attribute.layout_keyline = global::Florid.Staff.Droid.Resource.Attribute.layout_keyline;
+			global::Florid.Droid.Lib.Resource.Attribute.lineHeight = global::Florid.Staff.Droid.Resource.Attribute.lineHeight;
+			global::Florid.Droid.Lib.Resource.Attribute.listChoiceBackgroundIndicator = global::Florid.Staff.Droid.Resource.Attribute.listChoiceBackgroundIndicator;
+			global::Florid.Droid.Lib.Resource.Attribute.listDividerAlertDialog = global::Florid.Staff.Droid.Resource.Attribute.listDividerAlertDialog;
+			global::Florid.Droid.Lib.Resource.Attribute.listItemLayout = global::Florid.Staff.Droid.Resource.Attribute.listItemLayout;
+			global::Florid.Droid.Lib.Resource.Attribute.listLayout = global::Florid.Staff.Droid.Resource.Attribute.listLayout;
+			global::Florid.Droid.Lib.Resource.Attribute.listMenuViewStyle = global::Florid.Staff.Droid.Resource.Attribute.listMenuViewStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.listPopupWindowStyle = global::Florid.Staff.Droid.Resource.Attribute.listPopupWindowStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.listPreferredItemHeight = global::Florid.Staff.Droid.Resource.Attribute.listPreferredItemHeight;
+			global::Florid.Droid.Lib.Resource.Attribute.listPreferredItemHeightLarge = global::Florid.Staff.Droid.Resource.Attribute.listPreferredItemHeightLarge;
+			global::Florid.Droid.Lib.Resource.Attribute.listPreferredItemHeightSmall = global::Florid.Staff.Droid.Resource.Attribute.listPreferredItemHeightSmall;
+			global::Florid.Droid.Lib.Resource.Attribute.listPreferredItemPaddingLeft = global::Florid.Staff.Droid.Resource.Attribute.listPreferredItemPaddingLeft;
+			global::Florid.Droid.Lib.Resource.Attribute.listPreferredItemPaddingRight = global::Florid.Staff.Droid.Resource.Attribute.listPreferredItemPaddingRight;
+			global::Florid.Droid.Lib.Resource.Attribute.logo = global::Florid.Staff.Droid.Resource.Attribute.logo;
+			global::Florid.Droid.Lib.Resource.Attribute.logoDescription = global::Florid.Staff.Droid.Resource.Attribute.logoDescription;
+			global::Florid.Droid.Lib.Resource.Attribute.maxButtonHeight = global::Florid.Staff.Droid.Resource.Attribute.maxButtonHeight;
+			global::Florid.Droid.Lib.Resource.Attribute.measureWithLargestChild = global::Florid.Staff.Droid.Resource.Attribute.measureWithLargestChild;
+			global::Florid.Droid.Lib.Resource.Attribute.multiChoiceItemLayout = global::Florid.Staff.Droid.Resource.Attribute.multiChoiceItemLayout;
+			global::Florid.Droid.Lib.Resource.Attribute.navigationContentDescription = global::Florid.Staff.Droid.Resource.Attribute.navigationContentDescription;
+			global::Florid.Droid.Lib.Resource.Attribute.navigationIcon = global::Florid.Staff.Droid.Resource.Attribute.navigationIcon;
+			global::Florid.Droid.Lib.Resource.Attribute.navigationMode = global::Florid.Staff.Droid.Resource.Attribute.navigationMode;
+			global::Florid.Droid.Lib.Resource.Attribute.numericModifiers = global::Florid.Staff.Droid.Resource.Attribute.numericModifiers;
+			global::Florid.Droid.Lib.Resource.Attribute.overlapAnchor = global::Florid.Staff.Droid.Resource.Attribute.overlapAnchor;
+			global::Florid.Droid.Lib.Resource.Attribute.paddingBottomNoButtons = global::Florid.Staff.Droid.Resource.Attribute.paddingBottomNoButtons;
+			global::Florid.Droid.Lib.Resource.Attribute.paddingEnd = global::Florid.Staff.Droid.Resource.Attribute.paddingEnd;
+			global::Florid.Droid.Lib.Resource.Attribute.paddingStart = global::Florid.Staff.Droid.Resource.Attribute.paddingStart;
+			global::Florid.Droid.Lib.Resource.Attribute.paddingTopNoTitle = global::Florid.Staff.Droid.Resource.Attribute.paddingTopNoTitle;
+			global::Florid.Droid.Lib.Resource.Attribute.panelBackground = global::Florid.Staff.Droid.Resource.Attribute.panelBackground;
+			global::Florid.Droid.Lib.Resource.Attribute.panelMenuListTheme = global::Florid.Staff.Droid.Resource.Attribute.panelMenuListTheme;
+			global::Florid.Droid.Lib.Resource.Attribute.panelMenuListWidth = global::Florid.Staff.Droid.Resource.Attribute.panelMenuListWidth;
+			global::Florid.Droid.Lib.Resource.Attribute.popupMenuStyle = global::Florid.Staff.Droid.Resource.Attribute.popupMenuStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.popupTheme = global::Florid.Staff.Droid.Resource.Attribute.popupTheme;
+			global::Florid.Droid.Lib.Resource.Attribute.popupWindowStyle = global::Florid.Staff.Droid.Resource.Attribute.popupWindowStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.preserveIconSpacing = global::Florid.Staff.Droid.Resource.Attribute.preserveIconSpacing;
+			global::Florid.Droid.Lib.Resource.Attribute.progressBarPadding = global::Florid.Staff.Droid.Resource.Attribute.progressBarPadding;
+			global::Florid.Droid.Lib.Resource.Attribute.progressBarStyle = global::Florid.Staff.Droid.Resource.Attribute.progressBarStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.queryBackground = global::Florid.Staff.Droid.Resource.Attribute.queryBackground;
+			global::Florid.Droid.Lib.Resource.Attribute.queryHint = global::Florid.Staff.Droid.Resource.Attribute.queryHint;
+			global::Florid.Droid.Lib.Resource.Attribute.radioButtonStyle = global::Florid.Staff.Droid.Resource.Attribute.radioButtonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.ratingBarStyle = global::Florid.Staff.Droid.Resource.Attribute.ratingBarStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.ratingBarStyleIndicator = global::Florid.Staff.Droid.Resource.Attribute.ratingBarStyleIndicator;
+			global::Florid.Droid.Lib.Resource.Attribute.ratingBarStyleSmall = global::Florid.Staff.Droid.Resource.Attribute.ratingBarStyleSmall;
+			global::Florid.Droid.Lib.Resource.Attribute.searchHintIcon = global::Florid.Staff.Droid.Resource.Attribute.searchHintIcon;
+			global::Florid.Droid.Lib.Resource.Attribute.searchIcon = global::Florid.Staff.Droid.Resource.Attribute.searchIcon;
+			global::Florid.Droid.Lib.Resource.Attribute.searchViewStyle = global::Florid.Staff.Droid.Resource.Attribute.searchViewStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.seekBarStyle = global::Florid.Staff.Droid.Resource.Attribute.seekBarStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.selectableItemBackground = global::Florid.Staff.Droid.Resource.Attribute.selectableItemBackground;
+			global::Florid.Droid.Lib.Resource.Attribute.selectableItemBackgroundBorderless = global::Florid.Staff.Droid.Resource.Attribute.selectableItemBackgroundBorderless;
+			global::Florid.Droid.Lib.Resource.Attribute.showAsAction = global::Florid.Staff.Droid.Resource.Attribute.showAsAction;
+			global::Florid.Droid.Lib.Resource.Attribute.showDividers = global::Florid.Staff.Droid.Resource.Attribute.showDividers;
+			global::Florid.Droid.Lib.Resource.Attribute.showText = global::Florid.Staff.Droid.Resource.Attribute.showText;
+			global::Florid.Droid.Lib.Resource.Attribute.showTitle = global::Florid.Staff.Droid.Resource.Attribute.showTitle;
+			global::Florid.Droid.Lib.Resource.Attribute.singleChoiceItemLayout = global::Florid.Staff.Droid.Resource.Attribute.singleChoiceItemLayout;
+			global::Florid.Droid.Lib.Resource.Attribute.spinBars = global::Florid.Staff.Droid.Resource.Attribute.spinBars;
+			global::Florid.Droid.Lib.Resource.Attribute.spinnerDropDownItemStyle = global::Florid.Staff.Droid.Resource.Attribute.spinnerDropDownItemStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.spinnerStyle = global::Florid.Staff.Droid.Resource.Attribute.spinnerStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.splitTrack = global::Florid.Staff.Droid.Resource.Attribute.splitTrack;
+			global::Florid.Droid.Lib.Resource.Attribute.srcCompat = global::Florid.Staff.Droid.Resource.Attribute.srcCompat;
+			global::Florid.Droid.Lib.Resource.Attribute.state_above_anchor = global::Florid.Staff.Droid.Resource.Attribute.state_above_anchor;
+			global::Florid.Droid.Lib.Resource.Attribute.statusBarBackground = global::Florid.Staff.Droid.Resource.Attribute.statusBarBackground;
+			global::Florid.Droid.Lib.Resource.Attribute.subMenuArrow = global::Florid.Staff.Droid.Resource.Attribute.subMenuArrow;
+			global::Florid.Droid.Lib.Resource.Attribute.submitBackground = global::Florid.Staff.Droid.Resource.Attribute.submitBackground;
+			global::Florid.Droid.Lib.Resource.Attribute.subtitle = global::Florid.Staff.Droid.Resource.Attribute.subtitle;
+			global::Florid.Droid.Lib.Resource.Attribute.subtitleTextAppearance = global::Florid.Staff.Droid.Resource.Attribute.subtitleTextAppearance;
+			global::Florid.Droid.Lib.Resource.Attribute.subtitleTextColor = global::Florid.Staff.Droid.Resource.Attribute.subtitleTextColor;
+			global::Florid.Droid.Lib.Resource.Attribute.subtitleTextStyle = global::Florid.Staff.Droid.Resource.Attribute.subtitleTextStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.suggestionRowLayout = global::Florid.Staff.Droid.Resource.Attribute.suggestionRowLayout;
+			global::Florid.Droid.Lib.Resource.Attribute.switchMinWidth = global::Florid.Staff.Droid.Resource.Attribute.switchMinWidth;
+			global::Florid.Droid.Lib.Resource.Attribute.switchPadding = global::Florid.Staff.Droid.Resource.Attribute.switchPadding;
+			global::Florid.Droid.Lib.Resource.Attribute.switchStyle = global::Florid.Staff.Droid.Resource.Attribute.switchStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.switchTextAppearance = global::Florid.Staff.Droid.Resource.Attribute.switchTextAppearance;
+			global::Florid.Droid.Lib.Resource.Attribute.textAllCaps = global::Florid.Staff.Droid.Resource.Attribute.textAllCaps;
+			global::Florid.Droid.Lib.Resource.Attribute.textAppearanceLargePopupMenu = global::Florid.Staff.Droid.Resource.Attribute.textAppearanceLargePopupMenu;
+			global::Florid.Droid.Lib.Resource.Attribute.textAppearanceListItem = global::Florid.Staff.Droid.Resource.Attribute.textAppearanceListItem;
+			global::Florid.Droid.Lib.Resource.Attribute.textAppearanceListItemSecondary = global::Florid.Staff.Droid.Resource.Attribute.textAppearanceListItemSecondary;
+			global::Florid.Droid.Lib.Resource.Attribute.textAppearanceListItemSmall = global::Florid.Staff.Droid.Resource.Attribute.textAppearanceListItemSmall;
+			global::Florid.Droid.Lib.Resource.Attribute.textAppearancePopupMenuHeader = global::Florid.Staff.Droid.Resource.Attribute.textAppearancePopupMenuHeader;
+			global::Florid.Droid.Lib.Resource.Attribute.textAppearanceSearchResultSubtitle = global::Florid.Staff.Droid.Resource.Attribute.textAppearanceSearchResultSubtitle;
+			global::Florid.Droid.Lib.Resource.Attribute.textAppearanceSearchResultTitle = global::Florid.Staff.Droid.Resource.Attribute.textAppearanceSearchResultTitle;
+			global::Florid.Droid.Lib.Resource.Attribute.textAppearanceSmallPopupMenu = global::Florid.Staff.Droid.Resource.Attribute.textAppearanceSmallPopupMenu;
+			global::Florid.Droid.Lib.Resource.Attribute.textColorAlertDialogListItem = global::Florid.Staff.Droid.Resource.Attribute.textColorAlertDialogListItem;
+			global::Florid.Droid.Lib.Resource.Attribute.textColorSearchUrl = global::Florid.Staff.Droid.Resource.Attribute.textColorSearchUrl;
+			global::Florid.Droid.Lib.Resource.Attribute.theme = global::Florid.Staff.Droid.Resource.Attribute.theme;
+			global::Florid.Droid.Lib.Resource.Attribute.thickness = global::Florid.Staff.Droid.Resource.Attribute.thickness;
+			global::Florid.Droid.Lib.Resource.Attribute.thumbTextPadding = global::Florid.Staff.Droid.Resource.Attribute.thumbTextPadding;
+			global::Florid.Droid.Lib.Resource.Attribute.thumbTint = global::Florid.Staff.Droid.Resource.Attribute.thumbTint;
+			global::Florid.Droid.Lib.Resource.Attribute.thumbTintMode = global::Florid.Staff.Droid.Resource.Attribute.thumbTintMode;
+			global::Florid.Droid.Lib.Resource.Attribute.tickMark = global::Florid.Staff.Droid.Resource.Attribute.tickMark;
+			global::Florid.Droid.Lib.Resource.Attribute.tickMarkTint = global::Florid.Staff.Droid.Resource.Attribute.tickMarkTint;
+			global::Florid.Droid.Lib.Resource.Attribute.tickMarkTintMode = global::Florid.Staff.Droid.Resource.Attribute.tickMarkTintMode;
+			global::Florid.Droid.Lib.Resource.Attribute.tint = global::Florid.Staff.Droid.Resource.Attribute.tint;
+			global::Florid.Droid.Lib.Resource.Attribute.tintMode = global::Florid.Staff.Droid.Resource.Attribute.tintMode;
+			global::Florid.Droid.Lib.Resource.Attribute.title = global::Florid.Staff.Droid.Resource.Attribute.title;
+			global::Florid.Droid.Lib.Resource.Attribute.titleMargin = global::Florid.Staff.Droid.Resource.Attribute.titleMargin;
+			global::Florid.Droid.Lib.Resource.Attribute.titleMarginBottom = global::Florid.Staff.Droid.Resource.Attribute.titleMarginBottom;
+			global::Florid.Droid.Lib.Resource.Attribute.titleMarginEnd = global::Florid.Staff.Droid.Resource.Attribute.titleMarginEnd;
+			global::Florid.Droid.Lib.Resource.Attribute.titleMargins = global::Florid.Staff.Droid.Resource.Attribute.titleMargins;
+			global::Florid.Droid.Lib.Resource.Attribute.titleMarginStart = global::Florid.Staff.Droid.Resource.Attribute.titleMarginStart;
+			global::Florid.Droid.Lib.Resource.Attribute.titleMarginTop = global::Florid.Staff.Droid.Resource.Attribute.titleMarginTop;
+			global::Florid.Droid.Lib.Resource.Attribute.titleTextAppearance = global::Florid.Staff.Droid.Resource.Attribute.titleTextAppearance;
+			global::Florid.Droid.Lib.Resource.Attribute.titleTextColor = global::Florid.Staff.Droid.Resource.Attribute.titleTextColor;
+			global::Florid.Droid.Lib.Resource.Attribute.titleTextStyle = global::Florid.Staff.Droid.Resource.Attribute.titleTextStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.toolbarNavigationButtonStyle = global::Florid.Staff.Droid.Resource.Attribute.toolbarNavigationButtonStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.toolbarStyle = global::Florid.Staff.Droid.Resource.Attribute.toolbarStyle;
+			global::Florid.Droid.Lib.Resource.Attribute.tooltipForegroundColor = global::Florid.Staff.Droid.Resource.Attribute.tooltipForegroundColor;
+			global::Florid.Droid.Lib.Resource.Attribute.tooltipFrameBackground = global::Florid.Staff.Droid.Resource.Attribute.tooltipFrameBackground;
+			global::Florid.Droid.Lib.Resource.Attribute.tooltipText = global::Florid.Staff.Droid.Resource.Attribute.tooltipText;
+			global::Florid.Droid.Lib.Resource.Attribute.track = global::Florid.Staff.Droid.Resource.Attribute.track;
+			global::Florid.Droid.Lib.Resource.Attribute.trackTint = global::Florid.Staff.Droid.Resource.Attribute.trackTint;
+			global::Florid.Droid.Lib.Resource.Attribute.trackTintMode = global::Florid.Staff.Droid.Resource.Attribute.trackTintMode;
+			global::Florid.Droid.Lib.Resource.Attribute.ttcIndex = global::Florid.Staff.Droid.Resource.Attribute.ttcIndex;
+			global::Florid.Droid.Lib.Resource.Attribute.viewInflaterClass = global::Florid.Staff.Droid.Resource.Attribute.viewInflaterClass;
+			global::Florid.Droid.Lib.Resource.Attribute.voiceIcon = global::Florid.Staff.Droid.Resource.Attribute.voiceIcon;
+			global::Florid.Droid.Lib.Resource.Attribute.windowActionBar = global::Florid.Staff.Droid.Resource.Attribute.windowActionBar;
+			global::Florid.Droid.Lib.Resource.Attribute.windowActionBarOverlay = global::Florid.Staff.Droid.Resource.Attribute.windowActionBarOverlay;
+			global::Florid.Droid.Lib.Resource.Attribute.windowActionModeOverlay = global::Florid.Staff.Droid.Resource.Attribute.windowActionModeOverlay;
+			global::Florid.Droid.Lib.Resource.Attribute.windowFixedHeightMajor = global::Florid.Staff.Droid.Resource.Attribute.windowFixedHeightMajor;
+			global::Florid.Droid.Lib.Resource.Attribute.windowFixedHeightMinor = global::Florid.Staff.Droid.Resource.Attribute.windowFixedHeightMinor;
+			global::Florid.Droid.Lib.Resource.Attribute.windowFixedWidthMajor = global::Florid.Staff.Droid.Resource.Attribute.windowFixedWidthMajor;
+			global::Florid.Droid.Lib.Resource.Attribute.windowFixedWidthMinor = global::Florid.Staff.Droid.Resource.Attribute.windowFixedWidthMinor;
+			global::Florid.Droid.Lib.Resource.Attribute.windowMinWidthMajor = global::Florid.Staff.Droid.Resource.Attribute.windowMinWidthMajor;
+			global::Florid.Droid.Lib.Resource.Attribute.windowMinWidthMinor = global::Florid.Staff.Droid.Resource.Attribute.windowMinWidthMinor;
+			global::Florid.Droid.Lib.Resource.Attribute.windowNoTitle = global::Florid.Staff.Droid.Resource.Attribute.windowNoTitle;
+			global::Florid.Droid.Lib.Resource.Boolean.abc_action_bar_embed_tabs = global::Florid.Staff.Droid.Resource.Boolean.abc_action_bar_embed_tabs;
+			global::Florid.Droid.Lib.Resource.Boolean.abc_allow_stacked_button_bar = global::Florid.Staff.Droid.Resource.Boolean.abc_allow_stacked_button_bar;
+			global::Florid.Droid.Lib.Resource.Boolean.abc_config_actionMenuItemAllCaps = global::Florid.Staff.Droid.Resource.Boolean.abc_config_actionMenuItemAllCaps;
+			global::Florid.Droid.Lib.Resource.Color.abc_background_cache_hint_selector_material_dark = global::Florid.Staff.Droid.Resource.Color.abc_background_cache_hint_selector_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.abc_background_cache_hint_selector_material_light = global::Florid.Staff.Droid.Resource.Color.abc_background_cache_hint_selector_material_light;
+			global::Florid.Droid.Lib.Resource.Color.abc_btn_colored_borderless_text_material = global::Florid.Staff.Droid.Resource.Color.abc_btn_colored_borderless_text_material;
+			global::Florid.Droid.Lib.Resource.Color.abc_btn_colored_text_material = global::Florid.Staff.Droid.Resource.Color.abc_btn_colored_text_material;
+			global::Florid.Droid.Lib.Resource.Color.abc_color_highlight_material = global::Florid.Staff.Droid.Resource.Color.abc_color_highlight_material;
+			global::Florid.Droid.Lib.Resource.Color.abc_hint_foreground_material_dark = global::Florid.Staff.Droid.Resource.Color.abc_hint_foreground_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.abc_hint_foreground_material_light = global::Florid.Staff.Droid.Resource.Color.abc_hint_foreground_material_light;
+			global::Florid.Droid.Lib.Resource.Color.abc_input_method_navigation_guard = global::Florid.Staff.Droid.Resource.Color.abc_input_method_navigation_guard;
+			global::Florid.Droid.Lib.Resource.Color.abc_primary_text_disable_only_material_dark = global::Florid.Staff.Droid.Resource.Color.abc_primary_text_disable_only_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.abc_primary_text_disable_only_material_light = global::Florid.Staff.Droid.Resource.Color.abc_primary_text_disable_only_material_light;
+			global::Florid.Droid.Lib.Resource.Color.abc_primary_text_material_dark = global::Florid.Staff.Droid.Resource.Color.abc_primary_text_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.abc_primary_text_material_light = global::Florid.Staff.Droid.Resource.Color.abc_primary_text_material_light;
+			global::Florid.Droid.Lib.Resource.Color.abc_search_url_text = global::Florid.Staff.Droid.Resource.Color.abc_search_url_text;
+			global::Florid.Droid.Lib.Resource.Color.abc_search_url_text_normal = global::Florid.Staff.Droid.Resource.Color.abc_search_url_text_normal;
+			global::Florid.Droid.Lib.Resource.Color.abc_search_url_text_pressed = global::Florid.Staff.Droid.Resource.Color.abc_search_url_text_pressed;
+			global::Florid.Droid.Lib.Resource.Color.abc_search_url_text_selected = global::Florid.Staff.Droid.Resource.Color.abc_search_url_text_selected;
+			global::Florid.Droid.Lib.Resource.Color.abc_secondary_text_material_dark = global::Florid.Staff.Droid.Resource.Color.abc_secondary_text_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.abc_secondary_text_material_light = global::Florid.Staff.Droid.Resource.Color.abc_secondary_text_material_light;
+			global::Florid.Droid.Lib.Resource.Color.abc_tint_btn_checkable = global::Florid.Staff.Droid.Resource.Color.abc_tint_btn_checkable;
+			global::Florid.Droid.Lib.Resource.Color.abc_tint_default = global::Florid.Staff.Droid.Resource.Color.abc_tint_default;
+			global::Florid.Droid.Lib.Resource.Color.abc_tint_edittext = global::Florid.Staff.Droid.Resource.Color.abc_tint_edittext;
+			global::Florid.Droid.Lib.Resource.Color.abc_tint_seek_thumb = global::Florid.Staff.Droid.Resource.Color.abc_tint_seek_thumb;
+			global::Florid.Droid.Lib.Resource.Color.abc_tint_spinner = global::Florid.Staff.Droid.Resource.Color.abc_tint_spinner;
+			global::Florid.Droid.Lib.Resource.Color.abc_tint_switch_track = global::Florid.Staff.Droid.Resource.Color.abc_tint_switch_track;
+			global::Florid.Droid.Lib.Resource.Color.accent_material_dark = global::Florid.Staff.Droid.Resource.Color.accent_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.accent_material_light = global::Florid.Staff.Droid.Resource.Color.accent_material_light;
+			global::Florid.Droid.Lib.Resource.Color.background_floating_material_dark = global::Florid.Staff.Droid.Resource.Color.background_floating_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.background_floating_material_light = global::Florid.Staff.Droid.Resource.Color.background_floating_material_light;
+			global::Florid.Droid.Lib.Resource.Color.background_material_dark = global::Florid.Staff.Droid.Resource.Color.background_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.background_material_light = global::Florid.Staff.Droid.Resource.Color.background_material_light;
+			global::Florid.Droid.Lib.Resource.Color.bright_foreground_disabled_material_dark = global::Florid.Staff.Droid.Resource.Color.bright_foreground_disabled_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.bright_foreground_disabled_material_light = global::Florid.Staff.Droid.Resource.Color.bright_foreground_disabled_material_light;
+			global::Florid.Droid.Lib.Resource.Color.bright_foreground_inverse_material_dark = global::Florid.Staff.Droid.Resource.Color.bright_foreground_inverse_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.bright_foreground_inverse_material_light = global::Florid.Staff.Droid.Resource.Color.bright_foreground_inverse_material_light;
+			global::Florid.Droid.Lib.Resource.Color.bright_foreground_material_dark = global::Florid.Staff.Droid.Resource.Color.bright_foreground_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.bright_foreground_material_light = global::Florid.Staff.Droid.Resource.Color.bright_foreground_material_light;
+			global::Florid.Droid.Lib.Resource.Color.button_material_dark = global::Florid.Staff.Droid.Resource.Color.button_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.button_material_light = global::Florid.Staff.Droid.Resource.Color.button_material_light;
+			global::Florid.Droid.Lib.Resource.Color.dim_foreground_disabled_material_dark = global::Florid.Staff.Droid.Resource.Color.dim_foreground_disabled_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.dim_foreground_disabled_material_light = global::Florid.Staff.Droid.Resource.Color.dim_foreground_disabled_material_light;
+			global::Florid.Droid.Lib.Resource.Color.dim_foreground_material_dark = global::Florid.Staff.Droid.Resource.Color.dim_foreground_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.dim_foreground_material_light = global::Florid.Staff.Droid.Resource.Color.dim_foreground_material_light;
+			global::Florid.Droid.Lib.Resource.Color.error_color_material_dark = global::Florid.Staff.Droid.Resource.Color.error_color_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.error_color_material_light = global::Florid.Staff.Droid.Resource.Color.error_color_material_light;
+			global::Florid.Droid.Lib.Resource.Color.foreground_material_dark = global::Florid.Staff.Droid.Resource.Color.foreground_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.foreground_material_light = global::Florid.Staff.Droid.Resource.Color.foreground_material_light;
+			global::Florid.Droid.Lib.Resource.Color.highlighted_text_material_dark = global::Florid.Staff.Droid.Resource.Color.highlighted_text_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.highlighted_text_material_light = global::Florid.Staff.Droid.Resource.Color.highlighted_text_material_light;
+			global::Florid.Droid.Lib.Resource.Color.material_blue_grey_800 = global::Florid.Staff.Droid.Resource.Color.material_blue_grey_800;
+			global::Florid.Droid.Lib.Resource.Color.material_blue_grey_900 = global::Florid.Staff.Droid.Resource.Color.material_blue_grey_900;
+			global::Florid.Droid.Lib.Resource.Color.material_blue_grey_950 = global::Florid.Staff.Droid.Resource.Color.material_blue_grey_950;
+			global::Florid.Droid.Lib.Resource.Color.material_deep_teal_200 = global::Florid.Staff.Droid.Resource.Color.material_deep_teal_200;
+			global::Florid.Droid.Lib.Resource.Color.material_deep_teal_500 = global::Florid.Staff.Droid.Resource.Color.material_deep_teal_500;
+			global::Florid.Droid.Lib.Resource.Color.material_grey_100 = global::Florid.Staff.Droid.Resource.Color.material_grey_100;
+			global::Florid.Droid.Lib.Resource.Color.material_grey_300 = global::Florid.Staff.Droid.Resource.Color.material_grey_300;
+			global::Florid.Droid.Lib.Resource.Color.material_grey_50 = global::Florid.Staff.Droid.Resource.Color.material_grey_50;
+			global::Florid.Droid.Lib.Resource.Color.material_grey_600 = global::Florid.Staff.Droid.Resource.Color.material_grey_600;
+			global::Florid.Droid.Lib.Resource.Color.material_grey_800 = global::Florid.Staff.Droid.Resource.Color.material_grey_800;
+			global::Florid.Droid.Lib.Resource.Color.material_grey_850 = global::Florid.Staff.Droid.Resource.Color.material_grey_850;
+			global::Florid.Droid.Lib.Resource.Color.material_grey_900 = global::Florid.Staff.Droid.Resource.Color.material_grey_900;
+			global::Florid.Droid.Lib.Resource.Color.notification_action_color_filter = global::Florid.Staff.Droid.Resource.Color.notification_action_color_filter;
+			global::Florid.Droid.Lib.Resource.Color.notification_icon_bg_color = global::Florid.Staff.Droid.Resource.Color.notification_icon_bg_color;
+			global::Florid.Droid.Lib.Resource.Color.primary_dark_material_dark = global::Florid.Staff.Droid.Resource.Color.primary_dark_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.primary_dark_material_light = global::Florid.Staff.Droid.Resource.Color.primary_dark_material_light;
+			global::Florid.Droid.Lib.Resource.Color.primary_material_dark = global::Florid.Staff.Droid.Resource.Color.primary_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.primary_material_light = global::Florid.Staff.Droid.Resource.Color.primary_material_light;
+			global::Florid.Droid.Lib.Resource.Color.primary_text_default_material_dark = global::Florid.Staff.Droid.Resource.Color.primary_text_default_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.primary_text_default_material_light = global::Florid.Staff.Droid.Resource.Color.primary_text_default_material_light;
+			global::Florid.Droid.Lib.Resource.Color.primary_text_disabled_material_dark = global::Florid.Staff.Droid.Resource.Color.primary_text_disabled_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.primary_text_disabled_material_light = global::Florid.Staff.Droid.Resource.Color.primary_text_disabled_material_light;
+			global::Florid.Droid.Lib.Resource.Color.ripple_material_dark = global::Florid.Staff.Droid.Resource.Color.ripple_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.ripple_material_light = global::Florid.Staff.Droid.Resource.Color.ripple_material_light;
+			global::Florid.Droid.Lib.Resource.Color.secondary_text_default_material_dark = global::Florid.Staff.Droid.Resource.Color.secondary_text_default_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.secondary_text_default_material_light = global::Florid.Staff.Droid.Resource.Color.secondary_text_default_material_light;
+			global::Florid.Droid.Lib.Resource.Color.secondary_text_disabled_material_dark = global::Florid.Staff.Droid.Resource.Color.secondary_text_disabled_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.secondary_text_disabled_material_light = global::Florid.Staff.Droid.Resource.Color.secondary_text_disabled_material_light;
+			global::Florid.Droid.Lib.Resource.Color.switch_thumb_disabled_material_dark = global::Florid.Staff.Droid.Resource.Color.switch_thumb_disabled_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.switch_thumb_disabled_material_light = global::Florid.Staff.Droid.Resource.Color.switch_thumb_disabled_material_light;
+			global::Florid.Droid.Lib.Resource.Color.switch_thumb_material_dark = global::Florid.Staff.Droid.Resource.Color.switch_thumb_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.switch_thumb_material_light = global::Florid.Staff.Droid.Resource.Color.switch_thumb_material_light;
+			global::Florid.Droid.Lib.Resource.Color.switch_thumb_normal_material_dark = global::Florid.Staff.Droid.Resource.Color.switch_thumb_normal_material_dark;
+			global::Florid.Droid.Lib.Resource.Color.switch_thumb_normal_material_light = global::Florid.Staff.Droid.Resource.Color.switch_thumb_normal_material_light;
+			global::Florid.Droid.Lib.Resource.Color.tooltip_background_dark = global::Florid.Staff.Droid.Resource.Color.tooltip_background_dark;
+			global::Florid.Droid.Lib.Resource.Color.tooltip_background_light = global::Florid.Staff.Droid.Resource.Color.tooltip_background_light;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_content_inset_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_content_inset_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_content_inset_with_nav = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_content_inset_with_nav;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_default_height_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_default_height_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_default_padding_end_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_default_padding_end_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_default_padding_start_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_default_padding_start_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_elevation_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_elevation_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_icon_vertical_padding_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_icon_vertical_padding_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_overflow_padding_end_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_overflow_padding_end_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_overflow_padding_start_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_overflow_padding_start_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_stacked_max_height = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_stacked_max_height;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_stacked_tab_max_width = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_stacked_tab_max_width;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_subtitle_bottom_margin_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_subtitle_bottom_margin_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_bar_subtitle_top_margin_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_bar_subtitle_top_margin_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_button_min_height_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_button_min_height_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_button_min_width_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_button_min_width_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_action_button_min_width_overflow_material = global::Florid.Staff.Droid.Resource.Dimension.abc_action_button_min_width_overflow_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_alert_dialog_button_bar_height = global::Florid.Staff.Droid.Resource.Dimension.abc_alert_dialog_button_bar_height;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_alert_dialog_button_dimen = global::Florid.Staff.Droid.Resource.Dimension.abc_alert_dialog_button_dimen;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_button_inset_horizontal_material = global::Florid.Staff.Droid.Resource.Dimension.abc_button_inset_horizontal_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_button_inset_vertical_material = global::Florid.Staff.Droid.Resource.Dimension.abc_button_inset_vertical_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_button_padding_horizontal_material = global::Florid.Staff.Droid.Resource.Dimension.abc_button_padding_horizontal_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_button_padding_vertical_material = global::Florid.Staff.Droid.Resource.Dimension.abc_button_padding_vertical_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_cascading_menus_min_smallest_width = global::Florid.Staff.Droid.Resource.Dimension.abc_cascading_menus_min_smallest_width;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_config_prefDialogWidth = global::Florid.Staff.Droid.Resource.Dimension.abc_config_prefDialogWidth;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_control_corner_material = global::Florid.Staff.Droid.Resource.Dimension.abc_control_corner_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_control_inset_material = global::Florid.Staff.Droid.Resource.Dimension.abc_control_inset_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_control_padding_material = global::Florid.Staff.Droid.Resource.Dimension.abc_control_padding_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_corner_radius_material = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_corner_radius_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_fixed_height_major = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_fixed_height_major;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_fixed_height_minor = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_fixed_height_minor;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_fixed_width_major = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_fixed_width_major;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_fixed_width_minor = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_fixed_width_minor;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_list_padding_bottom_no_buttons = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_list_padding_bottom_no_buttons;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_list_padding_top_no_title = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_list_padding_top_no_title;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_min_width_major = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_min_width_major;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_min_width_minor = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_min_width_minor;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_padding_material = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_padding_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_padding_top_material = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_padding_top_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dialog_title_divider_material = global::Florid.Staff.Droid.Resource.Dimension.abc_dialog_title_divider_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_disabled_alpha_material_dark = global::Florid.Staff.Droid.Resource.Dimension.abc_disabled_alpha_material_dark;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_disabled_alpha_material_light = global::Florid.Staff.Droid.Resource.Dimension.abc_disabled_alpha_material_light;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dropdownitem_icon_width = global::Florid.Staff.Droid.Resource.Dimension.abc_dropdownitem_icon_width;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dropdownitem_text_padding_left = global::Florid.Staff.Droid.Resource.Dimension.abc_dropdownitem_text_padding_left;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_dropdownitem_text_padding_right = global::Florid.Staff.Droid.Resource.Dimension.abc_dropdownitem_text_padding_right;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_edit_text_inset_bottom_material = global::Florid.Staff.Droid.Resource.Dimension.abc_edit_text_inset_bottom_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_edit_text_inset_horizontal_material = global::Florid.Staff.Droid.Resource.Dimension.abc_edit_text_inset_horizontal_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_edit_text_inset_top_material = global::Florid.Staff.Droid.Resource.Dimension.abc_edit_text_inset_top_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_floating_window_z = global::Florid.Staff.Droid.Resource.Dimension.abc_floating_window_z;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_list_item_padding_horizontal_material = global::Florid.Staff.Droid.Resource.Dimension.abc_list_item_padding_horizontal_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_panel_menu_list_width = global::Florid.Staff.Droid.Resource.Dimension.abc_panel_menu_list_width;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_progress_bar_height_material = global::Florid.Staff.Droid.Resource.Dimension.abc_progress_bar_height_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_search_view_preferred_height = global::Florid.Staff.Droid.Resource.Dimension.abc_search_view_preferred_height;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_search_view_preferred_width = global::Florid.Staff.Droid.Resource.Dimension.abc_search_view_preferred_width;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_seekbar_track_background_height_material = global::Florid.Staff.Droid.Resource.Dimension.abc_seekbar_track_background_height_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_seekbar_track_progress_height_material = global::Florid.Staff.Droid.Resource.Dimension.abc_seekbar_track_progress_height_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_select_dialog_padding_start_material = global::Florid.Staff.Droid.Resource.Dimension.abc_select_dialog_padding_start_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_switch_padding = global::Florid.Staff.Droid.Resource.Dimension.abc_switch_padding;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_body_1_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_body_1_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_body_2_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_body_2_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_button_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_button_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_caption_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_caption_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_display_1_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_display_1_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_display_2_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_display_2_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_display_3_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_display_3_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_display_4_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_display_4_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_headline_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_headline_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_large_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_large_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_medium_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_medium_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_menu_header_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_menu_header_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_menu_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_menu_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_small_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_small_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_subhead_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_subhead_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_subtitle_material_toolbar = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_subtitle_material_toolbar;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_title_material = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_title_material;
+			global::Florid.Droid.Lib.Resource.Dimension.abc_text_size_title_material_toolbar = global::Florid.Staff.Droid.Resource.Dimension.abc_text_size_title_material_toolbar;
+			global::Florid.Droid.Lib.Resource.Dimension.compat_button_inset_horizontal_material = global::Florid.Staff.Droid.Resource.Dimension.compat_button_inset_horizontal_material;
+			global::Florid.Droid.Lib.Resource.Dimension.compat_button_inset_vertical_material = global::Florid.Staff.Droid.Resource.Dimension.compat_button_inset_vertical_material;
+			global::Florid.Droid.Lib.Resource.Dimension.compat_button_padding_horizontal_material = global::Florid.Staff.Droid.Resource.Dimension.compat_button_padding_horizontal_material;
+			global::Florid.Droid.Lib.Resource.Dimension.compat_button_padding_vertical_material = global::Florid.Staff.Droid.Resource.Dimension.compat_button_padding_vertical_material;
+			global::Florid.Droid.Lib.Resource.Dimension.compat_control_corner_material = global::Florid.Staff.Droid.Resource.Dimension.compat_control_corner_material;
+			global::Florid.Droid.Lib.Resource.Dimension.compat_notification_large_icon_max_height = global::Florid.Staff.Droid.Resource.Dimension.compat_notification_large_icon_max_height;
+			global::Florid.Droid.Lib.Resource.Dimension.compat_notification_large_icon_max_width = global::Florid.Staff.Droid.Resource.Dimension.compat_notification_large_icon_max_width;
+			global::Florid.Droid.Lib.Resource.Dimension.disabled_alpha_material_dark = global::Florid.Staff.Droid.Resource.Dimension.disabled_alpha_material_dark;
+			global::Florid.Droid.Lib.Resource.Dimension.disabled_alpha_material_light = global::Florid.Staff.Droid.Resource.Dimension.disabled_alpha_material_light;
+			global::Florid.Droid.Lib.Resource.Dimension.highlight_alpha_material_colored = global::Florid.Staff.Droid.Resource.Dimension.highlight_alpha_material_colored;
+			global::Florid.Droid.Lib.Resource.Dimension.highlight_alpha_material_dark = global::Florid.Staff.Droid.Resource.Dimension.highlight_alpha_material_dark;
+			global::Florid.Droid.Lib.Resource.Dimension.highlight_alpha_material_light = global::Florid.Staff.Droid.Resource.Dimension.highlight_alpha_material_light;
+			global::Florid.Droid.Lib.Resource.Dimension.hint_alpha_material_dark = global::Florid.Staff.Droid.Resource.Dimension.hint_alpha_material_dark;
+			global::Florid.Droid.Lib.Resource.Dimension.hint_alpha_material_light = global::Florid.Staff.Droid.Resource.Dimension.hint_alpha_material_light;
+			global::Florid.Droid.Lib.Resource.Dimension.hint_pressed_alpha_material_dark = global::Florid.Staff.Droid.Resource.Dimension.hint_pressed_alpha_material_dark;
+			global::Florid.Droid.Lib.Resource.Dimension.hint_pressed_alpha_material_light = global::Florid.Staff.Droid.Resource.Dimension.hint_pressed_alpha_material_light;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_action_icon_size = global::Florid.Staff.Droid.Resource.Dimension.notification_action_icon_size;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_action_text_size = global::Florid.Staff.Droid.Resource.Dimension.notification_action_text_size;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_big_circle_margin = global::Florid.Staff.Droid.Resource.Dimension.notification_big_circle_margin;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_content_margin_start = global::Florid.Staff.Droid.Resource.Dimension.notification_content_margin_start;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_large_icon_height = global::Florid.Staff.Droid.Resource.Dimension.notification_large_icon_height;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_large_icon_width = global::Florid.Staff.Droid.Resource.Dimension.notification_large_icon_width;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_main_column_padding_top = global::Florid.Staff.Droid.Resource.Dimension.notification_main_column_padding_top;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_media_narrow_margin = global::Florid.Staff.Droid.Resource.Dimension.notification_media_narrow_margin;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_right_icon_size = global::Florid.Staff.Droid.Resource.Dimension.notification_right_icon_size;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_right_side_padding_top = global::Florid.Staff.Droid.Resource.Dimension.notification_right_side_padding_top;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_small_icon_background_padding = global::Florid.Staff.Droid.Resource.Dimension.notification_small_icon_background_padding;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_small_icon_size_as_large = global::Florid.Staff.Droid.Resource.Dimension.notification_small_icon_size_as_large;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_subtext_size = global::Florid.Staff.Droid.Resource.Dimension.notification_subtext_size;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_top_pad = global::Florid.Staff.Droid.Resource.Dimension.notification_top_pad;
+			global::Florid.Droid.Lib.Resource.Dimension.notification_top_pad_large_text = global::Florid.Staff.Droid.Resource.Dimension.notification_top_pad_large_text;
+			global::Florid.Droid.Lib.Resource.Dimension.tooltip_corner_radius = global::Florid.Staff.Droid.Resource.Dimension.tooltip_corner_radius;
+			global::Florid.Droid.Lib.Resource.Dimension.tooltip_horizontal_padding = global::Florid.Staff.Droid.Resource.Dimension.tooltip_horizontal_padding;
+			global::Florid.Droid.Lib.Resource.Dimension.tooltip_margin = global::Florid.Staff.Droid.Resource.Dimension.tooltip_margin;
+			global::Florid.Droid.Lib.Resource.Dimension.tooltip_precise_anchor_extra_offset = global::Florid.Staff.Droid.Resource.Dimension.tooltip_precise_anchor_extra_offset;
+			global::Florid.Droid.Lib.Resource.Dimension.tooltip_precise_anchor_threshold = global::Florid.Staff.Droid.Resource.Dimension.tooltip_precise_anchor_threshold;
+			global::Florid.Droid.Lib.Resource.Dimension.tooltip_vertical_padding = global::Florid.Staff.Droid.Resource.Dimension.tooltip_vertical_padding;
+			global::Florid.Droid.Lib.Resource.Dimension.tooltip_y_offset_non_touch = global::Florid.Staff.Droid.Resource.Dimension.tooltip_y_offset_non_touch;
+			global::Florid.Droid.Lib.Resource.Dimension.tooltip_y_offset_touch = global::Florid.Staff.Droid.Resource.Dimension.tooltip_y_offset_touch;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ab_share_pack_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_ab_share_pack_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_action_bar_item_background_material = global::Florid.Staff.Droid.Resource.Drawable.abc_action_bar_item_background_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_btn_borderless_material = global::Florid.Staff.Droid.Resource.Drawable.abc_btn_borderless_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_btn_check_material = global::Florid.Staff.Droid.Resource.Drawable.abc_btn_check_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_btn_check_to_on_mtrl_000 = global::Florid.Staff.Droid.Resource.Drawable.abc_btn_check_to_on_mtrl_000;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_btn_check_to_on_mtrl_015 = global::Florid.Staff.Droid.Resource.Drawable.abc_btn_check_to_on_mtrl_015;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_btn_colored_material = global::Florid.Staff.Droid.Resource.Drawable.abc_btn_colored_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_btn_default_mtrl_shape = global::Florid.Staff.Droid.Resource.Drawable.abc_btn_default_mtrl_shape;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_btn_radio_material = global::Florid.Staff.Droid.Resource.Drawable.abc_btn_radio_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_btn_radio_to_on_mtrl_000 = global::Florid.Staff.Droid.Resource.Drawable.abc_btn_radio_to_on_mtrl_000;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_btn_radio_to_on_mtrl_015 = global::Florid.Staff.Droid.Resource.Drawable.abc_btn_radio_to_on_mtrl_015;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_btn_switch_to_on_mtrl_00001 = global::Florid.Staff.Droid.Resource.Drawable.abc_btn_switch_to_on_mtrl_00001;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_btn_switch_to_on_mtrl_00012 = global::Florid.Staff.Droid.Resource.Drawable.abc_btn_switch_to_on_mtrl_00012;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_cab_background_internal_bg = global::Florid.Staff.Droid.Resource.Drawable.abc_cab_background_internal_bg;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_cab_background_top_material = global::Florid.Staff.Droid.Resource.Drawable.abc_cab_background_top_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_cab_background_top_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_cab_background_top_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_control_background_material = global::Florid.Staff.Droid.Resource.Drawable.abc_control_background_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_dialog_material_background = global::Florid.Staff.Droid.Resource.Drawable.abc_dialog_material_background;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_edit_text_material = global::Florid.Staff.Droid.Resource.Drawable.abc_edit_text_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_ab_back_material = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_ab_back_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_arrow_drop_right_black_24dp = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_arrow_drop_right_black_24dp;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_clear_material = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_clear_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_commit_search_api_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_commit_search_api_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_go_search_api_material = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_go_search_api_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_menu_copy_mtrl_am_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_menu_copy_mtrl_am_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_menu_cut_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_menu_cut_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_menu_overflow_material = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_menu_overflow_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_menu_paste_mtrl_am_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_menu_paste_mtrl_am_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_menu_selectall_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_menu_selectall_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_menu_share_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_menu_share_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_search_api_material = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_search_api_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_star_black_16dp = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_star_black_16dp;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_star_black_36dp = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_star_black_36dp;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_star_black_48dp = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_star_black_48dp;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_star_half_black_16dp = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_star_half_black_16dp;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_star_half_black_36dp = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_star_half_black_36dp;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_star_half_black_48dp = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_star_half_black_48dp;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ic_voice_search_api_material = global::Florid.Staff.Droid.Resource.Drawable.abc_ic_voice_search_api_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_item_background_holo_dark = global::Florid.Staff.Droid.Resource.Drawable.abc_item_background_holo_dark;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_item_background_holo_light = global::Florid.Staff.Droid.Resource.Drawable.abc_item_background_holo_light;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_divider_material = global::Florid.Staff.Droid.Resource.Drawable.abc_list_divider_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_divider_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_list_divider_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_focused_holo = global::Florid.Staff.Droid.Resource.Drawable.abc_list_focused_holo;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_longpressed_holo = global::Florid.Staff.Droid.Resource.Drawable.abc_list_longpressed_holo;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_pressed_holo_dark = global::Florid.Staff.Droid.Resource.Drawable.abc_list_pressed_holo_dark;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_pressed_holo_light = global::Florid.Staff.Droid.Resource.Drawable.abc_list_pressed_holo_light;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_selector_background_transition_holo_dark = global::Florid.Staff.Droid.Resource.Drawable.abc_list_selector_background_transition_holo_dark;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_selector_background_transition_holo_light = global::Florid.Staff.Droid.Resource.Drawable.abc_list_selector_background_transition_holo_light;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_selector_disabled_holo_dark = global::Florid.Staff.Droid.Resource.Drawable.abc_list_selector_disabled_holo_dark;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_selector_disabled_holo_light = global::Florid.Staff.Droid.Resource.Drawable.abc_list_selector_disabled_holo_light;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_selector_holo_dark = global::Florid.Staff.Droid.Resource.Drawable.abc_list_selector_holo_dark;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_list_selector_holo_light = global::Florid.Staff.Droid.Resource.Drawable.abc_list_selector_holo_light;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_menu_hardkey_panel_mtrl_mult = global::Florid.Staff.Droid.Resource.Drawable.abc_menu_hardkey_panel_mtrl_mult;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_popup_background_mtrl_mult = global::Florid.Staff.Droid.Resource.Drawable.abc_popup_background_mtrl_mult;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ratingbar_indicator_material = global::Florid.Staff.Droid.Resource.Drawable.abc_ratingbar_indicator_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ratingbar_material = global::Florid.Staff.Droid.Resource.Drawable.abc_ratingbar_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_ratingbar_small_material = global::Florid.Staff.Droid.Resource.Drawable.abc_ratingbar_small_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_scrubber_control_off_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_scrubber_control_off_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_000 = global::Florid.Staff.Droid.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_000;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_005 = global::Florid.Staff.Droid.Resource.Drawable.abc_scrubber_control_to_pressed_mtrl_005;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_scrubber_primary_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_scrubber_primary_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_scrubber_track_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_scrubber_track_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_seekbar_thumb_material = global::Florid.Staff.Droid.Resource.Drawable.abc_seekbar_thumb_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_seekbar_tick_mark_material = global::Florid.Staff.Droid.Resource.Drawable.abc_seekbar_tick_mark_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_seekbar_track_material = global::Florid.Staff.Droid.Resource.Drawable.abc_seekbar_track_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_spinner_mtrl_am_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_spinner_mtrl_am_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_spinner_textfield_background_material = global::Florid.Staff.Droid.Resource.Drawable.abc_spinner_textfield_background_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_switch_thumb_material = global::Florid.Staff.Droid.Resource.Drawable.abc_switch_thumb_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_switch_track_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_switch_track_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_tab_indicator_material = global::Florid.Staff.Droid.Resource.Drawable.abc_tab_indicator_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_tab_indicator_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_tab_indicator_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_textfield_activated_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_textfield_activated_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_textfield_default_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_textfield_default_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_textfield_search_activated_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_textfield_search_activated_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_textfield_search_default_mtrl_alpha = global::Florid.Staff.Droid.Resource.Drawable.abc_textfield_search_default_mtrl_alpha;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_textfield_search_material = global::Florid.Staff.Droid.Resource.Drawable.abc_textfield_search_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_text_cursor_material = global::Florid.Staff.Droid.Resource.Drawable.abc_text_cursor_material;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_text_select_handle_left_mtrl_dark = global::Florid.Staff.Droid.Resource.Drawable.abc_text_select_handle_left_mtrl_dark;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_text_select_handle_left_mtrl_light = global::Florid.Staff.Droid.Resource.Drawable.abc_text_select_handle_left_mtrl_light;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_text_select_handle_middle_mtrl_dark = global::Florid.Staff.Droid.Resource.Drawable.abc_text_select_handle_middle_mtrl_dark;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_text_select_handle_middle_mtrl_light = global::Florid.Staff.Droid.Resource.Drawable.abc_text_select_handle_middle_mtrl_light;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_text_select_handle_right_mtrl_dark = global::Florid.Staff.Droid.Resource.Drawable.abc_text_select_handle_right_mtrl_dark;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_text_select_handle_right_mtrl_light = global::Florid.Staff.Droid.Resource.Drawable.abc_text_select_handle_right_mtrl_light;
+			global::Florid.Droid.Lib.Resource.Drawable.abc_vector_test = global::Florid.Staff.Droid.Resource.Drawable.abc_vector_test;
+			global::Florid.Droid.Lib.Resource.Drawable.notification_action_background = global::Florid.Staff.Droid.Resource.Drawable.notification_action_background;
+			global::Florid.Droid.Lib.Resource.Drawable.notification_bg = global::Florid.Staff.Droid.Resource.Drawable.notification_bg;
+			global::Florid.Droid.Lib.Resource.Drawable.notification_bg_low = global::Florid.Staff.Droid.Resource.Drawable.notification_bg_low;
+			global::Florid.Droid.Lib.Resource.Drawable.notification_bg_low_normal = global::Florid.Staff.Droid.Resource.Drawable.notification_bg_low_normal;
+			global::Florid.Droid.Lib.Resource.Drawable.notification_bg_low_pressed = global::Florid.Staff.Droid.Resource.Drawable.notification_bg_low_pressed;
+			global::Florid.Droid.Lib.Resource.Drawable.notification_bg_normal = global::Florid.Staff.Droid.Resource.Drawable.notification_bg_normal;
+			global::Florid.Droid.Lib.Resource.Drawable.notification_bg_normal_pressed = global::Florid.Staff.Droid.Resource.Drawable.notification_bg_normal_pressed;
+			global::Florid.Droid.Lib.Resource.Drawable.notification_icon_background = global::Florid.Staff.Droid.Resource.Drawable.notification_icon_background;
+			global::Florid.Droid.Lib.Resource.Drawable.notification_template_icon_bg = global::Florid.Staff.Droid.Resource.Drawable.notification_template_icon_bg;
+			global::Florid.Droid.Lib.Resource.Drawable.notification_template_icon_low_bg = global::Florid.Staff.Droid.Resource.Drawable.notification_template_icon_low_bg;
+			global::Florid.Droid.Lib.Resource.Drawable.notification_tile_bg = global::Florid.Staff.Droid.Resource.Drawable.notification_tile_bg;
+			global::Florid.Droid.Lib.Resource.Drawable.notify_panel_notification_icon_bg = global::Florid.Staff.Droid.Resource.Drawable.notify_panel_notification_icon_bg;
+			global::Florid.Droid.Lib.Resource.Drawable.tooltip_frame_dark = global::Florid.Staff.Droid.Resource.Drawable.tooltip_frame_dark;
+			global::Florid.Droid.Lib.Resource.Drawable.tooltip_frame_light = global::Florid.Staff.Droid.Resource.Drawable.tooltip_frame_light;
+			global::Florid.Droid.Lib.Resource.Id.actions = global::Florid.Staff.Droid.Resource.Id.actions;
+			global::Florid.Droid.Lib.Resource.Id.action_bar = global::Florid.Staff.Droid.Resource.Id.action_bar;
+			global::Florid.Droid.Lib.Resource.Id.action_bar_activity_content = global::Florid.Staff.Droid.Resource.Id.action_bar_activity_content;
+			global::Florid.Droid.Lib.Resource.Id.action_bar_container = global::Florid.Staff.Droid.Resource.Id.action_bar_container;
+			global::Florid.Droid.Lib.Resource.Id.action_bar_root = global::Florid.Staff.Droid.Resource.Id.action_bar_root;
+			global::Florid.Droid.Lib.Resource.Id.action_bar_spinner = global::Florid.Staff.Droid.Resource.Id.action_bar_spinner;
+			global::Florid.Droid.Lib.Resource.Id.action_bar_subtitle = global::Florid.Staff.Droid.Resource.Id.action_bar_subtitle;
+			global::Florid.Droid.Lib.Resource.Id.action_bar_title = global::Florid.Staff.Droid.Resource.Id.action_bar_title;
+			global::Florid.Droid.Lib.Resource.Id.action_container = global::Florid.Staff.Droid.Resource.Id.action_container;
+			global::Florid.Droid.Lib.Resource.Id.action_context_bar = global::Florid.Staff.Droid.Resource.Id.action_context_bar;
+			global::Florid.Droid.Lib.Resource.Id.action_divider = global::Florid.Staff.Droid.Resource.Id.action_divider;
+			global::Florid.Droid.Lib.Resource.Id.action_image = global::Florid.Staff.Droid.Resource.Id.action_image;
+			global::Florid.Droid.Lib.Resource.Id.action_menu_divider = global::Florid.Staff.Droid.Resource.Id.action_menu_divider;
+			global::Florid.Droid.Lib.Resource.Id.action_menu_presenter = global::Florid.Staff.Droid.Resource.Id.action_menu_presenter;
+			global::Florid.Droid.Lib.Resource.Id.action_mode_bar = global::Florid.Staff.Droid.Resource.Id.action_mode_bar;
+			global::Florid.Droid.Lib.Resource.Id.action_mode_bar_stub = global::Florid.Staff.Droid.Resource.Id.action_mode_bar_stub;
+			global::Florid.Droid.Lib.Resource.Id.action_mode_close_button = global::Florid.Staff.Droid.Resource.Id.action_mode_close_button;
+			global::Florid.Droid.Lib.Resource.Id.action_text = global::Florid.Staff.Droid.Resource.Id.action_text;
+			global::Florid.Droid.Lib.Resource.Id.activity_chooser_view_content = global::Florid.Staff.Droid.Resource.Id.activity_chooser_view_content;
+			global::Florid.Droid.Lib.Resource.Id.add = global::Florid.Staff.Droid.Resource.Id.add;
+			global::Florid.Droid.Lib.Resource.Id.alertTitle = global::Florid.Staff.Droid.Resource.Id.alertTitle;
+			global::Florid.Droid.Lib.Resource.Id.all = global::Florid.Staff.Droid.Resource.Id.all;
+			global::Florid.Droid.Lib.Resource.Id.ALT = global::Florid.Staff.Droid.Resource.Id.ALT;
+			global::Florid.Droid.Lib.Resource.Id.always = global::Florid.Staff.Droid.Resource.Id.always;
+			global::Florid.Droid.Lib.Resource.Id.async = global::Florid.Staff.Droid.Resource.Id.async;
+			global::Florid.Droid.Lib.Resource.Id.beginning = global::Florid.Staff.Droid.Resource.Id.beginning;
+			global::Florid.Droid.Lib.Resource.Id.blocking = global::Florid.Staff.Droid.Resource.Id.blocking;
+			global::Florid.Droid.Lib.Resource.Id.bottom = global::Florid.Staff.Droid.Resource.Id.bottom;
+			global::Florid.Droid.Lib.Resource.Id.buttonPanel = global::Florid.Staff.Droid.Resource.Id.buttonPanel;
+			global::Florid.Droid.Lib.Resource.Id.center = global::Florid.Staff.Droid.Resource.Id.center;
+			global::Florid.Droid.Lib.Resource.Id.center_horizontal = global::Florid.Staff.Droid.Resource.Id.center_horizontal;
+			global::Florid.Droid.Lib.Resource.Id.center_vertical = global::Florid.Staff.Droid.Resource.Id.center_vertical;
+			global::Florid.Droid.Lib.Resource.Id.checkbox = global::Florid.Staff.Droid.Resource.Id.checkbox;
+			global::Florid.Droid.Lib.Resource.Id.chronometer = global::Florid.Staff.Droid.Resource.Id.chronometer;
+			global::Florid.Droid.Lib.Resource.Id.clip_horizontal = global::Florid.Staff.Droid.Resource.Id.clip_horizontal;
+			global::Florid.Droid.Lib.Resource.Id.clip_vertical = global::Florid.Staff.Droid.Resource.Id.clip_vertical;
+			global::Florid.Droid.Lib.Resource.Id.collapseActionView = global::Florid.Staff.Droid.Resource.Id.collapseActionView;
+			global::Florid.Droid.Lib.Resource.Id.content = global::Florid.Staff.Droid.Resource.Id.content;
+			global::Florid.Droid.Lib.Resource.Id.contentPanel = global::Florid.Staff.Droid.Resource.Id.contentPanel;
+			global::Florid.Droid.Lib.Resource.Id.CTRL = global::Florid.Staff.Droid.Resource.Id.CTRL;
+			global::Florid.Droid.Lib.Resource.Id.custom = global::Florid.Staff.Droid.Resource.Id.custom;
+			global::Florid.Droid.Lib.Resource.Id.customPanel = global::Florid.Staff.Droid.Resource.Id.customPanel;
+			global::Florid.Droid.Lib.Resource.Id.decor_content_parent = global::Florid.Staff.Droid.Resource.Id.decor_content_parent;
+			global::Florid.Droid.Lib.Resource.Id.default_activity_button = global::Florid.Staff.Droid.Resource.Id.default_activity_button;
+			global::Florid.Droid.Lib.Resource.Id.disableHome = global::Florid.Staff.Droid.Resource.Id.disableHome;
+			global::Florid.Droid.Lib.Resource.Id.edit_query = global::Florid.Staff.Droid.Resource.Id.edit_query;
+			global::Florid.Droid.Lib.Resource.Id.end = global::Florid.Staff.Droid.Resource.Id.end;
+			global::Florid.Droid.Lib.Resource.Id.expanded_menu = global::Florid.Staff.Droid.Resource.Id.expanded_menu;
+			global::Florid.Droid.Lib.Resource.Id.expand_activities_button = global::Florid.Staff.Droid.Resource.Id.expand_activities_button;
+			global::Florid.Droid.Lib.Resource.Id.fill = global::Florid.Staff.Droid.Resource.Id.fill;
+			global::Florid.Droid.Lib.Resource.Id.fill_horizontal = global::Florid.Staff.Droid.Resource.Id.fill_horizontal;
+			global::Florid.Droid.Lib.Resource.Id.fill_vertical = global::Florid.Staff.Droid.Resource.Id.fill_vertical;
+			global::Florid.Droid.Lib.Resource.Id.forever = global::Florid.Staff.Droid.Resource.Id.forever;
+			global::Florid.Droid.Lib.Resource.Id.FUNCTION = global::Florid.Staff.Droid.Resource.Id.FUNCTION;
+			global::Florid.Droid.Lib.Resource.Id.group_divider = global::Florid.Staff.Droid.Resource.Id.group_divider;
+			global::Florid.Droid.Lib.Resource.Id.home = global::Florid.Staff.Droid.Resource.Id.home;
+			global::Florid.Droid.Lib.Resource.Id.homeAsUp = global::Florid.Staff.Droid.Resource.Id.homeAsUp;
+			global::Florid.Droid.Lib.Resource.Id.icon = global::Florid.Staff.Droid.Resource.Id.icon;
+			global::Florid.Droid.Lib.Resource.Id.icon_group = global::Florid.Staff.Droid.Resource.Id.icon_group;
+			global::Florid.Droid.Lib.Resource.Id.ifRoom = global::Florid.Staff.Droid.Resource.Id.ifRoom;
+			global::Florid.Droid.Lib.Resource.Id.image = global::Florid.Staff.Droid.Resource.Id.image;
+			global::Florid.Droid.Lib.Resource.Id.info = global::Florid.Staff.Droid.Resource.Id.info;
+			global::Florid.Droid.Lib.Resource.Id.italic = global::Florid.Staff.Droid.Resource.Id.italic;
+			global::Florid.Droid.Lib.Resource.Id.left = global::Florid.Staff.Droid.Resource.Id.left;
+			global::Florid.Droid.Lib.Resource.Id.line1 = global::Florid.Staff.Droid.Resource.Id.line1;
+			global::Florid.Droid.Lib.Resource.Id.line3 = global::Florid.Staff.Droid.Resource.Id.line3;
+			global::Florid.Droid.Lib.Resource.Id.listMode = global::Florid.Staff.Droid.Resource.Id.listMode;
+			global::Florid.Droid.Lib.Resource.Id.list_item = global::Florid.Staff.Droid.Resource.Id.list_item;
+			global::Florid.Droid.Lib.Resource.Id.message = global::Florid.Staff.Droid.Resource.Id.message;
+			global::Florid.Droid.Lib.Resource.Id.META = global::Florid.Staff.Droid.Resource.Id.META;
+			global::Florid.Droid.Lib.Resource.Id.middle = global::Florid.Staff.Droid.Resource.Id.middle;
+			global::Florid.Droid.Lib.Resource.Id.multiply = global::Florid.Staff.Droid.Resource.Id.multiply;
+			global::Florid.Droid.Lib.Resource.Id.never = global::Florid.Staff.Droid.Resource.Id.never;
+			global::Florid.Droid.Lib.Resource.Id.none = global::Florid.Staff.Droid.Resource.Id.none;
+			global::Florid.Droid.Lib.Resource.Id.normal = global::Florid.Staff.Droid.Resource.Id.normal;
+			global::Florid.Droid.Lib.Resource.Id.notification_background = global::Florid.Staff.Droid.Resource.Id.notification_background;
+			global::Florid.Droid.Lib.Resource.Id.notification_main_column = global::Florid.Staff.Droid.Resource.Id.notification_main_column;
+			global::Florid.Droid.Lib.Resource.Id.notification_main_column_container = global::Florid.Staff.Droid.Resource.Id.notification_main_column_container;
+			global::Florid.Droid.Lib.Resource.Id.parentPanel = global::Florid.Staff.Droid.Resource.Id.parentPanel;
+			global::Florid.Droid.Lib.Resource.Id.progress_circular = global::Florid.Staff.Droid.Resource.Id.progress_circular;
+			global::Florid.Droid.Lib.Resource.Id.progress_horizontal = global::Florid.Staff.Droid.Resource.Id.progress_horizontal;
+			global::Florid.Droid.Lib.Resource.Id.radio = global::Florid.Staff.Droid.Resource.Id.radio;
+			global::Florid.Droid.Lib.Resource.Id.right = global::Florid.Staff.Droid.Resource.Id.right;
+			global::Florid.Droid.Lib.Resource.Id.right_icon = global::Florid.Staff.Droid.Resource.Id.right_icon;
+			global::Florid.Droid.Lib.Resource.Id.right_side = global::Florid.Staff.Droid.Resource.Id.right_side;
+			global::Florid.Droid.Lib.Resource.Id.screen = global::Florid.Staff.Droid.Resource.Id.screen;
+			global::Florid.Droid.Lib.Resource.Id.scrollIndicatorDown = global::Florid.Staff.Droid.Resource.Id.scrollIndicatorDown;
+			global::Florid.Droid.Lib.Resource.Id.scrollIndicatorUp = global::Florid.Staff.Droid.Resource.Id.scrollIndicatorUp;
+			global::Florid.Droid.Lib.Resource.Id.scrollView = global::Florid.Staff.Droid.Resource.Id.scrollView;
+			global::Florid.Droid.Lib.Resource.Id.search_badge = global::Florid.Staff.Droid.Resource.Id.search_badge;
+			global::Florid.Droid.Lib.Resource.Id.search_bar = global::Florid.Staff.Droid.Resource.Id.search_bar;
+			global::Florid.Droid.Lib.Resource.Id.search_button = global::Florid.Staff.Droid.Resource.Id.search_button;
+			global::Florid.Droid.Lib.Resource.Id.search_close_btn = global::Florid.Staff.Droid.Resource.Id.search_close_btn;
+			global::Florid.Droid.Lib.Resource.Id.search_edit_frame = global::Florid.Staff.Droid.Resource.Id.search_edit_frame;
+			global::Florid.Droid.Lib.Resource.Id.search_go_btn = global::Florid.Staff.Droid.Resource.Id.search_go_btn;
+			global::Florid.Droid.Lib.Resource.Id.search_mag_icon = global::Florid.Staff.Droid.Resource.Id.search_mag_icon;
+			global::Florid.Droid.Lib.Resource.Id.search_plate = global::Florid.Staff.Droid.Resource.Id.search_plate;
+			global::Florid.Droid.Lib.Resource.Id.search_src_text = global::Florid.Staff.Droid.Resource.Id.search_src_text;
+			global::Florid.Droid.Lib.Resource.Id.search_voice_btn = global::Florid.Staff.Droid.Resource.Id.search_voice_btn;
+			global::Florid.Droid.Lib.Resource.Id.select_dialog_listview = global::Florid.Staff.Droid.Resource.Id.select_dialog_listview;
+			global::Florid.Droid.Lib.Resource.Id.SHIFT = global::Florid.Staff.Droid.Resource.Id.SHIFT;
+			global::Florid.Droid.Lib.Resource.Id.shortcut = global::Florid.Staff.Droid.Resource.Id.shortcut;
+			global::Florid.Droid.Lib.Resource.Id.showCustom = global::Florid.Staff.Droid.Resource.Id.showCustom;
+			global::Florid.Droid.Lib.Resource.Id.showHome = global::Florid.Staff.Droid.Resource.Id.showHome;
+			global::Florid.Droid.Lib.Resource.Id.showTitle = global::Florid.Staff.Droid.Resource.Id.showTitle;
+			global::Florid.Droid.Lib.Resource.Id.spacer = global::Florid.Staff.Droid.Resource.Id.spacer;
+			global::Florid.Droid.Lib.Resource.Id.split_action_bar = global::Florid.Staff.Droid.Resource.Id.split_action_bar;
+			global::Florid.Droid.Lib.Resource.Id.src_atop = global::Florid.Staff.Droid.Resource.Id.src_atop;
+			global::Florid.Droid.Lib.Resource.Id.src_in = global::Florid.Staff.Droid.Resource.Id.src_in;
+			global::Florid.Droid.Lib.Resource.Id.src_over = global::Florid.Staff.Droid.Resource.Id.src_over;
+			global::Florid.Droid.Lib.Resource.Id.start = global::Florid.Staff.Droid.Resource.Id.start;
+			global::Florid.Droid.Lib.Resource.Id.submenuarrow = global::Florid.Staff.Droid.Resource.Id.submenuarrow;
+			global::Florid.Droid.Lib.Resource.Id.submit_area = global::Florid.Staff.Droid.Resource.Id.submit_area;
+			global::Florid.Droid.Lib.Resource.Id.SYM = global::Florid.Staff.Droid.Resource.Id.SYM;
+			global::Florid.Droid.Lib.Resource.Id.tabMode = global::Florid.Staff.Droid.Resource.Id.tabMode;
+			global::Florid.Droid.Lib.Resource.Id.tag_transition_group = global::Florid.Staff.Droid.Resource.Id.tag_transition_group;
+			global::Florid.Droid.Lib.Resource.Id.tag_unhandled_key_event_manager = global::Florid.Staff.Droid.Resource.Id.tag_unhandled_key_event_manager;
+			global::Florid.Droid.Lib.Resource.Id.tag_unhandled_key_listeners = global::Florid.Staff.Droid.Resource.Id.tag_unhandled_key_listeners;
+			global::Florid.Droid.Lib.Resource.Id.text = global::Florid.Staff.Droid.Resource.Id.text;
+			global::Florid.Droid.Lib.Resource.Id.text2 = global::Florid.Staff.Droid.Resource.Id.text2;
+			global::Florid.Droid.Lib.Resource.Id.textSpacerNoButtons = global::Florid.Staff.Droid.Resource.Id.textSpacerNoButtons;
+			global::Florid.Droid.Lib.Resource.Id.textSpacerNoTitle = global::Florid.Staff.Droid.Resource.Id.textSpacerNoTitle;
+			global::Florid.Droid.Lib.Resource.Id.time = global::Florid.Staff.Droid.Resource.Id.time;
+			global::Florid.Droid.Lib.Resource.Id.title = global::Florid.Staff.Droid.Resource.Id.title;
+			global::Florid.Droid.Lib.Resource.Id.titleDividerNoCustom = global::Florid.Staff.Droid.Resource.Id.titleDividerNoCustom;
+			global::Florid.Droid.Lib.Resource.Id.title_template = global::Florid.Staff.Droid.Resource.Id.title_template;
+			global::Florid.Droid.Lib.Resource.Id.top = global::Florid.Staff.Droid.Resource.Id.top;
+			global::Florid.Droid.Lib.Resource.Id.topPanel = global::Florid.Staff.Droid.Resource.Id.topPanel;
+			global::Florid.Droid.Lib.Resource.Id.uniform = global::Florid.Staff.Droid.Resource.Id.uniform;
+			global::Florid.Droid.Lib.Resource.Id.up = global::Florid.Staff.Droid.Resource.Id.up;
+			global::Florid.Droid.Lib.Resource.Id.useLogo = global::Florid.Staff.Droid.Resource.Id.useLogo;
+			global::Florid.Droid.Lib.Resource.Id.withText = global::Florid.Staff.Droid.Resource.Id.withText;
+			global::Florid.Droid.Lib.Resource.Id.wrap_content = global::Florid.Staff.Droid.Resource.Id.wrap_content;
+			global::Florid.Droid.Lib.Resource.Integer.abc_config_activityDefaultDur = global::Florid.Staff.Droid.Resource.Integer.abc_config_activityDefaultDur;
+			global::Florid.Droid.Lib.Resource.Integer.abc_config_activityShortDur = global::Florid.Staff.Droid.Resource.Integer.abc_config_activityShortDur;
+			global::Florid.Droid.Lib.Resource.Integer.cancel_button_image_alpha = global::Florid.Staff.Droid.Resource.Integer.cancel_button_image_alpha;
+			global::Florid.Droid.Lib.Resource.Integer.config_tooltipAnimTime = global::Florid.Staff.Droid.Resource.Integer.config_tooltipAnimTime;
+			global::Florid.Droid.Lib.Resource.Integer.status_bar_notification_info_maxnum = global::Florid.Staff.Droid.Resource.Integer.status_bar_notification_info_maxnum;
+			global::Florid.Droid.Lib.Resource.Layout.abc_action_bar_title_item = global::Florid.Staff.Droid.Resource.Layout.abc_action_bar_title_item;
+			global::Florid.Droid.Lib.Resource.Layout.abc_action_bar_up_container = global::Florid.Staff.Droid.Resource.Layout.abc_action_bar_up_container;
+			global::Florid.Droid.Lib.Resource.Layout.abc_action_menu_item_layout = global::Florid.Staff.Droid.Resource.Layout.abc_action_menu_item_layout;
+			global::Florid.Droid.Lib.Resource.Layout.abc_action_menu_layout = global::Florid.Staff.Droid.Resource.Layout.abc_action_menu_layout;
+			global::Florid.Droid.Lib.Resource.Layout.abc_action_mode_bar = global::Florid.Staff.Droid.Resource.Layout.abc_action_mode_bar;
+			global::Florid.Droid.Lib.Resource.Layout.abc_action_mode_close_item_material = global::Florid.Staff.Droid.Resource.Layout.abc_action_mode_close_item_material;
+			global::Florid.Droid.Lib.Resource.Layout.abc_activity_chooser_view = global::Florid.Staff.Droid.Resource.Layout.abc_activity_chooser_view;
+			global::Florid.Droid.Lib.Resource.Layout.abc_activity_chooser_view_list_item = global::Florid.Staff.Droid.Resource.Layout.abc_activity_chooser_view_list_item;
+			global::Florid.Droid.Lib.Resource.Layout.abc_alert_dialog_button_bar_material = global::Florid.Staff.Droid.Resource.Layout.abc_alert_dialog_button_bar_material;
+			global::Florid.Droid.Lib.Resource.Layout.abc_alert_dialog_material = global::Florid.Staff.Droid.Resource.Layout.abc_alert_dialog_material;
+			global::Florid.Droid.Lib.Resource.Layout.abc_alert_dialog_title_material = global::Florid.Staff.Droid.Resource.Layout.abc_alert_dialog_title_material;
+			global::Florid.Droid.Lib.Resource.Layout.abc_cascading_menu_item_layout = global::Florid.Staff.Droid.Resource.Layout.abc_cascading_menu_item_layout;
+			global::Florid.Droid.Lib.Resource.Layout.abc_dialog_title_material = global::Florid.Staff.Droid.Resource.Layout.abc_dialog_title_material;
+			global::Florid.Droid.Lib.Resource.Layout.abc_expanded_menu_layout = global::Florid.Staff.Droid.Resource.Layout.abc_expanded_menu_layout;
+			global::Florid.Droid.Lib.Resource.Layout.abc_list_menu_item_checkbox = global::Florid.Staff.Droid.Resource.Layout.abc_list_menu_item_checkbox;
+			global::Florid.Droid.Lib.Resource.Layout.abc_list_menu_item_icon = global::Florid.Staff.Droid.Resource.Layout.abc_list_menu_item_icon;
+			global::Florid.Droid.Lib.Resource.Layout.abc_list_menu_item_layout = global::Florid.Staff.Droid.Resource.Layout.abc_list_menu_item_layout;
+			global::Florid.Droid.Lib.Resource.Layout.abc_list_menu_item_radio = global::Florid.Staff.Droid.Resource.Layout.abc_list_menu_item_radio;
+			global::Florid.Droid.Lib.Resource.Layout.abc_popup_menu_header_item_layout = global::Florid.Staff.Droid.Resource.Layout.abc_popup_menu_header_item_layout;
+			global::Florid.Droid.Lib.Resource.Layout.abc_popup_menu_item_layout = global::Florid.Staff.Droid.Resource.Layout.abc_popup_menu_item_layout;
+			global::Florid.Droid.Lib.Resource.Layout.abc_screen_content_include = global::Florid.Staff.Droid.Resource.Layout.abc_screen_content_include;
+			global::Florid.Droid.Lib.Resource.Layout.abc_screen_simple = global::Florid.Staff.Droid.Resource.Layout.abc_screen_simple;
+			global::Florid.Droid.Lib.Resource.Layout.abc_screen_simple_overlay_action_mode = global::Florid.Staff.Droid.Resource.Layout.abc_screen_simple_overlay_action_mode;
+			global::Florid.Droid.Lib.Resource.Layout.abc_screen_toolbar = global::Florid.Staff.Droid.Resource.Layout.abc_screen_toolbar;
+			global::Florid.Droid.Lib.Resource.Layout.abc_search_dropdown_item_icons_2line = global::Florid.Staff.Droid.Resource.Layout.abc_search_dropdown_item_icons_2line;
+			global::Florid.Droid.Lib.Resource.Layout.abc_search_view = global::Florid.Staff.Droid.Resource.Layout.abc_search_view;
+			global::Florid.Droid.Lib.Resource.Layout.abc_select_dialog_material = global::Florid.Staff.Droid.Resource.Layout.abc_select_dialog_material;
+			global::Florid.Droid.Lib.Resource.Layout.abc_tooltip = global::Florid.Staff.Droid.Resource.Layout.abc_tooltip;
+			global::Florid.Droid.Lib.Resource.Layout.notification_action = global::Florid.Staff.Droid.Resource.Layout.notification_action;
+			global::Florid.Droid.Lib.Resource.Layout.notification_action_tombstone = global::Florid.Staff.Droid.Resource.Layout.notification_action_tombstone;
+			global::Florid.Droid.Lib.Resource.Layout.notification_template_custom_big = global::Florid.Staff.Droid.Resource.Layout.notification_template_custom_big;
+			global::Florid.Droid.Lib.Resource.Layout.notification_template_icon_group = global::Florid.Staff.Droid.Resource.Layout.notification_template_icon_group;
+			global::Florid.Droid.Lib.Resource.Layout.notification_template_part_chronometer = global::Florid.Staff.Droid.Resource.Layout.notification_template_part_chronometer;
+			global::Florid.Droid.Lib.Resource.Layout.notification_template_part_time = global::Florid.Staff.Droid.Resource.Layout.notification_template_part_time;
+			global::Florid.Droid.Lib.Resource.Layout.select_dialog_item_material = global::Florid.Staff.Droid.Resource.Layout.select_dialog_item_material;
+			global::Florid.Droid.Lib.Resource.Layout.select_dialog_multichoice_material = global::Florid.Staff.Droid.Resource.Layout.select_dialog_multichoice_material;
+			global::Florid.Droid.Lib.Resource.Layout.select_dialog_singlechoice_material = global::Florid.Staff.Droid.Resource.Layout.select_dialog_singlechoice_material;
+			global::Florid.Droid.Lib.Resource.Layout.support_simple_spinner_dropdown_item = global::Florid.Staff.Droid.Resource.Layout.support_simple_spinner_dropdown_item;
+			global::Florid.Droid.Lib.Resource.String.abc_action_bar_home_description = global::Florid.Staff.Droid.Resource.String.abc_action_bar_home_description;
+			global::Florid.Droid.Lib.Resource.String.abc_action_bar_up_description = global::Florid.Staff.Droid.Resource.String.abc_action_bar_up_description;
+			global::Florid.Droid.Lib.Resource.String.abc_action_menu_overflow_description = global::Florid.Staff.Droid.Resource.String.abc_action_menu_overflow_description;
+			global::Florid.Droid.Lib.Resource.String.abc_action_mode_done = global::Florid.Staff.Droid.Resource.String.abc_action_mode_done;
+			global::Florid.Droid.Lib.Resource.String.abc_activitychooserview_choose_application = global::Florid.Staff.Droid.Resource.String.abc_activitychooserview_choose_application;
+			global::Florid.Droid.Lib.Resource.String.abc_activity_chooser_view_see_all = global::Florid.Staff.Droid.Resource.String.abc_activity_chooser_view_see_all;
+			global::Florid.Droid.Lib.Resource.String.abc_capital_off = global::Florid.Staff.Droid.Resource.String.abc_capital_off;
+			global::Florid.Droid.Lib.Resource.String.abc_capital_on = global::Florid.Staff.Droid.Resource.String.abc_capital_on;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_body_1_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_body_1_material;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_body_2_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_body_2_material;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_button_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_button_material;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_caption_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_caption_material;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_display_1_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_display_1_material;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_display_2_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_display_2_material;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_display_3_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_display_3_material;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_display_4_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_display_4_material;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_headline_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_headline_material;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_menu_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_menu_material;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_subhead_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_subhead_material;
+			global::Florid.Droid.Lib.Resource.String.abc_font_family_title_material = global::Florid.Staff.Droid.Resource.String.abc_font_family_title_material;
+			global::Florid.Droid.Lib.Resource.String.abc_menu_alt_shortcut_label = global::Florid.Staff.Droid.Resource.String.abc_menu_alt_shortcut_label;
+			global::Florid.Droid.Lib.Resource.String.abc_menu_ctrl_shortcut_label = global::Florid.Staff.Droid.Resource.String.abc_menu_ctrl_shortcut_label;
+			global::Florid.Droid.Lib.Resource.String.abc_menu_delete_shortcut_label = global::Florid.Staff.Droid.Resource.String.abc_menu_delete_shortcut_label;
+			global::Florid.Droid.Lib.Resource.String.abc_menu_enter_shortcut_label = global::Florid.Staff.Droid.Resource.String.abc_menu_enter_shortcut_label;
+			global::Florid.Droid.Lib.Resource.String.abc_menu_function_shortcut_label = global::Florid.Staff.Droid.Resource.String.abc_menu_function_shortcut_label;
+			global::Florid.Droid.Lib.Resource.String.abc_menu_meta_shortcut_label = global::Florid.Staff.Droid.Resource.String.abc_menu_meta_shortcut_label;
+			global::Florid.Droid.Lib.Resource.String.abc_menu_shift_shortcut_label = global::Florid.Staff.Droid.Resource.String.abc_menu_shift_shortcut_label;
+			global::Florid.Droid.Lib.Resource.String.abc_menu_space_shortcut_label = global::Florid.Staff.Droid.Resource.String.abc_menu_space_shortcut_label;
+			global::Florid.Droid.Lib.Resource.String.abc_menu_sym_shortcut_label = global::Florid.Staff.Droid.Resource.String.abc_menu_sym_shortcut_label;
+			global::Florid.Droid.Lib.Resource.String.abc_prepend_shortcut_label = global::Florid.Staff.Droid.Resource.String.abc_prepend_shortcut_label;
+			global::Florid.Droid.Lib.Resource.String.abc_searchview_description_clear = global::Florid.Staff.Droid.Resource.String.abc_searchview_description_clear;
+			global::Florid.Droid.Lib.Resource.String.abc_searchview_description_query = global::Florid.Staff.Droid.Resource.String.abc_searchview_description_query;
+			global::Florid.Droid.Lib.Resource.String.abc_searchview_description_search = global::Florid.Staff.Droid.Resource.String.abc_searchview_description_search;
+			global::Florid.Droid.Lib.Resource.String.abc_searchview_description_submit = global::Florid.Staff.Droid.Resource.String.abc_searchview_description_submit;
+			global::Florid.Droid.Lib.Resource.String.abc_searchview_description_voice = global::Florid.Staff.Droid.Resource.String.abc_searchview_description_voice;
+			global::Florid.Droid.Lib.Resource.String.abc_search_hint = global::Florid.Staff.Droid.Resource.String.abc_search_hint;
+			global::Florid.Droid.Lib.Resource.String.abc_shareactionprovider_share_with = global::Florid.Staff.Droid.Resource.String.abc_shareactionprovider_share_with;
+			global::Florid.Droid.Lib.Resource.String.abc_shareactionprovider_share_with_application = global::Florid.Staff.Droid.Resource.String.abc_shareactionprovider_share_with_application;
+			global::Florid.Droid.Lib.Resource.String.abc_toolbar_collapse_description = global::Florid.Staff.Droid.Resource.String.abc_toolbar_collapse_description;
+			global::Florid.Droid.Lib.Resource.String.app_name = global::Florid.Staff.Droid.Resource.String.app_name;
+			global::Florid.Droid.Lib.Resource.String.hello = global::Florid.Staff.Droid.Resource.String.hello;
+			global::Florid.Droid.Lib.Resource.String.search_menu_title = global::Florid.Staff.Droid.Resource.String.search_menu_title;
+			global::Florid.Droid.Lib.Resource.String.status_bar_notification_info_overflow = global::Florid.Staff.Droid.Resource.String.status_bar_notification_info_overflow;
+			global::Florid.Droid.Lib.Resource.Style.AlertDialog_AppCompat = global::Florid.Staff.Droid.Resource.Style.AlertDialog_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.AlertDialog_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.AlertDialog_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Animation_AppCompat_Dialog = global::Florid.Staff.Droid.Resource.Style.Animation_AppCompat_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Animation_AppCompat_DropDownUp = global::Florid.Staff.Droid.Resource.Style.Animation_AppCompat_DropDownUp;
+			global::Florid.Droid.Lib.Resource.Style.Animation_AppCompat_Tooltip = global::Florid.Staff.Droid.Resource.Style.Animation_AppCompat_Tooltip;
+			global::Florid.Droid.Lib.Resource.Style.Base_AlertDialog_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_AlertDialog_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_AlertDialog_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Base_AlertDialog_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Base_Animation_AppCompat_Dialog = global::Florid.Staff.Droid.Resource.Style.Base_Animation_AppCompat_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_Animation_AppCompat_DropDownUp = global::Florid.Staff.Droid.Resource.Style.Base_Animation_AppCompat_DropDownUp;
+			global::Florid.Droid.Lib.Resource.Style.Base_Animation_AppCompat_Tooltip = global::Florid.Staff.Droid.Resource.Style.Base_Animation_AppCompat_Tooltip;
+			global::Florid.Droid.Lib.Resource.Style.Base_DialogWindowTitleBackground_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_DialogWindowTitleBackground_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_DialogWindowTitle_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_DialogWindowTitle_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Body1 = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Body1;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Body2 = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Body2;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Button = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Button;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Caption = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Caption;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Display1 = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display1;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Display2 = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display2;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Display3 = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display3;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Display4 = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Display4;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Headline = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Headline;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Inverse = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Large = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Large;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Large_Inverse = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Large_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Large = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Large;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Small = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Light_Widget_PopupMenu_Small;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Medium = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Medium;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Medium_Inverse = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Medium_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Menu = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Menu;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_SearchResult = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_SearchResult;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Subtitle = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Subtitle;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Title = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_SearchResult_Title;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Small = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Small;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Small_Inverse = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Small_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Subhead = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Subhead;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Subhead_Inverse = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Subhead_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Title = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Title;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Title_Inverse = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Title_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Tooltip = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Tooltip;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Menu = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Menu;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Subtitle = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Subtitle;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Title = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionMode_Title;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Borderless_Colored = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Borderless_Colored;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Colored = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Colored;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Inverse = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Button_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_DropDownItem = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_DropDownItem;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Header = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Header;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Large = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Large;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Small = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_PopupMenu_Small;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_Switch = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_Switch;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_AppCompat_Widget_TextView_SpinnerItem = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_TextView_SpinnerItem;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_Widget_AppCompat_ExpandedMenu_Item = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_Widget_AppCompat_ExpandedMenu_Item;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Subtitle = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Subtitle;
+			global::Florid.Droid.Lib.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Title = global::Florid.Staff.Droid.Resource.Style.Base_TextAppearance_Widget_AppCompat_Toolbar_Title;
+			global::Florid.Droid.Lib.Resource.Style.Base_ThemeOverlay_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_ThemeOverlay_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_ThemeOverlay_AppCompat_ActionBar = global::Florid.Staff.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_ThemeOverlay_AppCompat_Dark = global::Florid.Staff.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dark;
+			global::Florid.Droid.Lib.Resource.Style.Base_ThemeOverlay_AppCompat_Dark_ActionBar = global::Florid.Staff.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dark_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog = global::Florid.Staff.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog_Alert = global::Florid.Staff.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Dialog_Alert;
+			global::Florid.Droid.Lib.Resource.Style.Base_ThemeOverlay_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Base_ThemeOverlay_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_CompactMenu = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_CompactMenu;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_Dialog = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_DialogWhenLarge = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_DialogWhenLarge;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_Dialog_Alert = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_Dialog_Alert;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_Dialog_FixedSize = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_Dialog_FixedSize;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_Dialog_MinWidth = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_Dialog_MinWidth;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_Light_DarkActionBar = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_Light_DarkActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_Light_Dialog = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_Light_DialogWhenLarge = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_Light_DialogWhenLarge;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_Light_Dialog_Alert = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_Alert;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_Light_Dialog_FixedSize = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_FixedSize;
+			global::Florid.Droid.Lib.Resource.Style.Base_Theme_AppCompat_Light_Dialog_MinWidth = global::Florid.Staff.Droid.Resource.Style.Base_Theme_AppCompat_Light_Dialog_MinWidth;
+			global::Florid.Droid.Lib.Resource.Style.Base_V21_ThemeOverlay_AppCompat_Dialog = global::Florid.Staff.Droid.Resource.Style.Base_V21_ThemeOverlay_AppCompat_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_V21_Theme_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_V21_Theme_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_V21_Theme_AppCompat_Dialog = global::Florid.Staff.Droid.Resource.Style.Base_V21_Theme_AppCompat_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_V21_Theme_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Base_V21_Theme_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Base_V21_Theme_AppCompat_Light_Dialog = global::Florid.Staff.Droid.Resource.Style.Base_V21_Theme_AppCompat_Light_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_V22_Theme_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_V22_Theme_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_V22_Theme_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Base_V22_Theme_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Base_V23_Theme_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_V23_Theme_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_V23_Theme_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Base_V23_Theme_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Base_V26_Theme_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_V26_Theme_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_V26_Theme_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Base_V26_Theme_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Base_V26_Widget_AppCompat_Toolbar = global::Florid.Staff.Droid.Resource.Style.Base_V26_Widget_AppCompat_Toolbar;
+			global::Florid.Droid.Lib.Resource.Style.Base_V28_Theme_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_V28_Theme_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_V28_Theme_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Base_V28_Theme_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Base_V7_ThemeOverlay_AppCompat_Dialog = global::Florid.Staff.Droid.Resource.Style.Base_V7_ThemeOverlay_AppCompat_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_V7_Theme_AppCompat = global::Florid.Staff.Droid.Resource.Style.Base_V7_Theme_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Base_V7_Theme_AppCompat_Dialog = global::Florid.Staff.Droid.Resource.Style.Base_V7_Theme_AppCompat_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_V7_Theme_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Base_V7_Theme_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Base_V7_Theme_AppCompat_Light_Dialog = global::Florid.Staff.Droid.Resource.Style.Base_V7_Theme_AppCompat_Light_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_V7_Widget_AppCompat_AutoCompleteTextView = global::Florid.Staff.Droid.Resource.Style.Base_V7_Widget_AppCompat_AutoCompleteTextView;
+			global::Florid.Droid.Lib.Resource.Style.Base_V7_Widget_AppCompat_EditText = global::Florid.Staff.Droid.Resource.Style.Base_V7_Widget_AppCompat_EditText;
+			global::Florid.Droid.Lib.Resource.Style.Base_V7_Widget_AppCompat_Toolbar = global::Florid.Staff.Droid.Resource.Style.Base_V7_Widget_AppCompat_Toolbar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ActionBar = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ActionBar_Solid = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_Solid;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ActionBar_TabBar = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_TabBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ActionBar_TabText = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_TabText;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ActionBar_TabView = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_TabView;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ActionButton = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ActionButton;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ActionButton_CloseMode = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ActionButton_CloseMode;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ActionButton_Overflow = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ActionButton_Overflow;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ActionMode = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ActionMode;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ActivityChooserView = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ActivityChooserView;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_AutoCompleteTextView = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_AutoCompleteTextView;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Button = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Button;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ButtonBar = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ButtonBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ButtonBar_AlertDialog = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ButtonBar_AlertDialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Button_Borderless = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Button_Borderless;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Button_Borderless_Colored = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Button_Borderless_Colored;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Button_ButtonBar_AlertDialog = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Button_ButtonBar_AlertDialog;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Button_Colored = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Button_Colored;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Button_Small = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Button_Small;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_CompoundButton_CheckBox = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_CompoundButton_CheckBox;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_CompoundButton_RadioButton = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_CompoundButton_RadioButton;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_CompoundButton_Switch = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_CompoundButton_Switch;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle_Common = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_DrawerArrowToggle_Common;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_DropDownItem_Spinner = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_DropDownItem_Spinner;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_EditText = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_EditText;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ImageButton = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ImageButton;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Light_ActionBar = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_Solid = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_Solid;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabBar = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText_Inverse = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabText_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabView = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Light_ActionBar_TabView;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu_Overflow = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Light_PopupMenu_Overflow;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ListMenuView = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ListMenuView;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ListPopupWindow = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ListPopupWindow;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ListView = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ListView;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ListView_DropDown = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ListView_DropDown;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ListView_Menu = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ListView_Menu;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_PopupMenu = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_PopupMenu;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_PopupMenu_Overflow = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_PopupMenu_Overflow;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_PopupWindow = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_PopupWindow;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ProgressBar = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ProgressBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_ProgressBar_Horizontal = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_ProgressBar_Horizontal;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_RatingBar = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_RatingBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_RatingBar_Indicator = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_RatingBar_Indicator;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_RatingBar_Small = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_RatingBar_Small;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_SearchView = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_SearchView;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_SearchView_ActionBar = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_SearchView_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_SeekBar = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_SeekBar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_SeekBar_Discrete = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_SeekBar_Discrete;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Spinner = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Spinner;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Spinner_Underlined = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Spinner_Underlined;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_TextView_SpinnerItem = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_TextView_SpinnerItem;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Toolbar = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Toolbar;
+			global::Florid.Droid.Lib.Resource.Style.Base_Widget_AppCompat_Toolbar_Button_Navigation = global::Florid.Staff.Droid.Resource.Style.Base_Widget_AppCompat_Toolbar_Button_Navigation;
+			global::Florid.Droid.Lib.Resource.Style.Platform_AppCompat = global::Florid.Staff.Droid.Resource.Style.Platform_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Platform_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Platform_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Platform_ThemeOverlay_AppCompat = global::Florid.Staff.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Platform_ThemeOverlay_AppCompat_Dark = global::Florid.Staff.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat_Dark;
+			global::Florid.Droid.Lib.Resource.Style.Platform_ThemeOverlay_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Platform_V21_AppCompat = global::Florid.Staff.Droid.Resource.Style.Platform_V21_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Platform_V21_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Platform_V21_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Platform_V25_AppCompat = global::Florid.Staff.Droid.Resource.Style.Platform_V25_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Platform_V25_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Platform_V25_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Platform_Widget_AppCompat_Spinner = global::Florid.Staff.Droid.Resource.Style.Platform_Widget_AppCompat_Spinner;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_DialogWindowTitle_AppCompat = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_DialogWindowTitle_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_ActionBar_TitleItem = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_ActionBar_TitleItem;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_DialogTitle_Icon = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_DialogTitle_Icon;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_InternalGroup = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_InternalGroup;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Shortcut = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Shortcut;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_SubmenuArrow = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_SubmenuArrow;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Text = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Text;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Title = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_PopupMenuItem_Title;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_SearchView_MagIcon = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_SearchView_MagIcon;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon1 = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon1;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon2 = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Icon2;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Query = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Query;
+			global::Florid.Droid.Lib.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text = global::Florid.Staff.Droid.Resource.Style.RtlOverlay_Widget_AppCompat_Search_DropDown_Text;
+			global::Florid.Droid.Lib.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton = global::Florid.Staff.Droid.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton;
+			global::Florid.Droid.Lib.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow = global::Florid.Staff.Droid.Resource.Style.RtlUnderlay_Widget_AppCompat_ActionButton_Overflow;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Body1 = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Body1;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Body2 = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Body2;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Button = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Button;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Caption = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Caption;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Display1 = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Display1;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Display2 = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Display2;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Display3 = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Display3;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Display4 = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Display4;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Headline = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Headline;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Inverse = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Large = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Large;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Large_Inverse = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Large_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Subtitle = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Subtitle;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Title = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Light_SearchResult_Title;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Large = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Large;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Small = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Light_Widget_PopupMenu_Small;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Medium = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Medium;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Medium_Inverse = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Medium_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Menu = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Menu;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_SearchResult_Subtitle = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_SearchResult_Subtitle;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_SearchResult_Title = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_SearchResult_Title;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Small = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Small;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Small_Inverse = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Small_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Subhead = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Subhead;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Subhead_Inverse = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Subhead_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Title = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Title;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Title_Inverse = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Title_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Tooltip = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Tooltip;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Menu = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Menu;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Title_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle_Inverse = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Subtitle_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title_Inverse = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionMode_Title_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_Button = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_Button_Borderless_Colored = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button_Borderless_Colored;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_Button_Colored = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button_Colored;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_Button_Inverse = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Button_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_DropDownItem = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_DropDownItem;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Header = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Header;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Large = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Large;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Small = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Small;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_Switch = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Switch;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_AppCompat_Widget_TextView_SpinnerItem = global::Florid.Staff.Droid.Resource.Style.TextAppearance_AppCompat_Widget_TextView_SpinnerItem;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_Compat_Notification = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Compat_Notification;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_Compat_Notification_Info = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Compat_Notification_Info;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_Compat_Notification_Line2 = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Compat_Notification_Line2;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_Compat_Notification_Time = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Compat_Notification_Time;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_Compat_Notification_Title = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Compat_Notification_Title;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_Widget_AppCompat_ExpandedMenu_Item = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Widget_AppCompat_ExpandedMenu_Item;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Subtitle = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Subtitle;
+			global::Florid.Droid.Lib.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Title = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Widget_AppCompat_Toolbar_Title;
+			global::Florid.Droid.Lib.Resource.Style.ThemeOverlay_AppCompat = global::Florid.Staff.Droid.Resource.Style.ThemeOverlay_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.ThemeOverlay_AppCompat_ActionBar = global::Florid.Staff.Droid.Resource.Style.ThemeOverlay_AppCompat_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.ThemeOverlay_AppCompat_Dark = global::Florid.Staff.Droid.Resource.Style.ThemeOverlay_AppCompat_Dark;
+			global::Florid.Droid.Lib.Resource.Style.ThemeOverlay_AppCompat_Dark_ActionBar = global::Florid.Staff.Droid.Resource.Style.ThemeOverlay_AppCompat_Dark_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.ThemeOverlay_AppCompat_Dialog = global::Florid.Staff.Droid.Resource.Style.ThemeOverlay_AppCompat_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.ThemeOverlay_AppCompat_Dialog_Alert = global::Florid.Staff.Droid.Resource.Style.ThemeOverlay_AppCompat_Dialog_Alert;
+			global::Florid.Droid.Lib.Resource.Style.ThemeOverlay_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.ThemeOverlay_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_CompactMenu = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_CompactMenu;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_DayNight = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_DayNight;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_DayNight_DarkActionBar = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_DayNight_DarkActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_DayNight_Dialog = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_DayNight_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_DayNight_DialogWhenLarge = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_DayNight_DialogWhenLarge;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_DayNight_Dialog_Alert = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_DayNight_Dialog_Alert;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_DayNight_Dialog_MinWidth = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_DayNight_Dialog_MinWidth;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_DayNight_NoActionBar = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_DayNight_NoActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_Dialog = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_DialogWhenLarge = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_DialogWhenLarge;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_Dialog_Alert = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_Dialog_Alert;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_Dialog_MinWidth = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_Dialog_MinWidth;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_Light = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_Light;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_Light_DarkActionBar = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_Light_DarkActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_Light_Dialog = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_Light_Dialog;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_Light_DialogWhenLarge = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_Light_DialogWhenLarge;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_Light_Dialog_Alert = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_Light_Dialog_Alert;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_Light_Dialog_MinWidth = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_Light_Dialog_MinWidth;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_Light_NoActionBar = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_Light_NoActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Theme_AppCompat_NoActionBar = global::Florid.Staff.Droid.Resource.Style.Theme_AppCompat_NoActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ActionBar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ActionBar_Solid = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ActionBar_Solid;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ActionBar_TabBar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ActionBar_TabBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ActionBar_TabText = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ActionBar_TabText;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ActionBar_TabView = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ActionBar_TabView;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ActionButton = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ActionButton;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ActionButton_CloseMode = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ActionButton_CloseMode;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ActionButton_Overflow = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ActionButton_Overflow;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ActionMode = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ActionMode;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ActivityChooserView = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ActivityChooserView;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_AutoCompleteTextView = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_AutoCompleteTextView;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Button = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Button;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ButtonBar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ButtonBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ButtonBar_AlertDialog = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ButtonBar_AlertDialog;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Button_Borderless = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Button_Borderless;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Button_Borderless_Colored = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Button_Borderless_Colored;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Button_ButtonBar_AlertDialog = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Button_ButtonBar_AlertDialog;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Button_Colored = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Button_Colored;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Button_Small = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Button_Small;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_CompoundButton_CheckBox = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_CompoundButton_CheckBox;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_CompoundButton_RadioButton = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_CompoundButton_RadioButton;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_CompoundButton_Switch = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_CompoundButton_Switch;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_DrawerArrowToggle = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_DrawerArrowToggle;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_DropDownItem_Spinner = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_DropDownItem_Spinner;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_EditText = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_EditText;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ImageButton = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ImageButton;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionBar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid_Inverse = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_Solid_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar_Inverse = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabBar_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText_Inverse = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabText_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView_Inverse = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionBar_TabView_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionButton = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionButton;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionButton_CloseMode = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionButton_CloseMode;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionButton_Overflow = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionButton_Overflow;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActionMode_Inverse = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActionMode_Inverse;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ActivityChooserView = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ActivityChooserView;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_AutoCompleteTextView = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_AutoCompleteTextView;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_DropDownItem_Spinner = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_DropDownItem_Spinner;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ListPopupWindow = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ListPopupWindow;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_ListView_DropDown = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_ListView_DropDown;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_PopupMenu = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_PopupMenu;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_PopupMenu_Overflow = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_PopupMenu_Overflow;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_SearchView = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_SearchView;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Light_Spinner_DropDown_ActionBar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Light_Spinner_DropDown_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ListMenuView = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ListMenuView;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ListPopupWindow = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ListPopupWindow;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ListView = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ListView;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ListView_DropDown = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ListView_DropDown;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ListView_Menu = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ListView_Menu;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_PopupMenu = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_PopupMenu;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_PopupMenu_Overflow = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_PopupMenu_Overflow;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_PopupWindow = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_PopupWindow;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ProgressBar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ProgressBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_ProgressBar_Horizontal = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_ProgressBar_Horizontal;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_RatingBar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_RatingBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_RatingBar_Indicator = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_RatingBar_Indicator;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_RatingBar_Small = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_RatingBar_Small;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_SearchView = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_SearchView;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_SearchView_ActionBar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_SearchView_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_SeekBar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_SeekBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_SeekBar_Discrete = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_SeekBar_Discrete;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Spinner = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Spinner;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Spinner_DropDown = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Spinner_DropDown;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Spinner_DropDown_ActionBar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Spinner_DropDown_ActionBar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Spinner_Underlined = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Spinner_Underlined;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_TextView_SpinnerItem = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_TextView_SpinnerItem;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Toolbar = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Toolbar;
+			global::Florid.Droid.Lib.Resource.Style.Widget_AppCompat_Toolbar_Button_Navigation = global::Florid.Staff.Droid.Resource.Style.Widget_AppCompat_Toolbar_Button_Navigation;
+			global::Florid.Droid.Lib.Resource.Style.Widget_Compat_NotificationActionContainer = global::Florid.Staff.Droid.Resource.Style.Widget_Compat_NotificationActionContainer;
+			global::Florid.Droid.Lib.Resource.Style.Widget_Compat_NotificationActionText = global::Florid.Staff.Droid.Resource.Style.Widget_Compat_NotificationActionText;
+			global::Florid.Droid.Lib.Resource.Style.Widget_Support_CoordinatorLayout = global::Florid.Staff.Droid.Resource.Style.Widget_Support_CoordinatorLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar = global::Florid.Staff.Droid.Resource.Styleable.ActionBar;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBarLayout = global::Florid.Staff.Droid.Resource.Styleable.ActionBarLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBarLayout_android_layout_gravity = global::Florid.Staff.Droid.Resource.Styleable.ActionBarLayout_android_layout_gravity;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_background = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_background;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_backgroundSplit = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_backgroundSplit;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_backgroundStacked = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_backgroundStacked;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_contentInsetEnd = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_contentInsetEnd;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_contentInsetEndWithActions = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_contentInsetEndWithActions;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_contentInsetLeft = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_contentInsetLeft;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_contentInsetRight = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_contentInsetRight;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_contentInsetStart = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_contentInsetStart;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_contentInsetStartWithNavigation = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_contentInsetStartWithNavigation;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_customNavigationLayout = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_customNavigationLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_displayOptions = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_displayOptions;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_divider = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_divider;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_elevation = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_elevation;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_height = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_height;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_hideOnContentScroll = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_hideOnContentScroll;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_homeAsUpIndicator = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_homeAsUpIndicator;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_homeLayout = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_homeLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_icon = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_icon;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_indeterminateProgressStyle = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_indeterminateProgressStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_itemPadding = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_itemPadding;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_logo = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_logo;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_navigationMode = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_navigationMode;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_popupTheme = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_popupTheme;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_progressBarPadding = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_progressBarPadding;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_progressBarStyle = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_progressBarStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_subtitle = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_subtitle;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_subtitleTextStyle = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_subtitleTextStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_title = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_title;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionBar_titleTextStyle = global::Florid.Staff.Droid.Resource.Styleable.ActionBar_titleTextStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionMenuItemView = global::Florid.Staff.Droid.Resource.Styleable.ActionMenuItemView;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionMenuItemView_android_minWidth = global::Florid.Staff.Droid.Resource.Styleable.ActionMenuItemView_android_minWidth;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionMenuView = global::Florid.Staff.Droid.Resource.Styleable.ActionMenuView;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionMode = global::Florid.Staff.Droid.Resource.Styleable.ActionMode;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionMode_background = global::Florid.Staff.Droid.Resource.Styleable.ActionMode_background;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionMode_backgroundSplit = global::Florid.Staff.Droid.Resource.Styleable.ActionMode_backgroundSplit;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionMode_closeItemLayout = global::Florid.Staff.Droid.Resource.Styleable.ActionMode_closeItemLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionMode_height = global::Florid.Staff.Droid.Resource.Styleable.ActionMode_height;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionMode_subtitleTextStyle = global::Florid.Staff.Droid.Resource.Styleable.ActionMode_subtitleTextStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.ActionMode_titleTextStyle = global::Florid.Staff.Droid.Resource.Styleable.ActionMode_titleTextStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.ActivityChooserView = global::Florid.Staff.Droid.Resource.Styleable.ActivityChooserView;
+			global::Florid.Droid.Lib.Resource.Styleable.ActivityChooserView_expandActivityOverflowButtonDrawable = global::Florid.Staff.Droid.Resource.Styleable.ActivityChooserView_expandActivityOverflowButtonDrawable;
+			global::Florid.Droid.Lib.Resource.Styleable.ActivityChooserView_initialActivityCount = global::Florid.Staff.Droid.Resource.Styleable.ActivityChooserView_initialActivityCount;
+			global::Florid.Droid.Lib.Resource.Styleable.AlertDialog = global::Florid.Staff.Droid.Resource.Styleable.AlertDialog;
+			global::Florid.Droid.Lib.Resource.Styleable.AlertDialog_android_layout = global::Florid.Staff.Droid.Resource.Styleable.AlertDialog_android_layout;
+			global::Florid.Droid.Lib.Resource.Styleable.AlertDialog_buttonIconDimen = global::Florid.Staff.Droid.Resource.Styleable.AlertDialog_buttonIconDimen;
+			global::Florid.Droid.Lib.Resource.Styleable.AlertDialog_buttonPanelSideLayout = global::Florid.Staff.Droid.Resource.Styleable.AlertDialog_buttonPanelSideLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.AlertDialog_listItemLayout = global::Florid.Staff.Droid.Resource.Styleable.AlertDialog_listItemLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.AlertDialog_listLayout = global::Florid.Staff.Droid.Resource.Styleable.AlertDialog_listLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.AlertDialog_multiChoiceItemLayout = global::Florid.Staff.Droid.Resource.Styleable.AlertDialog_multiChoiceItemLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.AlertDialog_showTitle = global::Florid.Staff.Droid.Resource.Styleable.AlertDialog_showTitle;
+			global::Florid.Droid.Lib.Resource.Styleable.AlertDialog_singleChoiceItemLayout = global::Florid.Staff.Droid.Resource.Styleable.AlertDialog_singleChoiceItemLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableCompat = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableCompat;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableCompat_android_constantSize = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_constantSize;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableCompat_android_dither = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_dither;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableCompat_android_enterFadeDuration = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_enterFadeDuration;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableCompat_android_exitFadeDuration = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_exitFadeDuration;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableCompat_android_variablePadding = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_variablePadding;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableCompat_android_visible = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableCompat_android_visible;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableItem = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableItem;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableItem_android_drawable = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableItem_android_drawable;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableItem_android_id = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableItem_android_id;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableTransition = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableTransition;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableTransition_android_drawable = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_drawable;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableTransition_android_fromId = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_fromId;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableTransition_android_reversible = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_reversible;
+			global::Florid.Droid.Lib.Resource.Styleable.AnimatedStateListDrawableTransition_android_toId = global::Florid.Staff.Droid.Resource.Styleable.AnimatedStateListDrawableTransition_android_toId;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatImageView = global::Florid.Staff.Droid.Resource.Styleable.AppCompatImageView;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatImageView_android_src = global::Florid.Staff.Droid.Resource.Styleable.AppCompatImageView_android_src;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatImageView_srcCompat = global::Florid.Staff.Droid.Resource.Styleable.AppCompatImageView_srcCompat;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatImageView_tint = global::Florid.Staff.Droid.Resource.Styleable.AppCompatImageView_tint;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatImageView_tintMode = global::Florid.Staff.Droid.Resource.Styleable.AppCompatImageView_tintMode;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatSeekBar = global::Florid.Staff.Droid.Resource.Styleable.AppCompatSeekBar;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatSeekBar_android_thumb = global::Florid.Staff.Droid.Resource.Styleable.AppCompatSeekBar_android_thumb;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatSeekBar_tickMark = global::Florid.Staff.Droid.Resource.Styleable.AppCompatSeekBar_tickMark;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatSeekBar_tickMarkTint = global::Florid.Staff.Droid.Resource.Styleable.AppCompatSeekBar_tickMarkTint;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatSeekBar_tickMarkTintMode = global::Florid.Staff.Droid.Resource.Styleable.AppCompatSeekBar_tickMarkTintMode;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextHelper = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextHelper;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextHelper_android_drawableBottom = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableBottom;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextHelper_android_drawableEnd = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableEnd;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextHelper_android_drawableLeft = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableLeft;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextHelper_android_drawableRight = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableRight;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextHelper_android_drawableStart = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableStart;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextHelper_android_drawableTop = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextHelper_android_drawableTop;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextHelper_android_textAppearance = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextHelper_android_textAppearance;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView_android_textAppearance = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView_android_textAppearance;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView_autoSizeMaxTextSize = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView_autoSizeMaxTextSize;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView_autoSizeMinTextSize = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView_autoSizeMinTextSize;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView_autoSizePresetSizes = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView_autoSizePresetSizes;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView_autoSizeStepGranularity = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView_autoSizeStepGranularity;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView_autoSizeTextType = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView_autoSizeTextType;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView_firstBaselineToTopHeight = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView_firstBaselineToTopHeight;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView_fontFamily = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView_fontFamily;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView_lastBaselineToBottomHeight = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView_lastBaselineToBottomHeight;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView_lineHeight = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView_lineHeight;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTextView_textAllCaps = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTextView_textAllCaps;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionBarDivider = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionBarDivider;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionBarItemBackground = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionBarItemBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionBarPopupTheme = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionBarPopupTheme;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionBarSize = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionBarSize;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionBarSplitStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionBarSplitStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionBarStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionBarStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionBarTabBarStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionBarTabBarStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionBarTabStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionBarTabStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionBarTabTextStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionBarTabTextStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionBarTheme = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionBarTheme;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionBarWidgetTheme = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionBarWidgetTheme;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionButtonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionButtonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionDropDownStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionDropDownStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionMenuTextAppearance = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionMenuTextAppearance;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionMenuTextColor = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionMenuTextColor;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModeBackground = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModeBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModeCloseButtonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModeCloseButtonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModeCloseDrawable = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModeCloseDrawable;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModeCopyDrawable = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModeCopyDrawable;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModeCutDrawable = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModeCutDrawable;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModeFindDrawable = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModeFindDrawable;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModePasteDrawable = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModePasteDrawable;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModePopupWindowStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModePopupWindowStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModeSelectAllDrawable = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModeSelectAllDrawable;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModeShareDrawable = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModeShareDrawable;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModeSplitBackground = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModeSplitBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModeStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModeStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionModeWebSearchDrawable = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionModeWebSearchDrawable;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionOverflowButtonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionOverflowButtonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_actionOverflowMenuStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_actionOverflowMenuStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_activityChooserViewStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_activityChooserViewStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_alertDialogButtonGroupStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_alertDialogButtonGroupStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_alertDialogCenterButtons = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_alertDialogCenterButtons;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_alertDialogStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_alertDialogStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_alertDialogTheme = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_alertDialogTheme;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_android_windowAnimationStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_android_windowAnimationStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_android_windowIsFloating = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_android_windowIsFloating;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_autoCompleteTextViewStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_autoCompleteTextViewStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_borderlessButtonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_borderlessButtonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_buttonBarButtonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_buttonBarButtonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_buttonBarNegativeButtonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_buttonBarNegativeButtonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_buttonBarNeutralButtonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_buttonBarNeutralButtonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_buttonBarPositiveButtonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_buttonBarPositiveButtonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_buttonBarStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_buttonBarStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_buttonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_buttonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_buttonStyleSmall = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_buttonStyleSmall;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_checkboxStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_checkboxStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_checkedTextViewStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_checkedTextViewStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_colorAccent = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_colorAccent;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_colorBackgroundFloating = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_colorBackgroundFloating;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_colorButtonNormal = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_colorButtonNormal;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_colorControlActivated = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_colorControlActivated;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_colorControlHighlight = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_colorControlHighlight;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_colorControlNormal = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_colorControlNormal;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_colorError = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_colorError;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_colorPrimary = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_colorPrimary;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_colorPrimaryDark = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_colorPrimaryDark;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_colorSwitchThumbNormal = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_colorSwitchThumbNormal;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_controlBackground = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_controlBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_dialogCornerRadius = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_dialogCornerRadius;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_dialogPreferredPadding = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_dialogPreferredPadding;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_dialogTheme = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_dialogTheme;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_dividerHorizontal = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_dividerHorizontal;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_dividerVertical = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_dividerVertical;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_dropdownListPreferredItemHeight = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_dropdownListPreferredItemHeight;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_dropDownListViewStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_dropDownListViewStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_editTextBackground = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_editTextBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_editTextColor = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_editTextColor;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_editTextStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_editTextStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_homeAsUpIndicator = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_homeAsUpIndicator;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_imageButtonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_imageButtonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_listChoiceBackgroundIndicator = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_listChoiceBackgroundIndicator;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_listDividerAlertDialog = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_listDividerAlertDialog;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_listMenuViewStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_listMenuViewStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_listPopupWindowStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_listPopupWindowStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_listPreferredItemHeight = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemHeight;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_listPreferredItemHeightLarge = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemHeightLarge;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_listPreferredItemHeightSmall = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemHeightSmall;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingLeft = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingLeft;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingRight = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_listPreferredItemPaddingRight;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_panelBackground = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_panelBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_panelMenuListTheme = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_panelMenuListTheme;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_panelMenuListWidth = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_panelMenuListWidth;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_popupMenuStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_popupMenuStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_popupWindowStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_popupWindowStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_radioButtonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_radioButtonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_ratingBarStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_ratingBarStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_ratingBarStyleIndicator = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_ratingBarStyleIndicator;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_ratingBarStyleSmall = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_ratingBarStyleSmall;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_searchViewStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_searchViewStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_seekBarStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_seekBarStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_selectableItemBackground = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_selectableItemBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_selectableItemBackgroundBorderless = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_selectableItemBackgroundBorderless;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_spinnerDropDownItemStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_spinnerDropDownItemStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_spinnerStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_spinnerStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_switchStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_switchStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_textAppearanceLargePopupMenu = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_textAppearanceLargePopupMenu;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_textAppearanceListItem = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_textAppearanceListItem;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_textAppearanceListItemSecondary = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_textAppearanceListItemSecondary;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_textAppearanceListItemSmall = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_textAppearanceListItemSmall;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_textAppearancePopupMenuHeader = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_textAppearancePopupMenuHeader;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultSubtitle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultSubtitle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultTitle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_textAppearanceSearchResultTitle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_textAppearanceSmallPopupMenu = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_textAppearanceSmallPopupMenu;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_textColorAlertDialogListItem = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_textColorAlertDialogListItem;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_textColorSearchUrl = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_textColorSearchUrl;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_toolbarNavigationButtonStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_toolbarNavigationButtonStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_toolbarStyle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_toolbarStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_tooltipForegroundColor = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_tooltipForegroundColor;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_tooltipFrameBackground = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_tooltipFrameBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_viewInflaterClass = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_viewInflaterClass;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_windowActionBar = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_windowActionBar;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_windowActionBarOverlay = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_windowActionBarOverlay;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_windowActionModeOverlay = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_windowActionModeOverlay;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_windowFixedHeightMajor = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_windowFixedHeightMajor;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_windowFixedHeightMinor = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_windowFixedHeightMinor;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_windowFixedWidthMajor = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_windowFixedWidthMajor;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_windowFixedWidthMinor = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_windowFixedWidthMinor;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_windowMinWidthMajor = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_windowMinWidthMajor;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_windowMinWidthMinor = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_windowMinWidthMinor;
+			global::Florid.Droid.Lib.Resource.Styleable.AppCompatTheme_windowNoTitle = global::Florid.Staff.Droid.Resource.Styleable.AppCompatTheme_windowNoTitle;
+			global::Florid.Droid.Lib.Resource.Styleable.ButtonBarLayout = global::Florid.Staff.Droid.Resource.Styleable.ButtonBarLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.ButtonBarLayout_allowStacking = global::Florid.Staff.Droid.Resource.Styleable.ButtonBarLayout_allowStacking;
+			global::Florid.Droid.Lib.Resource.Styleable.ColorStateListItem = global::Florid.Staff.Droid.Resource.Styleable.ColorStateListItem;
+			global::Florid.Droid.Lib.Resource.Styleable.ColorStateListItem_alpha = global::Florid.Staff.Droid.Resource.Styleable.ColorStateListItem_alpha;
+			global::Florid.Droid.Lib.Resource.Styleable.ColorStateListItem_android_alpha = global::Florid.Staff.Droid.Resource.Styleable.ColorStateListItem_android_alpha;
+			global::Florid.Droid.Lib.Resource.Styleable.ColorStateListItem_android_color = global::Florid.Staff.Droid.Resource.Styleable.ColorStateListItem_android_color;
+			global::Florid.Droid.Lib.Resource.Styleable.CompoundButton = global::Florid.Staff.Droid.Resource.Styleable.CompoundButton;
+			global::Florid.Droid.Lib.Resource.Styleable.CompoundButton_android_button = global::Florid.Staff.Droid.Resource.Styleable.CompoundButton_android_button;
+			global::Florid.Droid.Lib.Resource.Styleable.CompoundButton_buttonTint = global::Florid.Staff.Droid.Resource.Styleable.CompoundButton_buttonTint;
+			global::Florid.Droid.Lib.Resource.Styleable.CompoundButton_buttonTintMode = global::Florid.Staff.Droid.Resource.Styleable.CompoundButton_buttonTintMode;
+			global::Florid.Droid.Lib.Resource.Styleable.CoordinatorLayout = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.CoordinatorLayout_keylines = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_keylines;
+			global::Florid.Droid.Lib.Resource.Styleable.CoordinatorLayout_Layout = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout;
+			global::Florid.Droid.Lib.Resource.Styleable.CoordinatorLayout_Layout_android_layout_gravity = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_android_layout_gravity;
+			global::Florid.Droid.Lib.Resource.Styleable.CoordinatorLayout_Layout_layout_anchor = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_anchor;
+			global::Florid.Droid.Lib.Resource.Styleable.CoordinatorLayout_Layout_layout_anchorGravity = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_anchorGravity;
+			global::Florid.Droid.Lib.Resource.Styleable.CoordinatorLayout_Layout_layout_behavior = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_behavior;
+			global::Florid.Droid.Lib.Resource.Styleable.CoordinatorLayout_Layout_layout_dodgeInsetEdges = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_dodgeInsetEdges;
+			global::Florid.Droid.Lib.Resource.Styleable.CoordinatorLayout_Layout_layout_insetEdge = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_insetEdge;
+			global::Florid.Droid.Lib.Resource.Styleable.CoordinatorLayout_Layout_layout_keyline = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_keyline;
+			global::Florid.Droid.Lib.Resource.Styleable.CoordinatorLayout_statusBarBackground = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_statusBarBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.DrawerArrowToggle = global::Florid.Staff.Droid.Resource.Styleable.DrawerArrowToggle;
+			global::Florid.Droid.Lib.Resource.Styleable.DrawerArrowToggle_arrowHeadLength = global::Florid.Staff.Droid.Resource.Styleable.DrawerArrowToggle_arrowHeadLength;
+			global::Florid.Droid.Lib.Resource.Styleable.DrawerArrowToggle_arrowShaftLength = global::Florid.Staff.Droid.Resource.Styleable.DrawerArrowToggle_arrowShaftLength;
+			global::Florid.Droid.Lib.Resource.Styleable.DrawerArrowToggle_barLength = global::Florid.Staff.Droid.Resource.Styleable.DrawerArrowToggle_barLength;
+			global::Florid.Droid.Lib.Resource.Styleable.DrawerArrowToggle_color = global::Florid.Staff.Droid.Resource.Styleable.DrawerArrowToggle_color;
+			global::Florid.Droid.Lib.Resource.Styleable.DrawerArrowToggle_drawableSize = global::Florid.Staff.Droid.Resource.Styleable.DrawerArrowToggle_drawableSize;
+			global::Florid.Droid.Lib.Resource.Styleable.DrawerArrowToggle_gapBetweenBars = global::Florid.Staff.Droid.Resource.Styleable.DrawerArrowToggle_gapBetweenBars;
+			global::Florid.Droid.Lib.Resource.Styleable.DrawerArrowToggle_spinBars = global::Florid.Staff.Droid.Resource.Styleable.DrawerArrowToggle_spinBars;
+			global::Florid.Droid.Lib.Resource.Styleable.DrawerArrowToggle_thickness = global::Florid.Staff.Droid.Resource.Styleable.DrawerArrowToggle_thickness;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamily = global::Florid.Staff.Droid.Resource.Styleable.FontFamily;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamilyFont = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamilyFont_android_font = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_android_font;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamilyFont_android_fontStyle = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_android_fontStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamilyFont_android_fontVariationSettings = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_android_fontVariationSettings;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamilyFont_android_fontWeight = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_android_fontWeight;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamilyFont_android_ttcIndex = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_android_ttcIndex;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamilyFont_font = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_font;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamilyFont_fontStyle = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_fontStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamilyFont_fontVariationSettings = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_fontVariationSettings;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamilyFont_fontWeight = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_fontWeight;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamilyFont_ttcIndex = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_ttcIndex;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamily_fontProviderAuthority = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderAuthority;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamily_fontProviderCerts = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderCerts;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamily_fontProviderFetchStrategy = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderFetchStrategy;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamily_fontProviderFetchTimeout = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderFetchTimeout;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamily_fontProviderPackage = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderPackage;
+			global::Florid.Droid.Lib.Resource.Styleable.FontFamily_fontProviderQuery = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderQuery;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor = global::Florid.Staff.Droid.Resource.Styleable.GradientColor;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColorItem = global::Florid.Staff.Droid.Resource.Styleable.GradientColorItem;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColorItem_android_color = global::Florid.Staff.Droid.Resource.Styleable.GradientColorItem_android_color;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColorItem_android_offset = global::Florid.Staff.Droid.Resource.Styleable.GradientColorItem_android_offset;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_centerColor = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_centerColor;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_centerX = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_centerX;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_centerY = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_centerY;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_endColor = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_endColor;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_endX = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_endX;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_endY = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_endY;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_gradientRadius = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_gradientRadius;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_startColor = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_startColor;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_startX = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_startX;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_startY = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_startY;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_tileMode = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_tileMode;
+			global::Florid.Droid.Lib.Resource.Styleable.GradientColor_android_type = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_type;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_android_baselineAligned = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAligned;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_android_baselineAlignedChildIndex;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_android_gravity = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_android_gravity;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_android_orientation = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_android_orientation;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_android_weightSum = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_android_weightSum;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_divider = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_divider;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_dividerPadding = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_dividerPadding;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_Layout = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_Layout;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_gravity = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_gravity;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_height = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_height;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_weight = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_weight;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_width = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_Layout_android_layout_width;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_measureWithLargestChild = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_measureWithLargestChild;
+			global::Florid.Droid.Lib.Resource.Styleable.LinearLayoutCompat_showDividers = global::Florid.Staff.Droid.Resource.Styleable.LinearLayoutCompat_showDividers;
+			global::Florid.Droid.Lib.Resource.Styleable.ListPopupWindow = global::Florid.Staff.Droid.Resource.Styleable.ListPopupWindow;
+			global::Florid.Droid.Lib.Resource.Styleable.ListPopupWindow_android_dropDownHorizontalOffset = global::Florid.Staff.Droid.Resource.Styleable.ListPopupWindow_android_dropDownHorizontalOffset;
+			global::Florid.Droid.Lib.Resource.Styleable.ListPopupWindow_android_dropDownVerticalOffset = global::Florid.Staff.Droid.Resource.Styleable.ListPopupWindow_android_dropDownVerticalOffset;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuGroup = global::Florid.Staff.Droid.Resource.Styleable.MenuGroup;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuGroup_android_checkableBehavior = global::Florid.Staff.Droid.Resource.Styleable.MenuGroup_android_checkableBehavior;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuGroup_android_enabled = global::Florid.Staff.Droid.Resource.Styleable.MenuGroup_android_enabled;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuGroup_android_id = global::Florid.Staff.Droid.Resource.Styleable.MenuGroup_android_id;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuGroup_android_menuCategory = global::Florid.Staff.Droid.Resource.Styleable.MenuGroup_android_menuCategory;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuGroup_android_orderInCategory = global::Florid.Staff.Droid.Resource.Styleable.MenuGroup_android_orderInCategory;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuGroup_android_visible = global::Florid.Staff.Droid.Resource.Styleable.MenuGroup_android_visible;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem = global::Florid.Staff.Droid.Resource.Styleable.MenuItem;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_actionLayout = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_actionLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_actionProviderClass = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_actionProviderClass;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_actionViewClass = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_actionViewClass;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_alphabeticModifiers = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_alphabeticModifiers;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_alphabeticShortcut = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_alphabeticShortcut;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_checkable = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_checkable;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_checked = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_checked;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_enabled = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_enabled;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_icon = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_icon;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_id = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_id;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_menuCategory = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_menuCategory;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_numericShortcut = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_numericShortcut;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_onClick = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_onClick;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_orderInCategory = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_orderInCategory;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_title = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_title;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_titleCondensed = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_titleCondensed;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_android_visible = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_android_visible;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_contentDescription = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_contentDescription;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_iconTint = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_iconTint;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_iconTintMode = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_iconTintMode;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_numericModifiers = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_numericModifiers;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_showAsAction = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_showAsAction;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuItem_tooltipText = global::Florid.Staff.Droid.Resource.Styleable.MenuItem_tooltipText;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuView = global::Florid.Staff.Droid.Resource.Styleable.MenuView;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuView_android_headerBackground = global::Florid.Staff.Droid.Resource.Styleable.MenuView_android_headerBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuView_android_horizontalDivider = global::Florid.Staff.Droid.Resource.Styleable.MenuView_android_horizontalDivider;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuView_android_itemBackground = global::Florid.Staff.Droid.Resource.Styleable.MenuView_android_itemBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuView_android_itemIconDisabledAlpha = global::Florid.Staff.Droid.Resource.Styleable.MenuView_android_itemIconDisabledAlpha;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuView_android_itemTextAppearance = global::Florid.Staff.Droid.Resource.Styleable.MenuView_android_itemTextAppearance;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuView_android_verticalDivider = global::Florid.Staff.Droid.Resource.Styleable.MenuView_android_verticalDivider;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuView_android_windowAnimationStyle = global::Florid.Staff.Droid.Resource.Styleable.MenuView_android_windowAnimationStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuView_preserveIconSpacing = global::Florid.Staff.Droid.Resource.Styleable.MenuView_preserveIconSpacing;
+			global::Florid.Droid.Lib.Resource.Styleable.MenuView_subMenuArrow = global::Florid.Staff.Droid.Resource.Styleable.MenuView_subMenuArrow;
+			global::Florid.Droid.Lib.Resource.Styleable.PopupWindow = global::Florid.Staff.Droid.Resource.Styleable.PopupWindow;
+			global::Florid.Droid.Lib.Resource.Styleable.PopupWindowBackgroundState = global::Florid.Staff.Droid.Resource.Styleable.PopupWindowBackgroundState;
+			global::Florid.Droid.Lib.Resource.Styleable.PopupWindowBackgroundState_state_above_anchor = global::Florid.Staff.Droid.Resource.Styleable.PopupWindowBackgroundState_state_above_anchor;
+			global::Florid.Droid.Lib.Resource.Styleable.PopupWindow_android_popupAnimationStyle = global::Florid.Staff.Droid.Resource.Styleable.PopupWindow_android_popupAnimationStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.PopupWindow_android_popupBackground = global::Florid.Staff.Droid.Resource.Styleable.PopupWindow_android_popupBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.PopupWindow_overlapAnchor = global::Florid.Staff.Droid.Resource.Styleable.PopupWindow_overlapAnchor;
+			global::Florid.Droid.Lib.Resource.Styleable.RecycleListView = global::Florid.Staff.Droid.Resource.Styleable.RecycleListView;
+			global::Florid.Droid.Lib.Resource.Styleable.RecycleListView_paddingBottomNoButtons = global::Florid.Staff.Droid.Resource.Styleable.RecycleListView_paddingBottomNoButtons;
+			global::Florid.Droid.Lib.Resource.Styleable.RecycleListView_paddingTopNoTitle = global::Florid.Staff.Droid.Resource.Styleable.RecycleListView_paddingTopNoTitle;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView = global::Florid.Staff.Droid.Resource.Styleable.SearchView;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_android_focusable = global::Florid.Staff.Droid.Resource.Styleable.SearchView_android_focusable;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_android_imeOptions = global::Florid.Staff.Droid.Resource.Styleable.SearchView_android_imeOptions;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_android_inputType = global::Florid.Staff.Droid.Resource.Styleable.SearchView_android_inputType;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_android_maxWidth = global::Florid.Staff.Droid.Resource.Styleable.SearchView_android_maxWidth;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_closeIcon = global::Florid.Staff.Droid.Resource.Styleable.SearchView_closeIcon;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_commitIcon = global::Florid.Staff.Droid.Resource.Styleable.SearchView_commitIcon;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_defaultQueryHint = global::Florid.Staff.Droid.Resource.Styleable.SearchView_defaultQueryHint;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_goIcon = global::Florid.Staff.Droid.Resource.Styleable.SearchView_goIcon;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_iconifiedByDefault = global::Florid.Staff.Droid.Resource.Styleable.SearchView_iconifiedByDefault;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_layout = global::Florid.Staff.Droid.Resource.Styleable.SearchView_layout;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_queryBackground = global::Florid.Staff.Droid.Resource.Styleable.SearchView_queryBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_queryHint = global::Florid.Staff.Droid.Resource.Styleable.SearchView_queryHint;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_searchHintIcon = global::Florid.Staff.Droid.Resource.Styleable.SearchView_searchHintIcon;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_searchIcon = global::Florid.Staff.Droid.Resource.Styleable.SearchView_searchIcon;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_submitBackground = global::Florid.Staff.Droid.Resource.Styleable.SearchView_submitBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_suggestionRowLayout = global::Florid.Staff.Droid.Resource.Styleable.SearchView_suggestionRowLayout;
+			global::Florid.Droid.Lib.Resource.Styleable.SearchView_voiceIcon = global::Florid.Staff.Droid.Resource.Styleable.SearchView_voiceIcon;
+			global::Florid.Droid.Lib.Resource.Styleable.Spinner = global::Florid.Staff.Droid.Resource.Styleable.Spinner;
+			global::Florid.Droid.Lib.Resource.Styleable.Spinner_android_dropDownWidth = global::Florid.Staff.Droid.Resource.Styleable.Spinner_android_dropDownWidth;
+			global::Florid.Droid.Lib.Resource.Styleable.Spinner_android_entries = global::Florid.Staff.Droid.Resource.Styleable.Spinner_android_entries;
+			global::Florid.Droid.Lib.Resource.Styleable.Spinner_android_popupBackground = global::Florid.Staff.Droid.Resource.Styleable.Spinner_android_popupBackground;
+			global::Florid.Droid.Lib.Resource.Styleable.Spinner_android_prompt = global::Florid.Staff.Droid.Resource.Styleable.Spinner_android_prompt;
+			global::Florid.Droid.Lib.Resource.Styleable.Spinner_popupTheme = global::Florid.Staff.Droid.Resource.Styleable.Spinner_popupTheme;
+			global::Florid.Droid.Lib.Resource.Styleable.StateListDrawable = global::Florid.Staff.Droid.Resource.Styleable.StateListDrawable;
+			global::Florid.Droid.Lib.Resource.Styleable.StateListDrawableItem = global::Florid.Staff.Droid.Resource.Styleable.StateListDrawableItem;
+			global::Florid.Droid.Lib.Resource.Styleable.StateListDrawableItem_android_drawable = global::Florid.Staff.Droid.Resource.Styleable.StateListDrawableItem_android_drawable;
+			global::Florid.Droid.Lib.Resource.Styleable.StateListDrawable_android_constantSize = global::Florid.Staff.Droid.Resource.Styleable.StateListDrawable_android_constantSize;
+			global::Florid.Droid.Lib.Resource.Styleable.StateListDrawable_android_dither = global::Florid.Staff.Droid.Resource.Styleable.StateListDrawable_android_dither;
+			global::Florid.Droid.Lib.Resource.Styleable.StateListDrawable_android_enterFadeDuration = global::Florid.Staff.Droid.Resource.Styleable.StateListDrawable_android_enterFadeDuration;
+			global::Florid.Droid.Lib.Resource.Styleable.StateListDrawable_android_exitFadeDuration = global::Florid.Staff.Droid.Resource.Styleable.StateListDrawable_android_exitFadeDuration;
+			global::Florid.Droid.Lib.Resource.Styleable.StateListDrawable_android_variablePadding = global::Florid.Staff.Droid.Resource.Styleable.StateListDrawable_android_variablePadding;
+			global::Florid.Droid.Lib.Resource.Styleable.StateListDrawable_android_visible = global::Florid.Staff.Droid.Resource.Styleable.StateListDrawable_android_visible;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_android_textOff = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_android_textOff;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_android_textOn = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_android_textOn;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_android_thumb = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_android_thumb;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_showText = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_showText;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_splitTrack = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_splitTrack;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_switchMinWidth = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_switchMinWidth;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_switchPadding = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_switchPadding;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_switchTextAppearance = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_switchTextAppearance;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_thumbTextPadding = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_thumbTextPadding;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_thumbTint = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_thumbTint;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_thumbTintMode = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_thumbTintMode;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_track = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_track;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_trackTint = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_trackTint;
+			global::Florid.Droid.Lib.Resource.Styleable.SwitchCompat_trackTintMode = global::Florid.Staff.Droid.Resource.Styleable.SwitchCompat_trackTintMode;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_android_fontFamily = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_android_fontFamily;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_android_shadowColor = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_android_shadowColor;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_android_shadowDx = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_android_shadowDx;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_android_shadowDy = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_android_shadowDy;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_android_shadowRadius = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_android_shadowRadius;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_android_textColor = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_android_textColor;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_android_textColorHint = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_android_textColorHint;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_android_textColorLink = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_android_textColorLink;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_android_textSize = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_android_textSize;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_android_textStyle = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_android_textStyle;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_android_typeface = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_android_typeface;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_fontFamily = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_fontFamily;
+			global::Florid.Droid.Lib.Resource.Styleable.TextAppearance_textAllCaps = global::Florid.Staff.Droid.Resource.Styleable.TextAppearance_textAllCaps;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar = global::Florid.Staff.Droid.Resource.Styleable.Toolbar;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_android_gravity = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_android_gravity;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_android_minHeight = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_android_minHeight;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_buttonGravity = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_buttonGravity;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_collapseContentDescription = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_collapseContentDescription;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_collapseIcon = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_collapseIcon;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_contentInsetEnd = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_contentInsetEnd;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_contentInsetEndWithActions = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_contentInsetEndWithActions;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_contentInsetLeft = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_contentInsetLeft;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_contentInsetRight = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_contentInsetRight;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_contentInsetStart = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_contentInsetStart;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_contentInsetStartWithNavigation = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_contentInsetStartWithNavigation;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_logo = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_logo;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_logoDescription = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_logoDescription;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_maxButtonHeight = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_maxButtonHeight;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_navigationContentDescription = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_navigationContentDescription;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_navigationIcon = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_navigationIcon;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_popupTheme = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_popupTheme;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_subtitle = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_subtitle;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_subtitleTextAppearance = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_subtitleTextAppearance;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_subtitleTextColor = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_subtitleTextColor;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_title = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_title;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_titleMargin = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_titleMargin;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_titleMarginBottom = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_titleMarginBottom;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_titleMarginEnd = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_titleMarginEnd;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_titleMargins = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_titleMargins;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_titleMarginStart = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_titleMarginStart;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_titleMarginTop = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_titleMarginTop;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_titleTextAppearance = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_titleTextAppearance;
+			global::Florid.Droid.Lib.Resource.Styleable.Toolbar_titleTextColor = global::Florid.Staff.Droid.Resource.Styleable.Toolbar_titleTextColor;
+			global::Florid.Droid.Lib.Resource.Styleable.View = global::Florid.Staff.Droid.Resource.Styleable.View;
+			global::Florid.Droid.Lib.Resource.Styleable.ViewBackgroundHelper = global::Florid.Staff.Droid.Resource.Styleable.ViewBackgroundHelper;
+			global::Florid.Droid.Lib.Resource.Styleable.ViewBackgroundHelper_android_background = global::Florid.Staff.Droid.Resource.Styleable.ViewBackgroundHelper_android_background;
+			global::Florid.Droid.Lib.Resource.Styleable.ViewBackgroundHelper_backgroundTint = global::Florid.Staff.Droid.Resource.Styleable.ViewBackgroundHelper_backgroundTint;
+			global::Florid.Droid.Lib.Resource.Styleable.ViewBackgroundHelper_backgroundTintMode = global::Florid.Staff.Droid.Resource.Styleable.ViewBackgroundHelper_backgroundTintMode;
+			global::Florid.Droid.Lib.Resource.Styleable.ViewStubCompat = global::Florid.Staff.Droid.Resource.Styleable.ViewStubCompat;
+			global::Florid.Droid.Lib.Resource.Styleable.ViewStubCompat_android_id = global::Florid.Staff.Droid.Resource.Styleable.ViewStubCompat_android_id;
+			global::Florid.Droid.Lib.Resource.Styleable.ViewStubCompat_android_inflatedId = global::Florid.Staff.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
+			global::Florid.Droid.Lib.Resource.Styleable.ViewStubCompat_android_layout = global::Florid.Staff.Droid.Resource.Styleable.ViewStubCompat_android_layout;
+			global::Florid.Droid.Lib.Resource.Styleable.View_android_focusable = global::Florid.Staff.Droid.Resource.Styleable.View_android_focusable;
+			global::Florid.Droid.Lib.Resource.Styleable.View_android_theme = global::Florid.Staff.Droid.Resource.Styleable.View_android_theme;
+			global::Florid.Droid.Lib.Resource.Styleable.View_paddingEnd = global::Florid.Staff.Droid.Resource.Styleable.View_paddingEnd;
+			global::Florid.Droid.Lib.Resource.Styleable.View_paddingStart = global::Florid.Staff.Droid.Resource.Styleable.View_paddingStart;
+			global::Florid.Droid.Lib.Resource.Styleable.View_theme = global::Florid.Staff.Droid.Resource.Styleable.View_theme;
 			global::Xamarin.Essentials.Resource.Attribute.alpha = global::Florid.Staff.Droid.Resource.Attribute.alpha;
 			global::Xamarin.Essentials.Resource.Attribute.coordinatorLayoutStyle = global::Florid.Staff.Droid.Resource.Attribute.coordinatorLayoutStyle;
 			global::Xamarin.Essentials.Resource.Attribute.font = global::Florid.Staff.Droid.Resource.Attribute.font;
@@ -3650,328 +5257,325 @@ namespace Florid.Staff.Droid
 			public const int logTokenButton = 2131230823;
 			
 			// aapt resource value: 0x7F080068
-			public const int masked = 2131230824;
+			public const int mainWebview = 2131230824;
 			
 			// aapt resource value: 0x7F080069
-			public const int media_actions = 2131230825;
+			public const int masked = 2131230825;
 			
 			// aapt resource value: 0x7F08006A
-			public const int message = 2131230826;
+			public const int media_actions = 2131230826;
+			
+			// aapt resource value: 0x7F08006B
+			public const int message = 2131230827;
 			
 			// aapt resource value: 0x7F080004
 			public const int META = 2131230724;
 			
-			// aapt resource value: 0x7F08006B
-			public const int middle = 2131230827;
-			
 			// aapt resource value: 0x7F08006C
-			public const int mini = 2131230828;
+			public const int middle = 2131230828;
 			
 			// aapt resource value: 0x7F08006D
-			public const int msgText = 2131230829;
+			public const int mini = 2131230829;
 			
 			// aapt resource value: 0x7F08006E
-			public const int mtrl_child_content_container = 2131230830;
+			public const int msgText = 2131230830;
 			
 			// aapt resource value: 0x7F08006F
-			public const int mtrl_internal_children_alpha_tag = 2131230831;
+			public const int mtrl_child_content_container = 2131230831;
 			
 			// aapt resource value: 0x7F080070
-			public const int multiply = 2131230832;
+			public const int mtrl_internal_children_alpha_tag = 2131230832;
 			
 			// aapt resource value: 0x7F080071
-			public const int navigation_header_container = 2131230833;
+			public const int multiply = 2131230833;
 			
 			// aapt resource value: 0x7F080072
-			public const int never = 2131230834;
+			public const int navigation_header_container = 2131230834;
 			
 			// aapt resource value: 0x7F080073
-			public const int none = 2131230835;
+			public const int never = 2131230835;
 			
 			// aapt resource value: 0x7F080074
-			public const int normal = 2131230836;
+			public const int none = 2131230836;
 			
 			// aapt resource value: 0x7F080075
-			public const int notification_background = 2131230837;
+			public const int normal = 2131230837;
 			
 			// aapt resource value: 0x7F080076
-			public const int notification_main_column = 2131230838;
+			public const int notification_background = 2131230838;
 			
 			// aapt resource value: 0x7F080077
-			public const int notification_main_column_container = 2131230839;
+			public const int notification_main_column = 2131230839;
 			
 			// aapt resource value: 0x7F080078
-			public const int outline = 2131230840;
+			public const int notification_main_column_container = 2131230840;
 			
 			// aapt resource value: 0x7F080079
-			public const int parallax = 2131230841;
+			public const int outline = 2131230841;
 			
 			// aapt resource value: 0x7F08007A
-			public const int parentPanel = 2131230842;
+			public const int parallax = 2131230842;
 			
 			// aapt resource value: 0x7F08007B
-			public const int parent_matrix = 2131230843;
+			public const int parentPanel = 2131230843;
 			
 			// aapt resource value: 0x7F08007C
-			public const int password = 2131230844;
+			public const int parent_matrix = 2131230844;
 			
 			// aapt resource value: 0x7F08007D
-			public const int phoneNumber = 2131230845;
+			public const int pin = 2131230845;
 			
 			// aapt resource value: 0x7F08007E
-			public const int pin = 2131230846;
+			public const int progress_circular = 2131230846;
 			
 			// aapt resource value: 0x7F08007F
-			public const int progress_circular = 2131230847;
+			public const int progress_horizontal = 2131230847;
 			
 			// aapt resource value: 0x7F080080
-			public const int progress_horizontal = 2131230848;
+			public const int radio = 2131230848;
 			
 			// aapt resource value: 0x7F080081
-			public const int radio = 2131230849;
+			public const int right = 2131230849;
 			
 			// aapt resource value: 0x7F080082
-			public const int right = 2131230850;
+			public const int right_icon = 2131230850;
 			
 			// aapt resource value: 0x7F080083
-			public const int right_icon = 2131230851;
+			public const int right_side = 2131230851;
 			
 			// aapt resource value: 0x7F080084
-			public const int right_side = 2131230852;
+			public const int save_image_matrix = 2131230852;
 			
 			// aapt resource value: 0x7F080085
-			public const int save_image_matrix = 2131230853;
+			public const int save_non_transition_alpha = 2131230853;
 			
 			// aapt resource value: 0x7F080086
-			public const int save_non_transition_alpha = 2131230854;
+			public const int save_scale_type = 2131230854;
 			
 			// aapt resource value: 0x7F080087
-			public const int save_scale_type = 2131230855;
+			public const int screen = 2131230855;
 			
 			// aapt resource value: 0x7F080088
-			public const int screen = 2131230856;
-			
-			// aapt resource value: 0x7F080089
-			public const int scroll = 2131230857;
-			
-			// aapt resource value: 0x7F08008D
-			public const int scrollable = 2131230861;
-			
-			// aapt resource value: 0x7F08008A
-			public const int scrollIndicatorDown = 2131230858;
-			
-			// aapt resource value: 0x7F08008B
-			public const int scrollIndicatorUp = 2131230859;
+			public const int scroll = 2131230856;
 			
 			// aapt resource value: 0x7F08008C
-			public const int scrollView = 2131230860;
+			public const int scrollable = 2131230860;
+			
+			// aapt resource value: 0x7F080089
+			public const int scrollIndicatorDown = 2131230857;
+			
+			// aapt resource value: 0x7F08008A
+			public const int scrollIndicatorUp = 2131230858;
+			
+			// aapt resource value: 0x7F08008B
+			public const int scrollView = 2131230859;
+			
+			// aapt resource value: 0x7F08008D
+			public const int search_badge = 2131230861;
 			
 			// aapt resource value: 0x7F08008E
-			public const int search_badge = 2131230862;
+			public const int search_bar = 2131230862;
 			
 			// aapt resource value: 0x7F08008F
-			public const int search_bar = 2131230863;
+			public const int search_button = 2131230863;
 			
 			// aapt resource value: 0x7F080090
-			public const int search_button = 2131230864;
+			public const int search_close_btn = 2131230864;
 			
 			// aapt resource value: 0x7F080091
-			public const int search_close_btn = 2131230865;
+			public const int search_edit_frame = 2131230865;
 			
 			// aapt resource value: 0x7F080092
-			public const int search_edit_frame = 2131230866;
+			public const int search_go_btn = 2131230866;
 			
 			// aapt resource value: 0x7F080093
-			public const int search_go_btn = 2131230867;
+			public const int search_mag_icon = 2131230867;
 			
 			// aapt resource value: 0x7F080094
-			public const int search_mag_icon = 2131230868;
+			public const int search_plate = 2131230868;
 			
 			// aapt resource value: 0x7F080095
-			public const int search_plate = 2131230869;
+			public const int search_src_text = 2131230869;
 			
 			// aapt resource value: 0x7F080096
-			public const int search_src_text = 2131230870;
-			
-			// aapt resource value: 0x7F080097
-			public const int search_voice_btn = 2131230871;
-			
-			// aapt resource value: 0x7F080099
-			public const int selected = 2131230873;
+			public const int search_voice_btn = 2131230870;
 			
 			// aapt resource value: 0x7F080098
-			public const int select_dialog_listview = 2131230872;
+			public const int selected = 2131230872;
+			
+			// aapt resource value: 0x7F080097
+			public const int select_dialog_listview = 2131230871;
 			
 			// aapt resource value: 0x7F080005
 			public const int SHIFT = 2131230725;
 			
+			// aapt resource value: 0x7F080099
+			public const int shortcut = 2131230873;
+			
 			// aapt resource value: 0x7F08009A
-			public const int shortcut = 2131230874;
+			public const int showCustom = 2131230874;
 			
 			// aapt resource value: 0x7F08009B
-			public const int showCustom = 2131230875;
+			public const int showHome = 2131230875;
 			
 			// aapt resource value: 0x7F08009C
-			public const int showHome = 2131230876;
+			public const int showTitle = 2131230876;
 			
 			// aapt resource value: 0x7F08009D
-			public const int showTitle = 2131230877;
+			public const int smallLabel = 2131230877;
 			
 			// aapt resource value: 0x7F08009E
-			public const int smallLabel = 2131230878;
+			public const int snackbar_action = 2131230878;
 			
 			// aapt resource value: 0x7F08009F
-			public const int snackbar_action = 2131230879;
+			public const int snackbar_text = 2131230879;
 			
 			// aapt resource value: 0x7F0800A0
-			public const int snackbar_text = 2131230880;
+			public const int snap = 2131230880;
 			
 			// aapt resource value: 0x7F0800A1
-			public const int snap = 2131230881;
+			public const int snapMargins = 2131230881;
 			
 			// aapt resource value: 0x7F0800A2
-			public const int snapMargins = 2131230882;
+			public const int spacer = 2131230882;
 			
 			// aapt resource value: 0x7F0800A3
-			public const int spacer = 2131230883;
+			public const int split_action_bar = 2131230883;
 			
 			// aapt resource value: 0x7F0800A4
-			public const int split_action_bar = 2131230884;
+			public const int src_atop = 2131230884;
 			
 			// aapt resource value: 0x7F0800A5
-			public const int src_atop = 2131230885;
+			public const int src_in = 2131230885;
 			
 			// aapt resource value: 0x7F0800A6
-			public const int src_in = 2131230886;
+			public const int src_over = 2131230886;
 			
 			// aapt resource value: 0x7F0800A7
-			public const int src_over = 2131230887;
+			public const int standard = 2131230887;
 			
 			// aapt resource value: 0x7F0800A8
-			public const int standard = 2131230888;
+			public const int start = 2131230888;
 			
 			// aapt resource value: 0x7F0800A9
-			public const int start = 2131230889;
+			public const int status_bar_latest_event_content = 2131230889;
 			
 			// aapt resource value: 0x7F0800AA
-			public const int status_bar_latest_event_content = 2131230890;
+			public const int stretch = 2131230890;
 			
 			// aapt resource value: 0x7F0800AB
-			public const int stretch = 2131230891;
+			public const int submenuarrow = 2131230891;
 			
 			// aapt resource value: 0x7F0800AC
-			public const int submenuarrow = 2131230892;
+			public const int submit_area = 2131230892;
 			
 			// aapt resource value: 0x7F0800AD
-			public const int submit_area = 2131230893;
-			
-			// aapt resource value: 0x7F0800AE
-			public const int subscribeButton = 2131230894;
+			public const int subscribeButton = 2131230893;
 			
 			// aapt resource value: 0x7F080006
 			public const int SYM = 2131230726;
 			
+			// aapt resource value: 0x7F0800AE
+			public const int tabMode = 2131230894;
+			
 			// aapt resource value: 0x7F0800AF
-			public const int tabMode = 2131230895;
+			public const int tag_transition_group = 2131230895;
 			
 			// aapt resource value: 0x7F0800B0
-			public const int tag_transition_group = 2131230896;
+			public const int tag_unhandled_key_event_manager = 2131230896;
 			
 			// aapt resource value: 0x7F0800B1
-			public const int tag_unhandled_key_event_manager = 2131230897;
+			public const int tag_unhandled_key_listeners = 2131230897;
 			
 			// aapt resource value: 0x7F0800B2
-			public const int tag_unhandled_key_listeners = 2131230898;
+			public const int text = 2131230898;
 			
 			// aapt resource value: 0x7F0800B3
-			public const int text = 2131230899;
-			
-			// aapt resource value: 0x7F0800B4
-			public const int text2 = 2131230900;
-			
-			// aapt resource value: 0x7F0800B9
-			public const int textinput_counter = 2131230905;
-			
-			// aapt resource value: 0x7F0800BA
-			public const int textinput_error = 2131230906;
-			
-			// aapt resource value: 0x7F0800BB
-			public const int textinput_helper_text = 2131230907;
-			
-			// aapt resource value: 0x7F0800B5
-			public const int textSpacerNoButtons = 2131230901;
-			
-			// aapt resource value: 0x7F0800B6
-			public const int textSpacerNoTitle = 2131230902;
-			
-			// aapt resource value: 0x7F0800B7
-			public const int textStart = 2131230903;
+			public const int text2 = 2131230899;
 			
 			// aapt resource value: 0x7F0800B8
-			public const int text_input_password_toggle = 2131230904;
+			public const int textinput_counter = 2131230904;
+			
+			// aapt resource value: 0x7F0800B9
+			public const int textinput_error = 2131230905;
+			
+			// aapt resource value: 0x7F0800BA
+			public const int textinput_helper_text = 2131230906;
+			
+			// aapt resource value: 0x7F0800B4
+			public const int textSpacerNoButtons = 2131230900;
+			
+			// aapt resource value: 0x7F0800B5
+			public const int textSpacerNoTitle = 2131230901;
+			
+			// aapt resource value: 0x7F0800B6
+			public const int textStart = 2131230902;
+			
+			// aapt resource value: 0x7F0800B7
+			public const int text_input_password_toggle = 2131230903;
+			
+			// aapt resource value: 0x7F0800BB
+			public const int time = 2131230907;
 			
 			// aapt resource value: 0x7F0800BC
-			public const int time = 2131230908;
+			public const int title = 2131230908;
 			
 			// aapt resource value: 0x7F0800BD
-			public const int title = 2131230909;
+			public const int titleDividerNoCustom = 2131230909;
 			
 			// aapt resource value: 0x7F0800BE
-			public const int titleDividerNoCustom = 2131230910;
+			public const int title_template = 2131230910;
 			
 			// aapt resource value: 0x7F0800BF
-			public const int title_template = 2131230911;
+			public const int top = 2131230911;
 			
 			// aapt resource value: 0x7F0800C0
-			public const int top = 2131230912;
+			public const int topPanel = 2131230912;
 			
 			// aapt resource value: 0x7F0800C1
-			public const int topPanel = 2131230913;
+			public const int touch_outside = 2131230913;
 			
 			// aapt resource value: 0x7F0800C2
-			public const int touch_outside = 2131230914;
+			public const int transition_current_scene = 2131230914;
 			
 			// aapt resource value: 0x7F0800C3
-			public const int transition_current_scene = 2131230915;
+			public const int transition_layout_save = 2131230915;
 			
 			// aapt resource value: 0x7F0800C4
-			public const int transition_layout_save = 2131230916;
+			public const int transition_position = 2131230916;
 			
 			// aapt resource value: 0x7F0800C5
-			public const int transition_position = 2131230917;
+			public const int transition_scene_layoutid_cache = 2131230917;
 			
 			// aapt resource value: 0x7F0800C6
-			public const int transition_scene_layoutid_cache = 2131230918;
+			public const int transition_transform = 2131230918;
 			
 			// aapt resource value: 0x7F0800C7
-			public const int transition_transform = 2131230919;
+			public const int uniform = 2131230919;
 			
 			// aapt resource value: 0x7F0800C8
-			public const int uniform = 2131230920;
+			public const int unlabeled = 2131230920;
 			
 			// aapt resource value: 0x7F0800C9
-			public const int unlabeled = 2131230921;
+			public const int up = 2131230921;
 			
 			// aapt resource value: 0x7F0800CA
-			public const int up = 2131230922;
+			public const int useLogo = 2131230922;
 			
 			// aapt resource value: 0x7F0800CB
-			public const int useLogo = 2131230923;
+			public const int view_offset_helper = 2131230923;
 			
 			// aapt resource value: 0x7F0800CC
-			public const int view_offset_helper = 2131230924;
+			public const int visible = 2131230924;
 			
 			// aapt resource value: 0x7F0800CD
-			public const int visible = 2131230925;
+			public const int wide = 2131230925;
 			
 			// aapt resource value: 0x7F0800CE
-			public const int wide = 2131230926;
+			public const int withText = 2131230926;
 			
 			// aapt resource value: 0x7F0800CF
-			public const int withText = 2131230927;
-			
-			// aapt resource value: 0x7F0800D0
-			public const int wrap_content = 2131230928;
+			public const int wrap_content = 2131230927;
 			
 			static Id()
 			{
@@ -4528,31 +6132,34 @@ namespace Florid.Staff.Droid
 			public const int google_storage_bucket = 2131558471;
 			
 			// aapt resource value: 0x7F0D0048
-			public const int hide_bottom_view_on_scroll_behavior = 2131558472;
+			public const int hello = 2131558472;
 			
 			// aapt resource value: 0x7F0D0049
-			public const int mtrl_chip_close_icon_content_description = 2131558473;
+			public const int hide_bottom_view_on_scroll_behavior = 2131558473;
 			
 			// aapt resource value: 0x7F0D004A
-			public const int password_toggle_content_description = 2131558474;
+			public const int mtrl_chip_close_icon_content_description = 2131558474;
 			
 			// aapt resource value: 0x7F0D004B
-			public const int path_password_eye = 2131558475;
+			public const int password_toggle_content_description = 2131558475;
 			
 			// aapt resource value: 0x7F0D004C
-			public const int path_password_eye_mask_strike_through = 2131558476;
+			public const int path_password_eye = 2131558476;
 			
 			// aapt resource value: 0x7F0D004D
-			public const int path_password_eye_mask_visible = 2131558477;
+			public const int path_password_eye_mask_strike_through = 2131558477;
 			
 			// aapt resource value: 0x7F0D004E
-			public const int path_password_strike_through = 2131558478;
+			public const int path_password_eye_mask_visible = 2131558478;
 			
 			// aapt resource value: 0x7F0D004F
-			public const int search_menu_title = 2131558479;
+			public const int path_password_strike_through = 2131558479;
 			
 			// aapt resource value: 0x7F0D0050
-			public const int status_bar_notification_info_overflow = 2131558480;
+			public const int search_menu_title = 2131558480;
+			
+			// aapt resource value: 0x7F0D0051
+			public const int status_bar_notification_info_overflow = 2131558481;
 			
 			static String()
 			{

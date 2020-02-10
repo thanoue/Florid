@@ -48,7 +48,6 @@ namespace Florid.Staff.Droid.Activity
 
             msgText = FindViewById<TextView>(Resource.Id.msgText);
 
-            Log.Debug(TAG, "google app id: " + GetString(Resource.String.google_app_id));
 
             IsPlayServicesAvailable();
 

@@ -42,7 +42,7 @@ namespace Florid.Staff.Droid.Activity
                 {
                     RunOnUiThread(() =>
                     {
-                        StartActivity(typeof(MainActivity));
+                        StartActivity(typeof(LoginActivity));
                     });
                 }
             }, 3000);
