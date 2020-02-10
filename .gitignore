@@ -8,4 +8,5 @@ Florid/Florid.Droid.Lib/bin/
 Florid/packages/
 Florid/Florid.Schema/obj/
 Florid/Florid.Schema/bin/
-
+floriday-staff/node_modules/
+floriday-staff/dist/
