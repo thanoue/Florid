@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 // declare function showToast(title, message, okBtntext, okCallback?: () => void): any;
-declare function showToast(): any;
-
 
 @Component({
   selector: 'app-root',
@@ -15,8 +13,5 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  customers() {
-    showToast();
-  }
 
 }

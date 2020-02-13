@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Webkit;
 using Android.Widget;
 using Firebase.Auth;
+using Java.Interop;
 
 namespace Florid.Staff.Droid.Activity
 {
@@ -31,12 +32,61 @@ namespace Florid.Staff.Droid.Activity
 
 
             _mainWebview = FindViewById<WebView>(Resource.Id.mainWebview);
+            _mainWebview.ClearCache(true);
 
             WebSettings settings = _mainWebview.Settings;
             settings.JavaScriptEnabled = true;
-            _mainWebview.AddJavascriptInterface(new MyJavascriptInterface(this), "MyJSClient");
-            _mainWebview.LoadUrl("https://lorid-e9c34.firebaseapp.com/");
+            settings.SetEnableSmoothTransition(true);
+            settings.SetSupportZoom(true);
+
+            _mainWebview.SetWebViewClient(new WebViewClient());
+            _mainWebview.SetWebChromeClient(new WebChromeClient());
+
+            _mainWebview.AddJavascriptInterface(new MyJavascriptInterface(this), "Android");
+            _mainWebview.LoadUrl("https://lorid-e9c34.web.app");
+
             //_loginBtn.Click += _loginBtn_Click;
+
+            FindViewById<Button>(Resource.Id.LoginBtn).Click += _loginBtn_Click;
+        }
+
+        public class MyChromeClient : WebChromeClient
+        {
+            public override void OnConsoleMessage(string message, int lineNumber, string sourceID)
+            {
+                base.OnConsoleMessage(message, lineNumber, sourceID);
+            }
+        }
+
+        public void ExecJavaScript(string jscode)
+        {
+            if (_mainWebview != null)
+            {
+                _mainWebview.Post(() =>
+                {
+                    try
+                    {
+                        if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
+                        {
+                            _mainWebview.EvaluateJavascript(jscode,null);
+                        }
+                        else
+                        {
+                            _mainWebview.LoadUrl("javascript:" + jscode);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        // TODO: How to handle exceptions?
+                    }
+                }
+                );
+            }
+            else
+            {
+                throw new NullReferenceException("WebView is null!");
+            }
+
         }
 
         public class MyJavascriptInterface : Java.Lang.Object
@@ -50,16 +100,19 @@ namespace Florid.Staff.Droid.Activity
             }
 
             [Android.Webkit.JavascriptInterface]
-            public void getStringFromJS(String txtVal)
+            [Export("showToast")]
+            public void showToast(String toast)
             {
-                Toast.MakeText(context, "Value From JS : " + txtVal,ToastLength.Long).Show();
+                Toast.MakeText(context, "Value From JS : " + toast, ToastLength.Long).Show();
             }
 
         }
 
         private void _loginBtn_Click(object sender, EventArgs e)
         {
-
+            ExecJavaScript("receiveEvent(\"call from android\")");  
+            //_mainWebview.ClearCache(true);
+            //_mainWebview.LoadUrl("https://lorid-e9c34.web.app");
         }
     }
 }

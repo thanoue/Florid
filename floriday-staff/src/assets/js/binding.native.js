@@ -1,11 +1,16 @@
-var MyJSClient;
-function showToast() {
-    var txtVal = "toast from angular client";
-    window.MyJSClient.getStringFromJS(txtVal);
+function receiveEvent(data) {
+    callAngularFunction(data);
 }
 
-function showToastWithCallback(callback) {
-    var txtVal = "toast from angular client";
-    window.MyJSClient.getStringFromJS(txtVal);
-    callback();
+function showAndroidToast(toast) {
+
+    if (typeof Android !== "undefined" && Android !== null) {
+        Android.showToast(toast);
+    } else {
+        console.log('error!!!!');
+    }
 }
+
+function callAngularFunction(data) {
+    window.angularComponentReference.zone.run(() => { window.angularComponentReference.loadAngularFunction(data); });
+}  
