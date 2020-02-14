@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+  <declare-styleable name="CustomTextView">
+    <attr name="fontIcon" format="string"/>
+    <attr name="isBold" format="boolean"/>
+
+    <attr name="customFont" format="enum">
+            <enum name="Regular" value="0" />
+            <enum name="ExtraLight" value="1" />
+            <enum name="Light" value="2" />
+            <enum name="LightItalic" value="3" />
+            <enum name="SuperRegular" value="4" />
+            <enum name="Bold" value="5" />
+     </attr>
+  </declare-styleable>
+</resources>

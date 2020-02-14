@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +10,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { CustomerDetailsComponent } from './components/customer-details/customer-details-component';
 import { CustomersListComponent } from './components/customers-list/customers-list-component';
 import { CreateCustomerComponent } from './components/create-customer/create-customer-component';
+import { AppInjector } from './services/base.injector';
+import { GlobalService } from './services/global.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,12 @@ import { CreateCustomerComponent } from './components/create-customer/create-cus
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule, // for database
   ],
-  providers: [],
+  providers: [GlobalService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(injector: Injector) {
+    AppInjector.setInjector(injector);
+  }
+}

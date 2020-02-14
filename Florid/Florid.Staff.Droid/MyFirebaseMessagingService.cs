@@ -38,20 +38,20 @@ namespace Florid.Staff.Droid
                 intent.PutExtra(key, data[key]);
             }
 
-            var pendingIntent = PendingIntent.GetActivity(this,
-                                                          MainActivity.NOTIFICATION_ID,
-                                                          intent,
-                                                          PendingIntentFlags.OneShot);
+            //var pendingIntent = PendingIntent.GetActivity(this,
+            //                                              MainActivity.NOTIFICATION_ID,
+            //                                              intent,
+            //                                              PendingIntentFlags.OneShot);
 
-            var notificationBuilder = new NotificationCompat.Builder(this, MainActivity.CHANNEL_ID)
-                                      .SetSmallIcon(Resource.Drawable.notification_bg_low)
-                                      .SetContentTitle("FCM Message")
-                                      .SetContentText(messageBody)
-                                      .SetAutoCancel(true)
-                                      .SetContentIntent(pendingIntent);
+            //var notificationBuilder = new NotificationCompat.Builder(this, MainActivity.CHANNEL_ID)
+            //                          .SetSmallIcon(Resource.Drawable.notification_bg_low)
+            //                          .SetContentTitle("FCM Message")
+            //                          .SetContentText(messageBody)
+            //                          .SetAutoCancel(true)
+            //                          .SetContentIntent(pendingIntent);
 
-            var notificationManager = NotificationManagerCompat.From(this);
-            notificationManager.Notify(MainActivity.NOTIFICATION_ID, notificationBuilder.Build());
+            //var notificationManager = NotificationManagerCompat.From(this);
+            //notificationManager.Notify(MainActivity.NOTIFICATION_ID, notificationBuilder.Build());
         }
     }
 }

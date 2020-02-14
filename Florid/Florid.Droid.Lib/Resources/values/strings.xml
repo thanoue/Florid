@@ -1,4 +1,27 @@
 <resources>
-    <string name="hello">Hello World, Click Me!</string>
-    <string name="app_name">Florid.Droid.Lib</string>
+    <string name="icon_shipping">icon_shipping</string>
+    <string name="icon_flower_menu">icon_flower_menu</string>
+    <string name="icon_filter">icon_filter</string>
+    <string name="icon_check_list">icon_check_list</string>
+    <string name="icon_user">icon_user</string>
+    <string name="icon_to_right_arrow">icon_to_right_arrow</string>
+    <string name="icon_edit">icon_edit</string>
+    <string name="icon_add">icon_add</string>
+    <string name="icon_pictures">icon_pictures</string>
+    <string name="icon_down_arrow">icon_down_arrow</string>
+    <string name="icon_customer_service_guy">icon_customer_service_guy</string>
+    <string name="icon_flower">icon_flower</string>
+    <string name="icon_shipper">icon_shipper</string>
+    <string name="icon_empty_1">icon_empty_1</string>
+    <string name="icon_empty_2">icon_empty_2</string>
+    <string name="icon_empty_3">icon_empty_3</string>
+    <string name="icon_empty_4">icon_empty_4</string>
+    <string name="icon_user_menu">icon_user_menu</string>
+    <string name="icon_users_menu">icon_users_menu</string>
+    <string name="icon_floristing">icon_floristing</string>
+    <string name="icon_search">icon_search</string>
+    <string name="icon_remove">icon_remove</string>
+    <string name="icon_flower_thin">icon_flower_thin</string>
+    <string name="icon_camera">icon_camera</string>
+    <string name="icon_attach">icon_attach</string>
 </resources>

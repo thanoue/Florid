@@ -14,7 +14,7 @@ using Firebase.Auth;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity(Label = "SplashActivity", Theme = "@style/AppTheme", MainLauncher = true,NoHistory =true)]
+    [Activity(Theme = "@style/AppTheme", MainLauncher = true,NoHistory =true)]
     public class SplashActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -42,10 +42,10 @@ namespace Florid.Staff.Droid.Activity
                 {
                     RunOnUiThread(() =>
                     {
-                        StartActivity(typeof(LoginActivity));
+                        StartActivity(typeof(MainActivity));
                     });
                 }
-            }, 3000);
+            }, 1000);
         }
     }
 }

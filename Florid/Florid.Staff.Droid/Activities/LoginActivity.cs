@@ -16,7 +16,7 @@ using Java.Interop;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity(Label = "LoginActivity", Theme = "@style/AppTheme")]
+    [Activity]
     public class LoginActivity : AppCompatActivity
     {
         Button _loginBtn;
@@ -42,7 +42,7 @@ namespace Florid.Staff.Droid.Activity
             _mainWebview.SetWebViewClient(new WebViewClient());
             _mainWebview.SetWebChromeClient(new WebChromeClient());
 
-            _mainWebview.AddJavascriptInterface(new MyJavascriptInterface(this), "Android");
+       //     _mainWebview.AddJavascriptInterface(new MyJavascriptInterface(this), "Android");
             _mainWebview.LoadUrl("https://lorid-e9c34.web.app");
 
             //_loginBtn.Click += _loginBtn_Click;
@@ -89,24 +89,6 @@ namespace Florid.Staff.Droid.Activity
 
         }
 
-        public class MyJavascriptInterface : Java.Lang.Object
-        {
-
-            Context context;
-
-            public MyJavascriptInterface(Context context)
-            {
-                this.context = context;
-            }
-
-            [Android.Webkit.JavascriptInterface]
-            [Export("showToast")]
-            public void showToast(String toast)
-            {
-                Toast.MakeText(context, "Value From JS : " + toast, ToastLength.Long).Show();
-            }
-
-        }
 
         private void _loginBtn_Click(object sender, EventArgs e)
         {

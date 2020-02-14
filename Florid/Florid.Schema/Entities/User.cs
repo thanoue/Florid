@@ -9,10 +9,9 @@ namespace Florid.Entity
     public class User : BaseEntity
     {
         public string AvtUrl { get; set; }
-        public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string FullName { get; set; }
-        public Role Role {get;set;}
+        public Roles Role { get;set;}
 
         public LoginModel LoginModel { get; set; }
 
@@ -28,7 +27,7 @@ namespace Florid.Entity
         public string Passcode { get; set; }
     }
 
-    public enum Role
+    public enum Roles
     {
         Admin,
         Shipper,
