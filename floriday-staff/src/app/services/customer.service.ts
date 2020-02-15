@@ -1,37 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { BaseModel } from '../models/base.model';
 import { Customer } from '../models/customer';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
-  private dbPath = '/customers';
+export class CustomerService extends BaseService<Customer> {
 
-  customersRef: AngularFireList<Customer> = null;
-
-  constructor(public db: AngularFireDatabase) {
-    this.customersRef = db.list(this.dbPath);
+  protected tablePath(): string {
+    return '/customers';
   }
 
-  createCustomer(customer: Customer): void {
-    this.customersRef.push(customer);
+  constructor() {
+    super();
   }
-
-  updateCustomer(key: string, value: any): Promise<void> {
-    return this.customersRef.update(key, value);
-  }
-
-  deleteCustomer(key: string): Promise<void> {
-    return this.customersRef.remove(key);
-  }
-
-  getCustomersList(): AngularFireList<Customer> {
-    return this.customersRef;
-  }
-
-  deleteAll(): Promise<void> {
-    return this.customersRef.remove();
-  }
-
 }

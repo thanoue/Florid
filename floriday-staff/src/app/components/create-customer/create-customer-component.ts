@@ -22,10 +22,10 @@ export class CreateCustomerComponent implements OnInit {
 
   save() {
     const customer = new Customer();
-    customer.age = 1;
-    customer.name = 'tran vinh kha';
-    customer.active = false;
-    console.log(customer);
-    this.customerService.createCustomer(customer);
+    customer.FullName = 'tran vinh kha';
+    customer.PhoneNumber = '092746253';
+    this.customerService.insert(customer).then((res) => {
+      console.log('after add', res);
+    });
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Customer } from 'src/app/models/customer';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-customer-details',
@@ -9,9 +11,9 @@ import { Customer } from 'src/app/models/customer';
 })
 export class CustomerDetailsComponent implements OnInit {
 
-  @Input() customer: Customer;
+  @Input() user: User;
 
-  constructor(private customerService: CustomerService) {
+  constructor(private userService: UserService) {
 
   }
 
@@ -19,14 +21,15 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   updateActive(isActive: boolean) {
-    this.customerService
-      .updateCustomer(this.customer.key, { active: isActive })
+    this.user.Active = isActive;
+    this.userService
+      .update(this.user.Id, this.user)
       .catch(err => console.log(err));
   }
 
   deleteCustomer() {
-    this.customerService
-      .deleteCustomer(this.customer.key)
+    this.userService
+      .delete(this.user.Id)
       .catch(err => console.log(err));
   }
 
