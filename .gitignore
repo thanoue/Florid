@@ -11,3 +11,6 @@ Florid/Florid.Schema/bin/
 floriday-staff/node_modules/
 floriday-staff/dist/
 Florid/Florid.Droid.Lib/Florid.Droid.Common/obj
+FloridCrawler/packages/
+FloridCrawler/FloridCrawler/bin/
+FloridCrawler/FloridCrawler/obj/
