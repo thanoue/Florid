@@ -1,7 +1,7 @@
 ﻿using System;
 using Florid.Entity;
 
-namespace Florid.Schema.Model
+namespace Florid.Model
 {
     public class GenericModel<T> where T: BaseEntity
     {

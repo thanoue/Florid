@@ -17,8 +17,8 @@ using Florid.Core;
 using Android.Views;
 using Android.Webkit;
 using Florid.Droid.Lib.Static;
-using Florid.Schema.Model;
 using Newtonsoft.Json;
+using Florid.Model;
 
 namespace Florid.Staff.Droid.Activity   
 {   
@@ -33,6 +33,8 @@ namespace Florid.Staff.Droid.Activity
 
         protected override void InitView(ViewGroup viewGroup)
         {
+        
+
             _mainWebView = FindViewById<WebView>(Resource.Id.mainWebview);
 
             _mainWebView.ClearCache(true);
@@ -40,6 +42,7 @@ namespace Florid.Staff.Droid.Activity
             WebSettings settings = _mainWebView.Settings;
             settings.JavaScriptEnabled = true;
             settings.SetEnableSmoothTransition(true);
+            settings.DomStorageEnabled = true;
             settings.SetSupportZoom(true);
 
             _mainWebView.SetWebViewClient(new WebViewClient());
@@ -59,7 +62,7 @@ namespace Florid.Staff.Droid.Activity
                         break;
                 }
             }), "Android");
-            _mainWebView.LoadUrl("https://lorid-e9c34.firebaseapp.com");
+            _mainWebView.LoadUrl("https://floridstaff.web.app");    
         }
     }
 }

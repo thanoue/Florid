@@ -53,6 +53,8 @@
     <Compile Include="Statics\BaseModelHelper.cs" />
     <Compile Include="BaseMainApplication.cs" />
     <Compile Include="Statics\JavascriptClient.cs" />
+    <Compile Include="Services\DroidSecure.cs" />
+    <Compile Include="Services\DroidContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -111,6 +113,7 @@
     <Folder Include="Resources\font\" />
     <Folder Include="Assets\" />
     <Folder Include="Assets\FontIcons\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Florid.Core\Florid.Core.csproj">

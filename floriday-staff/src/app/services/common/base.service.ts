@@ -1,6 +1,6 @@
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
-import { BaseModel } from '../models/base.model';
-import { AppInjector } from '../services/base.injector';
+import { BaseModel } from 'src/app/models/base.model';
+import { AppInjector } from './base.injector';
 import { Observable } from 'rxjs';
 
 export abstract class BaseService<T extends BaseModel> {

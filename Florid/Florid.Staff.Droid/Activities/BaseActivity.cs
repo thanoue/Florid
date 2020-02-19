@@ -35,6 +35,9 @@ namespace Florid.Staff.Droid.Activity
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Window.SetFlags(WindowManagerFlags.LayoutNoLimits,
+                 WindowManagerFlags.LayoutNoLimits);
+
             base.OnCreate(savedInstanceState);
 
 

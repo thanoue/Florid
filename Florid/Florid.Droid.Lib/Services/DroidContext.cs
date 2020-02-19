@@ -2,7 +2,7 @@
 using Android.Content;
 using Florid.Core.Service;
 
-namespace Florid.Staff.Droid.Service
+namespace Florid.Droid.Lib.Service
 {
     public class DroidContext : IContext
     {

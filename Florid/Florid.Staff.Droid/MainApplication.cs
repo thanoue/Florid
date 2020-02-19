@@ -14,7 +14,6 @@ using Florid.Core.Service;
 using Florid.Droid.Lib;
 using Florid.Entity;
 using Florid.Staff.Droid.Repository;
-using Florid.Staff.Droid.Service;
 using Plugin.Iconize;
 
 namespace Florid.Staff.Droid
@@ -34,8 +33,6 @@ namespace Florid.Staff.Droid
 
         public override void OnCreate()
         {
-            ServiceLocator.Instance.Register<IContext, DroidContext>(this);
-
             base.OnCreate();
 
             ServiceLocator.Instance.Register<IUserRepository, UserRepository>();

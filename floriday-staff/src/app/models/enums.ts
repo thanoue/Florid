@@ -7,6 +7,7 @@ export enum EntityType {
 
 
 export enum Roles {
+    None = -1,
     Admin,
     Shipper,
     CustomerService,

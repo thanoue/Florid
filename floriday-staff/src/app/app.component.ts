@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GenericModel } from './models/generic.model';
 import { Subscribable, Subscription } from 'rxjs';
-import { GlobalService } from './services/global.service';
+import { GlobalService } from './services/common/global.service';
 import { strict } from 'assert';
 
 // declare function showToast(title, message, okBtntext, okCallback?: () => void): any;
@@ -22,6 +22,9 @@ export class AppComponent implements OnInit {
   insertDataWithIdResSubc: Subscription;
 
   ngOnInit(): void {
+
+    console.log('---');
+
     this.insertDataSubc = this.globalService.insertDataCallback
       .subscribe(data => {
 

@@ -10,6 +10,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Florid.Core;
+using Florid.Core.Service;
+using Florid.Droid.Lib.Service;
 using Plugin.Iconize;
 
 namespace Florid.Droid.Lib
@@ -30,7 +33,8 @@ namespace Florid.Droid.Lib
         {
             base.OnCreate();
 
-            // Create your application here
+            ServiceLocator.Instance.Register<IContext, DroidContext>(this);
+            ServiceLocator.Instance.Register<ISecure, DroidSecure>();
 
             Iconize.With(new Staff.Droid.Statics.IconModule());
 

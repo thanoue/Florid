@@ -1,8 +1,8 @@
 import { OnInit, Inject, forwardRef, Injector } from '@angular/core';
 import { AppComponent } from '../app.component';
-import { AppInjector } from '../services/base.injector';
+import { AppInjector } from '../services/common/base.injector';
 import { GenericModel } from '../models/generic.model';
-import { GlobalService } from '../services/global.service';
+import { GlobalService } from '../services/common/global.service';
 
 export abstract class BaseComponent implements OnInit {
 
