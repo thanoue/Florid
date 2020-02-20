@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Florid - Update your day</title>
+    <link rel="icon" type="image/gif" href="./favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap&subset=vietnamese" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet"  type="text/css" href="./css/style.css">
+    <script type='text/javascript' src='./js/frontend.js'></script>
+</head>
+    
+<body>
+    <div class="breadcrumb">
+        <a class="prev-icon">Prev</a>
+        <!-- Click vào button để hiển thị canvas menu -->
+        <div class="breadcrumb-title">
+            <span>Thông tin đơn</span>
+        </div>
+    </div>
+    <div class="page-content" id="orderAdd">
+        <div class="container">
+            <form action="" class="addOrderForm">
+                <div class="form-group prodInfo">
+                    <div class="prodImg">
+                        <img src="./images/product-img.jpg" alt="">
+                    </div>
+                    <div class="prodDetail">
+                        <h5 class="prodCode">Mã SP: 003</h5>
+                        <span class="prodPrice">0 vnđ</span>
+                        <div class="prodQuantity"><input type="number" name="" id="" step="1" value="1" min="1"></div>
+                    </div>
+                    <div class="prodBrowser" onclick="slideUp('actionMenu')">
+                        <i class="fa fa-search main-bg"></i>
+                    </div>
+                </div>
+                <div class="form-group custInfo">
+                    <button onclick="popUp('infoRec')" class="main-bg">Thông tin người nhận</button>
+                </div>
+                <div class="form-group orderInfo">
+                    <input type="text" name="" id="" class="orderField" placeholder="Phụ phí...">
+                </div>
+                <div class="form-group orderDesc">
+                    <textarea name="" id="" class="orderField" placeholder="Mô tả..."></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-8 mx-auto text-center">
+                        <button type="submit" class="btn main-btn w-100">Xong</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="actionMenu">
+        <ul>
+            <li><a href="./danh-sach.html">Bó hoa tươi</a></li>
+            <li><a href="./danh-sach.html">Bình hoa tươi</a></li>
+            <li><a href="./danh-sach.html">Hộp hoa tươi</a></li>
+            <li><a href="./danh-sach.html">Giỏ hoa tươi</a></li>
+            <li><a href="./danh-sach.html">Hoa cưới</a></li>
+            <li><a href="./danh-sach.html">Hoa nghệ thuật</a></li>
+        </ul>
+    </div>
+    <div id="infoRec">
+
+    </div>
+</body>
+    
+</html>
