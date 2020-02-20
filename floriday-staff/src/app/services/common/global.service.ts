@@ -5,9 +5,9 @@ import { GenericModel } from 'src/app/models/generic.model';
     providedIn: 'root'
 })
 export class GlobalService {
+
     insertDataCallback: BehaviorSubject<GenericModel> = new BehaviorSubject<GenericModel>(null);
     insertDataWithIdResCallback: BehaviorSubject<GenericModel> = new BehaviorSubject<GenericModel>(null);
-
 
     insertData(data: GenericModel) {
         this.insertDataCallback.next(data);

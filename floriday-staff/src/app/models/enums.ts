@@ -14,3 +14,16 @@ export enum Roles {
     Florist,
     Others
 }
+
+export enum ProductCategories {
+    Valentine,
+    BoHoaTuoi,
+    BinhHoaTuoi,
+    HopHoaTuoi,
+    GioHoaTuoi,
+    HoaCuoi,
+    HoaNgheThuat,
+    KeHoaTuoi,
+    HoaSuKien,
+    LanHoDiep
+}

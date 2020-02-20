@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,39 +46,41 @@ namespace FloridCrawler
         {
 
 
-            var valentines = CrawlHoaValentine().Result;
+            //var binhHoaTuoi = Crawl("http://florid.com.vn/binh-hoa-tuoi?page=",6,ProductCategories.BinhHoaTuoi).Result;
 
-            var boHoaTuoi = CrawlBoaHoaTuoi().Result;
+            //var hopHoaTuoi = Crawl("http://florid.com.vn/hop-hoa-tuoi?page=", 7, ProductCategories.HopHoaTuoi).Result;
+
+            //var gioHoaTuoi = Crawl("http://florid.com.vn/gio-hoa-tuoi?page=", 4, ProductCategories.GioHoaTuoi).Result;
+
+            var hoaCuoi = Crawl("http://florid.com.vn/hoa-cuoi-1?page=", 1, ProductCategories.HoaCuoi).Result;
+
+            var hoaNgheThuat = Crawl("http://florid.com.vn/hoa-nghe-thuat?page=", 1, ProductCategories.HoaNgheThuat).Result;
+
+            var keHoaTuoi = Crawl("http://florid.com.vn/ke-hoa-tuoi?page=", 3, ProductCategories.KeHoaTuoi).Result;
+
+            var lanHoDiep = Crawl("http://florid.com.vn/lan-ho-diep?page=", 4, ProductCategories.LanHoDiep).Result;
+
+            var products = new List<Product>();
+            products.AddRange(hoaCuoi);
+            products.AddRange(hoaNgheThuat);
+            products.AddRange(keHoaTuoi);
+            products.AddRange(lanHoDiep);
+
+            var source = JsonConvert.SerializeObject(products);
 
             Console.ReadLine();
         }
 
-   
-        private static async Task<List<Product>> CrawlHoaValentine()
+
+        private static async Task<List<Product>> Crawl(string baseUrl,int pageCount,ProductCategories productCategories)
         {
             var products = new List<Product>();
 
-            for(int i= 1; i <= 4; i++)
+            for (int i = 1; i <= pageCount; i++)
             {
-               var prods =  await CrawlerProduct("http://florid.com.vn/valentine-14-2?page=",i,ProductCategories.Valentine);
+                var prods = await CrawlerProduct(baseUrl, i, productCategories);
 
                 products.AddRange(prods);
-
-            }
-
-            return products;
-        }
-
-        private static async Task<List<Product>> CrawlBoaHoaTuoi()
-        {
-            var products = new List<Product>();
-
-            for (int i = 1; i <= 12; i++)
-            {
-                var prods = await CrawlerProduct("http://florid.com.vn/bo-hoa-tuoi?page=", i, ProductCategories.BoHoaTuoi);
-
-                products.AddRange(prods);
-
             }
 
             return products;
@@ -95,7 +98,7 @@ namespace FloridCrawler
 
             //var client = new HttpClient();
             //client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko");
-            var html = webClient.DownloadString(url);
+            var html = await webClient.DownloadStringTaskAsync(url);
 
             var htmlDoc = new HtmlDocument();
 
