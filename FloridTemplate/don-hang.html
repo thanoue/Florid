@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Florid - Update your day</title>
+    <link rel="icon" type="image/gif" href="./favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap&subset=vietnamese" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet"  type="text/css" href="./css/style.css">
+    <script type='text/javascript' src='./js/frontend.js'></script>
+</head>
+    
+<body>
+    <div class="breadcrumb">
+        <a class="prev-icon">Prev</a>
+        <!-- Click vào button để hiển thị canvas menu -->
+        <div class="breadcrumb-title">
+            <span>Danh sách đơn</span>
+        </div>
+    </div>
+    <div class="page-content" id="order">
+        <div class="container order-add">
+            <div class="row">
+                <div class="col-8 mx-auto text-center">
+                    <a href="./them-don.html" class="btn main-btn">Thêm đơn</a>
+                </div>
+            </div>
+        </div>
+        <div class="container order-list">
+            <div class="row order-list-top">
+                <div class="col-2 order-filter text-left">
+                    <button><img src="./images/filter.svg" alt=""></button>
+                </div>
+                <div class="col-8 order-search">
+                    <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
+                </div>
+                <div class="col-2 order-check text-right">
+                    <button><img src="./images/check.svg" alt=""></button>
+                </div>
+            </div>
+            <div class="row order-list-bot">
+                <ul class="col-12 order-content accordion  cusScroll" id="accordionOrder">
+                    <li class="order-content-item">
+                        <div class="item-top" id="heading1">
+                            <span class="item-code">MS 756</span>
+                            <div class="item-info">
+                                <h4 class="item-name">Nguyễn Lan Khánh Vy</h4>
+                                <span class="item-price">800.000 vnđ</span>
+                                <span class="item-date">01/02/2020</span>
+                            </div>
+                            <button data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1" class="collapsed">mở</button>
+                        </div>
+                        <div class="item-bot collapse" id="collapse1"  aria-labelledby="heading1" data-parent="#accordionOrder">
+                            <ul class="order-product-list cusScroll">
+                                <li class="order-product-item">
+                                    <div class="item-status r" onclick="popUp('colorBoard')"><span>1</span></div>
+                                    <div class="item-detail" onclick="slideUp('actionMenu')">
+                                        <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
+                                        <div class="item-detail-info">
+                                            <h5 class="item-code">Mã SP: 003</h5>
+                                            <span class="item-quantity">Số lượng: 1</span>
+                                            <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí Minh</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="order-product-item">
+                                    <div class="item-status g" onclick="popUp('colorBoard')"><span>2</span></div>
+                                    <div class="item-detail" onclick="slideUp('actionMenu')">
+                                        <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
+                                        <div class="item-detail-info">
+                                            <h5 class="item-code">Mã SP: 004</h5>
+                                            <span class="item-quantity">Số lượng: 3</span>
+                                            <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí Minh</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="order-product-item">
+                                    <div class="item-status y" onclick="popUp('colorBoard')"><span>3</span></div>
+                                    <div class="item-detail" onclick="slideUp('actionMenu')">
+                                        <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
+                                        <div class="item-detail-info">
+                                            <h5 class="item-code">Mã SP: 002</h5>
+                                            <span class="item-quantity">Số lượng: 1</span>
+                                            <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí Minh</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="order-product-item">
+                                    <div class="item-status y" onclick="popUp('colorBoard')"><span>4</span></div>
+                                    <div class="item-detail" onclick="slideUp('actionMenu')">
+                                        <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
+                                        <div class="item-detail-info">
+                                            <h5 class="item-code">Mã SP: 002</h5>
+                                            <span class="item-quantity">Số lượng: 1</span>
+                                            <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí Minh</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="order-content-item">
+                        <div class="item-top" id="heading2">
+                            <span class="item-code">MS 753</span>
+                            <div class="item-info">
+                                <h4 class="item-name">Nguyễn Lan Khánh Vy</h4>
+                                <span class="item-price">600.000 vnđ</span>
+                                <span class="item-date">01/02/2020</span>
+                            </div>
+                            <button data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2" class="collapsed">mở</button>
+                        </div>
+                        <div class="item-bot collapse" id="collapse2"  aria-labelledby="heading2" data-parent="#accordionOrder">
+                            content
+                        </div>
+                    </li>
+                    <li class="order-content-item">
+                        <div class="item-top" id="heading2">
+                            <span class="item-code">MS 753</span>
+                            <div class="item-info">
+                                <h4 class="item-name">Nguyễn Lan Khánh Vy</h4>
+                                <span class="item-price">600.000 vnđ</span>
+                                <span class="item-date">01/02/2020</span>
+                            </div>
+                            <button data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2" class="collapsed">mở</button>
+                        </div>
+                        <div class="item-bot collapse" id="collapse2"  aria-labelledby="heading2" data-parent="#accordionOrder">
+                            content
+                        </div>
+                    </li>
+                    <li class="order-content-item">
+                        <div class="item-top" id="heading2">
+                            <span class="item-code">MS 753</span>
+                            <div class="item-info">
+                                <h4 class="item-name">Nguyễn Lan Khánh Vy</h4>
+                                <span class="item-price">600.000 vnđ</span>
+                                <span class="item-date">01/02/2020</span>
+                            </div>
+                            <button data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2" class="collapsed">mở</button>
+                        </div>
+                        <div class="item-bot collapse" id="collapse2"  aria-labelledby="heading2" data-parent="#accordionOrder">
+                            content
+                        </div>
+                    </li>
+                    <li class="order-content-item">
+                        <div class="item-top" id="heading2">
+                            <span class="item-code">MS 753</span>
+                            <div class="item-info">
+                                <h4 class="item-name">Nguyễn Lan Khánh Vy</h4>
+                                <span class="item-price">600.000 vnđ</span>
+                                <span class="item-date">01/02/2020</span>
+                            </div>
+                            <button data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2" class="collapsed">mở</button>
+                        </div>
+                        <div class="item-bot collapse" id="collapse2"  aria-labelledby="heading2" data-parent="#accordionOrder">
+                            content
+                        </div>
+                    </li>
+                    <li class="order-content-item">
+                        <div class="item-top" id="heading2">
+                            <span class="item-code">MS 753</span>
+                            <div class="item-info">
+                                <h4 class="item-name">Nguyễn Lan Khánh Vy</h4>
+                                <span class="item-price">600.000 vnđ</span>
+                                <span class="item-date">01/02/2020</span>
+                            </div>
+                            <button data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2" class="collapsed">mở</button>
+                        </div>
+                        <div class="item-bot collapse" id="collapse2"  aria-labelledby="heading2" data-parent="#accordionOrder">
+                            content
+                        </div>
+                    </li>
+                    <li class="order-content-item">
+                        <div class="item-top" id="heading2">
+                            <span class="item-code">MS 753</span>
+                            <div class="item-info">
+                                <h4 class="item-name">Nguyễn Lan Khánh Vy</h4>
+                                <span class="item-price">600.000 vnđ</span>
+                                <span class="item-date">01/02/2020</span>
+                            </div>
+                            <button data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2" class="collapsed">mở</button>
+                        </div>
+                        <div class="item-bot collapse" id="collapse2"  aria-labelledby="heading2" data-parent="#accordionOrder">
+                            content
+                        </div>
+                    </li>
+                    <li class="order-content-item">
+                        <div class="item-top" id="heading2">
+                            <span class="item-code">MS 753</span>
+                            <div class="item-info">
+                                <h4 class="item-name">Nguyễn Lan Khánh Vy</h4>
+                                <span class="item-price">600.000 vnđ</span>
+                                <span class="item-date">01/02/2020</span>
+                            </div>
+                            <button data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2" class="collapsed">mở</button>
+                        </div>
+                        <div class="item-bot collapse" id="collapse2"  aria-labelledby="heading2" data-parent="#accordionOrder">
+                            content
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Bảng màu -->
+    <div id="colorBoard">
+        <ul class="colorList">
+            <li class="colorItem">
+                <div class="item-status r"><span></span></div>
+                <label>Đang chờ</label>
+            </li>
+            <li class="colorItem">
+                <div class="item-status o"><span></span></div>
+                <label>Đang thực hiện</label>
+            </li>
+            <li class="colorItem">
+                <div class="item-status y"><span></span></div>
+                <label>Đang xác nhận</label>
+            </li>
+            <li class="colorItem">
+                <div class="item-status p"><span></span></div>
+                <label>Chờ giao</label>
+            </li>
+            <li class="colorItem">
+                <div class="item-status b"><span></span></div>
+                <label>Đang giao</label>
+            </li>
+            <li class="colorItem">
+                <div class="item-status g"><span></span></div>
+                <label>Hoàn thành</label>
+            </li>
+            <li class="colorItem">
+                <div class="item-status x"><span></span></div>
+                <label>Đã hủy</label>
+            </li>
+        </ul>
+    </div>
+    <!-- Menu Slide Up -->
+    <div id="actionMenu">
+        <ul>
+            <li><a href="#">Chuyển cho florist</a></li>
+            <li><a href="#">Nhận thành phẩm</a></li>
+            <li><a href="#">Giao hàng</a></li>
+            <li><a href="#">Hoàn thành</a></li>
+            <li><a href="#">Chi tiết sản phẩm</a></li>
+        </ul>
+    </div>
+</body>
+    
+</html>
