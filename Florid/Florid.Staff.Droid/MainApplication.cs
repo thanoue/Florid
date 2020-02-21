@@ -18,7 +18,7 @@ using Plugin.Iconize;
 
 namespace Florid.Staff.Droid
 {
-    [Application]
+    [Application(UsesCleartextTraffic =true)]
     public class MainApplication : BaseMainApplication
     {
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)

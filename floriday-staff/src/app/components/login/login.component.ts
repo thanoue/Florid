@@ -3,7 +3,6 @@ import { BaseComponent } from '../base.component';
 import { LocalService } from 'src/app/services/common/local.service';
 import { Router } from '@angular/router';
 
-declare function showErrorDialog(title, content): void;
 
 @Component({
   selector: 'app-login',
@@ -22,19 +21,9 @@ export class LoginComponent extends BaseComponent {
   protected Init() {
   }
 
-  showToast() {
-    showErrorDialog('Loi', 'Dang nhap loi');
-  }
-
   login() {
+    this.setStatusBarColor(false);
     LocalService.setLogStatus(true);
     this.router.navigate(['']);
-
-    // if (this.username === 'khoikha' && this.password === 'namidth') {
-    //   LocalService.setLogStatus(true);
-    //   this.router.navigate(['']);
-    // } else {
-    //   showErrorDialog('Loi', 'Dang nhap loi');
-    // }
   }
 }

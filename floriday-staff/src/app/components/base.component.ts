@@ -25,5 +25,9 @@ export abstract class BaseComponent implements OnInit {
         this.globalService.insertWithIdResData(model);
     }
 
+    protected setStatusBarColor(isDark: boolean) {
+        this.globalService.setStatusBarColor(isDark);
+    }
+
     protected abstract Init();
 }
