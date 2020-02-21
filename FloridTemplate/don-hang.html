@@ -61,8 +61,8 @@
                         <div class="item-bot collapse" id="collapse1"  aria-labelledby="heading1" data-parent="#accordionOrder">
                             <ul class="order-product-list cusScroll">
                                 <li class="order-product-item">
-                                    <div class="item-status r" onclick="popUp('colorBoard')"><span>1</span></div>
-                                    <div class="item-detail" onclick="slideUp('actionMenu')">
+                                    <div class="item-status r" onclick="openColorBoard()"><span>1</span></div>
+                                    <div class="item-detail" onclick="openOrderMenu()">
                                         <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
                                         <div class="item-detail-info">
                                             <h5 class="item-code">Mã SP: 003</h5>
@@ -72,8 +72,8 @@
                                     </div>
                                 </li>
                                 <li class="order-product-item">
-                                    <div class="item-status g" onclick="popUp('colorBoard')"><span>2</span></div>
-                                    <div class="item-detail" onclick="slideUp('actionMenu')">
+                                    <div class="item-status g" onclick="openColorBoard()"><span>2</span></div>
+                                    <div class="item-detail" onclick="openOrderMenu()">
                                         <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
                                         <div class="item-detail-info">
                                             <h5 class="item-code">Mã SP: 004</h5>
@@ -83,8 +83,8 @@
                                     </div>
                                 </li>
                                 <li class="order-product-item">
-                                    <div class="item-status y" onclick="popUp('colorBoard')"><span>3</span></div>
-                                    <div class="item-detail" onclick="slideUp('actionMenu')">
+                                    <div class="item-status y" onclick="openColorBoard()"><span>3</span></div>
+                                    <div class="item-detail" onclick="openOrderMenu()">
                                         <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
                                         <div class="item-detail-info">
                                             <h5 class="item-code">Mã SP: 002</h5>
@@ -94,8 +94,8 @@
                                     </div>
                                 </li>
                                 <li class="order-product-item">
-                                    <div class="item-status y" onclick="popUp('colorBoard')"><span>4</span></div>
-                                    <div class="item-detail" onclick="slideUp('actionMenu')">
+                                    <div class="item-status y" onclick="openColorBoard()"><span>4</span></div>
+                                    <div class="item-detail" onclick="openOrderMenu()">
                                         <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
                                         <div class="item-detail-info">
                                             <h5 class="item-code">Mã SP: 002</h5>
@@ -210,48 +210,9 @@
         </div>
     </div>
     <!-- Bảng màu -->
-    <div id="colorBoard">
-        <ul class="colorList">
-            <li class="colorItem">
-                <div class="item-status r"><span></span></div>
-                <label>Đang chờ</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status o"><span></span></div>
-                <label>Đang thực hiện</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status y"><span></span></div>
-                <label>Đang xác nhận</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status p"><span></span></div>
-                <label>Chờ giao</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status b"><span></span></div>
-                <label>Đang giao</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status g"><span></span></div>
-                <label>Hoàn thành</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status x"><span></span></div>
-                <label>Đã hủy</label>
-            </li>
-        </ul>
-    </div>
+    
     <!-- Menu Slide Up -->
-    <div id="actionMenu">
-        <ul>
-            <li><a href="#">Chuyển cho florist</a></li>
-            <li><a href="#">Nhận thành phẩm</a></li>
-            <li><a href="#">Giao hàng</a></li>
-            <li><a href="#">Hoàn thành</a></li>
-            <li><a href="#">Chi tiết sản phẩm</a></li>
-        </ul>
-    </div>
+    
 </body>
     
 </html>

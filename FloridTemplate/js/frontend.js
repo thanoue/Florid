@@ -1,8 +1,4 @@
-
-
 jQuery(document).ready(function(){
-    
-
     // custom number input
     jQuery('<div class="quantity-button quantity-down">-</div>').insertBefore('.prodQuantity input');
     jQuery('<div class="quantity-button quantity-up">+</div>').insertAfter('.prodQuantity input');
@@ -32,16 +28,15 @@ jQuery(document).ready(function(){
         });
   
     });
+    
 })
-function popUp(e){
-    jQuery("body").append("<div class='overlay-dark'></div>");
-    var popup_id = "#"+e; 
-    jQuery(popup_id).fadeIn(350); 
-    jQuery(".overlay-dark").click(function(){
-        jQuery(popup_id).hide(250);
-        jQuery(this).remove();
-    });
+// append 2 element
+function appendInBody(e)
+{
+    jQuery("body").append("<div class='overlay-dark'></div>",e);
 }
+
+// slide canvas menu
 function customerSupport(e){
     jQuery("body").append("<div class='overlay-dark'></div>");
         jQuery(".customer-support").css({
@@ -56,13 +51,147 @@ function customerSupport(e){
             jQuery(this).remove();
         });
 }
-function slideUp(e)
+
+// Menu Đơn hàng
+function openOrderMenu(){
+    var html = `<div class="actionMenu">
+        <ul>
+            <li><a class="menu-item-dynamic" data-index="0" >Chuyển cho florist</a></li>
+            <li><a class="menu-item-dynamic" data-index="1" >Nhận thành phẩm</a></li>
+            <li><a class="menu-item-dynamic" data-index="2" >Giao hàng</a></li>
+            <li><a class="menu-item-dynamic" data-index="3" >Hoàn thành</a></li>
+            <li><a class="menu-item-dynamic" data-index="4" >Chi tiết sản phẩm</a></li>
+        </ul>
+    </div>`;
+    slideUp(html,function(index){
+        switch(index)
+        {
+            case '0' : window.location = '#'+index; break;
+            case '1' : window.location = '#'+index; break;
+            case '2' : window.location = '#'+index; break;
+            case '3' : window.location = '#'+index; break;
+            case '4' : openProductDetail();
+        }
+    });
+}
+
+// Menu Danh sách hoa
+function openListMenu()
 {
-    jQuery("body").append("<div class='overlay-dark'></div>");
-    var slideup_id = "#"+e; 
-    jQuery(slideup_id).slideDown(350);
+    var html = `<div class="actionMenu">
+        <ul>
+            <li><a class="menu-item-dynamic" data-index="0" href="javascript:void(0)">Bó hoa tươi</a></li>
+            <li><a  class="menu-item-dynamic" data-index="1"  href="javascript:void(0)">Bình hoa tươi</a></li>
+            <li><a class="menu-item-dynamic" data-index="2"  href="javascript:void(0)">Hộp hoa tươi</a></li>
+            <li><a class="menu-item-dynamic" data-index="3"  href="javascript:void(0)">Giỏ hoa tươi</a></li>
+            <li><a class="menu-item-dynamic" data-index="4"  href="javascript:void(0)">Hoa cưới</a></li>
+            <li><a class="menu-item-dynamic" data-index="5"  href="javascript:void(0)">Hoa nghệ thuật</a></li>
+        </ul>
+        </div>`;
+    slideUp(html,function(index){
+        window.location = './danh-sach.html?'+index;
+    });
+}
+
+// SlideUp Action menu
+function slideUp(html,callback)
+{
+    appendInBody(html);
+    jQuery(document).on('click','a.menu-item-dynamic',function(){
+        var index = jQuery(this).attr('data-index');
+
+        jQuery(".actionMenu").slideUp(250,function(){
+            jQuery(".actionMenu").remove();
+            jQuery(".overlay-dark").remove();
+            callback(index);
+        });
+    });
+
+
+    jQuery(".actionMenu").slideDown(350);
     jQuery(".overlay-dark").click(function(){
-        jQuery(slideup_id).slideUp(250);
-        jQuery(this).remove();
+        jQuery(".actionMenu").slideUp(250,function(){
+            jQuery(".overlay-dark").remove();
+            jQuery(this).remove();
+        });
+    });
+
+}
+
+// Thông báo lỗi Login
+function openLoginError()
+{
+    var html = `<div id="loginerror" class="popup-content">
+            <img src="./images/alert.png" alt="">
+            <p>ĐĂNG NHẬP LỖI</p>
+            <span>Nhập sai mật khẩu hoặc số điện thoại<br/>Vui lòng nhập lại</span>
+        </div>`;
+    popUp(html);    
+}
+
+// Hiển thị bảng màu
+function openColorBoard()
+{
+    var html = `<div id="colorBoard" class="popup-content">
+                <ul class="colorList">
+                    <li class="colorItem">
+                        <div class="item-status r"><span></span></div>
+                        <label>Đang chờ</label>
+                    </li>
+                    <li class="colorItem">
+                        <div class="item-status o"><span></span></div>
+                        <label>Đang thực hiện</label>
+                    </li>
+                    <li class="colorItem">
+                        <div class="item-status y"><span></span></div>
+                        <label>Đang xác nhận</label>
+                    </li>
+                    <li class="colorItem">
+                        <div class="item-status p"><span></span></div>
+                        <label>Chờ giao</label>
+                    </li>
+                    <li class="colorItem">
+                        <div class="item-status b"><span></span></div>
+                        <label>Đang giao</label>
+                    </li>
+                    <li class="colorItem">
+                        <div class="item-status g"><span></span></div>
+                        <label>Hoàn thành</label>
+                    </li>
+                    <li class="colorItem">
+                        <div class="item-status x"><span></span></div>
+                        <label>Đã hủy</label>
+                    </li>
+                </ul>
+            </div>`;
+    popUp(html);
+}
+
+// Thông tin sản phẩm
+function openProductDetail(){
+    var html = `<div class="popup-content">THÔNG TIN SẢN PHẨM</div>`;
+    popUp(html);
+}
+
+// Thông tin người nhận
+function openCustInfo(){
+    var html = `<div id="infoRec" class="popup-content">
+            <div class="currentInfo">
+            </div>
+            <div class="newInfo">
+                Họ tên
+            </div>
+        </div>`;
+    popUp(html);
+}
+// Popup thông báo
+function popUp(html){
+    appendInBody(html);
+    jQuery(".popup-content").fadeIn(350); 
+    jQuery(".overlay-dark").click(function(){
+        jQuery(".popup-content").hide(250,function(){
+            jQuery(".overlay-dark").remove();
+            jQuery(this).remove();
+        });
     });
 }
