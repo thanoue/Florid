@@ -428,12 +428,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         LayoutInflater inflater=LayoutInflater.from(this);
         dialogView=inflater.inflate(R.layout.printer_list, null);
-        adapter1=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, deviceList_bonded);
+
+
         lv1=(ListView) dialogView.findViewById(R.id.listView1);
+        adapter1=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, deviceList_bonded);
+
         btn_scan=(Button) dialogView.findViewById(R.id.btn_scan);
+
         LLlayout=(LinearLayout) dialogView.findViewById(R.id.ll1);
+
         lv2=(ListView) dialogView.findViewById(R.id.listView2);
         adapter2=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, deviceList_found);
+
         lv1.setAdapter(adapter1);
         lv2.setAdapter(adapter2);
         dialog=new AlertDialog.Builder(this).setTitle("BLE").setView(dialogView).create();

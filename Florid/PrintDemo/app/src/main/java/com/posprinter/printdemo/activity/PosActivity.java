@@ -1,5 +1,8 @@
 package com.posprinter.printdemo.activity;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -11,11 +14,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.ParcelUuid;
 import android.provider.MediaStore;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +29,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.mazenrashed.printooth.Printooth;
+import com.mazenrashed.printooth.data.printable.ImagePrintable;
+import com.mazenrashed.printooth.data.printable.Printable;
+import com.mazenrashed.printooth.utilities.Printing;
 import com.posprinter.printdemo.R;
 import com.posprinter.printdemo.utils.StringUtils;
 import com.zxy.tiny.Tiny;
@@ -36,8 +45,12 @@ import net.posprinter.utils.DataForSendToPrinterPos58;
 import net.posprinter.utils.DataForSendToPrinterPos80;
 import net.posprinter.utils.PosPrinterDev;
 
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 
 public class PosActivity extends AppCompatActivity implements View.OnClickListener{
@@ -49,14 +62,18 @@ public class PosActivity extends AppCompatActivity implements View.OnClickListen
     RelativeLayout rl;
     Receiver netReciever;
     TextView tip;
-
+    BluetoothAdapter bluetoothAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Printooth.INSTANCE.init(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pos);
 
+        bluetoothAdapter= BluetoothAdapter.getDefaultAdapter();
 
         netReciever=new Receiver();
         registerReceiver(netReciever,new IntentFilter(MainActivity.DISCONNECT));
@@ -155,6 +172,9 @@ public class PosActivity extends AppCompatActivity implements View.OnClickListen
                             byte[] data1= StringUtils.strTobytes(str);
                             list.add(data1);
                             //should add the command of print and feed line,because print only when one line is complete, not one line, no print
+                            list.add(DataForSendToPrinterPos80.printAndFeedLine());
+                            list.add(DataForSendToPrinterPos80.printAndFeedLine());
+                            list.add(DataForSendToPrinterPos80.printAndFeedLine());
                             list.add(DataForSendToPrinterPos80.printAndFeedLine());
                             //cut pager
                             list.add(DataForSendToPrinterPos80.selectCutPagerModerAndCutPager(66,1));
@@ -260,6 +280,8 @@ public class PosActivity extends AppCompatActivity implements View.OnClickListen
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
         startActivityForResult(intent,0);
+
+
     }
 
 
@@ -274,25 +296,25 @@ public class PosActivity extends AppCompatActivity implements View.OnClickListen
                 Uri imagepath=data.getData();
                 ContentResolver resolver = getContentResolver();
                 Bitmap b=MediaStore.Images.Media.getBitmap(resolver,imagepath);
-                b1=convertGreyImg(b);
+                b1=b;
                 Message message=new Message();
                 message.what=1;
                 handler.handleMessage(message);
 
-                //compress the bitmap
+                //  compress the bitmap
                 Tiny.BitmapCompressOptions options = new Tiny.BitmapCompressOptions();
+                options.config = Bitmap.Config.ARGB_4444;
+
                 Tiny.getInstance().source(b1).asBitmap().withOptions(options).compress(new BitmapCallback() {
                     @Override
                     public void callback(boolean isSuccess, Bitmap bitmap) {
-                        if (isSuccess){
-//                            Toast.makeText(PosActivity.this,"bitmap: "+bitmap.getByteCount(),Toast.LENGTH_LONG).show();
-                            b2=bitmap;
-//                            b2=resizeImage(b1,380,false);
+
+                            b2 = resizeImage(bitmap,380,false);
+
+                           //b2=resizeImage(b1,380,false);
                             Message message=new Message();
                             message.what=2;
                             handler.handleMessage(message);
-                        }
-
 
                     }
                 });
@@ -326,11 +348,11 @@ public class PosActivity extends AppCompatActivity implements View.OnClickListen
             @Override
             public List<byte[]> processDataBeforeSend() {
                 List<byte[]> list=new ArrayList<byte[]>();
-                list.add(DataForSendToPrinterPos80.initializePrinter());
-                list.add(DataForSendToPrinterPos80.printRasterBmp(
+                list.add(DataForSendToPrinterPos58.initializePrinter());
+                list.add(DataForSendToPrinterPos58.printRasterBmp(
                         0,printBmp, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Left,576));
+                list.add(DataForSendToPrinterPos58.printAndFeedLine());
 //                list.add(DataForSendToPrinterPos80.printAndFeedForward(3));
-                list.add(DataForSendToPrinterPos80.selectCutPagerModerAndCutPager(66,1));
                 return list;
             }
         });
@@ -451,6 +473,7 @@ print the bitmap ,the connection is USB
                case 2:
                    //usb connection need special deal with
                    if (PosPrinterDev.PortType.USB!=MainActivity.portType){
+
                        printpicCode(b2);
                    }else {
                        showSnackbar("bimap  "+b2.getWidth()+"  height: "+b2.getHeight());
@@ -458,8 +481,6 @@ print the bitmap ,the connection is USB
                        printUSBbitamp(b2);
 
                    }
-
-
 
                    tip.setVisibility(View.GONE);
                    break;

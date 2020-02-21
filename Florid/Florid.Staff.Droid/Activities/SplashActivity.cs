@@ -52,15 +52,12 @@ namespace Florid.Staff.Droid.Activity
                         Bitmap bmp = Bitmap.CreateBitmap(picture.Width, picture.Height, Bitmap.Config.Argb8888);
                         Canvas canvas = new Canvas(bmp);
                         picture.Draw(canvas);
+
+                        ExportBitmapAsPNG(bmp);
                     }
-                }, 1000);
+                }, 500);
             };
 
-            _mainWebview.Settings.UseWideViewPort = true;
-            _mainWebview.Settings.LoadWithOverviewMode = true;
-            _mainWebview.SetWebViewClient(myWebViewClient);
-            _mainWebview.SetInitialScale(96);
-            _mainWebview.SetWebChromeClient(new WebChromeClient());
 
             using (Stream input = Assets.Open("reciptTemplate.html"))
             {
@@ -69,9 +66,19 @@ namespace Florid.Staff.Droid.Activity
                     var val = reader.ReadToEnd();
 
                     _mainWebview.LoadDataWithBaseURL("", val, "text/html", "UTF-8", "");
+                    _mainWebview.SetWebViewClient(myWebViewClient);
                 }
             }
 
+        }
+
+        void ExportBitmapAsPNG(Bitmap bitmap)
+        {
+            var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+            var filePath = System.IO.Path.Combine(sdCardPath, "test.png");
+            var stream = new FileStream(filePath, FileMode.Create);
+            bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
+            stream.Close();
         }
 
         protected override void OnResume()
