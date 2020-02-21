@@ -41,6 +41,18 @@ font-style: italic;
 color: #fff;
 font-style: italic;
 }
+ul.paging {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2vh;
+}
+ul.paging li{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0 15px;
+    border-radius: 50%;
+}
 /* màu */
 /* xam rgb(153,155,158)
 do rgb(219,18,18)
@@ -752,7 +764,7 @@ form.addOrderForm {
     border: 3px solid transparent;
     box-sizing: border-box;
     transition: 350ms;
-    height: 105px;
+    height: 90px;
     object-fit: cover;
 }
 .prodItem:focus img,
@@ -779,7 +791,7 @@ form.addOrderForm {
 }
 .prodList {
     overflow-y: scroll;
-    height: 450px;
+    height: 400px;
     margin-bottom: 2vh;
 }
 .filterCate
@@ -822,6 +834,7 @@ form.addOrderForm {
     -webkit-line-clamp: 1;
     line-height: 32px;
 }
-.filterSearch {
-    padding-right: 0px;
+.filterAdd
+{
+    padding-left: 0;
 }
