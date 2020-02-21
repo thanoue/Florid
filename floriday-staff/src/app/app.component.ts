@@ -23,8 +23,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log('---');
-
     this.insertDataSubc = this.globalService.insertDataCallback
       .subscribe(data => {
 

@@ -1,9 +1,0 @@
-<h1>Customers</h1>
-<div *ngFor="let user of users" style="width: 300px;">
-  <app-customer-details [user]='user'></app-customer-details>
-</div>
-<span style="font-size:20px">{{contentCallback}}</span>
-<div style=" margin-top:20px;">
-  <button type="button" class="button btn-danger" (click)='addUser()'>Add</button>
-</div>
-<img style="width: 100px;height: 100px" [src]="imagePath">

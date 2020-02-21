@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Android.App;
 using Android.Content;
 using Florid.Entity;
 using Florid.Model;
@@ -13,10 +14,14 @@ namespace Florid.Droid.Lib.Static
         Action<string, string> _login;
         Action<EntityType,string> _insertData;
 
-        public JavascriptClient(Action<string, string> login,Action<EntityType,string> insertData)
+        public Action<bool> SetPrimaryDarkStatusBar;
+        Activity _activity;
+        
+        public JavascriptClient(Activity activity,Action<string, string> login,Action<EntityType,string> insertData)
         {
             _login = login;
             _insertData = insertData;
+            _activity = activity;
         }
 
         [Android.Webkit.JavascriptInterface]
@@ -34,6 +39,17 @@ namespace Florid.Droid.Lib.Static
             _insertData(model.ModelType,data);
         }
 
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("setStatusBarColor")]
+        public  void SetStatusBarColor(bool isDark)
+        {
+            _activity.RunOnUiThread(() =>
+            {
+                SetPrimaryDarkStatusBar(isDark);
+            });
+        }
+
         [Android.Webkit.JavascriptInterface]
         [Export("insertWithIdResult")]
         public  string InsertWithIdResult(string data)
@@ -42,6 +58,7 @@ namespace Florid.Droid.Lib.Static
             _insertData(model.ModelType, data);
             return "send from android";
         }
+
 
         [Android.Webkit.JavascriptInterface]
         [Export("getFirebaseConfig")]

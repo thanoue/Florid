@@ -35,11 +35,18 @@ namespace Florid.Staff.Droid.Activity
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            Window.SetFlags(WindowManagerFlags.LayoutNoLimits,
-                 WindowManagerFlags.LayoutNoLimits);
+            Window.SetSoftInputMode(SoftInput.AdjustPan);
+
+            if (Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
+            {
+                Window.ClearFlags(Android.Views.WindowManagerFlags.TranslucentNavigation);
+                Window.ClearFlags(Android.Views.WindowManagerFlags.TranslucentStatus);
+                Window.AddFlags(Android.Views.WindowManagerFlags.DrawsSystemBarBackgrounds);
+                Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorPrimary));
+                Window.SetNavigationBarColor(Resources.GetColor(Resource.Color.colorPrimary));
+            }
 
             base.OnCreate(savedInstanceState);
-
 
             if (!UseOwnLayout)
             {
@@ -73,6 +80,20 @@ namespace Florid.Staff.Droid.Activity
             InitView(_mainContent);
 
             // Create your application here
+        }
+
+        public void SetStatusBarColor(bool isDark)
+        {
+            if (isDark)
+            {
+                Window.SetStatusBarColor(Resources.GetColor(Resource.Color.mainBackground));
+                Window.SetNavigationBarColor(Resources.GetColor(Resource.Color.mainBackground));
+            }
+            else
+            {
+                Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorPrimary));
+                Window.SetNavigationBarColor(Resources.GetColor(Resource.Color.colorPrimary));
+            }
         }
 
         protected void SetTitle(string title)
