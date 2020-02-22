@@ -25,6 +25,28 @@ export abstract class BaseService<T extends BaseModel> {
 
     }
 
+    async insertList(data: T[]): Promise<T[]> {
+
+        console.log(data.length);
+
+        const products: T[] = [];
+
+        for (let i = 1; i < data.length; i++) {
+
+            const newData = await this.insert(data[i]);
+
+            if (newData) {
+                products.push(newData);
+                continue;
+            } else {
+                console.log('error insert');
+                continue;
+            }
+        }
+
+        return products;
+    }
+
     public getById(id: string): Observable<T> {
         return this.db.object<T>(`${this.tablePath()}/${id}`).valueChanges();
     }

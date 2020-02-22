@@ -33,8 +33,6 @@ namespace Florid.Staff.Droid.Activity
 
         protected override void InitView(ViewGroup viewGroup)
         {
-        
-
             _mainWebView = FindViewById<WebView>(Resource.Id.mainWebview);
 
             _mainWebView.ClearCache(true);
@@ -48,9 +46,9 @@ namespace Florid.Staff.Droid.Activity
             _mainWebView.SetWebViewClient(new WebViewClient());
             _mainWebView.SetWebChromeClient(new WebChromeClient());
 
-            _mainWebView.AddJavascriptInterface(new JavascriptClient((email,password)=> {
+            var javascriptClient = new JavascriptClient(this, (email, password) => {
 
-            },(type,data)=> {
+            }, (type, data) => {
 
                 switch (type)
                 {
@@ -61,8 +59,17 @@ namespace Florid.Staff.Droid.Activity
                     default:
                         break;
                 }
-            }), "Android");
-            _mainWebView.LoadUrl("https://floridstaff.web.app");    
+            });
+
+            javascriptClient.SetPrimaryDarkStatusBar = (isDark) =>
+            {
+                SetStatusBarColor(isDark);
+            };
+
+            _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
+            _mainWebView.LoadUrl("http://192.168.1.28:5000");
+
+            SetStatusBarColor(true);
         }
     }
 }

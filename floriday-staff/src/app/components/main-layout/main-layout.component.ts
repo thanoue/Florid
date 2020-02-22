@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
 
+
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
@@ -12,6 +13,6 @@ export class MainLayoutComponent extends BaseComponent {
     super();
   }
   protected Init() {
-    console.log('main  layout component');
+
   }
 }

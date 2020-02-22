@@ -1,0 +1,28 @@
+﻿<Properties StartupConfiguration="{A03672A6-E69A-493D-B9DC-F279688F50E9}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FloridCrawler/Program.cs">
+    <Files>
+      <File FileName="FloridCrawler/Program.cs" Line="43" Column="10" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="FloridCrawler" expanded="True">
+            <Node name="FloridCrawler" expanded="True">
+              <Node name="Properties" expanded="True" />
+              <Node name="Program.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.FloridCrawler PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/khatran/Data/Florid/FloridCrawler/FloridCrawler/Program.cs" relfile="FloridCrawler/Program.cs" line="69" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

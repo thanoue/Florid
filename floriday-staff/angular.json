@@ -29,7 +29,8 @@
             ],
             "scripts": [
               "src/assets/js/binding.native.js",
-              "src/assets/js/frontend.js"
+              "src/assets/js/frontend.js",
+              "src/assets/js/config.system.js"
             ]
           },
           "configurations": {
@@ -40,8 +41,8 @@
                   "with": "src/environments/environment.prod.ts"
                 },
                 {
-                  "replace": "src/assets/js/binding.native.js",
-                  "with": "src/assets/js/binding.native.prod.js"
+                  "replace": "src/assets/js/config.system.js",
+                  "with": "src/assets/js/config.system.prod.js"
                 }
               ],
               "optimization": true,
