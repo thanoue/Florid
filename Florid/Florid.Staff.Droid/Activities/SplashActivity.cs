@@ -14,6 +14,7 @@ using Android.Views;
 using Android.Webkit;
 using Android.Widget;
 using Firebase.Auth;
+using Florid.Droid.Lib.Static;
 using Java.IO;
 
 namespace Florid.Staff.Droid.Activity
@@ -32,7 +33,7 @@ namespace Florid.Staff.Droid.Activity
     [Activity(Theme = "@style/AppTheme", MainLauncher = true, NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {
-        WebView _mainWebview;
+        ImageView _testImage;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -40,24 +41,7 @@ namespace Florid.Staff.Droid.Activity
             // Create your application here
             SetContentView(Resource.Layout.SplashLayout);
 
-            _mainWebview = FindViewById<WebView>(Resource.Id.mainWebview);
-            var myWebViewClient = new MyWebViewClient();
-            myWebViewClient.OnPageFinishedEvt = (sender, e) =>
-            {
-                (new Handler()).PostDelayed(() =>
-                {
-                    using (Picture picture = _mainWebview.CapturePicture())
-                    {
-
-                        Bitmap bmp = Bitmap.CreateBitmap(picture.Width, picture.Height, Bitmap.Config.Argb8888);
-                        Canvas canvas = new Canvas(bmp);
-                        picture.Draw(canvas);
-
-                        ExportBitmapAsPNG(bmp);
-                    }
-                }, 500);
-            };
-
+            _testImage = FindViewById<ImageView>(Resource.Id.testImage); 
 
             using (Stream input = Assets.Open("reciptTemplate.html"))
             {
@@ -65,17 +49,46 @@ namespace Florid.Staff.Droid.Activity
                 {
                     var val = reader.ReadToEnd();
 
-                    _mainWebview.LoadDataWithBaseURL("", val, "text/html", "UTF-8", "");
-                    _mainWebview.SetWebViewClient(myWebViewClient);
+                    RunOnUiThread(() =>
+                    {
+                        var _mainWebview = new WebView(this);
+                        var paramsLayout = new RelativeLayout.LayoutParams(Android.Views.ViewGroup.LayoutParams.MatchParent, Android.Views.ViewGroup.LayoutParams.MatchParent);
+                        _mainWebview.LayoutParameters = paramsLayout;
+
+                        var myWebViewClient = new MyWebViewClient();
+                        myWebViewClient.OnPageFinishedEvt += (sender, e) =>
+                        {
+                            (new Handler()).PostDelayed(() =>
+                            {
+                                using (Picture picture = _mainWebview.CapturePicture())
+                                {
+                                    Bitmap bmp = Bitmap.CreateBitmap(picture.Width, picture.Height, Bitmap.Config.Argb4444);
+                                    Canvas canvas = new Canvas(bmp);
+                                    picture.Draw(canvas);
+
+                                    _testImage.SetImageBitmap(bmp);
+
+                                    ExportBitmapAsPNG(bmp);
+                                }
+                            }, 1000);
+                        };
+
+                        _mainWebview.Settings.UseWideViewPort = true;
+                        _mainWebview.Settings.LoadWithOverviewMode = true;
+                        _mainWebview.SetWebViewClient(myWebViewClient);
+                        _mainWebview.SetInitialScale(96);
+                        _mainWebview.SetWebChromeClient(new WebChromeClient());
+                        _mainWebview.LoadDataWithBaseURL("", val, "text/html", "UTF-8", "");
+
+                    });
                 }
             }
-
         }
 
         void ExportBitmapAsPNG(Bitmap bitmap)
         {
             var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-            var filePath = System.IO.Path.Combine(sdCardPath, "test.png");
+            var filePath = System.IO.Path.Combine(sdCardPath, "test2.png");
             var stream = new FileStream(filePath, FileMode.Create);
             bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
             stream.Close();

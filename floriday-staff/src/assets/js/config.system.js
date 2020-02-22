@@ -21,3 +21,6 @@ function setStatusBarColor(isDark) {
     //Android.setPrimaryStatusBarColor(isDark);
 }
 
+function doPrintJob(url) {
+
+}

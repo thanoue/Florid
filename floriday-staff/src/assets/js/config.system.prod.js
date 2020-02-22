@@ -26,6 +26,11 @@ function setStatusBarColor(isDark) {
     }
 }
 
+function doPrintJob(url) {
+    if (typeof Android !== "undefined" && Android !== null) {
+        Android.doPrintJob(url);
+    }
+}
 
 function callAngularFunction(data) {
     window.angularComponentReference.zone.run(() => { window.angularComponentReference.loadAngularFunction(data); });

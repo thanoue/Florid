@@ -16,12 +16,25 @@ namespace Florid.Droid.Lib.Static
 
         public Action<bool> SetPrimaryDarkStatusBar;
         Activity _activity;
+        Action _documentReady;
         
         public JavascriptClient(Activity activity,Action<string, string> login,Action<EntityType,string> insertData)
         {
             _login = login;
             _insertData = insertData;
             _activity = activity;
+        }
+
+        public JavascriptClient(Action documentReady)
+        {
+            _documentReady = documentReady;
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("documentReady")]
+        public void DocumentReady()
+        {
+            _documentReady();
         }
 
         [Android.Webkit.JavascriptInterface]

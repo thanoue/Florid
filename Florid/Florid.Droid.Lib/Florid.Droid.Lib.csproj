@@ -89,10 +89,6 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\font\regular.ttf">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\font\bold.ttf">
       <SubType></SubType>
       <Generator></Generator>
@@ -103,6 +99,10 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\font\super_regular.ttf">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\font\regular.ttf">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
