@@ -33,7 +33,14 @@ jQuery(document).ready(function(){
 // append 2 element
 function appendInBody(e)
 {
-    jQuery("body").append("<div class='overlay-dark'></div>",e);
+    if(jQuery("body").find(".overlay-dark").length)
+    {
+        jQuery("body").append("<div class='overlay-dark layer2'></div>",e);
+    }
+    else
+    {
+        jQuery("body").append("<div class='overlay-dark'></div>",e);
+    }
 }
 
 // slide canvas menu
@@ -93,10 +100,42 @@ function openListMenu()
     });
 }
 
+// Menu Danh sách Khách hàng
+function openCustMenu()
+{
+    var html = `<div class="actionMenu" id="custInfo">
+                    <ul>
+                        <li data-index="0">
+                            <p class="custInfo-name">Lê Văn Đậu</p>
+                            <span class="custInfo-phone">0898338294</span>
+                            <span class="custInfo-date">00/03/2019</span>
+                            <span class="custInfo-add">234 Phan Văn Trị, P.17, Q.Bình Thạnh, TP. Hồ Chí Minh</span>
+                        </li>
+                        <li data-index="1">
+                            <p class="custInfo-name">Lê Văn Đậu</p>
+                            <span class="custInfo-phone">0898338294</span>
+                            <span class="custInfo-date">00/03/2019</span>
+                            <span class="custInfo-add">234 Phan Văn Trị, P.17, Q.Bình Thạnh</span>
+                        </li>
+                        <li data-index="2">
+                            <p class="custInfo-name">Lê Văn Đậu</p>
+                            <span class="custInfo-phone">0898338294</span>
+                            <span class="custInfo-date">00/03/2019</span>
+                            <span class="custInfo-add">234 Phan Văn Trị, P.17, Q.Bình Thạnh</span>
+                        </li>
+                    </ul>
+                </div>`;
+    slideUp(html,function(index){
+        window.location = './xac-nhan.html?'+index;
+    });
+}
+
 // SlideUp Action menu
 function slideUp(html,callback)
 {
     appendInBody(html);
+    jQuery(".actionMenu").slideDown(350);
+    //click vào menu
     jQuery(document).on('click','a.menu-item-dynamic',function(){
         var index = jQuery(this).attr('data-index');
 
@@ -106,16 +145,29 @@ function slideUp(html,callback)
             callback(index);
         });
     });
+    //click vào tên kh
+    jQuery(document).on('click','#custInfo li',function(){
+        var index = jQuery(this).attr('data-index');
+        jQuery(".actionMenu").slideUp(250,function(){
+            jQuery(".actionMenu").remove();
+            jQuery(".overlay-dark").remove();
+            callback(index);
+        });
+    });
 
-
-    jQuery(".actionMenu").slideDown(350);
-    jQuery(".overlay-dark").click(function(){
+    jQuery(".overlay-dark:not(.layer2)").click(function(){
         jQuery(".actionMenu").slideUp(250,function(){
             jQuery(".overlay-dark").remove();
             jQuery(this).remove();
         });
     });
-
+    jQuery(".overlay-dark.layer2").click(function(){
+        jQuery(".actionMenu").slideUp(250,function(){
+            jQuery(".overlay-dark.layer2").remove();
+            jQuery(this).remove();
+        });
+    });
+    
 }
 
 // Thông báo lỗi Login
@@ -176,19 +228,45 @@ function openProductDetail(){
 // Thông tin người nhận
 function openCustInfo(){
     var html = `<div id="infoRec" class="popup-content">
-            <div class="currentInfo">
-            </div>
-            <div class="newInfo">
-                Họ tên
-            </div>
-        </div>`;
+                    <div class="currentInfo">
+                        <span>Thông tin người nhận đã lưu</span>
+                        <a href="javascript:void(0)" class="main-bg" onclick="openCustMenu();"><img src="./images/view.svg" class="white-filter"></a>
+                    </div>
+                    <div class="newInfo">
+                        <form action="" class="addInfoForm">
+                            <div class="form-group">
+                                <input type="text" name="" id="" class="mainForm" placeholder="Tên người nhận...">
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="" id="" class="mainForm" placeholder="Số điện thoại...">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="" id="" class="mainForm" placeholder="Địa chỉ người nhận...">
+                            </div>
+                            <div class="form-group">
+                                <input type="date" name="" id="" class="mainForm" placeholder="Thời gian...">
+                            </div>
+                            <div class="row">
+                                <div class="col-8 mx-auto text-center">
+                                    <button type="submit" class="btn main-btn w-100 mt-3">Xong</button>
+                                </div>
+                            </div>
+                        </form>   
+                    </div>
+</div>`;
     popUp(html);
 }
 // Popup thông báo
 function popUp(html){
     appendInBody(html);
     jQuery(".popup-content").fadeIn(350); 
-    jQuery(".overlay-dark").click(function(){
+
+    // jQuery(document).on('click','.currentInfo a',function(){
+    //     openCustMenu();
+    // });
+
+
+    jQuery(".overlay-dark:not(.layer2)").click(function(){
         jQuery(".popup-content").hide(250,function(){
             jQuery(".overlay-dark").remove();
             jQuery(this).remove();
