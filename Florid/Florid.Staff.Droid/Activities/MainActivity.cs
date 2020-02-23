@@ -19,6 +19,9 @@ using Android.Webkit;
 using Florid.Droid.Lib.Static;
 using Newtonsoft.Json;
 using Florid.Model;
+using Android.Graphics;
+using System.IO;
+using Java.Net;
 
 namespace Florid.Staff.Droid.Activity   
 {   
@@ -66,10 +69,35 @@ namespace Florid.Staff.Droid.Activity
                 SetStatusBarColor(isDark);
             };
 
+            javascriptClient.DoPrintJob = (url) =>
+            {
+                URL URL = new URL(url);
+
+                var connection =(HttpURLConnection) URL.OpenConnection();
+                connection.DoInput = true;
+                connection.Connect();
+                using (Stream input = connection.InputStream)
+                {
+                    using (Bitmap myBitmap = BitmapFactory.DecodeStream(input))
+                    {
+                        ExportBitmapAsPNG(myBitmap);
+                    }
+                }
+            };
+
             _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
             _mainWebView.LoadUrl("http://192.168.1.28:5000");
 
             SetStatusBarColor(true);
+        }
+
+        void ExportBitmapAsPNG(Bitmap bitmap)
+        {
+            var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+            var filePath = System.IO.Path.Combine(sdCardPath, "test2.png");
+            var stream = new FileStream(filePath, FileMode.Create);
+            bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
+            stream.Close();
         }
     }
 }

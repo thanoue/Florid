@@ -12,6 +12,7 @@ import { GlobalService } from './services/common/global.service';
 import { LoginComponent } from './components/login/login.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
+import { PrinterComponent } from './components/printer/printer.component';
 
 declare function getFirebaseConfig(): any;
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { LocalService } from 'src/app/services/common/local.service';
 import { Router } from '@angular/router';
+import html2canvas from 'html2canvas';
 
 
 @Component({

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Florid - Update your day</title>
+    <link rel="icon" type="image/gif" href="./favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap&subset=vietnamese" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet"  type="text/css" href="./css/style.css">
+    <script type='text/javascript' src='./js/frontend.js'></script>
+
+    <style>
+        .wrapper{background-color: #fff; padding: 30px 20px;text-align: center;font-size: 18px;}
+        .shop-info { margin-top: 10px;margin-bottom: 10px;}
+        h1 {font-size: 24px; margin-bottom: 10px;font-weight: 700;}
+        .shop-info p { margin-top: 0; margin-bottom: 5px;}
+        .recipe-info,.recipe-detail,.recipe-total{border-top: 1px dashed #333; padding-top: 20px; margin-bottom: 20px;}
+        table{width:100%;}
+        table tr td:first-child,table tr th:first-child{text-align: left; width:50%}
+        table tr td:last-child,table tr th:last-child{text-align: right; width:50%}
+        .recipe-detail table{vertical-align: top;}
+        .recipe-detail table tr th { font-weight:600;padding-bottom:10px; font-size: 20px;}
+        .recipe-detail table tr th:nth-child(2),.recipe-detail table tr td:nth-child(2) { width: 10%; text-align: center;}
+        .recipe-detail table tr{vertical-align: top;}
+        .recipe-detail table tr td{padding-bottom: 10px ;}
+        .recipe-detail table tr td p{margin-top: 0;margin-bottom:7px; font-weight: 600;}
+        .recipe-info table tfoot td {padding-top: 20px;}
+        .recipe-total table tr:first-child td {font-size: 22px; font-weight: 600;}
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div style="align-content:center">
+            <img style="width:50%;height:50%"
+                src="data:image/png;base64,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"
+                alt="Red dot" />
+        </div>
+        <div class="shop-info">
+            <h1>FLORID</h1>
+            <p>783 Phan Văn Trị, P7, Quận Gò Vấp, Thành phố Hồ Chí Minh, 70000
+            </p>
+            <p>SĐT: 0931281122</p>
+            <p>Facebook: fb.com/floridshop</p>
+            <p>Website: florid.com.vn</p>
+        </div>
+        <h1>BIÊN LAI</h1>
+        <div class="recipe-info">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Số biên lai:</td>
+                        <td>02002017</td>
+                    </tr>
+                    <tr>
+                        <td>Thời gian:</td>
+                        <td>21-02-2020 13:08</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="recipe-detail">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Mặt hàng</th>
+                        <th>SL</th>
+                        <th>Số tiền</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Bayby (Giá niêm yết)</p><span>40.000</span>
+                        </td>
+                        <td>1</td>
+                        <td>40.0000</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Hoa lẻ</p><span>10.000</span>
+                        </td>
+                        <td>1</td>
+                        <td>10.0000</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Hoa lẻ</p><span>10.000</span>
+                        </td>
+                        <td>1</td>
+                        <td>10.0000</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Hoa lẻ</p><span>10.000</span>
+                        </td>
+                        <td>1</td>
+                        <td>10.0000</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Hoa lẻ</p><span>10.000</span>
+                        </td>
+                        <td>1</td>
+                        <td>10.0000</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Hoa lẻ</p><span>10.000</span>
+                        </td>
+                        <td>1</td>
+                        <td>10.0000</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <p>Tổng</p>
+                        </td>
+                        <td>2</td>
+                        <td>50.0000</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="recipe-total">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Tổng</td>
+                        <td>50.000đ</td>
+                    </tr>
+                    <tr>
+                        <td>Tiền mặt:</td>
+                        <td>50.000đ</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="recipe-thank">
+            <p>Cảm ơn & chúc bạn một ngày tuyệt vời!<br />Power by</p>
+        </div>
+    </div>
+</body>
+
+</html>
