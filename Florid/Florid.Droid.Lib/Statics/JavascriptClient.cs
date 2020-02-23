@@ -13,8 +13,8 @@ namespace Florid.Droid.Lib.Static
     {
         Action<string, string> _login;
         Action<EntityType,string> _insertData;
-
         public Action<bool> SetPrimaryDarkStatusBar;
+        public Action<string> DoPrintJob;
         Activity _activity;
         Action _documentReady;
         
@@ -28,6 +28,13 @@ namespace Florid.Droid.Lib.Static
         public JavascriptClient(Action documentReady)
         {
             _documentReady = documentReady;
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("doPrintJob")]
+        public void doPrintJob(string url)
+        {
+            DoPrintJob?.Invoke(url);
         }
 
         [Android.Webkit.JavascriptInterface]

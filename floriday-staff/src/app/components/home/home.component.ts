@@ -22,4 +22,7 @@ export class HomeComponent extends BaseComponent {
     this.router.navigate(['login']);
   }
 
+  goToPrintJob() {
+    this.router.navigate(['printjob']);
+  }
 }

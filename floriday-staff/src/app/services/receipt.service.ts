@@ -20,7 +20,6 @@ export class ReceiptService extends BaseService<Receipt> {
   }
 
   public uploadReceipt(file: File | Blob, receipt: Receipt, updateCompletedCallback: (receiptUrl: string) => void) {
-
     this.storageService.pushFileToStorage(file, receipt, (res) => {
       updateCompletedCallback(res.Url);
       this.insert(res as Receipt);

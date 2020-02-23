@@ -1,0 +1,43 @@
+[debug] [2020-02-22T17:07:50.237Z] ----------------------------------------------------------------------
+[debug] [2020-02-22T17:07:50.238Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --host 0.0.0.0
+[debug] [2020-02-22T17:07:50.239Z] CLI Version:   7.12.1
+[debug] [2020-02-22T17:07:50.239Z] Platform:      darwin
+[debug] [2020-02-22T17:07:50.239Z] Node Version:  v10.16.3
+[debug] [2020-02-22T17:07:50.239Z] Time:          Sun Feb 23 2020 00:07:50 GMT+0700 (Indochina Time)
+[debug] [2020-02-22T17:07:50.239Z] ----------------------------------------------------------------------
+[debug] [2020-02-22T17:07:50.239Z] 
+[debug] [2020-02-22T17:07:50.246Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-02-22T17:07:50.246Z] > authorizing via signed-in user
+[debug] [2020-02-22T17:07:50.246Z] [iam] checking project lorid-e9c34 for permissions ["firebase.projects.get"]
+[debug] [2020-02-22T17:07:50.248Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/lorid-e9c34:testIamPermissions  
+
+[debug] [2020-02-22T17:07:51.603Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-22T17:07:51.605Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/lorid-e9c34  
+ 
+[debug] [2020-02-22T17:07:51.941Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/khatran/Data/Florid/floriday-staff'...
+[info] 
+[debug] [2020-02-22T17:07:51.945Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/lorid-e9c34/webApps/-/config  
+ 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[info] ✔  functions: Emulator started at http://0.0.0.0:5001
+[debug] [2020-02-22T17:07:53.045Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/Users/khatran/Data/Florid/floriday-staff/functions" for Cloud Functions...
+[debug] [2020-02-22T17:07:53.072Z] [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-02-22T17:07:53.072Z] [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2020-02-22T17:07:53.072Z] [worker-pool] submitWork(triggerId=)
+[debug] [2020-02-22T17:07:53.073Z] [worker-~diagnostic~-bc1ee16c-a9a0-4245-a130-3779595a07e7]: Assigning socketPath: /var/folders/v8/3m4d06dx59g_96sknqpsmc6w0000gn/T/fire_emu_3953.sock
+[debug] [2020-02-22T17:07:53.073Z] [worker-~diagnostic~-bc1ee16c-a9a0-4245-a130-3779595a07e7]: BUSY
+[info] i  hosting[floridStaff]: Serving hosting files from: dist/floriday-staff
+[info] ✔  hosting[floridStaff]: Local server: http://0.0.0.0:5000
+[debug] [2020-02-22T17:07:53.299Z] [runtime-status] [3953] Functions runtime initialized. {"cwd":"/Users/khatran/Data/Florid/floriday-staff/functions","node_version":"10.16.3"}
+[debug] [2020-02-22T17:07:53.300Z] [runtime-status] [3953] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-02-22T17:07:53.302Z] [runtime-status] [3953] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.2","resolution":"/Users/khatran/Data/Florid/floriday-staff/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-02-22T17:07:53.303Z] [runtime-status] [3953] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"/Users/khatran/Data/Florid/floriday-staff/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-02-22T17:07:53.304Z] [runtime-status] [3953] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"/Users/khatran/Data/Florid/floriday-staff/functions/node_modules/firebase-functions/lib/index.js"}
+[info] ✔  functions[webApi]: http function initialized (http://0.0.0.0:5001/lorid-e9c34/us-central1/webApi).
+[debug] [2020-02-22T17:07:53.439Z] [worker-~diagnostic~-bc1ee16c-a9a0-4245-a130-3779595a07e7]: IDLE
+[info] Shutting down...
+[debug] [2020-02-22T17:12:18.758Z] [worker-~diagnostic~-bc1ee16c-a9a0-4245-a130-3779595a07e7]: exited
+[debug] [2020-02-22T17:12:18.759Z] [worker-~diagnostic~-bc1ee16c-a9a0-4245-a130-3779595a07e7]: FINISHED

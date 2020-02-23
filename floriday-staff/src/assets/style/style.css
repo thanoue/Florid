@@ -1,3 +1,12 @@
+:root
+{
+    --main-grey: #97999c;
+    --main-blue: #1fc9db;
+    --main-green: #1fe8cb;
+    --main-filter: brightness(1.6);
+    --white-filter: brightness(3);
+}
+
 body
 {
     font-family: 'Montserrat', sans-serif;
@@ -16,6 +25,10 @@ ul
     list-style: none;
     margin: 0;
 }
+embed
+{
+    pointer-events: none;
+}
 .form-control::-webkit-input-placeholder { /* Edge */
     color: #fff;
     font-style: italic;
@@ -29,6 +42,18 @@ font-style: italic;
 .form-control::placeholder {
 color: #fff;
 font-style: italic;
+}
+ul.paging {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2vh;
+}
+ul.paging li{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0 15px;
+    border-radius: 50%;
 }
 /* màu */
 /* xam rgb(153,155,158)
@@ -54,14 +79,18 @@ xanh 1fc9db xanh 1fe8cb */
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.7);
     z-index: 1;
     top: 0;
 }
+.overlay-dark.layer2
+{
+    z-index: 10;
+}
 .btn.main-btn
 {
-    background-image: -o-linear-gradient(45deg, rgb(31,201,219), rgb(31,232,203));
-    background-image: linear-gradient(45deg, rgb(31,201,219), rgb(31,232,203));
+    background-image: -o-linear-gradient(45deg, var(--main-blue),var(--main-green));
+    background-image: linear-gradient(45deg, var(--main-blue),var(--main-green));
     transition: 350ms;
     color: #fff;
     text-transform: uppercase;
@@ -83,8 +112,8 @@ xanh 1fc9db xanh 1fe8cb */
 }
 .main-bg:hover
 {   
-    background-image: -o-linear-gradient(45deg, rgb(31,201,219), rgb(31,232,203));
-    background-image: linear-gradient(45deg, rgb(31,201,219), rgb(31,232,203));
+    background-image: -o-linear-gradient(45deg,  var(--main-blue),var(--main-green));
+    background-image: linear-gradient(45deg,  var(--main-blue),var(--main-green));
     color: #fff;
 }
 /* ====================================================================LOGIN PAGE */
@@ -112,6 +141,7 @@ form#loginform {
     width: 100%;
     position: absolute;
     bottom: 110px;
+    left: 0;
 }
 #loginform .form-group {
     width: 80%;
@@ -122,6 +152,7 @@ form#loginform {
     height: 45px;
     background: transparent;
     border-radius: 30px;
+    color: #fff;
 }
 #loginform input.btn {
     display: block;
@@ -134,9 +165,8 @@ form#loginform {
     padding: 12px 25px;
     border-radius: 30px;
 }
-div#loginerror,
-div#colorBoard,
-div#actionMenu {
+.popup-content,
+div.actionMenu {
     position: fixed;
     width: 90vw;
     background: #fff;
@@ -186,8 +216,8 @@ div#actionMenu {
 }
 .breadcrumb {
     background-color: #f5f5f5;
-    background-image: -o-linear-gradient(45deg, rgb(31,201,219), rgb(31,232,203));
-    background-image: linear-gradient(45deg, rgb(31,201,219), rgb(31,232,203));
+    background-image: -o-linear-gradient(45deg, var(--main-blue),var(--main-green));
+    background-image: linear-gradient(45deg, var(--main-blue),var(--main-green));
     position: relative;
     margin-bottom: 0;
     display: -webkit-box;
@@ -264,19 +294,22 @@ nav.main-menu .main-menu-item {
     margin-bottom: 4vh;
     text-align: center;
 }
-.main-menu-item a img {
+.main-menu-item a img,
+.main-menu-item a embed {
     width: 50%;
     transition: 350ms;
     filter: grayscale(1) brightness(2);
     display: block;
     margin: auto;
     margin-bottom: 10px;
+    
 }
 .main-menu-item a span {
     color: #fff;
     font-weight: 600;
 }
-.main-menu-item a:hover img 
+.main-menu-item a:hover img ,
+.main-menu-item a:hover embed
 {
     filter: none;
 }
@@ -315,7 +348,9 @@ a.prev-icon {
     padding-left: 0;
 }
 .order-filter button,
-.order-check button {
+.order-check button,
+.filterCate button, 
+.filterAdd button {
     display: inline-block;
     width: 40px;
     height: 40px;
@@ -325,15 +360,20 @@ a.prev-icon {
     border: none;
     padding: 10px;
 }
-.order-search .form-control{
+.order-search .form-control,
+.filterSearch .form-control{
     height: 40px;
     background: transparent;
     border-radius: 30px;
+    color: #fff;
 }
-.order-filter button img,
-.order-check button img 
+img.main-filter
 {
-    filter: brightness(1.5);
+    filter: var(--main-filter);
+}
+img.white-filter 
+{
+    filter: var(--white-filter);
 }
 .order-filter button:hover, 
 .order-check button:hover 
@@ -342,7 +382,8 @@ a.prev-icon {
     background-image: linear-gradient(45deg, rgb(31,201,219), rgb(31,232,203));
 }
 .order-filter button:hover img, 
-.order-check button:hover img
+.order-check button:hover img,
+.filterAdd button:hover img
 {
     filter: brightness(3);
 }
@@ -575,7 +616,7 @@ div#colorBoard
         -ms-flex-align: center;
             align-items: center;
 }
-div#actionMenu {
+div.actionMenu {
     text-align: left;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -584,14 +625,14 @@ div#actionMenu {
     transform: translate(-50%,0);
     padding: 30px 0;
 }
-div#actionMenu a {
+div.actionMenu a {
     display: block;
     padding: 10px 30px;
     color: #999;
     font-size: 14px;
     transition: 350ms;
 }
-div#actionMenu a:hover {
+div.actionMenu a:hover {
     color: #fff;
     background-image: -o-linear-gradient(45deg, rgb(31,201,219), rgb(31,232,203));
     background-image: linear-gradient(45deg, rgb(31,201,219), rgb(31,232,203));
@@ -638,7 +679,7 @@ form.addOrderForm .form-group {
     width: 50px;
     display: block;
 }
-.prodInfo .prodBrowser a {
+.prodInfo .prodBrowser i {
     display: block;
     width: 50px;
     height: 50px;
@@ -647,6 +688,7 @@ form.addOrderForm .form-group {
     font-size: 20px;
     text-align: center;
     line-height: 48px;
+    color: #777;
 }
 .prodInfo .prodDetail 
 {  
@@ -654,13 +696,14 @@ form.addOrderForm .form-group {
     padding: 0 5px;
 }
 .custInfo a {
-    display: block;
     font-size: 16px;
     text-transform: uppercase;
     font-weight: 600;
     text-align: center;
     height: 60px;
     line-height: 60px;
+    color: var(--main-grey);
+    display: block;
 }
 .orderInfo input,
 .orderDesc textarea {
@@ -712,3 +755,174 @@ form.addOrderForm {
 }
 
 
+/* ===================================================PRODUCT CATE */
+.prodFilter 
+{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+.prodDone a 
+{
+    display: block;
+}
+.prodItem img {
+    width: 100%;
+    border-radius: 10px;
+    border: 3px solid transparent;
+    box-sizing: border-box;
+    transition: 350ms;
+    height: 90px;
+    object-fit: cover;
+}
+.prodItem:focus img,
+.prodItem:hover img
+{
+    border-color: #1fc9db;
+}
+.prodItem 
+{
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+    margin-bottom: 7px;
+}
+.prodItem h4 {
+    margin-top: 7px;
+    margin-bottom: 0;
+    font-size: 12px;
+}
+.prodItem span
+{
+    display: block;
+    font-weight: 600;
+}
+.prodList {
+    overflow-y: scroll;
+    height: 400px;
+    margin-bottom: 2vh;
+}
+.filterCate
+{
+    padding-right: 0;
+}
+.filterCate a {
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    border-radius: 20px;
+    font-size: 12px;
+    border: none;
+    padding: 5px;
+    padding-left: 40px;
+}
+
+.filterCate a img {
+    position: absolute;
+    left: 20px;
+    height: 30px;
+    width: 30px;
+    top: 5px;
+    -webkit-filter: invert(.7) brightness(2);
+    filter: invert(.7) brightness(2);
+}
+.filterCate a:hover img
+{
+    -webkit-filter: none;
+    filter: none;
+}
+.filterCate a span 
+{
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-height: 32px;
+}
+.filterAdd
+{
+    padding-left: 0;
+}
+
+div#infoRec
+{
+    padding: 10px;
+    border-radius: 20px;
+}
+.currentInfo {
+    border: 1px solid #999;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    font-style: italic;
+    position: relative;
+    border-radius: 10px;
+}
+.currentInfo span {
+    padding-right: 50px;
+}
+.currentInfo a.main-bg:not(:hover) {
+    background: var(--main-grey);
+}
+.currentInfo a
+{   
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    right: 2px;
+    top: 2px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px;
+}
+.currentInfo a img {
+    display: block;
+}
+input.mainForm {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    font-style: italic;
+    background: transparent;
+    color: #999;
+}
+.newInfo {
+    padding: 15px 15px 30px 15px;
+}
+#custInfo 
+{
+    z-index: 99;
+}
+#custInfo li {
+    text-align: center;
+    border-bottom: 1px solid #97999c;
+    padding: 10px 15px;
+    font-size: 14px;
+}
+p.custInfo-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+#custInfo span.custInfo-phone {
+    float: left;
+    width: 50%;
+    text-align: left;
+}
+#custInfo span.custInfo-date {
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+span.custInfo-add {
+    width: 100%;
+    height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}

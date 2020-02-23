@@ -21,13 +21,7 @@ export class PrinterComponent extends BaseComponent {
 
   protected Init() {
     setTimeout(() => {
-      html2canvas(document.body).then((canvas) => {
-        const contentDataURL = canvas.toDataURL('image/png');
-        var link = document.createElement('a');
-        document.body.appendChild(link);
-        link.download = 'html_image.png';
-        link.href = canvas.toDataURL('image/png');
-        link.target = '_blank';
+      html2canvas(document.getElementById('receipt-form')).then((canvas) => {
 
         canvas.toBlob((blob => {
 
@@ -39,11 +33,8 @@ export class PrinterComponent extends BaseComponent {
           console.log(blob);
 
           this.receiptService.uploadReceipt(blob, receipt, (url => {
-
             doPrintJob(url);
-
           }));
-
         }), 'image/png', 1);
 
       });
