@@ -23,15 +23,23 @@ namespace Florid.Staff.Droid.Activity
         protected virtual bool UseOwnLayout => false;
         protected virtual new string Title => "Base Activity";
 
+
         protected virtual void OnBacktbnClicking()
         {
             Finish();
         }
 
-        private RelativeLayout _baseLayout;
+        private ViewGroup _baseLayout;
         private ViewGroup _mainContent;
         private CustomTextView _backBtn;
         private CustomTextView _titleTv;
+
+        public ViewGroup ParentContainer
+        {
+            get => _baseLayout;
+        }
+
+        public MainApplication MainApp => (MainApplication)Application;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -74,6 +82,7 @@ namespace Florid.Staff.Droid.Activity
             else
             {
                 _mainContent = (ViewGroup)LayoutInflater.Inflate(LayoutId, null, true);
+                _baseLayout = _mainContent;
                 SetContentView(_mainContent);
             }
 

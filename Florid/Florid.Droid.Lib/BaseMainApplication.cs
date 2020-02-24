@@ -36,7 +36,7 @@ namespace Florid.Droid.Lib
             ServiceLocator.Instance.Register<IContext, DroidContext>(this);
             ServiceLocator.Instance.Register<ISecure, DroidSecure>();
 
-            Iconize.With(new Staff.Droid.Statics.IconModule());
+            Iconize.With(new Staff.Droid.Static.IconModule());
 
             BaseModelHelper.Instance.CacheFonts[Resource.Font.bold] = Android.Support.V4.Content.Res.ResourcesCompat.GetFont(this, Resource.Font.bold);
             BaseModelHelper.Instance.CacheFonts[Resource.Font.extra_light] = Android.Support.V4.Content.Res.ResourcesCompat.GetFont(this, Resource.Font.extra_light);

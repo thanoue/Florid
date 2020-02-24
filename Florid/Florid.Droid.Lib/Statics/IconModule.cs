@@ -5,7 +5,7 @@ using Florid.Core.Service;
 using Florid.Droid.Lib;
 using Plugin.Iconize;
 
-namespace Florid.Staff.Droid.Statics
+namespace Florid.Staff.Droid.Static
 {
     public class IconModule : Plugin.Iconize.IconModule
     {

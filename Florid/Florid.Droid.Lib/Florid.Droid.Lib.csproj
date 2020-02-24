@@ -48,6 +48,8 @@
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statics\BitmapToByteData.cs" />
+    <Compile Include="Statics\DroidUtility.cs" />
     <Compile Include="Statics\IconModule.cs" />
     <Compile Include="Widgets\CustomTextView.cs" />
     <Compile Include="Statics\BaseModelHelper.cs" />
@@ -74,47 +76,56 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />
     <AndroidResource Include="Resources\drawable\bg_main_gradient.xml">
-      <SubType></SubType>
-      <Generator></Generator>
+      <SubType>
+      </SubType>
+      <Generator>
+      </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\font\extra_light.ttf">
-      <SubType></SubType>
-      <Generator></Generator>
+      <SubType>
+      </SubType>
+      <Generator>
+      </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\font\light_italic.ttf">
-      <SubType></SubType>
-      <Generator></Generator>
+      <SubType>
+      </SubType>
+      <Generator>
+      </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\font\light.ttf">
-      <SubType></SubType>
-      <Generator></Generator>
+      <SubType>
+      </SubType>
+      <Generator>
+      </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\font\bold.ttf">
-      <SubType></SubType>
-      <Generator></Generator>
+      <SubType>
+      </SubType>
+      <Generator>
+      </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\values\attrs.xml">
-      <SubType></SubType>
-      <Generator></Generator>
+      <SubType>
+      </SubType>
+      <Generator>
+      </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\font\super_regular.ttf">
-      <SubType></SubType>
-      <Generator></Generator>
+      <SubType>
+      </SubType>
+      <Generator>
+      </Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\font\regular.ttf">
-      <SubType></SubType>
-      <Generator></Generator>
+      <SubType>
+      </SubType>
+      <Generator>
+      </Generator>
     </AndroidResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\drawable\" />
-    <Folder Include="Statics\" />
-    <Folder Include="Resources\font\" />
-    <Folder Include="Assets\" />
-    <Folder Include="Assets\FontIcons\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Florid.Core\Florid.Core.csproj">
       <Project>{90724680-1978-4627-90EE-7BBF62345E54}</Project>

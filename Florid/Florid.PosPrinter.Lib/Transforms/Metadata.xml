@@ -1,0 +1,15 @@
+﻿<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+  <attr path="/api/package[@name='net.posprinter.service']/class[@name='PosprinterService']/property[@name='xPrinterDev']" name="visibility">protected</attr>
+  <attr path="/api/package[@name='net.posprinter.service']/class[@name='PosprinterService']/property[@name='mMsg']" name="visibility">protected</attr>
+  <attr path="/api/package[@name='net.posprinter.service']/class[@name='PosprinterService']/property[@name='isConnected']" name="visibility">protected</attr>
+  <!--<attr path="/api/package[@name='net.posprinter.service']/class[@name='PosprinterService.MyBinder']/method[@name='writeDataByYouself' and count(parameter)=2 and parameter[1][@type='net.posprinter.posprinterface.UiExecute'] and parameter[2][@type='net.posprinter.posprinterface.ProcessData']]" name="visibility">public virtual</attr>-->
+  
+  
+</metadata>

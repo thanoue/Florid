@@ -22,9 +22,14 @@ using Florid.Model;
 using Android.Graphics;
 using System.IO;
 using Java.Net;
+using Firebase.Storage;
+using static Firebase.Storage.StreamDownloadTask;
+using System;
+using Florid.Staff.Droid.Static;
+using System.Threading;
 
-namespace Florid.Staff.Droid.Activity   
-{   
+namespace Florid.Staff.Droid.Activity
+{
     [Activity]
     public class MainActivity : BaseActivity
     {
@@ -49,9 +54,11 @@ namespace Florid.Staff.Droid.Activity
             _mainWebView.SetWebViewClient(new WebViewClient());
             _mainWebView.SetWebChromeClient(new WebChromeClient());
 
-            var javascriptClient = new JavascriptClient(this, (email, password) => {
+            var javascriptClient = new JavascriptClient(this, (email, password) =>
+            {
 
-            }, (type, data) => {
+            }, (type, data) =>
+            {
 
                 switch (type)
                 {
@@ -73,7 +80,7 @@ namespace Florid.Staff.Droid.Activity
             {
                 URL URL = new URL(url);
 
-                var connection =(HttpURLConnection) URL.OpenConnection();
+                var connection = (HttpURLConnection)URL.OpenConnection();
                 connection.DoInput = true;
                 connection.Connect();
                 using (Stream input = connection.InputStream)
@@ -89,6 +96,57 @@ namespace Florid.Staff.Droid.Activity
             _mainWebView.LoadUrl("http://192.168.1.28:5000");
 
             SetStatusBarColor(true);
+
+
+            MainApp.ConnectToBluetoothDevice(this, "DC:0D:30:2F:49:8F", (isSuccess) =>
+            {
+
+                FirebaseStorage storage = FirebaseStorage.Instance;
+
+                StorageReference httpsReference = storage.GetReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/lorid-e9c34.appspot.com/o/receipts%2Freceipt1.png?alt=media&token=32be5849-6962-409d-9984-0a713fca63a9");
+
+                httpsReference.GetStream(new MyFirebaseStreamProcessor((str) =>
+                {
+                    using (var bitmap = BitmapFactory.DecodeStream(str).ResizeImage(400, false))
+                    {
+                        var binder = MainApp.MyBinder;
+
+                        var manualEvent = new ManualResetEvent(false);
+
+                        manualEvent.Reset();
+
+                        binder.WriteDataByYouself(new MyUiExecute(() =>
+                        {
+
+                        }, () =>
+                        {
+                            MainApp.ShowSnackbar(this, "Printing Error!!!!", AlertType.Error);
+
+                        }), new MyProcessDataCallback(bitmap, () =>
+                        {
+                            manualEvent.Set();
+                        }));
+
+                        manualEvent.WaitOne();
+                    }
+                }));
+            });
+        }
+
+        public class MyFirebaseStreamProcessor : Java.Lang.Object, IStreamProcessor
+        {
+            Action<Stream> _streamDownloadCallback;
+            public MyFirebaseStreamProcessor(Action<Stream> streamDownloadCallback)
+            {
+                _streamDownloadCallback = streamDownloadCallback;
+            }
+
+
+
+            public void DoInBackground(TaskSnapshot state, Stream stream)
+            {
+                _streamDownloadCallback?.Invoke(stream);
+            }
         }
 
         void ExportBitmapAsPNG(Bitmap bitmap)

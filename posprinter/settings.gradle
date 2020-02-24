@@ -1,0 +1,2 @@
+include ':app', ':posprinterlib'
+rootProject.name='posprinter'

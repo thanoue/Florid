@@ -1,0 +1,1 @@
+bluetooth mac address DC:0D:30:2F:49:8F

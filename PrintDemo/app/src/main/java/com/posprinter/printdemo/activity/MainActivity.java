@@ -1,5 +1,6 @@
 package com.posprinter.printdemo.activity;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
@@ -41,7 +42,7 @@ import java.util.List;
 import java.util.Set;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener{
 
     public static String DISCONNECT="com.posconsend.net.disconnetct";
 
@@ -269,8 +270,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
     /*
     net connection
      */
@@ -363,7 +362,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onsucess() {
                     ISCONNECT=true;
-                    showSnackbar(getString(R.string.con_success));
+                        showSnackbar(getString(R.string.con_success));
                     BTCon.setText(getString(R.string.con_success));
 
                     binder.write(DataForSendToPrinterPos80.openOrCloseAutoReturnPrintState(0x1f), new UiExecute() {

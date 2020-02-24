@@ -278,6 +278,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                 Message message=new Message();
                 message.what=1;
                 handler.handleMessage(message);
+//
 
                 //compress the bitmap
                 Tiny.BitmapCompressOptions options = new Tiny.BitmapCompressOptions();
@@ -285,15 +286,11 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                     @Override
                     public void callback(boolean isSuccess, Bitmap bitmap) {
                         if (isSuccess){
-//                            Toast.makeText(PosActivity.this,"bitmap: "+bitmap.getByteCount(),Toast.LENGTH_LONG).show();
-                         //   b2=bitmap;
-                            b2=resizeImage(b1,380,false);
+                            b2=resizeImage(b1,450,false);
                             Message message=new Message();
                             message.what=2;
                             handler.handleMessage(message);
                         }
-
-
                     }
                 });
 //                b2=resizeImage(b1,576,386,false);
@@ -327,9 +324,9 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             @Override
             public List<byte[]> processDataBeforeSend() {
                 List<byte[]> list=new ArrayList<byte[]>();
-                list.add(DataForSendToPrinterPos58.initializePrinter());
-                list.add(DataForSendToPrinterPos58.printRasterBmp(
-                        0,printBmp, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Left,580));
+                list.add(DataForSendToPrinterPos80.initializePrinter());
+                list.add(DataForSendToPrinterPos80.printRasterBmp(
+                        0,printBmp, BitmapToByteData.BmpType.Dithering, BitmapToByteData.AlignType.Left,680));
 //                list.add(DataForSendToPrinterPos80.printAndFeedForward(3));
                // list.add(DataForSendToPrinterPos58.selectCutPagerModerAndCutPager(66,1));
                 return list;

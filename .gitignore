@@ -19,3 +19,6 @@ Florid/Florid.Schema/bin
 Florid/PrintDemo/.gradle/
 Florid/PrintDemo/.idea/
 Florid/PrintDemo/app/build/
+Florid/Florid.PosPrinter.Lib/obj/
+PrintDemo/.idea/
+Florid/Florid.PosPrinter.Lib/bin/

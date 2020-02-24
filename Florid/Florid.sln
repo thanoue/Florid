@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{C1FF14B6-D43D-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Florid.Droid.Lib", "Florid.Droid.Lib\Florid.Droid.Lib.csproj", "{8D84DA70-9605-4B39-A280-E6C1EF0181B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Florid.PosPrinter.Lib", "Florid.PosPrinter.Lib\Florid.PosPrinter.Lib.csproj", "{170D138D-7EDD-4ABB-9756-8F79C367D0EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{8D84DA70-9605-4B39-A280-E6C1EF0181B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D84DA70-9605-4B39-A280-E6C1EF0181B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D84DA70-9605-4B39-A280-E6C1EF0181B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{170D138D-7EDD-4ABB-9756-8F79C367D0EF}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{170D138D-7EDD-4ABB-9756-8F79C367D0EF}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{170D138D-7EDD-4ABB-9756-8F79C367D0EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{170D138D-7EDD-4ABB-9756-8F79C367D0EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{FB9D4177-71CF-4471-8F03-10D0C9A8CF29} = {C122B49A-AB04-4881-8D5F-C189CC59E91C}
 		{C1FF14B6-D43D-485B-B449-A0231AE9E38F} = {C122B49A-AB04-4881-8D5F-C189CC59E91C}
 		{8D84DA70-9605-4B39-A280-E6C1EF0181B1} = {C1FF14B6-D43D-485B-B449-A0231AE9E38F}
+		{170D138D-7EDD-4ABB-9756-8F79C367D0EF} = {C1FF14B6-D43D-485B-B449-A0231AE9E38F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F1618A72-3A47-41D1-87BC-E21547529477}

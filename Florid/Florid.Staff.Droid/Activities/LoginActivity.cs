@@ -50,13 +50,6 @@ namespace Florid.Staff.Droid.Activity
             FindViewById<Button>(Resource.Id.LoginBtn).Click += _loginBtn_Click;
         }
 
-        public class MyChromeClient : WebChromeClient
-        {
-            public override void OnConsoleMessage(string message, int lineNumber, string sourceID)
-            {
-                base.OnConsoleMessage(message, lineNumber, sourceID);
-            }
-        }
 
         public void ExecJavaScript(string jscode)
         {
