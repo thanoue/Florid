@@ -22,3 +22,6 @@ Florid/PrintDemo/app/build/
 Florid/Florid.PosPrinter.Lib/obj/
 PrintDemo/.idea/
 Florid/Florid.PosPrinter.Lib/bin/
+Floridstaff/posprinterlib-release/build
+Florid/Florid.Schema/bin
+Florid/Florid.Schema/bin/

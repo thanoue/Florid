@@ -35,6 +35,7 @@ export class PrinterComponent extends BaseComponent {
           this.receiptService.uploadReceipt(blob, receipt, (url => {
             doPrintJob(url);
           }));
+
         }), 'image/png', 1);
 
       });

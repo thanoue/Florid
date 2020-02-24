@@ -101,13 +101,16 @@ namespace Florid.Staff.Droid.Activity
             MainApp.ConnectToBluetoothDevice(this, "DC:0D:30:2F:49:8F", (isSuccess) =>
             {
 
+                if (!isSuccess)
+                    return;
+
                 FirebaseStorage storage = FirebaseStorage.Instance;
 
-                StorageReference httpsReference = storage.GetReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/lorid-e9c34.appspot.com/o/receipts%2Freceipt1.png?alt=media&token=32be5849-6962-409d-9984-0a713fca63a9");
+                StorageReference httpsReference = storage.GetReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/lorid-e9c34.appspot.com/o/receipts%2Freceipt1.png?alt=media&token=6782bc33-402b-47cb-a7a7-9b8a77588c82");
 
                 httpsReference.GetStream(new MyFirebaseStreamProcessor((str) =>
                 {
-                    using (var bitmap = BitmapFactory.DecodeStream(str).ResizeImage(400, false))
+                    using (var bitmap = BitmapFactory.DecodeStream(str).ResizeImage(390, false))
                     {
                         var binder = MainApp.MyBinder;
 
