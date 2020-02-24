@@ -180,6 +180,25 @@ function openLoginError()
         </div>`;
     popUp(html);    
 }
+// HIển thị quét QR
+function openQR()
+{
+    var html = `<div id="codeQR" class="popup-content">
+            <span>Quét mã QR</span>
+            <img src="./images/qr.jpg" alt="">
+        </div>`;
+    popUp(html);    
+}
+// HIển thị Xác nhận thành công
+function openLoginError()
+{
+    var html = `<div id="loginerror" class="popup-content">
+            <img src="./images/success.png" alt="">
+            <p>XÁC NHẬN</p>
+            <span>Thanh toán thành công</span>
+        </div>`;
+    popUp(html);    
+}
 
 // Hiển thị bảng màu
 function openColorBoard()
@@ -256,6 +275,35 @@ function openCustInfo(){
 </div>`;
     popUp(html);
 }
+// Thêm thông tin
+function openAddInfo(){
+    var html = `<div id="infoAdd" class="popup-content">
+                        <form action="" class="addInfoForm">
+                            <div class="form-group">
+                                <input type="text" name="" id="" class="mainForm" placeholder="Tên khách hàng...">
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="" id="" class="mainForm" placeholder="Số điện thoại...">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="" id="" class="mainForm" placeholder="Địa chỉ khách hàng...">
+                            </div>
+                            <div class="row">
+                                <div class="col-6 mx-auto text-center">
+                                    <button type="submit" class="btn grey-btn w-100 mt-3">Hủy</button>
+                                </div>
+                                <div class="col-6 mx-auto text-center">
+                                    <button type="submit" class="btn main-btn w-100 mt-3">Lưu</button>
+                                </div>
+                            </div>
+                        </form>   
+</div>`;
+    popUp(html);
+}
+
+
+
+
 // Popup thông báo
 function popUp(html){
     appendInBody(html);
@@ -272,4 +320,25 @@ function popUp(html){
             jQuery(this).remove();
         });
     });
+}
+
+// Bao gồm thuế VAT
+function changeVAT()
+{
+    if(jQuery(".vatStatus").hasClass("on"))
+    {
+        jQuery(".vatStatus a span").animate({
+            left:"-=30px",
+          }, 200, function() {
+            jQuery(".vatStatus").removeClass("on");
+          });
+    }
+    else
+    {
+        jQuery(".vatStatus a span").animate({
+            left:"+=30px",
+          }, 200, function() {
+            jQuery(".vatStatus").addClass("on");
+          });
+    }
 }
