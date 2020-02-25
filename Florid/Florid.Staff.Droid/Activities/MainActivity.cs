@@ -27,6 +27,7 @@ using static Firebase.Storage.StreamDownloadTask;
 using System;
 using Florid.Staff.Droid.Static;
 using System.Threading;
+using Florid.Staff.Droid.Services;
 
 namespace Florid.Staff.Droid.Activity
 {
@@ -78,87 +79,29 @@ namespace Florid.Staff.Droid.Activity
 
             javascriptClient.DoPrintJob = (url) =>
             {
-                URL URL = new URL(url);
-
-                var connection = (HttpURLConnection)URL.OpenConnection();
-                connection.DoInput = true;
-                connection.Connect();
-                using (Stream input = connection.InputStream)
-                {
-                    using (Bitmap myBitmap = BitmapFactory.DecodeStream(input))
-                    {
-                        ExportBitmapAsPNG(myBitmap);
-                    }
-                }
+                MainApp.DoPrintJob(url);
             };
 
             _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
-            _mainWebView.LoadUrl("http://192.168.1.28:5000");
+            _mainWebView.LoadUrl("https://floridstaff.firebaseapp.com");
 
             SetStatusBarColor(true);
 
 
-            MainApp.ConnectToBluetoothDevice(this, "DC:0D:30:2F:49:8F", (isSuccess) =>
+            MainApp.ConnectToBluetoothDevice( "DC:0D:30:2F:49:8F", (isSuccess) =>
             {
-
-                if (!isSuccess)
-                    return;
-
-                FirebaseStorage storage = FirebaseStorage.Instance;
-
-                StorageReference httpsReference = storage.GetReferenceFromUrl("https://firebasestorage.googleapis.com/v0/b/lorid-e9c34.appspot.com/o/receipts%2Freceipt1.png?alt=media&token=6782bc33-402b-47cb-a7a7-9b8a77588c82");
-
-                httpsReference.GetStream(new MyFirebaseStreamProcessor((str) =>
-                {
-                    using (var bitmap = BitmapFactory.DecodeStream(str).ResizeImage(390, false))
-                    {
-                        var binder = MainApp.MyBinder;
-
-                        var manualEvent = new ManualResetEvent(false);
-
-                        manualEvent.Reset();
-
-                        binder.WriteDataByYouself(new MyUiExecute(() =>
-                        {
-
-                        }, () =>
-                        {
-                            MainApp.ShowSnackbar(this, "Printing Error!!!!", AlertType.Error);
-
-                        }), new MyProcessDataCallback(bitmap, () =>
-                        {
-                            manualEvent.Set();
-                        }));
-
-                        manualEvent.WaitOne();
-                    }
-                }));
+              
             });
         }
 
-        public class MyFirebaseStreamProcessor : Java.Lang.Object, IStreamProcessor
-        {
-            Action<Stream> _streamDownloadCallback;
-            public MyFirebaseStreamProcessor(Action<Stream> streamDownloadCallback)
-            {
-                _streamDownloadCallback = streamDownloadCallback;
-            }
-
-
-
-            public void DoInBackground(TaskSnapshot state, Stream stream)
-            {
-                _streamDownloadCallback?.Invoke(stream);
-            }
-        }
-
-        void ExportBitmapAsPNG(Bitmap bitmap)
-        {
-            var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-            var filePath = System.IO.Path.Combine(sdCardPath, "test2.png");
-            var stream = new FileStream(filePath, FileMode.Create);
-            bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
-            stream.Close();
-        }
+      
+        //void ExportBitmapAsPNG(Bitmap bitmap)
+        //{
+        //    var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
+        //    var filePath = System.IO.Path.Combine(sdCardPath, "test2.png");
+        //    var stream = new FileStream(filePath, FileMode.Create);
+        //    bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
+        //    stream.Close();
+        //}
     }
 }

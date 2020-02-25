@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -9,108 +10,34 @@ using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.Design.Widget;
+using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Com.Khoideptrai.Posprinter;
+using Firebase.Storage;
 using Florid.Core;
 using Florid.Core.Service;
 using Florid.Droid.Lib;
 using Florid.Entity;
 using Florid.Staff.Droid.Activity;
 using Florid.Staff.Droid.Repository;
+using Florid.Staff.Droid.Services;
+using Florid.Staff.Droid.Static;
 using Java.Lang;
 using Net.Posprinter.AsynncTask;
 using Net.Posprinter.Posprinterface;
 using Net.Posprinter.Service;
 using Net.Posprinter.Utils;
+using Plugin.CurrentActivity;
 using Plugin.Iconize;
+using static Firebase.Storage.FileDownloadTask;
+using static Firebase.Storage.StreamDownloadTask;
 using static Net.Posprinter.Utils.PosPrinterDev;
+using TaskSnapshot = Firebase.Storage.StreamDownloadTask.TaskSnapshot;
+
 namespace Florid.Staff.Droid
 {
-    public class PrintBitmapBackgroundInit : Java.Lang.Object, IBackgroundInit
-    {
-        public interface IBackground
-        {
-            bool PrintBitmapBackground(IProcessData processData);
-        }
-
-        IProcessData _processData;
-
-        IBackground _backgroundInit;
-
-        public PrintBitmapBackgroundInit(IProcessData processData, IBackground backgroundInit)
-        {
-            _processData = processData;
-            _backgroundInit = backgroundInit;
-        }
-
-        public bool Doinbackground()
-        {
-            return _backgroundInit.PrintBitmapBackground(_processData);
-        }
-    }
-
-
-    public class BindingBinder : CustomBinder,PrintBitmapBackgroundInit.IBackground
-    {
-        public bool PrintBitmapBackground(IProcessData processData)
-        {
-            var list = processData.ProcessDataBeforeSend().ToList();
-
-            if (list != null)
-            {
-                for (int i = 0; i < list.Count; i++)
-                {
-                    var bytes = list[i];
-                    MMsg = XPrinterDev.Write(bytes);
-                }
-
-                if (MMsg.ErrorCode.Equals(ErrorCode.WriteDataSuccess))
-                {
-                    return true;
-                }
-
-            }
-
-            return false;
-        }
-
-        public override void WriteDataByYouself(IUiExecute execute, IProcessData processData)
-        {
-            var posAsync = new PosAsynncTask(execute, new PrintBitmapBackgroundInit(processData, this));
-
-            posAsync.Execute(new Java.Lang.Void[0]);
-        }
-    }
-
-    [Service(Name = "Florid.Staff.Droid.MyService")]
-    public class MyService : Service
-    {
-        protected IBinder MyBinder = new BindingBinder();
-
-        public override IBinder OnBind(Intent intent)
-        {
-            return this.MyBinder;
-        }
-
-        public override void OnCreate()
-        {
-            base.OnCreate();
-            ((IMyCustomBinder)MyBinder).InitRoundQueue();
-        }
-
-        public override bool OnUnbind(Intent intent)
-        {
-            return base.OnUnbind(intent);
-        }
-
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
-            ((IMyCustomBinder)MyBinder).Destroy();
-        }
-    }
 
     [Application(UsesCleartextTraffic = true)]
     public class MainApplication : BaseMainApplication
@@ -127,17 +54,22 @@ namespace Florid.Staff.Droid
             }
         }
 
+        BaseActivity _currentActivity => (BaseActivity)CrossCurrentActivity.Current.Activity;
+
         public MainApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
         }
 
         public MainApplication()
         {
+
         }
 
         public override void OnCreate()
         {
             base.OnCreate();
+
+            CrossCurrentActivity.Current.Init(this);
 
             ServiceLocator.Instance.Register<IUserRepository, UserRepository>();
 
@@ -150,7 +82,53 @@ namespace Florid.Staff.Droid
             BindService(intent, _serviceConnection, Bind.AutoCreate);
         }
 
-        public void ConnectToBluetoothDevice(BaseActivity activity, string macAddress, Action<bool> callback)
+        public class MyFirebaseStreamProcessor : Java.Lang.Object, IStreamProcessor
+        {
+            Action<Stream> _streamDownloadCallback;
+            public MyFirebaseStreamProcessor(Action<Stream> streamDownloadCallback)
+            {
+                _streamDownloadCallback = streamDownloadCallback;
+            }
+
+            public void DoInBackground(TaskSnapshot state, Stream stream)
+            {
+                _streamDownloadCallback?.Invoke(stream);
+            }
+        }
+
+
+        public void DoPrintJob(string url)
+        {
+            FirebaseStorage storage = FirebaseStorage.Instance;
+
+            StorageReference httpsReference = storage.GetReferenceFromUrl("url");//https://firebasestorage.googleapis.com/v0/b/lorid-e9c34.appspot.com/o/receipts%2Freceipt1.png?alt=media&token=174fb53c-d25e-4ebe-8b8d-48b7cbb3e575
+
+            httpsReference.GetStream(new MyFirebaseStreamProcessor((str) =>
+            {
+                using (var bitmap = BitmapFactory.DecodeStream(str).ResizeImage(440, false))
+                {
+                    var manualEvent = new ManualResetEvent(false);
+
+                    manualEvent.Reset();
+
+                    _binder.WriteDataByYouself(new MyUiExecute(() =>
+                    {
+
+                    }, () =>
+                    {
+                       ShowSnackbar( "Printing Error!!!!", AlertType.Error);
+
+                    }), new MyProcessDataCallback(bitmap, () =>
+                    {
+                        manualEvent.Set();
+                    }));
+
+                    manualEvent.WaitOne();
+                }
+            }));
+        }
+
+        public void ConnectToBluetoothDevice( string macAddress, Action<bool> callback)
         {
             if (ISCONNECT)
                 return;
@@ -159,7 +137,7 @@ namespace Florid.Staff.Droid
             {
                 ISCONNECT = true;
 
-                ShowSnackbar(activity, "Đã kết nối tới máy in!!", AlertType.Success);
+                ShowSnackbar( "Đã kết nối tới máy in!!", AlertType.Success);
 
                 callback?.Invoke(true);
 
@@ -171,7 +149,7 @@ namespace Florid.Staff.Droid
                     }, () =>
                     {
                         ISCONNECT = false;
-                        ShowSnackbar(activity, "Máy in bị ngắt kết nối !!", AlertType.Warning);
+                        ShowSnackbar( "Máy in bị ngắt kết nối !!", AlertType.Warning);
                         callback?.Invoke(false);
 
                     }));
@@ -184,7 +162,7 @@ namespace Florid.Staff.Droid
             }, () =>
             {
                 ISCONNECT = false;
-                ShowSnackbar(activity, "Không thể kết nối tới máy in !!", AlertType.Error);
+                ShowSnackbar( "Không thể kết nối tới máy in !!", AlertType.Error);
                 callback?.Invoke(false);
 
             }));
@@ -197,19 +175,19 @@ namespace Florid.Staff.Droid
             _binder.DisconnectCurrentPort(new MyUiExecute(() =>
             {
                 ISCONNECT = false;
-                ShowSnackbar(activity, "Đã ngắt kết nối tới máy in!!!", AlertType.Info);
+                ShowSnackbar( "Đã ngắt kết nối tới máy in!!!", AlertType.Info);
             }, () =>
             {
-                ShowSnackbar(activity, "Xảy ra lỗi khi ngắt kết nối tới máy in!!", AlertType.Error);
+                ShowSnackbar( "Xảy ra lỗi khi ngắt kết nối tới máy in!!", AlertType.Error);
 
             }));
         }
 
-        public void ShowSnackbar(BaseActivity activity, string content, AlertType alertType)
+        public void ShowSnackbar(string content, AlertType alertType)
         {
-            activity.RunOnUiThread(() =>
+            _currentActivity.RunOnUiThread(() =>
             {
-                var bar = Snackbar.Make(activity.ParentContainer, content, Snackbar.LengthLong)
+                var bar = Snackbar.Make(_currentActivity.ParentContainer, content, Snackbar.LengthLong)
                   .SetActionTextColor(Color.White);
 
                 TextView tv = (TextView)(bar.View).FindViewById(Resource.Id.snackbar_text);
@@ -238,73 +216,4 @@ namespace Florid.Staff.Droid
     }
 
    
-    public enum AlertType
-    {
-        Info,
-        Error,
-        Success,
-        Warning
-    }
-
-    public class MyProcessDataCallback : Java.Lang.Object, IProcessData
-    {
-        Bitmap _bitmap;
-        Action _completeProcess;
-        public MyProcessDataCallback(Bitmap bitmap, Action completeProcess)
-        {
-            _bitmap = bitmap;
-            _completeProcess = completeProcess;
-        }
-
-        public IList<byte[]> ProcessDataBeforeSend()
-        {
-            var list = new List<byte[]>();
-
-            list.Add(DataForSendToPrinterPos58.InitializePrinter());
-            list.Add(BitmapToByteData.RasterBmpToSendData(0, _bitmap, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Left, _bitmap.Width));
-            list.Add(DataForSendToPrinterPos58.PrintAndFeedForward(3));
-
-            _completeProcess?.Invoke();
-
-            return list;
-        }
-    }
-
-    public class MyUiExecute : Java.Lang.Object, IUiExecute
-    {
-        Action _onSuccess, _onFailed;
-        public MyUiExecute(Action onSuccess, Action onFailed)
-        {
-            _onSuccess = onSuccess;
-            _onFailed = onFailed;
-        }
-        public void Onfailed()
-        {
-            _onFailed?.Invoke();
-        }
-
-        public void Onsucess()
-        {
-            _onSuccess?.Invoke();
-        }
-    }
-
-    public class MyServiceConnection : Java.Lang.Object, IServiceConnection
-    {
-        Action<IBinder> _binderCallback;
-        public MyServiceConnection(Action<IBinder> binderCallback)
-        {
-            _binderCallback = binderCallback;
-        }
-
-        public void OnServiceConnected(ComponentName name, IBinder service)
-        {
-            _binderCallback?.Invoke(service);
-        }
-
-        public void OnServiceDisconnected(ComponentName name)
-        {
-            Log.Error("disbinder", "disconnected");
-        }
-    }
 }

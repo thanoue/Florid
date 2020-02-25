@@ -15,7 +15,7 @@ using Florid.Droid.Widgets;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity(Theme = "@style/AppTheme")]
+    [Activity(Theme = "@style/AppTheme",WindowSoftInputMode = SoftInput.AdjustResize)]
     public abstract class BaseActivity : AppCompatActivity
     {
         protected virtual int LayoutId => 0;
@@ -43,7 +43,6 @@ namespace Florid.Staff.Droid.Activity
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            Window.SetSoftInputMode(SoftInput.AdjustPan);
 
             if (Build.VERSION.SdkInt > BuildVersionCodes.Lollipop)
             {

@@ -5,6 +5,7 @@
               android:layout_height="match_parent">
     <android.webkit.WebView
         android:id="@+id/mainWebview"
+        android:windowSoftInputMode="adjustResize"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>
