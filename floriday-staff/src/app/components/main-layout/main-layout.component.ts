@@ -13,6 +13,6 @@ export class MainLayoutComponent extends BaseComponent {
     super();
   }
   protected Init() {
-
+    this.setStatusBarColor(false);
   }
 }

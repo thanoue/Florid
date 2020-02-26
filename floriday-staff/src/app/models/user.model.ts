@@ -3,12 +3,10 @@ import { BaseModel } from './base.model';
 
 
 export class LoginModel {
-    UserName: string;
-    Passcode: string;
+    userName: string;
+    passcode: string;
 
-    constructor(userName, passCode) {
-        this.Passcode = passCode;
-        this.UserName = userName;
+    constructor() {
     }
 }
 

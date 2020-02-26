@@ -9,8 +9,6 @@ export class StorageService {
 
     constructor() { }
 
-    private basePath = '/uploads';
-
     pushFileToStorage(file: File | Blob, fileUpload: BaseFile, uploadedCallback: (fileUpload: BaseFile) => void): void {
 
         if (file == null) {

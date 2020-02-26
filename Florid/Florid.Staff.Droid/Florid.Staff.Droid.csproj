@@ -59,6 +59,9 @@
     <Reference Include="Florid.PosPrinter.Lib">
       <HintPath>..\..\Libs\Florid.PosPrinter.Lib.dll</HintPath>
     </Reference>
+    <Reference Include="Florid.Droid.Secure.Lib">
+      <HintPath>..\..\Libs\Florid.Droid.Secure.Lib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\LoginActivity.cs" />
@@ -66,8 +69,6 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Controls\Label.cs" />
     <Compile Include="MainApplication.cs" />
-    <Compile Include="MyFirebaseIIDService.cs" />
-    <Compile Include="MyFirebaseMessagingService.cs" />
     <Compile Include="Repositories\BaseNormalDroidRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -75,6 +76,9 @@
     <Compile Include="Activities\CameraActivity.cs" />
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Services\BackgroundImpl.cs" />
+    <Compile Include="Services\MyFirebaseIIDService.cs" />
+    <Compile Include="Services\MyFirebaseMessagingService.cs" />
+    <Compile Include="Services\NativeDroidSecureConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />

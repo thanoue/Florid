@@ -1,14 +1,17 @@
 <div class="page-content" id="login">
-    <h1 class="logo" onclick="openLoginError()">
+    <h1 class="logo">
         <a href="#">Login to Florid</a>
     </h1>
-    <form action="javascript:void(0)" id="loginform">
+    <form #form="ngForm" (submit)="login(form)" autocomplete="on" id="loginform">
         <div class="form-group">
-            <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại...">
+            <input class="form-control" type="text" name="userName" [(ngModel)]="model.userName"
+                placeholder="Tên đăng nhập..." />
         </div>
+
         <div class="form-group">
-            <input type="password" class="form-control" id="pwd" placeholder="Nhập mật khẩu...">
+            <input class="form-control" type="password" name="passcode" [(ngModel)]="model.passcode"
+                placeholder="Mật khẩu..." />
         </div>
-        <input type="submit" class="btn btn-default" value="Đăng Nhập" (click)="login()">
+        <input type="submit" class="btn btn-default" value="Đăng nhập" />
     </form>
 </div>

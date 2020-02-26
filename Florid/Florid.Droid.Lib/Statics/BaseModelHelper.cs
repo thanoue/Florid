@@ -15,5 +15,7 @@ namespace Florid.Droid.Lib
         public IDictionary<int, Typeface> CacheFonts = new Dictionary<int, Typeface>();
 
         public IContext Context => ServiceLocator.Instance.Get<IContext>();
+
+        public ISecureConfig SecureConfig => ServiceLocator.Instance.Get<ISecureConfig>();
     }
 }

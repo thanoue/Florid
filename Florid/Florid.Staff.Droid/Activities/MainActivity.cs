@@ -42,6 +42,8 @@ namespace Florid.Staff.Droid.Activity
 
         protected override void InitView(ViewGroup viewGroup)
         {
+
+
             _mainWebView = FindViewById<WebView>(Resource.Id.mainWebview);
 
             _mainWebView.ClearCache(true);
@@ -94,14 +96,5 @@ namespace Florid.Staff.Droid.Activity
             });
         }
 
-      
-        //void ExportBitmapAsPNG(Bitmap bitmap)
-        //{
-        //    var sdCardPath = Android.OS.Environment.ExternalStorageDirectory.AbsolutePath;
-        //    var filePath = System.IO.Path.Combine(sdCardPath, "test2.png");
-        //    var stream = new FileStream(filePath, FileMode.Create);
-        //    bitmap.Compress(Bitmap.CompressFormat.Png, 100, stream);
-        //    stream.Close();
-        //}
     }
 }

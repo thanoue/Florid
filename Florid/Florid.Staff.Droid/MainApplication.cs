@@ -72,6 +72,7 @@ namespace Florid.Staff.Droid
             CrossCurrentActivity.Current.Init(this);
 
             ServiceLocator.Instance.Register<IUserRepository, UserRepository>();
+            ServiceLocator.Instance.Register<ISecureConfig, NativeDroidSecureConfig>();
 
             _serviceConnection = new MyServiceConnection((binder) =>
             {
@@ -213,7 +214,7 @@ namespace Florid.Staff.Droid
                 bar.Show();
             });
         }
-    }
+    }   
 
    
 }

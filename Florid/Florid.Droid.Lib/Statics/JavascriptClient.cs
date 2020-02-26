@@ -84,17 +84,7 @@ namespace Florid.Droid.Lib.Static
         [Export("getFirebaseConfig")]
         public  string GetFirebaseConfig()
         {
-            var config = new FirebaseConfig()
-            {
-                ApiKey = "AIzaSyDZGFKjLZH4h0SCRdmJVAP0QsRxo_9qYwA",
-                AuthDomain = "lorid-e9c34.firebaseapp.com",
-                DatabaseURL = "https://lorid-e9c34.firebaseio.com",
-                ProjectId = "lorid-e9c34",
-                StorageBucket = "lorid-e9c34.appspot.com",
-                MessagingSenderId = "messagingSenderId",
-                AppId = "1:907493762076:web:41a83454c12029c3c6abd9",
-                MeasurementId = "G-DMM406R71M"
-            };
+            var config = BaseModelHelper.Instance.SecureConfig.GetFirebaseConfig();
 
             return JsonConvert.SerializeObject(config); 
         }

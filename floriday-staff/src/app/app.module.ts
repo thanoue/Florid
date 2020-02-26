@@ -13,6 +13,10 @@ import { LoginComponent } from './components/login/login.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { PrinterComponent } from './components/printer/printer.component';
+import { TextBoxComponent } from './controls/text-box/text-box.component';
+import { FormsModule } from '@angular/forms';
+import { InvalidTypeDirective } from './directives/invalid-type.directive';
+import { InvalidmessageDirective } from './directives/invalid-message.directive';
 
 declare function getFirebaseConfig(): any;
 
@@ -21,11 +25,15 @@ declare function getFirebaseConfig(): any;
     AppComponent,
     LoginComponent,
     MainLayoutComponent,
-    HomeComponent
+    HomeComponent,
+    TextBoxComponent,
+    InvalidTypeDirective,
+    InvalidmessageDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     AngularFireModule.initializeApp(getFirebaseConfig()),
     AngularFireDatabaseModule, // for database,
   ],

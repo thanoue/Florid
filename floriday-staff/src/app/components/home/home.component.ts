@@ -17,7 +17,6 @@ export class HomeComponent extends BaseComponent {
   }
 
   logout() {
-    this.setStatusBarColor(true);
     AuthService.logout();
     this.router.navigate(['login']);
   }
