@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 import * as userService from './user.service';
+const blacklist = require('express-jwt-blacklist');
 
 // routes
-router.post('/authenticate', authenticate);
+router.post('/login', authenticate);
 router.get('/', getAll);
+router.post('/logout', logout);
 
 module.exports = router;
 
@@ -18,4 +20,9 @@ function getAll(req: any, res: any, next: any) {
     userService.getAll()
         .then(users => res.json(users))
         .catch(err => next(err));
+}
+
+function logout(req: any, res: any) {
+    blacklist.revoke(req.user);
+    res.sendStatus(200);
 }

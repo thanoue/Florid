@@ -2,17 +2,18 @@
 import * as functions from 'firebase-functions';
 import * as bodyParser from 'body-parser';
 const cors = require('cors');
-import * as jwt from './helper/jwt';
 import * as  router from './users/user.controller';
-
-
+const express = require('express');
 const admin = require('firebase-admin');
-const app = require('express');
-const main = require('express');
+const jwt = require('express-jwt');
+const blacklist = require('express-jwt-blacklist');
+const serviceAccount = require("../serviceAccountKey.json");
 
+const app = new express();
+const main = new express();
 
 // admin.initializeApp(functions.config().firebase);
-const serviceAccount = require("../serviceAccountKey.json");
+
 
 const defaultApp = admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -29,14 +30,14 @@ main.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
 
-// use JWT auth to secure the api
-app.use(jwt.jwt());
+app.use(jwt({ secret: "KHOIDEPTRAIAHIIH", isRevoked: blacklist.isRevoked }).unless({
+    path: [
+        // public routes that don't require authentication
+        '/api/v1/users/login'
+    ]
+}));
 
-// api routes
 app.use('/users', router);
-
-// webApi is your functions name, and you will pass main as 
-// a parameter
 
 app.post('/confirm', (req: any, res: any) => {
 

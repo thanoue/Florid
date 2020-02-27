@@ -71,7 +71,7 @@ namespace Florid.Staff.Droid.Activity
                         break;
                 }
             });
-
+                
             javascriptClient.SetPrimaryDarkStatusBar = (isDark) =>
             {
                 SetStatusBarColor(isDark);
