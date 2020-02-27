@@ -57,6 +57,7 @@
     <Compile Include="Statics\JavascriptClient.cs" />
     <Compile Include="Services\DroidSecure.cs" />
     <Compile Include="Services\DroidContext.cs" />
+    <Compile Include="Widgets\CustomWebView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

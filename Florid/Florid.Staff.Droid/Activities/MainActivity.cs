@@ -42,8 +42,6 @@ namespace Florid.Staff.Droid.Activity
 
         protected override void InitView(ViewGroup viewGroup)
         {
-
-
             _mainWebView = FindViewById<WebView>(Resource.Id.mainWebview);
 
             _mainWebView.ClearCache(true);

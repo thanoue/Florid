@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import html2canvas from 'html2canvas';
 import { LoginModel } from 'src/app/models/user.model';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/services/common/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,17 +21,21 @@ export class LoginComponent extends BaseComponent {
 
   protected Init() {
     this.setStatusBarColor(true);
+    this.model.passcode = '123645';
+    this.model.userName = 'ba.mai@florid.com';
   }
 
   login(form: NgForm) {
 
+    if (!form.valid) {
+      return;
+    }
 
-    this.router.navigate(['']);
-    // console.log(this.model);
-
-    // if (!form.valid) {
-    //   return;
-    // }
+    AuthService.login(this.model, isSuccess => {
+      if (isSuccess) {
+        this.router.navigate(['']);
+      }
+    });
 
   }
 }

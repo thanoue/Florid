@@ -17,8 +17,12 @@ export class HomeComponent extends BaseComponent {
   }
 
   logout() {
-    AuthService.logout();
-    this.router.navigate(['login']);
+
+    AuthService.logout(isSuccess => {
+      if (isSuccess) {
+        this.router.navigate(['login']);
+      }
+    });
   }
 
   goToPrintJob() {

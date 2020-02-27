@@ -17,6 +17,8 @@ import { TextBoxComponent } from './controls/text-box/text-box.component';
 import { FormsModule } from '@angular/forms';
 import { InvalidTypeDirective } from './directives/invalid-type.directive';
 import { InvalidmessageDirective } from './directives/invalid-message.directive';
+import * as firebase from 'firebase/app';
+import { AddUserComponent } from './components/add-user/add-user.component';
 
 declare function getFirebaseConfig(): any;
 
@@ -29,6 +31,7 @@ declare function getFirebaseConfig(): any;
     TextBoxComponent,
     InvalidTypeDirective,
     InvalidmessageDirective,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,5 +47,7 @@ export class AppModule {
 
   constructor(injector: Injector) {
     AppInjector.setInjector(injector);
+    firebase.initializeApp(getFirebaseConfig());
+
   }
 }

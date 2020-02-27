@@ -1,10 +1,15 @@
 
 import * as functions from 'firebase-functions';
-import * as express from 'express';
 import * as bodyParser from 'body-parser';
+const cors = require('cors');
+import * as jwt from './helper/jwt';
+import * as  router from './users/user.controller';
+
+
 const admin = require('firebase-admin');
-const app = express();
-const main = express();
+const app = require('express');
+const main = require('express');
+
 
 // admin.initializeApp(functions.config().firebase);
 const serviceAccount = require("../serviceAccountKey.json");
@@ -20,15 +25,25 @@ const defaultAuth = defaultApp.auth();
 main.use('/api/v1', app);
 main.use(bodyParser.json());
 main.use(bodyParser.urlencoded({ extended: false }));
+
+
+app.use(cors());
+
+// use JWT auth to secure the api
+app.use(jwt.jwt());
+
+// api routes
+app.use('/users', router);
+
 // webApi is your functions name, and you will pass main as 
 // a parameter
 
-app.post('/confirm', (req, res) => {
+app.post('/confirm', (req: any, res: any) => {
 
     res.status(200).send('get from functions');
 })
 
-app.get('/user', (req, res) => {
+app.get('/user', (req: any, res: any) => {
 
     defaultAuth.getUser('V2L5VyZDarfkPCoQprcxd0i8KCI2')
         .then((userRecord: any) => {
@@ -42,16 +57,9 @@ app.get('/user', (req, res) => {
         });
 });
 
-app.post('/createUser', (req, res) => {
-    defaultAuth.createUser({
-        email: 'user@example.com',
-        emailVerified: false,
-        phoneNumber: '+11234567890',
-        password: 'secretPassword',
-        displayName: 'John Doe',
-        photoURL: 'http://www.example.com/12345678/photo.png',
-        disabled: false
-    })
+app.post('/createUser', (req: any, res: any) => {
+
+    defaultAuth.createUser(req.body)
         .then((userRecord: any) => {
             // See the UserRecord reference doc for the contents of userRecord.
             console.log('Successfully fetched user data:', userRecord.toJSON());

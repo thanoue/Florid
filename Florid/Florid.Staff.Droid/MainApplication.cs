@@ -100,9 +100,12 @@ namespace Florid.Staff.Droid
 
         public void DoPrintJob(string url)
         {
+            if (!ISCONNECT)
+                return;
+
             FirebaseStorage storage = FirebaseStorage.Instance;
 
-            StorageReference httpsReference = storage.GetReferenceFromUrl("url");//https://firebasestorage.googleapis.com/v0/b/lorid-e9c34.appspot.com/o/receipts%2Freceipt1.png?alt=media&token=174fb53c-d25e-4ebe-8b8d-48b7cbb3e575
+            StorageReference httpsReference = storage.GetReferenceFromUrl(url);//https://firebasestorage.googleapis.com/v0/b/lorid-e9c34.appspot.com/o/receipts%2Freceipt1.png?alt=media&token=174fb53c-d25e-4ebe-8b8d-48b7cbb3e575
 
             httpsReference.GetStream(new MyFirebaseStreamProcessor((str) =>
             {
@@ -173,6 +176,7 @@ namespace Florid.Staff.Droid
         {
             if (!ISCONNECT)
                 return;
+
             _binder.DisconnectCurrentPort(new MyUiExecute(() =>
             {
                 ISCONNECT = false;
@@ -191,9 +195,12 @@ namespace Florid.Staff.Droid
                 var bar = Snackbar.Make(_currentActivity.ParentContainer, content, Snackbar.LengthLong)
                   .SetActionTextColor(Color.White);
 
+                bar.SetDuration(3000);
+
                 TextView tv = (TextView)(bar.View).FindViewById(Resource.Id.snackbar_text);
 
-                tv.SetTypeface(BaseModelHelper.Instance.CacheFonts[Resource.Font.super_regular], TypefaceStyle.Normal);
+                tv.SetTypeface(BaseModelHelper.Instance.CacheFonts[Resource.Font.bold], TypefaceStyle.Normal);
+                tv.TextSize = 25;
 
                 switch (alertType)
                 {
