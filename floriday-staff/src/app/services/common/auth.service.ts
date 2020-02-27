@@ -4,60 +4,61 @@ import { Roles } from 'src/app/models/enums';
 import { Local } from 'protractor/built/driverProviders';
 import { LoginModel } from 'src/app/models/user.model';
 import * as firebase from 'firebase';
+import { GlobalService } from './global.service';
+import { async } from '@angular/core/testing';
+import { UserService } from '../user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private globalService: GlobalService, private userService: UserService) { }
 
-  static isLoggedIn(): boolean {
-    const user = firebase.auth().currentUser;
-    if (user) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  static logout(signedOutCallback: (isSuccess: boolean) => void) {
-    firebase.auth().signOut().then(() => {
-      signedOutCallback(true);
-    }).catch(error => {
-
-      var errorCode = error.code;
-      var errorMessage = error.message;
-
-      console.log(errorCode, errorMessage);
-
-      signedOutCallback(false);
-
-    });
-  }
-
-  static getCurrentRole(): Roles {
-
-    if (!this.isLoggedIn()) {
-      return Roles.None;
-    }
-
+  static getCurrentRole(): any {
     const role = LocalService.getRole();
-
     return role;
   }
 
-  static login(model: LoginModel, loginCallback: (isSuccess: boolean) => void) {
+  logout(signedOutCallback: (isSuccess: boolean) => void) {
+
+    this.globalService.startLoading();
+
+    firebase.auth().signOut().then(() => {
+
+      signedOutCallback(true);
+      this.globalService.stopLoading();
+
+    }).catch(error => {
+
+      console.log(error.code, error.message);
+      signedOutCallback(false);
+
+      this.globalService.stopLoading();
+    });
+
+  }
+
+  login(model: LoginModel, loginCallback: (isSuccess: boolean) => void) {
+
+    this.globalService.startLoading();
 
     firebase.auth().signInWithEmailAndPassword(model.userName, model.passcode)
-      .then(userInfo => {
-        console.log(userInfo.additionalUserInfo);
-        loginCallback(true);
+      .then(async userInfo => {
+        // console.log(userInfo.user.uid);
+        LocalService.setUserId(userInfo.user.uid);
+
+        var user = await this.userService.getByLoginId(userInfo.user.uid);
+
+        if (user) {
+          LocalService.setRole(user.Role);
+          LocalService.setUserName(user.FullName);
+          LocalService.setPhoneNumber(user.PhoneNumber);
+          loginCallback(true);
+        }
       })
       .catch(error => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        this.globalService.stopLoading();
         loginCallback(false);
       });
 

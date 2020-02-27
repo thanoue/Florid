@@ -11,7 +11,15 @@ export class GlobalService {
 
     insertDataCallback: BehaviorSubject<GenericModel> = new BehaviorSubject<GenericModel>(null);
     insertDataWithIdResCallback: BehaviorSubject<GenericModel> = new BehaviorSubject<GenericModel>(null);
+    spinnerInvoke: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+    startLoading() {
+        this.spinnerInvoke.next(true);
+    }
+
+    stopLoading() {
+        this.spinnerInvoke.next(false);
+    }
 
     insertData(data: GenericModel) {
         this.insertDataCallback.next(data);

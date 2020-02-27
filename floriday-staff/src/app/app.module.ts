@@ -18,7 +18,9 @@ import { FormsModule } from '@angular/forms';
 import { InvalidTypeDirective } from './directives/invalid-type.directive';
 import { InvalidmessageDirective } from './directives/invalid-message.directive';
 import * as firebase from 'firebase/app';
-import { AddUserComponent } from './components/add-user/add-user.component';
+import { AddUserComponent } from './components/user/add-user/add-user.component';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
+import { HttpClientModule } from '@angular/common/http';
 
 declare function getFirebaseConfig(): any;
 
@@ -39,6 +41,16 @@ declare function getFirebaseConfig(): any;
     FormsModule,
     AngularFireModule.initializeApp(getFirebaseConfig()),
     AngularFireDatabaseModule, // for database,
+    HttpClientModule,
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.chasingDots,
+      backdropBackgroundColour: 'rgba(0, 0, 0, 0.6)',
+      backdropBorderRadius: '4px',
+      primaryColour: '#59f2f7',
+      secondaryColour: '#59f2f7',
+      tertiaryColour: '#59f2f7',
+      fullScreenBackdrop: true,
+    })
   ],
   providers: [GlobalService, AngularFireModule],
   bootstrap: [AppComponent]

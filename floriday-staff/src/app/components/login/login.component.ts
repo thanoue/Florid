@@ -31,11 +31,10 @@ export class LoginComponent extends BaseComponent {
       return;
     }
 
-    AuthService.login(this.model, isSuccess => {
+    this.authService.login(this.model, isSuccess => {
       if (isSuccess) {
         this.router.navigate(['']);
       }
     });
-
   }
 }

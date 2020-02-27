@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<div>
+    <router-outlet></router-outlet>
+
+    <ng-template #customLoadingTemplate>
+        <div class="custom-class">
+        </div>
+    </ng-template>
+    <ngx-loading [show]="loading" [template]="customLoadingTemplate">
+    </ngx-loading>
+</div>

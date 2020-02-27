@@ -2,17 +2,15 @@
 import * as functions from 'firebase-functions';
 import * as bodyParser from 'body-parser';
 const cors = require('cors');
-import * as jwt from './helper/jwt';
 import * as  router from './users/user.controller';
-
-
+const express = require('express');
 const admin = require('firebase-admin');
-const app = require('express');
-const main = require('express');
-
-
-// admin.initializeApp(functions.config().firebase);
+const jwt = require('express-jwt');
+const blacklist = require('express-jwt-blacklist');
 const serviceAccount = require("../serviceAccountKey.json");
+
+const app = new express();
+const main = new express();
 
 const defaultApp = admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -20,6 +18,7 @@ const defaultApp = admin.initializeApp({
 });
 
 const defaultAuth = defaultApp.auth();
+const defauDatabase = defaultApp.database();
 // const defaultDb = defaultApp.database();
 
 main.use('/api/v1', app);
@@ -29,14 +28,14 @@ main.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors());
 
-// use JWT auth to secure the api
-app.use(jwt.jwt());
+app.use(jwt({ secret: "KHOIDEPTRAIAHIIH", isRevoked: blacklist.isRevoked }).unless({
+    path: [
+        // public routes that don't require authentication
+        '/api/v1/users/login'
+    ]
+}));
 
-// api routes
 app.use('/users', router);
-
-// webApi is your functions name, and you will pass main as 
-// a parameter
 
 app.post('/confirm', (req: any, res: any) => {
 
@@ -62,7 +61,18 @@ app.post('/createUser', (req: any, res: any) => {
     defaultAuth.createUser(req.body)
         .then((userRecord: any) => {
             // See the UserRecord reference doc for the contents of userRecord.
-            console.log('Successfully fetched user data:', userRecord.toJSON());
+            var newUserKey = defauDatabase.ref().child('users').push().key;
+
+            defauDatabase.ref('users/' + newUserKey).set({
+                LoginId: userRecord.uid,
+                PhoneNumber: userRecord.phoneNumber,
+                FullName: userRecord.displayName,
+                Id: newUserKey,
+                Email: userRecord.email,
+                AvtUrl: userRecord.photoURL,
+                Active: true,
+                Role: req.body.roleId,
+            });
 
             res.status(200).send(userRecord.toJSON());
         })

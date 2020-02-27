@@ -4,7 +4,6 @@ import { Subscribable, Subscription } from 'rxjs';
 import { GlobalService } from './services/common/global.service';
 import { strict } from 'assert';
 
-// declare function showToast(title, message, okBtntext, okCallback?: () => void): any;
 declare function insertData(data: GenericModel): number;
 declare function insertDataWithIdResult(data: GenericModel): string;
 
@@ -20,6 +19,8 @@ export class AppComponent implements OnInit {
 
   insertDataSubc: Subscription;
   insertDataWithIdResSubc: Subscription;
+  spinnerCallback: Subscription;
+  loading = false;
 
   ngOnInit(): void {
 
@@ -43,6 +44,13 @@ export class AppComponent implements OnInit {
         }
         this.insertDataWithIdResult(data);
 
+      });
+
+    this.spinnerCallback = this.globalService.spinnerInvoke
+      .subscribe(isLoading => {
+        setTimeout(() => {
+          this.loading = isLoading;
+        }, 100);
       });
   }
 

@@ -2,18 +2,27 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angula
 import { BaseModel } from 'src/app/models/base.model';
 import { AppInjector } from './base.injector';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { GlobalService } from './global.service';
 
 export abstract class BaseService<T extends BaseModel> {
+
+    private authService: AuthService;
+    protected globalService: GlobalService;
 
     constructor() {
         const injector = AppInjector.getInjector();
         this.db = injector.get(AngularFireDatabase);
+
+        this.globalService = injector.get(GlobalService);
     }
 
     protected db: AngularFireDatabase;
     protected abstract tablePath(): string;
 
     public insert(model: T): Promise<T> {
+
+        this.globalService.startLoading();
 
         const createRef = this.db.list(this.tablePath()).push(model);
 
@@ -27,9 +36,8 @@ export abstract class BaseService<T extends BaseModel> {
 
     async insertList(data: T[]): Promise<T[]> {
 
-        console.log(data.length);
-
         const products: T[] = [];
+        this.globalService.startLoading();
 
         for (let i = 1; i < data.length; i++) {
 
@@ -47,25 +55,49 @@ export abstract class BaseService<T extends BaseModel> {
         return products;
     }
 
-    public getById(id: string): Observable<T> {
-        return this.db.object<T>(`${this.tablePath()}/${id}`).valueChanges();
+    public getById(id: string): Promise<T> {
+        this.globalService.startLoading();
+
+        const item = this.db.object<T>(`${this.tablePath()}/${id}`).valueChanges();
+
+        return item.toPromise().then((res) => {
+            this.globalService.stopLoading();
+            return res;
+        });
     }
 
     public update(key: string, value: T): Promise<T> {
         return this.db.list(this.tablePath()).update(key, value).then(() => {
+
+            this.globalService.stopLoading();
+
             return value;
         });
     }
 
     public delete(key: string): Promise<void> {
-        return this.db.list(this.tablePath()).remove(key);
+
+        this.globalService.startLoading();
+        return this.db.list(this.tablePath()).remove(key).then(() => {
+            this.globalService.stopLoading();
+        });
     }
 
-    public getAll(): Observable<T[]> {
-        return this.db.list<T>(this.tablePath()).valueChanges();
+    public getAll(): Promise<T[]> {
+
+        this.globalService.startLoading();
+        return this.db.list<T>(this.tablePath()).valueChanges().toPromise().then(res => {
+            this.globalService.stopLoading();
+            return res;
+        });
     }
 
     public deleteAll(): Promise<void> {
-        return this.db.list(this.tablePath()).remove();
+
+        this.globalService.startLoading();
+        return this.db.list(this.tablePath()).remove().then(() => {
+            this.globalService.stopLoading();
+            return;
+        });
     }
 }

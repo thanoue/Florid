@@ -18,7 +18,7 @@ export class HomeComponent extends BaseComponent {
 
   logout() {
 
-    AuthService.logout(isSuccess => {
+    this.authService.logout(isSuccess => {
       if (isSuccess) {
         this.router.navigate(['login']);
       }

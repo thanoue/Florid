@@ -15,8 +15,7 @@ export class User extends BaseModel {
     PhoneNumber: string;
     FullName: string;
     Role: Roles;
-    LoginModel: LoginModel;
-
+    LoginId: string;
     constructor() {
         super();
     }
