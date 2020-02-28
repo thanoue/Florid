@@ -23,44 +23,43 @@
         <a class="prev-icon">Prev</a>
         <!-- Click vào button để hiển thị canvas menu -->
         <div class="breadcrumb-title">
-            <span>Thông tin đơn</span>
+            <span>Thanh toán</span>
         </div>
     </div>
-    <div class="page-content" id="orderAdd">
+    <div class="page-content" id="checkOut">
         <div class="container">
-            <form action="" class="addOrderForm">
-                <div class="form-group prodInfo">
-                    <div class="prodImg">
-                        <img src="./images/product-img.jpg" alt="">
+            <div class="checkOut">
+                <div class="checkOutTotal">
+                    <h3>Tổng số tiền thanh toán</h3>
+                    <p>380.000 vnđ</p>
+                </div>
+                <div class="checkOutLeft">
+                    <h4>Tổng số tiền thanh toán</h4>
+                    <p>380.000 vnđ</p>
+                </div>
+                <form action="./xac-nhan.html" class="checkOutMethod">
+                    <div class="form-group">
+                        <input type="number" name="" id="" class="mainForm" placeholder="Số tiền thanh toán...">
                     </div>
-                    <div class="prodDetail">
-                        <h5 class="prodCode">Mã SP: 003</h5>
-                        <span class="prodPrice">0 vnđ</span>
-                        <div class="prodQuantity"><input type="number" name="" id="" step="1" value="1" min="1"></div>
+                    <div class="form-group methodGrid">
+                        <a href="javascript:void(0)" onclick="openQR()" class="methodItem"><img src="./images/momo.jpg" alt=""></a>
+                        <a href="javascript:void(0)" onclick="openQR()" class="methodItem"><img src="./images/moca.jpg" alt=""></a>
+                        <a href="javascript:void(0)" onclick="openQR()" class="methodItem"><img src="./images/zalo.jpg" alt=""></a>
+                        <a href="javascript:void(0)" onclick="openQR()" class="methodItem"><img src="./images/viettel.jpg" alt=""></a>
                     </div>
-                    <div class="prodBrowser" onclick="openListMenu()">
-                        <i class="fa fa-search main-bg"></i>
+                    <div class="row">
+                        <div class="col-8 mx-auto text-center">
+                            <button type="submit" class="btn main-btn w-100">Xác nhận</button>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group addInfo">
-                    <a class="main-bg" href="./thong-tin.html">Thông tin người nhận</a>
-                </div>
-                <div class="form-group orderInfo">
-                    <input type="text" name="" id="" class="orderField" placeholder="Phụ phí...">
-                </div>
-                <div class="form-group orderDesc">
-                    <textarea name="" id="" class="orderField" placeholder="Mô tả..."></textarea>
-                </div>
-                <div class="row">
-                    <div class="col-8 mx-auto text-center">
-                        <button type="submit" class="btn main-btn w-100">Xong</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-    
-    
+    <div id="codeQR" class="popup-content">
+        <span>Quét mã QR</span>
+        <img src="./images/qr.jpg" alt="">
+    </div>
 </body>
     
 </html>

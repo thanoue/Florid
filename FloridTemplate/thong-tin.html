@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Florid - Update your day</title>
+    <link rel="icon" type="image/gif" href="./favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap&subset=vietnamese" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet"  type="text/css" href="./css/style.css">
+    <script type='text/javascript' src='./js/frontend.js'></script>
+</head>
+    
+<body>
+    <div class="breadcrumb">
+        <a class="prev-icon">Prev</a>
+        <!-- Click vào button để hiển thị canvas menu -->
+        <div class="breadcrumb-title">
+            <span>Thông tin người nhận</span>
+        </div>
+    </div>
+    <div class="page-content" id="custInfo">
+        <div class="container">
+            <div class="custInfo">
+                <div class="currentInfo">
+                    <span>Thông tin người nhận đã lưu</span>
+                    <a href="javascript:void(0)" class="main-bg" onclick="openCustMenu()"><img src="./images/view.svg" class="white-filter"></a>
+                </div>
+                <div class="newInfo">
+                    <form action="./xac-nhan.html" class="addInfoForm">
+                        <div class="form-group">
+                            <input type="text" name="newInfo-name" value="" class="mainForm" placeholder="Tên người nhận...">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="newInfo-phone" value="" class="mainForm" placeholder="Số điện thoại...">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="newInfo-add" value="" class="mainForm" placeholder="Địa chỉ người nhận...">
+                        </div>
+                        <div class="form-group">
+                            <input type="date" name="newInfo-date" value="" class="mainForm" placeholder="Thời gian...">
+                        </div>
+                        <div class="row">
+                            <div class="col-8 mx-auto text-center">
+                                <button type="submit" class="btn main-btn w-100 mt-3">Xong</button>
+                            </div>
+                        </div>
+                    </form>   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="actionMenu" id="recentInfo">
+        <ul>
+            <li data-index="0">
+                <p class="recentInfo-name">Vũ Đinh Trọng Thắng</p>
+                <span class="recentInfo-phone">0898338294</span>
+                <span class="recentInfo-date">2020-03-20</span>
+                <span class="recentInfo-add">234 Phan Văn Trị, P.17, Q.Bình Thạnh, TP. Hồ Chí Minh</span>
+            </li>
+            <li data-index="1">
+                <p class="recentInfo-name">Lê Văn Đậu</p>
+                <span class="recentInfo-phone">0898338294</span>
+                <span class="recentInfo-date">2019-03-20</span>
+                <span class="recentInfo-add">234 Phan Văn Trị, P.17, Q.Bình Thạnh</span>
+            </li>
+            <li data-index="2">
+                <p class="recentInfo-name">Nguyễn Văn A</p>
+                <span class="recentInfo-phone">0898338294</span>
+                <span class="recentInfo-date">2019-05-20</span>
+                <span class="recentInfo-add">234 Phan Văn Trị, P.17, Q.Bình Thạnh</span>
+            </li>
+        </ul>
+    </div>
+</body>
+    
+</html>
