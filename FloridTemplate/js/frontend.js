@@ -28,6 +28,16 @@ jQuery(document).ready(function(){
         });
   
     });
+    jQuery(".popup-content img.item-detail-thumb").click(function(){
+        var imgSource = jQuery(this).attr("src");
+        appendInBody();
+        jQuery("body").append("<div class='popup-image'><img src='"+ imgSource +"'></div>");
+        jQuery(".popup-image").show(250);
+        jQuery(".overlay-dark").click(function(){
+            jQuery(".popup-image").remove();
+            jQuery(this).remove();
+        })
+    })
 })
 // append 2 element
 function appendInBody()
@@ -259,6 +269,29 @@ function openAddInfo(){
     });
 }
 
+// Hiển thị xác nhận đơn
+function openOrderConfirm(){
+    appendInBody();
+    jQuery("#orderConfirm").fadeIn(350); 
+
+    jQuery(".overlay-dark:not(.layer2)").click(function(){
+        jQuery("#orderConfirm").hide(250,function(){
+            jQuery(".overlay-dark").remove();
+        });
+    });
+}
+
+// Hiển thị xác nhận đơn
+function openDeliConfirm(){
+    appendInBody();
+    jQuery("#deliConfirm").fadeIn(350); 
+
+    jQuery(".overlay-dark:not(.layer2)").click(function(){
+        jQuery("#deliConfirm").hide(250,function(){
+            jQuery(".overlay-dark").remove();
+        });
+    });
+}
 
 //Thay đổi thứ thự đơn hàng
 function openOrdChange()
