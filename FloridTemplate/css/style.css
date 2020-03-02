@@ -1219,7 +1219,7 @@ span.prodCharge {
 }
 
 /* =======================================================CHECKOUT */
-.checkOut,.prodDetail,.custInfo {
+.checkOut,.prodDetail,.custInfo,.staffAdd {
     background: #fff;
     padding: 20px;
     border-radius: 30px;
@@ -1486,4 +1486,86 @@ ul.viewedList li.viewItem span:last-child
     left: 50%;
     max-width: 90vw;
     display: none;
+}
+/* ============================================================STAFF */
+.staff-top {
+    margin-top: 3vh;
+}
+.addStaff a {
+    display: block;
+    width: 50px;
+    margin: auto;
+    border-radius: 50%;
+    padding: 7px;
+}
+.staffList {
+    background: #fff;
+    border-radius: 30px;
+    margin-top: 3vh;
+    width: 100%;
+    float: left;
+    height: 420px;
+    overflow-y: scroll;
+}
+li.staffItem {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    width: 100%;
+    float: left;
+}
+li.staffItem:last-child {
+    border-bottom: none;
+}
+li.staffItem .staffImg {
+    width: 60px;
+    float: left;
+    background: var(--main-grey);
+    padding: 15px;
+    border-radius: 50%;
+}
+li.staffItem .staffInfo
+{
+    width: 55%;
+    float: left;
+    margin-left: 5%;
+}
+li.staffItem .staffIcon {
+    width: 10%;
+    float: right;
+    margin-left: 1%;
+}
+.staffIcon > div {
+    background: var(--main-grey);
+    width: 30px;
+    height: 30px;
+    margin-bottom: 3px;
+    border-radius: 50%;
+    padding: 7px;
+}
+.staffIcon > div.iconRole 
+{
+    margin-bottom: 0;
+}
+.staffIcon img {
+    display: block;
+}
+h5.staffName {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--main-grey);
+    margin-bottom: 0;
+}
+p.staffPhone {
+    font-size: 14px;
+    color: #777;
+}
+.staffAdd .addImage {
+    display: block;
+    background: var(--main-grey);
+    width: 80px;
+    margin: auto;
+    padding: 15px;
+    border-radius: 50%;
+    height: 80px;
 }
