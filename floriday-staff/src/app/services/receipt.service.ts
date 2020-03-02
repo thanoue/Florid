@@ -5,6 +5,7 @@ import { Customer } from '../models/customer';
 import { BaseService } from './common/base.service';
 import { Receipt } from '../models/file.model';
 import { StorageService } from './storage.service';
+import 'firebase/database';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class ReceiptService extends BaseService<Receipt> {
     return '/receipts';
   }
 
-  constructor(private storageService: StorageService) {
-    super();
+  constructor(private storageService: StorageService, db: AngularFireDatabase) {
+    super(db);
   }
 
   public uploadReceipt(file: File | Blob, receipt: Receipt, updateCompletedCallback: (receiptUrl: string) => void) {

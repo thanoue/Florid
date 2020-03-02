@@ -21,8 +21,8 @@ export class LoginComponent extends BaseComponent {
 
   protected Init() {
     this.setStatusBarColor(true);
-    this.model.passcode = '123645';
-    this.model.userName = 'ba.mai@florid.com';
+    this.model.passcode = '221111';
+    this.model.userName = 'a.ma33i.van@florid.com';
   }
 
   login(form: NgForm) {
@@ -34,6 +34,8 @@ export class LoginComponent extends BaseComponent {
     this.authService.login(this.model, isSuccess => {
       if (isSuccess) {
         this.router.navigate(['']);
+      } else {
+        console.log('dang nhap loi');
       }
     });
   }

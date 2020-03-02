@@ -4,6 +4,8 @@ import { Product } from '../models/product';
 
 import { from } from 'rxjs';
 import { promise } from 'protractor';
+import 'firebase/database';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +16,7 @@ export class ProductService extends BaseService<Product> {
         return '/products';
     }
 
-    constructor() {
-        super();
+    constructor(db: AngularFireDatabase) {
+        super(db);
     }
 }

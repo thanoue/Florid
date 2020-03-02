@@ -7,13 +7,15 @@ import * as firebase from 'firebase';
 import { GlobalService } from './global.service';
 import { async } from '@angular/core/testing';
 import { UserService } from '../user.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private globalService: GlobalService, private userService: UserService) { }
+  constructor(private globalService: GlobalService, private userService: UserService, public auth: AngularFireAuth) { }
 
   static getCurrentRole(): any {
     const role = LocalService.getRole();
@@ -43,24 +45,28 @@ export class AuthService {
 
     this.globalService.startLoading();
 
-    firebase.auth().signInWithEmailAndPassword(model.userName, model.passcode)
+    this.auth.auth.signInWithEmailAndPassword(model.userName, model.passcode)
       .then(async userInfo => {
-        // console.log(userInfo.user.uid);
+        console.log(userInfo);
+
         LocalService.setUserId(userInfo.user.uid);
 
-        var user = await this.userService.getByLoginId(userInfo.user.uid);
-
-        if (user) {
-          LocalService.setRole(user.Role);
-          LocalService.setUserName(user.FullName);
-          LocalService.setPhoneNumber(user.PhoneNumber);
-          loginCallback(true);
-        }
+        this.userService.getByLoginId(userInfo.user.uid).then(user => {
+          if (user) {
+            console.log('logined user:', user);
+            LocalService.setRole(user.Role);
+            LocalService.setUserName(user.FullName);
+            LocalService.setPhoneNumber(user.PhoneNumber);
+            loginCallback(true);
+          } else {
+            this.globalService.stopLoading();
+            loginCallback(false);
+          }
+        });
       })
       .catch(error => {
         this.globalService.stopLoading();
         loginCallback(false);
       });
-
   }
 }

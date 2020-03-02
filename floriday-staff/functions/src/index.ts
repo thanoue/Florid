@@ -61,13 +61,11 @@ app.post('/createUser', (req: any, res: any) => {
     defaultAuth.createUser(req.body)
         .then((userRecord: any) => {
             // See the UserRecord reference doc for the contents of userRecord.
-            var newUserKey = defauDatabase.ref().child('users').push().key;
+            // var newUserKey = defauDatabase.ref().child('users').push().key;
 
-            defauDatabase.ref('users/' + newUserKey).set({
-                LoginId: userRecord.uid,
+            defauDatabase.ref('users').child(userRecord.uid).set({
                 PhoneNumber: userRecord.phoneNumber,
                 FullName: userRecord.displayName,
-                Id: newUserKey,
                 Email: userRecord.email,
                 AvtUrl: userRecord.photoURL,
                 Active: true,

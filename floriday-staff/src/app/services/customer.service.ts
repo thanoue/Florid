@@ -3,6 +3,7 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { BaseModel } from '../models/base.model';
 import { Customer } from '../models/customer';
 import { BaseService } from './common/base.service';
+import 'firebase/database';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class CustomerService extends BaseService<Customer> {
     return '/customers';
   }
 
-  constructor() {
-    super();
+  constructor(db: AngularFireDatabase) {
+    super(db);
   }
 }

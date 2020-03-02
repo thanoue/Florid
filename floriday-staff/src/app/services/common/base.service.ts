@@ -4,21 +4,17 @@ import { AppInjector } from './base.injector';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { GlobalService } from './global.service';
+import 'firebase/database';
 
 export abstract class BaseService<T extends BaseModel> {
 
-    private authService: AuthService;
     protected globalService: GlobalService;
+    protected abstract tablePath(): string;
 
-    constructor() {
+    constructor(protected db: AngularFireDatabase) {
         const injector = AppInjector.getInjector();
-        this.db = injector.get(AngularFireDatabase);
-
         this.globalService = injector.get(GlobalService);
     }
-
-    protected db: AngularFireDatabase;
-    protected abstract tablePath(): string;
 
     public insert(model: T): Promise<T> {
 

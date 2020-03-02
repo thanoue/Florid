@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AppInjector } from './services/common/base.injector';
 import { GlobalService } from './services/common/global.service';
 import { LoginComponent } from './components/login/login.component';
@@ -41,6 +42,7 @@ declare function getFirebaseConfig(): any;
     FormsModule,
     AngularFireModule.initializeApp(getFirebaseConfig()),
     AngularFireDatabaseModule, // for database,
+    AngularFireAuthModule,
     HttpClientModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.chasingDots,
@@ -52,7 +54,7 @@ declare function getFirebaseConfig(): any;
       fullScreenBackdrop: true,
     })
   ],
-  providers: [GlobalService, AngularFireModule],
+  providers: [GlobalService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
@@ -60,6 +62,5 @@ export class AppModule {
   constructor(injector: Injector) {
     AppInjector.setInjector(injector);
     firebase.initializeApp(getFirebaseConfig());
-
   }
 }
