@@ -27,3 +27,10 @@ export enum ProductCategories {
     HoaSuKien,
     LanHoDiep
 }
+
+export enum MembershipTypes {
+    NewCustomer,
+    StandardMember,
+    VipMember,
+    VVipMember
+}

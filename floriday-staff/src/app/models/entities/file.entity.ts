@@ -1,6 +1,5 @@
-import { BaseModel } from './base.model';
-export class BaseFile extends BaseModel {
-
+import { BaseEntity } from './base.entity';
+export class BaseFile extends BaseEntity {
     Name: string;
     Url: string;
     FolderName: string;

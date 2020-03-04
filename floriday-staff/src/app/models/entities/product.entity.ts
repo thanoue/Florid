@@ -1,7 +1,7 @@
-import { ProductCategories } from './enums';
-import { BaseModel } from './base.model';
+import { ProductCategories } from '../enums';
+import { BaseEntity } from './base.entity';
 
-export class Product extends BaseModel {
+export class Product extends BaseEntity {
     Name: string;
     Price: string;
     ImageUrl: string;

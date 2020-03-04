@@ -19,9 +19,9 @@ import { FormsModule } from '@angular/forms';
 import { InvalidTypeDirective } from './directives/invalid-type.directive';
 import { InvalidmessageDirective } from './directives/invalid-message.directive';
 import * as firebase from 'firebase/app';
-import { AddUserComponent } from './components/user/add-user/add-user.component';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
+import { OrdersManageComponent } from './components/orders-manage/orders-manage.component';
 
 declare function getFirebaseConfig(): any;
 
@@ -34,7 +34,7 @@ declare function getFirebaseConfig(): any;
     TextBoxComponent,
     InvalidTypeDirective,
     InvalidmessageDirective,
-    AddUserComponent,
+    OrdersManageComponent,
   ],
   imports: [
     BrowserModule,

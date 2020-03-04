@@ -1,4 +1,4 @@
-import { EntityType } from './enums';
+import { EntityType } from '../enums';
 
 export class GenericModel {
     ModelType: EntityType;

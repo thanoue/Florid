@@ -5,10 +5,15 @@ import { LoggedInGuard, AdminGuard } from './guards/login.guard';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { PrinterComponent } from './components/printer/printer.component';
 import { HomeComponent } from './components/home/home.component';
-import { AddUserComponent } from './components/user/add-user/add-user.component';
+import { OrdersManageComponent } from './components/orders-manage/orders-manage.component';
+import { RouteModel } from './models/view.models/route.model';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+
+  {
+    path: 'login', component: LoginComponent,
+    data: { Title: 'Dang nhap', NavigateClass: 'none' }
+  },
   { path: 'printjob', component: PrinterComponent },
 
   {
@@ -20,9 +25,8 @@ const routes: Routes = [
         path: '',
         component: HomeComponent,
       }, {
-        path: 'add-user',
-        component: AddUserComponent,
-        canActivate: [AdminGuard]
+        path: 'orders-manager',
+        component: OrdersManageComponent,
       }
     ]
   }

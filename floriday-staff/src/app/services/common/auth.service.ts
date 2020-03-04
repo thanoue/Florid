@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalService } from './local.service';
 import { Roles } from 'src/app/models/enums';
 import { Local } from 'protractor/built/driverProviders';
-import { LoginModel } from 'src/app/models/user.model';
+import { LoginModel } from 'src/app/models/entities/user.entity';
 import * as firebase from 'firebase';
 import { GlobalService } from './global.service';
 import { async } from '@angular/core/testing';
@@ -26,7 +26,7 @@ export class AuthService {
 
     this.globalService.startLoading();
 
-    firebase.auth().signOut().then(() => {
+    this.auth.auth.signOut().then(() => {
 
       signedOutCallback(true);
       this.globalService.stopLoading();
@@ -47,16 +47,14 @@ export class AuthService {
 
     this.auth.auth.signInWithEmailAndPassword(model.userName, model.passcode)
       .then(async userInfo => {
-        console.log(userInfo);
-
         LocalService.setUserId(userInfo.user.uid);
 
         this.userService.getByLoginId(userInfo.user.uid).then(user => {
           if (user) {
-            console.log('logined user:', user);
             LocalService.setRole(user.Role);
             LocalService.setUserName(user.FullName);
             LocalService.setPhoneNumber(user.PhoneNumber);
+
             loginCallback(true);
           } else {
             this.globalService.stopLoading();

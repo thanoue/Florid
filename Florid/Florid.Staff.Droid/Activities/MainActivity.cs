@@ -83,7 +83,7 @@ namespace Florid.Staff.Droid.Activity
             };
 
             _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
-            _mainWebView.LoadUrl("http://192.168.1.22:5000");
+            _mainWebView.LoadUrl("https://floridstaff.firebaseapp.com");
 
             SetStatusBarColor(true);
 

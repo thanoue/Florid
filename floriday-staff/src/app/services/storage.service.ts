@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
+import { BaseFile } from '../models/entities/file.entity';
 
-import { BaseFile } from '../models/file.model';
 @Injectable({
     providedIn: 'root'
 })
@@ -21,7 +21,6 @@ export class StorageService {
         uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
             (snapshot) => {
                 // in progress
-                const snap = snapshot as firebase.storage.UploadTaskSnapshot
             },
             (error) => {
                 // fail

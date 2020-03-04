@@ -1,5 +1,5 @@
-import { Roles } from './enums';
-import { BaseModel } from './base.model';
+import { Roles } from '../enums';
+import { BaseEntity } from './base.entity';
 
 
 export class LoginModel {
@@ -10,7 +10,7 @@ export class LoginModel {
     }
 }
 
-export class User extends BaseModel {
+export class User extends BaseEntity {
     AvtUrl: string;
     PhoneNumber: string;
     FullName: string;

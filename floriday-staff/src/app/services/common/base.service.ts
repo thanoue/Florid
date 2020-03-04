@@ -1,12 +1,12 @@
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
-import { BaseModel } from 'src/app/models/base.model';
 import { AppInjector } from './base.injector';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { GlobalService } from './global.service';
 import 'firebase/database';
+import { BaseEntity } from 'src/app/models/entities/base.entity';
 
-export abstract class BaseService<T extends BaseModel> {
+export abstract class BaseService<T extends BaseEntity> {
 
     protected globalService: GlobalService;
     protected abstract tablePath(): string;

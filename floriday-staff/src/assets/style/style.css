@@ -5,6 +5,7 @@
     --main-green: #1fe8cb;
     --main-filter: brightness(1.6);
     --white-filter: brightness(3);
+    --nega-filter: invert(.7) brightness(2);
 }
 
 body
@@ -24,6 +25,10 @@ ul
     padding: 0;
     list-style: none;
     margin: 0;
+}
+img 
+{
+    max-width: 100%;
 }
 embed
 {
@@ -87,7 +92,7 @@ xanh 1fc9db xanh 1fe8cb */
 {
     z-index: 10;
 }
-.btn.main-btn
+.btn.main-btn,.btn.grey-btn
 {
     background-image: -o-linear-gradient(45deg, var(--main-blue),var(--main-green));
     background-image: linear-gradient(45deg, var(--main-blue),var(--main-green));
@@ -103,6 +108,10 @@ xanh 1fc9db xanh 1fe8cb */
 .btn.main-btn:hover {
     color: #999;
     background: #fff;
+}
+.btn.grey-btn
+{
+    background: var(--main-grey);
 }
 .main-bg 
 {
@@ -334,10 +343,13 @@ a.prev-icon {
     font-size: 14px;
     color: #fff;
 }
-.order-add a {
-    display: block;
+.order-add {
     margin-top: 3vh;
     margin-bottom: 3vh;
+}
+.order-add a 
+{
+    display: block;
 }
 .order-filter
 {
@@ -347,10 +359,11 @@ a.prev-icon {
 {
     padding-left: 0;
 }
-.order-filter button,
-.order-check button,
+.order-filter a,
+.order-check a,
 .filterCate button, 
-.filterAdd button {
+.filterAdd button,
+.order-noti a {
     display: inline-block;
     width: 40px;
     height: 40px;
@@ -359,6 +372,19 @@ a.prev-icon {
     font-size: 0;
     border: none;
     padding: 10px;
+}
+span.noti-count {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: #db1212;
+    top: -5px;
+    border-radius: 50%;
+    font-size: 10px;
+    color: #fff;
+    right: 5px;
+    line-height: 24px;
+    text-align: center;
 }
 .order-search .form-control,
 .filterSearch .form-control{
@@ -383,7 +409,8 @@ img.white-filter
 }
 .order-filter button:hover img, 
 .order-check button:hover img,
-.filterAdd button:hover img
+.filterAdd button:hover img,
+.prodAdd a:hover img
 {
     filter: brightness(3);
 }
@@ -396,21 +423,21 @@ ul.order-content {
     margin-bottom: 0;
     overflow-y: scroll;
 }
-li.order-content-item {
+.order-content-item {
     margin-bottom: 10px;
     background: #fff;
     border-radius: 30px;
     width: 100%;
     float: left;
 }
-li.order-content-item .item-top 
+.order-content-item .item-top 
 {
     width: 100%;
     position: relative;
     float: left;
     height: 50px;
 }
-li.order-content-item .item-top .item-code {
+.order-content-item .item-top .item-code {
     width: 28%;
     text-align: center;
     float: left;
@@ -422,13 +449,13 @@ li.order-content-item .item-top .item-code {
     border-right: 1px solid;
     margin-right: 15px;
 }
-li.order-content-item .item-top .item-info {
+.order-content-item .item-top .item-info {
     width: 52%;
     float: left;
     height: 36px;
     margin-top: 7px;
 }
-li.order-content-item .item-top .item-info h4.item-name {
+.order-content-item .item-top .item-info h4.item-name {
     font-size: 14px;
     font-weight: 600;
     color: #999;
@@ -440,20 +467,19 @@ li.order-content-item .item-top .item-info h4.item-name {
     -webkit-line-clamp: 1;
     height: 18px;
 }
-li.order-content-item .item-top .item-info span.item-price,
-span.prodPrice {
+.order-content-item .item-top .item-info span.item-price{
     float: left;
     font-size: 13px;
     color: #db1212;
     font-weight: 600;
 }
-li.order-content-item .item-top .item-info span.item-date
+.order-content-item .item-top .item-info span.item-date
 {
     font-size: 13px;
     color: #97999c;
     float: right;
 }
-li.order-content-item .item-top button {
+.order-content-item .item-top button {
     position: absolute;
     width: 30px;
     height: 30px;
@@ -466,11 +492,11 @@ li.order-content-item .item-top button {
     top: 10px;
     transition: 350ms;
 }
-li.order-content-item .item-top button:not(.collapsed)
+.order-content-item .item-top button:not(.collapsed)
 {
     transform: rotate(90deg);
 }
-li.order-content-item .item-top button:before 
+.order-content-item .item-top button:before 
 {
     content: "\f105";
     font-family: fontawesome;
@@ -517,6 +543,7 @@ li.order-product-item .item-detail
     height: 90px;
     padding: 5px;
     float: left;
+    position: relative;
 }
 img.item-detail-thumb {
     width: 30%;
@@ -524,6 +551,7 @@ img.item-detail-thumb {
     height: 78px;
     object-fit: cover;
     margin-right: 3%;
+    border-radius: 10px;
 }
 .item-detail-info {
     width: 67%;
@@ -669,11 +697,13 @@ form.addOrderForm .form-group {
     padding-top: 0;
     margin-bottom: 3px;
 }
-.prodInfo span.prodPrice
+span.prodPrice
 {
     float: none;
     display: block;
-    margin-bottom: 3px;
+    color: #db1212;
+    font-size: 14px;
+    font-weight: 600;
 }
 .prodInfo input.prodQuantity {
     width: 50px;
@@ -695,7 +725,7 @@ form.addOrderForm .form-group {
     min-width: calc(100% - 140px);
     padding: 0 5px;
 }
-.custInfo a {
+.addInfo a {
     font-size: 16px;
     text-transform: uppercase;
     font-weight: 600;
@@ -823,8 +853,8 @@ form.addOrderForm {
     height: 30px;
     width: 30px;
     top: 5px;
-    -webkit-filter: invert(.7) brightness(2);
-    filter: invert(.7) brightness(2);
+    -webkit-filter: var(--nega-filter);
+    filter: var(--nega-filter);
 }
 .filterCate a:hover img
 {
@@ -841,7 +871,8 @@ form.addOrderForm {
     -webkit-line-clamp: 1;
     line-height: 32px;
 }
-.filterAdd
+.filterAdd,
+.order-noti
 {
     padding-left: 0;
 }
@@ -862,6 +893,7 @@ div#infoRec
 }
 .currentInfo span {
     padding-right: 50px;
+    font-size: 14px;
 }
 .currentInfo a.main-bg:not(:hover) {
     background: var(--main-grey);
@@ -891,33 +923,33 @@ input.mainForm {
     color: #999;
 }
 .newInfo {
-    padding: 15px 15px 30px 15px;
+    margin-top: 20px;
 }
-#custInfo 
+#recentInfo 
 {
     z-index: 99;
 }
-#custInfo li {
+#recentInfo li {
     text-align: center;
     border-bottom: 1px solid #97999c;
     padding: 10px 15px;
     font-size: 14px;
 }
-p.custInfo-name {
+p.recentInfo-name {
     font-weight: 600;
     margin-bottom: 5px;
 }
-#custInfo span.custInfo-phone {
+#recentInfo span.recentInfo-phone {
     float: left;
     width: 50%;
     text-align: left;
 }
-#custInfo span.custInfo-date {
+#recentInfo span.recentInfo-date {
     float: right;
     width: 50%;
     text-align: right;
 }
-span.custInfo-add {
+span.recentInfo-add {
     width: 100%;
     height: 25px;
     overflow: hidden;
@@ -925,4 +957,615 @@ span.custInfo-add {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+}
+
+/* =============================================CONFIRM */
+.custList a {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    border-radius: 15px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative;
+    padding-left: 40px;
+}
+.prodAdd a 
+{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    padding: 10px;
+}
+.custListButton img 
+{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    left: 10px;
+    top: 4px;
+}
+ul.orderDetail {
+    background: #fff;
+    border-radius: 15px;
+    height: 320px;
+    overflow-y: scroll;
+    padding: 15px;
+    margin-top: 1vh;
+}
+li.orderDetailItem {
+    height: 110px;
+    border-bottom: 1px solid var(--main-grey);
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    float: left;
+}
+li.orderDetailItem:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.itemNumb {
+    width: 20px;
+    float: left;
+    vertical-align: middle;
+    height: 100px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.itemNumb span {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    background: var(--main-grey);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    line-height: 20px;
+}
+.itemDetail {
+    width: calc(100% - 60px);
+    float: left;
+    margin-left: 5px;
+}
+.itemDetail img.item-detail-thumb {
+    width: 35%;
+    margin-right: 5%;
+    height: 104px;
+}
+.itemDetail .item-detail-info {
+    width: 60%;
+}
+.itemAction {
+    width: 35px;
+    float: left;
+    text-align: right;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100px;
+    flex-wrap: wrap;
+}
+.itemAction a {
+    height: 35px;
+    width: 35px;
+    background: var(--main-grey);
+    display: inline-block;
+    border-radius: 10px;
+    padding: 10px;
+}
+.itemAction a img 
+{
+    display: block;
+}
+span.prodPriceOld {
+    font-size: 14px;
+    display: block;
+    color: #d81d1d;
+    text-decoration: line-through;
+}
+span.prodCharge {
+    color: #777;
+    font-size: 12px;
+    display: block;
+}
+.itemDetail .prodPrice ,
+.prodDetail .prodPrice
+{
+    display: block;
+    float: none;
+    font-size: 16px;
+}
+.custListButton img {
+    filter: var(--nega-filter);
+}
+.custListButton:hover img
+{
+    filter: none;
+}
+.vatStatus {	
+    margin-top: 1vh;
+    display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: row;
+	        flex-direction: row;
+	-ms-flex-wrap: nowrap;
+	    flex-wrap: nowrap;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-ms-flex-line-pack: center;
+        align-content: center;
+        color: #fff;
+}
+.vatStatus p,.vatStatus a 
+{
+    display: inline-block;
+    margin-bottom: 0;
+}
+.vatStatus a {
+    height: 30px;
+    width: 60px;
+    margin-left: 15px;
+    border-radius: 15px;
+    position: relative;
+    transition: 350ms;
+    background: #fff;
+}
+.vatStatus.on a 
+{
+    background-image: -o-linear-gradient(45deg, var(--main-blue),var(--main-green));
+    background-image: linear-gradient(45deg, var(--main-blue),var(--main-green));
+}
+.vatStatus a span {
+    content: "";
+    width: 24px;
+    height: 24px;
+    background: var(--main-grey);
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 50%;
+    transition: 350ms;
+}
+.vatStatus.on a span 
+{
+    left: auto;
+    right: 3px;
+    background: #fff;
+}
+.orderTotal {
+    background: #fff;
+    border-radius: 15px;
+    padding: 10px 15px;
+    margin-top: 1vh;
+}
+.orderTotal p {
+    margin-bottom: 0;
+    color: var(--main-grey);
+}
+.orderTotal p.totalNew {
+    font-size: 20px;
+}
+.orderTotal p span.orderPrice
+{
+    color: #d81d1d;
+    font-weight: 600;}
+
+.orderTotal p.totalOld span.orderPrice
+{
+    font-weight: 400;
+    text-decoration: line-through;
+}
+.orderConfirm span 
+{
+    color: #fff;
+    font-style: italic;
+    font-size: 12px;
+}
+.custBrow, .orderConfirm {
+    margin-top: 2vh;
+}
+.nameTable {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    font-size: 14px;
+    color: var(--main-grey);
+    margin-bottom: 2vh;
+}
+.tableHead {
+    background: var(--main-grey);
+    color: #fff;
+    border: 2px solid #fff;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.nameTable .tableLeft, .nameTable .tableRight {
+    width: 49%;
+    display: inline-block;
+    padding: 7px 0 7px 20px;
+}
+.nameTable .tableHead .tableRight 
+{
+    border-left: 2px solid;
+    padding: 10px 20px;
+}
+.tableBody.cusScroll {
+    height: 400px;
+    overflow-y: scroll;
+}
+.checkTop 
+{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+/* =======================================================CHECKOUT */
+.checkOut,.prodDetail,.custInfo,.staffAdd {
+    background: #fff;
+    padding: 20px;
+    border-radius: 30px;
+    margin-top: 3vh;
+    text-align: center;
+}
+.checkOut p 
+{
+    margin-bottom: 0;
+    color: #db1212;
+    font-size: 20px;
+}
+.checkOutTotal {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+.checkOutTotal h3 {
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--main-grey);
+}
+.checkOutLeft p {
+    font-weight: 700;
+}
+.checkOutLeft {
+    margin-bottom: 30px;
+}
+.checkOutLeft h4 
+{
+    font-size: 16px;
+    color: var(--main-grey);
+    font-weight: 600;
+}
+.methodGrid a.methodItem {
+    width: calc(33.33% - 20px);
+    display: block;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+.methodGrid {
+    clear: both;
+    width: calc(100% + 20px);
+    float: left;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+#codeQR img {
+    border: 1px solid;
+}
+#codeQR span {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+}
+/* ===============================================ORDER LIST */
+#listContent .item-bot ul.order-product-list {
+    height: auto;
+    overflow: hidden;
+}
+ul#listNav.nav-tabs {
+    border-bottom: none;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+#listNav .nav-item:first-child {
+    padding-right: 5px;
+}
+#listNav .nav-item:last-child {
+    padding-left: 5px;
+}
+#listNav .nav-item a {
+    display: block;
+    text-align: center;
+    height: 40px;
+    text-transform: uppercase;
+    line-height: 40px;
+}
+#listNav .nav-item:first-child a
+{
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+#listNav .nav-item:last-child a
+{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+#listNav .nav-item a.main-bg.active {
+    background-image: -o-linear-gradient(45deg, var(--main-blue),var(--main-green));
+    background-image: linear-gradient(45deg, var(--main-blue),var(--main-green));
+    color: #fff;
+}
+#listContent h5.item-code
+{
+    padding-top: 0;
+}
+.order-content-item .item-top button.navOrder
+{
+    width: 15px;
+    height: 15px;
+    right: 10px;
+}
+.order-content-item .item-top button.navOrder:before 
+{
+    font-size: 10px;
+}
+.order-content-item .item-top button.navOrder.inOrder::before
+{
+    content: "\f104";
+}
+.order-content-item .item-top button.navOrder.deOrder
+{
+    top: 27px;
+}
+span.item-date,span.item-time 
+{
+    font-size: 14px;
+    font-weight: 600;
+    color: #db1212;
+}
+a.absLink {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+/* ==============================================PRODUCT DETAIL */
+.prodDetail 
+{
+    text-align: left;
+    padding-bottom: 40px;
+    position: relative;
+}
+.prodGen {
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+}
+.prodGen .item-status
+{
+    width: 30px;
+    float: left;
+    height: 100px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.prodGen .item-status span
+{
+    width: 20px;
+    height: 20px;
+}
+.prodGen img.item-detail-thumb {
+    height: 100px;
+    margin-right: 5%;
+}
+.prodGen .item-detail-info
+{
+    width: calc(65% - 30px);
+}
+.prodDetail .prodInfo {
+    height: 370px;
+    clear: both;
+    overflow-y: scroll;
+    font-size: 14px;
+    color: #777;
+}
+.prodInfo .infoGroup {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+.prodInfo .infoGroup span.itemlabel
+{
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 15px;
+}
+.viewed {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 12px;
+    color: #777;
+    font-weight: 600;
+}
+.viewed img {
+    width: 20px;
+    margin-right: 5px;
+}
+.prodQuan.infoGroup
+{
+    margin-top: 0;
+}
+div#viewed {
+    padding: 10px;
+    text-align: left;
+}
+div#viewed  h3,
+#orderConfirm h3,
+#deliConfirm h3{
+    background-image: -o-linear-gradient(45deg, var(--main-blue),var(--main-green));
+    background-image: linear-gradient(45deg, var(--main-blue),var(--main-green));
+    color: #fff;
+    font-size: 16px;
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: center;
+}
+ul.viewedList li.viewItem {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+ul.viewedList li.viewItem:before 
+{
+    content: "\f2bd";
+    font-family: fontawesome;
+    margin-right: 5px;
+}
+ul.viewedList li.viewItem span:first-child
+{
+    display: inline-block;
+    width: 70%;
+}
+ul.viewedList li.viewItem span:last-child
+{
+    display: inline-block;
+    width: 20%;
+}
+.popup-content.prodDetail
+{
+    position: fixed;
+    margin-top: 0;
+    padding: 10px;
+}
+.popup-content.prodDetail .prodInfo {
+    height: 245px;
+}
+#deliConfirm.popup-content.prodDetail .prodInfo {
+    height: 190px;
+}
+.popup-image {
+    position: fixed;
+    z-index: 99;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    max-width: 90vw;
+    display: none;
+}
+/* ============================================================STAFF */
+.staff-top {
+    margin-top: 3vh;
+}
+.addStaff a {
+    display: block;
+    width: 50px;
+    margin: auto;
+    border-radius: 50%;
+    padding: 7px;
+}
+.staffList {
+    background: #fff;
+    border-radius: 30px;
+    margin-top: 3vh;
+    width: 100%;
+    float: left;
+    height: 420px;
+    overflow-y: scroll;
+}
+li.staffItem {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    width: 100%;
+    float: left;
+}
+li.staffItem:last-child {
+    border-bottom: none;
+}
+li.staffItem .staffImg {
+    width: 60px;
+    float: left;
+    background: var(--main-grey);
+    padding: 15px;
+    border-radius: 50%;
+}
+li.staffItem .staffInfo
+{
+    width: 55%;
+    float: left;
+    margin-left: 5%;
+}
+li.staffItem .staffIcon {
+    width: 10%;
+    float: right;
+    margin-left: 1%;
+}
+.staffIcon > div {
+    background: var(--main-grey);
+    width: 30px;
+    height: 30px;
+    margin-bottom: 3px;
+    border-radius: 50%;
+    padding: 7px;
+}
+.staffIcon > div.iconRole 
+{
+    margin-bottom: 0;
+}
+.staffIcon img {
+    display: block;
+}
+h5.staffName {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--main-grey);
+    margin-bottom: 0;
+}
+p.staffPhone {
+    font-size: 14px;
+    color: #777;
+}
+.staffAdd .addImage {
+    display: block;
+    background: var(--main-grey);
+    width: 80px;
+    margin: auto;
+    padding: 15px;
+    border-radius: 50%;
+    height: 80px;
 }

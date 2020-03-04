@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { LocalService } from 'src/app/services/common/local.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import html2canvas from 'html2canvas';
-import { LoginModel } from 'src/app/models/user.model';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/common/auth.service';
+import { LoginModel } from 'src/app/models/entities/user.entity';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,10 +13,13 @@ import { AuthService } from 'src/app/services/common/auth.service';
 })
 export class LoginComponent extends BaseComponent {
 
+  Title = '';
+  NavigateClass = '';
+
   model: LoginModel = new LoginModel();
 
-  constructor(private router: Router) {
-    super();
+  constructor(private router: Router, protected activatedRoute: ActivatedRoute) {
+    super(activatedRoute);
   }
 
   protected Init() {
@@ -35,7 +38,7 @@ export class LoginComponent extends BaseComponent {
       if (isSuccess) {
         this.router.navigate(['']);
       } else {
-        console.log('dang nhap loi');
+        console.log('Lỗi đăng nhập');
       }
     });
   }

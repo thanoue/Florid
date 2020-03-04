@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { LocalService } from 'src/app/services/common/local.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import html2canvas from 'html2canvas';
 import { ReceiptService } from 'src/app/services/receipt.service';
-import { Receipt } from 'src/app/models/file.model';
+import { Receipt } from 'src/app/models/entities/file.entity';
 
 declare function doPrintJob(url: string): any;
 
@@ -15,8 +15,11 @@ declare function doPrintJob(url: string): any;
 })
 export class PrinterComponent extends BaseComponent {
 
-  constructor(private router: Router, private receiptService: ReceiptService) {
-    super();
+  Title = '';
+  NavigateClass = '';
+
+  constructor(private router: Router, protected activatedRoute: ActivatedRoute, private receiptService: ReceiptService) {
+    super(activatedRoute);
   }
 
   protected Init() {

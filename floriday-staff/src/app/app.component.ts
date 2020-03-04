@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GenericModel } from './models/generic.model';
+import { GenericModel } from './models/view.models/generic.model';
 import { Subscribable, Subscription } from 'rxjs';
 import { GlobalService } from './services/common/global.service';
 import { strict } from 'assert';

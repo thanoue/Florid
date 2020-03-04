@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { AuthService } from 'src/app/services/common/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+
+declare function customerSupport(): any;
 
 @Component({
   selector: 'app-home',
@@ -10,9 +12,17 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent extends BaseComponent {
 
-  constructor(private router: Router) {
-    super();
+  Title = 'Trang chủ';
+  NavigateClass = 'nav-icon';
+
+  protected OnNavigateClick() {
+    customerSupport();
   }
+
+  constructor(private router: Router, protected activatedRoute: ActivatedRoute) {
+    super(activatedRoute);
+  }
+
   protected Init() {
   }
 
@@ -28,4 +38,7 @@ export class HomeComponent extends BaseComponent {
   goToPrintJob() {
     this.router.navigate(['printjob']);
   }
+
+
+
 }
