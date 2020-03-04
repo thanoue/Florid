@@ -18,9 +18,7 @@ export class MainLayoutComponent implements OnDestroy {
 
   constructor(public router: Router, private globalService: GlobalService) {
 
-    console.log('pass to main layout');
-
-    this.navigateClass = 'prev-icon';
+    this.navigateClass = '';
     this.title = '';
 
     this.headerUpdate = this.globalService.updateHeader

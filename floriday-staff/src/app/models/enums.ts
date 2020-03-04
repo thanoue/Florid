@@ -34,3 +34,14 @@ export enum MembershipTypes {
     VipMember,
     VVipMember
 }
+
+export enum OrderDetailStates {
+    Waiting,
+    Making,
+    Comfirming,
+    DeliveryWaiting,
+    Delivering,
+    Deliveried,
+    Completed,
+    Canceled
+}

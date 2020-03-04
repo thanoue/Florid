@@ -1,0 +1,95 @@
+<div class="page-content" id="order">
+    <div class="container order-add">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8 text-center">
+                <a href="./them-don.html" class="btn main-btn">Thêm đơn</a>
+            </div>
+            <div class="col-2 order-noti text-right">
+                <a href="./xac-nhan-don.html"><img src="../../../assets/images/noti.png" alt=""
+                        class="main-filter"><span class="noti-count">20</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="container order-list">
+        <div class="row order-list-top">
+            <div class="col-2 order-filter text-left">
+                <a href="./tien-do-don.html" class="main-bg"><img src="../../../assets/images/filter.svg" alt=""
+                        class="main-filter"></a>
+            </div>
+            <div class="col-8 order-search">
+                <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
+            </div>
+            <div class="col-2 order-check text-right">
+                <a href="./danh-sach-don.html" class="main-bg"><img src="../../../assets/images/check.svg" alt=""
+                        class="main-filter"></a>
+            </div>
+        </div>
+        <div class="row order-list-bot">
+            <ul class="col-12 order-content accordion  cusScroll" id="accordionOrder">
+                <li *ngFor="let order of orders" class="order-content-item" [id]="'order' + order.Index">
+                    <div class="item-top" [id]="'heading' + order.Index">
+                        <span class="item-code">{{order.OrderId}}</span>
+                        <div class="item-info">
+                            <h4 class="item-name">{{order.CustomerName}}</h4>
+                            <span class="item-price">{{order.TotalAmount}} vnđ</span>
+                            <span class="item-date">{{order.CreatedDate | date: 'dd/MM/yyyy'}}</span>
+                        </div>
+                        <button data-toggle="collapse" [attr.data-target]="'#collapse' + order.Index"
+                            aria-expanded="false" [attr.aria-controls]="'collapse' + order.Index"
+                            class="collapsed">mở</button>
+                    </div>
+                    <div class="item-bot collapse" [id]="'collapse' + order.Index"
+                        [attr.aria-labelledby]="'heading' + order.Index" [attr.data-parent]="'#order' + order.Index">
+                        <ul class="order-product-list cusScroll">
+                            <li *ngFor="let orderDetail of order.OrderDetails" class="order-product-item">
+                                <div [ngSwitch]="orderDetail.State">
+                                    <div *ngSwitchCase="states.Waiting" class="item-status r"
+                                        onclick="openColorBoard()">
+                                        <span>{{orderDetail.Index}}</span>
+                                    </div>
+                                    <div *ngSwitchCase="states.Making" class="item-status o" onclick="openColorBoard()">
+                                        <span>{{orderDetail.Index}}</span>
+                                    </div>
+                                    <div *ngSwitchCase="states.Comfirming" class="item-status y"
+                                        onclick="openColorBoard()">
+                                        <span>{{orderDetail.Index}}</span>
+                                    </div>
+                                    <div *ngSwitchCase="states.DeliveryWaiting" class="item-status p"
+                                        onclick="openColorBoard()">
+                                        <span>{{orderDetail.Index}}</span>
+                                    </div>
+                                    <div *ngSwitchCase="states.Delivering" class="item-status b"
+                                        onclick="openColorBoard()">
+                                        <span>{{orderDetail.Index}}</span>
+                                    </div>
+                                    <div *ngSwitchCase="states.Deliveried" class="item-status bl"
+                                        onclick="openColorBoard()">
+                                        <span>{{orderDetail.Index}}</span>
+                                    </div>
+                                    <div *ngSwitchCase="states.Completed" class="item-status g"
+                                        onclick="openColorBoard()">
+                                        <span>{{orderDetail.Index}}</span>
+                                    </div>
+                                    <div *ngSwitchCase="states.Canceled" class="item-status x"
+                                        onclick="openColorBoard()">
+                                        <span>{{orderDetail.Index}}</span>
+                                    </div>
+                                </div>
+                                <div class="item-detail">
+                                    <a href="./chi-tiet.html" class="absLink"></a>
+                                    <img src="{{orderDetail.ProductUrl}}" alt="" class="item-detail-thumb">
+                                    <div class="item-detail-info">
+                                        <h5 class="item-code">{{orderDetail.ProductName}}</h5>
+                                        <span class="item-quantity">Số lượng: {{orderDetail.Quantity}}</span>
+                                        <span class="item-address">{{orderDetail.DeliveryAddress}}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

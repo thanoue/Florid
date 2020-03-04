@@ -51,13 +51,19 @@ function appendInBody() {
 
 // slide canvas menu
 function customerSupport() {
-    console.log('call');
+
     jQuery("body").append("<div class='overlay-dark'></div>");
     jQuery(".customer-support").css({
         "left": "0",
         "opacity": "1"
     });
+
+    jQuery(".customer-support #logoutBtn").one("click", function () {
+        jQuery(".overlay-dark").remove();
+    });
+
     jQuery(".overlay-dark").one("click", function () {
+        jQuery(".customer-support #logoutBtn").off("click");
         jQuery(".customer-support").css({
             "left": "-80vw",
             "opacity": "0"
@@ -197,13 +203,23 @@ function slideUp(html, callback) {
 }
 
 // Thông báo lỗi Login
-function openLoginError() {
+function messageDialog(title, message) {
     appendInBody();
+
+    var html = `<div id="loginerror" class="popup-content">
+    <img src="../../../assets/images/alert.png" alt="">
+    <p>${title}</p>
+    <span>${message}</span>
+    </div>`
+
+    jQuery("body").append(html);
+
     jQuery("#loginerror").fadeIn(350);
 
-    jQuery(".overlay-dark:not(.layer2)").click(function () {
+    jQuery(".overlay-dark").one("click", function () {
         jQuery("#loginerror").hide(250, function () {
             jQuery(".overlay-dark").remove();
+            jQuery(this).remove();
         });
     });
 }

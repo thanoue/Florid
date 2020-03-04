@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, from } from 'rxjs';
+import { BehaviorSubject, from, Subject } from 'rxjs';
 import { GenericModel } from 'src/app/models/view.models/generic.model';
 import { RouteModel } from 'src/app/models/view.models/route.model';
 
 declare function setStatusBarColor(isDark: boolean): any;
+declare function messageDialog(title: string, message: string): any;
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,9 @@ export class GlobalService {
     insertDataWithIdResCallback: BehaviorSubject<GenericModel> = new BehaviorSubject<GenericModel>(null);
     spinnerInvoke: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     updateHeader: BehaviorSubject<RouteModel> = new BehaviorSubject<RouteModel>(null);
-    navigateOnClick: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+    navigateOnClick = new Subject<boolean>();
+    navigateOnClickEmitter$ = this.navigateOnClick.asObservable;
 
     startLoading() {
         this.spinnerInvoke.next(true);
@@ -41,7 +44,10 @@ export class GlobalService {
     }
 
     clickOnNavigateButton() {
-        console.log('click on navigate');
         this.navigateOnClick.next(true);
+    }
+
+    showMessageDialog(title: string, message: string) {
+        messageDialog(title, message);
     }
 }

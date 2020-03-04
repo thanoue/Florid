@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs';
 
 export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
-
     protected globalService: GlobalService;
     protected authService: AuthService;
 

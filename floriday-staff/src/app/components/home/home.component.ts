@@ -24,6 +24,7 @@ export class HomeComponent extends BaseComponent {
   }
 
   protected Init() {
+    this.setStatusBarColor(false);
   }
 
   logout() {

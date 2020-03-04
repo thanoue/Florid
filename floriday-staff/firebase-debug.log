@@ -1,0 +1,37 @@
+[debug] [2020-03-04T17:38:07.169Z] ----------------------------------------------------------------------
+[debug] [2020-03-04T17:38:07.173Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy --only hosting
+[debug] [2020-03-04T17:38:07.173Z] CLI Version:   7.12.1
+[debug] [2020-03-04T17:38:07.173Z] Platform:      darwin
+[debug] [2020-03-04T17:38:07.173Z] Node Version:  v10.16.3
+[debug] [2020-03-04T17:38:07.174Z] Time:          Thu Mar 05 2020 00:38:07 GMT+0700 (Indochina Time)
+[debug] [2020-03-04T17:38:07.174Z] ----------------------------------------------------------------------
+[debug] [2020-03-04T17:38:07.174Z] 
+[debug] [2020-03-04T17:38:07.183Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-04T17:38:07.184Z] > authorizing via signed-in user
+[debug] [2020-03-04T17:38:07.184Z] [iam] checking project lorid-e9c34 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-03-04T17:38:07.185Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-03-04T17:38:07.185Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-03-04T17:38:07.395Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-04T17:38:07.403Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/lorid-e9c34:testIamPermissions  
+
+[debug] [2020-03-04T17:38:08.783Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-04T17:38:08.784Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/lorid-e9c34  
+ 
+[debug] [2020-03-04T17:38:09.289Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'lorid-e9c34'...
+[info] 
+[info] i  deploying hosting
+[debug] [2020-03-04T17:38:10.577Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/floridstaff/versions  
+
+[debug] [2020-03-04T17:38:12.877Z] <<< HTTP RESPONSE 200
+[info] i  hosting[floridstaff]: beginning deploy...
+[info] i  hosting[floridstaff]: found 72 files in dist/floriday-staff
+[debug] [2020-03-04T17:38:12.999Z] [hosting] hash cache [ZGlzdC9mbG9yaWRheS1zdGFmZg] stored for 72 files
+[debug] [2020-03-04T17:38:13.000Z] [hosting][hash queue][FINAL]
+[debug] [2020-03-04T17:38:13.000Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/floridstaff/versions/f0ba9b409a1b1e0b:populateFiles  
+ <request body omitted>
+[debug] [2020-03-04T17:38:14.919Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-04T17:38:14.924Z] [hosting][populate queue][FINAL]
+[debug] [2020-03-04T17:38:14.924Z] [hosting] uploads queued: 8

@@ -23,7 +23,9 @@ export class LoginComponent extends BaseComponent {
   }
 
   protected Init() {
+
     this.setStatusBarColor(true);
+
     this.model.passcode = '221111';
     this.model.userName = 'a.ma33i.van@florid.com';
   }
@@ -38,8 +40,9 @@ export class LoginComponent extends BaseComponent {
       if (isSuccess) {
         this.router.navigate(['']);
       } else {
-        console.log('Lỗi đăng nhập');
+        this.globalService.showMessageDialog('LỖI ĐĂNG NHẬP', 'Sai tên đăng nhập hoặc mật khẩu!!');
       }
     });
+
   }
 }
