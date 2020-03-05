@@ -129,7 +129,7 @@ xanh 1fc9db xanh 1fe8cb */
 div#login {
     height: 100vh;
     width: 100%;
-    background: url(../images/login-bg.jpg) center center no-repeat ;
+    background: url(../images/login-bg.svg) center center no-repeat ;
     background-size: cover;
     overflow: hidden;
 }
@@ -620,6 +620,10 @@ span.item-address {
 .item-status.x span
 {
     background:#97999c;
+}
+.item-status.bl span
+{
+    background:#000000;
 }
 #colorBoard .item-status span
 {
