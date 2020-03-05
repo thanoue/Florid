@@ -40,7 +40,7 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
             });
     }
 
-    constructor(protected activatedRoute: ActivatedRoute) {
+    constructor() {
         const injector = AppInjector.getInjector();
         this.globalService = injector.get(GlobalService);
         this.authService = injector.get(AuthService);

@@ -22,6 +22,7 @@ import * as firebase from 'firebase/app';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
 import { OrdersManageComponent } from './components/orders-manage/orders-manage.component';
+import { AddOrderComponent } from './components/add-order/add-order.component';
 
 declare function getFirebaseConfig(): any;
 
@@ -35,6 +36,7 @@ declare function getFirebaseConfig(): any;
     InvalidTypeDirective,
     InvalidmessageDirective,
     OrdersManageComponent,
+    AddOrderComponent,
   ],
   imports: [
     BrowserModule,

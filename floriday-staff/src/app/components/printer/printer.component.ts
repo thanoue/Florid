@@ -18,8 +18,8 @@ export class PrinterComponent extends BaseComponent {
   Title = '';
   NavigateClass = '';
 
-  constructor(private router: Router, protected activatedRoute: ActivatedRoute, private receiptService: ReceiptService) {
-    super(activatedRoute);
+  constructor(private router: Router, private receiptService: ReceiptService) {
+    super();
   }
 
   protected Init() {
