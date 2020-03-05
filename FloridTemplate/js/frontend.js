@@ -28,7 +28,7 @@ jQuery(document).ready(function(){
         });
   
     });
-    jQuery(".popup-content img.item-detail-thumb").click(function(){
+    jQuery("#deliConfirm img.item-detail-thumb").click(function(){
         var imgSource = jQuery(this).attr("src");
         appendInBody();
         jQuery("body").append("<div class='popup-image'><img src='"+ imgSource +"'></div>");
@@ -86,7 +86,7 @@ function openOrderMenu(){
             case '1' : window.location = '#'+index; break;
             case '2' : window.location = '#'+index; break;
             case '3' : window.location = '#'+index; break;
-            case '4' : openProductDetail();
+            case '4' : window.location = './chi-tiet.html?'+index; break;
         }
     });
 }
@@ -139,6 +139,41 @@ function openCompMenu()
         switch(index)
         {
             case '0' : alert("Hoàn thành đơn"); break;
+            case '1' : window.location = './chi-tiet.html'; break;
+        }
+    });
+}
+
+// Menu tiến độ
+function openProgMenu2()
+{
+    var html = `<div class="actionMenu">
+        <ul>
+            <li><a class="menu-item-dynamic" data-index="0" href="javascript:void(0)">Nhận giao đơn</a></li>
+            <li><a  class="menu-item-dynamic" data-index="1"  href="javascript:void(0)">Chi tiết sản phẩm</a></li>
+        </ul>
+        </div>`;
+    slideUp(html,function(index){
+        switch(index)
+        {
+            case '0' : alert("Nhận giao"); break;
+            case '1' : window.location = './chi-tiet.html'; break;
+        }
+    });
+}
+// Menu hoàn thành đơn
+function openCompMenu2()
+{
+    var html = `<div class="actionMenu">
+        <ul>
+            <li><a class="menu-item-dynamic" data-index="0" href="javascript:void(0)">Hoàn thành giao</a></li>
+            <li><a  class="menu-item-dynamic" data-index="1"  href="javascript:void(0)">Chi tiết sản phẩm</a></li>
+        </ul>
+        </div>`;
+    slideUp(html,function(index){
+        switch(index)
+        {
+            case '0' : alert("Hoàn thành giao"); break;
             case '1' : window.location = './chi-tiet.html'; break;
         }
     });
@@ -235,10 +270,10 @@ function openQR()
 function openLoginError()
 {
     var html = `<div id="loginerror" class="popup-content">
-            <img src="./images/success.png" alt="">
-            <p>XÁC NHẬN</p>
-            <span>Thanh toán thành công</span>
-        </div>`;
+    <img src="./images/alert.png" alt="">
+    <p>ĐĂNG NHẬP LỖI</p>
+    <span>Nhập sai mật khẩu hoặc số điện thoại<br/>Vui lòng nhập lại</span>
+</div>`;
     popUp(html);    
 }
 
