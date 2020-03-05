@@ -34,7 +34,7 @@
                     <a href="./them-don.html" class="btn main-btn">Thêm đơn</a>
                 </div>
                 <div class="col-2 order-noti text-right">
-                    <a href="./xac-nhan-don.html"><img src="./images/noti.png" alt="" class="main-filter"><span class="noti-count">20</span></a>
+                    <a href="./thong-bao.html"><img src="./images/noti.png" alt="" class="main-filter"><span class="noti-count">20</span></a>
                 </div>
             </div>
         </div>
@@ -66,49 +66,49 @@
                             <ul class="order-product-list cusScroll">
                                 <li class="order-product-item">
                                     <div class="item-status r" onclick="openColorBoard()"><span>1</span></div>
-                                    <div class="item-detail">
-                                        <a href="./chi-tiet.html" class="absLink"></a>
+                                    <div class="item-detail" onclick="openOrderMenu()">
                                         <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
                                         <div class="item-detail-info">
                                             <h5 class="item-code">Mã SP: 003</h5>
                                             <span class="item-quantity">Số lượng: 1</span>
                                             <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí Minh</span>
+                                            <span class="item-time">17:30</span>  <span class="item-date">12/02/2020</span>
                                         </div>
                                     </div>
                                 </li>
                                 <li class="order-product-item">
                                     <div class="item-status g" onclick="openColorBoard()"><span>2</span></div>
-                                    <div class="item-detail">
-                                        <a href="./chi-tiet.html" class="absLink"></a>
+                                    <div class="item-detail" onclick="openOrderMenu()">
                                         <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
                                         <div class="item-detail-info">
-                                            <h5 class="item-code">Mã SP: 004</h5>
-                                            <span class="item-quantity">Số lượng: 3</span>
+                                            <h5 class="item-code">Mã SP: 003</h5>
+                                            <span class="item-quantity">Số lượng: 1</span>
                                             <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí Minh</span>
+                                            <span class="item-time">17:30</span>  <span class="item-date">12/02/2020</span>
                                         </div>
                                     </div>
                                 </li>
                                 <li class="order-product-item">
-                                    <div class="item-status y" onclick="openColorBoard()"><span>3</span></div>
-                                    <div class="item-detail">
-                                        <a href="./chi-tiet.html" class="absLink"></a>
+                                    <div class="item-status gr" onclick="openColorBoard()"><span>3</span></div>
+                                    <div class="item-detail" onclick="openOrderMenu()">
                                         <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
                                         <div class="item-detail-info">
-                                            <h5 class="item-code">Mã SP: 002</h5>
+                                            <h5 class="item-code">Mã SP: 003</h5>
                                             <span class="item-quantity">Số lượng: 1</span>
                                             <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí Minh</span>
+                                            <span class="item-time">17:30</span>  <span class="item-date">12/02/2020</span>
                                         </div>
                                     </div>
                                 </li>
                                 <li class="order-product-item">
                                     <div class="item-status y" onclick="openColorBoard()"><span>4</span></div>
-                                    <div class="item-detail">
-                                        <a href="./chi-tiet.html" class="absLink"></a>
+                                    <div class="item-detail" onclick="openOrderMenu()">
                                         <img src="./images/product-img.jpg" alt="" class="item-detail-thumb">
                                         <div class="item-detail-info">
-                                            <h5 class="item-code">Mã SP: 002</h5>
+                                            <h5 class="item-code">Mã SP: 003</h5>
                                             <span class="item-quantity">Số lượng: 1</span>
                                             <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí Minh</span>
+                                            <span class="item-time">17:30</span>  <span class="item-date">12/02/2020</span>
                                         </div>
                                     </div>
                                 </li>
@@ -220,33 +220,15 @@
     <!-- Bảng màu -->
     <div id="colorBoard" class="popup-content">
         <ul class="colorList">
-            <li class="colorItem">
+            <li class="colorInfo colorItem">
                 <div class="item-status r"><span></span></div>
                 <label>Đang chờ</label>
             </li>
-            <li class="colorItem">
-                <div class="item-status o"><span></span></div>
-                <label>Đang thực hiện</label>
+            <li class="colorInfo">
+                <label>Người cắm hoa: </label><span>Nguyễn Văn A</span>
             </li>
-            <li class="colorItem">
-                <div class="item-status y"><span></span></div>
-                <label>Đang xác nhận</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status p"><span></span></div>
-                <label>Chờ giao</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status b"><span></span></div>
-                <label>Đang giao</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status g"><span></span></div>
-                <label>Hoàn thành</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status x"><span></span></div>
-                <label>Đã hủy</label>
+            <li class="colorInfo">
+                <label>Người giao hoa: </label><span>Lê Thị Bình</span>
             </li>
         </ul>
     </div>
