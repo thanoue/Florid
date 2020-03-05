@@ -1514,10 +1514,10 @@ ul.viewedList li.viewItem span:last-child
     margin-top: 0;
     padding: 10px;
 }
-.popup-content.prodDetail .prodInfo {
+#orderConfirm .prodDetail .prodInfo {
     height: 245px;
 }
-#deliConfirm.popup-content.prodDetail .prodInfo {
+#deliConfirm .prodDetail .prodInfo{
     height: 190px;
 }
 .popup-image {

@@ -28,7 +28,7 @@ jQuery(document).ready(function(){
         });
   
     });
-    jQuery(".popup-content img.item-detail-thumb").click(function(){
+    jQuery("#deliConfirm img.item-detail-thumb").click(function(){
         var imgSource = jQuery(this).attr("src");
         appendInBody();
         jQuery("body").append("<div class='popup-image'><img src='"+ imgSource +"'></div>");
