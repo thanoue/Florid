@@ -19,7 +19,7 @@ export class LoginComponent extends BaseComponent {
   model: LoginModel = new LoginModel();
 
   constructor(private router: Router, protected activatedRoute: ActivatedRoute) {
-    super(activatedRoute);
+    super();
   }
 
   protected Init() {

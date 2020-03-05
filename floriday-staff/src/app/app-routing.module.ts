@@ -7,6 +7,7 @@ import { PrinterComponent } from './components/printer/printer.component';
 import { HomeComponent } from './components/home/home.component';
 import { OrdersManageComponent } from './components/orders-manage/orders-manage.component';
 import { RouteModel } from './models/view.models/route.model';
+import { AddOrderComponent } from './components/add-order/add-order.component';
 
 const routes: Routes = [
 
@@ -24,9 +25,14 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
-      }, {
+      },
+      {
         path: 'orders-manager',
         component: OrdersManageComponent,
+      },
+      {
+        path: 'add-order',
+        component: AddOrderComponent,
       }
     ]
   }

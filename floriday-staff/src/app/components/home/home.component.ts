@@ -20,7 +20,7 @@ export class HomeComponent extends BaseComponent {
   }
 
   constructor(private router: Router, protected activatedRoute: ActivatedRoute) {
-    super(activatedRoute);
+    super();
   }
 
   protected Init() {

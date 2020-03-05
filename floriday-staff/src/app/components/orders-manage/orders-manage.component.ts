@@ -21,7 +21,7 @@ export class OrdersManageComponent extends BaseComponent {
 
 
   constructor(protected activatedRoute: ActivatedRoute, private router: Router) {
-    super(activatedRoute);
+    super();
   }
   protected OnNavigateClick() {
     this.router.navigate(['']);
