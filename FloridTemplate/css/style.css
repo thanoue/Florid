@@ -437,6 +437,7 @@ ul.order-content {
     float: left;
     height: 50px;
 }
+
 .order-content-item .item-top .item-code {
     width: 28%;
     text-align: center;
@@ -467,6 +468,7 @@ ul.order-content {
     -webkit-line-clamp: 1;
     height: 18px;
 }
+
 .order-content-item .item-top .item-info span.item-price{
     float: left;
     font-size: 13px;
@@ -501,9 +503,7 @@ ul.order-content {
     content: "\f105";
     font-family: fontawesome;
     font-size: 18px;
-    color: #fff;
-    
-}
+    color: #fff;}
 .item-bot {
     width: 100%;
     float: left;
@@ -511,7 +511,7 @@ ul.order-content {
 .item-bot ul.order-product-list {
     list-style: none;
     padding: 0 10px;
-    height: 300px;
+    max-height: 300px;
     overflow-y: scroll;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -534,7 +534,12 @@ li.order-product-item .item-status {
         -ms-flex-align: center;
             align-items: center;
 }
-li.order-product-item .item-detail  
+.product-item .item-status {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+.item-detail  
 {
     width: calc(100% - 40px);
     border: 1px solid #999;
@@ -562,7 +567,6 @@ h5.prodCode {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 0;
-    padding-top: 10px;
     color: #999;
 }
 span.item-quantity,
@@ -635,14 +639,20 @@ div#colorBoard
     font-size: 14px;
     margin-bottom: 0;
 }
-#colorBoard li.colorItem {
-    margin-bottom: 20px;
+#colorBoard .colorInfo label + span {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+#colorBoard li.colorInfo {
+    margin-bottom: 15px;
+}
+#colorBoard li.colorInfo.colorItem
+{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
 }
 div.actionMenu {
     text-align: left;
@@ -1115,41 +1125,48 @@ span.prodCharge {
         align-content: center;
         color: #fff;
 }
-.vatStatus p,.vatStatus a 
+.vatStatus p
 {
     display: inline-block;
     margin-bottom: 0;
 }
-.vatStatus a {
-    height: 30px;
-    width: 60px;
-    margin-left: 15px;
-    border-radius: 15px;
+.vatScope 
+{
     position: relative;
-    transition: 350ms;
-    background: #fff;
+    width: 20px;
+    margin-left: 20px;
+    height: 20px;
 }
-.vatStatus.on a 
-{
-    background-image: -o-linear-gradient(45deg, var(--main-blue),var(--main-green));
-    background-image: linear-gradient(45deg, var(--main-blue),var(--main-green));
-}
-.vatStatus a span {
-    content: "";
-    width: 24px;
-    height: 24px;
-    background: var(--main-grey);
+input#vatInclude {
+    width: 20px;
+    height: 20px;
     position: absolute;
-    top: 3px;
-    left: 3px;
-    border-radius: 50%;
-    transition: 350ms;
+    z-index: 1;
+    opacity: 0;
 }
-.vatStatus.on a span 
+span.main-bg.vatCustom {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 0;
+}
+span.main-bg.vatCustom::before {
+    content: "\f00c";
+    font-family: fontawesome;
+    position: absolute;
+    top: -2px;
+    right: 2px;
+    color: #fff;
+    display: none;
+}
+input#vatInclude:checked + span.vatCustom.main-bg 
 {
-    left: auto;
-    right: 3px;
-    background: #fff;
+    background:var(--main-green);
+}
+input#vatInclude:checked + span.vatCustom.main-bg::before
+{
+    display: block;
 }
 .orderTotal {
     background: #fff;
@@ -1284,7 +1301,7 @@ span.prodCharge {
     display: block;
 }
 /* ===============================================ORDER LIST */
-#listContent .item-bot ul.order-product-list {
+.product-item .item-bot ul.order-product-list {
     height: auto;
     overflow: hidden;
 }
@@ -1321,25 +1338,37 @@ ul#listNav.nav-tabs {
     background-image: linear-gradient(45deg, var(--main-blue),var(--main-green));
     color: #fff;
 }
-#listContent h5.item-code
-{
-    padding-top: 0;
+.product-item .item-bot ul.order-product-list li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 10px;
 }
-.order-content-item .item-top button.navOrder
-{
-    width: 15px;
-    height: 15px;
-    right: 10px;
+.changeOrder {
+    width: 40px;
+    overflow: hidden;
 }
-.order-content-item .item-top button.navOrder:before 
-{
-    font-size: 10px;
+.changeOrder button.navOrder {
+    width: 30px;
+    height: 30px;
+    margin: 2px 0;
+    font-size: 0;
+    border-radius: 50%;
+    border: none;
+    background: var(--main-grey);
+    font-family: fontawesome;
 }
-.order-content-item .item-top button.navOrder.inOrder::before
+button.navOrder:before 
 {
-    content: "\f104";
+    font-size: 18px;
+    content: "\f107";
+    color: #fff;
 }
-.order-content-item .item-top button.navOrder.deOrder
+button.navOrder.inOrder::before
+{
+    content: "\f106";
+}
+button.navOrder.deOrder
 {
     top: 27px;
 }
@@ -1355,6 +1384,18 @@ a.absLink {
     height: 100%;
     top: 0;
     left: 0;
+}
+.product-item .item-detail {
+    height: auto;
+    width: 100%;
+    
+    margin-left: 10px;
+}
+.product-item img.item-detail-thumb {
+    height: 105px;
+}
+#listContent ul.order-content {
+    height: 500px;
 }
 /* ==============================================PRODUCT DETAIL */
 .prodDetail 
@@ -1450,16 +1491,17 @@ ul.viewedList li.viewItem {
     border-bottom: 1px solid #ddd;
     position: relative;
 }
-ul.viewedList li.viewItem:before 
-{
-    content: "\f2bd";
-    font-family: fontawesome;
-    margin-right: 5px;
+ul.viewedList li.viewItem img.itemAva {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    display: inline-block;
+    margin-right: 10px;
 }
-ul.viewedList li.viewItem span:first-child
+ul.viewedList li.viewItem span
 {
     display: inline-block;
-    width: 70%;
+    width: 50%;
 }
 ul.viewedList li.viewItem span:last-child
 {
