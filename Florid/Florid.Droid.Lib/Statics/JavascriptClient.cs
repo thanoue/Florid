@@ -15,6 +15,7 @@ namespace Florid.Droid.Lib.Static
         Action<EntityType,string> _insertData;
         public Action<bool> SetPrimaryDarkStatusBar;
         public Action<string> DoPrintJob;
+        public Action<Action<string>> RequestInputDialog; 
         Activity _activity;
         Action _documentReady;
         
@@ -29,6 +30,8 @@ namespace Florid.Droid.Lib.Static
         {
             _documentReady = documentReady;
         }
+
+
 
         [Android.Webkit.JavascriptInterface]
         [Export("doPrintJob")]
@@ -88,6 +91,13 @@ namespace Florid.Droid.Lib.Static
 
             return JsonConvert.SerializeObject(config); 
         }
+
+        //[Android.Webkit.JavascriptInterface]
+        //[Export("getInput")]
+        //public  void GetInput(Action<string> resCallback)
+        //{
+        //    RequestInputDialog?.Invoke(resCallback);
+        //}
 
 
     }

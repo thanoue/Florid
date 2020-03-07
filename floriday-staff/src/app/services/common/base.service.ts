@@ -1,33 +1,32 @@
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
 import { AppInjector } from './base.injector';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { GlobalService } from './global.service';
-import 'firebase/database';
+import * as firebase from 'firebase';
 import { BaseEntity } from 'src/app/models/entities/base.entity';
 
 export abstract class BaseService<T extends BaseEntity> {
 
+    protected db: firebase.database.Database;
+
     protected globalService: GlobalService;
     protected abstract tablePath(): string;
 
-    constructor(protected db: AngularFireDatabase) {
+    constructor() {
         const injector = AppInjector.getInjector();
         this.globalService = injector.get(GlobalService);
+        this.db = firebase.database();
     }
 
     public insert(model: T): Promise<T> {
 
         this.globalService.startLoading();
 
-        const createRef = this.db.list(this.tablePath()).push(model);
+        const pushRef = this.db.ref(this.tablePath()).push(model);
 
-        const newKey = createRef.key;
+        model.Id = pushRef.key;
 
-        model.Id = newKey;
-
-        return this.update(newKey, model);
-
+        return this.update(model);
     }
 
     async insertList(data: T[]): Promise<T[]> {
@@ -52,29 +51,33 @@ export abstract class BaseService<T extends BaseEntity> {
     }
 
     public getById(id: string): Promise<T> {
+
         this.globalService.startLoading();
 
-        const item = this.db.object<T>(`${this.tablePath()}/${id}`).valueChanges();
+        return this.db.ref(`${this.tablePath()}/${id}`).once('value').then(data => {
 
-        return item.toPromise().then((res) => {
-            this.globalService.stopLoading();
-            return res;
+            return data[0].val() as T;
+
+        }).catch(error => {
+            return null;
         });
+
     }
 
-    public update(key: string, value: T): Promise<T> {
-        return this.db.list(this.tablePath()).update(key, value).then(() => {
+    public update(value: T): Promise<T> {
+
+        return this.db.ref(this.tablePath()).child(value.Id).set(value).then(() => {
 
             this.globalService.stopLoading();
 
             return value;
         });
+
     }
 
-    public delete(key: string): Promise<void> {
-
+    public delete(id: string): Promise<void> {
         this.globalService.startLoading();
-        return this.db.list(this.tablePath()).remove(key).then(() => {
+        return this.db.ref(`${this.tablePath()}/${id}`).remove().then(() => {
             this.globalService.stopLoading();
         });
     }
@@ -82,16 +85,28 @@ export abstract class BaseService<T extends BaseEntity> {
     public getAll(): Promise<T[]> {
 
         this.globalService.startLoading();
-        return this.db.list<T>(this.tablePath()).valueChanges().toPromise().then(res => {
-            this.globalService.stopLoading();
-            return res;
-        });
+
+        return this.db.ref(this.tablePath()).once('value')
+            .then(dataSnapShot => {
+
+                const res: T[] = [];
+                dataSnapShot.forEach(data => {
+                    res.push(data.val() as T);
+                });
+                this.globalService.stopLoading();
+
+                return res;
+            })
+            .catch(error => {
+                this.globalService.stopLoading();
+                return [];
+            });
     }
 
     public deleteAll(): Promise<void> {
 
         this.globalService.startLoading();
-        return this.db.list(this.tablePath()).remove().then(() => {
+        return this.db.ref(this.tablePath()).remove().then(() => {
             this.globalService.stopLoading();
             return;
         });

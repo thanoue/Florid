@@ -22,9 +22,7 @@ export class OrdersManageComponent extends BaseComponent {
 
   constructor(protected activatedRoute: ActivatedRoute, private router: Router) {
     super();
-  }
-  protected OnNavigateClick() {
-    this.router.navigate(['']);
+    this.globalService.currentOrderViewModel = new OrderViewModel();
   }
 
   protected Init() {
@@ -40,7 +38,7 @@ export class OrdersManageComponent extends BaseComponent {
       order.OrderId = `OR0${i}`;
       order.TotalAmount = 800000;
       order.Index = i;
-      order.CustomerName = 'Nguyễn Thị Linh';
+      order.CustomerInfo.Name = 'Nguyễn Thị Linh';
 
       const orderDetais: OrderDetailViewModel[] = [];
 
@@ -48,12 +46,11 @@ export class OrdersManageComponent extends BaseComponent {
 
         const orderDetail = new OrderDetailViewModel();
 
-        orderDetail.DeliveryDate = new Date();
-        orderDetail.DeliveryTime = (new Date()).toTimeString();
+        orderDetail.DeliveryInfo.DateTime = new Date();
         orderDetail.ProductName = 'Hoa 01';
         orderDetail.Quantity = j;
         orderDetail.ProductUrl = '../../../assets/images/product-img.jpg';
-        orderDetail.DeliveryAddress = '200 Dương Đình Hội, Phước Long B';
+        orderDetail.DeliveryInfo.Address = '200 Dương Đình Hội, Phước Long B';
         orderDetail.State = j as OrderDetailStates; // OrderDetailStates.Comfirming;
         orderDetail.Index = j;
         orderDetais.push(orderDetail);

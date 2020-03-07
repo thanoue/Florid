@@ -36,3 +36,11 @@ function callAngularFunction(data) {
     window.angularComponentReference.zone.run(() => { window.angularComponentReference.loadAngularFunction(data); });
 }
 
+function getInput(resCallback) {
+
+    // if (typeof Android !== "undefined" && Android !== null) {
+    //     Android.getInput(function (res) {
+    //         resCallback(res);
+    //     });
+    // }
+}

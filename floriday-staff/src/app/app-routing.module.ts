@@ -8,6 +8,9 @@ import { HomeComponent } from './components/home/home.component';
 import { OrdersManageComponent } from './components/orders-manage/orders-manage.component';
 import { RouteModel } from './models/view.models/route.model';
 import { AddOrderComponent } from './components/add-order/add-order.component';
+import { SelectCustomerComponent } from './components/select-customer/select-customer.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
+import { SelectReceiverComponent } from './components/select-receiver/select-receiver.component';
 
 const routes: Routes = [
 
@@ -20,7 +23,7 @@ const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    canActivate: [LoggedInGuard],
+    // canActivate: [LoggedInGuard],
     children: [
       {
         path: '',
@@ -33,6 +36,22 @@ const routes: Routes = [
       {
         path: 'add-order',
         component: AddOrderComponent,
+      },
+      {
+        path: 'add-order',
+        component: AddOrderComponent,
+      },
+      {
+        path: 'select-customer',
+        component: SelectCustomerComponent,
+      },
+      {
+        path: 'order-detail/:id',
+        component: OrderDetailComponent,
+      },
+      {
+        path: 'select-receiver/:id',
+        component: SelectReceiverComponent,
       }
     ]
   }

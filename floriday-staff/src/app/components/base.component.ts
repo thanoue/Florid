@@ -9,14 +9,16 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { RouteModel } from '../models/view.models/route.model';
 import { map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
+    abstract Title: string;
+    protected NavigateClass = 'prev-icon';
+
     protected globalService: GlobalService;
     protected authService: AuthService;
-
-    abstract Title: string;
-    abstract NavigateClass: string;
+    protected location: Location;
 
     private navigateOnClick: Subscription;
 
@@ -38,12 +40,14 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
                 }
                 this.OnNavigateClick();
             });
+        this.afterViewLoad();
     }
 
     constructor() {
         const injector = AppInjector.getInjector();
         this.globalService = injector.get(GlobalService);
         this.authService = injector.get(AuthService);
+        this.location = injector.get(Location);
     }
 
     protected startLoading() {
@@ -69,6 +73,10 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     protected abstract Init();
 
     protected OnNavigateClick() {
+        this.location.back();
     }
 
+    protected afterViewLoad() {
+
+    }
 }

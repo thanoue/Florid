@@ -5,7 +5,6 @@ export class Order extends BaseEntity {
     CustomerServiceId: string;
     VATIncluded: string;
     TotalAmount: string;
-    TotalBalance: string;
     TotalPaidAmount: string;
 }
 

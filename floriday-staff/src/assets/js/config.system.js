@@ -24,3 +24,7 @@ function setStatusBarColor(isDark) {
 function doPrintJob(url) {
 
 }
+
+function getInput(resCallback) {
+
+}

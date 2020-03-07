@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
+import { OrderViewModel, OrderDetailViewModel } from 'src/app/models/view.models/order.model';
+import { OrderDetailStates } from 'src/app/models/enums';
+import { GlobalService } from 'src/app/services/common/global.service';
 
 @Component({
   selector: 'app-add-order',
@@ -8,15 +11,18 @@ import { BaseComponent } from '../base.component';
 })
 export class AddOrderComponent extends BaseComponent {
 
+  Title = 'Thêm Đơn';
 
-  Title: string;
-  NavigateClass: string;
+  order: OrderViewModel;
+
   protected Init() {
+
+    this.order = this.globalService.currentOrderViewModel;
   }
+
 
   constructor() {
     super();
-
   }
 
 }

@@ -14,8 +14,8 @@ export class ReceiptService extends BaseService<Receipt> {
     return '/receipts';
   }
 
-  constructor(private storageService: StorageService, db: AngularFireDatabase) {
-    super(db);
+  constructor(private storageService: StorageService) {
+    super();
   }
 
   public uploadReceipt(file: File | Blob, receipt: Receipt, updateCompletedCallback: (receiptUrl: string) => void) {

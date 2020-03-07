@@ -1,5 +1,18 @@
 jQuery(document).ready(function () {
     // custom number input
+    jQuery(".popup-content img.item-detail-thumb").click(function () {
+        var imgSource = jQuery(this).attr("src");
+        appendInBody();
+        jQuery("body").append("<div class='popup-image'><img src='" + imgSource + "'></div>");
+        jQuery(".popup-image").show(250);
+        jQuery(".overlay-dark").click(function () {
+            jQuery(".popup-image").remove();
+            jQuery(this).remove();
+        })
+    });
+})
+
+function createNumbericElement() {
     jQuery('<div class="quantity-button quantity-down">-</div>').insertBefore('.prodQuantity input');
     jQuery('<div class="quantity-button quantity-up">+</div>').insertAfter('.prodQuantity input');
     jQuery('.prodQuantity').each(function () {
@@ -28,17 +41,8 @@ jQuery(document).ready(function () {
         });
 
     });
-    jQuery(".popup-content img.item-detail-thumb").click(function () {
-        var imgSource = jQuery(this).attr("src");
-        appendInBody();
-        jQuery("body").append("<div class='popup-image'><img src='" + imgSource + "'></div>");
-        jQuery(".popup-image").show(250);
-        jQuery(".overlay-dark").click(function () {
-            jQuery(".popup-image").remove();
-            jQuery(this).remove();
-        })
-    })
-})
+}
+
 // append 2 element
 function appendInBody() {
     if (jQuery("body").find(".overlay-dark").length) {
@@ -153,14 +157,17 @@ function openCustMenu() {
         var recP = jQuery(this).find(".recentInfo-phone").html();
         var recD = jQuery(this).find(".recentInfo-date").html();
         var recA = jQuery(this).find(".recentInfo-add").html();
-        var infoArray = new Array(recN, recP, recA, recD);
-        var i = 0;
-        jQuery("#recentInfo").slideUp(250, function () {
-            jQuery(".overlay-dark").remove();
-            jQuery(".addInfoForm .form-group").each(function (index, value) {
-                jQuery(value).find("input").val(infoArray[i]); i++;
-            });
-        });
+
+        window.angularComponentReference.zone.run(() => { window.angularComponentReference.loadAngularFunction(jQuery(e).attr('data-id')); });
+
+        // var infoArray = new Array(recN, recP, recA, recD);
+        // var i = 0;
+        // jQuery("#recentInfo").slideUp(250, function () {
+        //     jQuery(".overlay-dark").remove();
+        //     jQuery(".addInfoForm .form-group").each(function (index, value) {
+        //         jQuery(value).find("input").val(infoArray[i]); i++;
+        //     });
+        // });
     });
 
     jQuery(".overlay-dark:not(.layer2)").click(function () {
@@ -263,10 +270,22 @@ function openAddInfo() {
     appendInBody();
     jQuery("#infoAdd").fadeIn(350);
 
-    jQuery(".overlay-dark:not(.layer2)").click(function () {
+    jQuery(".overlay-dark:not(.layer2)").one('click', function () {
         jQuery("#infoAdd").hide(250, function () {
             jQuery(".overlay-dark").remove();
         });
+    });
+
+    jQuery('#infoAdd #cancel-button').on('click', function () {
+        jQuery("#infoAdd").hide(250, function () {
+            jQuery(".overlay-dark").remove();
+        });
+    });
+}
+
+function closeAddCustomerDialog() {
+    jQuery("#infoAdd").hide(250, function () {
+        jQuery(".overlay-dark").remove();
     });
 }
 
@@ -345,3 +364,25 @@ function changeVAT() {
         });
     }
 }
+
+function selectItem(e, className) {
+
+    jQuery(className).removeClass('selected');
+
+    jQuery(e).addClass('selected');
+
+    window.angularComponentReference.zone.run(() => { window.angularComponentReference.loadAngularFunction(jQuery(e).attr('data-id')); });
+
+}
+
+function setSelectedCustomerItem(id) {
+    jQuery('#customer-list').each(function () {
+        jQuery(this).find('.customer-item').each(function () {
+            let itemId = jQuery(this).attr('data-id');
+            console.log(itemId);
+            if (itemId === id) {
+                jQuery(this).addClass('selected');
+            }
+        })
+    })
+}   

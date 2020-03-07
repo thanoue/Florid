@@ -71,7 +71,12 @@ namespace Florid.Staff.Droid.Activity
                         break;
                 }
             });
-                
+
+            javascriptClient.RequestInputDialog = (callback) =>
+            {
+                callback?.Invoke("test from android");
+            };
+
             javascriptClient.SetPrimaryDarkStatusBar = (isDark) =>
             {
                 SetStatusBarColor(isDark);
@@ -83,7 +88,7 @@ namespace Florid.Staff.Droid.Activity
             };
 
             _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
-            _mainWebView.LoadUrl("https://floridstaff.firebaseapp.com");
+            _mainWebView.LoadUrl("http://192.168.1.25:5000");
 
             SetStatusBarColor(true);
 

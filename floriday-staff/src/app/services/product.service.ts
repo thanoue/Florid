@@ -1,11 +1,11 @@
 import { BaseService } from './common/base.service';
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product';
 
 import { from } from 'rxjs';
 import { promise } from 'protractor';
 import 'firebase/database';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { Product } from '../models/entities/product.entity';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +16,7 @@ export class ProductService extends BaseService<Product> {
         return '/products';
     }
 
-    constructor(db: AngularFireDatabase) {
-        super(db);
+    constructor() {
+        super();
     }
 }
