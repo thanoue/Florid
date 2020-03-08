@@ -23,17 +23,19 @@ export class OrderDetailComponent extends BaseComponent {
 
     this.orderDetail = new OrderDetailViewModel();
 
-    // get URL parameters
     this.route.params.subscribe(params => {
-      const index = params.id; // --> Name must match wanted parameter
+      const index = params.id;
       this.detailIndex = index;
-      if (index > -1) {
-        this.orderDetail = this.globalService.currentOrderViewModel.OrderDetails[index];
-      }
+      this.orderDetail = this.globalService.currentOrderViewModel.OrderDetails[index];
     });
 
     createNumbericElement();
 
+  }
+
+  protected OnNavigateClick() {
+    this.globalService.currentOrderViewModel.OrderDetails.pop();
+    super.OnNavigateClick();
   }
 
   constructor(private route: ActivatedRoute) {
@@ -46,7 +48,5 @@ export class OrderDetailComponent extends BaseComponent {
       this.orderDetail.ModifiedPrice = res as unknown as number;
     });
   }
-
-
 
 }

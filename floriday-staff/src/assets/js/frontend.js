@@ -148,32 +148,27 @@ function openCompMenu() {
 
 // Menu Danh sách Khách hàng
 function openCustMenu() {
+
     appendInBody();
     jQuery("#recentInfo").slideDown(350);
-
-    //click vào menu
-    jQuery(document).on('click', '#recentInfo ul li', function () {
-        var recN = jQuery(this).find(".recentInfo-name").html();
-        var recP = jQuery(this).find(".recentInfo-phone").html();
-        var recD = jQuery(this).find(".recentInfo-date").html();
-        var recA = jQuery(this).find(".recentInfo-add").html();
-
-        window.angularComponentReference.zone.run(() => { window.angularComponentReference.loadAngularFunction(jQuery(e).attr('data-id')); });
-
-        // var infoArray = new Array(recN, recP, recA, recD);
-        // var i = 0;
-        // jQuery("#recentInfo").slideUp(250, function () {
-        //     jQuery(".overlay-dark").remove();
-        //     jQuery(".addInfoForm .form-group").each(function (index, value) {
-        //         jQuery(value).find("input").val(infoArray[i]); i++;
-        //     });
-        // });
-    });
 
     jQuery(".overlay-dark:not(.layer2)").click(function () {
         jQuery("#recentInfo").slideUp(250, function () {
             jQuery(".overlay-dark").remove();
         });
+    });
+}
+
+function selectSavedDeliveryInfo(e) {
+
+    let index = parseInt(jQuery(e).attr('data-index'));
+    console.log('frontend', index);
+    console.log('frontend');
+
+    window.angularComponentReference.zone.run(() => { window.angularComponentReference.loadAngularFunction(index); });
+
+    jQuery("#recentInfo").slideUp(250, function () {
+        jQuery(".overlay-dark").remove();
     });
 }
 
@@ -379,7 +374,6 @@ function setSelectedCustomerItem(id) {
     jQuery('#customer-list').each(function () {
         jQuery(this).find('.customer-item').each(function () {
             let itemId = jQuery(this).attr('data-id');
-            console.log(itemId);
             if (itemId === id) {
                 jQuery(this).addClass('selected');
             }

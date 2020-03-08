@@ -7,7 +7,7 @@
                         (-{{order.CustomerInfo.DiscountPercent}}%)</span></a>
             </div>
             <div class="col-3 prodAdd text-right">
-                <a [routerLink]="['/order-detail', -1]" class="main-bg"><img src="../../../assets/images/add.svg" alt=""
+                <a (click)="addNewOrderDetail()" class="main-bg"><img src="../../../assets/images/add.svg" alt=""
                         class="main-filter"></a>
             </div>
         </div>

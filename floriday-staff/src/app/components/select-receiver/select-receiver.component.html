@@ -7,7 +7,7 @@
                         src="../../../assets/images/view.svg" class="white-filter"></a>
             </div>
             <div class="newInfo">
-                <form action="./xac-nhan.html" class="addInfoForm">
+                <form #form="ngForm" (submit)="addReceiver(form)" autocomplete="on" class="addInfoForm">
                     <div class="form-group">
                         <input type="text" name="Name" [(ngModel)]="deliveryInfo.Name" id="Name" required minlength="5"
                             value="" class="mainForm" placeholder="Tên..." #Name="ngModel">
@@ -65,7 +65,8 @@
 </div>
 <div class="actionMenu" id="recentInfo">
     <ul>
-        <li #ngFor="let receiverInfo of currentList; let i = index" [attr.data-index]="i">
+        <li *ngFor="let receiverInfo of currentList; let i = index" onclick="selectSavedDeliveryInfo(this)"
+            [attr.data-index]="i">
             <p class="recentInfo-name">{{receiverInfo.Name}}</p>
             <span class="recentInfo-phone">{{receiverInfo.PhoneNumber}}</span>
             <span class="recentInfo-date">{{deliveryInfo.DateTime | date: 'HH:MM dd/MM/yyyy'}}</span>

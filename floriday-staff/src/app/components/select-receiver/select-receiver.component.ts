@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { OrderDetailDeliveryInfo } from 'src/app/models/view.models/order.model';
 import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-select-receiver',
@@ -14,6 +15,7 @@ export class SelectReceiverComponent extends BaseComponent {
 
   currentList: OrderDetailDeliveryInfo[];
   deliveryInfo: OrderDetailDeliveryInfo;
+  orderDetailIndex = -1;
 
   protected Init() {
 
@@ -21,7 +23,7 @@ export class SelectReceiverComponent extends BaseComponent {
 
     window[key] = {
       component: this, zone: this._ngZone,
-      loadAngularFunction: (data) => this.setSelectedCustomer(data)
+      loadAngularFunction: (data) => this.selectReceiver(data)
     };
 
 
@@ -34,16 +36,27 @@ export class SelectReceiverComponent extends BaseComponent {
     });
 
     this.route.params.subscribe(params => {
-      const index = params.id; // --> Name must match wanted parameter
-      if (index > -1) {
-        this.deliveryInfo = this.globalService.currentOrderViewModel.OrderDetails[index].DeliveryInfo;
-      }
+      const index = params.id;
+      this.orderDetailIndex = index;
+      this.deliveryInfo = Object.assign(this.deliveryInfo, this.globalService.currentOrderViewModel.OrderDetails[index].DeliveryInfo);
     });
-
 
   }
 
-  constructor(private route: ActivatedRoute) {
+  selectReceiver(index: number) {
+    console.log(index);
+    Object.assign(this.deliveryInfo, this.currentList[index]);
+  }
+
+  addReceiver(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+    this.globalService.currentOrderViewModel.OrderDetails[this.orderDetailIndex].DeliveryInfo = this.deliveryInfo;
+    super.OnNavigateClick();
+  }
+
+  constructor(private route: ActivatedRoute, private _ngZone: NgZone) {
     super();
   }
 
