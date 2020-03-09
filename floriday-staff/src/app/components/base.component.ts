@@ -11,6 +11,7 @@ import { map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 
+
 export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
     abstract Title: string;
@@ -22,7 +23,10 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
     private navigateOnClick: Subscription;
 
+    IsOnTerminal: boolean;
+
     ngOnInit(): void {
+        this.IsOnTerminal = this.globalService.isRunOnTerimal();
         this.Init();
     }
 

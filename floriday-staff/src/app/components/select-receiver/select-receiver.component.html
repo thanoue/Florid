@@ -46,12 +46,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" disabled value="{{deliveryInfo.DateTime | date: 'dd/MM/yyyy'}}"
-                            class="mainForm" placeholder="Ngày giao...">
+                        <input type="text" (click)="requestDatepicker()" readonly
+                            value="{{currDeliveryDate | date: 'dd/MM/yyyy'}}" class="mainForm">
                     </div>
                     <div class="form-group">
-                        <input type="text" value="{{deliveryInfo.DateTime | date: 'HH:MM'}}" disabled class="mainForm"
-                            placeholder="Giờ giao...">
+                        <input type="text" (click)="requestTimepicker()" value="{{currDeliveryTime}}" readonly
+                            class="mainForm" placeholder="Giờ giao...">
                     </div>
                     <div class="row">
                         <div class="col-8 mx-auto text-center">

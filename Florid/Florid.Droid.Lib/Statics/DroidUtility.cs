@@ -1,6 +1,9 @@
-﻿using Android.Graphics;
+﻿using System;
+using Android.Graphics;
+using Android.OS;
+using Android.Webkit;
 
-namespace Florid.Staff.Droid.Static
+namespace Florid.Staff.Droid
 { 
 
     public static class DroidUtility
@@ -37,6 +40,37 @@ namespace Florid.Staff.Droid.Static
             }
 
             return resizedBitmap;
+        }
+
+        public static void ExecJavaScript(WebView webView, string jscode)
+        {
+            if (webView != null)
+            {
+                webView.Post(() =>
+                {
+                    try
+                    {
+                        if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
+                        {
+                            webView.EvaluateJavascript(jscode, null);
+                        }
+                        else
+                        {
+                            webView.LoadUrl("javascript:" + jscode);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        // TODO: How to handle exceptions?
+                    }
+                }
+                );
+            }
+            else
+            {
+                throw new NullReferenceException("WebView is null!");
+            }
+
         }
 
     }

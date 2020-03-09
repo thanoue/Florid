@@ -162,10 +162,8 @@ function openCustMenu() {
 function selectSavedDeliveryInfo(e) {
 
     let index = parseInt(jQuery(e).attr('data-index'));
-    console.log('frontend', index);
-    console.log('frontend');
 
-    window.angularComponentReference.zone.run(() => { window.angularComponentReference.loadAngularFunction(index); });
+    window.angularComponentReference.zone.run(() => { window.angularComponentReference.selectDeliveryInfo(index); });
 
     jQuery("#recentInfo").slideUp(250, function () {
         jQuery(".overlay-dark").remove();

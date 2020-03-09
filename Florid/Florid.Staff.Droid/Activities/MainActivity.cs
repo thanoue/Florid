@@ -1,33 +1,16 @@
 ﻿using Android.App;
 using Android.OS;
-using Android.Support.V7.App;
-using Android.Widget;
-using Android.Util;
-using Firebase.Iid;
-using Firebase.Messaging;
-using Android.Gms.Common;
-using Firebase.Database;
 using Florid.Entity;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using Firebase.Database.Query;
-using Florid.Core.Service;
-using Florid.Core;
 using Android.Views;
 using Android.Webkit;
 using Florid.Droid.Lib.Static;
 using Newtonsoft.Json;
 using Florid.Model;
 using Android.Graphics;
-using System.IO;
-using Java.Net;
-using Firebase.Storage;
-using static Firebase.Storage.StreamDownloadTask;
 using System;
-using Florid.Staff.Droid.Static;
-using System.Threading;
-using Florid.Staff.Droid.Services;
+using Java.Util;
+using Florent37.SingleDateAndTimePickerLib.Dialogs;
+using Florid.Droid.Lib;
 
 namespace Florid.Staff.Droid.Activity
 {
@@ -50,32 +33,15 @@ namespace Florid.Staff.Droid.Activity
             settings.JavaScriptEnabled = true;
             settings.SetEnableSmoothTransition(true);
             settings.DomStorageEnabled = true;
-            settings.SetSupportZoom(true);
+            settings.SetSupportZoom(false);
 
             _mainWebView.SetWebViewClient(new WebViewClient());
-            _mainWebView.SetWebChromeClient(new WebChromeClient());
+            _mainWebView.SetWebChromeClient(new MyWebChromeClient());
 
-            var javascriptClient = new JavascriptClient(this, (email, password) =>
+            var javascriptClient = new JavascriptClient(this,_mainWebView, (email, password) =>
             {
 
-            }, (type, data) =>
-            {
-
-                switch (type)
-                {
-                    case EntityType.User:
-                        var user = (JsonConvert.DeserializeObject<GenericModel<User>>(data)).Data;
-
-                        break;
-                    default:
-                        break;
-                }
             });
-
-            javascriptClient.RequestInputDialog = (callback) =>
-            {
-                callback?.Invoke("test from android");
-            };
 
             javascriptClient.SetPrimaryDarkStatusBar = (isDark) =>
             {
@@ -88,16 +54,26 @@ namespace Florid.Staff.Droid.Activity
             };
 
             _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
-            _mainWebView.LoadUrl("http://192.168.1.25:5000");
+            _mainWebView.LoadUrl("http://192.168.1.23:4200");
+
+#if DEBUG
+            WebView.SetWebContentsDebuggingEnabled(true);
+#endif
 
             SetStatusBarColor(true);
 
 
             //MainApp.ConnectToBluetoothDevice( "DC:0D:30:2F:49:8F", (isSuccess) =>
             //{
-              
+
             //});
         }
 
+
+
+
     }
+
+
+
 }

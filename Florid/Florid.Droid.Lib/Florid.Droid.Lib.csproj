@@ -58,6 +58,9 @@
     <Compile Include="Services\DroidSecure.cs" />
     <Compile Include="Services\DroidContext.cs" />
     <Compile Include="Widgets\CustomWebView.cs" />
+    <Compile Include="Statics\DatetimePickerCallback.cs" />
+    <Compile Include="Statics\UtilEnums.cs" />
+    <Compile Include="Statics\MyWebChromeClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -72,6 +75,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Karamunting.Android.Florent37.SingleDateAndTimePicker">
+      <Version>2.1.5</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

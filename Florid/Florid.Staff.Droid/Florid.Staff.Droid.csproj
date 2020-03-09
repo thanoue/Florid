@@ -126,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="CustomImpl\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FirebaseDatabase.net">
@@ -188,6 +189,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Karamunting.Android.Florent37.SingleDateAndTimePicker">
+      <Version>2.1.5</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
