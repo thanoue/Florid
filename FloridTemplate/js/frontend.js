@@ -350,6 +350,19 @@ function openViewed()
     });
 }
 
+// Thêm thông tin
+function openExcForm(){
+    appendInBody();
+    jQuery("#exchangeAdd").fadeIn(350); 
+
+    jQuery(".overlay-dark:not(.layer2)").click(function(){
+        jQuery("#exchangeAdd").hide(250,function(){
+            jQuery(".overlay-dark").remove();
+        });
+    });
+}
+
+
 // Popup thông báo
 function popUp(html){
     appendInBody();
