@@ -22,9 +22,6 @@ namespace Florid.Droid.Lib.Static
 
         public Action<bool> SetPrimaryDarkStatusBar;
         public Action<string> DoPrintJob;
-        public Action<int,int,int> RequestDatePicker;
-        public Action<int,int> RequestTimePicker;
-        public Action<int,int,int,int,int> RequestDateTimePicker;
      
         public JavascriptClient(Activity activity,WebView webview,Action<string, string> login)
         {
@@ -111,24 +108,31 @@ namespace Florid.Droid.Lib.Static
         {
             _activity.RunOnUiThread(() =>
             {
+                var datetime = new DateTime(year, month + 1 , day, hour, minute, 0, 0);
+                var cal = ConvertToCalendar(datetime);
+
                 var dialog = new SingleDateAndTimePickerDialog.Builder(_activity)
                            .Title("DateTime Chooosing")
+                           .DefaultDate(cal.Time)
                            .Listener(new DatetimePickerCallback(_mainWebView, DialogStyle.DateTime))
                            .TitleTextColor(Color.White)
                            .MainColor(_activity.Resources.GetColor(Resource.Color.colorPrimary))
                            .DisplayHours(true)
                            .DisplayMinutes(true)
                            .DisplayAmPm(true)
-                           .DisplayDays(true)
-                           .DisplayYears(true)
-                           .DisplayMonth(true)
-                           .DisplayDaysOfMonth(true)
                            .Curved()
                            .CustomLocale(new Locale("vi"))
                            .MinutesStep(5);
                
                 dialog.Display();
             });
+        }
+
+        public static Calendar ConvertToCalendar(DateTime date)
+        {
+            Calendar calendar = Calendar.Instance;
+            calendar.Set(date.Year, date.Month -1, date.Day, date.Hour, date.Minute, date.Second);
+            return calendar;
         }
 
         [Android.Webkit.JavascriptInterface]

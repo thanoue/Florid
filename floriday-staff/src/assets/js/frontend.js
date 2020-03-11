@@ -163,7 +163,7 @@ function selectSavedDeliveryInfo(e) {
 
     let index = parseInt(jQuery(e).attr('data-index'));
 
-    window.angularComponentReference.zone.run(() => { window.angularComponentReference.selectDeliveryInfo(index); });
+    window.DeliveryInfoReference.zone.run(() => { window.DeliveryInfoReference.selectDeliveryInfo(index); });
 
     jQuery("#recentInfo").slideUp(250, function () {
         jQuery(".overlay-dark").remove();
@@ -364,7 +364,7 @@ function selectItem(e, className) {
 
     jQuery(e).addClass('selected');
 
-    window.angularComponentReference.zone.run(() => { window.angularComponentReference.loadAngularFunction(jQuery(e).attr('data-id')); });
+    window.customerReference.zone.run(() => { window.customerReference.setSelectedCustomer(jQuery(e).attr('data-id')); });
 
 }
 

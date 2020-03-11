@@ -25,11 +25,11 @@ export class SelectCustomerComponent extends BaseComponent {
   constructor(private customerService: CustomerService, private _ngZone: NgZone) {
     super();
 
-    const key = 'angularComponentReference';
+    const key = 'customerReference';
 
     window[key] = {
       component: this, zone: this._ngZone,
-      loadAngularFunction: (data) => this.setSelectedCustomer(data)
+      setSelectedCustomer: (data) => this.setSelectedCustomer(data)
     };
 
   }
@@ -70,7 +70,7 @@ export class SelectCustomerComponent extends BaseComponent {
 
       this.selectedCustomer = customer;
 
-      this.globalService.currentOrderViewModel.CustomerInfo = OrderCustomerInfoViewModel.toViewModel(this.selectedCustomer);
+      this.currentGlobalOrder.CustomerInfo = OrderCustomerInfoViewModel.toViewModel(this.selectedCustomer);
 
       closeAddCustomerDialog();
 
@@ -85,7 +85,7 @@ export class SelectCustomerComponent extends BaseComponent {
       return;
     }
 
-    this.globalService.currentOrderViewModel.CustomerInfo = OrderCustomerInfoViewModel.toViewModel(this.selectedCustomer);
+    this.currentGlobalOrder.CustomerInfo = OrderCustomerInfoViewModel.toViewModel(this.selectedCustomer);
 
     this.OnNavigateClick();
 
@@ -95,10 +95,9 @@ export class SelectCustomerComponent extends BaseComponent {
     this.customerService.getAll().then(customers => {
       this.customers = customers;
       setTimeout(() => {
-        if (this.globalService.currentOrderViewModel.CustomerInfo.Id) {
-          console.log(this.globalService.currentOrderViewModel.CustomerInfo.Id);
-          setSelectedCustomerItem(this.globalService.currentOrderViewModel.CustomerInfo.Id);
-          this.selectedCustomer = customers.find(p => p.Id === this.globalService.currentOrderViewModel.CustomerInfo.Id);
+        if (this.currentGlobalOrder.CustomerInfo.Id) {
+          setSelectedCustomerItem(this.currentGlobalOrder.CustomerInfo.Id);
+          this.selectedCustomer = customers.find(p => p.Id === this.currentGlobalOrder.CustomerInfo.Id);
         }
       }, 50);
     });

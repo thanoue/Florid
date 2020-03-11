@@ -26,7 +26,7 @@ export class OrderDetailComponent extends BaseComponent {
     this.route.params.subscribe(params => {
       const index = params.id;
       this.detailIndex = index;
-      this.orderDetail = this.globalService.currentOrderViewModel.OrderDetails[index];
+      this.orderDetail = this.currentGlobalOrder.OrderDetails[index];
     });
 
     createNumbericElement();
@@ -34,7 +34,7 @@ export class OrderDetailComponent extends BaseComponent {
   }
 
   protected OnNavigateClick() {
-    this.globalService.currentOrderViewModel.OrderDetails.pop();
+    this.currentGlobalOrder.OrderDetails.pop();
     super.OnNavigateClick();
   }
 

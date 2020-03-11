@@ -49,7 +49,7 @@ function getDateSelecting(year, month, day) {
 }
 
 function setDate(year, month, day) {
-    window.angularComponentReference.zone.run(() => { window.angularComponentReference.dateSelected(year, month, day); });
+    window.BaseReference.zone.run(() => { window.BaseReference.dateSelected(year, month, day); });
 }
 
 function getTimeSelecting(hour, minute) {
@@ -59,7 +59,21 @@ function getTimeSelecting(hour, minute) {
 }
 
 function setTime(hour, minute) {
-    window.angularComponentReference.zone.run(() => { window.angularComponentReference.timeSelected(hour, minute); });
+    window.BaseReference.zone.run(() => { window.BaseReference.timeSelected(hour, minute); });
+}
+
+function getDateTimeSelecting(year, month, day, hour, minute) {
+    if (typeof Android !== "undefined" && Android !== null) {
+        Android.requestDateTimeSelecting(year, month, day, hour, minute);
+    }
+}
+
+function setDateTime(year, month, day, hour, minute) {
+    window.BaseReference.zone.run(() => { window.BaseReference.dateTimeSelected(year, month, day, hour, minute); });
+}
+
+function backNavigate() {
+    window.BaseReference.zone.run(() => { window.BaseReference.forceBackNavigate(); });
 }
 
 function isOnTerminal() {

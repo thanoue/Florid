@@ -18,12 +18,12 @@ export class AddOrderComponent extends BaseComponent {
 
   protected Init() {
 
-    this.order = this.globalService.currentOrderViewModel;
+    this.order = this.currentGlobalOrder;
   }
 
   addNewOrderDetail() {
-    this.globalService.currentOrderViewModel.OrderDetails.push(new OrderDetailViewModel());
-    this.router.navigate([`/order-detail/${this.globalService.currentOrderViewModel.OrderDetails.length - 1}`]);
+    this.currentGlobalOrder.OrderDetails.push(new OrderDetailViewModel());
+    this.router.navigate([`/order-detail/${this.currentGlobalOrder.OrderDetails.length - 1}`]);
   }
 
   constructor(private router: Router) {

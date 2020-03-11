@@ -46,12 +46,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="text" (click)="requestDatepicker()" readonly
-                            value="{{currDeliveryDate | date: 'dd/MM/yyyy'}}" class="mainForm">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" (click)="requestTimepicker()" value="{{currDeliveryTime}}" readonly
-                            class="mainForm" placeholder="Giờ giao...">
+                        <input type="datetime" (click)="requestDateTimePicker()" readonly value="{{deliveryTime}}"
+                            class="mainForm">
                     </div>
                     <div class="row">
                         <div class="col-8 mx-auto text-center">
@@ -69,7 +65,7 @@
             [attr.data-index]="i">
             <p class="recentInfo-name">{{receiverInfo.Name}}</p>
             <span class="recentInfo-phone">{{receiverInfo.PhoneNumber}}</span>
-            <span class="recentInfo-date">{{deliveryInfo.DateTime | date: 'HH:MM dd/MM/yyyy'}}</span>
+            <span class="recentInfo-date">{{deliveryInfo.DateTime | date: 'dd/MM/yyyy hh:mm a'}}</span>
             <span class="recentInfo-add">{{receiverInfo.Address}}</span>
         </li>
     </ul>

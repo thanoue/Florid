@@ -3,8 +3,10 @@ import { BaseComponent } from '../base.component';
 import { OrderDetailDeliveryInfo } from 'src/app/models/view.models/order.model';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
-declare function getDateSelecting(year: number, month: number, day: number): any;
+
+declare function getDateTimeSelecting(year: number, month: number, day: number, hour: number, minute: number): any;
 declare function getTimeSelecting(hour: number, minute: number): any;
 
 @Component({
@@ -18,19 +20,17 @@ export class SelectReceiverComponent extends BaseComponent {
 
   currentList: OrderDetailDeliveryInfo[];
   deliveryInfo: OrderDetailDeliveryInfo;
-  currDeliveryDate = '';
-  currDeliveryTime = '';
+  deliveryTime = '';
   orderDetailIndex = -1;
 
   protected Init() {
 
-    const key = 'angularComponentReference';
+    const key = 'DeliveryInfoReference';
+
     window[key] = {
       component: this,
       zone: this._ngZone,
       selectDeliveryInfo: (data) => this.selectReceiver(data),
-      dateSelected: (year: number, month: number, day: number) => this.dateSelecting(year, month, day),
-      timeSelected: (hour: number, minute: number) => this.timeSelecting(hour, minute)
     };
 
 
@@ -38,66 +38,63 @@ export class SelectReceiverComponent extends BaseComponent {
 
     this.deliveryInfo = new OrderDetailDeliveryInfo();
 
-    this.globalService.currentOrderViewModel.OrderDetails.forEach(orderDetail => {
-      const temp = new OrderDetailDeliveryInfo();
-      Object.assign(temp, orderDetail.DeliveryInfo);
+    this.currentGlobalOrder.OrderDetails.forEach(orderDetail => {
+
+      const temp = OrderDetailDeliveryInfo.DeepCopy(orderDetail.DeliveryInfo);
+
       this.currentList.push(temp);
     });
 
     this.route.params.subscribe(params => {
-      const index = params.id;
-      this.orderDetailIndex = index;
-      this.deliveryInfo = Object.assign(this.deliveryInfo, this.globalService.currentOrderViewModel.OrderDetails[this.orderDetailIndex].DeliveryInfo);
 
-      this.currDeliveryDate = this.deliveryInfo.DateTime.toLocaleDateString();
-      this.currDeliveryTime = this.deliveryInfo.DateTime.toLocaleTimeString('vi-VN', { hour12: true });
+      this.orderDetailIndex = params.id;
 
+      this.deliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.currentGlobalOrder.OrderDetails[this.orderDetailIndex].DeliveryInfo);
       this.deliveryInfo.DateTime.setSeconds(0);
+
+      this.deliveryTime = this.deliveryInfo.DateTime.toLocaleString('vi-VN', { hour12: true });
 
     });
 
   }
 
-
-
   selectReceiver(index: number) {
-    Object.assign(this.deliveryInfo, this.currentList[index]);
-    this.currDeliveryDate = this.deliveryInfo.DateTime.toLocaleDateString();
-    this.currDeliveryTime = this.deliveryInfo.DateTime.toLocaleTimeString('vi-VN', { hour12: true });
+
+    console.log('before assign', this.currentList[index].DateTime);
+
+    this.deliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.currentList[index]);
+
+    this.deliveryTime = this.deliveryInfo.DateTime.toLocaleString('vi-VN', { hour12: true });
+
+    console.log('after assign', this.currentList[index].DateTime);
+
+    console.log(this.deliveryInfo.DateTime, this.deliveryTime);
   }
 
   addReceiver(form: NgForm) {
+
     if (!form.valid) {
       return;
     }
-    Object.assign(this.globalService.currentOrderViewModel.OrderDetails[this.orderDetailIndex].DeliveryInfo, this.deliveryInfo);
+    this.currentGlobalOrder.OrderDetails[this.orderDetailIndex].DeliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.deliveryInfo);
+
     super.OnNavigateClick();
   }
 
-  requestTimepicker() {
-    getTimeSelecting(this.deliveryInfo.DateTime.getHours(), this.deliveryInfo.DateTime.getMinutes());
+  requestDateTimePicker() {
+    // tslint:disable-next-line:max-line-length
+    getDateTimeSelecting(this.deliveryInfo.DateTime.getFullYear(), this.deliveryInfo.DateTime.getMonth(), this.deliveryInfo.DateTime.getDate(), this.deliveryInfo.DateTime.getHours(), this.deliveryInfo.DateTime.getMinutes());
   }
 
-  timeSelecting(hour: number, minute: number) {
-
-    this.deliveryInfo.DateTime.setHours(hour);
-    this.deliveryInfo.DateTime.setMinutes(minute);
-
-    this.currDeliveryTime = this.deliveryInfo.DateTime.toLocaleTimeString('vi-VN', { hour12: true });
-
-  }
-
-  requestDatepicker() {
-    getDateSelecting(this.deliveryInfo.DateTime.getFullYear(), this.deliveryInfo.DateTime.getMonth(), this.deliveryInfo.DateTime.getDate());
-  }
-
-  dateSelecting(year: number, month: number, day: number) {
+  protected dateTimeSelected(year: number, month: number, day: number, hour: number, minute: number) {
 
     this.deliveryInfo.DateTime.setFullYear(year);
     this.deliveryInfo.DateTime.setMonth(month);
     this.deliveryInfo.DateTime.setDate(day);
+    this.deliveryInfo.DateTime.setHours(hour);
+    this.deliveryInfo.DateTime.setMinutes(minute);
 
-    this.currDeliveryDate = this.deliveryInfo.DateTime.toLocaleDateString();
+    this.deliveryTime = this.deliveryInfo.DateTime.toLocaleString('vi-VN', { hour12: true });
 
   }
 

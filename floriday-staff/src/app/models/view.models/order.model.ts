@@ -46,10 +46,29 @@ export class OrderDetailViewModel {
 }
 
 export class OrderDetailDeliveryInfo {
+
     DateTime = new Date();
     Address: string;
     Name: string;
     PhoneNumber: string;
+
+    static DeepCopy(source: OrderDetailDeliveryInfo): OrderDetailDeliveryInfo {
+
+        const dest = new OrderDetailDeliveryInfo();
+
+        dest.Address = source.Address;
+        dest.Name = source.Name;
+        dest.PhoneNumber = source.PhoneNumber;
+
+        dest.DateTime.setFullYear(source.DateTime.getFullYear());
+        dest.DateTime.setMonth(source.DateTime.getMonth());
+        dest.DateTime.setDate(source.DateTime.getDate());
+        dest.DateTime.setHours(source.DateTime.getHours());
+        dest.DateTime.setMinutes(source.DateTime.getMinutes());
+        dest.DateTime.setSeconds(0);
+
+        return dest;
+    }
 }
 
 export class OrderCustomerInfoViewModel {

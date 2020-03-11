@@ -54,7 +54,7 @@ namespace Florid.Staff.Droid.Activity
             };
 
             _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
-            _mainWebView.LoadUrl("http://192.168.1.23:4200");
+            _mainWebView.LoadUrl("http://192.168.1.22:4200");
 
 #if DEBUG
             WebView.SetWebContentsDebuggingEnabled(true);
@@ -70,7 +70,10 @@ namespace Florid.Staff.Droid.Activity
         }
 
 
-
+        public override void OnBackPressed()
+        {
+            DroidUtility.ExecJavaScript(_mainWebView,"backNavigate()");
+        }
 
     }
 

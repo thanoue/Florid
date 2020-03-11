@@ -26,6 +26,10 @@ import { AddOrderComponent } from './components/add-order/add-order.component';
 import { SelectCustomerComponent } from './components/select-customer/select-customer.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { SelectReceiverComponent } from './components/select-receiver/select-receiver.component';
+import es from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+
+
 
 declare function getFirebaseConfig(): any;
 
@@ -70,5 +74,6 @@ export class AppModule {
   constructor(injector: Injector) {
     AppInjector.setInjector(injector);
     firebase.initializeApp(getFirebaseConfig());
+    registerLocaleData(es);
   }
 }
