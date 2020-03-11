@@ -29,10 +29,11 @@
     <div class="page-content" id="confirm">
         <div class="container">
             <div class="row custBrow">
-                <div class="col-9 custList pr-0">
-                    <a href="./khach-hang.html" class="main-bg custListButton"><img src="./images/cust.png" alt=""><span>Khách hàng</span></a>
+                <div class="col-10 custList ">
+                    <a href="./khach-hang.html" class="main-bg custListButton"><img src="./images/cust.png" alt="">
+                        <marquee behavior="scroll" direction="left">Huỳnh Ngọc Phương Thanh (-20%)</marquee></a>
                 </div>
-                <div class="col-3 prodAdd text-right">
+                <div class="col-2 prodAdd text-right pl-0">
                     <a href="#" class="main-bg"><img src="./images/add.svg" alt=""  class="main-filter"></a>
                 </div>
             </div>
@@ -95,15 +96,39 @@
             <div class="orderTotal">
                 <p class="totalOld">Thành tiền cũ: <span class="orderPrice">600.000vnđ</span></p>
                 <p class="totalNew">Thành tiền: <span class="orderPrice">600.000vnđ</span></p>
+                <p class="totalExc">Điểm đã đổi: <span class="orderPrice">20.000vnđ</span></p>
             </div>
-            <div class="row orderConfirm">
-                <div class="col-8 mx-auto text-center">
-                    <a href="./thanh-toan.html" type="submit" class="btn main-btn w-100">Thanh toán</a>
-                    <span>Xác nhận thanh toán</span>
+            <div class="row orderConfirm text-center">
+                <div class="col-4 exchange">
+                    <button class="btn main-bg w-100" onclick="openExcForm()"><img src="./images/money.svg" alt="Đổi điểm" class="main-filter"></button>
                 </div>
+                <div class="col-8 pl-0" >
+                    <a href="./thanh-toan.html" type="submit" class="btn main-btn w-100">Thanh toán</a>
+                </div>
+                <span>Xác nhận thanh toán</span>
             </div>
         </div>
     </div>
+    <div id="exchangeAdd" class="popup-content">
+        <form action="" class="">
+            <div class="form-group">
+                <label for="" class="excLabel">Thành viên: </label>
+                <span class="memberLevel s">Standard</span>
+            </div>
+            <div class="form-group">
+                <label for="" class="excLabel">Điểm tích lũy: </label>
+                <span class="">839</span>
+            </div>
+            <div class="form-group">
+                <input type="number" name="" id="" class="mainForm" placeholder="Số điểm muốn đổi...">
+            </div>
+            <div class="row">
+                <div class="col-8 mx-auto text-center">
+                    <button type="submit" class="btn main-btn w-100 mt-3">Đổi điểm</button>
+                </div>
+            </div>
+        </form>   
+</div>
 </body>
     
 </html>
