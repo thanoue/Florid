@@ -11,10 +11,11 @@ using System;
 using Java.Util;
 using Florent37.SingleDateAndTimePickerLib.Dialogs;
 using Florid.Droid.Lib;
+using Florid.Staff.Droid.Services;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity]
+    [Activity(MainLauncher = true, NoHistory = true)]
     public class MainActivity : BaseActivity
     {
         static readonly string TAG = "MainActivity";
@@ -22,10 +23,12 @@ namespace Florid.Staff.Droid.Activity
         protected override bool UseOwnLayout => true;
 
         private WebView _mainWebView;
+        private View _mask;
 
         protected override void InitView(ViewGroup viewGroup)
         {
             _mainWebView = FindViewById<WebView>(Resource.Id.mainWebview);
+            _mask = FindViewById<View>(Resource.Id.mask);
 
             _mainWebView.ClearCache(true);
 
@@ -69,6 +72,15 @@ namespace Florid.Staff.Droid.Activity
             //});
         }
 
+        public void ShowMask()
+        {
+            _mask.Visibility = ViewStates.Visible;
+        }
+
+        public void DismissMask()
+        {
+            _mask.Visibility = ViewStates.Gone;
+        }
 
         public override void OnBackPressed()
         {

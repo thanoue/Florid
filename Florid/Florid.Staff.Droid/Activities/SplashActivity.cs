@@ -19,10 +19,11 @@ using Java.IO;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity(Theme = "@style/AppTheme", MainLauncher = true, NoHistory = true)]
+    [Activity(Theme = "@style/AppTheme", NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {
         ImageView _testImage;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -30,8 +31,6 @@ namespace Florid.Staff.Droid.Activity
             // Create your application here
             SetContentView(Resource.Layout.SplashLayout);
         }
-
-      
 
         protected override void OnResume()
         {

@@ -10,16 +10,20 @@ namespace Florid.Droid.Lib
     {
         WebView _webView;
         DialogStyle _style;
-        public DatetimePickerCallback(WebView webView, DialogStyle style)
+        Action<Calendar> _dateTimeSetted;
+
+        public DatetimePickerCallback(WebView webView, DialogStyle style, Action<Calendar> dateTimeSetted = null)
         {
             _style = style;
             _webView = webView;
+            _dateTimeSetted = dateTimeSetted;
         }
 
         public void OnDateSelected(Date date)
         {
             var calendar = Calendar.Instance;
             calendar.Time = date;
+            _dateTimeSetted?.Invoke(calendar);
             switch (_style)
             {
                 case DialogStyle.Date:

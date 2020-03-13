@@ -11,6 +11,7 @@ import { AddOrderComponent } from './components/add-order/add-order.component';
 import { SelectCustomerComponent } from './components/select-customer/select-customer.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { SelectReceiverComponent } from './components/select-receiver/select-receiver.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
 
@@ -19,7 +20,6 @@ const routes: Routes = [
     data: { Title: 'Dang nhap', NavigateClass: 'none' }
   },
   { path: 'printjob', component: PrinterComponent },
-
   {
     path: '',
     component: MainLayoutComponent,
@@ -54,7 +54,9 @@ const routes: Routes = [
         component: SelectReceiverComponent,
       }
     ]
-  }
+  },
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({

@@ -54,7 +54,6 @@
     <Compile Include="Widgets\CustomTextView.cs" />
     <Compile Include="Statics\BaseModelHelper.cs" />
     <Compile Include="BaseMainApplication.cs" />
-    <Compile Include="Statics\JavascriptClient.cs" />
     <Compile Include="Services\DroidSecure.cs" />
     <Compile Include="Services\DroidContext.cs" />
     <Compile Include="Widgets\CustomWebView.cs" />

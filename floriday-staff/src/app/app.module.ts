@@ -28,6 +28,7 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
 import { SelectReceiverComponent } from './components/select-receiver/select-receiver.component';
 import es from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 
@@ -47,6 +48,7 @@ declare function getFirebaseConfig(): any;
     SelectCustomerComponent,
     OrderDetailComponent,
     SelectReceiverComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
