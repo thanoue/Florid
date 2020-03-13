@@ -93,6 +93,7 @@ export abstract class BaseService<T extends BaseEntity> {
                 dataSnapShot.forEach(data => {
                     res.push(data.val() as T);
                 });
+
                 this.globalService.stopLoading();
 
                 return res;

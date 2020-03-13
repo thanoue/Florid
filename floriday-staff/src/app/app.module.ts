@@ -29,6 +29,7 @@ import { SelectReceiverComponent } from './components/select-receiver/select-rec
 import es from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SearchProductComponent } from './components/search-product/search-product.component';
 
 
 
@@ -49,6 +50,7 @@ declare function getFirebaseConfig(): any;
     OrderDetailComponent,
     SelectReceiverComponent,
     NotFoundComponent,
+    SearchProductComponent,
   ],
   imports: [
     BrowserModule,

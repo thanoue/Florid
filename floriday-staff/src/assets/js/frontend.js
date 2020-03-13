@@ -99,19 +99,28 @@ function openOrderMenu() {
 }
 
 // Menu Danh sách hoa
-function openListMenu() {
+function selectProductCategory(menuItems, callback) {
+    actionMenuSelecting(menuItems, callback);
+}
+
+function actionMenuSelecting(menuItems, callback) {
+
+    let templateRes = '';
+
+    menuItems.forEach(element => {
+        var item = `<li><a class="menu-item-dynamic" data-index="0" data-value="${element.Value}"  href="javascript:void(0)">${element.Name}</a></li>`;
+        templateRes += item;
+    });
+
     var html = `<div class="actionMenu">
-        <ul>
-            <li><a class="menu-item-dynamic" data-index="0" href="javascript:void(0)">Bó hoa tươi</a></li>
-            <li><a  class="menu-item-dynamic" data-index="1"  href="javascript:void(0)">Bình hoa tươi</a></li>
-            <li><a class="menu-item-dynamic" data-index="2"  href="javascript:void(0)">Hộp hoa tươi</a></li>
-            <li><a class="menu-item-dynamic" data-index="3"  href="javascript:void(0)">Giỏ hoa tươi</a></li>
-            <li><a class="menu-item-dynamic" data-index="4"  href="javascript:void(0)">Hoa cưới</a></li>
-            <li><a class="menu-item-dynamic" data-index="5"  href="javascript:void(0)">Hoa nghệ thuật</a></li>
-        </ul>
-        </div>`;
+    <ul>
+     ${templateRes}
+    </ul>
+    </div>`;
+
     slideUp(html, function (index) {
-        window.location = './danh-sach.html?' + index;
+        callback(parseInt(index));
+        // window.location = './danh-sach.html?' + index;
     });
 }
 
@@ -177,22 +186,25 @@ function slideUp(html, callback) {
 
     jQuery(".actionMenu").slideDown(350);
     //click vào menu
-    jQuery(document).on('click', 'a.menu-item-dynamic', function () {
+    jQuery('.actionMenu a.menu-item-dynamic').one('click', function () {
+
         var index = jQuery(this).attr('data-index');
+        var val = jQuery(this).attr('data-value');
 
         jQuery(".actionMenu").slideUp(250, function () {
             jQuery(".actionMenu").remove();
             jQuery(".overlay-dark").remove();
-            callback(index);
+            callback(val);
         });
     });
 
-    jQuery(".overlay-dark:not(.layer2)").click(function () {
+    jQuery(".overlay-dark:not(.layer2)").one('click', function () {
         jQuery(".actionMenu").slideUp(250, function () {
             jQuery(".overlay-dark").remove();
             jQuery(this).remove();
         });
-    });
+    })
+
     jQuery(".overlay-dark.layer2").click(function () {
         jQuery(".actionMenu").slideUp(250, function () {
             jQuery(".overlay-dark.layer2").remove();
@@ -326,6 +338,19 @@ function openViewed() {
     });
 }
 
+
+// Thêm thông tin
+function openExcForm() {
+    appendInBody();
+    jQuery("#exchangeAdd").fadeIn(350);
+
+    jQuery(".overlay-dark:not(.layer2)").click(function () {
+        jQuery("#exchangeAdd").hide(250, function () {
+            jQuery(".overlay-dark").remove();
+        });
+    });
+}
+
 // Popup thông báo
 function popUp(html) {
     appendInBody();
@@ -364,7 +389,7 @@ function selectItem(e, className) {
 
     jQuery(e).addClass('selected');
 
-    window.customerReference.zone.run(() => { window.customerReference.setSelectedCustomer(jQuery(e).attr('data-id')); });
+    window.selectItemReference.zone.run(() => { window.selectItemReference.itemSelected(jQuery(e).attr('data-id')); });
 
 }
 

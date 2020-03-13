@@ -119,14 +119,12 @@ xanh 1fc9db xanh 1fe8cb */
     transition: 350ms;
     color: #999;
 }
-
-/* .main-bg:hover
+.main-bg:hover
 {   
     background-image: -o-linear-gradient(45deg,  var(--main-blue),var(--main-green));
     background-image: linear-gradient(45deg,  var(--main-blue),var(--main-green));
     color: #fff;
-} */
-
+}
 .main-bg.selected
 {   
     background-image: -o-linear-gradient(45deg,  var(--main-blue),var(--main-green));
@@ -427,7 +425,8 @@ img.white-filter
     margin-bottom: 3vh;
 }
 ul.order-content {
-    height: 420px;
+    /* height: 420px; */
+    max-height: 65vh;
     list-style: none;
     margin-bottom: 0;
     overflow-y: scroll;
@@ -573,7 +572,7 @@ img.item-detail-thumb {
 }
 h5.item-code,
 h5.prodCode {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     margin-bottom: 0;
     color: #999;
@@ -832,6 +831,12 @@ form.addOrderForm {
 {
     border-color: #1fc9db;
 }
+
+.product-item.selected .prodItem img
+{
+    border-color: #1fc9db;
+}
+
 .prodItem 
 {
     text-align: center;
@@ -987,13 +992,12 @@ span.recentInfo-add {
     display: block;
     height: 50px;
     line-height: 50px;
-    padding: 0 20px;
+    padding: 0 10px;
     border-radius: 15px;
     text-align: center;
-    text-transform: uppercase;
     font-weight: 600;
     position: relative;
-    padding-left: 40px;
+    padding-left: 50px;
 }
 .prodAdd a 
 {
@@ -1006,15 +1010,16 @@ span.recentInfo-add {
 .custListButton img 
 {
     position: absolute;
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     left: 10px;
-    top: 4px;
+    top: 10px;
 }
 ul.orderDetail {
     background: #fff;
     border-radius: 15px;
-    height: 320px;
+    /* height: 320px; */
+    max-height: 45vh;
     overflow-y: scroll;
     padding: 15px;
     margin-top: 1vh;
@@ -1066,6 +1071,17 @@ li.orderDetailItem:last-child {
 }
 .itemDetail .item-detail-info {
     width: 60%;
+    height: 100px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 .itemAction {
     width: 35px;
@@ -1208,7 +1224,9 @@ input#vatInclude:checked + span.vatCustom.main-bg::before
 {
     color: #fff;
     font-style: italic;
-    font-size: 12px;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
 }
 .custBrow, .orderConfirm {
     margin-top: 2vh;
@@ -1247,7 +1265,54 @@ input#vatInclude:checked + span.vatCustom.main-bg::before
     margin-top: 2vh;
     margin-bottom: 2vh;
 }
-
+.exchange button 
+{
+    padding: 0;
+    height: 40px;
+    border-radius: 20px;
+}
+.exchange img {
+    width: 30px;
+    display: block;
+    margin: auto;
+}
+.exchange button:hover img,
+.exchange button:focus img
+{
+    filter: var(--white-filter);
+}
+#exchangeAdd
+{
+    text-align: left;
+}
+#exchangeAdd label.excLabel {
+    font-size: 16px;
+    margin-right: 10px;
+}
+#exchangeAdd .form-group span {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 600;
+}
+span.memberLevel {
+    display: inline-block;
+    padding-left: 40px;
+    background: url(../images/medal.svg);
+    background-size: contain !important;
+    background-repeat: no-repeat !important ;
+}
+.memberLevel.vv 
+{
+    background: url(../images/medal-gold.svg);
+}
+.memberLevel.s
+{
+    background: url(../images/medal-bronze.svg);
+}
+.memberLevel.n 
+{
+    background: url(../images/medal-silver.svg);
+}
 /* =======================================================CHECKOUT */
 .checkOut,.prodDetail,.custInfo,.staffAdd {
     background: #fff;
@@ -1408,7 +1473,8 @@ a.absLink {
     height: 105px;
 }
 #listContent ul.order-content {
-    height: 500px;
+    /* height: 500px; */
+    max-height: 75vh;
 }
 /* ==============================================PRODUCT DETAIL */
 .prodDetail 
@@ -1623,4 +1689,34 @@ p.staffPhone {
     padding: 15px;
     border-radius: 50%;
     height: 80px;
+}
+
+.custInfo
+{
+    height: 70vh;
+    margin-top: 10vh;
+}
+
+.msg404 {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    top: 50%;
+    color: #fff;
+    transform: translateY(-50%);
+    font-size: 28px;
+    padding: 0 20px;
+}
+.msg404 h1 {
+    font-size: 100px;
+    font-weight: 600;
+}
+a.backtohome {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--main-blue);
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
 }

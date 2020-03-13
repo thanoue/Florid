@@ -154,7 +154,7 @@ namespace Florid.Staff.Droid.Services
         {
             _activity.RunOnUiThread(() =>
             {
-                _activity.ShowMask();
+               // _activity.ShowMask();
                 var dialog = new DateTimePickerDialog(_activity, () =>
                               {
                                   _activity.DismissMask();

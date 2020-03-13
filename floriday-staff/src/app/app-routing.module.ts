@@ -12,6 +12,7 @@ import { SelectCustomerComponent } from './components/select-customer/select-cus
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { SelectReceiverComponent } from './components/select-receiver/select-receiver.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SearchProductComponent } from './components/search-product/search-product.component';
 
 const routes: Routes = [
 
@@ -52,6 +53,10 @@ const routes: Routes = [
       {
         path: 'select-receiver/:id',
         component: SelectReceiverComponent,
+      },
+      {
+        path: 'search-product',
+        component: SearchProductComponent,
       }
     ]
   },

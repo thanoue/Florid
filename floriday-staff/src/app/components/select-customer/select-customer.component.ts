@@ -25,11 +25,11 @@ export class SelectCustomerComponent extends BaseComponent {
   constructor(private customerService: CustomerService, private _ngZone: NgZone) {
     super();
 
-    const key = 'customerReference';
+    const key = 'selectItemReference';
 
     window[key] = {
       component: this, zone: this._ngZone,
-      setSelectedCustomer: (data) => this.setSelectedCustomer(data)
+      itemSelected: (data) => this.setSelectedCustomer(data)
     };
 
   }
@@ -102,6 +102,7 @@ export class SelectCustomerComponent extends BaseComponent {
       }, 50);
     });
   }
+
 
 
 }

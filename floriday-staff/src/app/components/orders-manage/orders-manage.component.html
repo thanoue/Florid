@@ -82,9 +82,10 @@
                                         <h5 class="item-code">{{orderDetail.ProductName}}</h5>
                                         <span class="item-quantity">Số lượng: {{orderDetail.Quantity}}</span>
                                         <span class="item-address">{{orderDetail.DeliveryInfo.Address}}</span>
-                                        <span class="item-time">{{orderDetail.DeliveryInfo.Time}}</span>
                                         <span
-                                            class="item-date">{{orderDetail.DeliveryInfo.Date  | date: 'dd/MM/yyyy'}}</span>
+                                            class="item-time">{{orderDetail.DeliveryInfo.DateTime | date: 'hh:mm a'}}</span>
+                                        <span
+                                            class="item-date">{{orderDetail.DeliveryInfo.DateTime  | date: 'dd/MM/yyyy'}}</span>
                                     </div>
                                 </div>
                             </li>
@@ -94,4 +95,18 @@
             </ul>
         </div>
     </div>
+</div>
+<div id="colorBoard" class="popup-content">
+    <ul class="colorList">
+        <li class="colorInfo colorItem">
+            <div class="item-status r"><span></span></div>
+            <label>Đang chờ</label>
+        </li>
+        <li class="colorInfo">
+            <label>Người cắm hoa: </label><span>Nguyễn Văn A</span>
+        </li>
+        <li class="colorInfo">
+            <label>Người giao hoa: </label><span>Lê Thị Bình</span>
+        </li>
+    </ul>
 </div>
