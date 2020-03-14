@@ -37,6 +37,22 @@ jQuery(document).ready(function(){
             jQuery(".popup-image").remove();
             jQuery(this).remove();
         })
+    });
+    jQuery(".prodFilter .filterSearch").click(function(){
+        let Filter = jQuery(this).parent();
+        if(!Filter.hasClass("search"))
+        {
+            Filter.addClass("search");
+            Filter.find("a").attr("onclick", null);
+        }
+    });
+    jQuery(".prodFilter .filterCate").click(function(){
+        let Filter = jQuery(this).parent();
+        if(Filter.hasClass("search"))
+        {
+            Filter.removeClass("search");
+            Filter.find("a").attr("onclick","openListMenu()");
+        }
     })
 })
 // append 2 element
