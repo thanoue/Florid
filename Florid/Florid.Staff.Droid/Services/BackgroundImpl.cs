@@ -75,7 +75,7 @@ namespace Florid.Staff.Droid.Services
     }
 
 
-    [Service(Name = "Florid.Staff.Droid.MyService")]
+    [Service(Name = "florid.staff.froid.MyService")]
     public class MyService : Service
     {
         protected IBinder MyBinder = new BindingBinder();

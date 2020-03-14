@@ -98,4 +98,5 @@ function addProductsToCache(products) {
     if (typeof Android !== "undefined" && Android !== null) {
         Android.addProductsToCache(JSON.stringify(products));
     }
+    return;
 }
