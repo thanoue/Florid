@@ -1,0 +1,44 @@
+[debug] [2020-03-07T16:27:43.768Z] ----------------------------------------------------------------------
+[debug] [2020-03-07T16:27:43.770Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve --host 0.0.0.0
+[debug] [2020-03-07T16:27:43.770Z] CLI Version:   7.12.1
+[debug] [2020-03-07T16:27:43.770Z] Platform:      darwin
+[debug] [2020-03-07T16:27:43.770Z] Node Version:  v10.16.3
+[debug] [2020-03-07T16:27:43.775Z] Time:          Sat Mar 07 2020 23:27:43 GMT+0700 (Indochina Time)
+[debug] [2020-03-07T16:27:43.775Z] ----------------------------------------------------------------------
+[debug] [2020-03-07T16:27:43.775Z] 
+[debug] [2020-03-07T16:27:43.790Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-07T16:27:43.790Z] > authorizing via signed-in user
+[debug] [2020-03-07T16:27:43.790Z] [iam] checking project lorid-e9c34 for permissions ["firebase.projects.get"]
+[debug] [2020-03-07T16:27:43.791Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-03-07T16:27:43.792Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-03-07T16:27:43.982Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-07T16:27:43.994Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/lorid-e9c34:testIamPermissions  
+
+[debug] [2020-03-07T16:27:45.519Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-07T16:27:45.520Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/lorid-e9c34  
+ 
+[debug] [2020-03-07T16:27:46.569Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/khatran/Data/Florid/floriday-staff'...
+[info] 
+[debug] [2020-03-07T16:27:46.571Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/lorid-e9c34/webApps/-/config  
+ 
+[warn] ⚠  Your requested "node" version "8" doesn't match your global version "10"
+[info] ✔  functions: Emulator started at http://0.0.0.0:5001
+[debug] [2020-03-07T16:27:47.738Z] <<< HTTP RESPONSE 200
+[info] i  functions: Watching "/Users/khatran/Data/Florid/floriday-staff/functions" for Cloud Functions...
+[debug] [2020-03-07T16:27:47.773Z] [worker-pool] addWorker(~diagnostic~)
+[debug] [2020-03-07T16:27:47.773Z] [worker-pool] Adding worker with key ~diagnostic~, total=1
+[debug] [2020-03-07T16:27:47.773Z] [worker-pool] submitWork(triggerId=)
+[debug] [2020-03-07T16:27:47.773Z] [worker-~diagnostic~-3d4d7b20-fadc-4c7c-8cc8-2e178ec222f3]: Assigning socketPath: /var/folders/v8/3m4d06dx59g_96sknqpsmc6w0000gn/T/fire_emu_7808.sock
+[debug] [2020-03-07T16:27:47.774Z] [worker-~diagnostic~-3d4d7b20-fadc-4c7c-8cc8-2e178ec222f3]: BUSY
+[info] i  hosting[floridStaff]: Serving hosting files from: dist/floriday-staff
+[info] ✔  hosting[floridStaff]: Local server: http://0.0.0.0:5000
+[debug] [2020-03-07T16:27:48.021Z] [runtime-status] [7808] Functions runtime initialized. {"cwd":"/Users/khatran/Data/Florid/floriday-staff/functions","node_version":"10.16.3"}
+[debug] [2020-03-07T16:27:48.022Z] [runtime-status] [7808] Disabled runtime features: {"functions_config_helper":true,"network_filtering":true,"timeout":true,"memory_limiting":true,"admin_stubs":true,"pubsub_emulator":true}
+[debug] [2020-03-07T16:27:48.026Z] [runtime-status] [7808] Resolved module firebase-admin {"declared":true,"installed":true,"version":"8.9.2","resolution":"/Users/khatran/Data/Florid/floriday-staff/functions/node_modules/firebase-admin/lib/index.js"}
+[debug] [2020-03-07T16:27:48.028Z] [runtime-status] [7808] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"/Users/khatran/Data/Florid/floriday-staff/functions/node_modules/firebase-functions/lib/index.js"}
+[debug] [2020-03-07T16:27:48.028Z] [runtime-status] [7808] Resolved module firebase-functions {"declared":true,"installed":true,"version":"3.3.0","resolution":"/Users/khatran/Data/Florid/floriday-staff/functions/node_modules/firebase-functions/lib/index.js"}
+[info] ✔  functions[webApi]: http function initialized (http://0.0.0.0:5001/lorid-e9c34/us-central1/webApi).
+[debug] [2020-03-07T16:27:48.545Z] [worker-~diagnostic~-3d4d7b20-fadc-4c7c-8cc8-2e178ec222f3]: IDLE

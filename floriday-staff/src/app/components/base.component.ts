@@ -1,4 +1,4 @@
-import { OnInit, Inject, forwardRef, Injector, AfterViewInit, OnDestroy } from '@angular/core';
+import { OnInit, Inject, forwardRef, Injector, AfterViewInit, OnDestroy, NgZone } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { AppInjector } from '../services/common/base.injector';
 import { GenericModel } from '../models/view.models/generic.model';
@@ -9,18 +9,41 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { RouteModel } from '../models/view.models/route.model';
 import { map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
+import { OrderViewModel } from '../models/view.models/order.model';
+
 
 export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
+    abstract Title: string;
+    protected NavigateClass = 'prev-icon';
+
     protected globalService: GlobalService;
     protected authService: AuthService;
-
-    abstract Title: string;
-    abstract NavigateClass: string;
-
+    protected location: Location;
+    private ngZone: NgZone;
     private navigateOnClick: Subscription;
 
+    IsOnTerminal: boolean;
+
+    get currentGlobalOrder(): OrderViewModel {
+        return this.globalService.currentOrderViewModel;
+    }
+    set currentGlobalOrder(value: OrderViewModel) {
+        this.globalService.currentOrderViewModel = value;
+    }
+
     ngOnInit(): void {
+
+        const key = 'BaseReference';
+        window[key] = {
+            component: this,
+            zone: this.ngZone,
+            dateTimeSelected: (year, month, day, hour, minute) => this.dateTimeSelected(year, month, day, hour, minute),
+            forceBackNavigate: () => this.OnNavigateClick()
+        };
+
+        this.IsOnTerminal = this.globalService.isRunOnTerimal();
         this.Init();
     }
 
@@ -29,6 +52,7 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     ngAfterViewInit(): void {
+
         this.globalService.updateHeaderInfo(new RouteModel(this.Title, this.NavigateClass));
 
         this.navigateOnClick = this.globalService.navigateOnClick
@@ -38,13 +62,22 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
                 }
                 this.OnNavigateClick();
             });
+        this.afterViewLoad();
     }
 
     constructor() {
+
         const injector = AppInjector.getInjector();
         this.globalService = injector.get(GlobalService);
         this.authService = injector.get(AuthService);
+        this.location = injector.get(Location);
+        this.ngZone = injector.get(NgZone);
     }
+
+    protected dateTimeSelected(year: number, month: number, day: number, hour: number, minute: number) {
+
+    }
+
 
     protected startLoading() {
         this.globalService.startLoading();
@@ -69,6 +102,10 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     protected abstract Init();
 
     protected OnNavigateClick() {
+        this.location.back();
     }
 
+    protected afterViewLoad() {
+
+    }
 }

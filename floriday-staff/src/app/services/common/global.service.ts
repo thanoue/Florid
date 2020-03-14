@@ -2,9 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Subject } from 'rxjs';
 import { GenericModel } from 'src/app/models/view.models/generic.model';
 import { RouteModel } from 'src/app/models/view.models/route.model';
+import { OrderViewModel } from 'src/app/models/view.models/order.model';
 
 declare function setStatusBarColor(isDark: boolean): any;
 declare function messageDialog(title: string, message: string): any;
+declare function isOnTerminal(): any;
+
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +21,12 @@ export class GlobalService {
 
     navigateOnClick = new Subject<boolean>();
     navigateOnClickEmitter$ = this.navigateOnClick.asObservable;
+
+    currentOrderViewModel: OrderViewModel;
+
+    constructor() {
+        this.currentOrderViewModel = new OrderViewModel();
+    }
 
     startLoading() {
         this.spinnerInvoke.next(true);
@@ -49,5 +58,9 @@ export class GlobalService {
 
     showMessageDialog(title: string, message: string) {
         messageDialog(title, message);
+    }
+
+    isRunOnTerimal(): boolean {
+        return isOnTerminal();
     }
 }

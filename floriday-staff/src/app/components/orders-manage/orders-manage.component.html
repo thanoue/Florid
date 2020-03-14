@@ -31,7 +31,7 @@
                     <div class="item-top" [id]="'heading' + order.Index">
                         <span class="item-code">{{order.OrderId}}</span>
                         <div class="item-info">
-                            <h4 class="item-name">{{order.CustomerName}}</h4>
+                            <h4 class="item-name">{{order.CustomerInfo.Name}}</h4>
                             <span class="item-price">{{order.TotalAmount}} vnđ</span>
                             <span class="item-date">{{order.CreatedDate | date: 'dd/MM/yyyy'}}</span>
                         </div>
@@ -77,12 +77,15 @@
                                     </div>
                                 </div>
                                 <div class="item-detail">
-                                    <a href="./chi-tiet.html" class="absLink"></a>
                                     <img src="{{orderDetail.ProductUrl}}" alt="" class="item-detail-thumb">
                                     <div class="item-detail-info">
                                         <h5 class="item-code">{{orderDetail.ProductName}}</h5>
                                         <span class="item-quantity">Số lượng: {{orderDetail.Quantity}}</span>
-                                        <span class="item-address">{{orderDetail.DeliveryAddress}}</span>
+                                        <span class="item-address">{{orderDetail.DeliveryInfo.Address}}</span>
+                                        <span
+                                            class="item-time">{{orderDetail.DeliveryInfo.DateTime | date: 'hh:mm a'}}</span>
+                                        <span
+                                            class="item-date">{{orderDetail.DeliveryInfo.DateTime  | date: 'dd/MM/yyyy'}}</span>
                                     </div>
                                 </div>
                             </li>
@@ -92,4 +95,18 @@
             </ul>
         </div>
     </div>
+</div>
+<div id="colorBoard" class="popup-content">
+    <ul class="colorList">
+        <li class="colorInfo colorItem">
+            <div class="item-status r"><span></span></div>
+            <label>Đang chờ</label>
+        </li>
+        <li class="colorInfo">
+            <label>Người cắm hoa: </label><span>Nguyễn Văn A</span>
+        </li>
+        <li class="colorInfo">
+            <label>Người giao hoa: </label><span>Lê Thị Bình</span>
+        </li>
+    </ul>
 </div>

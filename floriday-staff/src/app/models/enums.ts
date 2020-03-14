@@ -16,7 +16,8 @@ export enum Roles {
 }
 
 export enum ProductCategories {
-    Valentine,
+    All = -1,
+    Valentine = 0,
     BoHoaTuoi,
     BinhHoaTuoi,
     HopHoaTuoi,

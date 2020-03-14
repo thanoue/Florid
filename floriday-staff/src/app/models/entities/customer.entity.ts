@@ -9,7 +9,6 @@ export class Customer extends BaseEntity {
     SocialMedia: CustomerSocialMediaInfo;
     ContactInfo: CustomerContactInfo;
     Address: CustomerAddress;
-    MembershipType: MembershipTypes;
     MembershipInfo: MembershipInfo;
 
     constructor() {
@@ -18,28 +17,33 @@ export class Customer extends BaseEntity {
         this.ContactInfo = new CustomerContactInfo();
         this.Address = new CustomerAddress();
         this.MembershipInfo = new MembershipInfo();
+        this.FullName = '';
+        this.PhoneNumber = '';
+        this.Birthday = new Date();
+        this.SpecialDays = [];
     }
 }
 
 export class MembershipInfo {
-    UsedScore: number;
-    CurrentlyScore: number;
-    AccumulatedAmount: number;
+    UsedScoreTotal = 0;
+    AvailableScore = 0;
+    AccumulatedAmount = 0;
+    MembershipType: MembershipTypes = MembershipTypes.NewCustomer;
 }
 
 export class CustomerSocialMediaInfo {
-    Facebook: string;
-    Instagram: string;
-    Skype: string;
+    Facebook = '';
+    Instagram = '';
+    Skype = '';
 }
 
 export class CustomerContactInfo {
-    Zalo: string;
-    Viber: string;
+    Zalo = '';
+    Viber = '';
 }
 
 export class CustomerAddress {
-    Home: string;
-    Work: string;
+    Home = '';
+    Work = '';
 }
 

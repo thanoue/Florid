@@ -1,5 +1,18 @@
 jQuery(document).ready(function () {
     // custom number input
+    jQuery(".popup-content img.item-detail-thumb").click(function () {
+        var imgSource = jQuery(this).attr("src");
+        appendInBody();
+        jQuery("body").append("<div class='popup-image'><img src='" + imgSource + "'></div>");
+        jQuery(".popup-image").show(250);
+        jQuery(".overlay-dark").click(function () {
+            jQuery(".popup-image").remove();
+            jQuery(this).remove();
+        })
+    });
+})
+
+function createNumbericElement() {
     jQuery('<div class="quantity-button quantity-down">-</div>').insertBefore('.prodQuantity input');
     jQuery('<div class="quantity-button quantity-up">+</div>').insertAfter('.prodQuantity input');
     jQuery('.prodQuantity').each(function () {
@@ -28,17 +41,8 @@ jQuery(document).ready(function () {
         });
 
     });
-    jQuery(".popup-content img.item-detail-thumb").click(function () {
-        var imgSource = jQuery(this).attr("src");
-        appendInBody();
-        jQuery("body").append("<div class='popup-image'><img src='" + imgSource + "'></div>");
-        jQuery(".popup-image").show(250);
-        jQuery(".overlay-dark").click(function () {
-            jQuery(".popup-image").remove();
-            jQuery(this).remove();
-        })
-    })
-})
+}
+
 // append 2 element
 function appendInBody() {
     if (jQuery("body").find(".overlay-dark").length) {
@@ -95,19 +99,28 @@ function openOrderMenu() {
 }
 
 // Menu Danh sách hoa
-function openListMenu() {
+function selectProductCategory(menuItems, callback) {
+    actionMenuSelecting(menuItems, callback);
+}
+
+function actionMenuSelecting(menuItems, callback) {
+
+    let templateRes = '';
+
+    menuItems.forEach(element => {
+        var item = `<li><a class="menu-item-dynamic" data-index="0" data-value="${element.Value}"  href="javascript:void(0)">${element.Name}</a></li>`;
+        templateRes += item;
+    });
+
     var html = `<div class="actionMenu">
-        <ul>
-            <li><a class="menu-item-dynamic" data-index="0" href="javascript:void(0)">Bó hoa tươi</a></li>
-            <li><a  class="menu-item-dynamic" data-index="1"  href="javascript:void(0)">Bình hoa tươi</a></li>
-            <li><a class="menu-item-dynamic" data-index="2"  href="javascript:void(0)">Hộp hoa tươi</a></li>
-            <li><a class="menu-item-dynamic" data-index="3"  href="javascript:void(0)">Giỏ hoa tươi</a></li>
-            <li><a class="menu-item-dynamic" data-index="4"  href="javascript:void(0)">Hoa cưới</a></li>
-            <li><a class="menu-item-dynamic" data-index="5"  href="javascript:void(0)">Hoa nghệ thuật</a></li>
-        </ul>
-        </div>`;
+    <ul>
+     ${templateRes}
+    </ul>
+    </div>`;
+
     slideUp(html, function (index) {
-        window.location = './danh-sach.html?' + index;
+        callback(parseInt(index));
+        // window.location = './danh-sach.html?' + index;
     });
 }
 
@@ -144,29 +157,25 @@ function openCompMenu() {
 
 // Menu Danh sách Khách hàng
 function openCustMenu() {
+
     appendInBody();
     jQuery("#recentInfo").slideDown(350);
-
-    //click vào menu
-    jQuery(document).on('click', '#recentInfo ul li', function () {
-        var recN = jQuery(this).find(".recentInfo-name").html();
-        var recP = jQuery(this).find(".recentInfo-phone").html();
-        var recD = jQuery(this).find(".recentInfo-date").html();
-        var recA = jQuery(this).find(".recentInfo-add").html();
-        var infoArray = new Array(recN, recP, recA, recD);
-        var i = 0;
-        jQuery("#recentInfo").slideUp(250, function () {
-            jQuery(".overlay-dark").remove();
-            jQuery(".addInfoForm .form-group").each(function (index, value) {
-                jQuery(value).find("input").val(infoArray[i]); i++;
-            });
-        });
-    });
 
     jQuery(".overlay-dark:not(.layer2)").click(function () {
         jQuery("#recentInfo").slideUp(250, function () {
             jQuery(".overlay-dark").remove();
         });
+    });
+}
+
+function selectSavedDeliveryInfo(e) {
+
+    let index = parseInt(jQuery(e).attr('data-index'));
+
+    window.DeliveryInfoReference.zone.run(() => { window.DeliveryInfoReference.selectDeliveryInfo(index); });
+
+    jQuery("#recentInfo").slideUp(250, function () {
+        jQuery(".overlay-dark").remove();
     });
 }
 
@@ -177,22 +186,25 @@ function slideUp(html, callback) {
 
     jQuery(".actionMenu").slideDown(350);
     //click vào menu
-    jQuery(document).on('click', 'a.menu-item-dynamic', function () {
+    jQuery('.actionMenu a.menu-item-dynamic').one('click', function () {
+
         var index = jQuery(this).attr('data-index');
+        var val = jQuery(this).attr('data-value');
 
         jQuery(".actionMenu").slideUp(250, function () {
             jQuery(".actionMenu").remove();
             jQuery(".overlay-dark").remove();
-            callback(index);
+            callback(val);
         });
     });
 
-    jQuery(".overlay-dark:not(.layer2)").click(function () {
+    jQuery(".overlay-dark:not(.layer2)").one('click', function () {
         jQuery(".actionMenu").slideUp(250, function () {
             jQuery(".overlay-dark").remove();
             jQuery(this).remove();
         });
-    });
+    })
+
     jQuery(".overlay-dark.layer2").click(function () {
         jQuery(".actionMenu").slideUp(250, function () {
             jQuery(".overlay-dark.layer2").remove();
@@ -263,10 +275,22 @@ function openAddInfo() {
     appendInBody();
     jQuery("#infoAdd").fadeIn(350);
 
-    jQuery(".overlay-dark:not(.layer2)").click(function () {
+    jQuery(".overlay-dark:not(.layer2)").one('click', function () {
         jQuery("#infoAdd").hide(250, function () {
             jQuery(".overlay-dark").remove();
         });
+    });
+
+    jQuery('#infoAdd #cancel-button').on('click', function () {
+        jQuery("#infoAdd").hide(250, function () {
+            jQuery(".overlay-dark").remove();
+        });
+    });
+}
+
+function closeAddCustomerDialog() {
+    jQuery("#infoAdd").hide(250, function () {
+        jQuery(".overlay-dark").remove();
     });
 }
 
@@ -314,6 +338,19 @@ function openViewed() {
     });
 }
 
+
+// Thêm thông tin
+function openExcForm() {
+    appendInBody();
+    jQuery("#exchangeAdd").fadeIn(350);
+
+    jQuery(".overlay-dark:not(.layer2)").click(function () {
+        jQuery("#exchangeAdd").hide(250, function () {
+            jQuery(".overlay-dark").remove();
+        });
+    });
+}
+
 // Popup thông báo
 function popUp(html) {
     appendInBody();
@@ -345,3 +382,24 @@ function changeVAT() {
         });
     }
 }
+
+function selectItem(e, className) {
+
+    jQuery(className).removeClass('selected');
+
+    jQuery(e).addClass('selected');
+
+    window.selectItemReference.zone.run(() => { window.selectItemReference.itemSelected(jQuery(e).attr('data-id')); });
+
+}
+
+function setSelectedCustomerItem(id) {
+    jQuery('#customer-list').each(function () {
+        jQuery(this).find('.customer-item').each(function () {
+            let itemId = jQuery(this).attr('data-id');
+            if (itemId === id) {
+                jQuery(this).addClass('selected');
+            }
+        })
+    })
+}   

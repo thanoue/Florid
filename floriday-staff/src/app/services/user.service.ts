@@ -17,8 +17,8 @@ export class UserService extends BaseService<User> {
     }
 
 
-    constructor(db: AngularFireDatabase) {
-        super(db);
+    constructor() {
+        super();
         this.datab = firebase.database();
     }
 

@@ -1,37 +1,21 @@
 ﻿using Android.App;
 using Android.OS;
-using Android.Support.V7.App;
-using Android.Widget;
-using Android.Util;
-using Firebase.Iid;
-using Firebase.Messaging;
-using Android.Gms.Common;
-using Firebase.Database;
 using Florid.Entity;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using Firebase.Database.Query;
-using Florid.Core.Service;
-using Florid.Core;
 using Android.Views;
 using Android.Webkit;
 using Florid.Droid.Lib.Static;
 using Newtonsoft.Json;
 using Florid.Model;
 using Android.Graphics;
-using System.IO;
-using Java.Net;
-using Firebase.Storage;
-using static Firebase.Storage.StreamDownloadTask;
 using System;
-using Florid.Staff.Droid.Static;
-using System.Threading;
+using Java.Util;
+using Florent37.SingleDateAndTimePickerLib.Dialogs;
+using Florid.Droid.Lib;
 using Florid.Staff.Droid.Services;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity]
+    [Activity(MainLauncher = true, NoHistory = true)]
     public class MainActivity : BaseActivity
     {
         static readonly string TAG = "MainActivity";
@@ -39,10 +23,12 @@ namespace Florid.Staff.Droid.Activity
         protected override bool UseOwnLayout => true;
 
         private WebView _mainWebView;
+        private View _mask;
 
         protected override void InitView(ViewGroup viewGroup)
         {
             _mainWebView = FindViewById<WebView>(Resource.Id.mainWebview);
+            _mask = FindViewById<View>(Resource.Id.mask);
 
             _mainWebView.ClearCache(true);
 
@@ -50,28 +36,16 @@ namespace Florid.Staff.Droid.Activity
             settings.JavaScriptEnabled = true;
             settings.SetEnableSmoothTransition(true);
             settings.DomStorageEnabled = true;
-            settings.SetSupportZoom(true);
+            settings.SetSupportZoom(false);
 
             _mainWebView.SetWebViewClient(new WebViewClient());
-            _mainWebView.SetWebChromeClient(new WebChromeClient());
+            _mainWebView.SetWebChromeClient(new MyWebChromeClient());
 
-            var javascriptClient = new JavascriptClient(this, (email, password) =>
+            var javascriptClient = new JavascriptClient(this,_mainWebView, (email, password) =>
             {
 
-            }, (type, data) =>
-            {
-
-                switch (type)
-                {
-                    case EntityType.User:
-                        var user = (JsonConvert.DeserializeObject<GenericModel<User>>(data)).Data;
-
-                        break;
-                    default:
-                        break;
-                }
             });
-                
+
             javascriptClient.SetPrimaryDarkStatusBar = (isDark) =>
             {
                 SetStatusBarColor(isDark);
@@ -83,16 +57,38 @@ namespace Florid.Staff.Droid.Activity
             };
 
             _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
-            _mainWebView.LoadUrl("https://floridstaff.firebaseapp.com");
+            _mainWebView.LoadUrl("http://192.168.1.21:4200");
+
+#if DEBUG
+            WebView.SetWebContentsDebuggingEnabled(true);
+#endif
 
             SetStatusBarColor(true);
 
 
             //MainApp.ConnectToBluetoothDevice( "DC:0D:30:2F:49:8F", (isSuccess) =>
             //{
-              
+
             //});
         }
 
+        public void ShowMask()
+        {
+            _mask.Visibility = ViewStates.Visible;
+        }
+
+        public void DismissMask()
+        {
+            _mask.Visibility = ViewStates.Gone;
+        }
+
+        public override void OnBackPressed()
+        {
+            DroidUtility.ExecJavaScript(_mainWebView,"backNavigate()");
+        }
+
     }
+
+
+
 }
