@@ -8,8 +8,6 @@ import { max } from 'rxjs/operators';
 import { PRODUCTCATEGORIES } from 'src/app/app.constants';
 
 declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: number) => void): any;
-declare function getProductsFromCache(category: number): any;
-declare function addProductsToCache(products: Product[]): any;
 
 @Component({
   selector: 'app-search-product',
@@ -84,7 +82,6 @@ export class SearchProductComponent extends BaseComponent {
       this.getProductsByPage(1);
 
       this.selectedProduct = new Product();
-
 
     });
   }
