@@ -68,6 +68,7 @@ function getDateTimeSelecting(year, month, day, hour, minute) {
     }
 }
 
+
 function setDateTime(year, month, day, hour, minute) {
     window.BaseReference.zone.run(() => { window.BaseReference.dateTimeSelected(year, month, day, hour, minute); });
 }
@@ -84,3 +85,17 @@ function isOnTerminal() {
 }
 
 
+function getProductsFromCache(category) {
+
+    if (typeof Android !== "undefined" && Android !== null) {
+        return Android.getProductsFromCache(category);
+    }
+    else return 'NONE';
+}
+
+function addProductsToCache(products) {
+
+    if (typeof Android !== "undefined" && Android !== null) {
+        Android.addProductsToCache(JSON.stringify(products));
+    }
+}

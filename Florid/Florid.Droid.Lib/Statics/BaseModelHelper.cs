@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Android.Graphics;
 using Florid.Core;
 using Florid.Core.Service;
+using Florid.Entity;
 
 namespace Florid.Droid.Lib
 {
@@ -17,5 +18,7 @@ namespace Florid.Droid.Lib
         public IContext Context => ServiceLocator.Instance.Get<IContext>();
 
         public ISecureConfig SecureConfig => ServiceLocator.Instance.Get<ISecureConfig>();
+
+        public List<Product> GlobalProducts = new List<Product>();
     }
 }

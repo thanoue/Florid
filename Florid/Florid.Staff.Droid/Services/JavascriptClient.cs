@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -8,6 +10,7 @@ using Android.Webkit;
 using Florent37.SingleDateAndTimePickerLib.Dialogs;
 using Florid.Droid.Lib;
 using Florid.Entity;
+using Florid.Enum;
 using Florid.Model;
 using Florid.Staff.Droid.Activity;
 using Java.Interop;
@@ -81,6 +84,25 @@ namespace Florid.Staff.Droid.Services
         }
 
         [Android.Webkit.JavascriptInterface]
+        [Export("addProductsToCache")]
+        public void AddProductsToCache(string data)
+        {
+            var newData = JsonConvert.DeserializeObject<List<Product>>(data);
+            BaseModelHelper.Instance.GlobalProducts.AddRange(newData);
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("getProductsFromCache")]
+        public string GetProductsFromCache(int category)
+        {
+            var newData = BaseModelHelper.Instance.GlobalProducts.Where(p => p.productCategories == (ProductCategories)category).ToList();
+            if (newData == null || !newData.Any())
+                return "NONE";
+
+            return JsonConvert.SerializeObject(newData);
+        }
+
+        [Android.Webkit.JavascriptInterface]
         [Export("requestDateSelecting")]
         public void RequestDateSelecting(int year, int month, int day)
         {
@@ -88,10 +110,7 @@ namespace Florid.Staff.Droid.Services
             {
                 _activity.ShowMask();
 
-                var dialog = new DateTimePickerDialog(_activity, () =>
-                {
-                    _activity.DismissMask();
-                })
+                var dialog = new SingleDateAndTimePickerDialog.Builder(_activity)
                                .Title("Date Chooosing")
                                .Listener(new DatetimePickerCallback(_mainWebView, DialogStyle.Date))
                                .TitleTextColor(Color.White)
@@ -121,21 +140,18 @@ namespace Florid.Staff.Droid.Services
 
                 _activity.ShowMask();
 
-                var dialog = new DateTimePickerDialog(_activity, () =>
-                {
-                    _activity.DismissMask();
-                })
-               .Title("DateTime Chooosing")
-               .DefaultDate(cal.Time)
-               .Listener(new DatetimePickerCallback(_mainWebView, DialogStyle.DateTime))
-               .TitleTextColor(Color.White)
-               .MainColor(_activity.Resources.GetColor(Resource.Color.colorPrimary))
-               .DisplayHours(true)
-               .DisplayMinutes(true)
-               .DisplayAmPm(true)
-               .Curved()
-               .CustomLocale(new Locale("vi"))
-               .MinutesStep(5);
+                var dialog = new SingleDateAndTimePickerDialog.Builder(_activity)
+                           .Title("DateTime Chooosing")
+                           .DefaultDate(cal.Time)
+                           .Listener(new DatetimePickerCallback(_mainWebView, DialogStyle.DateTime))
+                           .TitleTextColor(Color.White)
+                           .MainColor(_activity.Resources.GetColor(Resource.Color.colorPrimary))
+                           .DisplayHours(true)
+                           .DisplayMinutes(true)
+                           .DisplayAmPm(true)
+                           .Curved()
+                           .CustomLocale(new Locale("vi"))
+                           .MinutesStep(5).Build();
 
                 dialog.Display();
             });
@@ -155,10 +171,7 @@ namespace Florid.Staff.Droid.Services
             _activity.RunOnUiThread(() =>
             {
                // _activity.ShowMask();
-                var dialog = new DateTimePickerDialog(_activity, () =>
-                              {
-                                  _activity.DismissMask();
-                              })
+                var dialog = new SingleDateAndTimePickerDialog.Builder(_activity)
                            .Title("Time Chooosing")
                            .Listener(new DatetimePickerCallback(_mainWebView, DialogStyle.Time))
                            .TitleTextColor(Color.White)
@@ -174,25 +187,5 @@ namespace Florid.Staff.Droid.Services
                 dialog.Display();
             });
         }
-
-        public class DateTimePickerDialog : SingleDateAndTimePickerDialog.Builder
-        {
-            private Action _onDismiss;
-            protected DateTimePickerDialog(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
-            {
-            }
-
-            public DateTimePickerDialog(Context context, Action onDismiss) : base(context)
-            {
-                _onDismiss = onDismiss;
-            }
-
-            public override void Dismiss()
-            {
-                base.Dismiss();
-                _onDismiss?.Invoke();
-            }
-        }
-
     }
 }

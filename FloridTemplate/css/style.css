@@ -125,6 +125,13 @@ xanh 1fc9db xanh 1fe8cb */
     background-image: linear-gradient(45deg,  var(--main-blue),var(--main-green));
     color: #fff;
 }
+.main-bg.selected
+{   
+    background-image: -o-linear-gradient(45deg,  var(--main-blue),var(--main-green));
+    background-image: linear-gradient(45deg,  var(--main-blue),var(--main-green));
+    color: #fff;
+}
+
 /* ====================================================================LOGIN PAGE */
 div#login {
     height: 100vh;
@@ -824,6 +831,12 @@ form.addOrderForm {
 {
     border-color: #1fc9db;
 }
+
+.product-item.selected .prodItem img
+{
+    border-color: #1fc9db;
+}
+
 .prodItem 
 {
     text-align: center;

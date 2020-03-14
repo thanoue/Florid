@@ -42,6 +42,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\GenericModel.cs" />
     <Compile Include="Models\FirebaseConfig.cs" />
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="UtilEnums.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
