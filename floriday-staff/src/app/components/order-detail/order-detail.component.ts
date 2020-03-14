@@ -28,13 +28,10 @@ export class OrderDetailComponent extends BaseComponent {
     this.orderDetail = new OrderDetailViewModel();
 
     this.route.params.subscribe(params => {
-      const index = params.id;
-      this.detailIndex = index;
-      this.orderDetail = this.currentGlobalOrder.OrderDetails[index];
+      this.detailIndex = +params.id;
+      this.orderDetail = this.currentGlobalOrder.OrderDetails[this.detailIndex];
     });
-
     createNumbericElement();
-
   }
 
   protected OnNavigateClick() {

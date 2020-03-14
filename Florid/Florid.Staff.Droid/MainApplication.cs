@@ -200,7 +200,7 @@ namespace Florid.Staff.Droid
                 TextView tv = (TextView)(bar.View).FindViewById(Resource.Id.snackbar_text);
 
                 tv.SetTypeface(BaseModelHelper.Instance.CacheFonts[Resource.Font.bold], TypefaceStyle.Normal);
-                tv.TextSize = 25;
+                tv.TextSize = 20;
 
                 switch (alertType)
                 {

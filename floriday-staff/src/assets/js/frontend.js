@@ -12,6 +12,22 @@ jQuery(document).ready(function () {
     });
 })
 
+function filterFocus() {
+
+    let Filter = jQuery('.filterCate').parent();
+    if (Filter.hasClass("search")) {
+        Filter.removeClass("search");
+    }
+}
+
+function searchFocus(e) {
+    let Filter = jQuery(e).parent();
+    if (!Filter.hasClass("search")) {
+        Filter.addClass("search");
+    }
+    jQuery(e).find('.form-control').focus();
+}
+
 function createNumbericElement() {
     jQuery('<div class="quantity-button quantity-down">-</div>').insertBefore('.prodQuantity input');
     jQuery('<div class="quantity-button quantity-up">+</div>').insertAfter('.prodQuantity input');

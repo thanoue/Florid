@@ -46,3 +46,10 @@ export enum OrderDetailStates {
     Completed,
     Canceled
 }
+
+export enum AlertType {
+    Info = 0,
+    Error,
+    Success,
+    Warning
+}

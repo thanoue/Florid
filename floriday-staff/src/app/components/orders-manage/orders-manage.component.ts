@@ -49,7 +49,7 @@ export class OrdersManageComponent extends BaseComponent {
         orderDetail.DeliveryInfo.DateTime = new Date();
         orderDetail.ProductName = 'Hoa 01';
         orderDetail.Quantity = j;
-        orderDetail.ProductUrl = '../../../assets/images/product-img.jpg';
+        orderDetail.ProductImageUrl = '../../../assets/images/product-img.jpg';
         orderDetail.DeliveryInfo.Address = '200 Dương Đình Hội, Phước Long B';
         orderDetail.State = j as OrderDetailStates; // OrderDetailStates.Comfirming;
         orderDetail.Index = j;

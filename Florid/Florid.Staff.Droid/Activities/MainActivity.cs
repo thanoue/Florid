@@ -17,10 +17,12 @@ using Android.Runtime;
 namespace Florid.Staff.Droid.Activity
 {
     [Activity(MainLauncher = true, NoHistory = true)]
-    [Register("florid.staff.droid.activity.mainActivity")]
     public class MainActivity : BaseActivity
     {
         static readonly string TAG = "MainActivity";
+
+        public const int REQUEST_FILE_PICKER = 2;
+
         protected override int LayoutId => Resource.Layout.activity_main;
         protected override bool UseOwnLayout => true;
 
@@ -59,7 +61,7 @@ namespace Florid.Staff.Droid.Activity
             };
 
             _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
-            _mainWebView.LoadUrl("http://192.168.1.24:4200");
+            _mainWebView.LoadUrl("http://192.168.1.76:4200");
 
 #if DEBUG
             WebView.SetWebContentsDebuggingEnabled(true);

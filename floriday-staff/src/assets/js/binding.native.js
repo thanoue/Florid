@@ -98,6 +98,22 @@ function addProductsToCache(products) {
     if (typeof Android !== "undefined" && Android !== null) {
         Android.addProductsToCache(JSON.stringify(products));
     }
-    
+
+    return;
+}
+
+function alert(message, alertType) {
+    if (typeof Android !== "undefined" && Android !== null) {
+        Android.alert(message, alertType);
+    }
+
+    return;
+}
+
+function pickFile() {
+    if (typeof Android !== "undefined" && Android !== null) {
+        Android.pickFile();
+    }
+
     return;
 }

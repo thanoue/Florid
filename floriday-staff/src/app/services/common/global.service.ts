@@ -3,10 +3,12 @@ import { BehaviorSubject, from, Subject } from 'rxjs';
 import { GenericModel } from 'src/app/models/view.models/generic.model';
 import { RouteModel } from 'src/app/models/view.models/route.model';
 import { OrderViewModel } from 'src/app/models/view.models/order.model';
+import { AlertType } from 'src/app/models/enums';
 
 declare function setStatusBarColor(isDark: boolean): any;
 declare function messageDialog(title: string, message: string): any;
 declare function isOnTerminal(): any;
+declare function alert(message: string, alertType: number): any;
 
 
 @Injectable({
@@ -54,6 +56,22 @@ export class GlobalService {
 
     clickOnNavigateButton() {
         this.navigateOnClick.next(true);
+    }
+
+    showError(message: string) {
+        alert(message, +AlertType.Error);
+    }
+
+    showInfo(message: string) {
+        alert(message, +AlertType.Info);
+    }
+
+    showSuccess(message: string) {
+        alert(message, +AlertType.Success);
+    }
+
+    showWarning(message: string) {
+        alert(message, +AlertType.Warning);
     }
 
     showMessageDialog(title: string, message: string) {

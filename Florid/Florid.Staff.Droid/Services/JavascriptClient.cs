@@ -13,6 +13,8 @@ using Florid.Entity;
 using Florid.Enum;
 using Florid.Model;
 using Florid.Staff.Droid.Activity;
+//using JaiselRahman.FilePickerLib.Activities;
+//using JaiselRahman.FilePickerLib.Configs;
 using Java.Interop;
 using Java.Util;
 using Newtonsoft.Json;
@@ -103,6 +105,34 @@ namespace Florid.Staff.Droid.Services
         }
 
         [Android.Webkit.JavascriptInterface]
+        [Export("alert")]
+        public void Alert(string message,int type)
+        {
+            _activity.MainApp.ShowSnackbar(message, (AlertType)type);
+        }
+
+          [Android.Webkit.JavascriptInterface]
+        [Export("pickFile")]
+        public void PickFile()
+        {
+
+            //var intent = new Intent(_activity, typeof(FilePickerActivity));
+            //intent.PutExtra(FilePickerActivity.Configs, new Configurations.Builder()
+            //    .SetCheckPermission(true)
+            //    .SetShowAudios(false)
+            //    .SetShowImages(true)
+            //    .EnableImageCapture(true)
+            //    .SetMaxSelection(1)
+            //    .SetSkipZeroSizeFiles(true)
+            //    .SetShowAudios(false)
+            //    .Build());
+
+            //_activity.StartActivityForResult(intent, MainActivity.REQUEST_FILE_PICKER);
+
+        }
+        
+
+        [Android.Webkit.JavascriptInterface]
         [Export("requestDateSelecting")]
         public void RequestDateSelecting(int year, int month, int day)
         {
@@ -170,7 +200,7 @@ namespace Florid.Staff.Droid.Services
         {
             _activity.RunOnUiThread(() =>
             {
-               // _activity.ShowMask();
+                // _activity.ShowMask();
                 var dialog = new SingleDateAndTimePickerDialog.Builder(_activity)
                            .Title("Time Chooosing")
                            .Listener(new DatetimePickerCallback(_mainWebView, DialogStyle.Time))

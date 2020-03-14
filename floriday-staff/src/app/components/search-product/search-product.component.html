@@ -5,11 +5,11 @@
                 <a href="javascript:void(0)" class="main-bg" (click)="filter()"><img
                         src="../../../assets/images/filter2.png" alt=""><span>{{categoryName}}</span></a>
             </div>
-            <div class="filterSearch">
+            <div class="filterSearch" onclick="searchFocus(this)">
                 <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
             </div>
             <div class="filterAdd">
-                <button class="main-bg"><img src="../../../assets/images/attach.svg" alt=""
+                <button (click)="openFile()" class="main-bg"><img src="../../../assets/images/attach.svg" alt=""
                         class="main-filter"></button>
             </div>
         </div>
@@ -19,7 +19,7 @@
                 <div class="prodItem">
                     <img [src]="product.ImageUrl" alt="">
                     <h4>{{product.Name}}</h4>
-                    <span>{{product.Price}}vnđ</span>
+                    <span>{{product.Price}}</span>
                 </div>
             </div>
         </div>

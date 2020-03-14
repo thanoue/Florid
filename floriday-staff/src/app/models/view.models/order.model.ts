@@ -29,7 +29,8 @@ export class OrderDetailViewModel {
     ProductName: string;
     OrderDetailId: string;
     State: OrderDetailStates;
-    ProductUrl: string;
+    ProductId: string;
+    ProductImageUrl: string;
     Quantity = 0;
     Index = 0;
     DeliveryInfo: OrderDetailDeliveryInfo;

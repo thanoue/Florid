@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { OrderViewModel } from '../models/view.models/order.model';
 
+declare function pickFile(): any;
 
 export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -78,6 +79,25 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
     }
 
+    showError(message: string) {
+        this.globalService.showError(message);
+    }
+
+    showInfo(message: string) {
+        this.globalService.showInfo(message);
+    }
+
+    showSuccess(message: string) {
+        this.globalService.showSuccess(message);
+    }
+
+    showWarning(message: string) {
+        this.globalService.showWarning(message);
+    }
+
+    public openFile() {
+        pickFile();
+    }
 
     protected startLoading() {
         this.globalService.startLoading();
@@ -85,14 +105,6 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
     protected stopLoading() {
         this.globalService.stopLoading();
-    }
-
-    protected insertData(model: GenericModel) {
-        this.globalService.insertData(model);
-    }
-
-    protected insertDataWithIdResult(model: GenericModel) {
-        this.globalService.insertWithIdResData(model);
     }
 
     protected setStatusBarColor(isDark: boolean) {

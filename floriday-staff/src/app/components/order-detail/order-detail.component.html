@@ -3,11 +3,11 @@
         <form action="" class="addOrderForm">
             <div class="form-group prodInfo">
                 <div class="prodImg">
-                    <img src="../../../assets/images/product-img.jpg" alt="">
+                    <img [src]="orderDetail.ProductImageUrl" alt="">
                 </div>
-                <div class="prodDetail">
+                <div class="prodContent">
                     <h5 class="prodCode">{{orderDetail.ProductName}}</h5>
-                    <span (click)="insertModifiedValue()" class="prodPrice">{{orderDetail.ModifiedPrice}}vnđ</span>
+                    <span (click)="insertModifiedValue()" class="prodPrice">{{orderDetail.ModifiedPrice}}đ</span>
                     <div class="prodQuantity"><input type="number" [(ngModel)]="orderDetail.Quantity" name="Quantity"
                             id="Quantity" step="1" value="1" min="1">
                     </div>

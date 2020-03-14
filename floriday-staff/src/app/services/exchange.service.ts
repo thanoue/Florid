@@ -19,8 +19,8 @@ export class ExchangeService {
         }
     }
 
-    static getFinalPrice(requesrPrice: number, discountPercent: number, additionalFee: number) {
-        return requesrPrice - (requesrPrice / 100) * discountPercent + additionalFee;
+    static getFinalPrice(requestPrice: number, discountPercent: number, additionalFee: number) {
+        return requestPrice - (requestPrice / 100) * discountPercent + additionalFee;
     }
 
     static getGainedScore(totalAmount: number): number {
@@ -29,5 +29,15 @@ export class ExchangeService {
 
     static geExchangableAmunt(gainedScore: number) {
         return gainedScore * 1000;
+    }
+
+    static stringPriceToNumber(res: string): number {
+        // tslint:disable-next-line: no-debugger
+        const length = res.length;
+        const num = res.substring(0, length - 1);
+        const finalString = num.replace(/,/g, '');
+        const final = parseFloat(finalString);
+
+        return final;
     }
 }
