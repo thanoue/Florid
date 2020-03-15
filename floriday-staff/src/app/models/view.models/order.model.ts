@@ -41,8 +41,31 @@ export class OrderDetailViewModel {
 
     Description: string;
 
+    IsFromLocalProduct: boolean;
+
     constructor() {
         this.DeliveryInfo = new OrderDetailDeliveryInfo();
+    }
+
+    static DeepCopy(model: OrderDetailViewModel) {
+
+        const viewModel = new OrderDetailViewModel();
+
+        viewModel.ProductName = model.ProductName;
+        viewModel.OrderDetailId = model.OrderDetailId;
+        viewModel.State = model.State;
+        viewModel.ProductId = model.ProductId;
+        viewModel.ProductImageUrl = model.ProductImageUrl;
+        viewModel.Quantity = model.Quantity;
+        viewModel.Index = model.Index;
+        viewModel.DeliveryInfo = OrderDetailDeliveryInfo.DeepCopy(model.DeliveryInfo);
+        viewModel.OriginalPrice = model.OriginalPrice;
+        viewModel.ModifiedPrice = model.ModifiedPrice;
+        viewModel.AdditionalFee = model.AdditionalFee;
+        viewModel.Description = model.Description;
+        viewModel.IsFromLocalProduct = model.IsFromLocalProduct;
+
+        return viewModel;
     }
 }
 
@@ -81,7 +104,7 @@ export class OrderCustomerInfoViewModel {
     ScoreUsed = 0;
     UsedScoreTotal = 0;
     PhoneNumber: string;
-
+    MembershipType: MembershipTypes;
 
     static toViewModel(customer: Customer): OrderCustomerInfoViewModel {
         const viewModel = new OrderCustomerInfoViewModel();
@@ -89,12 +112,11 @@ export class OrderCustomerInfoViewModel {
         viewModel.Id = customer.Id;
         viewModel.Name = customer.FullName;
         viewModel.PhoneNumber = customer.PhoneNumber;
+        viewModel.MembershipType = customer.MembershipInfo.MembershipType;
         viewModel.DiscountPercent = ExchangeService.getMemberDiscountPercent(customer.MembershipInfo.MembershipType);
         viewModel.AvailableScore = customer.MembershipInfo.AvailableScore;
         viewModel.UsedScoreTotal = customer.MembershipInfo.UsedScoreTotal;
 
         return viewModel;
     }
-
-
 }

@@ -7,6 +7,8 @@ import { Product } from 'src/app/models/entities/product.entity';
 import { max } from 'rxjs/operators';
 import { PRODUCTCATEGORIES } from 'src/app/app.constants';
 import { ExchangeService } from 'src/app/services/exchange.service';
+import { TempProduct } from 'src/app/models/entities/file.entity';
+import { TempProductService } from 'src/app/services/tempProduct.service';
 
 declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: number) => void): any;
 declare function filterFocus(): any;
@@ -19,7 +21,6 @@ declare function filterFocus(): any;
 export class SearchProductComponent extends BaseComponent {
 
   Title = 'Chọn sản phẩm';
-  detailIndex: number;
   productCategory: ProductCategories;
   currentPage = 1;
   currentMaxPage = 0;
@@ -30,7 +31,8 @@ export class SearchProductComponent extends BaseComponent {
   categoryName = '';
   selectedProduct: Product;
 
-  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService, private _ngZone: NgZone) {
+  constructor(private route: ActivatedRoute, private router: Router,
+    private productService: ProductService, private _ngZone: NgZone, private tempProductService: TempProductService) {
     super();
 
     this.pagingProducts = [];
@@ -38,15 +40,12 @@ export class SearchProductComponent extends BaseComponent {
 
   }
 
-
   protected Init() {
 
     this.selectedProduct = new Product();
 
     this.route.queryParams
       .subscribe(params => {
-
-        this.detailIndex = +params.orderDetailId;
 
         this.getProductByCategory(+params.category);
 
@@ -63,6 +62,18 @@ export class SearchProductComponent extends BaseComponent {
 
   setSelectedProduct(data: string) {
     this.selectedProduct = this.pagingProducts.find(p => p.Id === data);
+  }
+
+  protected fileChosen(path: string) {
+
+    this.currentGlobalOrderDetail.IsFromLocalProduct = true;
+    this.currentGlobalOrderDetail.ProductImageUrl = 'data:image/png;base64,' + path;
+    this.currentGlobalOrderDetail.OriginalPrice = 0;
+    this.currentGlobalOrderDetail.ModifiedPrice = 0;
+    this.currentGlobalOrderDetail.ProductName = '.....';
+
+    this.OnNavigateClick();
+
   }
 
 
@@ -120,14 +131,15 @@ export class SearchProductComponent extends BaseComponent {
       return;
     }
 
-    this.currentGlobalOrder.OrderDetails[this.detailIndex].ProductName = this.selectedProduct.Name;
-    this.currentGlobalOrder.OrderDetails[this.detailIndex].ProductImageUrl = this.selectedProduct.ImageUrl;
-    this.currentGlobalOrder.OrderDetails[this.detailIndex].ProductId = this.selectedProduct.Id;
+    this.currentGlobalOrderDetail.ProductName = this.selectedProduct.Name;
+    this.currentGlobalOrderDetail.ProductImageUrl = this.selectedProduct.ImageUrl;
+    this.currentGlobalOrderDetail.ProductId = this.selectedProduct.Id;
+    this.currentGlobalOrderDetail.IsFromLocalProduct = false;
 
     const price = ExchangeService.stringPriceToNumber(this.selectedProduct.Price);
 
-    this.currentGlobalOrder.OrderDetails[this.detailIndex].OriginalPrice = price;
-    this.currentGlobalOrder.OrderDetails[this.detailIndex].ModifiedPrice = price;
+    this.currentGlobalOrderDetail.OriginalPrice = price;
+    this.currentGlobalOrderDetail.ModifiedPrice = price;
 
     this.OnNavigateClick();
   }

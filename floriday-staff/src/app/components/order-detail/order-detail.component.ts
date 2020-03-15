@@ -6,8 +6,9 @@ import { switchMap } from 'rxjs/operators';
 import { MenuItem } from '../../models/view.models/menu.model';
 import { ProductCategories } from 'src/app/models/enums';
 import { PRODUCTCATEGORIES } from 'src/app/app.constants';
+import { NgForm } from '@angular/forms';
 
-declare function getInput(resCallback: (res: string) => void): any;
+declare function getNumberInput(resCallback: (res: string) => void): any;
 declare function createNumbericElement(): any;
 declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: number) => void): any;
 
@@ -25,17 +26,17 @@ export class OrderDetailComponent extends BaseComponent {
 
   protected Init() {
 
-    this.orderDetail = new OrderDetailViewModel();
+    this.orderDetail = this.currentGlobalOrderDetail;
+
+    createNumbericElement();
 
     this.route.params.subscribe(params => {
-      this.detailIndex = +params.id;
-      this.orderDetail = this.currentGlobalOrder.OrderDetails[this.detailIndex];
+      this.detailIndex = + params.id;
     });
-    createNumbericElement();
   }
 
   protected OnNavigateClick() {
-    this.currentGlobalOrder.OrderDetails.pop();
+    // this.currentGlobalOrder.OrderDetails.pop();
     super.OnNavigateClick();
   }
 
@@ -45,7 +46,7 @@ export class OrderDetailComponent extends BaseComponent {
   }
 
   insertModifiedValue() {
-    getInput(res => {
+    getNumberInput(res => {
       this.orderDetail.ModifiedPrice = res as unknown as number;
     });
   }
@@ -53,9 +54,38 @@ export class OrderDetailComponent extends BaseComponent {
   searchProduct() {
 
     selectProductCategory(PRODUCTCATEGORIES, (val) => {
-      // tslint:disable-next-line:max-line-length
-      this.router.navigate(['/search-product'], { queryParams: { orderDetailId: this.detailIndex, category: val }, queryParamsHandling: 'merge' });
+
+      this.router.navigate(['/search-product'], { queryParams: { category: val }, queryParamsHandling: 'merge' });
+
     });
 
+  }
+
+  submitOrderDetail(form: NgForm) {
+
+    if (!form.valid) {
+      return;
+    }
+    console.log(this.orderDetail);
+
+    var index = this.detailIndex > -1 ? this.detailIndex : this.currentGlobalOrder.OrderDetails.length;
+
+    this.currentGlobalOrderDetail.Index = index;
+
+    const viewModel = OrderDetailViewModel.DeepCopy(this.currentGlobalOrderDetail);
+
+    if (this.detailIndex > -1) {
+
+      this.currentGlobalOrder.OrderDetails[this.detailIndex] = viewModel;
+
+      this.currentGlobalOrderDetail = null;
+
+    } else {
+
+      this.currentGlobalOrder.OrderDetails.push(viewModel);
+
+    }
+
+    this.OnNavigateClick();
   }
 }

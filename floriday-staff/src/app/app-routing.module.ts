@@ -51,7 +51,7 @@ const routes: Routes = [
         component: OrderDetailComponent,
       },
       {
-        path: 'select-receiver/:id',
+        path: 'select-receiver',
         component: SelectReceiverComponent,
       },
       {

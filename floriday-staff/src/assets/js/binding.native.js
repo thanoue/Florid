@@ -84,6 +84,9 @@ function isOnTerminal() {
     else return false;
 }
 
+function fileChosen(path) {
+    window.BaseReference.zone.run(() => { window.BaseReference.fileChosen(path); });
+}
 
 function getProductsFromCache(category) {
 

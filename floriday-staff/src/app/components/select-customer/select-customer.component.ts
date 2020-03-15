@@ -81,7 +81,7 @@ export class SelectCustomerComponent extends BaseComponent {
   selectConfirm() {
 
     if (this.selectedCustomer == null) {
-      this.globalService.showMessageDialog('Lỗi!', 'Chưa chọn khách hàng nào cả!!!');
+      this.showError('Chưa chọn khách hàng nào cả!!!');
       return;
     }
 

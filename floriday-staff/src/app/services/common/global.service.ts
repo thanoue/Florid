@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, from, Subject } from 'rxjs';
 import { GenericModel } from 'src/app/models/view.models/generic.model';
 import { RouteModel } from 'src/app/models/view.models/route.model';
-import { OrderViewModel } from 'src/app/models/view.models/order.model';
+import { OrderViewModel, OrderDetailViewModel } from 'src/app/models/view.models/order.model';
 import { AlertType } from 'src/app/models/enums';
 
 declare function setStatusBarColor(isDark: boolean): any;
@@ -25,6 +25,7 @@ export class GlobalService {
     navigateOnClickEmitter$ = this.navigateOnClick.asObservable;
 
     currentOrderViewModel: OrderViewModel;
+    currentOrderDetailViewModel: OrderDetailViewModel;
 
     constructor() {
         this.currentOrderViewModel = new OrderViewModel();

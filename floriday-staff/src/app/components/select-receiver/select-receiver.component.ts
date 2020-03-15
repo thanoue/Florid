@@ -21,7 +21,11 @@ export class SelectReceiverComponent extends BaseComponent {
   currentList: OrderDetailDeliveryInfo[];
   deliveryInfo: OrderDetailDeliveryInfo;
   deliveryTime = '';
-  orderDetailIndex = -1;
+
+
+  constructor(private route: ActivatedRoute, private _ngZone: NgZone) {
+    super();
+  }
 
   protected Init() {
 
@@ -43,13 +47,13 @@ export class SelectReceiverComponent extends BaseComponent {
       const temp = OrderDetailDeliveryInfo.DeepCopy(orderDetail.DeliveryInfo);
 
       this.currentList.push(temp);
+
     });
 
     this.route.params.subscribe(params => {
 
-      this.orderDetailIndex = params.id;
+      this.deliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.currentGlobalOrderDetail.DeliveryInfo);
 
-      this.deliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.currentGlobalOrder.OrderDetails[this.orderDetailIndex].DeliveryInfo);
       this.deliveryInfo.DateTime.setSeconds(0);
 
       this.deliveryTime = this.deliveryInfo.DateTime.toLocaleString('vi-VN', { hour12: true });
@@ -60,15 +64,10 @@ export class SelectReceiverComponent extends BaseComponent {
 
   selectReceiver(index: number) {
 
-    console.log('before assign', this.currentList[index].DateTime);
-
     this.deliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.currentList[index]);
 
     this.deliveryTime = this.deliveryInfo.DateTime.toLocaleString('vi-VN', { hour12: true });
 
-    console.log('after assign', this.currentList[index].DateTime);
-
-    console.log(this.deliveryInfo.DateTime, this.deliveryTime);
   }
 
   addReceiver(form: NgForm) {
@@ -76,7 +75,8 @@ export class SelectReceiverComponent extends BaseComponent {
     if (!form.valid) {
       return;
     }
-    this.currentGlobalOrder.OrderDetails[this.orderDetailIndex].DeliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.deliveryInfo);
+
+    this.currentGlobalOrderDetail.DeliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.deliveryInfo);
 
     super.OnNavigateClick();
   }
@@ -96,10 +96,6 @@ export class SelectReceiverComponent extends BaseComponent {
 
     this.deliveryTime = this.deliveryInfo.DateTime.toLocaleString('vi-VN', { hour12: true });
 
-  }
-
-  constructor(private route: ActivatedRoute, private _ngZone: NgZone) {
-    super();
   }
 
 }

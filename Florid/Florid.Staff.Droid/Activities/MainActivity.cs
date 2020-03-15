@@ -13,10 +13,14 @@ using Florent37.SingleDateAndTimePickerLib.Dialogs;
 using Florid.Droid.Lib;
 using Florid.Staff.Droid.Services;
 using Android.Runtime;
+using Android.Content;
+using JaiselRahman.FilePickerLib.Activities;
+using JaiselRahman.FilePickerLib.Models;
+using System.IO;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity(MainLauncher = true, NoHistory = true)]
+    [Activity(MainLauncher = true)]
     public class MainActivity : BaseActivity
     {
         static readonly string TAG = "MainActivity";
@@ -45,10 +49,10 @@ namespace Florid.Staff.Droid.Activity
             _mainWebView.SetWebViewClient(new WebViewClient());
             _mainWebView.SetWebChromeClient(new MyWebChromeClient());
 
-            var javascriptClient = new JavascriptClient(this,_mainWebView, (email, password) =>
-            {
+            var javascriptClient = new JavascriptClient(this, _mainWebView, (email, password) =>
+             {
 
-            });
+             });
 
             javascriptClient.SetPrimaryDarkStatusBar = (isDark) =>
             {
@@ -61,7 +65,7 @@ namespace Florid.Staff.Droid.Activity
             };
 
             _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
-            _mainWebView.LoadUrl("http://192.168.1.76:4200");
+            _mainWebView.LoadUrl("http://192.168.1.25:4200");
 
 #if DEBUG
             WebView.SetWebContentsDebuggingEnabled(true);
@@ -88,7 +92,61 @@ namespace Florid.Staff.Droid.Activity
 
         public override void OnBackPressed()
         {
-            DroidUtility.ExecJavaScript(_mainWebView,"backNavigate()");
+            DroidUtility.ExecJavaScript(_mainWebView, "backNavigate()");
+        }
+
+        protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            if (resultCode != Result.Ok)
+                return;
+
+            if (requestCode == REQUEST_FILE_PICKER)
+            {
+                var file = (MediaFile)data.GetParcelableArrayListExtra(FilePickerActivity.MediaFiles)[0];
+                var path = file.Path;
+                var size = file.Size;
+
+                using (var bitmap = BitmapFactory.DecodeFile(path))
+                {
+                    using (var scaled = GetResizedBitmap(bitmap, 700))
+                    {
+                        var stream = new MemoryStream();
+                        if (path.Contains(".png") || path.Contains(".PNG"))
+                            scaled.Compress(Bitmap.CompressFormat.Png, 100, stream);
+                        else
+                            scaled.Compress(Bitmap.CompressFormat.Jpeg, 100, stream);
+                        var bytes = stream.ToArray();
+
+                        var encoded = Base64.GetEncoder().EncodeToString(bytes);
+
+                        DroidUtility.ExecJavaScript(_mainWebView, "fileChosen(\"" + encoded + "\")");
+                    }
+
+                }
+
+            }
+
+        }
+
+        public Bitmap GetResizedBitmap(Bitmap image, int maxSize)
+        {
+            int width = image.Width;
+            int height = image.Height;
+
+            float bitmapRatio = (float)width / (float)height;
+            if (bitmapRatio > 1)
+            {
+                width = maxSize;
+                height = (int)(width / bitmapRatio);
+            }
+            else
+            {
+                height = maxSize;
+                width = (int)(height * bitmapRatio);
+            }
+            return Bitmap.CreateScaledBitmap(image, width, height, true);
         }
 
     }

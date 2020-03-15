@@ -10,7 +10,8 @@ import { RouteModel } from '../models/view.models/route.model';
 import { map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
-import { OrderViewModel } from '../models/view.models/order.model';
+import { OrderViewModel, OrderDetailViewModel } from '../models/view.models/order.model';
+import { OrderDetail } from '../models/entities/order.entity';
 
 declare function pickFile(): any;
 
@@ -34,6 +35,14 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         this.globalService.currentOrderViewModel = value;
     }
 
+    get currentGlobalOrderDetail(): OrderDetailViewModel {
+        return this.globalService.currentOrderDetailViewModel;
+    }
+    set currentGlobalOrderDetail(value: OrderDetailViewModel) {
+        this.globalService.currentOrderDetailViewModel = value;
+    }
+
+
     ngOnInit(): void {
 
         const key = 'BaseReference';
@@ -41,7 +50,8 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
             component: this,
             zone: this.ngZone,
             dateTimeSelected: (year, month, day, hour, minute) => this.dateTimeSelected(year, month, day, hour, minute),
-            forceBackNavigate: () => this.OnNavigateClick()
+            forceBackNavigate: () => this.OnNavigateClick(),
+            fileChosen: (path) => this.fileChosen(path)
         };
 
         this.IsOnTerminal = this.globalService.isRunOnTerimal();
@@ -119,5 +129,8 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
     protected afterViewLoad() {
 
+    }
+
+    protected fileChosen(path: string) {
     }
 }

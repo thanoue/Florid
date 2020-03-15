@@ -13,3 +13,11 @@ export class Receipt extends BaseFile {
         this.FolderName = '/receipts';
     }
 }
+
+export class TempProduct extends BaseFile {
+    OrderDetailId: string;
+    constructor() {
+        super();
+        this.FolderName = '/tempProduct';
+    }
+}

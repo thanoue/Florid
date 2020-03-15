@@ -13,8 +13,8 @@ using Florid.Entity;
 using Florid.Enum;
 using Florid.Model;
 using Florid.Staff.Droid.Activity;
-//using JaiselRahman.FilePickerLib.Activities;
-//using JaiselRahman.FilePickerLib.Configs;
+using JaiselRahman.FilePickerLib.Activities;
+using JaiselRahman.FilePickerLib.Configs;
 using Java.Interop;
 using Java.Util;
 using Newtonsoft.Json;
@@ -116,18 +116,18 @@ namespace Florid.Staff.Droid.Services
         public void PickFile()
         {
 
-            //var intent = new Intent(_activity, typeof(FilePickerActivity));
-            //intent.PutExtra(FilePickerActivity.Configs, new Configurations.Builder()
-            //    .SetCheckPermission(true)
-            //    .SetShowAudios(false)
-            //    .SetShowImages(true)
-            //    .EnableImageCapture(true)
-            //    .SetMaxSelection(1)
-            //    .SetSkipZeroSizeFiles(true)
-            //    .SetShowAudios(false)
-            //    .Build());
+            var intent = new Intent(_activity, typeof(FilePickerActivity));
+            intent.PutExtra(FilePickerActivity.Configs, new Configurations.Builder()
+                .SetCheckPermission(true)
+                .SetShowAudios(false)
+                .SetShowImages(true)
+                .EnableImageCapture(true)
+                .SetMaxSelection(1)
+                .SetSkipZeroSizeFiles(true)
+                .SetShowVideos(false)
+                .Build());
 
-            //_activity.StartActivityForResult(intent, MainActivity.REQUEST_FILE_PICKER);
+            _activity.StartActivityForResult(intent, MainActivity.REQUEST_FILE_PICKER);
 
         }
         
@@ -167,8 +167,6 @@ namespace Florid.Staff.Droid.Services
             {
                 var datetime = new DateTime(year, month + 1, day, hour, minute, 0, 0);
                 var cal = ConvertToCalendar(datetime);
-
-                _activity.ShowMask();
 
                 var dialog = new SingleDateAndTimePickerDialog.Builder(_activity)
                            .Title("DateTime Chooosing")

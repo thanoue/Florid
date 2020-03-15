@@ -334,13 +334,6 @@ function openDeliConfirm() {
     });
 }
 
-//Thay đổi thứ thự đơn hàng
-function openOrdChange() {
-    var html = `<div id="changeOrder" class="popup-content"><div class="form-group">
-        <input type="text" name="" id="" class="mainForm" placeholder="Thứ tự ưu tiên...">
-    </div></div>`;
-    popUp(html);
-}
 
 //Hiển thị số lượt xem
 function openViewed() {
@@ -365,6 +358,26 @@ function openExcForm() {
             jQuery(".overlay-dark").remove();
         });
     });
+}
+
+function getNumberInput(callback) {
+
+    var html = `<div id="changeOrder" class="popup-content"><div class="form-group">
+        <input type="number" name="" id="" class="mainForm" placeholder="Thứ tự ưu tiên...">
+    </div></div>`;
+
+    appendInBody();
+    
+    jQuery("body").append(html);
+    jQuery(".popup-content").fadeIn(350);
+
+    jQuery(".overlay-dark:not(.layer2)").click(function () {
+        jQuery(".popup-content").hide(250, function () {
+            jQuery(".overlay-dark").remove();
+            jQuery(this).remove();
+        });
+    });
+
 }
 
 // Popup thông báo
