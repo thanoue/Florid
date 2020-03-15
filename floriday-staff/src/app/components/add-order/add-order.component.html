@@ -15,7 +15,7 @@
         </div>
         <ul class=" orderDetail cusScroll">
             <li *ngFor="let orderDetail of order.OrderDetails" class="orderDetailItem">
-                <div class="itemNumb"><span>{{orderDetail.Index}}</span></div>
+                <div class="itemNumb"><span>{{orderDetail.Index + 1}}</span></div>
                 <div class="itemDetail">
                     <img src="{{orderDetail.ProductImageUrl}}" alt="" class="item-detail-thumb">
                     <div class="item-detail-info">
@@ -50,7 +50,7 @@
         </div>
         <div class="row orderConfirm text-center">
             <div class="col-4 exchange">
-                <button class="btn main-bg w-100" onclick="openExcForm()"><img src="../../../assets/images/money.svg"
+                <button class="btn main-bg w-100" (click)="scoreExchange()"><img src="../../../assets/images/money.svg"
                         alt="Đổi điểm" class="main-filter"></button>
             </div>
             <div class="col-8 pl-0">
@@ -71,11 +71,11 @@
             <span class="">{{order.CustomerInfo.AvailableScore}}</span>
         </div>
         <div class="form-group">
-            <input type="number" name="" id="" class="mainForm" placeholder="Số điểm muốn đổi...">
+            <input type="number" name="" id="exchange-val"  class="mainForm" placeholder="Số điểm muốn đổi...">
         </div>
         <div class="row">
             <div class="col-8 mx-auto text-center">
-                <button type="submit" class="btn main-btn w-100 mt-3">Đổi điểm</button>
+                <button type="submit" class="btn main-btn w-100 mt-3 exchange-confirm">Đổi điểm</button>
             </div>
         </div>
     </form>

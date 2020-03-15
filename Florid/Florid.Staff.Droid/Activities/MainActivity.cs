@@ -20,7 +20,7 @@ using System.IO;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity(MainLauncher = true)]
+    [Activity]
     public class MainActivity : BaseActivity
     {
         static readonly string TAG = "MainActivity";
@@ -65,7 +65,7 @@ namespace Florid.Staff.Droid.Activity
             };
 
             _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
-            _mainWebView.LoadUrl("http://192.168.1.25:4200");
+            _mainWebView.LoadUrl(BaseModelHelper.Instance.RootWebUrl);
 
 #if DEBUG
             WebView.SetWebContentsDebuggingEnabled(true);

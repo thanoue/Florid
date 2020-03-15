@@ -25,10 +25,11 @@ function searchFocus(e) {
     if (!Filter.hasClass("search")) {
         Filter.addClass("search");
     }
-    jQuery(e).find('.form-control').focus();
+
+    jQuery('.prodFilter .filterSearch .form-control').first().focus();
 }
 
-function createNumbericElement() {
+function createNumbericElement(isDisabled, calback) {
     jQuery('<div class="quantity-button quantity-down">-</div>').insertBefore('.prodQuantity input');
     jQuery('<div class="quantity-button quantity-up">+</div>').insertAfter('.prodQuantity input');
     jQuery('.prodQuantity').each(function () {
@@ -38,14 +39,22 @@ function createNumbericElement() {
             btnDown = spinner.find('.quantity-down'),
             min = input.attr('min');
 
+        if (isDisabled) {
+            return;
+        }
+
         btnUp.click(function () {
+
+
             var oldValue = parseFloat(input.val());
             var newVal = oldValue + 1;
             spinner.find("input").val(newVal);
             spinner.find("input").trigger("change");
+            calback(newVal);
         });
 
         btnDown.click(function () {
+
             var oldValue = parseFloat(input.val());
             if (oldValue <= min) {
                 var newVal = oldValue;
@@ -54,6 +63,9 @@ function createNumbericElement() {
             }
             spinner.find("input").val(newVal);
             spinner.find("input").trigger("change");
+
+            calback(newVal);
+
         });
 
     });
@@ -61,11 +73,14 @@ function createNumbericElement() {
 
 // append 2 element
 function appendInBody() {
+
     if (jQuery("body").find(".overlay-dark").length) {
         jQuery("body").append("<div class='overlay-dark layer2'></div>");
+        return false;
     }
     else {
         jQuery("body").append("<div class='overlay-dark'></div>");
+        return true;
     }
 }
 
@@ -197,6 +212,7 @@ function selectSavedDeliveryInfo(e) {
 
 // SlideUp Action menu
 function slideUp(html, callback) {
+
     appendInBody();
     jQuery("body").append(html);
 
@@ -230,9 +246,9 @@ function slideUp(html, callback) {
 
 }
 
-// Thông báo lỗi Login
 function messageDialog(title, message) {
-    appendInBody();
+
+    let isFirstLayer = appendInBody();
 
     var html = `<div id="loginerror" class="popup-content">
     <img src="../../../assets/images/alert.png" alt="">
@@ -244,9 +260,17 @@ function messageDialog(title, message) {
 
     jQuery("#loginerror").fadeIn(350);
 
-    jQuery(".overlay-dark").one("click", function () {
+    let overlayClasses = '';
+
+    if (isFirstLayer) {
+        overlayClasses = '.overlay-dark:not(.layer2)';
+    } else {
+        overlayClasses = '.overlay-dark.layer2';
+    }
+
+    jQuery(overlayClasses).one("click", function () {
         jQuery("#loginerror").hide(250, function () {
-            jQuery(".overlay-dark").remove();
+            jQuery(overlayClasses).remove();
             jQuery(this).remove();
         });
     });
@@ -349,13 +373,49 @@ function openViewed() {
 
 
 // Thêm thông tin
-function openExcForm() {
-    appendInBody();
+function openExcForm(callback) {
+
+    let input = jQuery('#exchangeAdd #exchange-val').first();
+    input.val('');
+
+    let isFirstLayer = appendInBody();
+
+    let overlayClasses = '';
+
+    if (isFirstLayer) {
+        overlayClasses = '.overlay-dark:not(.layer2)';
+    } else {
+        overlayClasses = '.overlay-dark.layer2';
+    }
+
     jQuery("#exchangeAdd").fadeIn(350);
 
-    jQuery(".overlay-dark:not(.layer2)").click(function () {
+    input.focus();
+
+    jQuery('#exchangeAdd .exchange-confirm').on('click', function () {
+
+        let input = jQuery('#exchangeAdd #exchange-val').first();
+
+        let val = input.val();
+
+        callback(parseInt(val), function (isSuccess) {
+
+            if (!isSuccess) {
+                return;
+            }
+
+            jQuery(this).off('click');
+
+            jQuery("#exchangeAdd").hide(250, function () {
+                jQuery(overlayClasses).remove();
+            });
+
+        });
+    });
+
+    jQuery(overlayClasses).one('click', function () {
         jQuery("#exchangeAdd").hide(250, function () {
-            jQuery(".overlay-dark").remove();
+            jQuery(overlayClasses).remove();
         });
     });
 }
@@ -367,7 +427,7 @@ function getNumberInput(callback) {
     </div></div>`;
 
     appendInBody();
-    
+
     jQuery("body").append(html);
     jQuery(".popup-content").fadeIn(350);
 

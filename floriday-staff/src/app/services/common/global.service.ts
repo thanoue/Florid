@@ -4,9 +4,9 @@ import { GenericModel } from 'src/app/models/view.models/generic.model';
 import { RouteModel } from 'src/app/models/view.models/route.model';
 import { OrderViewModel, OrderDetailViewModel } from 'src/app/models/view.models/order.model';
 import { AlertType } from 'src/app/models/enums';
+import { ToastrService } from 'ngx-toastr';
 
 declare function setStatusBarColor(isDark: boolean): any;
-declare function messageDialog(title: string, message: string): any;
 declare function isOnTerminal(): any;
 declare function alert(message: string, alertType: number): any;
 
@@ -16,8 +16,8 @@ declare function alert(message: string, alertType: number): any;
 })
 export class GlobalService {
 
-    insertDataCallback: BehaviorSubject<GenericModel> = new BehaviorSubject<GenericModel>(null);
-    insertDataWithIdResCallback: BehaviorSubject<GenericModel> = new BehaviorSubject<GenericModel>(null);
+    notifySetup: any;
+
     spinnerInvoke: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     updateHeader: BehaviorSubject<RouteModel> = new BehaviorSubject<RouteModel>(null);
 
@@ -27,8 +27,10 @@ export class GlobalService {
     currentOrderViewModel: OrderViewModel;
     currentOrderDetailViewModel: OrderDetailViewModel;
 
-    constructor() {
+    constructor(private toastr: ToastrService) {
         this.currentOrderViewModel = new OrderViewModel();
+        // tslint:disable-next-line: max-line-length
+        this.notifySetup = { timeOut: 15000, tapToDismiss: true, progressBar: false, progressAnimation: 'decreasing', positionClass: 'toast-bottom-right', closeButton: true, extendedTimeOut: 3000 };
     }
 
     startLoading() {
@@ -37,14 +39,6 @@ export class GlobalService {
 
     stopLoading() {
         this.spinnerInvoke.next(false);
-    }
-
-    insertData(data: GenericModel) {
-        this.insertDataCallback.next(data);
-    }
-
-    insertWithIdResData(data: GenericModel) {
-        this.insertDataWithIdResCallback.next(data);
     }
 
     setStatusBarColor(isDark: boolean) {
@@ -60,24 +54,37 @@ export class GlobalService {
     }
 
     showError(message: string) {
-        alert(message, +AlertType.Error);
+        if (!this.isRunOnTerimal()) {
+            this.toastr.error(message, 'Lỗi', this.notifySetup);
+        } else {
+            alert(message, +AlertType.Error);
+        }
     }
 
     showInfo(message: string) {
-        alert(message, +AlertType.Info);
+        if (!this.isRunOnTerimal()) {
+            this.toastr.info(message, 'Thông tin', this.notifySetup);
+        } else {
+            alert(message, +AlertType.Info);
+        }
     }
 
     showSuccess(message: string) {
-        alert(message, +AlertType.Success);
+        if (!this.isRunOnTerimal()) {
+            this.toastr.success(message, 'Thành công', this.notifySetup);
+        } else {
+            alert(message, +AlertType.Success);
+        }
     }
 
     showWarning(message: string) {
-        alert(message, +AlertType.Warning);
+        if (!this.isRunOnTerimal()) {
+            this.toastr.warning(message, 'Cảnh báo', this.notifySetup);
+        } else {
+            alert(message, +AlertType.Warning);
+        }
     }
 
-    showMessageDialog(title: string, message: string) {
-        messageDialog(title, message);
-    }
 
     isRunOnTerimal(): boolean {
         return isOnTerminal();

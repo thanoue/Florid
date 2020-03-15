@@ -31,13 +31,13 @@ export class OrderDetailViewModel {
     State: OrderDetailStates;
     ProductId: string;
     ProductImageUrl: string;
-    Quantity = 0;
+    Quantity = 1;
     Index = 0;
     DeliveryInfo: OrderDetailDeliveryInfo;
 
-    OriginalPrice = 0;
-    ModifiedPrice = 0;
-    AdditionalFee = 0;
+    OriginalPrice: number;
+    ModifiedPrice: number;
+    AdditionalFee: number;
 
     Description: string;
 

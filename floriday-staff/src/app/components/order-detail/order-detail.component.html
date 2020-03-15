@@ -8,7 +8,7 @@
                 <div class="prodContent">
                     <h5 class="prodCode">{{orderDetail.ProductName}}</h5>
                     <span (click)="insertModifiedValue()" class="prodPrice">{{orderDetail.ModifiedPrice}}đ</span>
-                    <div class="prodQuantity"><input type="number" [(ngModel)]="orderDetail.Quantity" name="Quantity"
+                    <div class="prodQuantity"><input type="number" readonly [(ngModel)]="orderDetail.Quantity" name="Quantity"
                             id="Quantity" step="1" min="1">
                     </div>
                 </div>

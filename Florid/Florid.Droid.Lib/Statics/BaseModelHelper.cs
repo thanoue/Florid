@@ -20,5 +20,7 @@ namespace Florid.Droid.Lib
         public ISecureConfig SecureConfig => ServiceLocator.Instance.Get<ISecureConfig>();
 
         public List<Product> GlobalProducts = new List<Product>();
+
+        public string RootWebUrl { get; set; }
     }
 }

@@ -24,28 +24,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.insertDataSubc = this.globalService.insertDataCallback
-      .subscribe(data => {
-
-        if (!data || data == null) {
-          return;
-
-        }
-        this.insertData(data);
-
-      });
-
-    this.insertDataWithIdResSubc = this.globalService.insertDataWithIdResCallback
-      .subscribe(data => {
-
-        if (!data || data == null) {
-          return;
-
-        }
-        this.insertDataWithIdResult(data);
-
-      });
-
     this.spinnerCallback = this.globalService.spinnerInvoke
       .subscribe(isLoading => {
         setTimeout(() => {

@@ -9,7 +9,7 @@ import { PRODUCTCATEGORIES } from 'src/app/app.constants';
 import { NgForm } from '@angular/forms';
 
 declare function getNumberInput(resCallback: (res: string) => void): any;
-declare function createNumbericElement(): any;
+declare function createNumbericElement(isDisabled: boolean, calback: (val: number) => void): any;
 declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: number) => void): any;
 
 @Component({
@@ -28,15 +28,19 @@ export class OrderDetailComponent extends BaseComponent {
 
     this.orderDetail = this.currentGlobalOrderDetail;
 
-    createNumbericElement();
 
     this.route.params.subscribe(params => {
       this.detailIndex = + params.id;
+
+      createNumbericElement(this.detailIndex > -1, (val) => {
+        this.orderDetail.Quantity = val;
+      });
+
     });
+
   }
 
   protected OnNavigateClick() {
-    // this.currentGlobalOrder.OrderDetails.pop();
     super.OnNavigateClick();
   }
 
@@ -66,26 +70,37 @@ export class OrderDetailComponent extends BaseComponent {
     if (!form.valid) {
       return;
     }
-    console.log(this.orderDetail);
 
-    var index = this.detailIndex > -1 ? this.detailIndex : this.currentGlobalOrder.OrderDetails.length;
-
-    this.currentGlobalOrderDetail.Index = index;
+    this.currentGlobalOrderDetail.Index = this.detailIndex > -1 ? this.detailIndex : this.currentGlobalOrder.OrderDetails.length;
 
     const viewModel = OrderDetailViewModel.DeepCopy(this.currentGlobalOrderDetail);
+
+    this.currentGlobalOrderDetail = null;
 
     if (this.detailIndex > -1) {
 
       this.currentGlobalOrder.OrderDetails[this.detailIndex] = viewModel;
 
-      this.currentGlobalOrderDetail = null;
-
     } else {
 
-      this.currentGlobalOrder.OrderDetails.push(viewModel);
+      let index = viewModel.Index;
+
+      for (let i = 0; i < viewModel.Quantity; i++) {
+
+        const subItem = OrderDetailViewModel.DeepCopy(viewModel);
+
+        subItem.Quantity = 1;
+
+        subItem.Index = index;
+
+        this.currentGlobalOrder.OrderDetails.push(subItem);
+
+        index += 1;
+
+      }
 
     }
 
-    this.OnNavigateClick();
+    super.OnNavigateClick();
   }
 }

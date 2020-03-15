@@ -14,12 +14,13 @@ using Android.Views;
 using Android.Webkit;
 using Android.Widget;
 using Firebase.Auth;
+using Florid.Droid.Lib;
 using Florid.Droid.Lib.Static;
 using Java.IO;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity(Theme = "@style/AppTheme", NoHistory = true)]
+    [Activity(MainLauncher = true)]
     public class SplashActivity : AppCompatActivity
     {
         ImageView _testImage;
@@ -30,29 +31,36 @@ namespace Florid.Staff.Droid.Activity
 
             // Create your application here
             SetContentView(Resource.Layout.SplashLayout);
+
+            FindViewById<Button>(Resource.Id.goBtn).Click += delegate
+            {
+                BaseModelHelper.Instance.RootWebUrl = FindViewById<EditText>(Resource.Id.urlTxt).Text;
+
+                StartActivity(new Intent(this, typeof(MainActivity)));
+            };
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-            var handler = new Handler();
-            handler.PostDelayed(() =>
-            {
-                if (FirebaseAuth.Instance.CurrentUser != null)
-                {
-                    RunOnUiThread(() =>
-                    {
-                        StartActivity(typeof(MainActivity));
-                    });
-                }
-                else
-                {
-                    RunOnUiThread(() =>
-                    {
-                        StartActivity(typeof(MainActivity));
-                    });
-                }
-            }, 1000);
+            //var handler = new Handler();
+            //handler.PostDelayed(() =>
+            //{
+            //    if (FirebaseAuth.Instance.CurrentUser != null)
+            //    {
+            //        RunOnUiThread(() =>
+            //        {
+            //            StartActivity(typeof(MainActivity));
+            //        });
+            //    }
+            //    else
+            //    {
+            //        RunOnUiThread(() =>
+            //        {
+            //            StartActivity(typeof(MainActivity));
+            //        });
+            //    }
+            //}, 1000);
         }
     }
 }

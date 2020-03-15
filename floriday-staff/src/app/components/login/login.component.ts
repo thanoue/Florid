@@ -40,7 +40,7 @@ export class LoginComponent extends BaseComponent {
       if (isSuccess) {
         this.router.navigate(['']);
       } else {
-        this.globalService.showMessageDialog('LỖI ĐĂNG NHẬP', 'Sai tên đăng nhập hoặc mật khẩu!!');
+        this.globalService.showError('Sai tên đăng nhập hoặc mật khẩu!!');
       }
     });
 

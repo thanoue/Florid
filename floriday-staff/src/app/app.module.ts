@@ -30,8 +30,8 @@ import es from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SearchProductComponent } from './components/search-product/search-product.component';
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 declare function getFirebaseConfig(): any;
 
@@ -60,6 +60,8 @@ declare function getFirebaseConfig(): any;
     AngularFireDatabaseModule, // for database,
     AngularFireAuthModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.chasingDots,
       backdropBackgroundColour: 'rgba(0, 0, 0, 0.6)',

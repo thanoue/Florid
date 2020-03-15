@@ -25,11 +25,12 @@
             ],
             "styles": [
               "src/assets/style/style.css",
-              "./node_modules/font-awesome/css/font-awesome.css"
+              "./node_modules/font-awesome/css/font-awesome.css",
+              "./node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "src/assets/js/binding.native.js",
-              "src/assets/js/frontend.js",
+              "src/assets/js/frontend.js" 
             ]
           },
           "configurations": {

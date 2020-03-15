@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { OrderViewModel, OrderDetailViewModel } from 'src/app/models/view.models/order.model';
 import { OrderDetailStates, MembershipTypes } from 'src/app/models/enums';
-import { GlobalService } from 'src/app/services/common/global.service';
 import { Router } from '@angular/router';
+
+declare function openExcForm(resCallback: (result: number, validateCalback: (isSuccess: boolean) => void) => void): any;
 
 @Component({
   selector: 'app-add-order',
@@ -17,7 +18,6 @@ export class AddOrderComponent extends BaseComponent {
   memberShipTitle = '';
 
   order: OrderViewModel;
-
 
   protected Init() {
 
@@ -47,6 +47,28 @@ export class AddOrderComponent extends BaseComponent {
 
   }
 
+  scoreExchange() {
+
+    openExcForm((res, validateCalback) => {
+
+      if (this.order.CustomerInfo.AvailableScore < res) {
+
+        this.showError('Vượt quá điểm tích lũy!!');
+
+        validateCalback.call(this, false);
+
+      } else {
+
+        validateCalback.call(this, true);
+
+        this.order.CustomerInfo.ScoreUsed = res;
+
+      }
+
+    });
+
+  }
+
   addNewOrderDetail() {
 
     this.currentGlobalOrderDetail = new OrderDetailViewModel();
@@ -57,7 +79,9 @@ export class AddOrderComponent extends BaseComponent {
   editOrderDetail(index: number) {
 
     const viewModel = OrderDetailViewModel.DeepCopy(this.order.OrderDetails[index]);
+
     this.currentGlobalOrderDetail = viewModel;
+
     this.router.navigate([`/order-detail/${index}`]);
 
   }
