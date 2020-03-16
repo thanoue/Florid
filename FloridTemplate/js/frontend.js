@@ -154,7 +154,7 @@ function openCompMenu()
     slideUp(html,function(index){
         switch(index)
         {
-            case '0' : alert("Hoàn thành đơn"); break;
+            case '0' : openConfirm(); break;
             case '1' : window.location = './chi-tiet.html'; break;
         }
     });
@@ -282,15 +282,19 @@ function openQR()
         });
     });
 }
-// HIển thị Xác nhận thành công
-function openLoginError()
-{
-    var html = `<div id="loginerror" class="popup-content">
-    <img src="./images/alert.png" alt="">
-    <p>ĐĂNG NHẬP LỖI</p>
-    <span>Nhập sai mật khẩu hoặc số điện thoại<br/>Vui lòng nhập lại</span>
-</div>`;
-    popUp(html);    
+
+
+// HIển thị dialog xác nhận
+function openConfirm()
+{  
+    appendInBody();
+    jQuery("#confirmDialog").fadeIn(350); 
+
+    jQuery(".overlay-dark:not(.layer2)").click(function(){
+        jQuery("#confirmDialog").hide(250,function(){
+            jQuery(".overlay-dark").remove();
+        });
+    });    
 }
 
 // Hiển thị bảng màu
@@ -348,7 +352,8 @@ function openDeliConfirm(){
 function openOrdChange()
 {
     var html = `<div id="changeOrder" class="popup-content"><div class="form-group">
-        <input type="text" name="" id="" class="mainForm" placeholder="Thứ tự ưu tiên...">
+        <input type="text" name="" id="" class="mainForm" placeholder="Thứ tự ưu tiên..."></div>
+        <div class="form-group changeOrderSubmit"><button class="btn main-btn">OK</button>
     </div></div>`;
     popUp(html);
 }
