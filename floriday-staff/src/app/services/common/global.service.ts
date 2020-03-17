@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 declare function setStatusBarColor(isDark: boolean): any;
 declare function isOnTerminal(): any;
 declare function alert(message: string, alertType: number): any;
+declare function openConfirm(message: string, okCallback: () => void, cancelCallback: () => void): any;
 
 
 @Injectable({
@@ -83,6 +84,10 @@ export class GlobalService {
         } else {
             alert(message, +AlertType.Warning);
         }
+    }
+
+    openConfirm(message: string, okCallback: () => void, cancelCallback?: () => void) {
+        openConfirm(message, okCallback, cancelCallback);
     }
 
 

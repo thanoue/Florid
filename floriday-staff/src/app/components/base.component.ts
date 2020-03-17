@@ -18,6 +18,7 @@ declare function pickFile(): any;
 export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
     abstract Title: string;
+    protected IsDataLosingWarning = true;
     protected NavigateClass = 'prev-icon';
 
     protected globalService: GlobalService;
@@ -42,7 +43,6 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         this.globalService.currentOrderDetailViewModel = value;
     }
 
-
     ngOnInit(): void {
 
         const key = 'BaseReference';
@@ -50,7 +50,7 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
             component: this,
             zone: this.ngZone,
             dateTimeSelected: (year, month, day, hour, minute) => this.dateTimeSelected(year, month, day, hour, minute),
-            forceBackNavigate: () => this.OnNavigateClick(),
+            forceBackNavigate: () => this.backNavigateOnClick(),
             fileChosen: (path) => this.fileChosen(path)
         };
 
@@ -68,10 +68,12 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
         this.navigateOnClick = this.globalService.navigateOnClick
             .subscribe((res) => {
+
                 if (!res) {
                     return;
                 }
-                this.OnNavigateClick();
+
+                this.backNavigateOnClick();
             });
         this.afterViewLoad();
     }
@@ -123,8 +125,20 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
     protected abstract Init();
 
-    protected OnNavigateClick() {
+    protected OnBackNaviage() {
         this.location.back();
+    }
+
+    private backNavigateOnClick() {
+
+        if (this.IsDataLosingWarning) {
+            this.openConfirm('Dữ liệu hiện tại sẽ bị mất! Bạn có chắc chắn?', () => {
+                this.OnBackNaviage();
+            });
+
+        } else {
+            this.OnBackNaviage();
+        }
     }
 
     protected afterViewLoad() {
@@ -132,5 +146,9 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     protected fileChosen(path: string) {
+    }
+
+    protected openConfirm(message: string, okCallback: () => void, cancelCallback?: () => void) {
+        this.globalService.openConfirm(message, okCallback, cancelCallback);
     }
 }

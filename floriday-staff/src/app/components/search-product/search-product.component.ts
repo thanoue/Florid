@@ -31,6 +31,8 @@ export class SearchProductComponent extends BaseComponent {
   categoryName = '';
   selectedProduct: Product;
 
+  protected IsDataLosingWarning = false;
+
   constructor(private route: ActivatedRoute, private router: Router,
     private productService: ProductService, private _ngZone: NgZone, private tempProductService: TempProductService) {
     super();
@@ -72,7 +74,7 @@ export class SearchProductComponent extends BaseComponent {
     this.currentGlobalOrderDetail.ModifiedPrice = 0;
     this.currentGlobalOrderDetail.ProductName = '.....';
 
-    this.OnNavigateClick();
+    this.OnBackNaviage();
 
   }
 
@@ -141,6 +143,6 @@ export class SearchProductComponent extends BaseComponent {
     this.currentGlobalOrderDetail.OriginalPrice = price;
     this.currentGlobalOrderDetail.ModifiedPrice = price;
 
-    this.OnNavigateClick();
+    this.OnBackNaviage();
   }
 }

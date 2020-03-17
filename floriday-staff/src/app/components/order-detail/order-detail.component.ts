@@ -40,10 +40,6 @@ export class OrderDetailComponent extends BaseComponent {
 
   }
 
-  protected OnNavigateClick() {
-    super.OnNavigateClick();
-  }
-
   constructor(private route: ActivatedRoute, private router: Router) {
     super();
 
@@ -101,6 +97,6 @@ export class OrderDetailComponent extends BaseComponent {
 
     }
 
-    super.OnNavigateClick();
+    super.OnBackNaviage();
   }
 }

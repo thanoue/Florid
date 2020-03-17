@@ -151,7 +151,6 @@ function actionMenuSelecting(menuItems, callback) {
 
     slideUp(html, function (index) {
         callback(parseInt(index));
-        // window.location = './danh-sach.html?' + index;
     });
 }
 
@@ -491,4 +490,52 @@ function setSelectedCustomerItem(id) {
             }
         })
     })
-}   
+}
+
+// HIển thị dialog xác nhận
+function openConfirm(message, okCallback, cancelCallback) {
+
+    let html = `<div id="confirmDialog" class="popup-content dialog-popup">
+                <img src="../../../assets/images/confirm.png" alt="">
+                <p>${message}</p>
+                <div class="row"><div class="col-6"><button class=" main-btn btn" id="success-btn">Đồng ý</button></div>
+                <div class="col-6"><button class=" main-bg border btn" id="cancel-btn">Hủy</button></div></div>
+                </div>`;
+
+    appendInBody();
+
+    jQuery("body").append(html);
+
+
+    jQuery("#confirmDialog").fadeIn(350);
+
+    jQuery('#confirmDialog #success-btn').one('click', function () {
+
+        jQuery("#confirmDialog").hide(250, function () {
+            jQuery(".overlay-dark").remove();
+            jQuery(this).remove();
+        });
+
+        if (okCallback != undefined)
+            okCallback();
+    });
+
+    jQuery('#confirmDialog #cancel-btn').one('click', function () {
+
+        jQuery("#confirmDialog").hide(250, function () {
+            jQuery(this).remove();
+            jQuery(".overlay-dark").remove();
+        });
+
+        if (cancelCallback != undefined)
+            cancelCallback();
+    });
+
+    jQuery(".overlay-dark").one('click', function () {
+        jQuery("#confirmDialog").hide(250, function () {
+            jQuery(this).remove();
+            jQuery(".overlay-dark").remove();
+        });
+    });
+
+}

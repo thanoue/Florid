@@ -22,6 +22,7 @@ export class SelectReceiverComponent extends BaseComponent {
   deliveryInfo: OrderDetailDeliveryInfo;
   deliveryTime = '';
 
+  protected IsDataLosingWarning = false;
 
   constructor(private route: ActivatedRoute, private _ngZone: NgZone) {
     super();
@@ -78,7 +79,7 @@ export class SelectReceiverComponent extends BaseComponent {
 
     this.currentGlobalOrderDetail.DeliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.deliveryInfo);
 
-    super.OnNavigateClick();
+    super.OnBackNaviage();
   }
 
   requestDateTimePicker() {

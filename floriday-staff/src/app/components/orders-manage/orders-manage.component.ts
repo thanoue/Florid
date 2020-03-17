@@ -19,6 +19,8 @@ export class OrdersManageComponent extends BaseComponent {
 
   states = OrderDetailStates;
 
+  protected IsDataLosingWarning = false;
+
 
   constructor(protected activatedRoute: ActivatedRoute, private router: Router) {
     super();

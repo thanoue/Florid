@@ -88,15 +88,20 @@ export class AddOrderComponent extends BaseComponent {
 
   deleteOrderDetail(index: number) {
     // confirm here
+    this.openConfirm('Chắc chắn xoá?', () => {
+      this.order.OrderDetails.splice(index, 1);
 
-    this.order.OrderDetails.splice(index, 1);
+      let tempIndex = 0;
 
-    let tempIndex = 0;
+      this.order.OrderDetails.forEach(item => {
+        item.Index = tempIndex;
+        tempIndex++;
+      });
+    }, () => {
 
-    this.order.OrderDetails.forEach(item => {
-      item.Index = tempIndex;
-      tempIndex++;
     });
+
+
 
   }
 

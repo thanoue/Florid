@@ -21,6 +21,7 @@ export class SelectCustomerComponent extends BaseComponent {
   newCustomer: CustomerViewModel;
   customers: Customer[];
   selectedCustomer: Customer;
+  protected IsDataLosingWarning = false;
 
   constructor(private customerService: CustomerService, private _ngZone: NgZone) {
     super();
@@ -90,7 +91,7 @@ export class SelectCustomerComponent extends BaseComponent {
 
     this.currentGlobalOrder.CustomerInfo = OrderCustomerInfoViewModel.toViewModel(this.selectedCustomer);
 
-    this.OnNavigateClick();
+    this.OnBackNaviage();
 
   }
 

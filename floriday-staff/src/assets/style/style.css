@@ -105,6 +105,11 @@ xanh 1fc9db xanh 1fe8cb */
     padding: 0;
     line-height: 40px;
 }
+.main-bg.btn 
+{
+    text-transform: uppercase;
+    border-radius: 30px;
+}
 .btn.main-btn:hover {
     color: #999;
     background: #fff;
@@ -197,16 +202,19 @@ div.actionMenu {
     color: #777;
     font-size: 12px;
 }
-#loginerror img {
+.dialog-popup img {
     width: 60px;
     display: block;
     margin: auto;
     margin-bottom: 20px;
 }
-#loginerror p 
+.dialog-popup p 
 {
     font-size: 18px;
     font-weight: 600;
+}
+.dialog-popup button {
+    width: 100%;
 }
 /* ============================================================HOME PAGE */
 /* div#home
@@ -230,6 +238,11 @@ div.actionMenu {
     text-align: center;
     color: #999;
 }
+.accountLogout a {
+    display: block;
+    width: 170px;
+    margin: 20px auto;
+}
 .breadcrumb {
     background-color: #f5f5f5;
     background-image: -o-linear-gradient(45deg, var(--main-blue),var(--main-green));
@@ -242,6 +255,7 @@ div.actionMenu {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    border-radius: 0;
 }
 .breadcrumb:before 
 {
@@ -896,7 +910,7 @@ form.addOrderForm {
 }
 .prodList {
     overflow-y: scroll;
-    height: 400px;
+    height: 64vh;
     margin-bottom: 2vh;
 }
 .filterCate
@@ -1008,6 +1022,10 @@ input.mainForm {
 #recentInfo 
 {
     z-index: 99;
+}
+#recentInfo > ul {
+    height: 270px;
+    overflow-y: scroll;
 }
 #recentInfo li {
     text-align: center;
@@ -1302,6 +1320,8 @@ input#vatInclude:checked + span.vatCustom.main-bg::before
     width: 49%;
     display: inline-block;
     padding: 7px 0 7px 20px;
+    word-break: break-word;
+    vertical-align: top;
 }
 .nameTable .tableHead .tableRight 
 {
@@ -1771,4 +1791,11 @@ a.backtohome {
     border-radius: 5px;
     font-size: 16px;
     color: #fff;
+}
+.form-group.changeOrderSubmit
+{
+    margin-bottom: 0;
+}
+.form-group.changeOrderSubmit button {
+    padding: 0 25px;
 }
