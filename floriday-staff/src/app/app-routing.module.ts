@@ -13,6 +13,7 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
 import { SelectReceiverComponent } from './components/select-receiver/select-receiver.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SearchProductComponent } from './components/search-product/search-product.component';
+import { SaleOptionComponent } from './components/sale-option/sale-option.component';
 
 const routes: Routes = [
 
@@ -57,6 +58,10 @@ const routes: Routes = [
       {
         path: 'search-product',
         component: SearchProductComponent,
+      },
+      {
+        path: 'sale-option',
+        component: SaleOptionComponent,
       }
     ]
   },

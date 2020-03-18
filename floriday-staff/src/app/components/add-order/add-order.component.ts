@@ -3,6 +3,7 @@ import { BaseComponent } from '../base.component';
 import { OrderViewModel, OrderDetailViewModel } from 'src/app/models/view.models/order.model';
 import { OrderDetailStates, MembershipTypes } from 'src/app/models/enums';
 import { Router } from '@angular/router';
+import { ExchangeService } from 'src/app/services/exchange.service';
 
 declare function openExcForm(resCallback: (result: number, validateCalback: (isSuccess: boolean) => void) => void): any;
 
@@ -25,6 +26,19 @@ export class AddOrderComponent extends BaseComponent {
 
     if (!this.order) {
       this.memberShipTitle = 'New Customer';
+    } else {
+
+      this.order.TotalAmount = 0;
+
+      this.order.OrderDetails.forEach(detail => {
+        if (!detail.AdditionalFee) {
+          detail.AdditionalFee = 0;
+        }
+        this.order.TotalAmount += detail.ModifiedPrice - (detail.ModifiedPrice / 100) * this.order.CustomerInfo.DiscountPercent + detail.AdditionalFee * 1000;
+      });
+
+      this.order.TotalAmount -= ExchangeService.geExchangableAmount(this.order.CustomerInfo.ScoreUsed);
+
     }
 
     switch (this.order.CustomerInfo.MembershipType) {
@@ -44,7 +58,6 @@ export class AddOrderComponent extends BaseComponent {
         this.memberShipTitle = 'New Customer';
         break;
     }
-
   }
 
   scoreExchange() {
@@ -61,12 +74,13 @@ export class AddOrderComponent extends BaseComponent {
 
         validateCalback.call(this, true);
 
+        this.order.TotalAmount += ExchangeService.geExchangableAmount(this.order.CustomerInfo.ScoreUsed);
+
         this.order.CustomerInfo.ScoreUsed = res;
 
+        this.order.TotalAmount -= ExchangeService.geExchangableAmount(this.order.CustomerInfo.ScoreUsed);
       }
-
     });
-
   }
 
   addNewOrderDetail() {
@@ -97,12 +111,8 @@ export class AddOrderComponent extends BaseComponent {
         item.Index = tempIndex;
         tempIndex++;
       });
-    }, () => {
 
     });
-
-
-
   }
 
 

@@ -7,9 +7,10 @@
                 </div>
                 <div class="prodContent">
                     <h5 class="prodCode">{{orderDetail.ProductName}}</h5>
-                    <span (click)="insertModifiedValue()" class="prodPrice">{{orderDetail.ModifiedPrice}}đ</span>
-                    <div class="prodQuantity"><input type="number" readonly [(ngModel)]="orderDetail.Quantity" name="Quantity"
-                            id="Quantity" step="1" min="1">
+                    <span (click)="insertModifiedValue()"
+                        class="prodPrice">{{orderDetail.ModifiedPrice| currency:'VND':'symbol-narrow':'':'vi-VN'}}</span>
+                    <div class="prodQuantity"><input type="number" readonly [(ngModel)]="orderDetail.Quantity"
+                            name="Quantity" id="Quantity" step="1" min="1">
                     </div>
                 </div>
                 <div class="prodBrowser" (click)="searchProduct()">
@@ -21,7 +22,7 @@
             </div>
             <div class="form-group orderInfo">
                 <input type="number" name="AdditionalFee" id="AdditionalFee" class="orderField"
-                    [(ngModel)]="orderDetail.AdditionalFee" placeholder="Phụ phí...">
+                    [(ngModel)]="orderDetail.AdditionalFee" placeholder="Phụ phí (k)...">
             </div>
             <div class="form-group orderDesc">
                 <textarea name="Description" id="Description" class="orderField" placeholder="Mô tả..."

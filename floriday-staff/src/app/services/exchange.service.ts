@@ -27,7 +27,7 @@ export class ExchangeService {
         return totalAmount / 100000;
     }
 
-    static geExchangableAmunt(gainedScore: number) {
+    static geExchangableAmount(gainedScore: number) {
         return gainedScore * 1000;
     }
 

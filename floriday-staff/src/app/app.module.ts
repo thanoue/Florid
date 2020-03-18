@@ -32,7 +32,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SearchProductComponent } from './components/search-product/search-product.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-
+import vi from '@angular/common/locales/vi';
+import { SaleOptionComponent } from './components/sale-option/sale-option.component';
 declare function getFirebaseConfig(): any;
 
 @NgModule({
@@ -51,6 +52,7 @@ declare function getFirebaseConfig(): any;
     SelectReceiverComponent,
     NotFoundComponent,
     SearchProductComponent,
+    SaleOptionComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,5 +83,6 @@ export class AppModule {
     AppInjector.setInjector(injector);
     firebase.initializeApp(getFirebaseConfig());
     registerLocaleData(es);
+    registerLocaleData(vi);
   }
 }
