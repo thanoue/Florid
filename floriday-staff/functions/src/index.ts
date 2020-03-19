@@ -2,15 +2,23 @@
 import * as functions from 'firebase-functions';
 import * as bodyParser from 'body-parser';
 const cors = require('cors');
-import * as  router from './users/user.controller';
+import * as  userRouter from './users/user.controller';
 const express = require('express');
 const admin = require('firebase-admin');
 const jwt = require('express-jwt');
 const blacklist = require('express-jwt-blacklist');
 const serviceAccount = require("../serviceAccountKey.json");
-
+const sha256 = require('js-sha256');
 const app = new express();
 const main = new express();
+
+const momoConfig = {
+    secretKey: 'gPefAYXMR3jQQ44bBU4oRjIzOC6Awsa0',
+    partnerCode: 'MOMO6B4T20200319',
+    storeId: 'florid_1',
+    accessKey: 'kcWTrI6rGUHxnFlq',
+    publicKey: 'MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqxVXfFBhTYk6kOYbdPK9jx5ZH7Im5PR0g6JWhrmPbFo1mQE/vgM0uc2MH6VF/fuxQUOGFmtNnBNyZgnWYWHUCL4/fYql0AdtvwFYrSnVwbJXdyhrYSrMD1uOIgVORn1h/9WlkHKIn40YT5c/3p7GDofqwX65HanLGKDb9FJRXPtoo0yv0OVRQxL1QVvkXpQMa2ZK8mSBz04wYNw5LPvtXKEoTQTjcVSK1+JWsltaF9qOvIK4GiuqnY17uFoVcBD7cutyim4HxG7j97/ac4s0zP/48wlPNsn6vCc20XrtIhb3iGMxPrxMiQUhzvgnPcQ81a4OcUUTFMcXUTmeOYQwn8Rq/p0rQJcADyif267h/HvaJNxtowdesdxlBSlAd0JyalG8Y+7FxwsWu0YiX5PQhedJuUjj1CW86DwIM8FH9NDjvCRoo4f/Ap5F7DpJtwywrqi7nkUsD9U8EOLggk6+X5D8LsODnbuuLnpZDz281goH52ovsZhujN2SE3ErXaXF7YPvRxPVMd+m4VYW+fGtK5JU4rfFkux+W5WId7EaWxNdP0E5eMcMQhnbuBZQAvFG+KxN11GKc7RHtJM+9hBfBvMRiL7MtXDrbLOiipBigRXyxBX85zwuepi7YQAhDeuktQI9bpEB+R+xU7PZHMdXZ5b/zNnB8dc/pE+7ZFmFWSkCAwEAAQ=='
+};
 
 const defaultApp = admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -31,14 +39,54 @@ app.use(cors());
 app.use(jwt({ secret: "KHOIDEPTRAIAHIIH", isRevoked: blacklist.isRevoked }).unless({
     path: [
         // public routes that don't require authentication
-        '/api/v1/users/login'
+        '/api/v1/users/login',
+        '/api/v1/momoconfirm'
     ]
 }));
 
-app.use('/users', router);
+
+app.use('/users', userRouter);
+
+app.post('/momoconfirm', (req: any, res: any) => {
+
+    const rawSignature = `amount=${req.body.amount}&message=thanh_cong&momoTransId=${req.body.momoTransId}&partnerRefId=${req.body.partnerRefId}&status=0`;
+
+    const signature = sha256.hmac.create(momoConfig.secretKey).update(rawSignature).hex();
+
+    const status = parseInt(req.body.status);
+
+    if (status === 0) {
+
+        defauDatabase.ref('momoTrans/' + req.body.partnerRefId).set({
+            Id: req.body.partnerRefId,
+            MomoTransId: req.body.momoTransId,
+            Amount: req.body.amount,
+            TransType: req.body.transType,
+            ResponseTime: parseInt(req.body.responseTime),
+            StoreId: req.body.storeId,
+            Status: status
+        }, (error: any) => {
+
+            if (error) {
+                res.status(400).send(error);
+            } else {
+                res.status(200).send({
+                    status: status,
+                    message: 'thanh_cong',
+                    partnerRefId: req.body.partnerRefId,
+                    momoTransId: req.body.momoTransId,
+                    amount: parseInt(req.body.amount),
+                    signature: signature
+                });
+            }
+        })
+
+    } else {
+        res.status(400).send();
+    }
+});
 
 app.post('/confirm', (req: any, res: any) => {
-
     res.status(200).send('get from functions');
 })
 
@@ -47,8 +95,6 @@ app.get('/user', (req: any, res: any) => {
     defaultAuth.getUser('V2L5VyZDarfkPCoQprcxd0i8KCI2')
         .then((userRecord: any) => {
             // See the UserRecord reference doc for the contents of userRecord.
-            console.log('Successfully fetched user data:', userRecord.toJSON());
-
             res.status(200).send(userRecord.toJSON());
         })
         .catch(function (error: any) {

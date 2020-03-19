@@ -86,6 +86,15 @@ namespace Florid.Staff.Droid.Services
         }
 
         [Android.Webkit.JavascriptInterface]
+        [Export("geMomoConfig")]
+        public string GeMomoConfig()
+        {
+            var config = BaseModelHelper.Instance.SecureConfig.GetMomoConfig();
+
+            return JsonConvert.SerializeObject(config);
+        }
+
+        [Android.Webkit.JavascriptInterface]
         [Export("addProductsToCache")]
         public void AddProductsToCache(string data)
         {

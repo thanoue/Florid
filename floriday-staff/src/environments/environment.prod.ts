@@ -9,5 +9,6 @@ export const environment = {
     messagingSenderId: '907493762076',
     appId: '1:907493762076:web:41a83454c12029c3c6abd9',
     measurementId: 'G-DMM406R71M'
-  }
+  },
+  momo_generate_qr_domain: 'https://test-payment.momo.vn'
 };

@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injector } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { QRCodeModule } from 'angularx-qrcode';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -57,6 +56,7 @@ declare function getFirebaseConfig(): any;
   imports: [
     BrowserModule,
     AppRoutingModule,
+    QRCodeModule,
     FormsModule,
     AngularFireModule.initializeApp(getFirebaseConfig()),
     AngularFireDatabaseModule, // for database,

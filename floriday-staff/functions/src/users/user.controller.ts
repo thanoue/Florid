@@ -1,14 +1,14 @@
 const express = require('express');
-const router = express.Router();
+const userRouter = express.Router();
 import * as userService from './user.service';
 const blacklist = require('express-jwt-blacklist');
 
 // routes
-router.post('/login', authenticate);
-router.get('/', getAll);
-router.post('/logout', logout);
+userRouter.post('/login', authenticate);
+userRouter.get('/', getAll);
+userRouter.post('/logout', logout);
 
-module.exports = router;
+module.exports = userRouter;
 
 function authenticate(req: any, res: any, next: any) {
     userService.authenticate(req.body)

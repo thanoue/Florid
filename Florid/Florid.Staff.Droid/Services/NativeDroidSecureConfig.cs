@@ -7,26 +7,53 @@ namespace Florid.Staff.Droid.Services
 {
     public class NativeDroidSecureConfig : ISecureConfig
     {
-        FirebaseKeys _firebaseConfigs;
+        FirebaseKeys _firebasenativeConfigs;
+        MomoKeys _momoNativeCongigs;
+
+
+        FirebaseConfig _firebaseConfig;
+        MomoConfig _momoConfig;
 
         public NativeDroidSecureConfig()
         {
-            _firebaseConfigs = new FirebaseKeys();
+            _firebasenativeConfigs = new FirebaseKeys();
+            _momoNativeCongigs = new MomoKeys();
         }
 
         public FirebaseConfig GetFirebaseConfig()
         {
-            return new FirebaseConfig()
+            if(_firebaseConfig == null)
             {
-                ApiKey = _firebaseConfigs.ApiKey,
-                AuthDomain = _firebaseConfigs.AuthDomain,
-                DatabaseURL = _firebaseConfigs.DatabaseURL,
-                ProjectId = _firebaseConfigs.ProjectId,
-                StorageBucket = _firebaseConfigs.StorageBucket,
-                MessagingSenderId = _firebaseConfigs.MessagingSenderId,
-                AppId =_firebaseConfigs.AppId,
-                MeasurementId = _firebaseConfigs.MeasurementId
-            };
+                _firebaseConfig = new FirebaseConfig()
+                {
+                    ApiKey = _firebasenativeConfigs.ApiKey,
+                    AuthDomain = _firebasenativeConfigs.AuthDomain,
+                    DatabaseURL = _firebasenativeConfigs.DatabaseURL,
+                    ProjectId = _firebasenativeConfigs.ProjectId,
+                    StorageBucket = _firebasenativeConfigs.StorageBucket,
+                    MessagingSenderId = _firebasenativeConfigs.MessagingSenderId,
+                    AppId = _firebasenativeConfigs.AppId,
+                    MeasurementId = _firebasenativeConfigs.MeasurementId
+                };
+            }
+
+            return _firebaseConfig;
+        }
+
+        public MomoConfig GetMomoConfig()
+        {
+            if(_momoConfig == null)
+            {
+                _momoConfig = new MomoConfig()
+                {
+                    AccessKey = _momoNativeCongigs.AccessKey,
+                    PartnerCode = _momoNativeCongigs.PartnerCode,
+                    PublicKey = _momoNativeCongigs.PublicKey,
+                    Secretkey = _momoNativeCongigs.SecretKey,
+                    StoreId = _momoNativeCongigs.StoreId
+                };
+            }
+            return _momoConfig;
         }
     }
 }

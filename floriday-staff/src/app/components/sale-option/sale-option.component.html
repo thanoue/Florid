@@ -11,10 +11,11 @@
             </div>
             <form class="checkOutMethod">
                 <div class="form-group">
-                    <input type="number" name="" id="" class="mainForm" placeholder="Số tiền thanh toán...">
+                    <input type="number" name="inputAmount" id="inputAmount" [(ngModel)]="inputAmount" class="mainForm"
+                        placeholder="Số tiền thanh toán...">
                 </div>
                 <div class="form-group methodGrid">
-                    <a href="javascript:void(0)" onclick="openQR()" class="methodItem"><img
+                    <a href="javascript:void(0)" (click)="momoPurchase()" class="methodItem"><img
                             src="../../../assets/images/momo.jpg" alt=""></a>
                     <a href="javascript:void(0)" onclick="openQR()" class="methodItem"><img
                             src="../../../assets/images/moca.jpg" alt=""></a>
@@ -34,5 +35,6 @@
 </div>
 <div id="codeQR" class="popup-content">
     <span>Quét mã QR</span>
-    <img src=".../../../assets/images/qr.jpg" alt="">
+    <qrcode [qrdata]="qrCodeData" [width]="256" [elementType]="'url'" [errorCorrectionLevel]="'M'" [cssClass]="''">
+    </qrcode>
 </div>

@@ -129,7 +129,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CustomImpl\" />
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
