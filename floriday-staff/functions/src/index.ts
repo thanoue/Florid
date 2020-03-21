@@ -49,40 +49,50 @@ app.use('/users', userRouter);
 
 app.post('/momoconfirm', (req: any, res: any) => {
 
-    const rawSignature = `amount=${req.body.amount}&message=thanh_cong&momoTransId=${req.body.momoTransId}&partnerRefId=${req.body.partnerRefId}&status=0`;
-
-    const signature = sha256.hmac.create(momoConfig.secretKey).update(rawSignature).hex();
-
     const status = parseInt(req.body.status);
 
     if (status === 0) {
 
-        defauDatabase.ref('momoTrans/' + req.body.partnerRefId).set({
-            Id: req.body.partnerRefId,
-            MomoTransId: req.body.momoTransId,
-            Amount: req.body.amount,
-            TransType: req.body.transType,
-            ResponseTime: parseInt(req.body.responseTime),
-            StoreId: req.body.storeId,
-            Status: status
-        }, (error: any) => {
+        const rawReqSig = `accessKey=${req.body.accessKey}&amount=${req.body.amount}&message=${req.body.message}&momoTransId=${req.body.momoTransId}
+        &partnerCode=${req.body.partnerCode}&partnerRefId=${req.body.partnerRefId}&partnerTransId=${req.body.partnerTransId}
+        &responseTime=${req.body.responseTime}&status=${req.body.status}&storeId=${req.body.storeId}&transType=momo_wallet`;
 
-            if (error) {
-                res.status(400).send(error);
-            } else {
-                res.status(200).send({
-                    status: status,
-                    message: 'thanh_cong',
-                    partnerRefId: req.body.partnerRefId,
-                    momoTransId: req.body.momoTransId,
-                    amount: parseInt(req.body.amount),
-                    signature: signature
-                });
-            }
-        })
+        const reqSig = sha256.hmac.create(momoConfig.secretKey).update(rawReqSig).hex();
 
+        if (!reqSig === req.body.signature) {
+            res.status(400).send("Authorize error!!!");
+        } else {
+
+            const rawSignature = `amount=${req.body.amount}&message=${req.body.message}&momoTransId=${req.body.momoTransId}&partnerRefId=${req.body.partnerRefId}&status=${req.body.status}`;
+
+            const signature = sha256.hmac.create(momoConfig.secretKey).update(rawSignature).hex();
+
+            defauDatabase.ref('momoTrans/' + req.body.partnerRefId).set({
+                Id: req.body.partnerRefId,
+                MomoTransId: req.body.momoTransId,
+                Amount: parseInt(req.body.amount),
+                TransType: req.body.transType,
+                ResponseTime: parseInt(req.body.responseTime),
+                StoreId: req.body.storeId,
+                Status: status
+            }, (error: any) => {
+
+                if (error) {
+                    res.status(400).send(error);
+                } else {
+                    res.status(200).send({
+                        status: status,
+                        message: req.body.message,
+                        amount: parseInt(req.body.amount),
+                        partnerRefId: req.body.partnerRefId,
+                        momoTransId: req.body.momoTransId,
+                        signature: signature
+                    });
+                }
+            })
+        }
     } else {
-        res.status(400).send();
+        res.status(400).send("trans failed");
     }
 });
 

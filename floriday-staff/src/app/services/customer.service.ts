@@ -9,13 +9,10 @@ import * as firebase from 'firebase';
 })
 export class CustomerService extends BaseService<Customer> {
 
-  protected tablePath(): string {
-    return '/customers';
-  }
+  protected tableName = '/customers';
 
   constructor() {
     super();
 
   }
-
 }

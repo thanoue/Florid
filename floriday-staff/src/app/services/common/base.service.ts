@@ -10,7 +10,12 @@ export abstract class BaseService<T extends BaseEntity> {
     protected db: firebase.database.Database;
 
     protected globalService: GlobalService;
-    protected abstract tablePath(): string;
+
+    protected abstract get tableName(): string;
+
+    protected get tableRef(): firebase.database.Reference {
+        return this.db.ref(this.tableName);
+    }
 
     constructor() {
         const injector = AppInjector.getInjector();
@@ -22,7 +27,7 @@ export abstract class BaseService<T extends BaseEntity> {
 
         this.globalService.startLoading();
 
-        const pushRef = this.db.ref(this.tablePath()).push(model);
+        const pushRef = this.tableRef.push(model);
 
         model.Id = pushRef.key;
 
@@ -54,7 +59,7 @@ export abstract class BaseService<T extends BaseEntity> {
 
         this.globalService.startLoading();
 
-        return this.db.ref(`${this.tablePath()}/${id}`).once('value').then(data => {
+        return this.db.ref(`${this.tableName}/${id}`).once('value').then(data => {
 
             return data[0].val() as T;
 
@@ -66,7 +71,7 @@ export abstract class BaseService<T extends BaseEntity> {
 
     public update(value: T): Promise<T> {
 
-        return this.db.ref(this.tablePath()).child(value.Id).set(value).then(() => {
+        return this.tableRef.child(value.Id).set(value).then(() => {
 
             this.globalService.stopLoading();
 
@@ -77,7 +82,7 @@ export abstract class BaseService<T extends BaseEntity> {
 
     public delete(id: string): Promise<void> {
         this.globalService.startLoading();
-        return this.db.ref(`${this.tablePath()}/${id}`).remove().then(() => {
+        return this.db.ref(`${this.tableName}/${id}`).remove().then(() => {
             this.globalService.stopLoading();
         });
     }
@@ -86,7 +91,7 @@ export abstract class BaseService<T extends BaseEntity> {
 
         this.globalService.startLoading();
 
-        return this.db.ref(this.tablePath()).once('value')
+        return this.tableRef.once('value')
             .then(dataSnapShot => {
 
                 const res: T[] = [];
@@ -107,7 +112,7 @@ export abstract class BaseService<T extends BaseEntity> {
     public deleteAll(): Promise<void> {
 
         this.globalService.startLoading();
-        return this.db.ref(this.tablePath()).remove().then(() => {
+        return this.tableRef.remove().then(() => {
             this.globalService.stopLoading();
             return;
         });

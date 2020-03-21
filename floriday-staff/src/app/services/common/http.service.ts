@@ -7,6 +7,7 @@ import { REQUEST_TIMEOUT } from 'src/app/app.constants';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -17,6 +18,7 @@ export class HttpService {
   static defaultHeader = {
     'Content-Type': 'application/json',
     'Access-Control-Max-Age': '3600',
+    'charset': 'UTF-8'
   };
 
   static formdataHeader = {
@@ -79,6 +81,23 @@ export class HttpService {
     }
 
     return res;
+  }
+
+
+  public sendMomoTransRes(url: string, params?: HttpParams | any, loader = true): Observable<object | any> {
+
+    const fullUrl = environment.momo_generate_qr_domain + url;
+    this.globalService.startLoading();
+
+    let request = this.http.post(fullUrl, params, { headers: this.headers })
+      .pipe(timeout(REQUEST_TIMEOUT),
+        catchError(this.handleError));
+
+    request.subscribe(() => {
+      this.globalService.stopLoading();
+    });
+
+    return request;
   }
 
   public post(url: string, params?: HttpParams | any, loader = true): Observable<Object | any> {

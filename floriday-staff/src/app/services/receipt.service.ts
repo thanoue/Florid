@@ -10,9 +10,7 @@ import { Receipt } from '../models/entities/file.entity';
 })
 export class ReceiptService extends BaseService<Receipt> {
 
-  protected tablePath(): string {
-    return '/receipts';
-  }
+  protected tableName = '/receipts';
 
   constructor(private storageService: StorageService) {
     super();

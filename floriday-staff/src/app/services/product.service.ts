@@ -17,9 +17,7 @@ declare function addProductsToCache(products: Product[]): any;
 })
 export class ProductService extends BaseService<Product> {
 
-    protected tablePath(): string {
-        return 'products';
-    }
+    protected tableName = '/products';
 
     constructor() {
         super();
@@ -32,7 +30,7 @@ export class ProductService extends BaseService<Product> {
         const productFromCache = getProductsFromCache(category);
 
         if (productFromCache === 'NONE') {
-            return this.db.ref(this.tablePath()).orderByChild('ProductCategories').equalTo(category).once('value').then(snapshot => {
+            return this.tableRef.orderByChild('ProductCategories').equalTo(category).once('value').then(snapshot => {
 
                 const res: Product[] = [];
                 snapshot.forEach(data => {
