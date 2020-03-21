@@ -351,10 +351,10 @@ function openDeliConfirm(){
 //Thay đổi thứ thự đơn hàng
 function openOrdChange()
 {
-    var html = `<div id="changeOrder" class="popup-content"><div class="form-group">
+    var html = `<div id="changeOrder" class="popup-content dialog-popup"><div class="form-group">
         <input type="text" name="" id="" class="mainForm" placeholder="Thứ tự ưu tiên..."></div>
-        <div class="form-group changeOrderSubmit"><button class="btn main-btn">OK</button>
-    </div></div>`;
+        <div class="row"><div class="col-6"><button class=" main-btn btn">Xác nhận</button></div>
+        <div class="col-6"><button class=" main-bg border btn">Hủy</button></div></div></div>`;
     popUp(html);
 }
 
@@ -396,25 +396,4 @@ function popUp(html){
             jQuery(this).remove();
         });
     });
-}
-
-// Bao gồm thuế VAT
-function changeVAT()
-{
-    if(jQuery(".vatStatus").hasClass("on"))
-    {
-        jQuery(".vatStatus a span").animate({
-            left:"-=30px",
-          }, 200, function() {
-            jQuery(".vatStatus").removeClass("on");
-          });
-    }
-    else
-    {
-        jQuery(".vatStatus a span").animate({
-            left:"+=30px",
-          }, 200, function() {
-            jQuery(".vatStatus").addClass("on");
-          });
-    }
 }
