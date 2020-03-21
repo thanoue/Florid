@@ -25,13 +25,15 @@ namespace Florid.Staff.Droid.Services
     {
         Action<string, string> _login;
         WebView _mainWebView;
-        MainActivity _activity;
+        BaseActivity _activity;
         Action _documentReady;
 
         public Action<bool> SetPrimaryDarkStatusBar;
         public Action<string> DoPrintJob;
+        public Action<string> BankingSaleReturn;
+        public Action<string> BankingSaleRequest;
 
-        public JavascriptClient(MainActivity activity, WebView webview, Action<string, string> login)
+        public JavascriptClient(BaseActivity activity, WebView webview, Action<string, string> login)
         {
             _login = login;
             _activity = activity;
@@ -48,6 +50,21 @@ namespace Florid.Staff.Droid.Services
         public void doPrintJob(string url)
         {
             DoPrintJob?.Invoke(url);
+        }
+
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("bankingSaleRequestSending")]
+        public void BankingSaleRequestSending(string url)
+        {
+            BankingSaleRequest?.Invoke(url);
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("bankingSaleCallback")]
+        public void BankingSaleCallback(string data)
+        {
+            BankingSaleReturn?.Invoke(data);
         }
 
         [Android.Webkit.JavascriptInterface]
@@ -147,8 +164,6 @@ namespace Florid.Staff.Droid.Services
         {
             _activity.RunOnUiThread(() =>
             {
-                _activity.ShowMask();
-
                 var dialog = new SingleDateAndTimePickerDialog.Builder(_activity)
                                .Title("Date Chooosing")
                                .Listener(new DatetimePickerCallback(_mainWebView, DialogStyle.Date))

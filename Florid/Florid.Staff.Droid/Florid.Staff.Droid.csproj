@@ -67,7 +67,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\LoginActivity.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Controls\Label.cs" />
@@ -76,13 +75,14 @@
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Activities\CameraActivity.cs" />
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Services\BackgroundImpl.cs" />
     <Compile Include="Services\MyFirebaseIIDService.cs" />
     <Compile Include="Services\MyFirebaseMessagingService.cs" />
     <Compile Include="Services\NativeDroidSecureConfig.cs" />
     <Compile Include="Services\JavascriptClient.cs" />
+    <Compile Include="Activities\CameraActivity.cs" />
+    <Compile Include="Activities\InternetBankingPurchaseActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
@@ -126,6 +126,10 @@
       </SubType>
       <Generator>
       </Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\webview_layout.axml">
+      <SubType></SubType>
+      <Generator></Generator>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +199,9 @@
     </PackageReference>
     <PackageReference Include="Karamunting.Android.Florent37.SingleDateAndTimePicker">
       <Version>2.1.5</Version>
+    </PackageReference>
+    <PackageReference Include="Karamunting.Android.SiraLam.WebViewSuite">
+      <Version>1.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

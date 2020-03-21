@@ -17,6 +17,7 @@ using Android.Content;
 using JaiselRahman.FilePickerLib.Activities;
 using JaiselRahman.FilePickerLib.Models;
 using System.IO;
+using Florid.Core;
 
 namespace Florid.Staff.Droid.Activity
 {
@@ -26,6 +27,7 @@ namespace Florid.Staff.Droid.Activity
         static readonly string TAG = "MainActivity";
 
         public const int REQUEST_FILE_PICKER = 2;
+        public const int REQUEST_INTERNET_SALE_REQUEST = 3;
 
         protected override int LayoutId => Resource.Layout.activity_main;
         protected override bool UseOwnLayout => true;
@@ -62,6 +64,14 @@ namespace Florid.Staff.Droid.Activity
             javascriptClient.DoPrintJob = (url) =>
             {
                 MainApp.DoPrintJob(url);
+            };
+
+            javascriptClient.BankingSaleRequest = (url) =>
+            {
+                var intent = new Intent(this, typeof(InternetBankingPurchaseActivity));
+                intent.PutExtra(Constants.pBankingSaleUrl, url);
+
+                StartActivityForResult(intent, REQUEST_INTERNET_SALE_REQUEST);
             };
 
             _mainWebView.AddJavascriptInterface(javascriptClient, "Android");
@@ -102,32 +112,40 @@ namespace Florid.Staff.Droid.Activity
             if (resultCode != Result.Ok)
                 return;
 
-            if (requestCode == REQUEST_FILE_PICKER)
+            switch (requestCode)
             {
-                var file = (MediaFile)data.GetParcelableArrayListExtra(FilePickerActivity.MediaFiles)[0];
-                var path = file.Path;
-                var size = file.Size;
+                case REQUEST_FILE_PICKER:
 
-                using (var bitmap = BitmapFactory.DecodeFile(path))
-                {
-                    using (var scaled = GetResizedBitmap(bitmap, 700))
+                    var file = (MediaFile)data.GetParcelableArrayListExtra(FilePickerActivity.MediaFiles)[0];
+                    var path = file.Path;
+                    var size = file.Size;
+
+                    using (var bitmap = BitmapFactory.DecodeFile(path))
                     {
-                        var stream = new MemoryStream();
-                        if (path.Contains(".png") || path.Contains(".PNG"))
-                            scaled.Compress(Bitmap.CompressFormat.Png, 100, stream);
-                        else
-                            scaled.Compress(Bitmap.CompressFormat.Jpeg, 100, stream);
-                        var bytes = stream.ToArray();
+                        using (var scaled = GetResizedBitmap(bitmap, 700))
+                        {
+                            var stream = new MemoryStream();
+                            if (path.Contains(".png") || path.Contains(".PNG"))
+                                scaled.Compress(Bitmap.CompressFormat.Png, 100, stream);
+                            else
+                                scaled.Compress(Bitmap.CompressFormat.Jpeg, 100, stream);
+                            var bytes = stream.ToArray();
 
-                        var encoded = Base64.GetEncoder().EncodeToString(bytes);
+                            var encoded = Base64.GetEncoder().EncodeToString(bytes);
 
-                        DroidUtility.ExecJavaScript(_mainWebView, "fileChosen(\"" + encoded + "\")");
+                            DroidUtility.ExecJavaScript(_mainWebView, "fileChosen(\"" + encoded + "\")");
+                        }
+
                     }
 
-                }
+                    break;
 
+                case REQUEST_INTERNET_SALE_REQUEST:
+                    var res = data.GetStringExtra(Constants.pBankingSaleResData);
+                    DroidUtility.ExecJavaScript(_mainWebView, "internetSaleDone(\"" + res + "\")");
+                    break;
             }
-
+           
         }
 
         public Bitmap GetResizedBitmap(Bitmap image, int maxSize)
