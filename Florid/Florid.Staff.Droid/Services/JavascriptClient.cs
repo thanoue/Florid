@@ -120,7 +120,7 @@ namespace Florid.Staff.Droid.Services
             _activity.MainApp.ShowSnackbar(message, (AlertType)type);
         }
 
-          [Android.Webkit.JavascriptInterface]
+        [Android.Webkit.JavascriptInterface]
         [Export("pickFile")]
         public void PickFile()
         {

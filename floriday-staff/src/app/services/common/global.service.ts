@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject, from, Subject } from 'rxjs';
 import { GenericModel } from 'src/app/models/view.models/generic.model';
 import { RouteModel } from 'src/app/models/view.models/route.model';
@@ -28,10 +28,18 @@ export class GlobalService {
     currentOrderViewModel: OrderViewModel;
     currentOrderDetailViewModel: OrderDetailViewModel;
 
-    constructor(private toastr: ToastrService) {
+    constructor(private toastr: ToastrService, private ngZone: NgZone) {
+
         this.currentOrderViewModel = new OrderViewModel();
-        // tslint:disable-next-line: max-line-length
-        this.notifySetup = { timeOut: 15000, tapToDismiss: true, progressBar: false, progressAnimation: 'decreasing', positionClass: 'toast-bottom-right', closeButton: true, extendedTimeOut: 3000 };
+
+        this.notifySetup = { timeOut: 5000, tapToDismiss: true, progressBar: false, progressAnimation: 'decreasing', positionClass: 'toast-bottom-full-width', closeButton: true, extendedTimeOut: 3000 };
+
+        const key = 'ToastReference';
+        window[key] = {
+            component: this,
+            zone: this.ngZone,
+            toastShowing: (message, alertType) => this.toastTrShowing(message, alertType)
+        };
     }
 
     startLoading() {
@@ -54,36 +62,39 @@ export class GlobalService {
         this.navigateOnClick.next(true);
     }
 
-    showError(message: string) {
-        if (!this.isRunOnTerimal()) {
-            this.toastr.error(message, 'Lỗi', this.notifySetup);
-        } else {
-            alert(message, +AlertType.Error);
+    toastTrShowing(message: string, alertType: number) {
+        switch (alertType) {
+            case AlertType.Error:
+                this.toastr.error(message, 'Lỗi', this.notifySetup);
+                break;
+            case AlertType.Info:
+                this.toastr.info(message, 'Thông tin', this.notifySetup);
+                break;
+            case AlertType.Success:
+                this.toastr.success(message, 'Thành công', this.notifySetup);
+                break;
+            case AlertType.Warning:
+                this.toastr.warning(message, 'Cảnh báo', this.notifySetup);
+                break;
+            default:
+                break;
         }
+    }
+
+    showError(message: string) {
+        alert(message, +AlertType.Error);
     }
 
     showInfo(message: string) {
-        if (!this.isRunOnTerimal()) {
-            this.toastr.info(message, 'Thông tin', this.notifySetup);
-        } else {
-            alert(message, +AlertType.Info);
-        }
+        alert(message, +AlertType.Info);
     }
 
     showSuccess(message: string) {
-        if (!this.isRunOnTerimal()) {
-            this.toastr.success(message, 'Thành công', this.notifySetup);
-        } else {
-            alert(message, +AlertType.Success);
-        }
+        alert(message, +AlertType.Success);
     }
 
     showWarning(message: string) {
-        if (!this.isRunOnTerimal()) {
-            this.toastr.warning(message, 'Cảnh báo', this.notifySetup);
-        } else {
-            alert(message, +AlertType.Warning);
-        }
+        alert(message, +AlertType.Warning);
     }
 
     openConfirm(message: string, okCallback: () => void, cancelCallback?: () => void) {

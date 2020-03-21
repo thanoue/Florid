@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { OrderDetailViewModel } from 'src/app/models/view.models/order.model';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { ProductCategories } from 'src/app/models/enums';
 import { PRODUCTCATEGORIES } from 'src/app/app.constants';
 import { NgForm } from '@angular/forms';
 
-declare function getNumberInput(resCallback: (res: string) => void): any;
+declare function getNumberInput(resCallback: (res: number) => void, placeHolder: string): any;
 declare function createNumbericElement(isDisabled: boolean, calback: (val: number) => void): any;
 declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: number) => void): any;
 
@@ -17,7 +17,7 @@ declare function selectProductCategory(menuitems: { Name: string; Value: Product
   templateUrl: './order-detail.component.html',
   styleUrls: ['./order-detail.component.css']
 })
-export class OrderDetailComponent extends BaseComponent {
+export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
   Title = 'Chi tiết đơn';
 
@@ -28,6 +28,7 @@ export class OrderDetailComponent extends BaseComponent {
 
     this.orderDetail = this.currentGlobalOrderDetail;
 
+    this.orderDetail.AdditionalFee /= 1000;
 
     this.route.params.subscribe(params => {
       this.detailIndex = + params.id;
@@ -40,6 +41,14 @@ export class OrderDetailComponent extends BaseComponent {
 
   }
 
+
+  destroy() {
+    console.log('destroy');
+    if (this.currentGlobalOrderDetail) {
+      this.currentGlobalOrderDetail.AdditionalFee *= 1000;
+    }
+  }
+
   constructor(private route: ActivatedRoute, private router: Router) {
     super();
 
@@ -47,8 +56,8 @@ export class OrderDetailComponent extends BaseComponent {
 
   insertModifiedValue() {
     getNumberInput(res => {
-      this.orderDetail.ModifiedPrice = res as unknown as number;
-    });
+      this.orderDetail.ModifiedPrice = res;
+    }, 'Cập nhật giá...');
   }
 
   searchProduct() {
@@ -72,6 +81,8 @@ export class OrderDetailComponent extends BaseComponent {
     const viewModel = OrderDetailViewModel.DeepCopy(this.currentGlobalOrderDetail);
 
     this.currentGlobalOrderDetail = null;
+
+    viewModel.AdditionalFee *= 1000;
 
     if (this.detailIndex > -1) {
 

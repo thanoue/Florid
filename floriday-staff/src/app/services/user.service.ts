@@ -12,10 +12,9 @@ export class UserService extends BaseService<User> {
 
     datab: firebase.database.Database;
 
-    protected tablePath(): string {
+    protected get tableName(): string {
         return '/users';
     }
-
 
     constructor() {
         super();
@@ -27,7 +26,7 @@ export class UserService extends BaseService<User> {
         this.globalService.startLoading();
 
         // tslint:disable-next-line:max-line-length
-        return this.datab.ref(`${this.tablePath()}/${loginId}`).once('value').then(user => {
+        return this.datab.ref(`${this.tableName}/${loginId}`).once('value').then(user => {
             this.globalService.stopLoading();
             return (user.val() as User);
         });

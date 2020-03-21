@@ -28,17 +28,7 @@ export class AddOrderComponent extends BaseComponent {
       this.memberShipTitle = 'New Customer';
     } else {
 
-      this.order.TotalAmount = 0;
-
-      this.order.OrderDetails.forEach(detail => {
-        if (!detail.AdditionalFee) {
-          detail.AdditionalFee = 0;
-        }
-        this.order.TotalAmount += detail.ModifiedPrice - (detail.ModifiedPrice / 100) * this.order.CustomerInfo.DiscountPercent + detail.AdditionalFee * 1000;
-      });
-
-      this.order.TotalAmount -= ExchangeService.geExchangableAmount(this.order.CustomerInfo.ScoreUsed);
-
+      this.onVATIncludedChange();
     }
 
     switch (this.order.CustomerInfo.MembershipType) {
@@ -57,6 +47,28 @@ export class AddOrderComponent extends BaseComponent {
       default:
         this.memberShipTitle = 'New Customer';
         break;
+    }
+  }
+
+  totalAmountCalculate() {
+    this.order.TotalAmount = 0;
+
+    this.order.OrderDetails.forEach(detail => {
+      if (!detail.AdditionalFee) {
+        detail.AdditionalFee = 0;
+      }
+      this.order.TotalAmount += detail.ModifiedPrice - (detail.ModifiedPrice / 100) * this.order.CustomerInfo.DiscountPercent + detail.AdditionalFee;
+    });
+
+    this.order.TotalAmount -= ExchangeService.geExchangableAmount(this.order.CustomerInfo.ScoreUsed);
+  }
+
+  onVATIncludedChange() {
+    if (this.order.VATIncluded) {
+      this.totalAmountCalculate();
+    } else {
+      this.totalAmountCalculate();
+      this.order.TotalAmount += (this.order.TotalAmount / 100) * 10;
     }
   }
 
@@ -111,6 +123,8 @@ export class AddOrderComponent extends BaseComponent {
         item.Index = tempIndex;
         tempIndex++;
       });
+
+      this.onVATIncludedChange();
 
     });
   }

@@ -10,7 +10,7 @@ import { Receipt, TempProduct } from '../models/entities/file.entity';
 })
 export class TempProductService extends BaseService<TempProduct> {
 
-  protected tablePath(): string {
+  protected get tableName(): string {
     return '/tempProducts';
   }
 

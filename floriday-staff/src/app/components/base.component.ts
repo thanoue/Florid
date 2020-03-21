@@ -60,6 +60,7 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
     ngOnDestroy(): void {
         this.navigateOnClick.unsubscribe();
+        this.destroy();
     }
 
     ngAfterViewInit(): void {
@@ -75,7 +76,6 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
                 this.backNavigateOnClick();
             });
-        this.afterViewLoad();
     }
 
     constructor() {
@@ -123,7 +123,6 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         this.globalService.setStatusBarColor(isDark);
     }
 
-    protected abstract Init();
 
     protected OnBackNaviage() {
         this.location.back();
@@ -141,7 +140,9 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         }
     }
 
-    protected afterViewLoad() {
+    protected abstract Init();
+
+    protected destroy() {
 
     }
 

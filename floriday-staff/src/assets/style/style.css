@@ -1236,7 +1236,7 @@ span.prodCharge {
     margin-left: 20px;
     height: 20px;
 }
-input#vatInclude {
+input#VATIncluded {
     width: 20px;
     height: 20px;
     position: absolute;
@@ -1259,11 +1259,11 @@ span.main-bg.vatCustom::before {
     color: #fff;
     display: none;
 }
-input#vatInclude:checked + span.vatCustom.main-bg 
+input#VATIncluded:checked + span.vatCustom.main-bg 
 {
     background:var(--main-green);
 }
-input#vatInclude:checked + span.vatCustom.main-bg::before
+input#VATIncluded:checked + span.vatCustom.main-bg::before
 {
     display: block;
 }

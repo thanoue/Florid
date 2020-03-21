@@ -391,19 +391,24 @@ function openExcForm(callback) {
 
     input.focus();
 
+    jQuery('#exchangeAdd .exchange-confirm').off('click');
+
     jQuery('#exchangeAdd .exchange-confirm').on('click', function () {
 
         let input = jQuery('#exchangeAdd #exchange-val').first();
 
         let val = input.val();
 
+        if (!val || parseInt(val) === 0) {
+            warningToast('Yêu cầu nhập số lớn hơn 0');
+            return;
+        }
+
         callback(parseInt(val), function (isSuccess) {
 
             if (!isSuccess) {
                 return;
             }
-
-            jQuery(this).off('click');
 
             jQuery("#exchangeAdd").hide(250, function () {
                 jQuery(overlayClasses).remove();
@@ -419,22 +424,41 @@ function openExcForm(callback) {
     });
 }
 
-function getNumberInput(callback) {
+function getNumberInput(callback, placeHolder) {
 
-    var html = `<div id="changeOrder" class="popup-content"><div class="form-group">
-        <input type="number" name="" id="" class="mainForm" placeholder="Thứ tự ưu tiên...">
-    </div></div>`;
+    var html = `<div id="inputDialog" class="popup-content dialog-popup"><div class="form-group">
+    <input type="number" name="" id="input-value" class="mainForm" placeholder="${placeHolder}"></div>
+    <div class="row"><div class="col-6"><button id="confirm-button" class=" main-btn btn">Xác nhận</button></div>
+    <div class="col-6"><button  id="cancel-button" class=" main-bg border btn">Hủy</button></div></div></div>`;
 
-    appendInBody();
+    popUp(html);
 
-    jQuery("body").append(html);
-    jQuery(".popup-content").fadeIn(350);
-
-    jQuery(".overlay-dark:not(.layer2)").click(function () {
+    jQuery('#inputDialog #cancel-button').one('click', function () {
         jQuery(".popup-content").hide(250, function () {
             jQuery(".overlay-dark").remove();
             jQuery(this).remove();
         });
+    });
+
+    jQuery('#inputDialog #confirm-button').one('click', function () {
+        var val = jQuery('#inputDialog #input-value').first().val();
+
+
+        if (!val) {
+            return;
+        }
+
+        if (parseInt(val) === NaN) {
+            return;
+        }
+
+        callback(parseInt(val));
+
+        jQuery(".popup-content").hide(250, function () {
+            jQuery(".overlay-dark").remove();
+            jQuery(this).remove();
+        });
+
     });
 
 }
@@ -445,30 +469,12 @@ function popUp(html) {
     jQuery("body").append(html);
     jQuery(".popup-content").fadeIn(350);
 
-    jQuery(".overlay-dark:not(.layer2)").click(function () {
+    jQuery(".overlay-dark:not(.layer2)").one('click', function () {
         jQuery(".popup-content").hide(250, function () {
             jQuery(".overlay-dark").remove();
             jQuery(this).remove();
         });
     });
-}
-
-// Bao gồm thuế VAT
-function changeVAT() {
-    if (jQuery(".vatStatus").hasClass("on")) {
-        jQuery(".vatStatus a span").animate({
-            left: "-=30px",
-        }, 200, function () {
-            jQuery(".vatStatus").removeClass("on");
-        });
-    }
-    else {
-        jQuery(".vatStatus a span").animate({
-            left: "+=30px",
-        }, 200, function () {
-            jQuery(".vatStatus").addClass("on");
-        });
-    }
 }
 
 function selectItem(e, className) {

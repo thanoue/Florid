@@ -74,7 +74,7 @@ declare function getFirebaseConfig(): any;
       fullScreenBackdrop: true,
     })
   ],
-  providers: [GlobalService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

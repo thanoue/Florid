@@ -4,8 +4,6 @@ import { GlobalService } from './global.service';
 import { LocalService } from './local.service';
 import { shareReplay, timeout, catchError } from 'rxjs/operators';
 import { REQUEST_TIMEOUT } from 'src/app/app.constants';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
 import { Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -35,8 +33,7 @@ export class HttpService {
     return this.apiHost + this.apiUrlPrefix + path;
   }
 
-  constructor(protected http: HttpClient,
-    protected globalService: GlobalService) {
+  constructor(protected http: HttpClient, protected globalService: GlobalService) {
     this.headers = new HttpHeaders(HttpService.defaultHeader);
   }
 
