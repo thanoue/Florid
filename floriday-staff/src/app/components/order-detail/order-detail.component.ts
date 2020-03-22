@@ -43,7 +43,6 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
 
   destroy() {
-    console.log('destroy');
     if (this.currentGlobalOrderDetail) {
       this.currentGlobalOrderDetail.AdditionalFee *= 1000;
     }

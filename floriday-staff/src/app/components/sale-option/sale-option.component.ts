@@ -40,8 +40,6 @@ export class SaleOptionComponent extends BaseComponent {
 
     const momoConfig = getMomoConfig();
 
-    console.log(momoConfig);
-
     const storeSlug = `${momoConfig.partnerCode}-${momoConfig.storeId}`;
 
     const currentTime = new Date();
@@ -57,8 +55,6 @@ export class SaleOptionComponent extends BaseComponent {
     const rawSignature = `storeSlug=${storeSlug}&amount=${this.inputAmount}&billId=${billId}`;
 
     const signature = sha256.hmac.create(momoConfig.secretkey).update(rawSignature).hex();
-
-    console.log('signature:', signature);
 
     this.qrCodeData = `${environment.momo_generate_qr_domain}/pay/store/${storeSlug}?a=${this.inputAmount}&b=${billId}&s=${signature}`;
 
@@ -88,10 +84,13 @@ export class SaleOptionComponent extends BaseComponent {
         signature: transConfirmSig
       };
 
-      this.httpServce.sendMomoTransRes('/pay/confirm', params)
-        .subscribe(res => {
-          console.log(res);
-        });
+      setTimeout(() => {
+        this.httpServce.sendMomoTransRes('/pay/confirm', params)
+          .subscribe(res => {
+            console.log(res);
+          });
+      }, 2000);
+
     });
 
   }

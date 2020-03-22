@@ -15,8 +15,9 @@ export class HttpService {
 
   static defaultHeader = {
     'Content-Type': 'application/json',
+    'charset': 'UTF-8',
+    'Access-Control-Allow-Origin': '*',
     'Access-Control-Max-Age': '3600',
-    'charset': 'UTF-8'
   };
 
   static formdataHeader = {

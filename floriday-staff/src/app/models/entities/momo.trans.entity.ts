@@ -7,4 +7,5 @@ export class MomoTrans extends BaseEntity {
     ResponseTime: number;
     StoreId: string;
     Status: number;
+    OrderInfo: string;
 }
