@@ -33,6 +33,7 @@ export class ProductService extends BaseService<Product> {
             return this.tableRef.orderByChild('ProductCategories').equalTo(category).once('value').then(snapshot => {
 
                 const res: Product[] = [];
+
                 snapshot.forEach(data => {
                     res.push(data.val() as Product);
                 });

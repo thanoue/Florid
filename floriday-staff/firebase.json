@@ -21,8 +21,7 @@
   "functions": {
     "predeploy": [
       "npm --prefix ./functions/ run lint",
-      "npm --prefix ./functions/ run build",
-      "npm build --prod"
+      "npm --prefix ./functions/ run build"
     ]
   }
 }

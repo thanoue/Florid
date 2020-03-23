@@ -4,6 +4,8 @@ import * as bodyParser from 'body-parser';
 const cors = require('cors');
 import * as  userRouter from './users/user.controller';
 import * as saleRouter from './sale/sale.controller';
+import * as adminSdk from './helper/admin.sdk';
+
 const express = require('express');
 const jwt = require('express-jwt');
 const blacklist = require('express-jwt-blacklist');
@@ -18,7 +20,7 @@ app.use(cors());
 //     next();
 // })
 
-app.use(jwt({ secret: "KHOIDEPTRAIAHIIH", isRevoked: blacklist.isRevoked }).unless({
+app.use(jwt({ secret: adminSdk.OAuthPrivateKey, isRevoked: blacklist.isRevoked }).unless({
     path: [
         // public routes that don't require authentication
         '/api/v1/users/login',

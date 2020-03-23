@@ -1,28 +1,32 @@
 const express = require('express');
 const userRouter = express.Router();
 import * as userService from './user.service';
-import * as adminSdk from '../helper/admin.sdk';
+import * as auth from '../helper/ authorize';
+import { Role } from '../helper/role';
 const blacklist = require('express-jwt-blacklist');
 
 // routes
 userRouter.post('/login', authenticate);
-userRouter.get('/', getAll);
 userRouter.post('/logout', logout);
-userRouter.get('/getUser', getUser);
-userRouter.get('/createUser', createUser);
+userRouter.post('/createUser', auth.authorize(Role.Admin), createUser);
+// userRouter.get('/', auth.authorize(Role.Admin), getAll);
+// userRouter.get('/getUser', auth.authorize(Role.Admin), getUser);
 
 module.exports = userRouter;
 
-function authenticate(req: any, res: any, next: any) {
-    userService.authenticate(req.body)
-        .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
-        .catch(err => next(err));
-}
+async function authenticate(req: any, res: any, next: any) {
 
-function getAll(req: any, res: any, next: any) {
-    userService.getAll()
-        .then(users => res.json(users))
-        .catch(err => next(err));
+    try {
+        const user = await userService.authenticate(req.body);
+
+        if (!user) {
+            res.status(400).json({ message: 'Username or password is incorrect' });
+        } else {
+            res.json(user);
+        }
+    } catch (error) {
+        res.status(403).send(error);
+    }
 }
 
 function logout(req: any, res: any) {
@@ -30,38 +34,29 @@ function logout(req: any, res: any) {
     res.sendStatus(200);
 }
 
-function getUser(req: any, res: any) {
-    adminSdk.defaultAuth.getUser('V2L5VyZDarfkPCoQprcxd0i8KCI2')
-        .then((userRecord: any) => {
-            // See the UserRecord reference doc for the contents of userRecord.
-            res.status(200).send(userRecord.toJSON());
-        })
-        .catch(function (error: any) {
-            res.status(403).send(error);
-        });
-}
+// function getUser(req: any, res: any) {
+//     adminSdk.defaultAuth.getUser('V2L5VyZDarfkPCoQprcxd0i8KCI2')
+//         .then((userRecord: any) => {
+//             // See the UserRecord reference doc for the contents of userRecord.
+//             res.status(200).send(userRecord.toJSON());
+//         })
+//         .catch(function (error: any) {
+//             res.status(403).send(error);
+//         });
+// }
 
 
-function createUser(req: any, res: any) {
-    adminSdk.defaultAuth.createUser(req.body)
-        .then((userRecord: any) => {
-            // See the UserRecord reference doc for the contents of userRecord.
-            // var newUserKey = defauDatabase.ref().child('users').push().key;
-
-            adminSdk.defauDatabase.ref('users').child(userRecord.uid).set({
-                PhoneNumber: userRecord.phoneNumber,
-                FullName: userRecord.displayName,
-                Email: userRecord.email,
-                AvtUrl: userRecord.photoURL,
-                Active: true,
-                Role: req.body.roleId,
-            });
-
-            res.status(200).send(userRecord.toJSON());
-        })
-        .catch(function (error: any) {
-            res.status(403).send(error);
-        });
+async function createUser(req: any, res: any) {
+    try {
+        const user = await userService.createUser(req);
+        if (user) {
+            res.status(200).send(user.toJSON());
+        } else {
+            res.status(500).send('ERROR!');
+        }
+    } catch (error) {
+        res.status(500).send(error);
+    }
 }
 
 

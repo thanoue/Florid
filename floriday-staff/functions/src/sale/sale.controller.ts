@@ -43,9 +43,8 @@ function momoQRCodeConfirm(req: any, res: any) {
             OrderInfo: req.body.order_info
         }, (error: any) => {
 
-
             if (error) {
-                res.status(400).send(error);
+                res.status(500).send(error);
             } else {
                 res.status(200).send({
                     status_code: status,
