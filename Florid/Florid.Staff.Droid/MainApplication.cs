@@ -112,7 +112,7 @@ namespace Florid.Staff.Droid
                 using (var bitmap = BitmapFactory.DecodeStream(str).ResizeImage(440, false))
                 {
                     var manualEvent = new ManualResetEvent(false);
-
+                        
                     manualEvent.Reset();
 
                     _binder.WriteDataByYouself(new MyUiExecute(() =>
@@ -124,6 +124,7 @@ namespace Florid.Staff.Droid
 
                     }), new MyProcessDataCallback(bitmap, () =>
                     {
+                        ShowSnackbar("Printing Completed!", AlertType.Info);
                         manualEvent.Set();
                     }));
 
@@ -132,10 +133,39 @@ namespace Florid.Staff.Droid
             }));
         }
 
+        public void DoPrintJob(Bitmap bitmap)
+        {
+            if (!ISCONNECT)
+                return;
+
+            var manualEvent = new ManualResetEvent(false);
+
+            manualEvent.Reset();
+
+            _binder.WriteDataByYouself(new MyUiExecute(() =>
+            {
+
+            }, () =>
+            {
+                ShowSnackbar("Printing Error!!!!", AlertType.Error);
+
+            }), new MyProcessDataCallback(bitmap, () =>
+            {
+                ShowSnackbar("Printing Completed!", AlertType.Info);
+                manualEvent.Set();
+            }));
+
+            manualEvent.WaitOne();
+
+        }
+
         public void ConnectToBluetoothDevice( string macAddress, Action<bool> callback)
         {
             if (ISCONNECT)
+            {
+                callback?.Invoke(true);
                 return;
+            }
 
             _binder.ConnectBtPort(macAddress, new MyUiExecute(() =>
             {

@@ -16,12 +16,14 @@ export class ReceiptService extends BaseService<Receipt> {
     super();
   }
 
-  public uploadReceipt(file: File | Blob, receipt: Receipt, updateCompletedCallback: (receiptUrl: string) => void) {
+  public uploadReceipt(file: File | Blob, receipt: Receipt, receiptId: string, updateCompletedCallback: (receiptUrl: string) => void) {
+
     this.storageService.pushFileToStorage(file, receipt, (res) => {
 
       updateCompletedCallback(res.Url);
 
-      this.insert(res as Receipt).then(re => {
+      this.db.ref(`${this.tableName}/${receiptId}`).set(res).then(snap => {
+
       });
 
     });

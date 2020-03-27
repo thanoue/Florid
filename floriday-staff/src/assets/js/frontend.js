@@ -150,7 +150,7 @@ function actionMenuSelecting(menuItems, callback) {
     </div>`;
 
     slideUp(html, function (index) {
-        callback(parseInt(index));
+        callback(index);
     });
 }
 
@@ -285,15 +285,6 @@ function openQR() {
         });
     });
 }
-// HIển thị Xác nhận thành công
-function openLoginError() {
-    var html = `<div id="loginerror" class="popup-content">
-            <img src="./images/success.png" alt="">
-            <p>XÁC NHẬN</p>
-            <span>Thanh toán thành công</span>
-        </div>`;
-    popUp(html);
-}
 
 // Hiển thị bảng màu
 function openColorBoard() {
@@ -424,25 +415,35 @@ function openExcForm(callback) {
     });
 }
 
-function getNumberInput(callback, placeHolder) {
+function getNumberInput(callback, placeHolder, oldValue) {
 
     var html = `<div id="inputDialog" class="popup-content dialog-popup"><div class="form-group">
-    <input type="number" name="" id="input-value" class="mainForm" placeholder="${placeHolder}"></div>
+    <input type="number" name="" id="input-value" class="mainForm" value="${oldValue}" placeholder="${placeHolder}"></div>
     <div class="row"><div class="col-6"><button id="confirm-button" class=" main-btn btn">Xác nhận</button></div>
     <div class="col-6"><button  id="cancel-button" class=" main-bg border btn">Hủy</button></div></div></div>`;
 
-    popUp(html);
+    appendInBody();
+
+    jQuery("body").append(html);
+    jQuery("#inputDialog").fadeIn(350);
+
+    jQuery(".overlay-dark").one('click', function () {
+        jQuery("#inputDialog").hide(250, function () {
+            jQuery(".overlay-dark").remove();
+            jQuery(this).remove();
+        });
+    });
 
     jQuery('#inputDialog #cancel-button').one('click', function () {
-        jQuery(".popup-content").hide(250, function () {
+        jQuery("#inputDialog").hide(250, function () {
             jQuery(".overlay-dark").remove();
             jQuery(this).remove();
         });
     });
 
     jQuery('#inputDialog #confirm-button').one('click', function () {
-        var val = jQuery('#inputDialog #input-value').first().val();
 
+        var val = jQuery('#inputDialog #input-value').first().val();
 
         if (!val) {
             return;
@@ -454,27 +455,13 @@ function getNumberInput(callback, placeHolder) {
 
         callback(parseInt(val));
 
-        jQuery(".popup-content").hide(250, function () {
+        jQuery("#inputDialog").hide(250, function () {
             jQuery(".overlay-dark").remove();
             jQuery(this).remove();
         });
 
     });
 
-}
-
-// Popup thông báo
-function popUp(html) {
-    appendInBody();
-    jQuery("body").append(html);
-    jQuery(".popup-content").fadeIn(350);
-
-    jQuery(".overlay-dark:not(.layer2)").one('click', function () {
-        jQuery(".popup-content").hide(250, function () {
-            jQuery(".overlay-dark").remove();
-            jQuery(this).remove();
-        });
-    });
 }
 
 function selectItem(e, className) {

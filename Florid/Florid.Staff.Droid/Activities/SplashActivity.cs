@@ -6,6 +6,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
@@ -13,6 +14,8 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Webkit;
 using Android.Widget;
+using Com.Izettle.Html2bitmap;
+using Com.Izettle.Html2bitmap.Content;
 using Firebase.Auth;
 using Florid.Droid.Lib;
 using Florid.Droid.Lib.Static;
@@ -20,24 +23,94 @@ using Java.IO;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity(MainLauncher = true)]
-    public class SplashActivity : AppCompatActivity
+    public class CustomConfig : Html2BitmapConfigurator
     {
+        public override void ConfigureWebView(WebView webview)
+        {
+            base.ConfigureWebView(webview);
+            webview.SetBackgroundColor(Color.Magenta);
+            webview.Settings.TextZoom = 100;
+        }
+    }
+
+    public class CustomAsyncTask : AsyncTask
+    {
+        BaseActivity _context;
+        public CustomAsyncTask(BaseActivity context)
+        {
+            _context = context;
+        }
+
+        protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params)
+        {
+            string content;
+            AssetManager assets = _context.Assets;
+            var sr = new StreamReader(assets.Open("reciptTemplate.html"));
+            content = sr.ReadToEnd();
+
+            var html2BitmapConfigurator = new CustomConfig();
+
+            var build = new Html2Bitmap.Builder()
+            .SetContext(_context)
+            .SetContent(WebViewContent.Html(content))
+            .SetBitmapWidth(420)
+            .SetMeasureDelay(10)
+            .SetScreenshotDelay(10)
+            .SetStrictMode(true)
+            .SetTimeout(5)
+            .SetTextZoom((Java.Lang.Integer)120)
+            .SetConfigurator(html2BitmapConfigurator)
+            .Build();
+
+            var bitmap = build.Bitmap;
+
+
+            return bitmap;
+        }
+
+        protected override void OnPostExecute(Java.Lang.Object result)
+        {
+            _context.MainApp.DoPrintJob((Bitmap)result);
+            base.OnPostExecute(result);
+        }
+    }
+
+    [Activity(MainLauncher = true)]
+    public class SplashActivity : BaseActivity
+    {
+        protected override int LayoutId => Resource.Layout.SplashLayout;
         ImageView _testImage;
+
+        protected override void InitView(ViewGroup viewGroup)
+        {
+        }
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            SetContentView(Resource.Layout.SplashLayout);
 
             FindViewById<Button>(Resource.Id.goBtn).Click += delegate
             {
-                BaseModelHelper.Instance.RootWebUrl = FindViewById<EditText>(Resource.Id.urlTxt).Text;
+                MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
+                {
+                    if (isSuccess)
+                    {
+                        var task = new CustomAsyncTask(this);
+                        task.Execute();
+                    }
 
-                StartActivity(new Intent(this, typeof(MainActivity)));
+                });
+
+            
+
+                //BaseModelHelper.Instance.RootWebUrl = FindViewById<EditText>(Resource.Id.urlTxt).Text;
+
+                //StartActivity(new Intent(this, typeof(MainActivity)));
             };
+
+
         }
 
         protected override void OnResume()

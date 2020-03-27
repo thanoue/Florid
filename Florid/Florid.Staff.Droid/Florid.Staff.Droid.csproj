@@ -65,6 +65,9 @@
     <Reference Include="Florid.Droid.Secure.Lib">
       <HintPath>..\..\Libs\Florid.Droid.Secure.Lib.dll</HintPath>
     </Reference>
+    <Reference Include="Florid.Droid.Htl2BitmapLib">
+      <HintPath>..\..\Libs\Florid.Droid.Htl2BitmapLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\MainActivity.cs" />

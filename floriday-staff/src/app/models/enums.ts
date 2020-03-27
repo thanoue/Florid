@@ -7,13 +7,11 @@ export enum EntityType {
 
 
 export enum Roles {
-    None = -1,
-    Admin,
-    Shipper,
-    CustomerService,
-    Florist,
-    Others
-}
+    Admin = 'Admin',
+    Account = 'Account',
+    Shipper = 'Shipper',
+    Florist = 'Florist'
+};
 
 export enum ProductCategories {
     All = -1,

@@ -14,8 +14,9 @@ export class HomeComponent extends BaseComponent {
 
   Title = 'Trang chủ';
   NavigateClass = 'nav-icon';
+  IsDataLosingWarning = false;
 
-  protected OnNavigateClick() {
+  protected OnBackNaviage() {
     customerSupport();
   }
 

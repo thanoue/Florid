@@ -53,6 +53,22 @@ export class LocalService {
         LocalService.setItem(LOCAL_STORAGE_VARIABLE.access_token, token);
     }
 
+    static getUserAvtUrl() {
+        return LocalService.getItem(LOCAL_STORAGE_VARIABLE.user_avt_url);
+    }
+
+    static setUserAvtUrl(url: string) {
+        LocalService.setItem(LOCAL_STORAGE_VARIABLE.user_avt_url, url);
+    }
+
+    static getUserEmail() {
+        return LocalService.getItem(LOCAL_STORAGE_VARIABLE.user_avt_url);
+    }
+
+    static setUserEmail(email: string) {
+        LocalService.setItem(LOCAL_STORAGE_VARIABLE.user_avt_url, email);
+    }
+
     static getPhoneNumber() {
         return LocalService.getItem(LOCAL_STORAGE_VARIABLE.phone_number);
     }

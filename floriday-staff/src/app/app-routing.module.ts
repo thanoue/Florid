@@ -16,12 +16,8 @@ import { SearchProductComponent } from './components/search-product/search-produ
 import { SaleOptionComponent } from './components/sale-option/sale-option.component';
 
 const routes: Routes = [
-
-  {
-    path: 'login', component: LoginComponent,
-    data: { Title: 'Dang nhap', NavigateClass: 'none' }
-  },
-  { path: 'printjob', component: PrinterComponent },
+  { path: 'print-job', component: PrinterComponent, canActivate: [LoggedInGuard] },
+  { path: 'login', component: LoginComponent },
   {
     path: '',
     component: MainLayoutComponent,
@@ -62,7 +58,7 @@ const routes: Routes = [
       {
         path: 'sale-option',
         component: SaleOptionComponent,
-      }
+      },
     ]
   },
   { path: '404', component: NotFoundComponent },

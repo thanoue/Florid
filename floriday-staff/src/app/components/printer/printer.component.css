@@ -15,4 +15,4 @@ table tr td:last-child,table tr th:last-child{text-align: right; width:50%}
 .recipe-info table tfoot td {padding-top: 20px;}
 .recipe-total table tr:first-child td {font-size: 22px; font-weight: 600;}
 body{background:#fff}
-.wrapper{width: 385px; margin:auto;}
+.wrapper{width: 385px; padding-right: 50px;margin: auto }

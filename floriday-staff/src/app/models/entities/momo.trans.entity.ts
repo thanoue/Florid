@@ -8,4 +8,5 @@ export class MomoTrans extends BaseEntity {
     StoreId: string;
     Status: number;
     OrderInfo: string;
+    RequestId: string;
 }

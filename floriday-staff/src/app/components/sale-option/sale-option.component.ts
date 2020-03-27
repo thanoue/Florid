@@ -5,6 +5,7 @@ import { sha256, sha224 } from 'js-sha256';
 import { environment } from 'src/environments/environment';
 import { MomoTransService } from 'src/app/services/momo.trans.service';
 import { HttpService } from 'src/app/services/common/http.service';
+import { API_END_POINT } from 'src/app/app.constants';
 
 declare function getMomoConfig(): any;
 declare function openQR(): any;
@@ -19,7 +20,7 @@ export class SaleOptionComponent extends BaseComponent {
   Title = 'Thanh toán';
   protected IsDataLosingWarning = false;
   order: OrderViewModel;
-  inputAmount = 0;
+  inputAmount = 30000;
   qrCodeData = 'data';
 
   constructor(private momoTransService: MomoTransService, private httpServce: HttpService) {
@@ -60,36 +61,39 @@ export class SaleOptionComponent extends BaseComponent {
 
     openQR();
 
+    let temp = 0;
+
     this.momoTransService.updateNewTransResult((transResult) => {
 
       if (transResult.Id !== billId) {
         return;
       }
 
+      console.log(temp);
+      temp += 1;
+
       console.log(transResult);
 
       this.momoTransService.removeNewTransResultHandler();
 
-      const momoRequestId = `florid_requestId_${currentTime.getTime()}`;
-
-      const transConfirmSigRaw = `partnerCode=${momoConfig.partnerCode}&partnerRefId=${transResult.Id}&requestType=capture&requestId=${momoRequestId}&momoTransId=${transResult.MomoTransId}`;
+      const transConfirmSigRaw = `partnerCode=${momoConfig.partnerCode}&partnerRefId=${transResult.Id}&requestType=capture&requestId=${transResult.RequestId}&momoTransId=${transResult.MomoTransId}`;
       const transConfirmSig = sha256.hmac.create(momoConfig.secretkey).update(transConfirmSigRaw).hex();
 
       const params = {
         partnerCode: momoConfig.partnerCode,
         partnerRefId: transResult.Id,
         requestType: 'capture',
-        requestId: momoRequestId,
+        requestId: transResult.RequestId,
         momoTransId: transResult.MomoTransId,
         signature: transConfirmSig
       };
 
       setTimeout(() => {
-        this.httpServce.sendMomoTransRes('/pay/confirm', params)
+        this.httpServce.post(API_END_POINT.momo_qr_confirm, params)
           .subscribe(res => {
             console.log(res);
           });
-      }, 2000);
+      }, 1000);
 
     });
 

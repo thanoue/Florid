@@ -12,94 +12,108 @@
         <p>Facebook: fb.com/floridshop</p>
         <p>Website: florid.com.vn</p>
     </div>
-    <h1>BIÊN LAI</h1>
+    <h1>Hoá đơn</h1>
     <div class="recipe-info">
         <table>
             <tbody>
                 <tr>
-                    <td>Số biên lai:</td>
-                    <td>02002017</td>
+                    <td>Mã hoá đơn:</td>
+                    <td>{{order.OrderId}}</td>
                 </tr>
                 <tr>
                     <td>Thời gian:</td>
-                    <td>21-02-2020 13:08</td>
+                    <td>{{createdDate}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div class="recipe-detail">
         <table>
+            <thead>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>STT</th>
+                    <th>Giá tiền</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr>
-                    <th>Mặt hàng</th>
-                    <th>SL</th>
-                    <th>Số tiền</th>
-                </tr>
-                <tr>
+                <tr *ngFor="let orderDetail of order.OrderDetails">
                     <td>
-                        <p>Bayby (Giá niêm yết)</p><span>40.000</span>
+                        <p>{{orderDetail.ProductName}}</p>
                     </td>
-                    <td>1</td>
-                    <td>40.0000</td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>Hoa lẻ</p><span>10.000</span>
+                    <td>{{orderDetail.Index +1 }}</td>
+                    <td>{{orderDetail.ModifiedPrice | currency:'VND':'symbol-narrow':'':'vi-VN'}} <p>+
+                            {{orderDetail.AdditionalFee | currency:'VND':'symbol-narrow':'':'vi-VN'}}</p>
                     </td>
-                    <td>1</td>
-                    <td>10.0000</td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>Hoa lẻ</p><span>10.000</span>
-                    </td>
-                    <td>1</td>
-                    <td>10.0000</td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>Hoa lẻ</p><span>10.000</span>
-                    </td>
-                    <td>1</td>
-                    <td>10.0000</td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>Hoa lẻ</p><span>10.000</span>
-                    </td>
-                    <td>1</td>
-                    <td>10.0000</td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>Hoa lẻ</p><span>10.000</span>
-                    </td>
-                    <td>1</td>
-                    <td>10.0000</td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <td>
-                        <p>Tổng</p>
+                        <p>Tổng:</p>
                     </td>
-                    <td>2</td>
-                    <td>50.0000</td>
+                    <td></td>
+                    <td>{{totalAmount | currency:'VND':'symbol-narrow':'':'vi-VN'}}</td>
                 </tr>
+                <tr>
+                    <td>Thành tiền:</td>
+                    <td></td>
+                    <td>{{order.TotalAmount | currency:'VND':'symbol-narrow':'':'vi-VN'}}</td>
+                </tr>
+                <tr>
+                    <td>Đã thanh toán:</td>
+                    <td></td>
+                    <td>{{order.TotalPaidAmount | currency:'VND':'symbol-narrow':'':'vi-VN'}}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Còn lại:</p>
+                    </td>
+                    <td></td>
+                    <td>{{order.TotalAmount - order.TotalPaidAmount | currency:'VND':'symbol-narrow':'':'vi-VN'}}</td>
+                </tr>
+
             </tfoot>
         </table>
     </div>
+    <p>{{ order.VATIncluded ? 'Đã bao gồm VAT' : 'Chưa bao gồm VAT' }}</p>
     <div class="recipe-total">
+        <p>Thông tin KH</p>
         <table>
             <tbody>
                 <tr>
-                    <td>Tổng</td>
-                    <td>50.000đ</td>
+                    <td>
+                        Giảm giá thành viên
+                    </td>
+                    <td>{{order.CustomerInfo.DiscountPercent}}%</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>Điểm sử dụng:</p>
+                    </td>
+                    <td>
+                        <p>{{order.CustomerInfo.ScoreUsed}}</p>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Tiền mặt:</td>
-                    <td>50.000đ</td>
+                    <td>
+                        <p>Điểm được cộng:</p>
+                    </td>
+                    <td>
+                        <p>{{order.CustomerInfo.GainedScore}}</p>
+                    </td>
                 </tr>
+                <tr>
+                    <td>
+                        <p>Điểm còn lại:</p>
+                    </td>
+                    <td>
+                        <p>{{ order.CustomerInfo.AvailableScore - order.CustomerInfo.ScoreUsed +  order.CustomerInfo.GainedScore}}
+                        </p>
+                    </td>
+                </tr>
+
             </tbody>
         </table>
     </div>

@@ -1,6 +1,8 @@
+import { Role } from "./role";
+
 const expressJwt = require('express-jwt');
 
-export function authorize(roles: [] | string = []) {
+export function authorize(roles: Role[] | string = []) {
 
     let role: string[] = [];
 

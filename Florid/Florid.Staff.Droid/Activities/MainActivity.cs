@@ -84,10 +84,12 @@ namespace Florid.Staff.Droid.Activity
             SetStatusBarColor(true);
 
 
-            //MainApp.ConnectToBluetoothDevice( "DC:0D:30:2F:49:8F", (isSuccess) =>
-            //{
+            MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
+           {
 
-            //});
+           });
+
+
         }
 
         public void ShowMask()

@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
 
 declare function getNumberInput(resCallback: (res: number) => void, placeHolder: string): any;
 declare function createNumbericElement(isDisabled: boolean, calback: (val: number) => void): any;
-declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: number) => void): any;
+declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: any) => void): any;
 
 @Component({
   selector: 'app-order-detail',
@@ -63,7 +63,7 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
     selectProductCategory(PRODUCTCATEGORIES, (val) => {
 
-      this.router.navigate(['/search-product'], { queryParams: { category: val }, queryParamsHandling: 'merge' });
+      this.router.navigate(['/search-product'], { queryParams: { category: +val }, queryParamsHandling: 'merge' });
 
     });
 

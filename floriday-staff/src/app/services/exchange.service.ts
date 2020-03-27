@@ -31,6 +31,10 @@ export class ExchangeService {
         return gainedScore * 1000;
     }
 
+    static setTotalScore(currentScode: number, orderGainedScore: number, orderUsedScore: number): number {
+        return currentScode - orderUsedScore + orderGainedScore;
+    }
+
     static stringPriceToNumber(res: string): number {
         // tslint:disable-next-line: no-debugger
         const length = res.length;

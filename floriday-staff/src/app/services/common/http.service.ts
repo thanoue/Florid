@@ -24,7 +24,7 @@ export class HttpService {
   };
 
   private caches = {};
-  protected apiHost = '';
+  protected apiHost = environment.base_domain;
   protected apiUrlPrefix = '/api/v1';
 
   protected headers: HttpHeaders;
@@ -97,17 +97,23 @@ export class HttpService {
     return request;
   }
 
-  public post(url: string, params?: HttpParams | any, loader = true): Observable<Object | any> {
+  public post(url: string, params?: HttpParams | any, loader = true): Observable<object | any> {
+
     this.loadToken();
     const fullUrl = this.createAPIURL(url);
-    this.globalService.startLoading();
+
+    if (loader) {
+      this.globalService.startLoading();
+    }
 
     let request = this.http.post(fullUrl, params, { headers: this.headers })
       .pipe(timeout(REQUEST_TIMEOUT),
         catchError(this.handleError));
 
     request.subscribe(() => {
-      this.globalService.stopLoading();
+      if (loader) {
+        this.globalService.stopLoading();
+      }
     });
 
     return request;

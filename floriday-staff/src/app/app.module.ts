@@ -26,7 +26,7 @@ import { SelectCustomerComponent } from './components/select-customer/select-cus
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { SelectReceiverComponent } from './components/select-receiver/select-receiver.component';
 import es from '@angular/common/locales/es';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CommonModule } from '@angular/common';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SearchProductComponent } from './components/search-product/search-product.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -52,6 +52,7 @@ declare function getFirebaseConfig(): any;
     NotFoundComponent,
     SearchProductComponent,
     SaleOptionComponent,
+    PrinterComponent
   ],
   imports: [
     BrowserModule,

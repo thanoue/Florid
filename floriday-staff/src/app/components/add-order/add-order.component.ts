@@ -4,8 +4,10 @@ import { OrderViewModel, OrderDetailViewModel } from 'src/app/models/view.models
 import { OrderDetailStates, MembershipTypes } from 'src/app/models/enums';
 import { Router } from '@angular/router';
 import { ExchangeService } from 'src/app/services/exchange.service';
+import { OrderService } from 'src/app/services/order.service';
 
 declare function openExcForm(resCallback: (result: number, validateCalback: (isSuccess: boolean) => void) => void): any;
+declare function getNumberInput(resCallback: (res: number) => void, placeHolder: string, oldValue: number): any;
 
 @Component({
   selector: 'app-add-order',
@@ -27,7 +29,6 @@ export class AddOrderComponent extends BaseComponent {
     if (!this.order) {
       this.memberShipTitle = 'New Customer';
     } else {
-
       this.onVATIncludedChange();
     }
 
@@ -50,6 +51,33 @@ export class AddOrderComponent extends BaseComponent {
     }
   }
 
+  requestPaidInput() {
+
+    getNumberInput((res) => {
+
+      this.order.TotalPaidAmount = res;
+
+      if (!this.order.OrderId) {
+
+        this.orerService.getNextIndex()
+          .then(nextIndex => {
+
+            this.order.OrderId = `DON_${nextIndex}`;
+
+            if (!this.order.CreatedDate) {
+              this.order.CreatedDate = new Date();
+            }
+
+            this.router.navigate(['/print-job']);
+
+          });
+      }
+      this.router.navigate(['/print-job']);
+
+    }, 'Số tiền đã thanh toán...', this.order.TotalAmount);
+
+  }
+
   totalAmountCalculate() {
     this.order.TotalAmount = 0;
 
@@ -57,10 +85,11 @@ export class AddOrderComponent extends BaseComponent {
       if (!detail.AdditionalFee) {
         detail.AdditionalFee = 0;
       }
-      this.order.TotalAmount += detail.ModifiedPrice - (detail.ModifiedPrice / 100) * this.order.CustomerInfo.DiscountPercent + detail.AdditionalFee;
+      this.order.TotalAmount += ExchangeService.getFinalPrice(detail.ModifiedPrice, this.order.CustomerInfo.DiscountPercent, detail.AdditionalFee);
     });
 
     this.order.TotalAmount -= ExchangeService.geExchangableAmount(this.order.CustomerInfo.ScoreUsed);
+
   }
 
   onVATIncludedChange() {
@@ -130,7 +159,7 @@ export class AddOrderComponent extends BaseComponent {
   }
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private orerService: OrderService) {
     super();
   }
 

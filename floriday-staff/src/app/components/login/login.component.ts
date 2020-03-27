@@ -26,8 +26,8 @@ export class LoginComponent extends BaseComponent {
 
     this.setStatusBarColor(true);
 
-    this.model.passcode = '221111';
-    this.model.userName = 'a.ma33i.van@florid.com';
+    this.model.passcode = '123456';
+    this.model.userName = 'florid.admin@florid.com';
   }
 
   login(form: NgForm) {

@@ -100,10 +100,14 @@ export class OrderCustomerInfoViewModel {
 
     Name: string;
     Id: string;
+
     DiscountPercent = 0;
-    AvailableScore = 0;
-    ScoreUsed = 0;
-    UsedScoreTotal = 0;
+    AvailableScore = 0; // điểm có sẵn của KH
+    ScoreUsed = 0; // điểm KH muốn sử dụng cho hoá đơn này
+    UsedScoreTotal = 0; // tổng điểm KH đã sử dụng 
+    GainedScore = 0; // điểm kiếm được từ hoá đơn
+    TotalScore = 0; // tổng điểm
+
     PhoneNumber: string;
     MembershipType: MembershipTypes;
 

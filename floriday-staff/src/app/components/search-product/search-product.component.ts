@@ -10,7 +10,7 @@ import { ExchangeService } from 'src/app/services/exchange.service';
 import { TempProduct } from 'src/app/models/entities/file.entity';
 import { TempProductService } from 'src/app/services/tempProduct.service';
 
-declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: number) => void): any;
+declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: any) => void): any;
 declare function filterFocus(): any;
 
 @Component({
@@ -105,7 +105,7 @@ export class SearchProductComponent extends BaseComponent {
   filter() {
     selectProductCategory(PRODUCTCATEGORIES, (val) => {
       filterFocus();
-      this.getProductByCategory(val);
+      this.getProductByCategory(+val);
     });
   }
 

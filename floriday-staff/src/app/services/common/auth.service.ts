@@ -8,6 +8,8 @@ import { GlobalService } from './global.service';
 import { async } from '@angular/core/testing';
 import { UserService } from '../user.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { HttpService } from './http.service';
+import { API_END_POINT } from 'src/app/app.constants';
 
 
 @Injectable({
@@ -15,7 +17,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AuthService {
 
-  constructor(private globalService: GlobalService, private userService: UserService, public auth: AngularFireAuth) { }
+  constructor(private globalService: GlobalService, private userService: UserService, public auth: AngularFireAuth, private httpService: HttpService) { }
 
   static getCurrentRole(): any {
     const role = LocalService.getRole();
@@ -28,8 +30,9 @@ export class AuthService {
 
     this.auth.auth.signOut().then(() => {
 
-      signedOutCallback(true);
+      LocalService.clear();
       this.globalService.stopLoading();
+      signedOutCallback(true);
 
     }).catch(error => {
 
@@ -47,15 +50,34 @@ export class AuthService {
 
     this.auth.auth.signInWithEmailAndPassword(model.userName, model.passcode)
       .then(async userInfo => {
-        LocalService.setUserId(userInfo.user.uid);
 
-        this.userService.getByLoginId(userInfo.user.uid).then(user => {
-          if (user) {
-            LocalService.setRole(user.Role);
-            LocalService.setUserName(user.FullName);
-            LocalService.setPhoneNumber(user.PhoneNumber);
+        const loggedUserId = LocalService.getUserId();
+
+        if (loggedUserId === userInfo.user.uid) {
+
+          this.globalService.stopLoading();
+          loginCallback(true);
+
+          return;
+        }
+
+        this.httpService.post(API_END_POINT.login, {
+          username: model.userName,
+          password: model.passcode
+        }, false).subscribe(res => {
+          if (res) {
+
+            this.globalService.stopLoading();
+
+            LocalService.setAccessToken(res.token);
+            LocalService.setUserName(res.FullName);
+            LocalService.setPhoneNumber(res.PhoneNumber);
+            LocalService.setRole(res.Role);
+            LocalService.setUserEmail(res.Email);
+            LocalService.setUserId(userInfo.user.uid);
 
             loginCallback(true);
+
           } else {
             this.globalService.stopLoading();
             loginCallback(false);

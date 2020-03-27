@@ -24,7 +24,7 @@ app.use(jwt({ secret: adminSdk.OAuthPrivateKey, isRevoked: blacklist.isRevoked }
     path: [
         // public routes that don't require authentication
         '/api/v1/users/login',
-        '/api/v1/sale/momoconfirm'
+        '/api/v1/sale/momo/qr/request'
     ]
 }));
 

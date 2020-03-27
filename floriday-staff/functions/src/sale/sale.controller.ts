@@ -1,18 +1,72 @@
 const express = require('express');
 const saleRouter = express.Router();
 const sha256 = require('js-sha256');
+const { v1: uuidv1 } = require('uuid');
+import * as auth from '../helper/ authorize';
 import * as adminSdk from '../helper/admin.sdk';
+import { Role } from '../helper/role';
+
+const https = require('https');
+
 
 // routes
-saleRouter.post('/momoconfirm', momoQRCodeConfirm);
+saleRouter.post('/momo/qr/request', momoQRCodeRequest);
+saleRouter.post('/momo/qr/confirm', auth.authorize(new Array(Role.Account, Role.Admin)), momoQRCodeConfirm)
 
 module.exports = saleRouter;
 
 function momoQRCodeConfirm(req: any, res: any) {
 
-    const status = parseInt(req.body.status_code);
+    const body = JSON.stringify({
+        partnerCode: req.body.partnerCode,
+        partnerRefId: req.body.partnerRefId,
+        requestType: 'capture',
+        requestId: req.body.requestId,
+        momoTransId: req.body.momoTransId,
+        signature: req.body.signature
+    });
 
-    console.log(req.body);
+    const options = {
+        hostname: 'test-payment.momo.vn',
+        path: '/pay/confirm',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Content-Length': body.length
+        }
+    };
+
+    console.log('param:', body);
+
+    const request = https.request(options, (result: any) => {
+        result.setEncoding('utf8');
+        result.on('data', (bodyRes: any) => {
+            if (bodyRes) {
+                console.log('data ne:', bodyRes);
+                res.status(200).send(bodyRes);
+            } else {
+                res.status(500).send('Error.');
+            }
+        });
+
+        res.on('end', () => {
+            console.log('No more data in response.');
+        });
+    })
+
+    request.on('error', (e: any) => {
+        console.log(`problem with request: ${e.message}`);
+        res.status(500).send(e);
+    });
+
+    // write data to request body
+    request.write(body);
+    request.end();
+}
+
+function momoQRCodeRequest(req: any, res: any) {
+
+    const status = parseInt(req.body.status_code);
 
     if (status === 0) {
 
@@ -27,10 +81,14 @@ function momoQRCodeConfirm(req: any, res: any) {
         //     return;
         // }
 
+        console.log(req.body);
 
-        const rawSignature = `amount=${req.body.amount}&message=${req.body.message}&transaction_id=${req.body.transaction_id}&order_id=${req.body.order_id}&status_code=${status}`;
+
+        const rawSignature = `amount=${req.body.amount}&message=${req.body.message}&momoTransId=${req.body.transaction_id}&partnerRefId=${req.body.order_id}&status=${req.body.status_code}`;
 
         const signature = sha256.hmac.create(adminSdk.momoConfig.secretKey).update(rawSignature).hex();
+
+        const requestId = uuidv1();
 
         adminSdk.defauDatabase.ref('momoTrans/' + req.body.order_id).set({
             Id: req.body.order_id,
@@ -40,18 +98,19 @@ function momoQRCodeConfirm(req: any, res: any) {
             ResponseTime: req.body.response_time,
             StoreId: req.body.store_id,
             Status: status,
-            OrderInfo: req.body.order_info
+            OrderInfo: req.body.order_info,
+            RequestId: requestId
         }, (error: any) => {
 
             if (error) {
                 res.status(500).send(error);
             } else {
                 res.status(200).send({
-                    status_code: status,
+                    status: status,
                     message: req.body.message,
                     amount: parseInt(req.body.amount),
-                    order_id: req.body.order_id,
-                    transaction_id: req.body.transaction_id,
+                    partnerRefId: req.body.order_id,
+                    momoTransId: req.body.transaction_id,
                     signature: signature
                 });
             }

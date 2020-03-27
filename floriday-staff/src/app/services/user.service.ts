@@ -25,7 +25,6 @@ export class UserService extends BaseService<User> {
 
         this.globalService.startLoading();
 
-        // tslint:disable-next-line:max-line-length
         return this.datab.ref(`${this.tableName}/${loginId}`).once('value').then(user => {
             this.globalService.stopLoading();
             return (user.val() as User);
