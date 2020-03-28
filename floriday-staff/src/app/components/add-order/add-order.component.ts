@@ -8,6 +8,7 @@ import { OrderService } from 'src/app/services/order.service';
 
 declare function openExcForm(resCallback: (result: number, validateCalback: (isSuccess: boolean) => void) => void): any;
 declare function getNumberInput(resCallback: (res: number) => void, placeHolder: string, oldValue: number): any;
+declare function doPrintJob(data: {}): any;
 
 @Component({
   selector: 'app-add-order',
@@ -64,17 +65,57 @@ export class AddOrderComponent extends BaseComponent {
 
             this.order.OrderId = `DON_${nextIndex}`;
 
-            if (!this.order.CreatedDate) {
-              this.order.CreatedDate = new Date();
-            }
-
-            this.router.navigate(['/print-job']);
+            this.doPrintReceipt();
 
           });
+      } else {
+        this.doPrintReceipt();
       }
-      this.router.navigate(['/print-job']);
+
 
     }, 'Số tiền đã thanh toán...', this.order.TotalAmount);
+
+  }
+
+  doPrintReceipt() {
+
+    if (!this.order.CreatedDate) {
+      this.order.CreatedDate = new Date();
+    }
+
+    let tempSummary = 0;
+    const products = [];
+    this.order.OrderDetails.forEach(product => {
+      products.push({
+        productName: product.ProductName,
+        index: product.Index + 1,
+        price: product.ModifiedPrice,
+        additionalFee: product.AdditionalFee
+      });
+      tempSummary += product.ModifiedPrice;
+    });
+
+    this.order.CustomerInfo.GainedScore = ExchangeService.getGainedScore(this.order.TotalAmount);
+
+
+    let orderData = {
+      saleItems: products,
+      createdDate: this.order.CreatedDate.toLocaleString('vi-VN', { hour12: true }),
+      orderId: this.order.OrderId,
+      summary: tempSummary,
+      totalAmount: this.order.TotalAmount,
+      totalPaidAmount: this.order.TotalPaidAmount,
+      totalBalance: this.order.TotalAmount - this.order.TotalPaidAmount,
+      vatIncluded: this.order.VATIncluded,
+      memberDiscount: this.order.CustomerInfo.DiscountPercent,
+      scoreUsed: this.order.CustomerInfo.ScoreUsed,
+      gainedScore: this.order.CustomerInfo.GainedScore,
+      totalScore: this.order.CustomerInfo.TotalScore,
+    };
+
+    console.log(orderData);
+
+    doPrintJob(orderData);
 
   }
 

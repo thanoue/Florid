@@ -39,9 +39,10 @@ function setStatusBarColor(isDark) {
     }
 }
 
-function doPrintJob(url) {
+function doPrintJob(data) {
+    console.log('native js');
     if (typeof Android !== "undefined" && Android !== null) {
-        Android.doPrintJob(url);
+        Android.doPrintJob(JSON.stringify(data));
     }
 }
 

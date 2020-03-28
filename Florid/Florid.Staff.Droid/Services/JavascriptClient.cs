@@ -9,6 +9,7 @@ using Android.Runtime;
 using Android.Webkit;
 using Florent37.SingleDateAndTimePickerLib.Dialogs;
 using Florid.Droid.Lib;
+using Florid.Droid.Lib.Static;
 using Florid.Entity;
 using Florid.Enum;
 using Florid.Model;
@@ -25,15 +26,15 @@ namespace Florid.Staff.Droid.Services
     {
         Action<string, string> _login;
         WebView _mainWebView;
-        BaseActivity _activity;
+        BaseStaffActivity _activity;
         Action _documentReady;
 
         public Action<bool> SetPrimaryDarkStatusBar;
-        public Action<string> DoPrintJob;
+        public Action<ReceiptPrintData> DoPrintJob;
         public Action<string> BankingSaleReturn;
         public Action<string> BankingSaleRequest;
 
-        public JavascriptClient(BaseActivity activity, WebView webview, Action<string, string> login)
+        public JavascriptClient(BaseStaffActivity activity, WebView webview, Action<string, string> login)
         {
             _login = login;
             _activity = activity;
@@ -49,7 +50,9 @@ namespace Florid.Staff.Droid.Services
         [Export("doPrintJob")]
         public void doPrintJob(string url)
         {
-            DoPrintJob?.Invoke(url);
+            var data = JsonConvert.DeserializeObject<ReceiptPrintData>(url);
+
+            DoPrintJob?.Invoke(data);
         }
 
 
@@ -136,6 +139,7 @@ namespace Florid.Staff.Droid.Services
         {
             _activity.MainApp.ShowSnackbar(message, (AlertType)type);
         }
+
 
         [Android.Webkit.JavascriptInterface]
         [Export("pickFile")]

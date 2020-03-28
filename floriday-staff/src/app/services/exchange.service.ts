@@ -24,7 +24,7 @@ export class ExchangeService {
     }
 
     static getGainedScore(totalAmount: number): number {
-        return totalAmount / 100000;
+        return Math.trunc(totalAmount / 100000);
     }
 
     static geExchangableAmount(gainedScore: number) {
