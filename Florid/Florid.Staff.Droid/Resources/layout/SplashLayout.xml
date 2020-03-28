@@ -14,4 +14,9 @@
     android:id="@+id/goBtn"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"/>
+<ImageView
+    android:layout_below="@+id/goBtn"
+    android:id="@+id/resImg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
 </RelativeLayout>

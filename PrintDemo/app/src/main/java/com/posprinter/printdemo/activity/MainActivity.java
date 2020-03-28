@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -74,7 +75,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             BtSb;// start posprint button
     Spinner conPort;//spinner connetion port
     EditText showET;// show edittext
-    CoordinatorLayout container;
+    RelativeLayout container;
 
     private View dialogView;
     BluetoothAdapter bluetoothAdapter;
@@ -122,7 +123,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         BtSb= (Button) findViewById(R.id.buttonSB);
         conPort= (Spinner) findViewById(R.id.connectport);
         showET= (EditText) findViewById(R.id.showET);
-        container= (CoordinatorLayout) findViewById(R.id.container);
+        container= (RelativeLayout) findViewById(R.id.container);
     }
 
 

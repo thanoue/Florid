@@ -28,15 +28,15 @@ namespace Florid.Staff.Droid.Activity
         public override void ConfigureWebView(WebView webview)
         {
             base.ConfigureWebView(webview);
-            webview.SetBackgroundColor(Color.Magenta);
+            webview.SetBackgroundColor(Color.Black);
             webview.Settings.TextZoom = 100;
         }
     }
 
     public class CustomAsyncTask : AsyncTask
     {
-        BaseActivity _context;
-        public CustomAsyncTask(BaseActivity context)
+        SplashActivity _context;
+        public CustomAsyncTask(SplashActivity context)
         {
             _context = context;
         }
@@ -71,6 +71,7 @@ namespace Florid.Staff.Droid.Activity
         protected override void OnPostExecute(Java.Lang.Object result)
         {
             _context.MainApp.DoPrintJob((Bitmap)result);
+            _context.TestImage.SetImageBitmap((Bitmap)result);
             base.OnPostExecute(result);
         }
     }
@@ -79,8 +80,7 @@ namespace Florid.Staff.Droid.Activity
     public class SplashActivity : BaseActivity
     {
         protected override int LayoutId => Resource.Layout.SplashLayout;
-        ImageView _testImage;
-
+        public ImageView TestImage;
         protected override void InitView(ViewGroup viewGroup)
         {
         }
@@ -89,6 +89,7 @@ namespace Florid.Staff.Droid.Activity
         {
             base.OnCreate(savedInstanceState);
 
+            TestImage = FindViewById<ImageView>(Resource.Id.resImg);
             // Create your application here
 
             FindViewById<Button>(Resource.Id.goBtn).Click += delegate
