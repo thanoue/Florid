@@ -1413,9 +1413,14 @@ span.memberLevel {
 .checkOutLeft p {
     font-weight: 700;
 }
-.checkOutLeft {
-    margin-bottom: 30px;
+span.checkouttext{
+    font-size: 13px;
+    color: #777;
+    font-style: italic;
+    display: block;
+    margin-top: 10px;
 }
+
 .checkOutLeft h4 
 {
     font-size: 16px;
@@ -1798,4 +1803,32 @@ a.backtohome {
 }
 .form-group.changeOrderSubmit button {
     padding: 0 25px;
+}
+.bankItem {
+    margin-bottom: 10px;
+}
+img.bankImg {
+    height: 80px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 7px;
+    transition: 250ms;
+}
+span.bankName {
+    font-size: 14px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    height: 20px;
+    word-break: break-all;
+}
+.bankItem:hover img.bankImg,
+.bankItem:focus img.bankImg
+{
+    border-color: var(--main-blue);
 }

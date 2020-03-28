@@ -270,8 +270,20 @@ function openLoginError()
         });
     });    
 }
+// Thông báo thành công
+var openSuccess = () =>
+{
+    appendInBody();
+    jQuery("#successInfo").fadeIn(350); 
+
+    jQuery(".overlay-dark:not(.layer2)").click(function(){
+        jQuery("#successInfo").hide(250,function(){
+            jQuery(".overlay-dark").remove();
+        });
+    });    
+}
 // HIển thị quét QR
-function openQR()
+var openQR = () =>
 {   
     appendInBody();
     jQuery("#codeQR").fadeIn(350); 
@@ -285,7 +297,7 @@ function openQR()
 
 
 // HIển thị dialog xác nhận
-function openConfirm()
+var openConfirm = () =>
 {  
     appendInBody();
     jQuery("#confirmDialog").fadeIn(350); 
@@ -298,7 +310,7 @@ function openConfirm()
 }
 
 // Hiển thị bảng màu
-function openColorBoard()
+var openColorBoard = () =>
 {
     appendInBody();
     jQuery("#colorBoard").fadeIn(350); 
@@ -309,11 +321,23 @@ function openColorBoard()
         });
     });
 }
+// Hiển thị danh sách ngân hàng
+var openEBank = () =>
+{
+    appendInBody();
+    jQuery("#bankList").fadeIn(350); 
 
+    jQuery(".overlay-dark:not(.layer2)").click(function(){
+        jQuery("#bankList").hide(250,function(){
+            jQuery(".overlay-dark").remove();
+        });
+    });
+}
 
 
 // Thêm thông tin
-function openAddInfo(){
+var openAddInfo = () =>
+{
     appendInBody();
     jQuery("#infoAdd").fadeIn(350); 
 
@@ -325,7 +349,8 @@ function openAddInfo(){
 }
 
 // Hiển thị xác nhận đơn
-function openOrderConfirm(){
+var openOrderConfirm = () =>
+{
     appendInBody();
     jQuery("#orderConfirm").fadeIn(350); 
 
@@ -337,7 +362,8 @@ function openOrderConfirm(){
 }
 
 // Hiển thị xác nhận đơn
-function openDeliConfirm(){
+var openDeliConfirm = () =>
+{
     appendInBody();
     jQuery("#deliConfirm").fadeIn(350); 
 
@@ -349,7 +375,7 @@ function openDeliConfirm(){
 }
 
 //Thay đổi thứ thự đơn hàng
-function openOrdChange()
+var openOrdChange = () =>
 {
     var html = `<div id="changeOrder" class="popup-content dialog-popup"><div class="form-group">
         <input type="text" name="" id="" class="mainForm" placeholder="Thứ tự ưu tiên..."></div>

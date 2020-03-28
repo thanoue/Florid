@@ -33,23 +33,30 @@
                     <h3>Tổng số tiền thanh toán</h3>
                     <p>380.000 vnđ</p>
                 </div>
-                <div class="checkOutLeft">
+                <div class="checkOutLeft mb-2">
                     <h4>Số tiền còn lại</h4>
                     <p>380.000 vnđ</p>
                 </div>
                 <form action="./xac-nhan.html" class="checkOutMethod">
                     <div class="form-group">
-                        <input type="number" name="" id="" class="mainForm" placeholder="Số tiền thanh toán...">
+                        <input type="number" name="" id="" class="mainForm" placeholder="Nhập số tiền thanh toán...">
                     </div>
-                    <div class="form-group methodGrid">
+                    <div class="form-group methodGrid mb-0">
                         <a href="javascript:void(0)" onclick="openQR()" class="methodItem"><img src="./images/momo.jpg" alt=""></a>
                         <a href="javascript:void(0)" onclick="openQR()" class="methodItem"><img src="./images/moca.jpg" alt=""></a>
                         <a href="javascript:void(0)" onclick="openQR()" class="methodItem"><img src="./images/zalo.jpg" alt=""></a>
                         <a href="javascript:void(0)" onclick="openQR()" class="methodItem"><img src="./images/viettel.jpg" alt=""></a>
+                        <a href="javascript:void(0)" onclick="openEBank()" class="methodItem"><img src="./images/banking.jpg" alt=""></a>
                     </div>
                     <div class="row">
                         <div class="col-8 mx-auto text-center">
                             <button type="submit" class="btn main-btn w-100">Xác nhận</button>
+                            <span class="checkouttext">Hoặc</span>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-10 mx-auto text-center">
+                            <a href="javascript:void(0)"  class="btn main-bg border w-100" onclick="openSuccess()">Thanh toán tiền mặt</a>
                         </div>
                     </div>
                 </form>
@@ -59,6 +66,59 @@
     <div id="codeQR" class="popup-content">
         <span>Quét mã QR</span>
         <img src="./images/qr.jpg" alt="">
+    </div>
+    <!-- click vào submit hiển thị xác nhận thành công -->
+    <div id="successInfo" class="popup-content dialog-popup">
+        <img src="./images/success.png" alt="">
+        <p>THÀNH CÔNG</p>
+        <span>Đơn hàng của bạn đã hoàn tất thanh toán</span>
+    </div>
+    <!-- click vào submit hiển thị danh sách ngân hàng -->
+    <div id="bankList" class="popup-content">
+        <h5 class="mb-2">Chọn Ngân hàng</h5>
+        <div class="row">
+            <div class="col-4">
+                <div class="bankItem">
+                    <img src="./images/banking.jpg" alt="" class="bankImg">
+                    <span class="bankName">ACB</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="bankItem">
+                    <img src="./images/banking.jpg" alt="" class="bankImg">
+                    <span class="bankName">VCB</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="bankItem">
+                    <img src="./images/banking.jpg" alt="" class="bankImg">
+                    <span class="bankName">BIDV</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="bankItem">
+                    <img src="./images/banking.jpg" alt="" class="bankImg">
+                    <span class="bankName">Techcombank</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="bankItem">
+                    <img src="./images/banking.jpg" alt="" class="bankImg">
+                    <span class="bankName">Saccombank</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="bankItem">
+                    <img src="./images/banking.jpg" alt="" class="bankImg">
+                    <span class="bankName">Vietinbank</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 mx-auto text-center">
+                <button type="submit" class="btn main-btn w-100">Xác nhận</button>
+            </div>
+        </div>              
     </div>
 </body>
     
