@@ -7,145 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Florid - Update your day</title>
     <link rel="icon" type="image/gif" href="./favicon.png" />
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap&subset=vietnamese"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap&subset=vietnamese" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
     <!-- jQuery library -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet"  type="text/css" href="./css/style.css">
     <script type='text/javascript' src='./js/frontend.js'></script>
 
     <style>
-        .wrapper {
-            background-color: #fff;
-            padding: 30px 20px;
-            text-align: center;
-            font-size: 18px;
-            width: 350px;
-            margin: auto
-        }
-
-        .shop-info {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .shop-info p {
-            margin-top: 0;
-            margin-bottom: 5px;
-        }
-
-        .recipe-info,
-        .recipe-detail,
-        .recipe-total {
-            border-top: 1px dashed #333;
-            padding-top: 20px;
-            margin-bottom: 20px;
-        }
-        .recipe-summary
-        {
-            margin-bottom: 20px;
-        }
-        .recipe-detail
-        {
-            margin-bottom: 10px;
-        }
-        table {
-            width: 100%;
-        }
-
-        table tr td:first-child,
-        table tr th:first-child {
-            text-align: left;
-            width: 50%
-        }
-
-        table tr td:last-child,
-        table tr th:last-child {
-            text-align: right;
-            width: 50%
-        }
-        .recipe-info table tr td:first-child, 
-        .recipe-info table tr th:first-child {
-        width: 30%;
-        } 
-        
-        .recipe-info table tr td:last-child
-        {
-            font-size: 14px;
-        }
-        .recipe-detail table {
-            vertical-align: top;
-        }
-
-        .recipe-detail table tr th {
-            font-weight: 600;
-            padding-bottom: 10px;
-            font-size: 20px;
-        }
-        
-        .recipe-detail table tr td:first-child,
-        .recipe-detail table tr th:first-child{
-            width: 20%;
-        }
-        .recipe-detail table tr th:nth-child(2),
-        .recipe-detail table tr td:nth-child(2) {
-            width: 50%;
-            text-align: left;
-        }
-        
-        .recipe-detail table  tr td:last-child,
-        .recipe-detail table  tr th:last-child{
-            width: 30%;
-        }
-        .recipe-detail table tr {
-            vertical-align: top;
-        }
-
-        .recipe-detail table tr td {
-            padding-bottom: 10px;
-        }
-
-        .recipe-detail table tr td p {
-            margin-top: 0;
-            margin-bottom: 7px;
-            font-weight: 600;
-        }
-
-        .recipe-info table tfoot td {
-            padding-top: 20px;
-        }
-
-        .recipe-vat
-        {
-            margin-top: 10px;
-            display: block;
-        }
-        .recipe-total table tr td:first-child
-        {
-            width: 70%;
-        }
-        .recipe-detail table tr td:last-child span {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-        }
+        .wrapper{background-color: #fff; padding: 30px 20px;text-align: center;font-size: 18px;}
+        .shop-info { margin-top: 10px;margin-bottom: 10px;}
+        h1 {font-size: 24px; margin-bottom: 10px;font-weight: 700;}
+        .shop-info p { margin-top: 0; margin-bottom: 5px;}
+        .recipe-info,.recipe-detail,.recipe-total{border-top: 1px dashed #333; padding-top: 20px; margin-bottom: 20px;}
+        table{width:100%;}
+        table tr td:first-child,table tr th:first-child{text-align: left; width:50%}
+        table tr td:last-child,table tr th:last-child{text-align: right; width:50%}
+        .recipe-detail table{vertical-align: top;}
+        .recipe-detail table tr th { font-weight:600;padding-bottom:10px; font-size: 20px;}
+        .recipe-detail table tr th:nth-child(2),.recipe-detail table tr td:nth-child(2) { width: 10%; text-align: center;}
+        .recipe-detail table tr{vertical-align: top;}
+        .recipe-detail table tr td{padding-bottom: 10px ;}
+        .recipe-detail table tr td p{margin-top: 0;margin-bottom:7px; font-weight: 600;}
+        .recipe-info table tfoot td {padding-top: 20px;}
+        .recipe-total table tr:first-child td {font-size: 22px; font-weight: 600;}
     </style>
 </head>
 
@@ -169,12 +58,12 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>Mã hóa đơn:</td>
+                        <td>Số biên lai:</td>
                         <td>02002017</td>
                     </tr>
                     <tr>
                         <td>Thời gian:</td>
-                        <td>12:19:12 CH, 28/3/2020</td>
+                        <td>21-02-2020 13:08</td>
                     </tr>
                 </tbody>
             </table>
@@ -183,103 +72,80 @@
             <table>
                 <tbody>
                     <tr>
-                        <th>STT</th>
                         <th>Mặt hàng</th>
+                        <th>SL</th>
                         <th>Số tiền</th>
                     </tr>
                     <tr>
-                        <td>1</td>
                         <td>
-                            <p>Bayby (Giá niêm yết)</p>
+                            <p>Bayby (Giá niêm yết)</p><span>40.000</span>
                         </td>
-                        <td>1.898.000đ<span>+10.000</span></td>
+                        <td>1</td>
+                        <td>40.0000</td>
                     </tr>
                     <tr>
-                        <td>1</td>
                         <td>
-                            <p>MS 0392 SUNNY COLOR</p>
+                            <p>Hoa lẻ</p><span>10.000</span>
                         </td>
-                        <td>240.0000<span>+10.000</span></td>
+                        <td>1</td>
+                        <td>10.0000</td>
                     </tr>
                     <tr>
-                        <td>1</td>
                         <td>
-                            <p>Hoa lẻ</p>
+                            <p>Hoa lẻ</p><span>10.000</span>
                         </td>
-                        <td>10.0000<span>+10.000</span></td>
+                        <td>1</td>
+                        <td>10.0000</td>
                     </tr>
                     <tr>
-                        <td>1</td>
                         <td>
-                            <p>Hoa lẻ</p>
+                            <p>Hoa lẻ</p><span>10.000</span>
                         </td>
-                        <td>10.0000<span>+10.000</span></td>
+                        <td>1</td>
+                        <td>10.0000</td>
                     </tr>
                     <tr>
-                        <td>1</td>
                         <td>
-                            <p>Hoa lẻ</p>
+                            <p>Hoa lẻ</p><span>10.000</span>
                         </td>
-                        <td>10.0000<span>+10.000</span></td>
+                        <td>1</td>
+                        <td>10.0000</td>
                     </tr>
                     <tr>
-                        <td>1</td>
                         <td>
-                            <p>Hoa lẻ</p>
+                            <p>Hoa lẻ</p><span>10.000</span>
                         </td>
-                        <td>10.0000<span>+10.000</span></td>
+                        <td>1</td>
+                        <td>10.0000</td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <p>Tổng</p>
+                        </td>
+                        <td>2</td>
+                        <td>50.0000</td>
+                    </tr>
+                </tfoot>
             </table>
-        </div>
-        <div class="recipe-summary">
-            <table>
-                <tbody>
-                    <tr>
-                        <td><strong>Tổng:</strong></td>
-                        <td>50.000đ</td>
-                    </tr>
-                    <tr>
-                        <td>Thành tiền:</td>
-                        <td>50.000đ</td>
-                    </tr>
-                    <tr>
-                        <td>Đã thanh toán:</td>
-                        <td>50.000đ</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Còn lại:</strong></td>
-                        <td>50.000đ</td>
-                    </tr>
-                </tbody>
-            </table>
-            <strong class="recipe-vat">Đã bao gồm VAT</strong>
         </div>
         <div class="recipe-total">
-            <h1>Thông tin KH</h1>
             <table>
                 <tbody>
                     <tr>
-                        <td>Giảm giá thành viên</td>
-                        <td>15%</td>
+                        <td>Tổng</td>
+                        <td>50.000đ</td>
                     </tr>
                     <tr>
-                        <td>Điểm sử dụng</td>
-                        <td>22</td>
-                    </tr>
-                    <tr>
-                        <td>Điểm được cộng</td>
-                        <td>11.738</td>
-                    </tr>
-                    <tr>
-                        <td>Điểm còn lại</td>
-                        <td>333222.34</td>
+                        <td>Tiền mặt:</td>
+                        <td>50.000đ</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="recipe-thank">
-            <p>Cảm ơn & chúc bạn một ngày tuyệt vời!</p>
+            <p>Cảm ơn & chúc bạn một ngày tuyệt vời!<br />Power by</p>
         </div>
     </div>
 </body>
