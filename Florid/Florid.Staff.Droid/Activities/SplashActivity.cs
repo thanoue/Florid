@@ -29,36 +29,34 @@ namespace Florid.Staff.Droid.Activity
         {
             base.ConfigureWebView(webview);
             webview.SetBackgroundColor(Color.Black);
-            webview.Settings.TextZoom = 100;
+            webview.Settings.TextZoom = 115;
         }
     }
 
     public class CustomAsyncTask : AsyncTask
     {
-        SplashActivity _context;
-        public CustomAsyncTask(SplashActivity context)
+        BaseActivity _context;
+        string _content;
+        public CustomAsyncTask(BaseActivity context,string content)
         {
+            _content = content;
             _context = context;
         }
 
         protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params)
         {
-            string content;
-            AssetManager assets = _context.Assets;
-            var sr = new StreamReader(assets.Open("reciptTemplate.html"));
-            content = sr.ReadToEnd();
-
+           
             var html2BitmapConfigurator = new CustomConfig();
 
             var build = new Html2Bitmap.Builder()
             .SetContext(_context)
-            .SetContent(WebViewContent.Html(content))
+            .SetContent(WebViewContent.Html(_content))
             .SetBitmapWidth(420)
             .SetMeasureDelay(10)
             .SetScreenshotDelay(10)
             .SetStrictMode(true)
             .SetTimeout(5)
-            .SetTextZoom((Java.Lang.Integer)120)
+            .SetTextZoom((Java.Lang.Integer)130)
             .SetConfigurator(html2BitmapConfigurator)
             .Build();
 
@@ -71,12 +69,11 @@ namespace Florid.Staff.Droid.Activity
         protected override void OnPostExecute(Java.Lang.Object result)
         {
             _context.MainApp.DoPrintJob((Bitmap)result);
-            _context.TestImage.SetImageBitmap((Bitmap)result);
             base.OnPostExecute(result);
         }
     }
 
-    [Activity(MainLauncher = true)]
+    [Activity(MainLauncher = false  )]
     public class SplashActivity : BaseActivity
     {
         protected override int LayoutId => Resource.Layout.SplashLayout;
@@ -94,21 +91,21 @@ namespace Florid.Staff.Droid.Activity
 
             FindViewById<Button>(Resource.Id.goBtn).Click += delegate
             {
-                MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
-                {
-                    if (isSuccess)
-                    {
-                        var task = new CustomAsyncTask(this);
-                        task.Execute();
-                    }
+                //MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
+                //{
+                //    if (isSuccess)
+                //    {
+                //        var task = new CustomAsyncTask(this);
+                //        task.Execute();
+                //    }
 
-                });
+                //});
 
-            
 
-                //BaseModelHelper.Instance.RootWebUrl = FindViewById<EditText>(Resource.Id.urlTxt).Text;
 
-                //StartActivity(new Intent(this, typeof(MainActivity)));
+                BaseModelHelper.Instance.RootWebUrl = FindViewById<EditText>(Resource.Id.urlTxt).Text;
+
+                StartActivity(new Intent(this, typeof(MainActivity)));
             };
 
 

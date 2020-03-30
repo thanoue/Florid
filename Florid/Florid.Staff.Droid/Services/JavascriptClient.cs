@@ -26,7 +26,7 @@ namespace Florid.Staff.Droid.Services
     {
         Action<string, string> _login;
         WebView _mainWebView;
-        BaseStaffActivity _activity;
+        BaseActivity _activity;
         Action _documentReady;
 
         public Action<bool> SetPrimaryDarkStatusBar;
@@ -34,7 +34,7 @@ namespace Florid.Staff.Droid.Services
         public Action<string> BankingSaleReturn;
         public Action<string> BankingSaleRequest;
 
-        public JavascriptClient(BaseStaffActivity activity, WebView webview, Action<string, string> login)
+        public JavascriptClient(BaseActivity activity, WebView webview, Action<string, string> login)
         {
             _login = login;
             _activity = activity;

@@ -453,11 +453,11 @@ function getNumberInput(callback, placeHolder, oldValue) {
             return;
         }
 
-        callback(parseInt(val));
 
         jQuery("#inputDialog").hide(250, function () {
             jQuery(".overlay-dark").remove();
             jQuery(this).remove();
+            callback(parseInt(val));
         });
 
     });
@@ -491,14 +491,13 @@ function openConfirm(message, okCallback, cancelCallback) {
     let html = `<div id="confirmDialog" class="popup-content dialog-popup">
                 <img src="../../../assets/images/confirm.png" alt="">
                 <p>${message}</p>
-                <div class="row"><div class="col-6"><button class=" main-btn btn" id="success-btn">Đồng ý</button></div>
-                <div class="col-6"><button class=" main-bg border btn" id="cancel-btn">Hủy</button></div></div>
+                <div class="row"><div class="col-6"><button class=" main-btn btn" id="success-btn">Có</button></div>
+                <div class="col-6"><button class=" main-bg border btn" id="cancel-btn">Không</button></div></div>
                 </div>`;
 
     appendInBody();
 
     jQuery("body").append(html);
-
 
     jQuery("#confirmDialog").fadeIn(350);
 

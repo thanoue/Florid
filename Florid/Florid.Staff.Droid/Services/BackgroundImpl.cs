@@ -127,8 +127,8 @@ namespace Florid.Staff.Droid.Services
             var list = new List<byte[]>();
 
             list.Add(DataForSendToPrinterPos58.InitializePrinter());
-            list.Add(BitmapToByteData.RasterBmpToSendData(0, _bitmap, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Left, _bitmap.Width));
-            list.Add(DataForSendToPrinterPos58.PrintAndFeedForward(3));
+            list.Add(BitmapToByteData.RasterBmpToSendData(0, _bitmap, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Center,430));
+            list.Add(DataForSendToPrinterPos58.PrintAndFeedLine());
 
             _completeProcess?.Invoke();
 

@@ -23,6 +23,14 @@ export abstract class BaseService<T extends BaseEntity> {
         this.db = firebase.database();
     }
 
+    public insertWithId(model: T, id: string): Promise<T> {
+        this.globalService.startLoading();
+        return this.db.ref(`${this.tableName}/${id}`).set(model).then(res => {
+            this.globalService.stopLoading();
+            return res.val();
+        });
+    }
+
     public insert(model: T): Promise<T> {
 
         this.globalService.startLoading();

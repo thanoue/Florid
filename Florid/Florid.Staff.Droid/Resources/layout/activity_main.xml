@@ -1,13 +1,24 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <android.webkit.WebView
-        android:id="@+id/mainWebview"
-        android:windowSoftInputMode="adjustResize"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+  <com.asksira.webviewsuite.WebViewSuite
+    android:id="@+id/mainWebview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:url="@string/url"
+    app:webViewProgressBarStyle="linear"
+    app:inflationDelay="100"
+    android:windowSoftInputMode="adjustResize"
+    app:enableJavaScript="false"
+    app:overrideTelLink="true"
+    app:overrideEmailLink="true"
+    app:overridePdfLink="true"
+    app:showZoomControl="false"
+    app:enableVerticalScrollBar="false"
+    app:enableHorizontalScrollBar="false"/>
     <View
         android:id="@+id/mask"
         android:background="#90000000"

@@ -144,14 +144,13 @@ namespace Florid.Staff.Droid
 
             _binder.WriteDataByYouself(new MyUiExecute(() =>
             {
-
+                DisconnectToBluetoothDevice();
             }, () =>
             {
                 ShowSnackbar("Printing Error!!!!", AlertType.Error);
 
             }), new MyProcessDataCallback(bitmap, () =>
             {
-                ShowSnackbar("Printing Completed!", AlertType.Info);
                 manualEvent.Set();
             }));
 
@@ -202,7 +201,7 @@ namespace Florid.Staff.Droid
             }));
         }
 
-        public void DisconnectToBluetoothDevice(BaseActivity activity)
+        public void DisconnectToBluetoothDevice()
         {
             if (!ISCONNECT)
                 return;
@@ -210,11 +209,10 @@ namespace Florid.Staff.Droid
             _binder.DisconnectCurrentPort(new MyUiExecute(() =>
             {
                 ISCONNECT = false;
-                ShowSnackbar( "Đã ngắt kết nối tới máy in!!!", AlertType.Info);
+                //ShowSnackbar( "Đã ngắt kết nối tới máy in!!!", AlertType.Info);
             }, () =>
             {
                 ShowSnackbar( "Xảy ra lỗi khi ngắt kết nối tới máy in!!", AlertType.Error);
-
             }));
         }
 

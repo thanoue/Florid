@@ -2,15 +2,17 @@ import { BaseEntity } from './base.entity';
 
 export class Order extends BaseEntity {
     CustomerId: string;
-    CustomerServiceId: string;
-    VATIncluded: string;
-    TotalAmount: string;
-    TotalPaidAmount: string;
+    AccountId: string;
+    VATIncluded: boolean;
+    TotalAmount: number;
+    TotalPaidAmount: number;
+
+    GainedScore: number;
+    ScoreUsed: number;
 }
 
 export class OrderDetail extends BaseEntity {
     OrderId: string;
-    Quantity: string;
     AdditionalFee: string;
     ProductId: string;
     ProductName: string;

@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './common/base.service';
 import { Customer } from '../models/entities/customer.entity';
+import { Order } from '../models/entities/order.entity';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrderService extends BaseService<Customer> {
+export class OrderService extends BaseService<Order> {
 
   protected tableName = '/orders';
 
   constructor() {
     super()
   }
+
 
   getNextIndex(): Promise<number> {
     return this.tableRef.limitToLast(1).once('value').then(snapShot => {

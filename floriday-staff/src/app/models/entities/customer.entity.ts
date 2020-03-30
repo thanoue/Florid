@@ -6,14 +6,12 @@ export class Customer extends BaseEntity {
     PhoneNumber: string;
     Birthday: Date;
     SpecialDays: Date[];
-    SocialMedia: CustomerSocialMediaInfo;
     ContactInfo: CustomerContactInfo;
     Address: CustomerAddress;
     MembershipInfo: MembershipInfo;
 
     constructor() {
         super();
-        this.SocialMedia = new CustomerSocialMediaInfo();
         this.ContactInfo = new CustomerContactInfo();
         this.Address = new CustomerAddress();
         this.MembershipInfo = new MembershipInfo();
@@ -31,15 +29,13 @@ export class MembershipInfo {
     MembershipType: MembershipTypes = MembershipTypes.NewCustomer;
 }
 
-export class CustomerSocialMediaInfo {
-    Facebook = '';
-    Instagram = '';
-    Skype = '';
-}
 
 export class CustomerContactInfo {
     Zalo = '';
     Viber = '';
+    Facebook = '';
+    Instagram = '';
+    Skype = '';
 }
 
 export class CustomerAddress {

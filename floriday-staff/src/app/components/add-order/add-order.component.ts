@@ -5,6 +5,8 @@ import { OrderDetailStates, MembershipTypes } from 'src/app/models/enums';
 import { Router } from '@angular/router';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { OrderService } from 'src/app/services/order.service';
+import { Order, OrderDetail } from 'src/app/models/entities/order.entity';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 declare function openExcForm(resCallback: (result: number, validateCalback: (isSuccess: boolean) => void) => void): any;
 declare function getNumberInput(resCallback: (res: number) => void, placeHolder: string, oldValue: number): any;
@@ -22,6 +24,12 @@ export class AddOrderComponent extends BaseComponent {
   memberShipTitle = '';
 
   order: OrderViewModel;
+
+
+  constructor(private router: Router, private orderService: OrderService, public auth: AngularFireAuth) {
+    super();
+  }
+
 
   protected Init() {
 
@@ -60,16 +68,17 @@ export class AddOrderComponent extends BaseComponent {
 
       if (!this.order.OrderId) {
 
-        this.orerService.getNextIndex()
+        this.orderService.getNextIndex()
+
           .then(nextIndex => {
 
             this.order.OrderId = `DON_${nextIndex}`;
 
-            this.doPrintReceipt();
+            this.printConfirm();
 
           });
       } else {
-        this.doPrintReceipt();
+        this.printConfirm();
       }
 
 
@@ -77,45 +86,78 @@ export class AddOrderComponent extends BaseComponent {
 
   }
 
-  doPrintReceipt() {
+  printConfirm() {
 
-    if (!this.order.CreatedDate) {
-      this.order.CreatedDate = new Date();
-    }
+    this.openConfirm('Có muốn in bill không?', () => {
+      if (!this.order.CreatedDate) {
+        this.order.CreatedDate = new Date();
+      }
 
-    let tempSummary = 0;
-    const products = [];
-    this.order.OrderDetails.forEach(product => {
-      products.push({
-        productName: product.ProductName,
-        index: product.Index + 1,
-        price: product.ModifiedPrice,
-        additionalFee: product.AdditionalFee
+      let tempSummary = 0;
+      const products = [];
+      this.order.OrderDetails.forEach(product => {
+        products.push({
+          productName: product.ProductName,
+          index: product.Index + 1,
+          price: product.ModifiedPrice,
+          additionalFee: product.AdditionalFee
+        });
+        tempSummary += product.ModifiedPrice;
       });
-      tempSummary += product.ModifiedPrice;
+
+      this.order.CustomerInfo.GainedScore = ExchangeService.getGainedScore(this.order.TotalAmount);
+
+
+      let orderData = {
+        saleItems: products,
+        createdDate: this.order.CreatedDate.toLocaleString('vi-VN', { hour12: true }),
+        orderId: this.order.OrderId,
+        summary: tempSummary,
+        totalAmount: this.order.TotalAmount,
+        totalPaidAmount: this.order.TotalPaidAmount,
+        totalBalance: this.order.TotalAmount - this.order.TotalPaidAmount,
+        vatIncluded: this.order.VATIncluded,
+        memberDiscount: this.order.CustomerInfo.DiscountPercent,
+        scoreUsed: this.order.CustomerInfo.ScoreUsed,
+        gainedScore: this.order.CustomerInfo.GainedScore,
+        totalScore: this.order.CustomerInfo.AvailableScore - this.order.CustomerInfo.ScoreUsed + this.order.CustomerInfo.GainedScore,
+      };
+      doPrintJob(orderData);
+
+      this.orderConfirm();
+
+    }, () => {
+
+      this.orderConfirm();
+
     });
 
-    this.order.CustomerInfo.GainedScore = ExchangeService.getGainedScore(this.order.TotalAmount);
+  }
+
+  orderConfirm() {
+    let orderDB = new Order();
+
+    orderDB.CustomerId = this.order.CustomerInfo.Id;
+    orderDB.Id = this.order.OrderId;
+    orderDB.AccountId = this.auth.auth.currentUser.uid;
+    orderDB.Created = this.order.CreatedDate;
+    orderDB.VATIncluded = this.order.VATIncluded;
+    orderDB.TotalAmount = this.order.TotalAmount;
+    orderDB.TotalPaidAmount = this.order.TotalPaidAmount;
+    orderDB.GainedScore = this.order.CustomerInfo.GainedScore;
+    orderDB.ScoreUsed = this.order.CustomerInfo.ScoreUsed;
+
+    this.orderService.insertWithId(orderDB, orderDB.Id)
+      .then(res => {
+        let orderDetais: OrderDetail[] = [];
+        this.order.OrderDetails.forEach(orderDetail => {
+          var detail = new OrderDetail();
+          detail.Id = `${orderDB.Id}_${orderDetail.Index}`;
+          detail.OrderId = this.order.OrderId;
+        });
+      })
 
 
-    let orderData = {
-      saleItems: products,
-      createdDate: this.order.CreatedDate.toLocaleString('vi-VN', { hour12: true }),
-      orderId: this.order.OrderId,
-      summary: tempSummary,
-      totalAmount: this.order.TotalAmount,
-      totalPaidAmount: this.order.TotalPaidAmount,
-      totalBalance: this.order.TotalAmount - this.order.TotalPaidAmount,
-      vatIncluded: this.order.VATIncluded,
-      memberDiscount: this.order.CustomerInfo.DiscountPercent,
-      scoreUsed: this.order.CustomerInfo.ScoreUsed,
-      gainedScore: this.order.CustomerInfo.GainedScore,
-      totalScore: this.order.CustomerInfo.TotalScore,
-    };
-
-    console.log(orderData);
-
-    doPrintJob(orderData);
 
   }
 
@@ -199,10 +241,6 @@ export class AddOrderComponent extends BaseComponent {
     });
   }
 
-
-  constructor(private router: Router, private orerService: OrderService) {
-    super();
-  }
 
 
 }
