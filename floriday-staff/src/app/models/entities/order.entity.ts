@@ -13,17 +13,19 @@ export class Order extends BaseEntity {
 
 export class OrderDetail extends BaseEntity {
     OrderId: string;
-    AdditionalFee: string;
+    AdditionalFee: number;
     ProductId: string;
     ProductName: string;
-    ProductPrice: string;
-    ProductImage: string;
-    TotalAmount: string;
-    ReceiverDetail: OrderReceiverDetail;
+    ProductPrice: number;
+    ProductImageUrl: string;
+    TotalAmount: number;
+    IsHardcodeProduct: boolean;
+    ReceiverInfo: OrderReceiverDetail;
+    Description: string;
 
     constructor() {
         super();
-        this.ReceiverDetail = new OrderReceiverDetail();
+        this.ReceiverInfo = new OrderReceiverDetail();
     }
 }
 
@@ -37,9 +39,8 @@ export class OrderReceiverDetail {
     }
 }
 
-export class CustomerReceiverDetail extends BaseEntity {
+export class CustomerReceiverDetail {
     FullName: string;
     PhoneNumber: string;
     Address: string;
-    CustomerId: string;
 }

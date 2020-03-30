@@ -1,5 +1,6 @@
 import { BaseEntity } from './base.entity';
 import { MembershipTypes } from '../enums';
+import { CustomerReceiverDetail } from './order.entity';
 
 export class Customer extends BaseEntity {
     FullName: string;
@@ -9,6 +10,7 @@ export class Customer extends BaseEntity {
     ContactInfo: CustomerContactInfo;
     Address: CustomerAddress;
     MembershipInfo: MembershipInfo;
+    ReceiverInfos: CustomerReceiverDetail[];
 
     constructor() {
         super();
@@ -19,6 +21,7 @@ export class Customer extends BaseEntity {
         this.PhoneNumber = '';
         this.Birthday = new Date();
         this.SpecialDays = [];
+        this.ReceiverInfos = [];
     }
 }
 

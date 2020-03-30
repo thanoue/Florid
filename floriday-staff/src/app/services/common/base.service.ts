@@ -24,10 +24,10 @@ export abstract class BaseService<T extends BaseEntity> {
     }
 
     public insertWithId(model: T, id: string): Promise<T> {
-        this.globalService.startLoading();
         return this.db.ref(`${this.tableName}/${id}`).set(model).then(res => {
-            this.globalService.stopLoading();
-            return res.val();
+            if (res) {
+                return model;
+            }
         });
     }
 
@@ -42,12 +42,30 @@ export abstract class BaseService<T extends BaseEntity> {
         return this.update(model);
     }
 
+    async setList(data: T[]): Promise<any> {
+
+        const list = [];
+
+        for (const item of data) {
+
+            const newItem = await this.insertWithId(item, item.Id);
+
+            if (newItem) {
+                list.push(newItem);
+            } else {
+                continue;
+            }
+        }
+        return list;
+    }
+
+
     async insertList(data: T[]): Promise<T[]> {
 
         const products: T[] = [];
         this.globalService.startLoading();
 
-        for (let i = 1; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
 
             const newData = await this.insert(data[i]);
 

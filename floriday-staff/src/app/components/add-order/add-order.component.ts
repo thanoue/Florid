@@ -5,8 +5,10 @@ import { OrderDetailStates, MembershipTypes } from 'src/app/models/enums';
 import { Router } from '@angular/router';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { OrderService } from 'src/app/services/order.service';
-import { Order, OrderDetail } from 'src/app/models/entities/order.entity';
+import { Order, OrderDetail, CustomerReceiverDetail } from 'src/app/models/entities/order.entity';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { OrderDetailService } from 'src/app/services/order-detail.service';
+import { CustomerService } from 'src/app/services/customer.service';
 
 declare function openExcForm(resCallback: (result: number, validateCalback: (isSuccess: boolean) => void) => void): any;
 declare function getNumberInput(resCallback: (res: number) => void, placeHolder: string, oldValue: number): any;
@@ -26,7 +28,7 @@ export class AddOrderComponent extends BaseComponent {
   order: OrderViewModel;
 
 
-  constructor(private router: Router, private orderService: OrderService, public auth: AngularFireAuth) {
+  constructor(private orderDetailService: OrderDetailService, private router: Router, private orderService: OrderService, public auth: AngularFireAuth, private customerService: CustomerService) {
     super();
   }
 
@@ -122,6 +124,7 @@ export class AddOrderComponent extends BaseComponent {
         gainedScore: this.order.CustomerInfo.GainedScore,
         totalScore: this.order.CustomerInfo.AvailableScore - this.order.CustomerInfo.ScoreUsed + this.order.CustomerInfo.GainedScore,
       };
+
       doPrintJob(orderData);
 
       this.orderConfirm();
@@ -135,12 +138,14 @@ export class AddOrderComponent extends BaseComponent {
   }
 
   orderConfirm() {
+    this.startLoading();
+
     let orderDB = new Order();
 
     orderDB.CustomerId = this.order.CustomerInfo.Id;
     orderDB.Id = this.order.OrderId;
     orderDB.AccountId = this.auth.auth.currentUser.uid;
-    orderDB.Created = this.order.CreatedDate;
+    orderDB.Created = this.order.CreatedDate.toString();
     orderDB.VATIncluded = this.order.VATIncluded;
     orderDB.TotalAmount = this.order.TotalAmount;
     orderDB.TotalPaidAmount = this.order.TotalPaidAmount;
@@ -149,16 +154,54 @@ export class AddOrderComponent extends BaseComponent {
 
     this.orderService.insertWithId(orderDB, orderDB.Id)
       .then(res => {
-        let orderDetais: OrderDetail[] = [];
-        this.order.OrderDetails.forEach(orderDetail => {
-          var detail = new OrderDetail();
-          detail.Id = `${orderDB.Id}_${orderDetail.Index}`;
+
+        const orderDetais: OrderDetail[] = [];
+        const receiverInfos: CustomerReceiverDetail[] = [];
+
+        this.order.OrderDetails.forEach(detailVM => {
+
+          const detail = new OrderDetail();
+
+          detail.Id = `${orderDB.Id}_${detailVM.Index}`;
           detail.OrderId = this.order.OrderId;
+          detail.IsHardcodeProduct = detailVM.IsFromLocalProduct;
+          detail.ProductId = detailVM.ProductId;
+          detail.ProductImageUrl = detailVM.ProductImageUrl;
+          detail.ProductPrice = detailVM.ModifiedPrice;
+          detail.AdditionalFee = detailVM.AdditionalFee;
+          detail.ProductName = detailVM.ProductName;
+          detail.Description = detailVM.Description;
+
+          detail.ReceiverInfo.ReceivingTime = detailVM.DeliveryInfo.DateTime;
+
+          const receiverInfo = new CustomerReceiverDetail();
+
+          receiverInfo.Address = detailVM.DeliveryInfo.Address;
+          receiverInfo.PhoneNumber = detailVM.DeliveryInfo.PhoneNumber;
+          receiverInfo.FullName = detailVM.DeliveryInfo.Name;
+
+          detail.ReceiverInfo.ReceiverDetail = receiverInfo;
+
+          receiverInfos.push(receiverInfo);
+
+          orderDetais.push(detail);
+
         });
-      })
 
+        this.orderDetailService.setList(orderDetais).then(() => {
+          this.customerService.updateReceiverList(this.order.CustomerInfo.Id, receiverInfos).then(() => {
+            this.stopLoading();
+            if (res) {
+              this.OnBackNaviage();
+            }
+          });
+        })
+          .catch(error => {
+            this.globalService.stopLoading();
+            this.showError(error);
+          });
 
-
+      });
   }
 
   totalAmountCalculate() {
