@@ -1,0 +1,266 @@
+.adminWrapper {
+    width: 100vw;
+    height: 100vh;
+    background: #f8f8f8;
+}
+nav#sideContent {
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+    background: #128070;
+    padding: 20px;
+    box-shadow: 0px 0px 10px 5px #999;
+    transition: 350ms;
+}
+.mini nav#sideContent
+{
+    transition: 350ms;
+    width: 0;
+    padding:0;
+    box-shadow: none;
+    overflow: hidden;
+}
+.adminLogo {
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+    border-bottom: 4px double #44978b;
+}
+.adminLogo h4 {
+    font-size: 20px;
+    color: #fff;
+    display: block;
+    text-align: center;
+    margin-top: 20px
+}
+.mainContent {
+    position: fixed;
+    width: calc(100% - 250px);
+    left: 250px;
+    height: 100vh;
+    transition: 350ms;
+}
+.mini .mainContent{
+    left: 0;
+    width: 100%;
+    transition: 350ms;
+}
+ul.mainMenu li.menuItem
+{
+    position: relative;
+}
+ul.mainMenu > li.menuItem:not(:last-child)
+{
+    border-bottom: 1px solid #44978b;
+}
+ul.mainMenu li.menuItem > a {
+    display: block;
+    padding: 15px 0;
+    color: #ddd;
+    transition: 250ms;
+}
+ul.mainMenu li.menuItem.active > a
+{
+    font-weight: 600;
+    color: #fff;
+}
+ul.mainMenu li.menuItem > a:hover 
+{
+    color: var(--main-green);
+}
+ul.mainMenu li.menuItem > a > i 
+{
+    width: 30px;
+}
+ul.mainMenu ul.subMenu li.menuItem > a {
+    font-size: 13px;
+    padding: 7px 0;
+}
+ul.mainMenu ul.subMenu {
+    padding-left: 30px;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: 350ms;
+    padding-bottom: 0;
+}
+span.showSubMenu {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    cursor: pointer;
+    transition: 250ms;
+    font-size: 20px;
+}
+ul.mainMenu .show ul.subMenu
+{
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+    padding-bottom: 15px;
+}
+.show span.showSubMenu {
+    transform: rotate(90deg);
+}
+span.showSubMenu:before {
+    content: "\f105";
+    font-family: fontawesome;
+    color: #ddd;
+}
+.contentHeader {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding:  15px;
+}
+button.menuToggle {
+    border: none;
+    position: relative;
+    padding: 0;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    background: none;
+}
+.icon-bar {
+	width: 30px; 
+	height: 2px;
+	background-color: #128070;
+	display: block;
+    transition: all 0.2s;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 550ms;
+}
+span.icon-bar.top-bar {
+    width: 20px;
+    transform: translateY(-50%) rotate(-45deg);
+    top: calc(50% - 8px);
+    left: -1px;
+}
+span.icon-bar.bottom-bar
+{
+    width: 20px;
+    transform: translateY(-50%) rotate(45deg);
+    top: calc(50% + 8px);
+    left: -1px;
+}
+.mini span.icon-bar.top-bar, 
+.mini span.icon-bar.bottom-bar, 
+.mini span.icon-bar {
+    width: 30px;
+    left: 0;
+    transform: none;
+}
+.headerCen h1.pageTitle {
+    margin: 0;
+    color: var(--main-grey);
+    width: 60%;
+    float: left;
+    font-size: 30px;
+}
+.headerCen .form-group  
+{
+    width: 39%;
+    float: right;
+    margin: 0;
+    position: relative;
+}
+.headerCen .form-group input.form-control {
+    background: none;
+    border-radius: 20px;
+}
+.headerCen .form-group button.btn {
+    background: #128070;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    border-radius: 20px;
+    color: #ddd;
+    height: 32px;
+    width: 32px;
+    padding: 0;
+}
+.headerRight 
+{
+    position: relative;
+}
+.headerRight a.nav-link {
+    padding: 0;
+    text-align: right;
+    color: var(--main-grey);
+}
+.headerRight a.nav-link span,
+.headerRight a.nav-link img 
+{
+    display: inline-block;
+}
+.headerRight a.nav-link img 
+{
+    width: 30px;
+    margin-left: 10px;
+    height: 30px;
+}
+.headerRight a.dropdown-item {
+    font-size: 13px;
+}
+.headerRight .dropdown-menu {
+    width: 100%;
+    transform: none !important;
+    left: auto !important;
+    right: 0;
+    top: 40px !important;
+}
+/* ==========================================login */
+.adminWrapper.loginScreen
+{
+    background: url(../images/login-bg.jpg) center center no-repeat ;
+    background-size: cover;
+}
+.loginWrap {
+    width: 50vw;
+    height: 500px;
+    position: fixed;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    background: #f8f8f8;
+}
+.loginWrap .loginLeft, .loginWrap .loginRight {
+    width: 50%;
+    float: left;
+}
+.loginLeft img {
+    object-fit: cover;
+    object-position: center;
+    height: 500px;
+    width: auto;
+}
+.loginRight {
+    padding: 40px;
+}
+.loginRight img.loginLogo {
+    filter: brightness(0.6);
+    width: 150px;
+}
+.loginRight form {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+.loginRight form input 
+{
+    border-radius: 20px;
+}
+.loginRight form a.form-check-label {
+    display: block;
+    line-height: 40px;
+    color: var(--main-grey);
+    font-size: 14px;
+}
