@@ -9,7 +9,7 @@ export class OrderViewModel {
     TotalPaidAmount: number;
     CreatedDate: Date;
     Index: number;
-    VATIncluded: boolean;
+    VATIncluded = false;
     CustomerInfo: OrderCustomerInfoViewModel;
 
     OrderDetails: OrderDetailViewModel[];
