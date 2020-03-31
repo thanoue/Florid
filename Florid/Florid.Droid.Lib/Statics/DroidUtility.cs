@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Android.Graphics;
 using Android.OS;
 using Android.Webkit;
@@ -40,6 +41,11 @@ namespace Florid.Staff.Droid
             }
 
             return resizedBitmap;
+        }
+
+        public static string VNCurrencyFormat(this long amount)
+        {
+            return amount.ToString("C", CultureInfo.GetCultureInfo("vi-vn"));
         }
 
         public static void ExecJavaScript(WebView webView, string jscode)
