@@ -202,17 +202,18 @@ export class AddOrderComponent extends BaseComponent {
           receiverInfos.push(receiverInfo);
         });
 
-        this.orderDetailService.setList(orderDetais).then(() => {
-          this.customerService.updateReceiverList(this.order.CustomerInfo.Id, receiverInfos).then(isSuccess => {
-            this.stopLoading();
-            if (isSuccess) {
-              this.OnBackNaviage();
-            }
-          });
-        })
+        this.orderDetailService.setList(orderDetais)
+          .then(() => {
+            this.customerService.updateReceiverList(this.order.CustomerInfo.Id, receiverInfos).then(isSuccess => {
+              this.stopLoading();
+              if (isSuccess) {
+                this.OnBackNaviage();
+              }
+            });
+          })
           .catch(error => {
             this.globalService.stopLoading();
-            this.showError(error);
+            this.showError(error.toString());
           });
 
       });

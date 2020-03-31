@@ -137,7 +137,8 @@ export class SearchProductComponent extends BaseComponent {
     this.currentGlobalOrderDetail.ProductName = this.selectedProduct.Name;
     this.currentGlobalOrderDetail.ProductImageUrl = this.selectedProduct.ImageUrl;
     this.currentGlobalOrderDetail.ProductId = this.selectedProduct.Id;
-    this.currentGlobalOrderDetail.IsFromLocalProduct = false;
+    this.currentGlobalOrderDetail.IsFromHardCodeProduct = false;
+    this.currentGlobalOrderDetail.HardcodeImageName = '';
 
     const price = ExchangeService.stringPriceToNumber(this.selectedProduct.Price);
 

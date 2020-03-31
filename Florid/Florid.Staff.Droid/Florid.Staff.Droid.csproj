@@ -38,6 +38,11 @@
     <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>/Users/khatran/Data/Florid/Resources/florid_staff_key.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>florid123</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>florid_staff_key</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>florid123</AndroidSigningKeyPass>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -67,6 +72,9 @@
     </Reference>
     <Reference Include="Florid.Droid.Htl2BitmapLib">
       <HintPath>..\..\Libs\Florid.Droid.Htl2BitmapLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CloudBanking.ResizerLib">
+      <HintPath>..\..\Libs\CloudBanking.ResizerLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

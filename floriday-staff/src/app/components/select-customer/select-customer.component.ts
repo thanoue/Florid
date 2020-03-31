@@ -108,21 +108,24 @@ export class SelectCustomerComponent extends BaseComponent {
 
     });
 
-    this.selectedCustomer.ReceiverInfos.forEach(item => {
+    if (this.selectedCustomer.ReceiverInfos) {
 
-      const info = new OrderDetailDeliveryInfo();
+      this.selectedCustomer.ReceiverInfos.forEach(item => {
 
-      info.Address = item.Address;
-      info.Name = item.FullName;
-      info.PhoneNumber = item.PhoneNumber;
-      info.DateTime = new Date();
+        const info = new OrderDetailDeliveryInfo();
 
-      newGlobalDeliveryInfos.push({
-        CustomerId: this.selectedCustomer.Id,
-        Info: info
+        info.Address = item.Address;
+        info.Name = item.FullName;
+        info.PhoneNumber = item.PhoneNumber;
+        info.DateTime = new Date();
+
+        newGlobalDeliveryInfos.push({
+          CustomerId: this.selectedCustomer.Id,
+          Info: info
+        });
+
       });
-
-    });
+    }
 
     this.globalDeliveryInfos = newGlobalDeliveryInfos;
 

@@ -118,6 +118,7 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
             console.log(error);
             return;
           });
+
       } else {
 
         this.tempProductService.addFile(viewModel.ProductImageUrl, tempProduct, (url) => {

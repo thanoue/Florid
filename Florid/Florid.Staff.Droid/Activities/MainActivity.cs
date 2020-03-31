@@ -21,11 +21,12 @@ using Florid.Core;
 using Android.Content.Res;
 using Asksira.WebViewSuiteLib;
 using static Asksira.WebViewSuiteLib.WebViewSuite;
+using ME.Echodev.Resizer;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity(MainLauncher =true)]
-    public class MainActivity : BaseActivity , IWebViewSetupInterference
+    [Activity(MainLauncher = true)]
+    public class MainActivity : BaseActivity, IWebViewSetupInterference
     {
         static readonly string TAG = "MainActivity";
 
@@ -50,32 +51,15 @@ namespace Florid.Staff.Droid.Activity
 
             settings.MixedContentMode = MixedContentHandling.AlwaysAllow;
 
-            //settings.LoadsImagesAutomatically = true;
-
-            //settings.BlockNetworkImage = false;
-            //settings.BlockNetworkLoads = false;
-
             webView.ClearCache(true);
 
             webView.SetWebViewClient(new WebViewClient());
             webView.SetWebChromeClient(new MyWebChromeClient());
-            webView.AddJavascriptInterface(_javascriptClient, "Android");
 
-        }
+            _javascriptClient = new JavascriptClient(this, webView, (email, password) =>
+            {
 
-        protected override void InitView(ViewGroup viewGroup)
-        {
-            _mainWebView = FindViewById<WebViewSuite>(Resource.Id.mainWebview);
-            _mask = FindViewById<View>(Resource.Id.mask);
-
-            _mainWebView.ToggleProgressbar(false);
-
-            _mainWebView.InterfereWebViewSetup(this);
-
-            _javascriptClient = new JavascriptClient(this, _mainWebView.WebView, (email, password) =>
-             {
-
-             });
+            });
 
             _javascriptClient.SetPrimaryDarkStatusBar = (isDark) =>
             {
@@ -89,49 +73,25 @@ namespace Florid.Staff.Droid.Activity
                     if (!isSuccess)
                         return;
 
-                    AssetManager assets = Assets;
-                    var sr = new StreamReader(assets.Open("receiptTemplate.html"));
-                    var template = sr.ReadToEnd();
-
-                    template = template.Replace("{{OrderId}}", data.OrderId);
-                    template = template.Replace("{{CreatedDate}}", data.CreatedDate);
-
-                    var productTemplate = @"<tr>
-                        <td>{0}</td>
-                        <td>
-                            <p>{1}</p>
-                        </td>
-                        <td>{2}<span> +{3} </span></td>
-   
-                       </tr>";
-
-                    long saleTotal = 0;
-                    var saleItemContainer = "";
-
-                    foreach(var product in data.SaleItems)
-                    {
-                        saleItemContainer += string.Format(productTemplate, product.Index, product.ProductName, product.Price.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat());
-                        saleTotal += product.Price;
-                    }
-
-                    template = template.Replace("{{SaleItems}}", saleItemContainer);
-
-                    template = template.Replace("{{SaleTotal}}", saleTotal.VNCurrencyFormat());
-                    template = template.Replace("{{TotalAmount}}", data.TotalAmount.VNCurrencyFormat());
-                    template = template.Replace("{{TotalPaidAmount}}", data.TotalPaidAmount.VNCurrencyFormat());
-                    template = template.Replace("{{TotalBalance}}", data.TotalBalance.VNCurrencyFormat());
-
-                    template = template.Replace("{{VATIncluded}}", data.VATIncluded ? "Đã bao gồm VAT": "");
-
-                    template = template.Replace("{{DiscountPercent}}", data.MemberDiscount.ToString());
-                    template = template.Replace("{{ScoreUsed}}", data.ScoreUsed.ToString());
-                    template = template.Replace("{{GainedScore}}", data.GainedScore.ToString());
-                    template = template.Replace("{{TotalScore}}", data.TotalScore.ToString());
-
-                    var task = new CustomAsyncTask(this, template);
+                    var task = new CustomAsyncTask(this, this.BindingReceiptData(data));
                     task.Execute();
                 });
             };
+
+            webView.AddJavascriptInterface(_javascriptClient, "Android");
+
+        }
+
+        protected override void InitView(ViewGroup viewGroup)
+        {
+            _mainWebView = FindViewById<WebViewSuite>(Resource.Id.mainWebview);
+            _mask = FindViewById<View>(Resource.Id.mask);
+
+            _mainWebView.ToggleProgressbar(false);
+
+            _mainWebView.InterfereWebViewSetup(this);
+
+      
 
             _mainWebView.StartLoading(BaseModelHelper.Instance.RootWebUrl);
 
@@ -170,24 +130,29 @@ namespace Florid.Staff.Droid.Activity
 
                     var file = (MediaFile)data.GetParcelableArrayListExtra(FilePickerActivity.MediaFiles)[0];
                     var path = file.Path;
-                    var size = file.Size;
 
-                    using (var bitmap = BitmapFactory.DecodeFile(path))
+                    var sourceFile = new Java.IO.File(path);
+
+
+                    using (var resizedImage = new Resizer(this)
+                         .SetTargetLength(1080)
+                        .SetQuality(30)
+                        //.SetOutputDirPath(sourceFile.Parent)
+                        .SetSourceImage(sourceFile)
+                        .SetOutputFormat("png")
+                        .ResizedBitmap)
                     {
-                        using (var scaled = GetResizedBitmap(bitmap, 900))
-                        {
-                            var stream = new MemoryStream();
-                            if (path.Contains(".png") || path.Contains(".PNG"))
-                                scaled.Compress(Bitmap.CompressFormat.Png, 100, stream);
-                            else
-                                scaled.Compress(Bitmap.CompressFormat.Jpeg, 100, stream);
-                            var bytes = stream.ToArray();
+                        var stream = new MemoryStream();
 
-                            var encoded = Base64.GetEncoder().EncodeToString(bytes);
+                        resizedImage.Compress(Bitmap.CompressFormat.Png, 100, stream);
 
-                            DroidUtility.ExecJavaScript(_mainWebView.WebView, "fileChosen(\"" + encoded + "\")");
-                        }
+                        var bytes = stream.ToArray();
 
+                        var encoded = Base64.GetEncoder().EncodeToString(bytes);
+
+                        DroidUtility.ExecJavaScript(_mainWebView.WebView, "fileChosen(\"" + encoded + "\")");
+
+                        stream.Close();
                     }
 
                     break;
@@ -197,7 +162,7 @@ namespace Florid.Staff.Droid.Activity
                     DroidUtility.ExecJavaScript(_mainWebView.WebView, "internetSaleDone(\"" + res + "\")");
                     break;
             }
-           
+
         }
 
         public Bitmap GetResizedBitmap(Bitmap image, int maxSize)

@@ -48,7 +48,9 @@ export abstract class BaseService<T extends BaseEntity> {
 
         for (const item of data) {
 
-            const newItem = await this.insertWithId(item, item.Id);
+            const newItem = await this.insertWithId(item, item.Id).catch(error => {
+                throw error;
+            });
 
             if (newItem) {
                 list.push(newItem);
