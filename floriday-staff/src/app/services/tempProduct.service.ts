@@ -18,18 +18,26 @@ export class TempProductService extends BaseService<TempProduct> {
     super();
   }
 
-  public updateTempProduct(file: string, model: TempProduct, updateCompletedCallback: (fileUrl: string) => void) {
+  public deleteFile(name: string): Promise<any> {
+
+    var model = new TempProduct();
+    return this.storageService.deleteFile(name, model.FolderName);
+  }
+
+  public addFile(file: string, model: TempProduct, updateCompletedCallback: (fileUrl: string) => void) {
     this.storageService.pushStringToStorage(file, model, (res) => {
+
+      if (res === null) {
+        updateCompletedCallback('ERROR');
+      }
 
       updateCompletedCallback(res.Url);
 
-      this.globalService.startLoading();
+      // this.insert(res as TempProduct).then(re => {
 
-      this.insert(res as TempProduct).then(re => {
-        this.globalService.stopLoading();
-      });
+      // });
 
     });
-
   }
+
 }

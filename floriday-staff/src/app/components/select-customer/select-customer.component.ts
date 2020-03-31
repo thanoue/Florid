@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { CustomerViewModel } from '../../models/view.models/customer.model';
 import { Customer } from 'src/app/models/entities/customer.entity';
 import { CustomerService } from 'src/app/services/customer.service';
-import { OrderCustomerInfoViewModel } from 'src/app/models/view.models/order.model';
+import { OrderCustomerInfoViewModel, OrderDetailDeliveryInfo } from 'src/app/models/view.models/order.model';
 import { MembershipTypes } from 'src/app/models/enums';
 
 declare function closeAddCustomerDialog(): any;
@@ -87,7 +87,44 @@ export class SelectCustomerComponent extends BaseComponent {
       return;
     }
 
+    if (this.currentGlobalOrder.CustomerInfo.Id === this.selectedCustomer.Id) {
+      this.OnBackNaviage();
+    }
+
     this.currentGlobalOrder.CustomerInfo = OrderCustomerInfoViewModel.toViewModel(this.selectedCustomer);
+
+    const newGlobalDeliveryInfos: { CustomerId: string, Info: OrderDetailDeliveryInfo }[] = [];
+
+    this.globalDeliveryInfos.forEach(item => {
+
+      if (item.CustomerId === '') {
+
+        newGlobalDeliveryInfos.push({
+          CustomerId: '',
+          Info: OrderDetailDeliveryInfo.DeepCopy(item.Info)
+        });
+
+      }
+
+    });
+
+    this.selectedCustomer.ReceiverInfos.forEach(item => {
+
+      const info = new OrderDetailDeliveryInfo();
+
+      info.Address = item.Address;
+      info.Name = item.FullName;
+      info.PhoneNumber = item.PhoneNumber;
+      info.DateTime = new Date();
+
+      newGlobalDeliveryInfos.push({
+        CustomerId: this.selectedCustomer.Id,
+        Info: info
+      });
+
+    });
+
+    this.globalDeliveryInfos = newGlobalDeliveryInfos;
 
     this.OnBackNaviage();
 

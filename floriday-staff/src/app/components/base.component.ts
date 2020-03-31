@@ -10,8 +10,8 @@ import { RouteModel } from '../models/view.models/route.model';
 import { map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
-import { OrderViewModel, OrderDetailViewModel } from '../models/view.models/order.model';
-import { OrderDetail } from '../models/entities/order.entity';
+import { OrderViewModel, OrderDetailViewModel, OrderDetailDeliveryInfo } from '../models/view.models/order.model';
+import { OrderDetail, OrderReceiverDetail } from '../models/entities/order.entity';
 
 declare function pickFile(): any;
 
@@ -41,6 +41,13 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     set currentGlobalOrderDetail(value: OrderDetailViewModel) {
         this.globalService.currentOrderDetailViewModel = value;
+    }
+
+    get globalDeliveryInfos(): { CustomerId: string, Info: OrderDetailDeliveryInfo }[] {
+        return this.globalService.currentDeliveryInfoViewModels;
+    }
+    set globalDeliveryInfos(value: { CustomerId: string, Info: OrderDetailDeliveryInfo }[]) {
+        this.globalService.currentDeliveryInfoViewModels = value;
     }
 
     ngOnInit(): void {

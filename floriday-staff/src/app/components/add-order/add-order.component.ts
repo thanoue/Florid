@@ -28,7 +28,11 @@ export class AddOrderComponent extends BaseComponent {
   order: OrderViewModel;
 
 
-  constructor(private orderDetailService: OrderDetailService, private router: Router, private orderService: OrderService, public auth: AngularFireAuth, private customerService: CustomerService) {
+  constructor(private orderDetailService: OrderDetailService, private router: Router,
+    // tslint:disable-next-line: align
+    private orderService: OrderService, public auth: AngularFireAuth,
+    // tslint:disable-next-line: align
+    private customerService: CustomerService) {
     super();
   }
 
@@ -145,7 +149,7 @@ export class AddOrderComponent extends BaseComponent {
     orderDB.CustomerId = this.order.CustomerInfo.Id;
     orderDB.Id = this.order.OrderId;
     orderDB.AccountId = this.auth.auth.currentUser.uid;
-    orderDB.Created = this.order.CreatedDate.toString();
+    orderDB.Created = this.order.CreatedDate.getTime();
     orderDB.VATIncluded = this.order.VATIncluded;
     orderDB.TotalAmount = this.order.TotalAmount;
     orderDB.TotalPaidAmount = this.order.TotalPaidAmount;
@@ -164,7 +168,8 @@ export class AddOrderComponent extends BaseComponent {
 
           detail.Id = `${orderDB.Id}_${detailVM.Index}`;
           detail.OrderId = this.order.OrderId;
-          detail.IsHardcodeProduct = detailVM.IsFromLocalProduct;
+          detail.IsHardcodeProduct = detailVM.IsFromHardCodeProduct;
+          detail.HardcodeProductImageName = detailVM.HardcodeImageName;
           detail.ProductId = detailVM.ProductId;
           detail.ProductImageUrl = detailVM.ProductImageUrl;
           detail.ProductPrice = detailVM.ModifiedPrice;
@@ -172,7 +177,7 @@ export class AddOrderComponent extends BaseComponent {
           detail.ProductName = detailVM.ProductName;
           detail.Description = detailVM.Description;
 
-          detail.ReceiverInfo.ReceivingTime = detailVM.DeliveryInfo.DateTime;
+          detail.ReceiverInfo.ReceivingTime = detailVM.DeliveryInfo.DateTime.getTime();
 
           const receiverInfo = new CustomerReceiverDetail();
 
@@ -182,16 +187,25 @@ export class AddOrderComponent extends BaseComponent {
 
           detail.ReceiverInfo.ReceiverDetail = receiverInfo;
 
-          receiverInfos.push(receiverInfo);
-
           orderDetais.push(detail);
 
         });
 
+        this.globalDeliveryInfos.forEach(item => {
+
+          const receiverInfo = new CustomerReceiverDetail();
+
+          receiverInfo.Address = item.Info.Address;
+          receiverInfo.PhoneNumber = item.Info.PhoneNumber;
+          receiverInfo.FullName = item.Info.Name;
+
+          receiverInfos.push(receiverInfo);
+        });
+
         this.orderDetailService.setList(orderDetais).then(() => {
-          this.customerService.updateReceiverList(this.order.CustomerInfo.Id, receiverInfos).then(() => {
+          this.customerService.updateReceiverList(this.order.CustomerInfo.Id, receiverInfos).then(isSuccess => {
             this.stopLoading();
-            if (res) {
+            if (isSuccess) {
               this.OnBackNaviage();
             }
           });

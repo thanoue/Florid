@@ -2,9 +2,10 @@ import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject, from, Subject } from 'rxjs';
 import { GenericModel } from 'src/app/models/view.models/generic.model';
 import { RouteModel } from 'src/app/models/view.models/route.model';
-import { OrderViewModel, OrderDetailViewModel } from 'src/app/models/view.models/order.model';
+import { OrderViewModel, OrderDetailViewModel, OrderDetailDeliveryInfo } from 'src/app/models/view.models/order.model';
 import { AlertType } from 'src/app/models/enums';
 import { ToastrService } from 'ngx-toastr';
+import { OrderReceiverDetail } from 'src/app/models/entities/order.entity';
 
 declare function setStatusBarColor(isDark: boolean): any;
 declare function isOnTerminal(): any;
@@ -27,10 +28,12 @@ export class GlobalService {
 
     currentOrderViewModel: OrderViewModel;
     currentOrderDetailViewModel: OrderDetailViewModel;
+    currentDeliveryInfoViewModels: { CustomerId: string, Info: OrderDetailDeliveryInfo }[];
 
     constructor(private toastr: ToastrService, private ngZone: NgZone) {
 
         this.currentOrderViewModel = new OrderViewModel();
+        this.currentDeliveryInfoViewModels = [];
 
         this.notifySetup = { timeOut: 5000, tapToDismiss: true, progressBar: false, progressAnimation: 'decreasing', positionClass: 'toast-bottom-full-width', closeButton: true, extendedTimeOut: 3000 };
 

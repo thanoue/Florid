@@ -26,7 +26,7 @@ export class OrderViewModel {
 }
 
 export class OrderDetailViewModel {
-
+    Id: string;
     ProductName: string;
     OrderDetailId: string;
     State: OrderDetailStates;
@@ -36,13 +36,15 @@ export class OrderDetailViewModel {
     Index = 0;
     DeliveryInfo: OrderDetailDeliveryInfo;
 
+
     OriginalPrice: number;
     ModifiedPrice: number;
     AdditionalFee: number;
 
     Description: string;
 
-    IsFromLocalProduct: boolean;
+    IsFromHardCodeProduct: boolean;
+    HardcodeImageName: string;
 
     constructor() {
         this.DeliveryInfo = new OrderDetailDeliveryInfo();
@@ -64,7 +66,7 @@ export class OrderDetailViewModel {
         viewModel.ModifiedPrice = model.ModifiedPrice;
         viewModel.AdditionalFee = model.AdditionalFee;
         viewModel.Description = model.Description;
-        viewModel.IsFromLocalProduct = model.IsFromLocalProduct;
+        viewModel.IsFromHardCodeProduct = model.IsFromHardCodeProduct;
 
         return viewModel;
     }

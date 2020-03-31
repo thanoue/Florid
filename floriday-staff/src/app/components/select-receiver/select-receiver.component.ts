@@ -4,6 +4,7 @@ import { OrderDetailDeliveryInfo } from 'src/app/models/view.models/order.model'
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { formatDate } from '@angular/common';
+import { ExchangeService } from 'src/app/services/exchange.service';
 
 
 declare function getDateTimeSelecting(year: number, month: number, day: number, hour: number, minute: number): any;
@@ -35,21 +36,16 @@ export class SelectReceiverComponent extends BaseComponent {
     window[key] = {
       component: this,
       zone: this._ngZone,
-      selectDeliveryInfo: (data) => this.selectReceiver(data),
+      selectDeliveryInfo: (data) => this.selectDeliveryInfo(data),
     };
-
 
     this.currentList = [];
 
-    this.deliveryInfo = new OrderDetailDeliveryInfo();
-
-    this.currentGlobalOrder.OrderDetails.forEach(orderDetail => {
-
-      const temp = OrderDetailDeliveryInfo.DeepCopy(orderDetail.DeliveryInfo);
-
-      this.currentList.push(temp);
-
+    this.globalDeliveryInfos.forEach(info => {
+      this.currentList.push(info.Info);
     });
+
+    this.deliveryInfo = new OrderDetailDeliveryInfo();
 
     this.route.params.subscribe(params => {
 
@@ -63,18 +59,34 @@ export class SelectReceiverComponent extends BaseComponent {
 
   }
 
-  selectReceiver(index: number) {
+  selectDeliveryInfo(index: number) {
 
     this.deliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.currentList[index]);
 
     this.deliveryTime = this.deliveryInfo.DateTime.toLocaleString('vi-VN', { hour12: true });
-
   }
 
   addReceiver(form: NgForm) {
 
     if (!form.valid) {
       return;
+    }
+
+    let isNew = true;
+
+    this.currentList.forEach(item => {
+
+      if (item.Address.toLowerCase() === this.deliveryInfo.Address.toLowerCase()
+        && item.Name.toLowerCase() === this.deliveryInfo.Name.toLowerCase()
+        && item.PhoneNumber.toLowerCase() === this.deliveryInfo.PhoneNumber.toLowerCase()
+        && ExchangeService.dateCompare(item.DateTime, this.deliveryInfo.DateTime)) {
+        isNew = false;
+      }
+
+    });
+
+    if (isNew) {
+      this.globalDeliveryInfos.push({ CustomerId: '', Info: this.deliveryInfo });
     }
 
     this.currentGlobalOrderDetail.DeliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.deliveryInfo);

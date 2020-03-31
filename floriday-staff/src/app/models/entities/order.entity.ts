@@ -19,9 +19,11 @@ export class OrderDetail extends BaseEntity {
     ProductPrice: number;
     ProductImageUrl: string;
     TotalAmount: number;
-    IsHardcodeProduct: boolean;
     ReceiverInfo: OrderReceiverDetail;
     Description: string;
+
+    IsHardcodeProduct: boolean;
+    HardcodeProductImageName: string;
 
     constructor() {
         super();
@@ -31,7 +33,7 @@ export class OrderDetail extends BaseEntity {
 
 export class OrderReceiverDetail {
 
-    ReceivingTime: Date;
+    ReceivingTime: number;
     ReceiverDetail: CustomerReceiverDetail;
 
     constructor() {

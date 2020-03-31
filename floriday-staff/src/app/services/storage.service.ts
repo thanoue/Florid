@@ -38,6 +38,10 @@ export class StorageService {
         );
     }
 
+    deleteFile(name: string, folderName: string): Promise<any> {
+        return firebase.storage().ref().child(`${folderName}/${name}`).delete();
+    }
+
     pushStringToStorage(file: string, fileUpload: BaseFile, uploadedCallback: (fileUpload: BaseFile) => void): void {
 
         if (file == null) {
@@ -65,6 +69,7 @@ export class StorageService {
             },
             (error) => {
                 // fail
+                uploadedCallback(null);
                 console.log(error);
             },
             () => {

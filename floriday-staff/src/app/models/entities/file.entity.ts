@@ -15,7 +15,6 @@ export class Receipt extends BaseFile {
 }
 
 export class TempProduct extends BaseFile {
-    OrderDetailId: string;
     constructor() {
         super();
         this.FolderName = '/tempProduct';

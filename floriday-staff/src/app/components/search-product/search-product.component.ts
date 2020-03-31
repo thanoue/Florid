@@ -68,7 +68,7 @@ export class SearchProductComponent extends BaseComponent {
 
   protected fileChosen(path: string) {
 
-    this.currentGlobalOrderDetail.IsFromLocalProduct = true;
+    this.currentGlobalOrderDetail.IsFromHardCodeProduct = true;
     this.currentGlobalOrderDetail.ProductImageUrl = 'data:image/png;base64,' + path;
     this.currentGlobalOrderDetail.OriginalPrice = 0;
     this.currentGlobalOrderDetail.ModifiedPrice = 0;
@@ -128,6 +128,7 @@ export class SearchProductComponent extends BaseComponent {
   }
 
   selectProduct() {
+
     if (!this.selectedProduct.Id) {
       this.showError('Chưa có sản phẩm nào được chọn!!');
       return;

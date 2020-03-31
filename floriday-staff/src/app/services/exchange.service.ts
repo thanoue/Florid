@@ -35,6 +35,18 @@ export class ExchangeService {
         return currentScode - orderUsedScore + orderGainedScore;
     }
 
+    static dateCompare(first: Date, second: Date): boolean {
+        if (first.getFullYear() !== second.getFullYear()
+            || first.getMonth() !== second.getMonth()
+            || first.getDate() !== second.getDate()
+            || first.getHours() !== second.getHours()
+            || first.getMinutes() !== second.getMinutes()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     static stringPriceToNumber(res: string): number {
         // tslint:disable-next-line: no-debugger
         const length = res.length;
