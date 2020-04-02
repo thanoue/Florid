@@ -105,7 +105,6 @@ export class SearchProductComponent extends BaseComponent {
             this.currentGlobalOrderDetail.HardcodeImageName = tempProduct.Name;
 
             this.OnBackNaviage();
-
           });
 
         })
