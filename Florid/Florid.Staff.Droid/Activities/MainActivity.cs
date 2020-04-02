@@ -135,7 +135,7 @@ namespace Florid.Staff.Droid.Activity
 
 
                     using (var resizedImage = new Resizer(this)
-                         .SetTargetLength(1080)
+                        .SetTargetLength(1080)
                         .SetQuality(30)
                         //.SetOutputDirPath(sourceFile.Parent)
                         .SetSourceImage(sourceFile)

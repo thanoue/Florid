@@ -82,70 +82,10 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
     this.currentGlobalOrderDetail = null;
 
-    this.startLoading();
-
-    if (viewModel.IsFromHardCodeProduct) {
-
-      const newName = `temp_image_${(new Date().getTime().toString())}`;
-
-      const tempProduct = new TempProduct();
-      tempProduct.Name = newName;
-
-      if (viewModel.HardcodeImageName) {
-
-        this.tempProductService.deleteFile(viewModel.HardcodeImageName)
-          .then(() => {
-
-            this.tempProductService.addFile(viewModel.ProductImageUrl, tempProduct, (url) => {
-
-              if (url === 'ERROR') {
-                this.stopLoading();
-                this.showError('Upload hình lỗi!!');
-                return;
-              }
-
-              viewModel.ProductImageUrl = url;
-              viewModel.HardcodeImageName = tempProduct.Name;
-
-              this.insertOrderDetail(viewModel);
-
-            });
-
-
-          })
-          .catch(error => {
-            this.stopLoading();
-            console.log(error);
-            return;
-          });
-
-      } else {
-
-        this.tempProductService.addFile(viewModel.ProductImageUrl, tempProduct, (url) => {
-
-          if (url === 'ERROR') {
-            this.stopLoading();
-            this.showError('Upload hình lỗi!!');
-            return;
-          }
-
-          viewModel.ProductImageUrl = url;
-          viewModel.HardcodeImageName = tempProduct.Name;
-
-          this.insertOrderDetail(viewModel);
-
-        });
-
-      }
-    } else {
-      this.insertOrderDetail(viewModel);
-    }
-
+    this.insertOrderDetail(viewModel);
   }
 
   insertOrderDetail(viewModel: OrderDetailViewModel) {
-
-    this.stopLoading();
 
     viewModel.AdditionalFee *= 1000;
 

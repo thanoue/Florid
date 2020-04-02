@@ -13,4 +13,25 @@ export class OrderDetailService extends BaseService<OrderDetail>  {
     super();
   }
 
+  getHardcodeImageSavedCounting(name: string, callback: (count: number) => void): void {
+
+    if (!name || name === '') {
+      callback(0);
+      return;
+    }
+
+    this.globalService.startLoading();
+    this.tableRef.orderByChild('HardcodeProductImageName').equalTo(name).once('value').then(snapshot => {
+
+      this.globalService.stopLoading();
+
+      if (snapshot) {
+        callback(snapshot.numChildren());
+      } else {
+        callback(0);
+      }
+
+    });
+  }
+
 }

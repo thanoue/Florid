@@ -30,6 +30,7 @@ export class ProductService extends BaseService<Product> {
         const productFromCache = getProductsFromCache(category);
 
         if (productFromCache === 'NONE') {
+
             return this.tableRef.orderByChild('ProductCategories').equalTo(category).once('value').then(snapshot => {
 
                 const res: Product[] = [];
