@@ -29,24 +29,24 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
     IsOnTerminal: boolean;
 
-    get currentGlobalOrder(): OrderViewModel {
+    get globalOrder(): OrderViewModel {
         return this.globalService.currentOrderViewModel;
     }
-    set currentGlobalOrder(value: OrderViewModel) {
+    set globalOrder(value: OrderViewModel) {
         this.globalService.currentOrderViewModel = value;
     }
 
-    get currentGlobalOrderDetail(): OrderDetailViewModel {
+    get globalOrderDetail(): OrderDetailViewModel {
         return this.globalService.currentOrderDetailViewModel;
     }
-    set currentGlobalOrderDetail(value: OrderDetailViewModel) {
+    set globalOrderDetail(value: OrderDetailViewModel) {
         this.globalService.currentOrderDetailViewModel = value;
     }
 
-    get globalDeliveryInfos(): { CustomerId: string, Info: OrderDetailDeliveryInfo }[] {
+    get globalDeliveryInfos(): { CustomerId: string, DetailIndex: number[], Info: OrderDetailDeliveryInfo }[] {
         return this.globalService.currentDeliveryInfoViewModels;
     }
-    set globalDeliveryInfos(value: { CustomerId: string, Info: OrderDetailDeliveryInfo }[]) {
+    set globalDeliveryInfos(value: { CustomerId: string, DetailIndex: number[], Info: OrderDetailDeliveryInfo }[]) {
         this.globalService.currentDeliveryInfoViewModels = value;
     }
 

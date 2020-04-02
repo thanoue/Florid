@@ -62,7 +62,7 @@ export class SearchProductComponent extends BaseComponent {
       itemSelected: (data) => this.setSelectedProduct(data)
     };
 
-    this.orderDetailService.getHardcodeImageSavedCounting(this.currentGlobalOrderDetail.HardcodeImageName, (count) => {
+    this.orderDetailService.getHardcodeImageSavedCounting(this.globalOrderDetail.HardcodeImageName, (count) => {
       this.currentHardcodeUsedCount = count;
     });
 
@@ -74,11 +74,11 @@ export class SearchProductComponent extends BaseComponent {
 
   protected fileChosen(path: string) {
 
-    this.currentGlobalOrderDetail.IsFromHardCodeProduct = true;
-    this.currentGlobalOrderDetail.ProductImageUrl = 'data:image/png;base64,' + path;
-    this.currentGlobalOrderDetail.OriginalPrice = 0;
-    this.currentGlobalOrderDetail.ModifiedPrice = 0;
-    this.currentGlobalOrderDetail.ProductName = '.....';
+    this.globalOrderDetail.IsFromHardCodeProduct = true;
+    this.globalOrderDetail.ProductImageUrl = 'data:image/png;base64,' + path;
+    this.globalOrderDetail.OriginalPrice = 0;
+    this.globalOrderDetail.ModifiedPrice = 0;
+    this.globalOrderDetail.ProductName = '.....';
 
     const newName = `temp_image_${(new Date().getTime().toString())}`;
 
@@ -87,12 +87,12 @@ export class SearchProductComponent extends BaseComponent {
 
     this.startLoading();
 
-    if (this.currentGlobalOrderDetail.HardcodeImageName && this.currentHardcodeUsedCount === 1) {
+    if (this.globalOrderDetail.HardcodeImageName && this.currentHardcodeUsedCount === 1) {
 
-      this.tempProductService.deleteFile(this.currentGlobalOrderDetail.HardcodeImageName)
+      this.tempProductService.deleteFile(this.globalOrderDetail.HardcodeImageName)
         .then(() => {
 
-          this.tempProductService.addFile(this.currentGlobalOrderDetail.ProductImageUrl, tempProduct, (url) => {
+          this.tempProductService.addFile(this.globalOrderDetail.ProductImageUrl, tempProduct, (url) => {
 
             this.stopLoading();
 
@@ -101,8 +101,8 @@ export class SearchProductComponent extends BaseComponent {
               return;
             }
 
-            this.currentGlobalOrderDetail.ProductImageUrl = url;
-            this.currentGlobalOrderDetail.HardcodeImageName = tempProduct.Name;
+            this.globalOrderDetail.ProductImageUrl = url;
+            this.globalOrderDetail.HardcodeImageName = tempProduct.Name;
 
             this.OnBackNaviage();
           });
@@ -116,7 +116,7 @@ export class SearchProductComponent extends BaseComponent {
 
     } else {
 
-      this.tempProductService.addFile(this.currentGlobalOrderDetail.ProductImageUrl, tempProduct, (url) => {
+      this.tempProductService.addFile(this.globalOrderDetail.ProductImageUrl, tempProduct, (url) => {
 
         this.stopLoading();
 
@@ -125,8 +125,8 @@ export class SearchProductComponent extends BaseComponent {
           return;
         }
 
-        this.currentGlobalOrderDetail.ProductImageUrl = url;
-        this.currentGlobalOrderDetail.HardcodeImageName = tempProduct.Name;
+        this.globalOrderDetail.ProductImageUrl = url;
+        this.globalOrderDetail.HardcodeImageName = tempProduct.Name;
 
         this.OnBackNaviage();
 
@@ -190,26 +190,26 @@ export class SearchProductComponent extends BaseComponent {
       return;
     }
 
-    this.currentGlobalOrderDetail.ProductName = this.selectedProduct.Name;
-    this.currentGlobalOrderDetail.ProductImageUrl = this.selectedProduct.ImageUrl;
-    this.currentGlobalOrderDetail.ProductId = this.selectedProduct.Id;
-    this.currentGlobalOrderDetail.IsFromHardCodeProduct = false;
+    this.globalOrderDetail.ProductName = this.selectedProduct.Name;
+    this.globalOrderDetail.ProductImageUrl = this.selectedProduct.ImageUrl;
+    this.globalOrderDetail.ProductId = this.selectedProduct.Id;
+    this.globalOrderDetail.IsFromHardCodeProduct = false;
 
     const price = ExchangeService.stringPriceToNumber(this.selectedProduct.Price);
 
-    this.currentGlobalOrderDetail.OriginalPrice = price;
-    this.currentGlobalOrderDetail.ModifiedPrice = price;
+    this.globalOrderDetail.OriginalPrice = price;
+    this.globalOrderDetail.ModifiedPrice = price;
 
-    if (this.currentGlobalOrderDetail.HardcodeImageName && this.currentHardcodeUsedCount === 1) {
+    if (this.globalOrderDetail.HardcodeImageName && this.currentHardcodeUsedCount === 1) {
 
       this.startLoading();
 
-      this.tempProductService.deleteFile(this.currentGlobalOrderDetail.HardcodeImageName)
+      this.tempProductService.deleteFile(this.globalOrderDetail.HardcodeImageName)
         .then(res => {
 
           this.stopLoading();
 
-          this.currentGlobalOrderDetail.HardcodeImageName = '';
+          this.globalOrderDetail.HardcodeImageName = '';
 
           this.OnBackNaviage();
 

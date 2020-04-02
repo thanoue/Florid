@@ -11,7 +11,7 @@ import { OrderDetailService } from 'src/app/services/order-detail.service';
 import { CustomerService } from 'src/app/services/customer.service';
 
 declare function openExcForm(resCallback: (result: number, validateCalback: (isSuccess: boolean) => void) => void): any;
-declare function getNumberInput(resCallback: (res: number) => void, placeHolder: string, oldValue: number): any;
+declare function getNumberValidateInput(resCallback: (res: number, validCallback: (isvalid: boolean, error: string) => void) => void, placeHolder: string, oldValue: number): any;
 declare function doPrintJob(data: {}): any;
 
 @Component({
@@ -39,7 +39,7 @@ export class AddOrderComponent extends BaseComponent {
 
   protected Init() {
 
-    this.order = this.currentGlobalOrder;
+    this.order = this.globalOrder;
 
     if (!this.order) {
       this.memberShipTitle = 'New Customer';
@@ -68,25 +68,51 @@ export class AddOrderComponent extends BaseComponent {
 
   requestPaidInput() {
 
-    getNumberInput((res) => {
+    if (!this.order.CustomerInfo.Id) {
+      this.showWarning('Thiếu thông tin Khách hàng');
+      return;
+    }
+
+    getNumberValidateInput((res, validateCallback) => {
+
+      if (res > this.order.TotalAmount) {
+        validateCallback(false, 'Thanh toán vượt quá thành tiền!');
+        return;
+      } else if (res <= 0) {
+        validateCallback(false, 'Thanh toán phải lớn hơn 0!');
+        return;
+      }
+
+      validateCallback(true, '');
 
       this.order.TotalPaidAmount = res;
 
+      if (!this.order.CreatedDate) {
+        this.order.CreatedDate = new Date();
+      }
+
+      this.order.CustomerInfo.GainedScore = ExchangeService.getGainedScore(this.order.TotalAmount);
+
       if (!this.order.OrderId) {
 
-        this.orderService.getNextIndex()
+        this.startLoading();
 
+        this.orderService.getNextIndex()
           .then(nextIndex => {
+
+            this.stopLoading();
 
             this.order.OrderId = `DON_${nextIndex}`;
 
             this.printConfirm();
 
           });
-      } else {
-        this.printConfirm();
-      }
 
+      } else {
+
+        this.printConfirm();
+
+      }
 
     }, 'Số tiền đã thanh toán...', this.order.TotalAmount);
 
@@ -95,12 +121,10 @@ export class AddOrderComponent extends BaseComponent {
   printConfirm() {
 
     this.openConfirm('Có muốn in bill không?', () => {
-      if (!this.order.CreatedDate) {
-        this.order.CreatedDate = new Date();
-      }
 
       let tempSummary = 0;
       const products = [];
+
       this.order.OrderDetails.forEach(product => {
         products.push({
           productName: product.ProductName,
@@ -111,10 +135,7 @@ export class AddOrderComponent extends BaseComponent {
         tempSummary += product.ModifiedPrice;
       });
 
-      this.order.CustomerInfo.GainedScore = ExchangeService.getGainedScore(this.order.TotalAmount);
-
-
-      let orderData = {
+      const orderData = {
         saleItems: products,
         createdDate: this.order.CreatedDate.toLocaleString('vi-VN', { hour12: true }),
         orderId: this.order.OrderId,
@@ -142,9 +163,10 @@ export class AddOrderComponent extends BaseComponent {
   }
 
   orderConfirm() {
+
     this.startLoading();
 
-    let orderDB = new Order();
+    const orderDB = new Order();
 
     orderDB.CustomerId = this.order.CustomerInfo.Id;
     orderDB.Id = this.order.OrderId;
@@ -156,8 +178,10 @@ export class AddOrderComponent extends BaseComponent {
     orderDB.GainedScore = this.order.CustomerInfo.GainedScore;
     orderDB.ScoreUsed = this.order.CustomerInfo.ScoreUsed;
 
-    this.orderService.insertWithId(orderDB, orderDB.Id)
+    this.orderService.set(orderDB)
       .then(res => {
+
+        console.log(orderDB);
 
         const orderDetais: OrderDetail[] = [];
         const receiverInfos: CustomerReceiverDetail[] = [];
@@ -167,7 +191,8 @@ export class AddOrderComponent extends BaseComponent {
           const detail = new OrderDetail();
 
           detail.Id = `${orderDB.Id}_${detailVM.Index}`;
-          detail.OrderId = this.order.OrderId;
+
+          detail.OrderId = orderDB.Id;
           detail.IsHardcodeProduct = detailVM.IsFromHardCodeProduct;
           detail.HardcodeProductImageName = detailVM.HardcodeImageName;
           detail.ProductId = detailVM.ProductId;
@@ -200,11 +225,12 @@ export class AddOrderComponent extends BaseComponent {
           receiverInfo.FullName = item.Info.Name;
 
           receiverInfos.push(receiverInfo);
+
         });
 
         this.orderDetailService.setList(orderDetais)
           .then(() => {
-            this.customerService.updateReceiverList(this.order.CustomerInfo.Id, receiverInfos).then(isSuccess => {
+            this.customerService.updateReceiverList(orderDB.CustomerId, receiverInfos).then(isSuccess => {
               this.stopLoading();
               if (isSuccess) {
                 this.OnBackNaviage();
@@ -212,6 +238,7 @@ export class AddOrderComponent extends BaseComponent {
             });
           })
           .catch(error => {
+            console.log(error);
             this.globalService.stopLoading();
             this.showError(error.toString());
           });
@@ -220,6 +247,7 @@ export class AddOrderComponent extends BaseComponent {
   }
 
   totalAmountCalculate() {
+
     this.order.TotalAmount = 0;
 
     this.order.OrderDetails.forEach(detail => {
@@ -267,7 +295,7 @@ export class AddOrderComponent extends BaseComponent {
 
   addNewOrderDetail() {
 
-    this.currentGlobalOrderDetail = new OrderDetailViewModel();
+    this.globalOrderDetail = new OrderDetailViewModel();
 
     this.router.navigate([`/order-detail/-1`]);
   }
@@ -276,7 +304,7 @@ export class AddOrderComponent extends BaseComponent {
 
     const viewModel = OrderDetailViewModel.DeepCopy(this.order.OrderDetails[index]);
 
-    this.currentGlobalOrderDetail = viewModel;
+    this.globalOrderDetail = viewModel;
 
     this.router.navigate([`/order-detail/${index}`]);
 

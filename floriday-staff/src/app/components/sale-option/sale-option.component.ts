@@ -29,7 +29,7 @@ export class SaleOptionComponent extends BaseComponent {
   }
 
   protected Init() {
-    this.order = this.currentGlobalOrder;
+    this.order = this.globalOrder;
   }
 
   momoPurchase() {

@@ -72,7 +72,7 @@ export class SelectCustomerComponent extends BaseComponent {
 
       this.selectedCustomer = customer;
 
-      this.currentGlobalOrder.CustomerInfo = OrderCustomerInfoViewModel.toViewModel(this.selectedCustomer);
+      this.globalOrder.CustomerInfo = OrderCustomerInfoViewModel.toViewModel(this.selectedCustomer);
 
       closeAddCustomerDialog();
 
@@ -87,19 +87,20 @@ export class SelectCustomerComponent extends BaseComponent {
       return;
     }
 
-    if (this.currentGlobalOrder.CustomerInfo.Id === this.selectedCustomer.Id) {
+    if (this.globalOrder.CustomerInfo.Id === this.selectedCustomer.Id) {
       this.OnBackNaviage();
     }
 
-    this.currentGlobalOrder.CustomerInfo = OrderCustomerInfoViewModel.toViewModel(this.selectedCustomer);
+    this.globalOrder.CustomerInfo = OrderCustomerInfoViewModel.toViewModel(this.selectedCustomer);
 
-    const newGlobalDeliveryInfos: { CustomerId: string, Info: OrderDetailDeliveryInfo }[] = [];
+    const newGlobalDeliveryInfos: { CustomerId: string, DetailIndex: number[], Info: OrderDetailDeliveryInfo }[] = [];
 
     this.globalDeliveryInfos.forEach(item => {
 
       if (item.CustomerId === '') {
 
         newGlobalDeliveryInfos.push({
+          DetailIndex: item.DetailIndex,
           CustomerId: '',
           Info: OrderDetailDeliveryInfo.DeepCopy(item.Info)
         });
@@ -120,11 +121,13 @@ export class SelectCustomerComponent extends BaseComponent {
         info.DateTime = new Date();
 
         newGlobalDeliveryInfos.push({
+          DetailIndex: [],
           CustomerId: this.selectedCustomer.Id,
           Info: info
         });
 
       });
+
     }
 
     this.globalDeliveryInfos = newGlobalDeliveryInfos;
@@ -137,9 +140,9 @@ export class SelectCustomerComponent extends BaseComponent {
     this.customerService.getAll().then(customers => {
       this.customers = customers;
       setTimeout(() => {
-        if (this.currentGlobalOrder.CustomerInfo.Id) {
-          setSelectedCustomerItem(this.currentGlobalOrder.CustomerInfo.Id);
-          this.selectedCustomer = customers.find(p => p.Id === this.currentGlobalOrder.CustomerInfo.Id);
+        if (this.globalOrder.CustomerInfo.Id) {
+          setSelectedCustomerItem(this.globalOrder.CustomerInfo.Id);
+          this.selectedCustomer = customers.find(p => p.Id === this.globalOrder.CustomerInfo.Id);
         }
       }, 50);
     });

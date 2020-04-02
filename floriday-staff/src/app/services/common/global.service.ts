@@ -28,7 +28,7 @@ export class GlobalService {
 
     currentOrderViewModel: OrderViewModel;
     currentOrderDetailViewModel: OrderDetailViewModel;
-    currentDeliveryInfoViewModels: { CustomerId: string, Info: OrderDetailDeliveryInfo }[];
+    currentDeliveryInfoViewModels: { CustomerId: string, DetailIndex: number[], Info: OrderDetailDeliveryInfo }[];
 
     constructor(private toastr: ToastrService, private ngZone: NgZone) {
 

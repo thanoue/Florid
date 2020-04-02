@@ -49,7 +49,7 @@ export class SelectReceiverComponent extends BaseComponent {
 
     this.route.params.subscribe(params => {
 
-      this.deliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.currentGlobalOrderDetail.DeliveryInfo);
+      this.deliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.globalOrderDetail.DeliveryInfo);
 
       this.deliveryInfo.DateTime.setSeconds(0);
 
@@ -72,26 +72,10 @@ export class SelectReceiverComponent extends BaseComponent {
       return;
     }
 
-    let isNew = true;
-
-    this.currentList.forEach(item => {
-
-      if (item.Address.toLowerCase() === this.deliveryInfo.Address.toLowerCase()
-        && item.Name.toLowerCase() === this.deliveryInfo.Name.toLowerCase()
-        && item.PhoneNumber.toLowerCase() === this.deliveryInfo.PhoneNumber.toLowerCase()
-        && ExchangeService.dateCompare(item.DateTime, this.deliveryInfo.DateTime)) {
-        isNew = false;
-      }
-
-    });
-
-    if (isNew) {
-      this.globalDeliveryInfos.push({ CustomerId: '', Info: this.deliveryInfo });
-    }
-
-    this.currentGlobalOrderDetail.DeliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.deliveryInfo);
+    this.globalOrderDetail.DeliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.deliveryInfo);
 
     super.OnBackNaviage();
+
   }
 
   requestDateTimePicker() {

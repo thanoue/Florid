@@ -27,9 +27,9 @@ export class OrderViewModel {
 
 export class OrderDetailViewModel {
     Id: string;
-    ProductName: string;
-    OrderDetailId: string;
-    State: OrderDetailStates;
+    ProductName = '';
+    OrderDetailId = '';
+    State = OrderDetailStates.Waiting;
     ProductId: string;
     ProductImageUrl: string;
     Quantity = 1;
@@ -43,8 +43,8 @@ export class OrderDetailViewModel {
 
     Description: string;
 
-    IsFromHardCodeProduct: boolean;
-    HardcodeImageName: string;
+    IsFromHardCodeProduct = false;
+    HardcodeImageName = '';
 
     constructor() {
         this.DeliveryInfo = new OrderDetailDeliveryInfo();

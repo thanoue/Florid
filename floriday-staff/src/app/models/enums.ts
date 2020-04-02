@@ -35,14 +35,14 @@ export enum MembershipTypes {
 }
 
 export enum OrderDetailStates {
-    Waiting,
-    Making,
-    Comfirming,
-    DeliveryWaiting,
-    Delivering,
-    Deliveried,
-    Completed,
-    Canceled
+    Waiting = 'Waiting',
+    Making = 'Making',
+    Comfirming = 'Comfirming',
+    DeliveryWaiting = 'DeliveryWaiting',
+    Delivering = 'Delivering',
+    Deliveried = 'Deliveried',
+    Completed = 'Completed',
+    Canceled = 'Canceled'
 }
 
 export enum AlertType {

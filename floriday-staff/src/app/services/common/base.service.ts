@@ -17,14 +17,22 @@ export abstract class BaseService<T extends BaseEntity> {
         return this.db.ref(this.tableName);
     }
 
+    protected startLoading() {
+        this.globalService.startLoading();
+    }
+
+    protected stopLoading() {
+        this.globalService.stopLoading();
+    }
+
     constructor() {
         const injector = AppInjector.getInjector();
         this.globalService = injector.get(GlobalService);
         this.db = firebase.database();
     }
 
-    public insertWithId(model: T, id: string): Promise<T> {
-        return this.db.ref(`${this.tableName}/${id}`).set(model).then(res => {
+    public set(model: T): Promise<T> {
+        return this.db.ref(`${this.tableName}/${model.Id}`).set(model).then(res => {
             if (res) {
                 return model;
             }
@@ -33,7 +41,7 @@ export abstract class BaseService<T extends BaseEntity> {
 
     public insert(model: T): Promise<T> {
 
-        this.globalService.startLoading();
+        this.startLoading();
 
         const pushRef = this.tableRef.push(model);
 
@@ -48,7 +56,7 @@ export abstract class BaseService<T extends BaseEntity> {
 
         for (const item of data) {
 
-            const newItem = await this.insertWithId(item, item.Id).catch(error => {
+            const newItem = await this.set(item).catch(error => {
                 throw error;
             });
 
@@ -65,7 +73,7 @@ export abstract class BaseService<T extends BaseEntity> {
     async insertList(data: T[]): Promise<T[]> {
 
         const products: T[] = [];
-        this.globalService.startLoading();
+        this.startLoading();
 
         for (let i = 0; i < data.length; i++) {
 
@@ -85,7 +93,7 @@ export abstract class BaseService<T extends BaseEntity> {
 
     public getById(id: string): Promise<T> {
 
-        this.globalService.startLoading();
+        this.startLoading();
 
         return this.db.ref(`${this.tableName}/${id}`).once('value').then(data => {
 
@@ -101,7 +109,7 @@ export abstract class BaseService<T extends BaseEntity> {
 
         return this.tableRef.child(value.Id).set(value).then(() => {
 
-            this.globalService.stopLoading();
+            this.stopLoading();
 
             return value;
         });
@@ -109,15 +117,15 @@ export abstract class BaseService<T extends BaseEntity> {
     }
 
     public delete(id: string): Promise<void> {
-        this.globalService.startLoading();
+        this.startLoading();
         return this.db.ref(`${this.tableName}/${id}`).remove().then(() => {
-            this.globalService.stopLoading();
+            this.stopLoading();
         });
     }
 
     public getAll(): Promise<T[]> {
 
-        this.globalService.startLoading();
+        this.startLoading();
 
         return this.tableRef.once('value')
             .then(dataSnapShot => {
@@ -127,21 +135,21 @@ export abstract class BaseService<T extends BaseEntity> {
                     res.push(data.val() as T);
                 });
 
-                this.globalService.stopLoading();
+                this.stopLoading();
 
                 return res;
             })
             .catch(error => {
-                this.globalService.stopLoading();
+                this.stopLoading();
                 return [];
             });
     }
 
     public deleteAll(): Promise<void> {
 
-        this.globalService.startLoading();
+        this.startLoading();
         return this.tableRef.remove().then(() => {
-            this.globalService.stopLoading();
+            this.stopLoading();
             return;
         });
     }

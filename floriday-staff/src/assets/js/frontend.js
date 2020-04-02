@@ -415,6 +415,64 @@ function openExcForm(callback) {
     });
 }
 
+function getNumberValidateInput(callback, placeHolder, oldValue) {
+
+    var html = `<div id="inputDialog" class="popup-content dialog-popup"><div class="form-group">
+    <input type="number" name="" id="input-value" class="mainForm" value="${oldValue}" placeholder="${placeHolder}"></div>
+    <div class="row"><div class="col-6"><button id="confirm-button" class=" main-btn btn">Xác nhận</button></div>
+    <div class="col-6"><button  id="cancel-button" class=" main-bg border btn">Hủy</button></div></div></div>`;
+
+    appendInBody();
+
+    jQuery("body").append(html);
+    jQuery("#inputDialog").fadeIn(350);
+
+    jQuery(".overlay-dark").one('click', function () {
+        jQuery("#inputDialog").hide(250, function () {
+            jQuery(".overlay-dark").remove();
+            jQuery(this).remove();
+        });
+    });
+
+    jQuery('#inputDialog #cancel-button').one('click', function () {
+        jQuery("#inputDialog").hide(250, function () {
+            jQuery(".overlay-dark").remove();
+            jQuery(this).remove();
+        });
+    });
+
+    jQuery('#inputDialog #confirm-button').on('click', function () {
+
+        var val = jQuery('#inputDialog #input-value').first().val();
+
+        if (!val) {
+            return;
+        }
+
+        if (parseInt(val) === NaN) {
+            return;
+        }
+
+        callback(parseInt(val), function (isValid, error) {
+
+            if (!isValid) {
+                warningToast(error);
+                return;
+            }
+
+            jQuery(this).off('click');
+
+            jQuery("#inputDialog").hide(250, function () {
+                jQuery(".overlay-dark").remove();
+                jQuery(this).remove();
+            });
+
+        });
+
+    });
+
+}
+
 function getNumberInput(callback, placeHolder, oldValue) {
 
     var html = `<div id="inputDialog" class="popup-content dialog-popup"><div class="form-group">

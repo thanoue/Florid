@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { OrderDetailViewModel } from 'src/app/models/view.models/order.model';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, retry } from 'rxjs/operators';
 import { MenuItem } from '../../models/view.models/menu.model';
 import { ProductCategories } from 'src/app/models/enums';
 import { PRODUCTCATEGORIES } from 'src/app/app.constants';
 import { NgForm } from '@angular/forms';
 import { TempProductService } from 'src/app/services/tempProduct.service';
 import { TempProduct } from 'src/app/models/entities/file.entity';
+import { ExchangeService } from 'src/app/services/exchange.service';
 
 declare function getNumberInput(resCallback: (res: number) => void, placeHolder: string): any;
 declare function createNumbericElement(isDisabled: boolean, calback: (val: number) => void): any;
@@ -33,12 +34,18 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
   protected Init() {
 
-    this.orderDetail = this.currentGlobalOrderDetail;
 
-    this.orderDetail.AdditionalFee /= 1000;
+
 
     this.route.params.subscribe(params => {
+
       this.detailIndex = + params.id;
+
+      this.globalOrderDetail.Index = this.detailIndex > -1 ? this.detailIndex : this.globalOrder.OrderDetails.length;
+
+      this.orderDetail = this.globalOrderDetail;
+
+      this.orderDetail.AdditionalFee /= 1000;
 
       createNumbericElement(this.detailIndex > -1, (val) => {
         this.orderDetail.Quantity = val;
@@ -49,8 +56,8 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
   }
 
   destroy() {
-    if (this.currentGlobalOrderDetail) {
-      this.currentGlobalOrderDetail.AdditionalFee *= 1000;
+    if (this.globalOrderDetail) {
+      this.globalOrderDetail.AdditionalFee *= 1000;
     }
   }
 
@@ -76,22 +83,84 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
       return;
     }
 
-    this.currentGlobalOrderDetail.Index = this.detailIndex > -1 ? this.detailIndex : this.currentGlobalOrder.OrderDetails.length;
+    if (!this.globalOrderDetail.DeliveryInfo.Address
+      || !this.globalOrderDetail.DeliveryInfo.PhoneNumber
+      || !this.globalOrderDetail.DeliveryInfo.Name
+      || !this.globalOrderDetail.DeliveryInfo.DateTime) {
+      this.showWarning('Thiếu thông in giao hàng!');
+      return;
+    }
 
-    const viewModel = OrderDetailViewModel.DeepCopy(this.currentGlobalOrderDetail);
+    let isNew = true;
 
-    this.currentGlobalOrderDetail = null;
+    this.globalDeliveryInfos.forEach(item => {
 
-    this.insertOrderDetail(viewModel);
+      if (item.Info.Address.toLowerCase() === this.globalOrderDetail.DeliveryInfo.Address.toLowerCase()
+        && item.Info.Name.toLowerCase() === this.globalOrderDetail.DeliveryInfo.Name.toLowerCase()
+        && item.Info.PhoneNumber.toLowerCase() === this.globalOrderDetail.DeliveryInfo.PhoneNumber.toLowerCase()
+        && ExchangeService.dateCompare(item.Info.DateTime, this.globalOrderDetail.DeliveryInfo.DateTime)) {
+        isNew = false;
+      }
+
+    });
+
+    let isAdd = true;
+
+    const newItem = { CustomerId: '', DetailIndex: [this.globalOrderDetail.Index], Info: this.globalOrderDetail.DeliveryInfo };
+
+    if (isNew) {
+
+      this.globalDeliveryInfos.forEach(item => {
+
+        const index = item.DetailIndex.indexOf(this.globalOrderDetail.Index, 0);
+
+        if (item.DetailIndex.length > 0 && index > -1) {
+
+          isAdd = false;
+
+          if (item.DetailIndex.length === 1) {
+            item.Info = this.globalOrderDetail.DeliveryInfo;
+            return;
+          }
+
+          item.DetailIndex.splice(index, 1);
+          return;
+
+        }
+
+      });
+
+      if (!isAdd) {
+        this.globalDeliveryInfos.push(newItem);
+      }
+
+      console.log(this.globalDeliveryInfos);
+
+    }
+
+    const viewModel = OrderDetailViewModel.DeepCopy(this.globalOrderDetail);
+
+    this.globalOrderDetail = null;
+
+    this.insertOrderDetail(viewModel, (indexes) => {
+
+      if (!isAdd || !isNew) {
+        return;
+      }
+
+      this.globalDeliveryInfos.push({ CustomerId: '', DetailIndex: indexes, Info: this.globalOrderDetail.DeliveryInfo });
+
+    });
   }
 
-  insertOrderDetail(viewModel: OrderDetailViewModel) {
+  insertOrderDetail(viewModel: OrderDetailViewModel, indexesCallback: (indexes: number[]) => void) {
 
     viewModel.AdditionalFee *= 1000;
+    const newIndexes: number[] = [];
 
     if (this.detailIndex > -1) {
 
-      this.currentGlobalOrder.OrderDetails[this.detailIndex] = viewModel;
+      this.globalOrder.OrderDetails[this.detailIndex] = viewModel;
 
     } else {
 
@@ -105,11 +174,14 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
         subItem.Index = index;
 
-        this.currentGlobalOrder.OrderDetails.push(subItem);
+        this.globalOrder.OrderDetails.push(subItem);
+
+        newIndexes.push(index);
 
         index += 1;
-
       }
+
+      indexesCallback(newIndexes);
 
     }
 

@@ -53,7 +53,7 @@ export class OrdersManageComponent extends BaseComponent {
         orderDetail.Quantity = j;
         orderDetail.ProductImageUrl = '../../../assets/images/product-img.jpg';
         orderDetail.DeliveryInfo.Address = '200 Dương Đình Hội, Phước Long B';
-        orderDetail.State = j as OrderDetailStates; // OrderDetailStates.Comfirming;
+        orderDetail.State = OrderDetailStates.Comfirming; // OrderDetailStates.Comfirming;
         orderDetail.Index = j;
         orderDetais.push(orderDetail);
 

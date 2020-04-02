@@ -16,20 +16,42 @@ export class OrderService extends BaseService<Order> {
 
 
   getNextIndex(): Promise<number> {
+
     return this.tableRef.limitToLast(1).once('value').then(snapShot => {
 
       if (!snapShot.val()) {
-        return 1;
+
+        const newOrder = new Order();
+        newOrder.Id = `DON_1`;
+
+        this.db.ref(`${this.tableName}/${newOrder.Id}`).set(newOrder).then(() => {
+          return 1;
+        });
+
       }
 
-      let key = snapShot.key;
+      let key = '';
 
-      let lastIndex = +key.substring(4, key.length);
+      snapShot.forEach(child => {
+        key = child.key;
+      });
 
-      return lastIndex++;
+      let index = +key.substring(4);
+      index += 1;
+
+      console.log(index);
+
+      const newOrder = new Order();
+      newOrder.Id = `DON_${index}`;
+
+      return this.db.ref(`${this.tableName}/${newOrder.Id}`).set(newOrder).then(res => {
+        return index;
+      });
 
     }).catch(() => {
+
       return 1;
+
     });
   }
 }

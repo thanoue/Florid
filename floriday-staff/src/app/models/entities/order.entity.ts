@@ -1,29 +1,29 @@
 import { BaseEntity } from './base.entity';
 
 export class Order extends BaseEntity {
-    CustomerId: string;
-    AccountId: string;
-    VATIncluded: boolean;
-    TotalAmount: number;
-    TotalPaidAmount: number;
+    CustomerId = '';
+    AccountId = '';
+    VATIncluded = false;
+    TotalAmount = 0;
+    TotalPaidAmount = 0;
 
-    GainedScore: number;
-    ScoreUsed: number;
+    GainedScore = 0;
+    ScoreUsed = 0;
 }
 
 export class OrderDetail extends BaseEntity {
-    OrderId: string;
-    AdditionalFee: number;
-    ProductId: string;
-    ProductName: string;
-    ProductPrice: number;
-    ProductImageUrl: string;
-    TotalAmount: number;
+    OrderId = '';
+    AdditionalFee = 0;
+    ProductId = '';
+    ProductName = '';
+    ProductPrice = 0;
+    ProductImageUrl = '';
+    TotalAmount = 0;
     ReceiverInfo: OrderReceiverDetail;
-    Description: string;
+    Description = '';
 
-    IsHardcodeProduct: boolean;
-    HardcodeProductImageName: string;
+    IsHardcodeProduct = false;
+    HardcodeProductImageName = '';
 
     constructor() {
         super();
@@ -33,7 +33,7 @@ export class OrderDetail extends BaseEntity {
 
 export class OrderReceiverDetail {
 
-    ReceivingTime: number;
+    ReceivingTime = 0;
     ReceiverDetail: CustomerReceiverDetail;
 
     constructor() {
@@ -42,7 +42,7 @@ export class OrderReceiverDetail {
 }
 
 export class CustomerReceiverDetail {
-    FullName: string;
-    PhoneNumber: string;
-    Address: string;
+    FullName = '';
+    PhoneNumber = '';
+    Address = '';
 }

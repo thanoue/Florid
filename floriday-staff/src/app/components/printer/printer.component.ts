@@ -32,7 +32,7 @@ export class PrinterComponent extends BaseComponent {
 
   protected Init() {
 
-    this.order = this.currentGlobalOrder;
+    this.order = this.globalOrder;
 
     this.order.OrderDetails.forEach(detail => {
       this.totalAmount += detail.ModifiedPrice;
