@@ -259,123 +259,61 @@ function slideUp(html,callback)
 }
 
 // Thông báo lỗi Login
-function openLoginError()
+openLoginError = () =>
 {
-    appendInBody();
-    jQuery("#loginerror").fadeIn(350); 
-
-    jQuery(".overlay-dark:not(.layer2)").click(function(){
-        jQuery("#loginerror").hide(250,function(){
-            jQuery(".overlay-dark").remove();
-        });
-    });    
+    popUpContent("#loginerror");
 }
 // Thông báo thành công
-var openSuccess = () =>
+openSuccess = () =>
 {
-    appendInBody();
-    jQuery("#successInfo").fadeIn(350); 
-
-    jQuery(".overlay-dark:not(.layer2)").click(function(){
-        jQuery("#successInfo").hide(250,function(){
-            jQuery(".overlay-dark").remove();
-        });
-    });    
+    popUpContent("#successInfo");   
 }
 // HIển thị quét QR
-var openQR = () =>
+openQR = () =>
 {   
-    appendInBody();
-    jQuery("#codeQR").fadeIn(350); 
-
-    jQuery(".overlay-dark:not(.layer2)").click(function(){
-        jQuery("#codeQR").hide(250,function(){
-            jQuery(".overlay-dark").remove();
-        });
-    });
+    popUpContent("#codeQR");
 }
 
-
 // HIển thị dialog xác nhận
-var openConfirm = () =>
+openConfirm = () =>
 {  
-    appendInBody();
-    jQuery("#confirmDialog").fadeIn(350); 
-
-    jQuery(".overlay-dark:not(.layer2)").click(function(){
-        jQuery("#confirmDialog").hide(250,function(){
-            jQuery(".overlay-dark").remove();
-        });
-    });    
+    popUpContent("#confirmDialog");  
 }
 
 // Hiển thị bảng màu
-var openColorBoard = () =>
+openColorBoard = () =>
 {
-    appendInBody();
-    jQuery("#colorBoard").fadeIn(350); 
-
-    jQuery(".overlay-dark:not(.layer2)").click(function(){
-        jQuery("#colorBoard").hide(250,function(){
-            jQuery(".overlay-dark").remove();
-        });
-    });
+    popUpContent("#colorBoard"); 
 }
-// Hiển thị danh sách ngân hàng
-var openEBank = () =>
-{
-    appendInBody();
-    jQuery("#bankList").fadeIn(350); 
 
-    jQuery(".overlay-dark:not(.layer2)").click(function(){
-        jQuery("#bankList").hide(250,function(){
-            jQuery(".overlay-dark").remove();
-        });
-    });
+// Hiển thị danh sách ngân hàng
+openEBank = () =>
+{
+    popUpContent("#bankList"); 
 }
 
 
 // Thêm thông tin
-var openAddInfo = () =>
+openAddInfo = () =>
 {
-    appendInBody();
-    jQuery("#infoAdd").fadeIn(350); 
-
-    jQuery(".overlay-dark:not(.layer2)").click(function(){
-        jQuery("#infoAdd").hide(250,function(){
-            jQuery(".overlay-dark").remove();
-        });
-    });
+    popUpContent("#infoAdd"); 
 }
 
 // Hiển thị xác nhận đơn
-var openOrderConfirm = () =>
+openOrderConfirm = () =>
 {
-    appendInBody();
-    jQuery("#orderConfirm").fadeIn(350); 
+    popUpContent("#orderConfirm");
 
-    jQuery(".overlay-dark:not(.layer2)").click(function(){
-        jQuery("#orderConfirm").hide(250,function(){
-            jQuery(".overlay-dark").remove();
-        });
-    });
 }
 
 // Hiển thị xác nhận đơn
-var openDeliConfirm = () =>
+openDeliConfirm = () =>
 {
-    appendInBody();
-    jQuery("#deliConfirm").fadeIn(350); 
-
-    jQuery(".overlay-dark:not(.layer2)").click(function(){
-        jQuery("#deliConfirm").hide(250,function(){
-            jQuery(".overlay-dark").remove();
-        });
-    });
+    popUpContent("#deliConfirm");
 }
 
 //Thay đổi thứ thự đơn hàng
-var openOrdChange = () =>
+openOrdChange = () =>
 {
     var html = `<div id="changeOrder" class="popup-content dialog-popup"><div class="form-group">
         <input type="text" name="" id="" class="mainForm" placeholder="Thứ tự ưu tiên..."></div>
@@ -385,30 +323,20 @@ var openOrdChange = () =>
 }
 
 //Hiển thị số lượt xem
-function openViewed()
+openViewed = () =>
 {
-    appendInBody();
-    jQuery("#viewed").fadeIn(350); 
-
-    jQuery(".overlay-dark:not(.layer2)").click(function(){
-        jQuery(".popup-content").hide(250,function(){
-            jQuery(".overlay-dark").remove();
-        });
-    });
+    popUpContent("#viewed");
 }
 
 // Thêm thông tin
-function openExcForm(){
-    appendInBody();
-    jQuery("#exchangeAdd").fadeIn(350); 
-
-    jQuery(".overlay-dark:not(.layer2)").click(function(){
-        jQuery("#exchangeAdd").hide(250,function(){
-            jQuery(".overlay-dark").remove();
-        });
-    });
+openExcForm =() => {
+    popUpContent("#exchangeAdd");
 }
-
+// Hiển thị popup thêm địa chỉ
+openAddressAdd = () =>
+{
+    popUpContent("#addressAdd");
+}
 
 // Popup thông báo
 function popUp(html){
@@ -420,6 +348,17 @@ function popUp(html){
         jQuery(".popup-content").hide(250,function(){
             jQuery(".overlay-dark").remove();
             jQuery(this).remove();
+        });
+    });
+}
+
+popUpContent = (id) => {
+    appendInBody();
+    jQuery(id).fadeIn(350); 
+
+    jQuery(".overlay-dark:not(.layer2)").click(function(){
+        jQuery(id).hide(250,function(){
+            jQuery(".overlay-dark").remove();
         });
     });
 }

@@ -42,7 +42,8 @@
                             <input type="tel" name="newInfo-phone" value="" class="mainForm" placeholder="Số điện thoại...">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="newInfo-add" value="" class="mainForm" placeholder="Địa chỉ người nhận...">
+                            <input type="text" name="newInfo-add" value="" class="mainForm" placeholder="Địa chỉ người nhận..." readonly>
+                            <a class="viewMore btn main-btn" href="javascript:void(0)" onclick="openAddressAdd()"><i class="fa fa-address-book-o"></i></a>
                         </div>
                         <div class="form-group">
                             <input type="date" name="newInfo-date" value="" class="mainForm" placeholder="Thời gian...">
@@ -96,6 +97,38 @@
                 <span class="recentInfo-add">234 Phan Văn Trị, P.17, Q.Bình Thạnh</span>
             </li>
         </ul>
+    </div>
+    <!-- click vào button hiển thị ô nhập địa chỉ - file frontend.js -->
+    <div id="addressAdd" class="popup-content">
+        <form action="" class="addInfoForm">
+            <div class="form-group">
+                <select class="mainForm" name="" id="">
+                    <option value="0">Quận/Huyện</option>
+                    <option value="1">Quận 1</option>
+                    <option value="2">Quận 2</option>
+                    <option value="3">Quận 10</option>
+                    <option value="4">Quận 11</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="mainForm" name="" id="">
+                    <option value="0">Phường/Xã</option>
+                    <option value="1">Đa Kao</option>
+                    <option value="2">Bến Nghé</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" name="" id="" class="mainForm" placeholder="Số nhà - Tên đường...">
+            </div>
+            <div class="row">
+                <div class="col-6 mx-auto text-center">
+                    <button type="submit" class="btn grey-btn w-100 mt-3">Hủy</button>
+                </div>
+                <div class="col-6 mx-auto text-center">
+                    <button type="submit" class="btn main-btn w-100 mt-3">Lưu</button>
+                </div>
+            </div>
+        </form>
     </div>
 </body>
     
