@@ -42,6 +42,19 @@ namespace FloridCrawler
             }
         }
 
+        public class District
+        {
+            public string Name { get; set; }
+            public string Id { get; set; }
+            public List<string> Wards { get; set; }
+
+            public District()
+            {
+                Wards = new List<string>();
+            }
+
+        }
+
         static  void Main(string[] args)
         {
 
@@ -52,24 +65,27 @@ namespace FloridCrawler
 
             //var gioHoaTuoi = Crawl("http://florid.com.vn/gio-hoa-tuoi?page=", 4, ProductCategories.GioHoaTuoi).Result;
 
-            var hoaCuoi = Crawl("http://florid.com.vn/hoa-cuoi-1?page=", 1, ProductCategories.HoaCuoi).Result;
+            //var hoaCuoi = Crawl("http://florid.com.vn/hoa-cuoi-1?page=", 1, ProductCategories.HoaCuoi).Result;
 
-            var hoaNgheThuat = Crawl("http://florid.com.vn/hoa-nghe-thuat?page=", 1, ProductCategories.HoaNgheThuat).Result;
+            //var hoaNgheThuat = Crawl("http://florid.com.vn/hoa-nghe-thuat?page=", 1, ProductCategories.HoaNgheThuat).Result;
 
-            var keHoaTuoi = Crawl("http://florid.com.vn/ke-hoa-tuoi?page=", 3, ProductCategories.KeHoaTuoi).Result;
+            //var keHoaTuoi = Crawl("http://florid.com.vn/ke-hoa-tuoi?page=", 3, ProductCategories.KeHoaTuoi).Result;
 
-            var lanHoDiep = Crawl("http://florid.com.vn/lan-ho-diep?page=", 4, ProductCategories.LanHoDiep).Result;
+            //var lanHoDiep = Crawl("http://florid.com.vn/lan-ho-diep?page=", 4, ProductCategories.LanHoDiep).Result;
 
-            var products = new List<Product>();
-            products.AddRange(hoaCuoi);
-            products.AddRange(hoaNgheThuat);
-            products.AddRange(keHoaTuoi);
-            products.AddRange(lanHoDiep);
+            //var products = new List<Product>();
+            //products.AddRange(hoaCuoi);
+            //products.AddRange(hoaNgheThuat);
+            //products.AddRange(keHoaTuoi);
+            //products.AddRange(lanHoDiep);
 
-            var source = JsonConvert.SerializeObject(products);
+            //var source = JsonConvert.SerializeObject(products);
+            CrawlAddress();
 
             Console.ReadLine();
         }
+
+
 
 
         private static async Task<List<Product>> Crawl(string baseUrl,int pageCount,ProductCategories productCategories)
@@ -84,6 +100,53 @@ namespace FloridCrawler
             }
 
             return products;
+        }
+
+        private  static void CrawlAddress()
+        {
+            var url = "https://bankervn.com/danh-sach-quan-huyen-tphcm/";
+
+            var webClient = new WebClient();
+
+            webClient.Encoding = Encoding.UTF8;
+
+
+            //var client = new HttpClient();
+            //client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko");
+            var html =  webClient.DownloadStringTaskAsync(url).Result;
+
+            var htmlDoc = new HtmlDocument();
+
+            htmlDoc.LoadHtml(html);
+
+            var divs = htmlDoc.DocumentNode.Descendants("div")
+               .Where(node => node.GetAttributeValue("class", "").Equals("elementor-toggle-item")).ToList();
+
+            var districts = new List<District>();
+
+            foreach(var div in divs)
+            {
+                var district = new District();
+
+                var  name = div.Descendants("a").FirstOrDefault().InnerText;
+                name = name.Replace("Các phường ", "");
+                name = name.Replace("Các xã ", "");
+
+                district.Name = name;
+           
+
+                district.Id = Guid.NewGuid().ToString();
+
+                var lies = div.Descendants("li").ToList();
+
+                district.Wards.AddRange( lies.Select(p=>p.InnerText).ToList());
+
+                districts.Add(district);
+            }
+
+            var res = JsonConvert.SerializeObject(districts);
+            var length = res.Length;
+
         }
 
 

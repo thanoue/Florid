@@ -41,9 +41,59 @@ export class SelectReceiverComponent extends BaseComponent {
 
     this.currentList = [];
 
-    this.globalDeliveryInfos.forEach(info => {
-      this.currentList.push(info.Info);
+    this.globalOrder.OrderDetails.forEach(orderDetail => {
+
+      const newItem = OrderDetailDeliveryInfo.DeepCopy(orderDetail.DeliveryInfo);
+
+      let isAdd = true;
+
+      this.currentList.forEach(item => {
+        if (ExchangeService.deliveryInfoCompare(newItem, item)) {
+          isAdd = false;
+          return;
+        }
+      });
+
+      if (isAdd) {
+        this.currentList.push(newItem);
+      }
+
     });
+
+    if (this.globalOrder.CustomerInfo) {
+
+      this.globalOrder.CustomerInfo.ReceiverInfos.forEach(receiver => {
+
+        let isAdd = true;
+
+        this.currentList.forEach(item => {
+
+          const newItem = {
+            FullName: item.FullName,
+            PhoneNumber: item.PhoneNumber,
+            Address: item.Address
+          };
+
+          if (ExchangeService.receiverInfoCompare(receiver, newItem)) {
+            isAdd = false;
+            return;
+          }
+
+        });
+
+        if (isAdd) {
+          this.currentList.push({
+            FullName: receiver.FullName,
+            PhoneNumber: receiver.PhoneNumber,
+            Address: receiver.Address,
+            DateTime: new Date()
+          });
+        }
+
+      });
+
+    }
+
 
     this.deliveryInfo = new OrderDetailDeliveryInfo();
 

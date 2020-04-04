@@ -45,6 +45,7 @@ export class SelectCustomerComponent extends BaseComponent {
     this.newCustomer = new CustomerViewModel();
     this.getCustomerList();
     this.selectedCustomer = null;
+
   }
 
   addCustomer(form: NgForm) {
@@ -92,45 +93,6 @@ export class SelectCustomerComponent extends BaseComponent {
     }
 
     this.globalOrder.CustomerInfo = OrderCustomerInfoViewModel.toViewModel(this.selectedCustomer);
-
-    const newGlobalDeliveryInfos: { CustomerId: string, DetailIndex: number[], Info: OrderDetailDeliveryInfo }[] = [];
-
-    this.globalDeliveryInfos.forEach(item => {
-
-      if (item.CustomerId === '') {
-
-        newGlobalDeliveryInfos.push({
-          DetailIndex: item.DetailIndex,
-          CustomerId: '',
-          Info: OrderDetailDeliveryInfo.DeepCopy(item.Info)
-        });
-
-      }
-
-    });
-
-    if (this.selectedCustomer.ReceiverInfos) {
-
-      this.selectedCustomer.ReceiverInfos.forEach(item => {
-
-        const info = new OrderDetailDeliveryInfo();
-
-        info.Address = item.Address;
-        info.Name = item.FullName;
-        info.PhoneNumber = item.PhoneNumber;
-        info.DateTime = new Date();
-
-        newGlobalDeliveryInfos.push({
-          DetailIndex: [],
-          CustomerId: this.selectedCustomer.Id,
-          Info: info
-        });
-
-      });
-
-    }
-
-    this.globalDeliveryInfos = newGlobalDeliveryInfos;
 
     this.OnBackNaviage();
 

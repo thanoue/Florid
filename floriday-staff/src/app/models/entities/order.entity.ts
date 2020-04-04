@@ -1,4 +1,5 @@
 import { BaseEntity } from './base.entity';
+import { OrderDetailStates } from '../enums';
 
 export class Order extends BaseEntity {
     CustomerId = '';
@@ -21,6 +22,8 @@ export class OrderDetail extends BaseEntity {
     TotalAmount = 0;
     ReceiverInfo: OrderReceiverDetail;
     Description = '';
+    Index = -1;
+    State = OrderDetailStates.Waiting;
 
     IsHardcodeProduct = false;
     HardcodeProductImageName = '';

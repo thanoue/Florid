@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OrderViewModel, OrderDetailViewModel } from '../../models/view.models/order.model';
 import { OrderDetail } from 'src/app/models/entities/order.entity';
 import { OrderDetailStates } from 'src/app/models/enums';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-orders-manage',
@@ -22,7 +23,7 @@ export class OrdersManageComponent extends BaseComponent {
   protected IsDataLosingWarning = false;
 
 
-  constructor(protected activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(protected activatedRoute: ActivatedRoute, private router: Router, private orderService: OrderService) {
     super();
     this.globalService.currentOrderViewModel = new OrderViewModel();
   }
@@ -30,39 +31,8 @@ export class OrdersManageComponent extends BaseComponent {
   protected Init() {
 
     this.setStatusBarColor(false);
-    this.orders = [];
 
-    for (let i = 1; i <= 5; i++) {
+    this.startLoading();
 
-      const order = new OrderViewModel();
-
-      order.CreatedDate = new Date();
-      order.OrderId = `OR0${i}`;
-      order.TotalAmount = 800000;
-      order.Index = i;
-      order.CustomerInfo.Name = 'Nguyễn Thị Linh';
-
-      const orderDetais: OrderDetailViewModel[] = [];
-
-      for (let j = 0; j < 4; j++) {
-
-        const orderDetail = new OrderDetailViewModel();
-
-        orderDetail.DeliveryInfo.DateTime = new Date();
-        orderDetail.ProductName = 'Hoa 01';
-        orderDetail.Quantity = j;
-        orderDetail.ProductImageUrl = '../../../assets/images/product-img.jpg';
-        orderDetail.DeliveryInfo.Address = '200 Dương Đình Hội, Phước Long B';
-        orderDetail.State = OrderDetailStates.Comfirming; // OrderDetailStates.Comfirming;
-        orderDetail.Index = j;
-        orderDetais.push(orderDetail);
-
-      }
-
-      order.OrderDetails = orderDetais;
-
-      this.orders.push(order);
-
-    }
   }
 }

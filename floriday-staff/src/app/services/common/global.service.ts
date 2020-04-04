@@ -28,12 +28,10 @@ export class GlobalService {
 
     currentOrderViewModel: OrderViewModel;
     currentOrderDetailViewModel: OrderDetailViewModel;
-    currentDeliveryInfoViewModels: { CustomerId: string, DetailIndex: number[], Info: OrderDetailDeliveryInfo }[];
 
     constructor(private toastr: ToastrService, private ngZone: NgZone) {
 
         this.currentOrderViewModel = new OrderViewModel();
-        this.currentDeliveryInfoViewModels = [];
 
         this.notifySetup = { timeOut: 5000, tapToDismiss: true, progressBar: false, progressAnimation: 'decreasing', positionClass: 'toast-bottom-full-width', closeButton: true, extendedTimeOut: 3000 };
 

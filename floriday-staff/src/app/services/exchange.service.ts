@@ -1,5 +1,7 @@
 import { MembershipTypes } from '../models/enums';
 import { Injectable } from '@angular/core';
+import { OrderDetailDeliveryInfo } from '../models/view.models/order.model';
+import { OrderReceiverDetail, CustomerReceiverDetail } from '../models/entities/order.entity';
 
 @Injectable({
     providedIn: 'root'
@@ -33,6 +35,27 @@ export class ExchangeService {
 
     static setTotalScore(currentScode: number, orderGainedScore: number, orderUsedScore: number): number {
         return currentScode - orderUsedScore + orderGainedScore;
+    }
+
+    static receiverInfoCompare(item1: CustomerReceiverDetail, item2: CustomerReceiverDetail): boolean {
+        if (item1.Address !== item2.Address
+            || item1.FullName !== item2.FullName
+            || item1.PhoneNumber !== item2.PhoneNumber) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    static deliveryInfoCompare(item1: OrderDetailDeliveryInfo, item2: OrderDetailDeliveryInfo): boolean {
+        if (!this.dateCompare(item1.DateTime, item2.DateTime)
+            || item1.Address !== item2.Address
+            || item1.FullName !== item2.FullName
+            || item1.PhoneNumber !== item2.PhoneNumber) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     static dateCompare(first: Date, second: Date): boolean {

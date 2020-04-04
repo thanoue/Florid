@@ -9,14 +9,15 @@
             <div class="newInfo">
                 <form #form="ngForm" (submit)="addReceiver(form)" autocomplete="on" class="addInfoForm">
                     <div class="form-group">
-                        <input type="text" name="Name" [(ngModel)]="deliveryInfo.Name" id="Name" required minlength="5"
-                            value="" class="mainForm" placeholder="Tên..." #Name="ngModel">
-                        <div *ngIf="Name.invalid && (Name.dirty || Name.touched)" class="alert alert-danger">
+                        <input type="text" name="FullName" [(ngModel)]="deliveryInfo.FullName" id="FullName" required
+                            minlength="5" value="" class="mainForm" placeholder="Tên..." #FullName="ngModel">
+                        <div *ngIf="FullName.invalid && (FullName.dirty || FullName.touched)"
+                            class="alert alert-danger">
 
-                            <div *ngIf="Name.errors.required">
+                            <div *ngIf="FullName.errors.required">
                                 Tên là bắt buộc
                             </div>
-                            <div *ngIf="Name.errors.minlength">
+                            <div *ngIf="FullName.errors.minlength">
                                 Tên tối thiểu 5 ký tự
                             </div>
                         </div>
@@ -63,7 +64,7 @@
     <ul>
         <li *ngFor="let receiverInfo of currentList; let i = index" onclick="selectSavedDeliveryInfo(this)"
             [attr.data-index]="i">
-            <p class="recentInfo-name">{{receiverInfo.Name}}</p>
+            <p class="recentInfo-name">{{receiverInfo.FullName}}</p>
             <span class="recentInfo-phone">{{receiverInfo.PhoneNumber}}</span>
             <span class="recentInfo-date">{{deliveryInfo.DateTime | date: 'dd/MM/yyyy hh:mm a'}}</span>
             <span class="recentInfo-add">{{receiverInfo.Address}}</span>

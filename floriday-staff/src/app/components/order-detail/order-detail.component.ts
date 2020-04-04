@@ -34,14 +34,10 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
   protected Init() {
 
-
-
-
     this.route.params.subscribe(params => {
 
       this.detailIndex = + params.id;
 
-      this.globalOrderDetail.Index = this.detailIndex > -1 ? this.detailIndex : this.globalOrder.OrderDetails.length;
 
       this.orderDetail = this.globalOrderDetail;
 
@@ -85,75 +81,32 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
     if (!this.globalOrderDetail.DeliveryInfo.Address
       || !this.globalOrderDetail.DeliveryInfo.PhoneNumber
-      || !this.globalOrderDetail.DeliveryInfo.Name
+      || !this.globalOrderDetail.DeliveryInfo.FullName
       || !this.globalOrderDetail.DeliveryInfo.DateTime) {
       this.showWarning('Thiếu thông in giao hàng!');
       return;
     }
 
-    let isNew = true;
-
-    this.globalDeliveryInfos.forEach(item => {
-
-      if (item.Info.Address.toLowerCase() === this.globalOrderDetail.DeliveryInfo.Address.toLowerCase()
-        && item.Info.Name.toLowerCase() === this.globalOrderDetail.DeliveryInfo.Name.toLowerCase()
-        && item.Info.PhoneNumber.toLowerCase() === this.globalOrderDetail.DeliveryInfo.PhoneNumber.toLowerCase()
-        && ExchangeService.dateCompare(item.Info.DateTime, this.globalOrderDetail.DeliveryInfo.DateTime)) {
-        isNew = false;
-      }
-
-    });
-
-    let isAdd = true;
-
-    const newItem = { CustomerId: '', DetailIndex: [this.globalOrderDetail.Index], Info: this.globalOrderDetail.DeliveryInfo };
-
-    if (isNew) {
-
-      this.globalDeliveryInfos.forEach(item => {
-
-        const index = item.DetailIndex.indexOf(this.globalOrderDetail.Index, 0);
-
-        if (item.DetailIndex.length > 0 && index > -1) {
-
-          isAdd = false;
-
-          if (item.DetailIndex.length === 1) {
-            item.Info = this.globalOrderDetail.DeliveryInfo;
-            return;
-          }
-
-          item.DetailIndex.splice(index, 1);
-          return;
-
-        }
-
-      });
-
-      if (!isAdd) {
-        this.globalDeliveryInfos.push(newItem);
-      }
-
-      console.log(this.globalDeliveryInfos);
-
+    if (this.globalOrderDetail.ModifiedPrice <= 0) {
+      this.showWarning('Chưa nhập giá tiền!');
+      return;
     }
+
+    if (!this.globalOrderDetail.IsFromHardCodeProduct && (!this.globalOrderDetail.ProductId || this.globalOrderDetail.ProductId === '')) {
+      this.showWarning('Chưa chọn sản phẩm');
+      return;
+    }
+
+    this.globalOrderDetail.Index = this.detailIndex > -1 ? this.detailIndex : this.globalOrder.OrderDetails.length;
 
     const viewModel = OrderDetailViewModel.DeepCopy(this.globalOrderDetail);
 
     this.globalOrderDetail = null;
 
-    this.insertOrderDetail(viewModel, (indexes) => {
-
-      if (!isAdd || !isNew) {
-        return;
-      }
-
-      this.globalDeliveryInfos.push({ CustomerId: '', DetailIndex: indexes, Info: this.globalOrderDetail.DeliveryInfo });
-
-    });
+    this.insertOrderDetail(viewModel);
   }
 
-  insertOrderDetail(viewModel: OrderDetailViewModel, indexesCallback: (indexes: number[]) => void) {
+  insertOrderDetail(viewModel: OrderDetailViewModel) {
 
     viewModel.AdditionalFee *= 1000;
     const newIndexes: number[] = [];
@@ -180,9 +133,6 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
         index += 1;
       }
-
-      indexesCallback(newIndexes);
-
     }
 
     super.OnBackNaviage();

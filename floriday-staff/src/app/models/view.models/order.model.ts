@@ -2,6 +2,7 @@ import { OrderDetailStates } from '../../models/enums';
 import { MembershipTypes } from '../enums';
 import { Customer } from '../entities/customer.entity';
 import { ExchangeService } from '../../services/exchange.service';
+import { CustomerReceiverDetail } from '../entities/order.entity';
 
 export class OrderViewModel {
     OrderId: string;
@@ -30,18 +31,17 @@ export class OrderDetailViewModel {
     ProductName = '';
     OrderDetailId = '';
     State = OrderDetailStates.Waiting;
-    ProductId: string;
-    ProductImageUrl: string;
+    ProductId = '';
+    ProductImageUrl = '';
     Quantity = 1;
     Index = 0;
     DeliveryInfo: OrderDetailDeliveryInfo;
 
+    OriginalPrice = 0;
+    ModifiedPrice = 0;
+    AdditionalFee = 0;
 
-    OriginalPrice: number;
-    ModifiedPrice: number;
-    AdditionalFee: number;
-
-    Description: string;
+    Description = '';
 
     IsFromHardCodeProduct = false;
     HardcodeImageName = '';
@@ -76,7 +76,7 @@ export class OrderDetailDeliveryInfo {
 
     DateTime = new Date();
     Address: string;
-    Name: string;
+    FullName: string;
     PhoneNumber: string;
 
     static DeepCopy(source: OrderDetailDeliveryInfo): OrderDetailDeliveryInfo {
@@ -84,7 +84,7 @@ export class OrderDetailDeliveryInfo {
         const dest = new OrderDetailDeliveryInfo();
 
         dest.Address = source.Address;
-        dest.Name = source.Name;
+        dest.FullName = source.FullName;
         dest.PhoneNumber = source.PhoneNumber;
 
         dest.DateTime.setFullYear(source.DateTime.getFullYear());
@@ -109,9 +109,14 @@ export class OrderCustomerInfoViewModel {
     UsedScoreTotal = 0; // tổng điểm KH đã sử dụng 
     GainedScore = 0; // điểm kiếm được từ hoá đơn
     TotalScore = 0; // tổng điểm
+    ReceiverInfos: CustomerReceiverDetail[];
 
     PhoneNumber: string;
     MembershipType: MembershipTypes;
+
+    constructor() {
+        this.ReceiverInfos = [];
+    }
 
     static toViewModel(customer: Customer): OrderCustomerInfoViewModel {
         const viewModel = new OrderCustomerInfoViewModel();
@@ -123,6 +128,7 @@ export class OrderCustomerInfoViewModel {
         viewModel.DiscountPercent = ExchangeService.getMemberDiscountPercent(customer.MembershipInfo.MembershipType);
         viewModel.AvailableScore = customer.MembershipInfo.AvailableScore;
         viewModel.UsedScoreTotal = customer.MembershipInfo.UsedScoreTotal;
+        Object.assign(viewModel.ReceiverInfos, customer.ReceiverInfos);
 
         return viewModel;
     }

@@ -43,13 +43,6 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         this.globalService.currentOrderDetailViewModel = value;
     }
 
-    get globalDeliveryInfos(): { CustomerId: string, DetailIndex: number[], Info: OrderDetailDeliveryInfo }[] {
-        return this.globalService.currentDeliveryInfoViewModels;
-    }
-    set globalDeliveryInfos(value: { CustomerId: string, DetailIndex: number[], Info: OrderDetailDeliveryInfo }[]) {
-        this.globalService.currentDeliveryInfoViewModels = value;
-    }
-
     ngOnInit(): void {
 
         const key = 'BaseReference';

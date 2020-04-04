@@ -9,6 +9,9 @@ import { Order, OrderDetail, CustomerReceiverDetail } from 'src/app/models/entit
 import { AngularFireAuth } from '@angular/fire/auth';
 import { OrderDetailService } from 'src/app/services/order-detail.service';
 import { CustomerService } from 'src/app/services/customer.service';
+import { District, Ward } from 'src/app/models/entities/address.entity';
+import { DistrictAddressService } from 'src/app/services/address/district-address.service';
+import { WardAddressService } from 'src/app/services/address/ward-address.service';
 
 declare function openExcForm(resCallback: (result: number, validateCalback: (isSuccess: boolean) => void) => void): any;
 declare function getNumberValidateInput(resCallback: (res: number, validCallback: (isvalid: boolean, error: string) => void) => void, placeHolder: string, oldValue: number): any;
@@ -32,7 +35,11 @@ export class AddOrderComponent extends BaseComponent {
     // tslint:disable-next-line: align
     private orderService: OrderService, public auth: AngularFireAuth,
     // tslint:disable-next-line: align
-    private customerService: CustomerService) {
+    private customerService: CustomerService,
+    // tslint:disable-next-line: align
+    private wardService: WardAddressService,
+    // tslint:disable-next-line: align
+    private addressService: DistrictAddressService) {
     super();
   }
 
@@ -69,7 +76,12 @@ export class AddOrderComponent extends BaseComponent {
   requestPaidInput() {
 
     if (!this.order.CustomerInfo.Id) {
-      this.showWarning('Thiếu thông tin Khách hàng');
+      this.showWarning('Thiếu thông tin Khách hàng!');
+      return;
+    }
+
+    if (!this.order.TotalAmount || this.order.TotalAmount === 0) {
+      this.showWarning('Chưa nhập Sản phẩm!');
       return;
     }
 
@@ -87,9 +99,7 @@ export class AddOrderComponent extends BaseComponent {
 
       this.order.TotalPaidAmount = res;
 
-      if (!this.order.CreatedDate) {
-        this.order.CreatedDate = new Date();
-      }
+      this.order.CreatedDate = new Date();
 
       this.order.CustomerInfo.GainedScore = ExchangeService.getGainedScore(this.order.TotalAmount);
 
@@ -201,6 +211,8 @@ export class AddOrderComponent extends BaseComponent {
           detail.AdditionalFee = detailVM.AdditionalFee;
           detail.ProductName = detailVM.ProductName;
           detail.Description = detailVM.Description;
+          detail.Index = detailVM.Index;
+          detail.State = OrderDetailStates.Waiting;
 
           detail.ReceiverInfo.ReceivingTime = detailVM.DeliveryInfo.DateTime.getTime();
 
@@ -208,25 +220,48 @@ export class AddOrderComponent extends BaseComponent {
 
           receiverInfo.Address = detailVM.DeliveryInfo.Address;
           receiverInfo.PhoneNumber = detailVM.DeliveryInfo.PhoneNumber;
-          receiverInfo.FullName = detailVM.DeliveryInfo.Name;
+          receiverInfo.FullName = detailVM.DeliveryInfo.FullName;
 
           detail.ReceiverInfo.ReceiverDetail = receiverInfo;
 
           orderDetais.push(detail);
 
+          let isAdd = true;
+
+          receiverInfos.forEach(info => {
+
+            if (ExchangeService.receiverInfoCompare(info, receiverInfo)) {
+              isAdd = false;
+              return;
+            }
+
+          });
+
+          if (isAdd) {
+            receiverInfos.push(receiverInfo);
+          }
+
         });
 
-        this.globalDeliveryInfos.forEach(item => {
+        this.globalOrder.CustomerInfo.ReceiverInfos.forEach(receiver => {
 
-          const receiverInfo = new CustomerReceiverDetail();
+          let isAdd = true;
 
-          receiverInfo.Address = item.Info.Address;
-          receiverInfo.PhoneNumber = item.Info.PhoneNumber;
-          receiverInfo.FullName = item.Info.Name;
+          receiverInfos.forEach(item => {
 
-          receiverInfos.push(receiverInfo);
+            if (ExchangeService.receiverInfoCompare(receiver, item)) {
+              isAdd = false;
+              return;
+            }
+
+          });
+
+          if (isAdd) {
+            receiverInfos.push(receiver);
+          }
 
         });
+
 
         this.orderDetailService.setList(orderDetais)
           .then(() => {
