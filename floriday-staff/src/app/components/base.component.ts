@@ -10,10 +10,13 @@ import { RouteModel } from '../models/view.models/route.model';
 import { map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
-import { OrderViewModel, OrderDetailViewModel, OrderDetailDeliveryInfo } from '../models/view.models/order.model';
-import { OrderDetail, OrderReceiverDetail } from '../models/entities/order.entity';
+import { OrderViewModel, OrderDetailViewModel } from '../models/view.models/order.model';
+import { DistrictAddressService } from '../services/address/district-address.service';
+import { WardAddressService } from '../services/address/ward-address.service';
+import { District, Ward } from '../models/entities/address.entity';
 
 declare function pickFile(): any;
+declare function addressRequest(districts: District[], resCallback: (res: string) => void, onDistrictChange: (res: string, newWardCallback: (wards: Ward[]) => void) => void): any;
 
 export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -26,6 +29,8 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     protected location: Location;
     private ngZone: NgZone;
     private navigateOnClick: Subscription;
+    private districtService: DistrictAddressService;
+    private wardService: WardAddressService;
 
     IsOnTerminal: boolean;
 
@@ -41,6 +46,32 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     }
     set globalOrderDetail(value: OrderDetailViewModel) {
         this.globalService.currentOrderDetailViewModel = value;
+    }
+
+    get globalDistricts(): District[] {
+        return this.globalService.currentDistricts;
+    }
+
+    set globalDistricts(value: District[]) {
+        this.globalService.currentDistricts = value;
+    }
+
+    get globalwards(): Ward[] {
+        return this.globalService.currentWards;
+    }
+
+    set globalwards(value: Ward[]) {
+        this.globalService.currentWards = value;
+    }
+
+    constructor() {
+        const injector = AppInjector.getInjector();
+        this.globalService = injector.get(GlobalService);
+        this.authService = injector.get(AuthService);
+        this.location = injector.get(Location);
+        this.ngZone = injector.get(NgZone);
+        this.districtService = injector.get(DistrictAddressService);
+        this.wardService = injector.get(WardAddressService);
     }
 
     ngOnInit(): void {
@@ -78,13 +109,34 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
             });
     }
 
-    constructor() {
+    protected selectAddress(resCallback: (res: string) => void) {
 
-        const injector = AppInjector.getInjector();
-        this.globalService = injector.get(GlobalService);
-        this.authService = injector.get(AuthService);
-        this.location = injector.get(Location);
-        this.ngZone = injector.get(NgZone);
+        if (this.globalwards.length <= 0) {
+
+            this.districtService.getAll().then(dists => {
+
+                this.globalDistricts = dists;
+
+                this.wardService.getAll().then(wards => {
+
+                    this.globalwards = wards;
+
+                    this.addressRequest(resCallback);
+                });
+            });
+
+        } else {
+            this.addressRequest(resCallback);
+        }
+    }
+
+    private addressRequest(resCallback: (res: string) => void) {
+
+        addressRequest(this.globalDistricts, resCallback, (districtId, newwardCallback) => {
+            const newWards = this.globalwards.filter(p => p.DistrictId === districtId);
+            newwardCallback(newWards);
+        });
+
     }
 
     protected dateTimeSelected(year: number, month: number, day: number, hour: number, minute: number) {

@@ -6,6 +6,7 @@ import { OrderViewModel, OrderDetailViewModel, OrderDetailDeliveryInfo } from 's
 import { AlertType } from 'src/app/models/enums';
 import { ToastrService } from 'ngx-toastr';
 import { OrderReceiverDetail } from 'src/app/models/entities/order.entity';
+import { District, Ward } from 'src/app/models/entities/address.entity';
 
 declare function setStatusBarColor(isDark: boolean): any;
 declare function isOnTerminal(): any;
@@ -28,10 +29,14 @@ export class GlobalService {
 
     currentOrderViewModel: OrderViewModel;
     currentOrderDetailViewModel: OrderDetailViewModel;
+    currentDistricts: District[];
+    currentWards: Ward[];
 
     constructor(private toastr: ToastrService, private ngZone: NgZone) {
 
         this.currentOrderViewModel = new OrderViewModel();
+        this.currentDistricts = [];
+        this.currentWards = [];
 
         this.notifySetup = { timeOut: 5000, tapToDismiss: true, progressBar: false, progressAnimation: 'decreasing', positionClass: 'toast-bottom-full-width', closeButton: true, extendedTimeOut: 3000 };
 

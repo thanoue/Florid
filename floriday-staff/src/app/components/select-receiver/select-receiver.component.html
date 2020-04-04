@@ -40,6 +40,8 @@
                     <div class="form-group">
                         <input type="text" name="Address" [(ngModel)]="deliveryInfo.Address" required id="Address"
                             class="mainForm" placeholder="Địa chỉ..." #Address="ngModel">
+                        <a class="viewMore btn main-btn" href="javascript:void(0)" (click)="addressChoosing()"><i
+                                class="fa fa-location-arrow"></i></a>
                         <div *ngIf="Address.invalid && (Address.dirty || Address.touched)" class="alert alert-danger">
                             <div *ngIf="Address.errors.required">
                                 Địa chỉ là bắt buộc

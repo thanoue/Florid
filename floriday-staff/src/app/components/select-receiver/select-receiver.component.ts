@@ -29,6 +29,12 @@ export class SelectReceiverComponent extends BaseComponent {
     super();
   }
 
+  addressChoosing() {
+    this.selectAddress((res) => {
+      this.deliveryInfo.Address = res;
+    });
+  }
+
   protected Init() {
 
     const key = 'DeliveryInfoReference';

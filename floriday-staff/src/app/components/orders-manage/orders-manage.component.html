@@ -25,20 +25,22 @@
         </div>
         <div class="row order-list-bot">
             <ul class="col-12 order-content accordion  cusScroll" id="accordionOrder">
-                <li *ngFor="let order of orders" class="order-content-item" [id]="'order' + order.Index">
-                    <div class="item-top" [id]="'heading' + order.Index">
+                <li *ngFor="let order of orders; let orderIndex = index" class="order-content-item"
+                    [id]="'order' + orderIndex">
+                    <div class="item-top" [id]="'heading' + orderIndex">
                         <span class="item-code">{{order.OrderId}}</span>
                         <div class="item-info">
                             <h4 class="item-name">{{order.CustomerInfo.Name}}</h4>
-                            <span class="item-price">{{order.TotalAmount}} vnđ</span>
+                            <span class="item-price">{{order.TotalAmount| currency:'VND':'symbol-narrow':'':'vi-VN'}}
+                            </span>
                             <span class="item-date">{{order.CreatedDate | date: 'dd/MM/yyyy'}}</span>
                         </div>
-                        <button data-toggle="collapse" [attr.data-target]="'#collapse' + order.Index"
-                            aria-expanded="false" [attr.aria-controls]="'collapse' + order.Index"
+                        <button data-toggle="collapse" [attr.data-target]="'#collapse' + orderIndex"
+                            aria-expanded="false" [attr.aria-controls]="'collapse' + orderIndex"
                             class="collapsed">mở</button>
                     </div>
-                    <div class="item-bot collapse" [id]="'collapse' + order.Index"
-                        [attr.aria-labelledby]="'heading' + order.Index" [attr.data-parent]="'#order' + order.Index">
+                    <div class="item-bot collapse" [id]="'collapse' + orderIndex"
+                        [attr.aria-labelledby]="'heading' + orderIndex" [attr.data-parent]="'#order' + orderIndex">
                         <ul class="order-product-list cusScroll">
                             <li *ngFor="let orderDetail of order.OrderDetails" class="order-product-item">
                                 <div [ngSwitch]="orderDetail.State">
@@ -51,34 +53,35 @@
                                     </div>
                                     <div *ngSwitchCase="states.Comfirming" class="item-status y"
                                         onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index}}</span>
+                                        <span>{{orderDetail.Index +1}}</span>
                                     </div>
                                     <div *ngSwitchCase="states.DeliveryWaiting" class="item-status p"
                                         onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index}}</span>
+                                        <span>{{orderDetail.Index +1}}</span>
                                     </div>
                                     <div *ngSwitchCase="states.Delivering" class="item-status b"
                                         onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index}}</span>
+                                        <span>{{orderDetail.Index +1}}</span>
                                     </div>
                                     <div *ngSwitchCase="states.Deliveried" class="item-status bl"
                                         onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index}}</span>
+                                        <span>{{orderDetail.Index +1}}</span>
                                     </div>
                                     <div *ngSwitchCase="states.Completed" class="item-status g"
                                         onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index}}</span>
+                                        <span>{{orderDetail.Index +1}}</span>
                                     </div>
                                     <div *ngSwitchCase="states.Canceled" class="item-status x"
                                         onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index}}</span>
+                                        <span>{{orderDetail.Index +1}}</span>
                                     </div>
                                 </div>
                                 <div class="item-detail" onclick="openOrderMenu()">
-                                    <img src="{{orderDetail.ProductUrl}}" alt="" class="item-detail-thumb">
+                                    <img [src]="orderDetail.ProductImageUrl" alt="" class="item-detail-thumb">
                                     <div class="item-detail-info">
                                         <h5 class="item-code">{{orderDetail.ProductName}}</h5>
-                                        <span class="item-quantity">Số lượng: {{orderDetail.Quantity}}</span>
+                                        <span class="item-quantity">Phụ phí:
+                                            {{orderDetail.AdditionalFee| currency:'VND':'symbol-narrow':'':'vi-VN'}}</span>
                                         <span class="item-address">{{orderDetail.DeliveryInfo.Address}}</span>
                                         <span
                                             class="item-time">{{orderDetail.DeliveryInfo.DateTime | date: 'hh:mm a'}}</span>

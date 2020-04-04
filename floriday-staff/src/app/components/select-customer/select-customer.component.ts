@@ -39,8 +39,6 @@ export class SelectCustomerComponent extends BaseComponent {
     this.selectedCustomer = this.customers.filter(p => p.Id === id)[0];
   }
 
-
-
   protected Init() {
     this.newCustomer = new CustomerViewModel();
     this.getCustomerList();

@@ -8,6 +8,7 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Product } from '../models/entities/product.entity';
 import { ProductCategories } from '../models/enums';
 import { async } from '@angular/core/testing';
+import { constants } from 'crypto';
 
 declare function getProductsFromCache(category: number): any;
 declare function addProductsToCache(products: Product[]): any;
@@ -36,11 +37,11 @@ export class ProductService extends BaseService<Product> {
                 const res: Product[] = [];
 
                 snapshot.forEach(data => {
-                    res.push(data.val() as Product);
-                });
 
-                res.forEach(product => {
-                    product.ImageUrl = 'http://florid.com.vn/' + product.ImageUrl;
+                    const prd = data.val() as Product;
+                    prd.ImageUrl = 'http://florid.com.vn/' + prd.ImageUrl;
+
+                    res.push(prd);
                 });
 
                 this.globalService.stopLoading();

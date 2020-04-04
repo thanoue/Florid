@@ -169,6 +169,7 @@ function openProgMenu() {
         }
     });
 }
+
 // Menu hoàn thành đơn
 function openCompMenu() {
     var html = `<div class="actionMenu">
@@ -298,8 +299,6 @@ function openColorBoard() {
     });
 }
 
-
-
 // Thêm thông tin
 function openAddInfo() {
     appendInBody();
@@ -347,7 +346,6 @@ function openDeliConfirm() {
         });
     });
 }
-
 
 //Hiển thị số lượt xem
 function openViewed() {
@@ -589,3 +587,89 @@ function openConfirm(message, okCallback, cancelCallback) {
     });
 
 }
+
+function addressRequest(districts, resCallback, requestNewWards) {
+
+    let districtData = `<option value="NULL">Quận/Huyện</option>`;
+
+    districts.forEach(function (district) {
+        districtData += `<option value="${district.Id}">${district.Name}</option>`
+    });
+
+    let htmlTemplate = `<div id="addressAdd" class="popup-content">
+        <div class="form-group">
+            <select class="mainForm" name="" id="district-select">
+              ${districtData}
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="mainForm" name="" id="ward-select">
+                <option value="0">Phường/Xã</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" name="" id="address-detail" class="mainForm" placeholder="Số nhà - Tên đường...">
+        </div>
+        <div class="row">
+            <div class="col-6 mx-auto text-center">
+                <button type="button" id="cancel-btn" class="btn grey-btn w-100 mt-3">Hủy</button>
+            </div>
+            <div class="col-6 mx-auto text-center">
+                <button type="button" id="submit-btn" class="btn main-btn w-100 mt-3">Lưu</button>
+            </div>
+        </div>
+        </div>`;
+
+    appendInBody();
+
+    jQuery("body").append(htmlTemplate);
+
+    jQuery("#addressAdd").fadeIn(350);
+
+    jQuery('#addressAdd #district-select').on('change', function () {
+
+        let selectedId = '';
+        $("#addressAdd #district-select option:selected").each(function () {
+            selectedId = $(this).val();
+        });
+
+        let newWardsData = `<option value="0">Phường/Xã</option>`;
+
+        requestNewWards(selectedId, function (newWards) {
+
+            console.log(newWards);
+
+            newWards.forEach(function (newWard) {
+                newWardsData += `<option value="${newWard.Id}">${newWard.Name}</option>`;
+            });
+
+            jQuery('#addressAdd #ward-select').html(newWardsData);
+
+        });
+    })
+
+    jQuery("#addressAdd #submit-btn").on('click', function () {
+
+        let district = $("#addressAdd #district-select option:selected").first().text();
+        let ward = $("#addressAdd #ward-select option:selected").first().text();
+        let detail = $('#addressAdd #address-detail').val();
+
+        let fullAddress = `${detail} ${ward} ${district}`;
+
+        resCallback(fullAddress);
+
+        jQuery('#addressAdd').hide(250, function () {
+            jQuery(this).remove();
+            jQuery(".overlay-dark:not(.layer2)").remove();
+        });
+
+    });
+
+    jQuery(".overlay-dark:not(.layer2)").click(function () {
+        jQuery('#addressAdd').hide(250, function () {
+            jQuery(this).remove();
+            jQuery(".overlay-dark").remove();
+        });
+    });
+}
+

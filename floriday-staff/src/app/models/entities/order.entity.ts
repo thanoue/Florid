@@ -13,14 +13,16 @@ export class Order extends BaseEntity {
 }
 
 export class OrderDetail extends BaseEntity {
+
     OrderId = '';
     AdditionalFee = 0;
     ProductId = '';
     ProductName = '';
-    ProductPrice = 0;
     ProductImageUrl = '';
+    ProductModifiedPrice = 0;
+    ProductPrice = 0;
     TotalAmount = 0;
-    ReceiverInfo: OrderReceiverDetail;
+    DeliveryInfo: OrderReceiverDetail;
     Description = '';
     Index = -1;
     State = OrderDetailStates.Waiting;
@@ -30,7 +32,7 @@ export class OrderDetail extends BaseEntity {
 
     constructor() {
         super();
-        this.ReceiverInfo = new OrderReceiverDetail();
+        this.DeliveryInfo = new OrderReceiverDetail();
     }
 }
 

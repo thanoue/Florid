@@ -35,11 +35,7 @@ export class AddOrderComponent extends BaseComponent {
     // tslint:disable-next-line: align
     private orderService: OrderService, public auth: AngularFireAuth,
     // tslint:disable-next-line: align
-    private customerService: CustomerService,
-    // tslint:disable-next-line: align
-    private wardService: WardAddressService,
-    // tslint:disable-next-line: align
-    private addressService: DistrictAddressService) {
+    private customerService: CustomerService) {
     super();
   }
 
@@ -213,8 +209,9 @@ export class AddOrderComponent extends BaseComponent {
           detail.Description = detailVM.Description;
           detail.Index = detailVM.Index;
           detail.State = OrderDetailStates.Waiting;
+          detail.ProductModifiedPrice = detailVM.ModifiedPrice;
 
-          detail.ReceiverInfo.ReceivingTime = detailVM.DeliveryInfo.DateTime.getTime();
+          detail.DeliveryInfo.ReceivingTime = detailVM.DeliveryInfo.DateTime.getTime();
 
           const receiverInfo = new CustomerReceiverDetail();
 
@@ -222,7 +219,7 @@ export class AddOrderComponent extends BaseComponent {
           receiverInfo.PhoneNumber = detailVM.DeliveryInfo.PhoneNumber;
           receiverInfo.FullName = detailVM.DeliveryInfo.FullName;
 
-          detail.ReceiverInfo.ReceiverDetail = receiverInfo;
+          detail.DeliveryInfo.ReceiverDetail = receiverInfo;
 
           orderDetais.push(detail);
 

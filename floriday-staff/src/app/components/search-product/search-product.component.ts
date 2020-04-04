@@ -63,7 +63,19 @@ export class SearchProductComponent extends BaseComponent {
     };
 
     this.orderDetailService.getHardcodeImageSavedCounting(this.globalOrderDetail.HardcodeImageName, (count) => {
+
       this.currentHardcodeUsedCount = count;
+
+      if (this.currentHardcodeUsedCount === 1) {
+        this.currentHardcodeUsedCount = 0;
+      }
+
+      this.globalOrder.OrderDetails.forEach(detail => {
+        if (detail.HardcodeImageName === this.globalOrderDetail.HardcodeImageName) {
+          this.currentHardcodeUsedCount++;
+        }
+      });
+
     });
 
   }
