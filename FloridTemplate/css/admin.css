@@ -1,3 +1,39 @@
+.form-control::-webkit-input-placeholder { /* Edge */
+    color: var(--main-grey);
+    font-style: normal;
+}
+  
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--main-grey);
+    font-style: normal;
+}
+
+.form-control::placeholder {
+    color: var(--main-grey);
+    font-style: normal;
+}
+a.tdName {
+    color: #17a2b8;
+    transition: 250ms;
+}
+a.tdName:hover {
+    color: #777;
+}
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: 0;
+    left: 20px;
+}
+.form-check {
+    padding-left: 30px;
+}
+hr.adminSeperate {
+    margin: 30px 0;
+    border-color: #c6c6c6;
+}
 .adminWrapper {
     width: 100vw;
     height: 100vh;
@@ -7,7 +43,7 @@ nav#sideContent {
     position: fixed;
     width: 250px;
     height: 100vh;
-    background: #128070;
+    background: #17a2b8;
     padding: 20px;
     box-shadow: 0px 0px 10px 5px #999;
     transition: 350ms;
@@ -23,7 +59,7 @@ nav#sideContent {
 .adminLogo {
     padding-bottom: 25px;
     margin-bottom: 25px;
-    border-bottom: 4px double #44978b;
+    border-bottom: 4px double #66c2d0;
 }
 .adminLogo h4 {
     font-size: 20px;
@@ -50,7 +86,7 @@ ul.mainMenu li.menuItem
 }
 ul.mainMenu > li.menuItem:not(:last-child)
 {
-    border-bottom: 1px solid #44978b;
+    border-bottom: 1px solid #66c2d0;
 }
 ul.mainMenu li.menuItem > a {
     display: block;
@@ -115,6 +151,7 @@ span.showSubMenu:before {
     -ms-flex-align: center;
     align-items: center;
     padding:  15px;
+    height: 80px;
 }
 button.menuToggle {
     border: none;
@@ -128,7 +165,7 @@ button.menuToggle {
 .icon-bar {
 	width: 30px; 
 	height: 2px;
-	background-color: #128070;
+	background-color: #17a2b8;
 	display: block;
     transition: all 0.2s;
     position: absolute;
@@ -175,7 +212,7 @@ span.icon-bar.bottom-bar
     border-radius: 20px;
 }
 .headerCen .form-group button.btn {
-    background: #128070;
+    background: #17a2b8;
     position: absolute;
     top: 3px;
     right: 3px;
@@ -214,6 +251,13 @@ span.icon-bar.bottom-bar
     left: auto !important;
     right: 0;
     top: 40px !important;
+}
+.contentFooter
+{
+    height: 70px;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 /* ==========================================login */
 .adminWrapper.loginScreen
@@ -263,4 +307,81 @@ span.icon-bar.bottom-bar
     line-height: 40px;
     color: var(--main-grey);
     font-size: 14px;
+}
+/* ============================================CONTENT  */
+.contentContent.container-fluid {
+    padding: 30px;
+    height: calc(100vh - 150px);
+    overflow-y: scroll;
+}
+.listHeader > .row {
+    padding-bottom: 20px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.listHeader .form-group
+{
+    margin-bottom: 0;
+}
+.listHeader input ,
+.listHeader select
+{
+    border-radius: 20px;
+}
+.optionSearch button.btn.btn-info {
+    top: 0;
+    right: 15px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.listContent .table
+{
+    margin-bottom: 20px;
+}
+.listContent .table tr td
+{
+    vertical-align: middle;
+}
+.listFooter ul.pagination
+{
+	-webkit-box-pack: end;
+	    -ms-flex-pack: end;
+	        justify-content: flex-end;
+}
+.userAvatar img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+}
+.userAvatar {
+    width: 100%;
+    position: relative;
+}
+.userAvatar:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+.userEdit .userName {
+    margin-bottom: 30px;
+}
+.form-action{
+    margin-top: 20px;
+	-webkit-box-pack: end;
+    -ms-flex-pack: end;
+        justify-content: flex-end;
+}
+
+.popupContent {
+    position: fixed;
+    width: 1200px;
+    bottom: 0;
+    background: #fff;
+    padding: 40px;
+    right: 0;
+    box-shadow: 0px 0px 20px 0px #999;
+    border-top-left-radius: 10px;
+    display: none;
 }
