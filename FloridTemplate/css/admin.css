@@ -331,7 +331,7 @@ span.icon-bar.bottom-bar
 }
 .optionSearch button.btn.btn-info {
     top: 0;
-    right: 15px;
+    right: 0;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
