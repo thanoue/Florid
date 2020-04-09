@@ -121,85 +121,148 @@ hideUserEdit = (e) => {
     
 }
 
-showUserAdd = () => {
-    jQuery(".adminWrapper").append(`
-    <div class="popupContent" id="userAdd">
-    <h4 class="userName">Thêm mới User</h4>
-    <hr class="adminSeperate">
-    <form action="">
-    <div class="form-row">
-    <div class="form-group col-md-6">
-    <label for="inputEmail4">Địa chỉ Email</label>
-    <input type="email" class="form-control" id="inputEmail4" placeholder="thanhhnp@gmail.com">
-    </div>
-    <div class="form-group col-md-6">
-    <label for="inputPassword4">Mật khẩu</label>
-    <input type="password" class="form-control" id="inputPassword4" placeholder="***********" >
-    </div>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-6">
-        <label for="inputName">Họ và Tên</label>
-        <input type="text" class="form-control" id="inputName" placeholder="Adriana C. Ocampo Uria">
-    </div>
-    <div class="form-group col-md-6">
-        <label for="inputPhone">Số điện thoại</label>
-        <input type="text" class="form-control" id="inputPhone" placeholder="0898443222">
-    </div>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-4">
-        <label for="selectDist">Quận/Huyện</label>
-        <select class="form-control" name="" id="selectDist">
-            <option value="0">Quận/Huyện</option>
-            <option value="1">Quận 1</option>
-            <option value="2">Quận 2</option>
-            <option value="3">Quận 10</option>
-            <option value="4">Quận 11</option>
-        </select>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="selectWard">Phường/Xã</label>
-        <select class="form-control" name="" id="selectWard">
-            <option value="0">Phường/Xã</option>
-            <option value="1">Đa Kao</option>
-            <option value="2">Bến Nghé</option>
-        </select>
-    </div>
-    <div class="form-group col-md-4">
-        <label for="inputAddress">Địa chỉ</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="13A Đinh Tiên Hoàng - Q1 - TP. Hồ Chí Minh">
-    </div>
-</div>
-<div class="form-row">
-    
-    <div class="form-group col-md-3">
-        <label for="inputState">Quyền</label>
-            <select id="inputState" class="form-control">
-            <option selected>Choose...</option>
-            <option >Account</option>
-            <option>Shipper</option>
-            <option>Florist</option>
-            <option>Other</option>
-        </select>
-    </div>
-</div>
-      <div class="form-group avatarChange">
-        <label for="">Chọn ảnh đại diện</label>
-        <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
-      </div>
-      <div class="form-action row">
-        <div class="col-md-2"><button type="" class="btn btn-outline-success w-100" onclick="">Thêm Mới</button></div>
-        <div class="col-md-1"><a href="javascript:void(0)" class="btn btn-outline-secondary w-100" onclick="hideUserAdd()">Hủy</a></div>
-    </div> 
-    </form>
-  </div>
-    `);
-    jQuery(".popupContent").slideDown(350);
-}
+
 hideUserAdd = () => {
     jQuery(".popupContent").slideUp(250, function(){
         jQuery(this).remove();
     });
 
+}
+
+showAddNew = (obj) => {
+    var html;
+    switch (obj) {
+        case "user": html = `<div class="popupContent" id="userAdd">
+        <h4 class="userName">Thêm mới Nhân Viên</h4>
+        <hr class="adminSeperate">
+        <form action="">
+        <div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="inputEmail4">Địa chỉ Email</label>
+        <input type="email" class="form-control" id="inputEmail4" placeholder="thanhhnp@gmail.com">
+        </div>
+        <div class="form-group col-md-6">
+        <label for="inputPassword4">Mật khẩu</label>
+        <input type="password" class="form-control" id="inputPassword4" placeholder="***********" >
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputName">Họ và Tên</label>
+            <input type="text" class="form-control" id="inputName" placeholder="Adriana C. Ocampo Uria">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputPhone">Số điện thoại</label>
+            <input type="text" class="form-control" id="inputPhone" placeholder="0898443222">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="selectDist">Quận/Huyện</label>
+            <select class="form-control" name="" id="selectDist">
+                <option value="0">Quận/Huyện</option>
+                <option value="1">Quận 1</option>
+                <option value="2">Quận 2</option>
+                <option value="3">Quận 10</option>
+                <option value="4">Quận 11</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="selectWard">Phường/Xã</label>
+            <select class="form-control" name="" id="selectWard">
+                <option value="0">Phường/Xã</option>
+                <option value="1">Đa Kao</option>
+                <option value="2">Bến Nghé</option>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputAddress">Địa chỉ</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="13A Đinh Tiên Hoàng - Q1 - TP. Hồ Chí Minh">
+        </div>
+    </div>
+    <div class="form-row">
+        
+        <div class="form-group col-md-3">
+            <label for="inputState">Quyền</label>
+                <select id="inputState" class="form-control">
+                <option selected>Choose...</option>
+                <option >Account</option>
+                <option>Shipper</option>
+                <option>Florist</option>
+                <option>Other</option>
+            </select>
+        </div>
+    </div>
+          <div class="form-group avatarChange">
+            <label for="">Chọn ảnh đại diện</label>
+            <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
+          </div>
+          <div class="form-action row">
+            <div class="col-md-2"><button type="" class="btn btn-outline-success w-100" onclick="">Thêm Mới</button></div>
+            <div class="col-md-1"><a href="javascript:void(0)" class="btn btn-outline-secondary w-100" onclick="hideUserAdd()">Hủy</a></div>
+        </div> 
+        </form>
+      </div>
+        `; break;
+        case "customer":
+            html = `<div class="popupContent" id="userAdd">
+            <h4 class="userName">Thêm mới Khách Hàng</h4>
+            <hr class="adminSeperate">
+            <form action="">
+            <div class="form-row">
+            <div class="form-group col-md-6">
+            <label for="inputEmail4">Địa chỉ Email</label>
+            <input type="email" class="form-control" id="inputEmail4" placeholder="thanhhnp@gmail.com">
+            </div>
+            <div class="form-group col-md-6">
+            <label for="inputPassword4">Mật khẩu</label>
+            <input type="password" class="form-control" id="inputPassword4" placeholder="***********" >
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputName">Họ và Tên</label>
+                <input type="text" class="form-control" id="inputName" placeholder="Adriana C. Ocampo Uria">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPhone">Số điện thoại</label>
+                <input type="text" class="form-control" id="inputPhone" placeholder="0898443222">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="selectDist">Quận/Huyện</label>
+                <select class="form-control" name="" id="selectDist">
+                    <option value="0">Quận/Huyện</option>
+                    <option value="1">Quận 1</option>
+                    <option value="2">Quận 2</option>
+                    <option value="3">Quận 10</option>
+                    <option value="4">Quận 11</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="selectWard">Phường/Xã</label>
+                <select class="form-control" name="" id="selectWard">
+                    <option value="0">Phường/Xã</option>
+                    <option value="1">Đa Kao</option>
+                    <option value="2">Bến Nghé</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputAddress">Địa chỉ</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="13A Đinh Tiên Hoàng - Q1 - TP. Hồ Chí Minh">
+            </div>
+        </div>
+                <div class="form-action row">
+                <div class="col-md-2"><button type="" class="btn btn-outline-success w-100" onclick="">Thêm Mới</button></div>
+                <div class="col-md-1"><a href="javascript:void(0)" class="btn btn-outline-secondary w-100" onclick="hideUserAdd()">Hủy</a></div>
+            </div> 
+            </form>
+            </div>
+            `; break;
+        default:
+            break;
+    }
+    jQuery(".adminWrapper").append(html);
+    jQuery(".popupContent").slideDown(350);
 }
