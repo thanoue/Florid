@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Florid - Khách hàng</title>
+    <link rel="icon" type="image/gif" href="../favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap&subset=vietnamese" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet"  type="text/css" href="../css/style.css">
+    <link rel="stylesheet"  type="text/css" href="../css/admin.css">
+    <script type='text/javascript' src='../js/admin.js'></script>
+  </head>
+  <body>
+    <div class="adminWrapper">
+      <nav id="sideContent">
+        <div class="adminLogo">
+          <img src="../images/logo.svg" alt="" class="mw-100 w-100"> 
+        </div>
+        <ul class="mainMenu">
+          <li class="menuItem">
+            <a href="#" class="menuItem-link"><i class="fa fa-dashboard"></i>Dashboard</a>
+          </li>
+          <li class="menuItem">
+            <a href="./user.html" class="menuItem-link"><i class="fa fa-user"></i>Nhân Viên</a>
+          </li>
+          <li class="menuItem active">
+            <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Khách Hàng</a>
+          </li>
+          <li class="menuItem hasChildren">
+            <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Sản Phẩm</a>
+            <ul class="subMenu">
+              <li class="menuItem">
+                <a href="#" class="menuItem-link">Tất Cả</a>
+              </li>
+              <li class="menuItem">
+                <a href="#" class="menuItem-link">Danh mục Sản phẩm</a>
+              </li>
+              <li class="menuItem">
+                <a href="#" class="menuItem-link">Tag Sản phẩm</a>
+              </li>
+            </ul>
+          </li>
+          <li class="menuItem">
+            <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Đơn Hàng</a>
+          </li>
+          <li class="menuItem">
+            <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Thống Kê</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="mainContent">
+        <div class="contentHeader">
+          <div class="col-1 headerLeft">
+            <button class="menuToggle" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="icon-bar top-bar"></span>
+              <span class="icon-bar middle-bar"></span>
+              <span class="icon-bar bottom-bar"></span>				
+            </button>
+          </div>
+          <div class="col-9 headerCen">
+            <h1 class="pageTitle">
+              Chi tiết Khách hàng
+            </h1>
+            <div class="form-group">
+              <input type="text" name="" id="" class="form-control" placeholder="Tìm kiếm..." aria-describedby="helpId">
+              <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+          <div class="col-2  headerRight dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              <span>Vĩnh Kha</span>
+              <img src="../images/product-img.jpg" alt="" class="rounded-circle mw-100">
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Account</a>
+              <a class="dropdown-item" href="#">Change Password</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Log Out</a>
+            </div>
+          </div>
+        </div>
+        <div class="contentContent container-fluid cusScroll">
+            <!-- Start List Sale Item Component -->
+            <div class="row">
+                <div class="col-9">
+                    <div class="leftDetail">
+                        <form>
+                            <div class="infoCard">
+                                <h3 class="infoTitle">Thông tin cá nhân</h3>
+                                <ul class="infoList">
+                                    <li><label>Họ và Tên: </label><input class="form-control" type="text" name="custName" value="Huỳnh Ngọc Phương Thanh"></li>
+                                    <li><label>Số điện thoại: </label><input class="form-control" type="text" name="custPhone" value="(+84) 898333888"></li>
+                                    <li><label>Địa chỉ Email: </label><input type="email" class="form-control" name="custEmail" value="thanhhnp@gmail.com"></li>
+                                    <li><label>Địa chỉ nhà riêng: </label>
+                                        <div class="group-wrap">
+                                            <div class="form-group">
+                                                <label for="selectDist">Quận/Huyện</label>
+                                                <select class="form-control" name="custDist" id="selectDist">
+                                                    <option value="0">Quận/Huyện</option>
+                                                    <option value="1" selected>Quận 1</option>
+                                                    <option value="2">Quận 2</option>
+                                                    <option value="3">Quận 10</option>
+                                                    <option value="4">Quận 11</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="selectWard">Phường/Xã</label>
+                                                <select class="form-control" name="custWard" id="selectWard">
+                                                    <option value="0">Phường/Xã</option>
+                                                    <option value="1" selected>Đa Kao</option>
+                                                    <option value="2">Bến Nghé</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress">Địa chỉ</label>
+                                                <input type="text" class="form-control" id="inputAddress" name="custAdd" value="13A Đinh Tiên Hoàng - Q1 - TP. Hồ Chí Minh">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><label>Địa chỉ công ty: </label>
+                                        <div class="group-wrap">
+                                            <div class="form-group">
+                                                <label for="selectDist">Quận/Huyện</label>
+                                                <select class="form-control" name="custDist" id="selectDist">
+                                                    <option value="0">Quận/Huyện</option>
+                                                    <option value="1" selected>Quận 1</option>
+                                                    <option value="2">Quận 2</option>
+                                                    <option value="3">Quận 10</option>
+                                                    <option value="4">Quận 11</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="selectWard">Phường/Xã</label>
+                                                <select class="form-control" name="custWard" id="selectWard">
+                                                    <option value="0">Phường/Xã</option>
+                                                    <option value="1" selected>Đa Kao</option>
+                                                    <option value="2">Bến Nghé</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputAddress">Địa chỉ</label>
+                                                <input type="text" class="form-control" id="inputAddress" name="custAdd" value="13A Đinh Tiên Hoàng - Q1 - TP. Hồ Chí Minh">
+                                            </div>
+                                        </div></li>
+                                    <li>
+                                        <label>Ngày đặc biệt:</label>
+                                        <div class="group-wrap">
+                                            <div class="form-row">
+                                                <input type="text" class="form-control col-6" id="inputAddress" name="custDayName" value="Sinh nhật">
+                                                <input type="date" class="form-control col-6" id="inputAddress" name="custDayValue" value="2020-03-02">
+                                            </div>
+                                            <div class="form-row">
+                                                <input type="text" class="form-control col-6" id="inputAddress" name="custDayName" value="Sinh nhật">
+                                                <input type="date" class="form-control col-6" id="inputAddress" name="custDayValue" value="2020-03-02">
+                                            </div>
+                                            <div class="form-row">
+                                                <input type="text" class="form-control col-6" id="inputAddress" name="custDayName" value="Sinh nhật">
+                                                <input type="date" class="form-control col-6" id="inputAddress" name="custDayValue" value="2020-03-02">
+                                            </div>
+                                            <button class="btn btn-outline-secondary"><i class="fa fa-plus"></i> Thêm ngày</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="infoCard">
+                                <h3 class="infoTitle">Thông tin liên hệ</h3>
+                                <ul class="infoList">
+                                    <li><label>Facebook: </label><input class="form-control" type="text" name="custFb" value="https://facebook.com"></li>
+                                    <li><label>Zalo: </label><input class="form-control" type="text" name="custZl" value="https://facebook.com"></li>
+                                    <li><label>Viber: </label><input class="form-control" type="text" name="custVb" value="https://facebook.com"></li>
+                                    <li><label>Skype: </label><input class="form-control" type="text" name="custSk" value="https://facebook.com"></li>
+                                    <li><label>Instagram: </label><input class="form-control" type="text" name="custIg" value="https://facebook.com"></li>
+                                </ul>
+                            </div>
+                            <div class="infoCard">
+                                <h3 class="infoTitle">Thông tin điểm thành viên</h3>
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class=" table-info">
+                                            <th>Điểm đã dùng</th>
+                                            <th>Tổng điểm</th>
+                                            <th>Tổng số tiền đã mua</th>
+                                            <th>Cấp bậc thành viên</th>
+                                        </tr>
+                                        <tr>
+                                            <td>2323</td>
+                                            <td>34434</td>
+                                            <td>1.222.320 vnđ</td>
+                                            <td>Thành viên vàng</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="w-100 text-right">
+                                <a href="./customerDetail.html" type="button" class="btn btn-outline-info"><i class="fa fa-check"></i> Lưu thông tin</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="rightDetail sidebar">
+                        <h4 class="sidebarTitle">Quản lý khách hàng</h4>
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Thông tin chung</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Danh sách đơn hàng</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Đơn hàng đã lưu</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a name="" id="" class="btn btn-outline-danger" href="#" role="button">Xóa Khách hàng</a>
+                </div>
+            </div>
+            <!-- End List Sale Item Component -->
+        </div>
+        <div class="contentFooter">
+          Power by Florid
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
