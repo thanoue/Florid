@@ -15,8 +15,11 @@ export class OrderDetailService extends BaseService<OrderDetail>  {
   }
 
   getAllByState(state: OrderDetailStates): Promise<OrderDetail[]> {
-    return this.tableRef.orderByChild('State').equalTo(state).once('value').then(snapshot => {
 
+    this.startLoading();
+
+    return this.tableRef.orderByChild('State').equalTo(state).once('value').then(snapshot => {
+      this.stopLoading();
       const res: OrderDetail[] = [];
 
       snapshot.forEach(data => {
@@ -25,7 +28,12 @@ export class OrderDetailService extends BaseService<OrderDetail>  {
 
       return res;
 
-    });
+    })
+      .catch(error => {
+        this.stopLoading();
+        this.globalService.showError(error.toString());
+        return [];
+      });
 
   }
 

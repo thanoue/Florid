@@ -27,6 +27,8 @@ export class GlobalService {
     navigateOnClick = new Subject<boolean>();
     navigateOnClickEmitter$ = this.navigateOnClick.asObservable;
 
+    private loadingCount = 0;
+
     currentOrderViewModel: OrderViewModel;
     currentOrderDetailViewModel: OrderDetailViewModel;
     currentDistricts: District[];
@@ -49,11 +51,27 @@ export class GlobalService {
     }
 
     startLoading() {
-        this.spinnerInvoke.next(true);
+        if (this.loadingCount === 0) {
+            this.spinnerInvoke.next(true);
+        }
+        this.loadingCount++;
+
+        if (this.loadingCount <= 0) {
+            this.loadingCount = 0;
+        }
     }
 
     stopLoading() {
-        this.spinnerInvoke.next(false);
+
+        if (this.loadingCount <= 1) {
+            this.spinnerInvoke.next(false);
+        }
+
+        this.loadingCount--;
+
+        if (this.loadingCount <= 0) {
+            this.loadingCount = 0;
+        }
     }
 
     setStatusBarColor(isDark: boolean) {

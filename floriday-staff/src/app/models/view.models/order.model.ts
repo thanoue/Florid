@@ -31,6 +31,7 @@ export class OrderViewModel {
         vm.CustomerInfo.DiscountPercent = ExchangeService.getMemberDiscountPercent(vm.CustomerInfo.MembershipType);
         vm.CustomerInfo.Name = customer.FullName;
         vm.CustomerInfo.PhoneNumber = customer.PhoneNumber;
+        vm.CustomerInfo.AvailableScore = customer.MembershipInfo.AvailableScore;
         Object.assign(vm.CustomerInfo.ReceiverInfos, customer.ReceiverInfos);// customer.ReceiverInfos;
 
         return vm;

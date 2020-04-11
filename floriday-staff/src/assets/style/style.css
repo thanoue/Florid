@@ -697,8 +697,11 @@ div.actionMenu {
     top: auto;
     transform: translate(-50%,0);
     padding: 30px 0;
+    max-height: 50vh;
+    overflow-y: scroll;
 }
-div.actionMenu a {
+div.actionMenu a ,
+.checkMenu .form-check{
     display: block;
     padding: 10px 30px;
     color: #999;
@@ -709,6 +712,16 @@ div.actionMenu a:hover {
     color: #fff;
     background-image: -o-linear-gradient(45deg, rgb(31,201,219), rgb(31,232,203));
     background-image: linear-gradient(45deg, rgb(31,201,219), rgb(31,232,203));
+}
+.actionMenu.checkMenu {
+    padding-left: 30px;
+    font-size: 14px;
+}
+.actionMenu input.form-check-input {
+    height: 16px;
+    width: 16px;
+    margin-top: 2px;
+    margin-left: -25px;
 }
 /* ================================================ADD ORDER */
 form.addOrderForm .form-group {
@@ -861,7 +874,7 @@ form.addOrderForm {
 }
 .search .filterSearch
 {
-    width: calc(100% - 110px);
+    width: calc(100% - 160px);
 }
 .filterSearch:before {
     content: "\f002";
@@ -925,7 +938,7 @@ form.addOrderForm {
 .filterCate
 {
     position: relative;
-    width: calc(100% - 110px);
+    width: calc(100% - 160px);
     transition: 350ms;
 }
 .search .filterCate 
@@ -1025,6 +1038,9 @@ select.mainForm {
     font-style: italic;
     background: transparent;
     color: #999;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .newInfo {
     margin-top: 20px;
@@ -1561,6 +1577,13 @@ a.absLink {
 #listContent ul.order-content {
     /* height: 500px; */
     max-height: 75vh;
+}
+a.order-edit {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--main-grey);
+    font-weight: 600;
 }
 /* ==============================================PRODUCT DETAIL */
 .prodDetail 

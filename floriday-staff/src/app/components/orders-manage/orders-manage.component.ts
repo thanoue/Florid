@@ -41,41 +41,60 @@ export class OrdersManageComponent extends BaseComponent {
     const orderIds: string[] = [];
     const orderDetailVMs: OrderDetailViewModel[] = [];
 
-    this.orderDetailService.getAllByState(OrderDetailStates.Waiting).then(orderDetails => {
+    const waiting = await this.orderDetailService.getAllByState(OrderDetailStates.Waiting);
+    const Comfirming = await this.orderDetailService.getAllByState(OrderDetailStates.Comfirming);
+    const making = await this.orderDetailService.getAllByState(OrderDetailStates.Making);
+    const deliveryWaiting = await this.orderDetailService.getAllByState(OrderDetailStates.DeliveryWaiting);
+    const delivering = await this.orderDetailService.getAllByState(OrderDetailStates.Delivering);
+    const deliveried = await this.orderDetailService.getAllByState(OrderDetailStates.Deliveried);
 
-      orderDetails.forEach(orderDetail => {
+    let orderdetails: OrderDetail[] = [];
 
-        if (orderIds.indexOf(orderDetail.OrderId) <= -1) {
-          orderIds.push(orderDetail.OrderId);
+    orderdetails = orderdetails.concat(waiting);
+    orderdetails = orderdetails.concat(Comfirming);
+    orderdetails = orderdetails.concat(making);
+    orderdetails = orderdetails.concat(deliveryWaiting);
+    orderdetails = orderdetails.concat(delivering);
+    orderdetails = orderdetails.concat(deliveried);
+
+    orderdetails.forEach(orderDetail => {
+
+      if (orderIds.indexOf(orderDetail.OrderId) <= -1) {
+        orderIds.push(orderDetail.OrderId);
+      }
+
+      const orderDetailVM = OrderDetailViewModel.ToViewModel(orderDetail);
+
+      orderDetailVMs.push(orderDetailVM);
+    });
+
+    orderIds.forEach(async orderId => {
+
+      const order = await this.orderService.getById(orderId);
+
+      const customer = await this.customerService.getById(order.CustomerId);
+
+      const orderVM = OrderViewModel.ToViewModel(order, customer);
+
+      orderDetailVMs.forEach(orderDetailVM => {
+
+        if (orderDetailVM.OrderId === orderVM.OrderId) {
+          orderVM.OrderDetails.push(orderDetailVM);
         }
 
-        const orderDetailVM = OrderDetailViewModel.ToViewModel(orderDetail);
-
-        orderDetailVMs.push(orderDetailVM);
-
       });
 
-      orderIds.forEach(async orderId => {
+      this.orders.push(orderVM);
 
-        const order = await this.orderService.getById(orderId);
-
-        const customer = await this.customerService.getById(order.CustomerId);
-
-        const orderVM = OrderViewModel.ToViewModel(order, customer);
-
-        orderDetailVMs.forEach(orderDetailVM => {
-
-          if (orderDetailVM.OrderId === orderVM.OrderId) {
-            orderVM.OrderDetails.push(orderDetailVM);
-          }
-
-        });
-
-        this.orders.push(orderVM);
-
-      });
-
-      this.stopLoading();
     });
+
+    this.stopLoading();
+
+  } 
+
+  editOrder(orderId: string) {
+    this.globalOrder = this.orders.filter(p => p.OrderId === orderId)[0];
+    this.router.navigate(['/add-order']);
   }
+
 }
