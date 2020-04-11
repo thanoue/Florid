@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Florid - Dashboard</title>
+    <title>Florid - Khách hàng</title>
     <link rel="icon" type="image/gif" href="../favicon.png" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap&subset=vietnamese" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
@@ -28,10 +28,10 @@
           <li class="menuItem">
             <a href="#" class="menuItem-link"><i class="fa fa-dashboard"></i>Dashboard</a>
           </li>
-          <li class="menuItem active">
-            <a href="./user.html" class="menuItem-link"><i class="fa fa-user"></i>Nhân Viên</a>
-          </li>
           <li class="menuItem">
+            <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Nhân Viên</a>
+          </li>
+          <li class="menuItem active">
             <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Khách Hàng</a>
           </li>
           <li class="menuItem hasChildren">
@@ -67,7 +67,7 @@
           </div>
           <div class="col-9 headerCen">
             <h1 class="pageTitle">
-              Danh sách đơn hàng
+              Quản lý Khách hàng
             </h1>
             <div class="form-group">
               <input type="text" name="" id="" class="form-control" placeholder="Tìm kiếm..." aria-describedby="helpId">
@@ -88,23 +88,30 @@
           </div>
         </div>
         <div class="contentContent container-fluid cusScroll">
-            <!-- Start List Sale Item Component -->
+            <!-- Start List Component -->
             <div class="listWrap">
+                <!-- Top of List Component -->
                 <div class="listHeader">
-                    <div class="row listOptions">
-                        <div class="col-md-6 col-xs-12  optionDelete">
-                            <h3 class="saleTitle">
-                              Adriana C. Ocampo Uria | ID: 211 | Florist
-                            </h3>
+                    <div class="row listAddNew">
+                        <div class="col-xs-12 col-md-2">
+                            <button  class="btn btn-outline-info d-block w-100" onclick="showAddNew('customer')" role="button">Thêm Mới</button>
                         </div>
-                        <div class="col-md-3 col-xs-12  optionSearch">
+                    </div>
+                    <div class="row listOptions">
+                        <div class="col-md-2 col-xs-12  optionDelete">
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                                <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12  optionSearch">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Tìm kiếm...">
                                 <button type="submit" class="btn btn-info position-absolute "><i class="fa fa-search"></i></button>
                             </div>
                             
                         </div>
-                        <div class="col-md-3 col-xs-12  text-right optionPerPage">
+                        <div class="col-md-4 col-xs-12  text-right optionPerPage">
                             <div class="form-group">
                               <label>Hiển thị </label>
                               <select class="form-control w-25 d-inline" name="" id="">
@@ -117,91 +124,68 @@
                         </div>
                     </div>
                 </div>
+                <!-- Content of List Component -->
                 <div class="listContent">
-                    <table class="table table-bordered table-hover table-responsive-xl">
-                      <thead class="table-info">
-                        <tr>
-                          <th scope="col"  style="width: 5%">STT</th>
-                          <th scope="col">Mã đơn</th>
-                          <th scope="col">Mã Sản phẩm</th>
-                          <th scope="col">Số lượng</th>
-                          <th scope="col">Đơn giá</th>
-                          <th scope="col">Phụ phí</th>
-                          <th scope="col">Thành tiền</th>
-                          <th scope="col">Địa chỉ</th>
-                          <th scope="col">Thời gian giao</th>
-                          <th scope="col">Trạng thái</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td scope="row">
+                  <table class="table table-bordered table-hover table-responsive-xl">
+                    <thead class="table-info">
+                      <tr>
+                        <th scope="col"  style="width: 5%">STT</th>
+                        <th scope="col">Họ và Tên</th>
+                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Thao tác</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
                               1
-                            </div>
-                          </td>
-                          <td>
-                            <a href="./saleDetail.html" class="tdName">MĐ 750</a>
-                          </td>
-                          <td>SP01930</td>
-                          <td>1</td>
-                          <td>200000 vnđ</td>
-                          <td>10%</td>
-                          <td>220000 vnđ</td>
-                          <td>Adriana C. Ocampo Uria st. TP. Hồ Chí Minh</td>
-                          <td>17:30 10/03/2020</td>
-                          <td>
-                            <span class="badge badge-pill badge-success d-block p-2">Đã giao</span>
-                          </td>
-                        </tr>
-                        <tr>
-                            <td scope="row">
-                                2
-                              </div>
-                            </td>
-                            <td>
-                              <a href="./saleDetail.html" class="tdName">MĐ 750</a>
-                            </td>
-                            <td>SP01930</td>
-                            <td>1</td>
-                            <td>200000 vnđ</td>
-                            <td>10%</td>
-                            <td>220000 vnđ</td>
-                            <td>Adriana C. Ocampo Uria st. Phường ĐaKao Quận 1 TP. Hồ Chí Minh</td>
-                            <td>17:30 10/03/2020</td>
-                            <td>
-                              <span class="badge badge-pill badge-info d-block p-2">Đang giao</span>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td scope="row">
-                                3
-                              </div>
-                            </td>
-                            <td>
-                              <a href="./saleDetail.html" class="tdName">MĐ 750</a>
-                            </td>
-                            <td>SP01930</td>
-                            <td>1</td>
-                            <td>200000 vnđ</td>
-                            <td>10%</td>
-                            <td>220000 vnđ</td>
-                            <td>248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí Minh</td>
-                            <td>17:30 10/03/2020</td>
-                            <td>
-                              <span class="badge badge-pill badge-success d-block p-2">Đã giao</span>
-                            </td>
-                          </tr>
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <a href="./customerDetail.html" class="tdName">Adriana C. Ocampo Uria</a>
+                        </td>
+                        <td>0898222999</td>
+                        <td>example@gmail.com</td>
+                        <td>Adriana C. Ocampo Uria st. TP. Hồ Chí Minh</td>
+                        <td>
+                            <a href="./customerDetail.html" type="button" class="btn btn-outline-secondary" ><i class="fa fa-eye"></i> Chi tiết</a>
+                            <button type="button" class="btn btn-outline-info"  onclick="showUserEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                        </td>
+                      </tr>
                     </tbody>
-                </table>
+                  </table>
+                </div>
+                <!-- Bottom of List Component -->
+                <div class="listFooter">
+                    <ul class="pagination text-right">
+                      <li class="page-item">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fa fa-angle-left"></i></a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+                      </li>
+                    </ul>
                 </div>
             </div>
-            
-            <!-- End List Sale Item Component -->
+            <!-- End List Component -->
         </div>
         <div class="contentFooter">
           Power by Florid
         </div>
       </div>
     </div>
+    
   </body>
 </html>

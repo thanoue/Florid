@@ -187,8 +187,6 @@ export class AddOrderComponent extends BaseComponent {
     this.orderService.set(orderDB)
       .then(res => {
 
-        console.log(orderDB);
-
         const orderDetais: OrderDetail[] = [];
         const receiverInfos: CustomerReceiverDetail[] = [];
 

@@ -92,9 +92,10 @@ export abstract class BaseService<T extends BaseEntity> {
     }
 
     public getById(id: string): Promise<T> {
-
+        this.startLoading();
         return this.db.ref(`${this.tableName}/${id}`).once('value').then(data => {
 
+            this.stopLoading();
             if (!data) {
                 return null;
             }
@@ -102,6 +103,7 @@ export abstract class BaseService<T extends BaseEntity> {
             return data.val() as T;
 
         }).catch(error => {
+            this.stopLoading();
             console.log(error);
             return null;
         });

@@ -225,6 +225,52 @@ function openCustMenu()
     });
 }
 
+// Menu hoàn thành đơn
+function openTagMenu()
+{
+    var html = `<div class="actionMenu checkMenu">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                Hoa Hồng
+              </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  Hoa Huệ
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  Hoa Lan
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  Hoa Cẩm Chướng
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  Hoa Lyly
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  Hoa Cúc
+                </label>
+              </div>
+        </div>`;
+    slideUp(html,function(index){
+        
+    });
+}
+
 // SlideUp Action menu
 function slideUp(html,callback)
 {
