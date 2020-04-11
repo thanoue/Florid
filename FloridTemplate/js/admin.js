@@ -6,6 +6,10 @@ jQuery(document).ready(function(){
 
     jQuery(".menuToggle").click(function(){
         jQuery(".adminWrapper").toggleClass("mini");
+    });
+
+    jQuery(".openOrderProducts").click(function(){
+        jQuery(this).next().toggle(200);
     })
 })
 
