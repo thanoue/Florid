@@ -232,37 +232,37 @@ function openTagMenu()
             <div class="form-check">
               <label class="form-check-label">
                 <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                Hoa Hồng
+                <span class="main-bg vatCustom"></span>Hoa Hồng
               </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
                   <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                  Hoa Huệ
+                  <span class="main-bg vatCustom"></span>Hoa Huệ
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
                   <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                  Hoa Lan
+                  <span class="main-bg vatCustom"></span>Hoa Lan
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
                   <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                  Hoa Cẩm Chướng
+                  <span class="main-bg vatCustom"></span>Hoa Cẩm Chướng
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
                   <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                  Hoa Lyly
+                  <span class="main-bg vatCustom"></span>Hoa Lyly
                 </label>
               </div>
               <div class="form-check">
                 <label class="form-check-label">
                   <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                  Hoa Cúc
+                  <span class="main-bg vatCustom"></span>Hoa Cúc
                 </label>
               </div>
         </div>`;

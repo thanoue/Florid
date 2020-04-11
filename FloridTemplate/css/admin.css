@@ -511,3 +511,23 @@ h4.sidebarTitle {
     margin:0;
     margin-bottom: 15px;
 }
+.infoCard .orderDetail ul {
+    columns: 2;
+    margin-bottom: 20px;
+}
+.infoCard .orderDetail ul li
+{
+    display: flex;
+}
+.infoCard .orderDetail ul li label {
+    min-width: 200px;
+}
+.infoCard h4.orderTitle {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+/* table.orderProducts
+{
+    display: none;
+} */
