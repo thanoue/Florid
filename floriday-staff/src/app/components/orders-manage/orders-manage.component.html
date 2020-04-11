@@ -46,10 +46,10 @@
                                 <div [ngSwitch]="orderDetail.State">
                                     <div *ngSwitchCase="states.Waiting" class="item-status r"
                                         onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index}}</span>
+                                        <span>{{orderDetail.Index +1}}</span>
                                     </div>
                                     <div *ngSwitchCase="states.Making" class="item-status o" onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index}}</span>
+                                        <span>{{orderDetail.Index +1}}</span>
                                     </div>
                                     <div *ngSwitchCase="states.Comfirming" class="item-status y"
                                         onclick="openColorBoard()">

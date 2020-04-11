@@ -80,14 +80,11 @@ export class SearchProductComponent extends BaseComponent {
 
   }
 
-  setSelectedProduct(data: string) {
-    this.selectedProduct = this.pagingProducts.find(p => p.Id === data);
-  }
 
-  protected fileChosen(path: string) {
+  onChange(event) {
+    const filesUpload: File = event.target.files[0];
 
     this.globalOrderDetail.IsFromHardCodeProduct = true;
-    this.globalOrderDetail.ProductImageUrl = 'data:image/png;base64,' + path;
     this.globalOrderDetail.OriginalPrice = 0;
     this.globalOrderDetail.ModifiedPrice = 0;
     this.globalOrderDetail.ProductName = '.....';
@@ -104,7 +101,7 @@ export class SearchProductComponent extends BaseComponent {
       this.tempProductService.deleteFile(this.globalOrderDetail.HardcodeImageName)
         .then(() => {
 
-          this.tempProductService.addFile(this.globalOrderDetail.ProductImageUrl, tempProduct, (url) => {
+          this.tempProductService.addFile(filesUpload, tempProduct, (url) => {
 
             this.stopLoading();
 
@@ -128,7 +125,7 @@ export class SearchProductComponent extends BaseComponent {
 
     } else {
 
-      this.tempProductService.addFile(this.globalOrderDetail.ProductImageUrl, tempProduct, (url) => {
+      this.tempProductService.addFile(filesUpload, tempProduct, (url) => {
 
         this.stopLoading();
 
@@ -145,6 +142,73 @@ export class SearchProductComponent extends BaseComponent {
       });
 
     }
+  }
+
+  protected fileChosen(path: string) {
+
+    this.globalOrderDetail.IsFromHardCodeProduct = true;
+    this.globalOrderDetail.ProductImageUrl = 'data:image/png;base64,' + path;
+    this.globalOrderDetail.OriginalPrice = 0;
+    this.globalOrderDetail.ModifiedPrice = 0;
+    this.globalOrderDetail.ProductName = '.....';
+
+    const newName = `temp_image_${(new Date().getTime().toString())}`;
+
+    const tempProduct = new TempProduct();
+    tempProduct.Name = newName;
+
+    this.startLoading();
+
+    if (this.globalOrderDetail.HardcodeImageName && this.currentHardcodeUsedCount === 1) {
+
+      this.tempProductService.deleteFile(this.globalOrderDetail.HardcodeImageName)
+        .then(() => {
+
+          this.tempProductService.addFileFromBase64String(this.globalOrderDetail.ProductImageUrl, tempProduct, (url) => {
+
+            this.stopLoading();
+
+            if (url === 'ERROR') {
+              this.showError('Upload hình lỗi!!');
+              return;
+            }
+
+            this.globalOrderDetail.ProductImageUrl = url;
+            this.globalOrderDetail.HardcodeImageName = tempProduct.Name;
+
+            this.OnBackNaviage();
+          });
+
+        })
+        .catch(error => {
+          this.stopLoading();
+          console.log(error);
+          return;
+        });
+
+    } else {
+
+      this.tempProductService.addFileFromBase64String(this.globalOrderDetail.ProductImageUrl, tempProduct, (url) => {
+
+        this.stopLoading();
+
+        if (url === 'ERROR') {
+          this.showError('Upload hình lỗi!!');
+          return;
+        }
+
+        this.globalOrderDetail.ProductImageUrl = url;
+        this.globalOrderDetail.HardcodeImageName = tempProduct.Name;
+
+        this.OnBackNaviage();
+
+      });
+
+    }
+  }
+
+  setSelectedProduct(data: string) {
+    this.selectedProduct = this.pagingProducts.find(p => p.Id === data);
   }
 
   getProductByCategory(category: number) {

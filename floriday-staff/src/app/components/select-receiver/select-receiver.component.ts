@@ -21,7 +21,6 @@ export class SelectReceiverComponent extends BaseComponent {
 
   currentList: OrderDetailDeliveryInfo[];
   deliveryInfo: OrderDetailDeliveryInfo;
-  deliveryTime = '';
 
   protected IsDataLosingWarning = false;
 
@@ -100,7 +99,6 @@ export class SelectReceiverComponent extends BaseComponent {
 
     }
 
-
     this.deliveryInfo = new OrderDetailDeliveryInfo();
 
     this.route.params.subscribe(params => {
@@ -109,17 +107,12 @@ export class SelectReceiverComponent extends BaseComponent {
 
       this.deliveryInfo.DateTime.setSeconds(0);
 
-      this.deliveryTime = this.deliveryInfo.DateTime.toLocaleString('vi-VN', { hour12: true });
-
     });
 
   }
 
   selectDeliveryInfo(index: number) {
-
     this.deliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.currentList[index]);
-
-    this.deliveryTime = this.deliveryInfo.DateTime.toLocaleString('vi-VN', { hour12: true });
   }
 
   addReceiver(form: NgForm) {
@@ -131,23 +124,6 @@ export class SelectReceiverComponent extends BaseComponent {
     this.globalOrderDetail.DeliveryInfo = OrderDetailDeliveryInfo.DeepCopy(this.deliveryInfo);
 
     super.OnBackNaviage();
-
-  }
-
-  requestDateTimePicker() {
-    // tslint:disable-next-line:max-line-length
-    getDateTimeSelecting(this.deliveryInfo.DateTime.getFullYear(), this.deliveryInfo.DateTime.getMonth(), this.deliveryInfo.DateTime.getDate(), this.deliveryInfo.DateTime.getHours(), this.deliveryInfo.DateTime.getMinutes());
-  }
-
-  protected dateTimeSelected(year: number, month: number, day: number, hour: number, minute: number) {
-
-    this.deliveryInfo.DateTime.setFullYear(year);
-    this.deliveryInfo.DateTime.setMonth(month);
-    this.deliveryInfo.DateTime.setDate(day);
-    this.deliveryInfo.DateTime.setHours(hour);
-    this.deliveryInfo.DateTime.setMinutes(minute);
-
-    this.deliveryTime = this.deliveryInfo.DateTime.toLocaleString('vi-VN', { hour12: true });
 
   }
 

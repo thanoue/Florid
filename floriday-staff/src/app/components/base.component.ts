@@ -32,7 +32,7 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     private districtService: DistrictAddressService;
     private wardService: WardAddressService;
 
-    IsOnTerminal: boolean;
+    public IsOnTerminal: boolean;
 
     get globalOrder(): OrderViewModel {
         return this.globalService.currentOrderViewModel;

@@ -8,9 +8,15 @@
             <div class="filterSearch" onclick="searchFocus(this)">
                 <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
             </div>
-            <div class="filterAdd">
+            <div class="filterAdd" *ngIf="IsOnTerminal">
                 <button (click)="openFile()" class="main-bg"><img src="../../../assets/images/attach.svg" alt=""
                         class="main-filter"></button>
+            </div>
+            <div class="filterAdd" *ngIf="!IsOnTerminal">
+                <input type="file" class="img-cover file-upload-default" (change)="onChange($event)" name="uploadedFile"
+                    #imageUpload hidden>
+                <button (click)="imageUpload.click()" class="main-bg"><img src="../../../assets/images/attach.svg"
+                        alt="" class="main-filter"></button>
             </div>
         </div>
         <div class="row prodList cusScroll">

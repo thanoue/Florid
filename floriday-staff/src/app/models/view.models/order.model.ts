@@ -124,10 +124,14 @@ export class OrderDetailViewModel {
 
 export class OrderDetailDeliveryInfo {
 
-    DateTime = new Date();
+    DateTime: Date;
     Address: string;
     FullName: string;
     PhoneNumber: string;
+
+    constructor() {
+        this.DateTime = new Date();
+    }
 
     static DeepCopy(source: OrderDetailDeliveryInfo): OrderDetailDeliveryInfo {
 

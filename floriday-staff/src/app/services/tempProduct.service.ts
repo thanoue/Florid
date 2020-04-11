@@ -24,7 +24,24 @@ export class TempProductService extends BaseService<TempProduct> {
     return this.storageService.deleteFile(name, model.FolderName);
   }
 
-  public addFile(file: string, model: TempProduct, updateCompletedCallback: (fileUrl: string) => void) {
+  public addFile(file: ArrayBuffer | Blob | File, model: TempProduct, updateCompletedCallback: (fileUrl: string) => void) {
+    this.storageService.pushFileToStorage(file, model, (res) => {
+
+      if (res === null) {
+        updateCompletedCallback('ERROR');
+      }
+
+      updateCompletedCallback(res.Url);
+
+      // this.insert(res as TempProduct).then(re => {
+
+      // });
+
+    });
+  }
+
+
+  public addFileFromBase64String(file: string, model: TempProduct, updateCompletedCallback: (fileUrl: string) => void) {
     this.storageService.pushStringToStorage(file, model, (res) => {
 
       if (res === null) {

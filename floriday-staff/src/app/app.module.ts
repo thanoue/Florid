@@ -33,6 +33,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import vi from '@angular/common/locales/vi';
 import { SaleOptionComponent } from './components/sale-option/sale-option.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
+
 declare function getFirebaseConfig(): any;
 
 @NgModule({
@@ -73,9 +76,13 @@ declare function getFirebaseConfig(): any;
       secondaryColour: '#59f2f7',
       tertiaryColour: '#59f2f7',
       fullScreenBackdrop: true,
-    })
+    }),
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
   ],
-  providers: [],
+  providers: [
+    { provide: OWL_DATE_TIME_LOCALE, useValue: 'vi' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
