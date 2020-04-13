@@ -30,6 +30,15 @@ export class LocalService {
         LocalService.setItem(LOCAL_STORAGE_VARIABLE.user_id, id);
     }
 
+    static isPrinter(): boolean {
+        const stringValue = LocalService.getItem(LOCAL_STORAGE_VARIABLE.is_printer);
+        return stringValue.toLowerCase() === 'true';
+    }
+
+    static setIsPrinter(isPrinter: boolean) {
+        LocalService.setItem(LOCAL_STORAGE_VARIABLE.is_printer, isPrinter);
+    }
+
     static getRole() {
         // tslint:disable-next-line:radix
         return parseInt(LocalService.getItem(LOCAL_STORAGE_VARIABLE.role));

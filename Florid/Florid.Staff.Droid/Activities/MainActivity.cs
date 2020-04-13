@@ -164,23 +164,5 @@ namespace Florid.Staff.Droid.Activity
 
         }
 
-        public Bitmap GetResizedBitmap(Bitmap image, int maxSize)
-        {
-            int width = image.Width;
-            int height = image.Height;
-
-            float bitmapRatio = (float)width / (float)height;
-            if (bitmapRatio > 1)
-            {
-                width = maxSize;
-                height = (int)(width / bitmapRatio);
-            }
-            else
-            {
-                height = maxSize;
-                width = (int)(height * bitmapRatio);
-            }
-            return Bitmap.CreateScaledBitmap(image, width, height, true);
-        }
     }
 }

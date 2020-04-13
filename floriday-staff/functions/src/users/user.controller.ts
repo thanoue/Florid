@@ -3,6 +3,7 @@ const userRouter = express.Router();
 import * as userService from './user.service';
 import * as auth from '../helper/ authorize';
 import { Role } from '../helper/role';
+import * as adminSdk from '../helper/admin.sdk';
 const blacklist = require('express-jwt-blacklist');
 
 // routes
@@ -15,19 +16,31 @@ userRouter.post('/createUser', auth.authorize(Role.Admin), createUser);
 module.exports = userRouter;
 
 async function authenticate(req: any, res: any, next: any) {
-
+    console.log('before call');
     try {
         const user = await userService.authenticate(req.body);
 
         if (!user) {
             res.status(400).json({ message: 'Username or password is incorrect' });
         } else {
-            res.json(user);
+            adminSdk.defauDatabase.ref(`/onlineUsers/${user.key}`).set({
+                Id: user.key,
+                Created: (new Date()).getTime()
+            }, (error: any) => {
+                console.log('after call');
+
+                res.status(200).send(user);
+                return;
+            });
+
         }
     } catch (error) {
+        console.log(error);
         res.status(403).send(error);
+        return;
     }
 }
+
 
 function logout(req: any, res: any) {
     blacklist.revoke(req.user);

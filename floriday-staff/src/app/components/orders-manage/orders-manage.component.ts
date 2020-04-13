@@ -34,12 +34,12 @@ export class OrdersManageComponent extends BaseComponent {
 
     this.setStatusBarColor(false);
 
-    this.startLoading();
-
     this.orders = [];
 
     const orderIds: string[] = [];
     const orderDetailVMs: OrderDetailViewModel[] = [];
+
+    this.startLoading();
 
     const waiting = await this.orderDetailService.getAllByState(OrderDetailStates.Waiting);
     const Comfirming = await this.orderDetailService.getAllByState(OrderDetailStates.Comfirming);
@@ -86,11 +86,24 @@ export class OrdersManageComponent extends BaseComponent {
 
       this.orders.push(orderVM);
 
+      this.orders = this.orders.sort((n1, n2) => {
+        if (n1.CreatedDate < n2.CreatedDate) {
+          return 1;
+        }
+
+        if (n1.CreatedDate > n2.CreatedDate) {
+          return -1;
+        }
+
+        return 0;
+
+      });
+
     });
 
     this.stopLoading();
 
-  } 
+  }
 
   editOrder(orderId: string) {
     this.globalOrder = this.orders.filter(p => p.OrderId === orderId)[0];

@@ -213,25 +213,27 @@
     ]
   },
   "packageFolders": {
-    "/Users/khatran/.nuget/packages/": {}
+    "C:\\Users\\Sin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/khatran/Data/Florid/Florid/Florid.Staff.Ios/Florid.Staff.Ios.csproj",
+      "projectUniqueName": "C:\\Users\\Sin\\Documents\\Florid\\Florid\\Florid.Staff.Ios\\Florid.Staff.Ios.csproj",
       "projectName": "Florid.Staff.Ios",
-      "projectPath": "/Users/khatran/Data/Florid/Florid/Florid.Staff.Ios/Florid.Staff.Ios.csproj",
-      "packagesPath": "/Users/khatran/.nuget/packages/",
-      "outputPath": "/Users/khatran/Data/Florid/Florid/Florid.Staff.Ios/obj/",
+      "projectPath": "C:\\Users\\Sin\\Documents\\Florid\\Florid\\Florid.Staff.Ios\\Florid.Staff.Ios.csproj",
+      "packagesPath": "C:\\Users\\Sin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Sin\\Documents\\Florid\\Florid\\Florid.Staff.Ios\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "/Users/khatran/.config/NuGet/NuGet.Config"
+        "C:\\Users\\Sin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "xamarinios10"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

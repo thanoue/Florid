@@ -16,6 +16,6 @@ export const momoConfig = {
 };
 
 export const OAuthPrivateKey = "KHOIDEPTRAIAHIIH";
-
 export const defaultAuth = defaultApp.auth();
 export const defauDatabase = defaultApp.database();
+export const messaging = defaultApp.messaging();

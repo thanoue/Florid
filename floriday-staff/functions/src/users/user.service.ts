@@ -30,13 +30,36 @@ export async function authenticate(body: any): Promise<any> {
 
                 return {
                     ...userWithoutPassword,
-                    token
+                    token,
+                    key
                 };
             } else {
                 return false;
             }
         })
         .catch((error: any) => { throw error; })
+}
+
+export async function forceUserLogout(userId: string, token: string): Promise<boolean> {
+
+    const message = {
+        data: {
+            userId: userId,
+            content: 'ForceLogout'
+        },
+        token: token
+    };
+
+    return adminSdk.messaging.send(message)
+        .then((response: any) => {
+            // Response is a message ID string.
+            console.info('Successfully sent message:', response);
+            return true;
+        })
+        .catch((error: any) => {
+            console.info('Error sending message:', error);
+            return false;
+        });
 }
 
 export async function createUser(req: any): Promise<any> {
@@ -55,7 +78,8 @@ export async function createUser(req: any): Promise<any> {
                 AvtUrl: userRecord.photoURL,
                 Active: true,
                 Role: req.body.role,
-                Password: hashedPassword
+                IsPrinter: req.body.IsPrinter,
+                Password: hashedPassword,
             });
 
             return userRecord;

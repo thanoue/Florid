@@ -32,10 +32,9 @@ app.use('/users', userRouter);
 app.use('/sale', saleRouter);
 
 main.use('/api/v1', app);
+// tslint:disable-next-line: deprecation
 main.use(bodyParser.json());
+// tslint:disable-next-line: deprecation
 main.use(bodyParser.urlencoded({ extended: false }));
-
-
-
 
 export const webApi = functions.https.onRequest(main);

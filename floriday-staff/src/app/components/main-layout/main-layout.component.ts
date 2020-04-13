@@ -4,19 +4,22 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { map, filter, scan } from 'rxjs/operators';
 import { GlobalService } from 'src/app/services/common/global.service';
 import { Subscription } from 'rxjs';
+import { LocalService } from 'src/app/services/common/local.service';
+import { OnlineUserService } from 'src/app/services/online.user.service';
+import { AuthService } from 'src/app/services/common/auth.service';
 
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.css']
 })
-export class MainLayoutComponent implements OnDestroy {
+export class MainLayoutComponent implements OnDestroy, OnInit {
 
   navigateClass: string;
   title: string;
   headerUpdate: Subscription;
 
-  constructor(public router: Router, private globalService: GlobalService) {
+  constructor(public router: Router, private globalService: GlobalService, private onlineUserService: OnlineUserService, private authService: AuthService) {
 
     this.navigateClass = '';
     this.title = '';
@@ -29,7 +32,25 @@ export class MainLayoutComponent implements OnDestroy {
         }
 
         this.updateHeaderBar(headerInfo.Title, headerInfo.NavigateClass);
+
       });
+
+  }
+  ngOnInit(): void {
+    console.log('mainlayou oninit');
+    this.onlineUserService.loginTimeChanging(LocalService.getUserId(), (userId) => {
+      this.authService.logout((loggedOut) => {
+        if (loggedOut) {
+          this.router.navigate(['login']);
+        }
+      });
+    });
+
+    this.globalService.setStatusBarColor(false);
+
+    if (LocalService.isPrinter()) {
+
+    }
 
   }
 
@@ -38,10 +59,6 @@ export class MainLayoutComponent implements OnDestroy {
       this.navigateClass = navigateClass;
       this.title = title;
     }, 100);
-  }
-
-  protected Init() {
-    this.globalService.setStatusBarColor(false);
   }
 
   ngOnDestroy(): void {

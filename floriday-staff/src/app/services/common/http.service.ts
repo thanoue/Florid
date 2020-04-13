@@ -106,7 +106,7 @@ export class HttpService {
       this.globalService.startLoading();
     }
 
-    let request = this.http.post(fullUrl, params, { headers: this.headers })
+    const request = this.http.post(fullUrl, params, { headers: this.headers })
       .pipe(timeout(REQUEST_TIMEOUT),
         catchError(this.handleError));
 
