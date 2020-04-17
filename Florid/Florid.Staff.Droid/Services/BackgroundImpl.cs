@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Android.App;
 using Android.Content;
+using Android.Gms.Tasks;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
@@ -11,6 +12,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Com.Khoideptrai.Posprinter;
+using Java.Lang;
 using Net.Posprinter.AsynncTask;
 using Net.Posprinter.Posprinterface;
 using Net.Posprinter.Utils;
@@ -127,7 +129,7 @@ namespace Florid.Staff.Droid.Services
             var list = new List<byte[]>();
 
             list.Add(DataForSendToPrinterPos58.InitializePrinter());
-            list.Add(BitmapToByteData.RasterBmpToSendData(0, _bitmap, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Center,430));
+            list.Add(BitmapToByteData.RasterBmpToSendData(0, _bitmap, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Center, 430));
             list.Add(DataForSendToPrinterPos58.PrintAndFeedLine());
 
             _completeProcess?.Invoke();
@@ -171,6 +173,43 @@ namespace Florid.Staff.Droid.Services
         public void OnServiceDisconnected(ComponentName name)
         {
             Log.Error("disbinder", "disconnected");
+        }
+    }
+
+    public class FirebaseTaskCallback : Java.Lang.Object, IOnSuccessListener, IOnFailureListener, IOnCompleteListener
+    {
+        Action<Java.Lang.Object> _successCallback;
+        Action<Java.Lang.Exception> _failureCallback;
+        private Action<Task> _completeCallback;
+
+        public FirebaseTaskCallback(Action<Java.Lang.Object> successCallback)
+        {
+            _successCallback = successCallback;
+        }
+
+        public FirebaseTaskCallback(Action<Java.Lang.Exception> failureCallback)
+        {
+            _failureCallback = failureCallback;
+        }
+
+        public FirebaseTaskCallback(Action<Task> completeCallback)
+        {
+            _completeCallback = completeCallback;
+        }
+
+        public void OnComplete(Task task)
+        {
+            _completeCallback?.Invoke(task);
+        }
+
+        public void OnFailure(Java.Lang.Exception e)
+        {
+            _failureCallback?.Invoke(e);
+        }
+
+        public void OnSuccess(Java.Lang.Object result)
+        {
+            _successCallback?.Invoke(result);
         }
     }
 }

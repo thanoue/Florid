@@ -7,6 +7,9 @@ import { Subscription } from 'rxjs';
 import { LocalService } from 'src/app/services/common/local.service';
 import { OnlineUserService } from 'src/app/services/online.user.service';
 import { AuthService } from 'src/app/services/common/auth.service';
+import { PrintJobService } from 'src/app/services/print-job.service';
+
+declare function doPrintJob(data: {}): any;
 
 @Component({
   selector: 'app-main-layout',
@@ -19,7 +22,8 @@ export class MainLayoutComponent implements OnDestroy, OnInit {
   title: string;
   headerUpdate: Subscription;
 
-  constructor(public router: Router, private globalService: GlobalService, private onlineUserService: OnlineUserService, private authService: AuthService) {
+  constructor(public router: Router, private globalService: GlobalService, private onlineUserService: OnlineUserService, private authService: AuthService
+    , private printJobService: PrintJobService) {
 
     this.navigateClass = '';
     this.title = '';
@@ -37,9 +41,9 @@ export class MainLayoutComponent implements OnDestroy, OnInit {
 
   }
   ngOnInit(): void {
-    console.log('mainlayou oninit');
+
     this.onlineUserService.loginTimeChanging(LocalService.getUserId(), (userId) => {
-      this.authService.logout((loggedOut) => {
+      this.authService.loutOutFirebase((loggedOut) => {
         if (loggedOut) {
           this.router.navigate(['login']);
         }
@@ -48,9 +52,12 @@ export class MainLayoutComponent implements OnDestroy, OnInit {
 
     this.globalService.setStatusBarColor(false);
 
-    if (LocalService.isPrinter()) {
-
-    }
+    // if (LocalService.isPrinter()) {
+    //   this.printJobService.printJobAdd(data => {
+    //     console.log('print data:', data);
+    //     doPrintJob(data);
+    //   });
+    // }
 
   }
 

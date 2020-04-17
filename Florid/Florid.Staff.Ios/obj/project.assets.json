@@ -213,20 +213,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sin\\.nuget\\packages\\": {}
+    "C:\\Users\\thano\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sin\\Documents\\Florid\\Florid\\Florid.Staff.Ios\\Florid.Staff.Ios.csproj",
+      "projectUniqueName": "C:\\Users\\thano\\Florid\\Florid\\Florid.Staff.Ios\\Florid.Staff.Ios.csproj",
       "projectName": "Florid.Staff.Ios",
-      "projectPath": "C:\\Users\\Sin\\Documents\\Florid\\Florid\\Florid.Staff.Ios\\Florid.Staff.Ios.csproj",
-      "packagesPath": "C:\\Users\\Sin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sin\\Documents\\Florid\\Florid\\Florid.Staff.Ios\\obj\\",
+      "projectPath": "C:\\Users\\thano\\Florid\\Florid\\Florid.Staff.Ios\\Florid.Staff.Ios.csproj",
+      "packagesPath": "C:\\Users\\thano\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\thano\\Florid\\Florid\\Florid.Staff.Ios\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\Sin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\thano\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

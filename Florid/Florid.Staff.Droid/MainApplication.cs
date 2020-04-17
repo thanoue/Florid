@@ -15,6 +15,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Com.Khoideptrai.Posprinter;
+using Firebase.Database;
 using Firebase.Storage;
 using Florid.Core;
 using Florid.Core.Service;
@@ -45,6 +46,7 @@ namespace Florid.Staff.Droid
         private static IMyCustomBinder _binder;
         private MyServiceConnection _serviceConnection;
         public static bool ISCONNECT;
+        private bool _isPrinter = false;
 
         public IMyCustomBinder MyBinder
         {
@@ -71,7 +73,9 @@ namespace Florid.Staff.Droid
 
             CrossCurrentActivity.Current.Init(this);
 
+            ServiceLocator.Instance.Register<INormalDBSession<FirebaseClient>, FirebaseDBSession>(Constants.MAIN_DATABASE_PATH);
             ServiceLocator.Instance.Register<IUserRepository, UserRepository>();
+            ServiceLocator.Instance.Register<IReceiptPrintJobRepository, ReceiptPrintJobRepository>();
             ServiceLocator.Instance.Register<ISecureConfig, NativeDroidSecureConfig>();
 
             _serviceConnection = new MyServiceConnection((binder) =>
@@ -81,6 +85,16 @@ namespace Florid.Staff.Droid
 
             Intent intent = new Intent(this, typeof(MyService));
             BindService(intent, _serviceConnection, Bind.AutoCreate);
+        }
+
+        public bool IsPrinter()
+        {
+            return _isPrinter;
+        }
+
+        public void SetIsPrinter(bool isPrinter)
+        {
+            _isPrinter = isPrinter;
         }
 
         public class MyFirebaseStreamProcessor : Java.Lang.Object, IStreamProcessor
@@ -112,7 +126,7 @@ namespace Florid.Staff.Droid
                 using (var bitmap = BitmapFactory.DecodeStream(str).ResizeImage(440, false))
                 {
                     var manualEvent = new ManualResetEvent(false);
-                        
+
                     manualEvent.Reset();
 
                     _binder.WriteDataByYouself(new MyUiExecute(() =>
@@ -120,7 +134,7 @@ namespace Florid.Staff.Droid
 
                     }, () =>
                     {
-                       ShowSnackbar( "Printing Error!!!!", AlertType.Error);
+                        ShowSnackbar("Printing Error!!!!", AlertType.Error);
 
                     }), new MyProcessDataCallback(bitmap, () =>
                     {
@@ -158,7 +172,7 @@ namespace Florid.Staff.Droid
 
         }
 
-        public void ConnectToBluetoothDevice( string macAddress, Action<bool> callback)
+        public void ConnectToBluetoothDevice(string macAddress, Action<bool> callback)
         {
             if (ISCONNECT)
             {
@@ -170,7 +184,7 @@ namespace Florid.Staff.Droid
             {
                 ISCONNECT = true;
 
-                ShowSnackbar( "Đã kết nối tới máy in!!", AlertType.Success);
+                ShowSnackbar("Đã kết nối tới máy in!!", AlertType.Success);
 
                 callback?.Invoke(true);
 
@@ -182,7 +196,7 @@ namespace Florid.Staff.Droid
                     }, () =>
                     {
                         ISCONNECT = false;
-                        ShowSnackbar( "Máy in bị ngắt kết nối !!", AlertType.Warning);
+                        ShowSnackbar("Máy in bị ngắt kết nối !!", AlertType.Warning);
                         callback?.Invoke(false);
 
                     }));
@@ -195,7 +209,7 @@ namespace Florid.Staff.Droid
             }, () =>
             {
                 ISCONNECT = false;
-                ShowSnackbar( "Không thể kết nối tới máy in !!", AlertType.Error);
+                ShowSnackbar("Không thể kết nối tới máy in !!", AlertType.Error);
                 callback?.Invoke(false);
 
             }));
@@ -212,8 +226,25 @@ namespace Florid.Staff.Droid
                 //ShowSnackbar( "Đã ngắt kết nối tới máy in!!!", AlertType.Info);
             }, () =>
             {
-                ShowSnackbar( "Xảy ra lỗi khi ngắt kết nối tới máy in!!", AlertType.Error);
+                ShowSnackbar("Xảy ra lỗi khi ngắt kết nối tới máy in!!", AlertType.Error);
             }));
+        }
+
+        public void ErrorToast(string content)
+        {
+            ShowSnackbar(content, AlertType.Error);
+        }
+        public void InfoToast(string content)
+        {
+            ShowSnackbar(content, AlertType.Info);
+        }
+        public void ErrorWarning(string content)
+        {
+            ShowSnackbar(content, AlertType.Warning);
+        }
+        public void SuccessToast(string content)
+        {
+            ShowSnackbar(content, AlertType.Success);
         }
 
         public void ShowSnackbar(string content, AlertType alertType)
@@ -249,7 +280,7 @@ namespace Florid.Staff.Droid
                 bar.Show();
             });
         }
-    }   
+    }
 
-   
+
 }

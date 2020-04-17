@@ -22,6 +22,11 @@ using Android.Content.Res;
 using Asksira.WebViewSuiteLib;
 using static Asksira.WebViewSuiteLib.WebViewSuite;
 using ME.Echodev.Resizer;
+using Firebase.Auth;
+using Android.Gms.Tasks;
+using Android.Widget;
+using Florid.Core.Service;
+using Firebase.Database;
 
 namespace Florid.Staff.Droid.Activity
 {
@@ -32,13 +37,14 @@ namespace Florid.Staff.Droid.Activity
 
         public const int REQUEST_FILE_PICKER = 2;
         public const int REQUEST_INTERNET_SALE_REQUEST = 3;
-
         protected override int LayoutId => Resource.Layout.activity_main;
         protected override bool UseOwnLayout => true;
 
         private WebViewSuite _mainWebView;
         private View _mask;
         private JavascriptClient _javascriptClient;
+
+        private INormalDBSession<FirebaseClient> _normalDbSession => ServiceLocator.Instance.Get<INormalDBSession<FirebaseClient>>();
 
         public void InterfereWebViewSetup(WebView webView)
         {
@@ -56,10 +62,30 @@ namespace Florid.Staff.Droid.Activity
             webView.SetWebViewClient(new WebViewClient());
             webView.SetWebChromeClient(new MyWebChromeClient());
 
-            _javascriptClient = new JavascriptClient(this, webView, (email, password) =>
-            {
+            _javascriptClient = new JavascriptClient(this, webView, async (email, password, idToken) =>
+             {
+                 if (MainApp.IsPrinter())
+                 {
+                     _normalDbSession.Authenticate(idToken);
+                     BaseModelHelper.Instance.ReceiptPrintJobRepo.ItemAddedRegister(item =>
+                     {
+                         MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
+                         {
+                             if (!isSuccess)
+                                 return;
 
-            });
+                             var task = new CustomAsyncTask(this, this.BindingReceiptData(item));
+                             task.Execute();
+                         });
+
+                     });
+                 }
+             });
+
+            _javascriptClient.LogoutCallback = () =>
+            {
+                _normalDbSession.Logout();
+            };
 
             _javascriptClient.SetPrimaryDarkStatusBar = (isDark) =>
             {
@@ -91,8 +117,6 @@ namespace Florid.Staff.Droid.Activity
 
             _mainWebView.InterfereWebViewSetup(this);
 
-      
-
             _mainWebView.StartLoading(BaseModelHelper.Instance.RootWebUrl);
 
 #if DEBUG
@@ -100,6 +124,7 @@ namespace Florid.Staff.Droid.Activity
 #endif
 
             SetStatusBarColor(true);
+
         }
 
         public void ShowMask()

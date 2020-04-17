@@ -1,6 +1,36 @@
 import { Role } from "./role";
+import * as adminSdk from './admin.sdk';
+import * as admin from 'firebase-admin'
 
 const expressJwt = require('express-jwt');
+
+export async function authorizeFunction(token: string, roles: Role[] | string = []): Promise<boolean> {
+
+    let role: string[] = [];
+
+    if (typeof roles === 'string') {
+        role.push(roles);
+    } else {
+        role = roles;
+    }
+    try {
+        const decodedToken: admin.auth.DecodedIdToken = await adminSdk.defaultAuth.verifyIdToken(token);
+
+        console.log("decodedToken", JSON.stringify(decodedToken));
+
+        const loggedRole: string = decodedToken.role ? decodedToken.role : Role.None;
+
+        if (role.length === 0 || role.indexOf(loggedRole) > -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    catch (error) {
+        console.log(error);
+        return false;
+    }
+}
 
 export function authorize(roles: Role[] | string = []) {
 

@@ -49,7 +49,7 @@
         </div>
         <div class="orderTotal">
             <p class="totalOld">Còn lại: <span
-                    class="orderPrice">{{order.TotalAmount - order.TotalPaidAmount | currency:'VND':'symbol-narrow':'':'vi-VN'}}
+                    class="orderPrice">{{totalBalance| currency:'VND':'symbol-narrow':'':'vi-VN'}}
                 </span></p>
             <p class="totalNew">Thành tiền: <span
                     class="orderPrice">{{order.TotalAmount | currency:'VND':'symbol-narrow':'':'vi-VN'}}

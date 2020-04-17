@@ -52,7 +52,7 @@ namespace Florid.Staff.Droid.Activity
             webView.SetWebViewClient(new WebViewClient());
             webView.SetWebChromeClient(new MyWebChromeClient());
 
-            var javascriptClient = new JavascriptClient(this, webView, (email, password) =>
+            var javascriptClient = new JavascriptClient(this, webView, (email, password,idtoken) =>
             {
 
             });

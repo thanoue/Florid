@@ -10,6 +10,7 @@ namespace Florid.Core.Service
     public interface  IBaseRepository<T> where T : BaseEntity
     {
         string TAG { get;  }
+
         Task<List<T>> GetAll();
 
         Task<T> GetById(string id);
@@ -20,7 +21,8 @@ namespace Florid.Core.Service
 
         Task Delete(T entity);
 
-        Task Delete(string id); 
+        Task Delete(string id);
 
+        void ItemAddedRegister(Action<T> newDataCallback);
     }
 }

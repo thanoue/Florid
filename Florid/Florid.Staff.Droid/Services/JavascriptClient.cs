@@ -24,7 +24,7 @@ namespace Florid.Staff.Droid.Services
 {
     public class JavascriptClient : Java.Lang.Object
     {
-        Action<string, string> _login;
+        Action<string, string,string> _login;
         WebView _mainWebView;
         BaseActivity _activity;
         Action _documentReady;
@@ -33,8 +33,9 @@ namespace Florid.Staff.Droid.Services
         public Action<ReceiptPrintData> DoPrintJob;
         public Action<string> BankingSaleReturn;
         public Action<string> BankingSaleRequest;
+        public Action LogoutCallback;
 
-        public JavascriptClient(BaseActivity activity, WebView webview, Action<string, string> login)
+        public JavascriptClient(BaseActivity activity, WebView webview, Action<string, string,string> login)
         {
             _login = login;
             _activity = activity;
@@ -79,11 +80,18 @@ namespace Florid.Staff.Droid.Services
 
         [Android.Webkit.JavascriptInterface]
         [Export("login")]
-        public void Login(string email, string password)
+        public void Login(string email, string password,bool isPrinter,string idToken)
         {
-            _login(email, password);
+            _activity.MainApp.SetIsPrinter(isPrinter);
+            _login(email, password,idToken);
         }
 
+        [Android.Webkit.JavascriptInterface]
+        [Export("logout")]
+        public void Logout()
+        {
+            LogoutCallback?.Invoke();
+        }
 
         [Android.Webkit.JavascriptInterface]
         [Export("setStatusBarColor")]

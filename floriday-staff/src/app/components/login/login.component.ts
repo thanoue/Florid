@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/common/auth.service';
 import { LoginModel } from 'src/app/models/entities/user.entity';
 import { OnlineUserService } from 'src/app/services/online.user.service';
+declare function deviceLogin(email: string, pasword: string, isPrinter: boolean, idToken: string): any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,7 +20,7 @@ export class LoginComponent extends BaseComponent {
 
   model: LoginModel = new LoginModel();
 
-  constructor(private onlineUserService: OnlineUserService, private router: Router, protected activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, protected activatedRoute: ActivatedRoute) {
     super();
   }
 
@@ -40,11 +41,14 @@ export class LoginComponent extends BaseComponent {
     this.authService.login(this.model, isSuccess => {
       if (isSuccess) {
 
+        deviceLogin(this.model.userName, this.model.passcode, LocalService.isPrinter(), LocalService.getAccessToken());
+
         this.router.navigate(['']);
 
       } else {
-        this.globalService.showError('Sai tên đăng nhập hoặc mật khẩu!!');
+
       }
+
     });
 
   }

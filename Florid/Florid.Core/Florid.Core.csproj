@@ -41,10 +41,11 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\BaseNormalRepository.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="Services\IBaseRepository.cs" />
+    <Compile Include="Services\IDBSession.cs" />
+    <Compile Include="Services\IReceiptPrintJobRepository.cs" />
     <Compile Include="Services\IUserRepository.cs" />
     <Compile Include="Services\IContext.cs" />
     <Compile Include="Services\ISecure.cs" />

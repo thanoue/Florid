@@ -40,6 +40,8 @@ export async function authenticate(body: any): Promise<any> {
         .catch((error: any) => { throw error; })
 }
 
+
+
 export async function forceUserLogout(userId: string, token: string): Promise<boolean> {
 
     const message = {
@@ -62,14 +64,59 @@ export async function forceUserLogout(userId: string, token: string): Promise<bo
         });
 }
 
-export async function createUser(req: any): Promise<any> {
+export function getUser(uid: string): Promise<any> {
 
-    req.body.emailVerified = true;
-
-    return adminSdk.defaultAuth.createUser(req.body)
+    return adminSdk.defaultAuth.getUser(uid)
         .then((userRecord: any) => {
 
-            const hashedPassword = sha256.hmac.create(adminSdk.momoConfig.secretKey).update(req.body.password).hex();
+            const customClaims = (userRecord.customClaims || { role: '', isPrinter: false }) as { role?: string, isPrinter?: boolean };
+
+            const role = customClaims.role ? customClaims.role : '';
+            const isPrinter = customClaims.isPrinter ? customClaims.isPrinter : false;
+
+            return {
+                ...userRecord,
+                role,
+                isPrinter
+            };
+        });
+}
+
+export function getAllUsers(): Promise<any> {
+
+    return adminSdk.defaultAuth.listUsers()
+        .then((usersRes: any) => {
+
+            console.log('user list:', usersRes);
+            const users: any[] = [];
+
+            usersRes.users.forEach((userRecord: any) => {
+                const customClaims = (userRecord.customClaims || { role: '', isPrinter: false }) as { role?: string, isPrinter?: boolean };
+
+                const role = customClaims.role ? customClaims.role : '';
+                const isPrinter = customClaims.isPrinter ? customClaims.isPrinter : false;
+
+                users.push({
+                    ...userRecord,
+                    role,
+                    isPrinter
+                });
+            });
+
+            return users;
+        });
+}
+
+export async function createUser(body: any): Promise<any> {
+
+    body.emailVerified = true;
+
+    return adminSdk.defaultAuth.createUser(body)
+        .then(async (userRecord: any) => {
+
+            await adminSdk.defaultAuth.setCustomUserClaims(userRecord.uid, { role: body.Role, isPrinter: body.IsPrinter })
+
+            const hashedPassword = sha256.hmac.create(adminSdk.momoConfig.secretKey).update(body.password).hex();
 
             adminSdk.defauDatabase.ref('users').child(userRecord.uid).set({
                 PhoneNumber: userRecord.phoneNumber,
@@ -77,8 +124,8 @@ export async function createUser(req: any): Promise<any> {
                 Email: userRecord.email,
                 AvtUrl: userRecord.photoURL,
                 Active: true,
-                Role: req.body.role,
-                IsPrinter: req.body.IsPrinter,
+                Role: body.Role,
+                IsPrinter: body.IsPrinter,
                 Password: hashedPassword,
             });
 

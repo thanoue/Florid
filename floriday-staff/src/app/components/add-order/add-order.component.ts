@@ -12,10 +12,12 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { District, Ward } from 'src/app/models/entities/address.entity';
 import { DistrictAddressService } from 'src/app/services/address/district-address.service';
 import { WardAddressService } from 'src/app/services/address/ward-address.service';
+import { PrintSaleItem, PrintJob } from 'src/app/models/entities/printjob.entity';
+import { Guid } from 'guid-typescript';
+import { PrintJobService } from 'src/app/services/print-job.service';
 
 declare function openExcForm(resCallback: (result: number, validateCalback: (isSuccess: boolean) => void) => void): any;
 declare function getNumberValidateInput(resCallback: (res: number, validCallback: (isvalid: boolean, error: string) => void) => void, placeHolder: string, oldValue: number): any;
-declare function doPrintJob(data: {}): any;
 
 @Component({
   selector: 'app-add-order',
@@ -30,12 +32,16 @@ export class AddOrderComponent extends BaseComponent {
 
   order: OrderViewModel;
 
+  totalBalance = 0;
 
   constructor(private orderDetailService: OrderDetailService, private router: Router,
     // tslint:disable-next-line: align
     private orderService: OrderService, public auth: AngularFireAuth,
     // tslint:disable-next-line: align
-    private customerService: CustomerService) {
+    private customerService: CustomerService,
+
+    // tslint:disable-next-line: align
+    private printJobService: PrintJobService) {
     super();
   }
 
@@ -67,6 +73,7 @@ export class AddOrderComponent extends BaseComponent {
         this.memberShipTitle = 'New Customer';
         break;
     }
+    this.totalBalance = this.order.TotalAmount - this.order.TotalPaidAmount;
   }
 
   requestPaidInput() {
@@ -81,6 +88,11 @@ export class AddOrderComponent extends BaseComponent {
       return;
     }
 
+    if (this.totalBalance <= 0) {
+      this.printConfirm();
+      return;
+    }
+
     getNumberValidateInput((res, validateCallback) => {
 
       if (res > this.order.TotalAmount) {
@@ -92,36 +104,40 @@ export class AddOrderComponent extends BaseComponent {
       }
 
       validateCallback(true, '');
+      this.doingPay(res);
 
-      this.order.TotalPaidAmount = res;
+    }, 'Số tiền đã thanh toán...', this.totalBalance);
 
-      this.order.CreatedDate = new Date();
+  }
 
-      this.order.CustomerInfo.GainedScore = ExchangeService.getGainedScore(this.order.TotalAmount);
+  doingPay(res: number) {
 
-      if (!this.order.OrderId) {
+    this.order.TotalPaidAmount = res;
 
-        this.startLoading();
+    if (!this.order.CreatedDate) { this.order.CreatedDate = new Date(); }
 
-        this.orderService.getNextIndex()
-          .then(nextIndex => {
+    this.order.CustomerInfo.GainedScore = ExchangeService.getGainedScore(this.order.TotalAmount);
 
-            this.stopLoading();
+    if (!this.order.OrderId) {
 
-            this.order.OrderId = `DON_${nextIndex}`;
+      this.startLoading();
 
-            this.printConfirm();
+      this.orderService.getNextIndex()
+        .then(nextIndex => {
 
-          });
+          this.stopLoading();
 
-      } else {
+          this.order.OrderId = `DON_${nextIndex}`;
 
-        this.printConfirm();
+          this.printConfirm();
 
-      }
+        });
 
-    }, 'Số tiền đã thanh toán...', this.order.TotalAmount);
+    } else {
 
+      this.printConfirm();
+
+    }
   }
 
   printConfirm() {
@@ -129,7 +145,7 @@ export class AddOrderComponent extends BaseComponent {
     this.openConfirm('Có muốn in bill không?', () => {
 
       let tempSummary = 0;
-      const products = [];
+      const products: PrintSaleItem[] = [];
 
       this.order.OrderDetails.forEach(product => {
         products.push({
@@ -141,14 +157,18 @@ export class AddOrderComponent extends BaseComponent {
         tempSummary += product.ModifiedPrice;
       });
 
-      const orderData = {
+      const orderData: PrintJob = {
+        Created: (new Date()).getTime(),
+        Id: Guid.create().toString(),
+        Active: true,
+        IsDeleted: false,
         saleItems: products,
         createdDate: this.order.CreatedDate.toLocaleString('vi-VN', { hour12: true }),
         orderId: this.order.OrderId,
         summary: tempSummary,
         totalAmount: this.order.TotalAmount,
         totalPaidAmount: this.order.TotalPaidAmount,
-        totalBalance: this.order.TotalAmount - this.order.TotalPaidAmount,
+        totalBalance: this.totalBalance,
         vatIncluded: this.order.VATIncluded,
         memberDiscount: this.order.CustomerInfo.DiscountPercent,
         scoreUsed: this.order.CustomerInfo.ScoreUsed,
@@ -156,9 +176,13 @@ export class AddOrderComponent extends BaseComponent {
         totalScore: this.order.CustomerInfo.AvailableScore - this.order.CustomerInfo.ScoreUsed + this.order.CustomerInfo.GainedScore,
       };
 
-      doPrintJob(orderData);
-
-      this.orderConfirm();
+      this.printJobService.set(orderData).then(res => {
+        this.orderConfirm();
+      })
+        .catch(error => {
+          this.showError(error);
+          return;
+        });
 
     }, () => {
 
@@ -289,6 +313,8 @@ export class AddOrderComponent extends BaseComponent {
 
     this.order.TotalAmount -= ExchangeService.geExchangableAmount(this.order.CustomerInfo.ScoreUsed);
 
+    this.totalBalance = this.order.TotalAmount - this.order.TotalPaidAmount;
+
   }
 
   onVATIncludedChange() {
@@ -314,11 +340,10 @@ export class AddOrderComponent extends BaseComponent {
 
         validateCalback.call(this, true);
 
-        this.order.TotalAmount += ExchangeService.geExchangableAmount(this.order.CustomerInfo.ScoreUsed);
-
         this.order.CustomerInfo.ScoreUsed = res;
 
-        this.order.TotalAmount -= ExchangeService.geExchangableAmount(this.order.CustomerInfo.ScoreUsed);
+        this.totalAmountCalculate();
+
       }
     });
   }

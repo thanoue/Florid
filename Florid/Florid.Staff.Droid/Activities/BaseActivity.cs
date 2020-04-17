@@ -11,6 +11,7 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using Firebase.Auth;
 using Florid.Droid.Widgets;
 
 namespace Florid.Staff.Droid.Activity
@@ -22,7 +23,7 @@ namespace Florid.Staff.Droid.Activity
         protected virtual bool ShowBackButton  => false;
         protected virtual bool UseOwnLayout => false;
         protected virtual new string Title => "Base Activity";
-
+        protected FirebaseAuth _firebaseAuth;
 
         protected virtual void OnBacktbnClicking()
         {
@@ -85,6 +86,8 @@ namespace Florid.Staff.Droid.Activity
                 SetContentView(_mainContent);
             }
 
+            _firebaseAuth = FirebaseAuth.Instance;
+
             InitView(_mainContent);
 
             // Create your application here
@@ -102,6 +105,13 @@ namespace Florid.Staff.Droid.Activity
                 Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorPrimary));
                 Window.SetNavigationBarColor(Resources.GetColor(Resource.Color.colorPrimary));
             }
+        }
+
+        protected bool IsLoggedIn()
+        {
+            if (_firebaseAuth.CurrentUser != null)
+                return true;
+            return false;
         }
 
         protected void SetTitle(string title)

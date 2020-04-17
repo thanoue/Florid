@@ -6,6 +6,7 @@ using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
 using Android.Webkit;
+using Florid.Entity;
 using Florid.Model;
 
 namespace Florid.Staff.Droid

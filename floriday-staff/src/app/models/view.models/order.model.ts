@@ -42,7 +42,6 @@ export class OrderViewModel {
         this.CustomerInfo = new OrderCustomerInfoViewModel();
         this.TotalAmount = 0;
         this.TotalPaidAmount = 0;
-        this.CreatedDate = new Date();
         this.OrderId = '';
     }
 }

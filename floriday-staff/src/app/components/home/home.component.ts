@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { AuthService } from 'src/app/services/common/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FunctionsService } from 'src/app/services/common/functions.service';
 
 declare function customerSupport(): any;
 
@@ -30,17 +31,26 @@ export class HomeComponent extends BaseComponent {
 
   logout() {
 
-    this.authService.logout(isSuccess => {
+    this.authService.loutOutFirebase(isSuccess => {
+
       if (isSuccess) {
         this.router.navigate(['login']);
       }
+
     });
   }
 
   goToPrintJob() {
-    this.router.navigate(['printjob']);
   }
 
-
-
+  async getUsers() {
+    try {
+      this.startLoading();
+      const users = await FunctionsService.excuteFunction('getUsers');
+      console.log(users);
+      this.stopLoading();
+    } catch (error) {
+      this.showWarning(error);
+    }
+  }
 }

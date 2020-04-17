@@ -10,8 +10,6 @@ namespace Florid.Core.Repository
 {
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        protected abstract string DatabasePath { get; }
-
         public  abstract string TAG { get; } 
 
         public abstract Task Delete(T entity);
@@ -25,6 +23,8 @@ namespace Florid.Core.Repository
         public abstract Task<T> Insert(T entity);
 
         public abstract Task Update(T entity);
+
+        public abstract void ItemAddedRegister(Action<T> newDataCallback);
       
     }
 }

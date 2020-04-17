@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Florid.Model
+namespace Florid.Entity
 {
-    public class ReceiptPrintData
+    public class ReceiptPrintData : BaseEntity
     {
-
         [JsonProperty("saleItems")]
         public IList<SaleItem> SaleItems { get; set; }
 

@@ -25,9 +25,11 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <AndroidSupportedAbis>armeabi-v7a;arm64-v8a;x86;x86_64</AndroidSupportedAbis>
+    <AndroidSdkBuildToolsVersion>26.0.3</AndroidSdkBuildToolsVersion>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>True</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <DebugType>portable</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
@@ -35,14 +37,17 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
-    <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a;arm64-v8a</AndroidSupportedAbis>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
-    <AndroidKeyStore>True</AndroidKeyStore>
-    <AndroidSigningKeyStore>/Users/khatran/Data/Florid/Resources/florid_staff_key.keystore</AndroidSigningKeyStore>
-    <AndroidSigningStorePass>florid123</AndroidSigningStorePass>
-    <AndroidSigningKeyAlias>florid_staff_key</AndroidSigningKeyAlias>
-    <AndroidSigningKeyPass>florid123</AndroidSigningKeyPass>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
+    <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
+    <EnableProguard>false</EnableProguard>
+    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -83,11 +88,13 @@
     <Compile Include="Controls\Label.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="Repositories\BaseNormalDroidRepository.cs" />
+    <Compile Include="Repositories\ReceiptPrintJobRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Services\BackgroundImpl.cs" />
+    <Compile Include="Services\FirebaseDBSession.cs" />
     <Compile Include="Services\MyFirebaseIIDService.cs" />
     <Compile Include="Services\MyFirebaseMessagingService.cs" />
     <Compile Include="Services\NativeDroidSecureConfig.cs" />
@@ -98,7 +105,9 @@
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
     <None Include="Resources\AboutResources.txt" />
-    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>

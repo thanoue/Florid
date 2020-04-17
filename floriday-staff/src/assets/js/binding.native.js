@@ -27,9 +27,9 @@ function getMomoConfig() {
     }
 }
 
-function login(email, password) {
+function deviceLogin(email, password, isPrinter, idToken) {
     if (typeof Android !== "undefined" && Android !== null) {
-        Android.login(email, password);
+        Android.login(email, password, isPrinter, idToken);
     }
 }
 
@@ -112,14 +112,14 @@ function getDateTimeSelecting(year, month, day, hour, minute) {
             min: '2018-01-01',
             max: '2025-12-31'
         }, {
-                day: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
-                shortDay: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
-                MDW: 'D, MM-dd',
-                YM: 'yyyy-MM',
-                OK: 'Xác nhận',
-                CANCEL: 'huỷ',
-                CLEAR: 'Xoá'
-            });
+            day: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+            shortDay: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+            MDW: 'D, MM-dd',
+            YM: 'yyyy-MM',
+            OK: 'Xác nhận',
+            CANCEL: 'huỷ',
+            CLEAR: 'Xoá'
+        });
 
         datePicker.on('selected', function (formatDate, now) {
             console.log('selected date: ', formatDate, now);

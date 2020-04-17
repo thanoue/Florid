@@ -13,49 +13,53 @@ using Firebase.Database;
 using Firebase.Database.Query;
 using Florid.Core;
 using Florid.Core.Repository;
+using Florid.Core.Service;
 using Florid.Entity;
 
 namespace Florid.Staff.Droid.Repositories
 {
-    public abstract class BaseNormalDroidRepository<T> : BaseNormalRepository<T> where T : BaseEntity
+    public abstract class BaseNormalDroidRepository<T> : BaseRepository<T> where T : BaseEntity
     {
-        protected FirebaseClient FirebaseClient;
+        protected INormalDBSession<FirebaseClient> DBSession => ServiceLocator.Instance.Get<INormalDBSession<FirebaseClient>>();
+
+        protected FirebaseClient Client => DBSession.Client;
 
         public BaseNormalDroidRepository()
         {
-            FirebaseClient = new FirebaseClient(DatabasePath);
+
         }
 
         public override async Task<List<T>> GetAll()
         {
-            return (await FirebaseClient
+            return (await Client
                      .Child(TAG)
                      .OnceAsync<T>()).Select(item => item.Object).ToList();
         }
 
         public override async Task Delete(T entity)
         {
-            await FirebaseClient.Child(TAG).Child(entity.Id).DeleteAsync();
+            await Client.Child(TAG).Child(entity.Id).DeleteAsync();
+
         }
 
         public override async Task Delete(string id)
         {
-            await FirebaseClient.Child(TAG).Child(id).DeleteAsync();
+            await Client.Child(TAG).Child(id).DeleteAsync();
         }
 
         public override async Task<T> GetById(string id)
         {
-            return (await FirebaseClient
-            .Child(TAG)
-            .Child(id)
-            .OnceSingleAsync<T>());
+            return (await Client
+                       .Child(TAG)
+                       .Child(id)
+                       .OnceSingleAsync<T>());
         }
 
         public override async Task<T> Insert(T entity)
         {
-            var obj = await FirebaseClient
-             .Child(TAG)
-             .PostAsync<T>(entity, true);
+            var obj = await Client
+                              .Child(TAG)
+                              .PostAsync<T>(entity, true);
 
             entity.Id = obj.Key;
 
@@ -67,10 +71,25 @@ namespace Florid.Staff.Droid.Repositories
 
         public override async Task Update(T entity)
         {
-            await FirebaseClient
-          .Child(TAG)
-          .Child(entity.Id)
-          .PutAsync(entity);
+            await Client
+                     .Child(TAG)
+                     .Child(entity.Id)
+                     .PutAsync(entity);
+        }
+
+        public override void ItemAddedRegister(Action<T> newDataCallback)
+        {
+            var register = Client.Child(TAG)
+                                    .AsObservable<T>()
+                                    .Subscribe(d =>
+                                    {
+                                        if (d.EventType == Firebase.Database.Streaming.FirebaseEventType.InsertOrUpdate)
+                                        {
+                                            newDataCallback?.Invoke(d.Object);
+                                        }
+                                    });
+
+            DBSession.AddHandle(register);
         }
     }
 }

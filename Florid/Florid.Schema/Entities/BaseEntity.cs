@@ -10,7 +10,7 @@ namespace Florid.Entity
     {
         public string Id { get; set; }
         public bool  Active { get; set; }
-        public DateTime Created { get; set; }
+        public long Created { get; set; }
         public bool IsDeleted { get; set; }
     }
 }
