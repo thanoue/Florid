@@ -1,46 +1,10 @@
 <div>
     <router-outlet></router-outlet>
-    <!-- <div id="colorBoard" class="popup-content">
-        <ul class="colorList">
-            <li class="colorItem">
-                <div class="item-status r"><span></span></div>
-                <label>Đang chờ</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status o"><span></span></div>
-                <label>Đang thực hiện</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status y"><span></span></div>
-                <label>Đang xác nhận</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status p"><span></span></div>
-                <label>Chờ giao</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status b"><span></span></div>
-                <label>Đang giao</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status bl"><span></span></div>
-                <label>Đã giao</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status g"><span></span></div>
-                <label>Hoàn thành</label>
-            </li>
-            <li class="colorItem">
-                <div class="item-status x"><span></span></div>
-                <label>Đã hủy</label>
-            </li>
-        </ul>
-    </div> -->
     <ng-template #customLoadingTemplate>
         <div class="custom-class">
         </div>
     </ng-template>
     <ngx-loading [show]="loading" [template]="customLoadingTemplate">
     </ngx-loading>
-    
+
 </div>

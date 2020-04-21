@@ -62,7 +62,7 @@ namespace Florid.Staff.Droid.Activity
             webView.SetWebViewClient(new WebViewClient());
             webView.SetWebChromeClient(new MyWebChromeClient());
 
-            _javascriptClient = new JavascriptClient(this, webView, async (email, password, idToken) =>
+            _javascriptClient = new JavascriptClient(this, webView,(email, password, idToken) =>
              {
                  if (MainApp.IsPrinter())
                  {

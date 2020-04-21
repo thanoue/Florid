@@ -1,12 +1,22 @@
 import { BaseEntity } from './base.entity';
-import { extend } from 'webdriver-js-extender';
 
 export class Tag extends BaseEntity {
-    Value: string;
     Name: string;
+    Description: string;
+    TagType: TagTypes;
+
+    constructor() {
+        super();
+        this.TagType = TagTypes.Product;
+    }
 }
 
 export class ProductTag extends BaseEntity {
     TagId: string;
     ProductId: string;
+}
+
+export enum TagTypes {
+    Product = 'Product',
+    Customer = 'Customer'
 }

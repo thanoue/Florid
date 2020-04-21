@@ -87,19 +87,12 @@ export function getAllUsers(): Promise<any> {
     return adminSdk.defaultAuth.listUsers()
         .then((usersRes: any) => {
 
-            console.log('user list:', usersRes);
             const users: any[] = [];
 
             usersRes.users.forEach((userRecord: any) => {
-                const customClaims = (userRecord.customClaims || { role: '', isPrinter: false }) as { role?: string, isPrinter?: boolean };
-
-                const role = customClaims.role ? customClaims.role : '';
-                const isPrinter = customClaims.isPrinter ? customClaims.isPrinter : false;
 
                 users.push({
-                    ...userRecord,
-                    role,
-                    isPrinter
+                    userRecord,
                 });
             });
 

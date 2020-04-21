@@ -17,7 +17,7 @@ export class OrderService extends BaseService<Order> {
 
   getNextIndex(): Promise<number> {
 
-    return this.tableRef.limitToLast(1).once('value').then(snapShot => {
+    return this.tableRef.orderByChild('Created').limitToLast(1).once('value').then(snapShot => {
 
       if (!snapShot.val()) {
 
@@ -33,13 +33,14 @@ export class OrderService extends BaseService<Order> {
       let key = '';
 
       snapShot.forEach(child => {
+        console.log(child.val());
         key = child.key;
       });
 
       let index = +key.substring(4);
       index += 1;
 
-      console.log(index);
+      console.log('next index:', index);
 
       const newOrder = new Order();
       newOrder.Id = `DON_${index}`;

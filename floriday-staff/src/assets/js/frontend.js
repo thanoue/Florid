@@ -542,7 +542,7 @@ function setSelectedCustomerItem(id) {
 }
 
 // HIển thị dialog xác nhận
-function openConfirm(message, okCallback, cancelCallback) {
+function openConfirm(message, okCallback, noCallback, cancelCallback) {
 
     let html = `<div id="confirmDialog" class="popup-content dialog-popup">
                 <img src="../../../assets/images/confirm.png" alt="">
@@ -562,30 +562,87 @@ function openConfirm(message, okCallback, cancelCallback) {
         jQuery("#confirmDialog").hide(250, function () {
             jQuery(".overlay-dark").remove();
             jQuery(this).remove();
+
+            if (okCallback != undefined)
+                okCallback();
         });
 
-        if (okCallback != undefined)
-            okCallback();
     });
 
     jQuery('#confirmDialog #cancel-btn').one('click', function () {
 
         jQuery("#confirmDialog").hide(250, function () {
+
             jQuery(this).remove();
             jQuery(".overlay-dark").remove();
+
+            if (noCallback != undefined)
+                noCallback();
         });
 
-        if (cancelCallback != undefined)
-            cancelCallback();
+
     });
 
     jQuery(".overlay-dark").one('click', function () {
         jQuery("#confirmDialog").hide(250, function () {
             jQuery(this).remove();
             jQuery(".overlay-dark").remove();
+
+            if (noCallback != undefined) {
+                noCallback();
+            } else {
+                if (cancelCallback != undefined) {
+                    cancelCallback();
+                }
+            }
+
         });
     });
 
+}
+
+function openTagMenu() {
+    var html = `<div class="actionMenu checkMenu">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                <span class="main-bg vatCustom"></span>Hoa Hồng
+              </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  <span class="main-bg vatCustom"></span>Hoa Huệ
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  <span class="main-bg vatCustom"></span>Hoa Lan
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  <span class="main-bg vatCustom"></span>Hoa Cẩm Chướng
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  <span class="main-bg vatCustom"></span>Hoa Lyly
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  <span class="main-bg vatCustom"></span>Hoa Cúc
+                </label>
+              </div>
+        </div>`;
+    slideUp(html, function (index) {
+
+    });
 }
 
 function addressRequest(districts, resCallback, requestNewWards) {

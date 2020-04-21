@@ -201,7 +201,7 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     protected fileChosen(path: string) {
     }
 
-    protected openConfirm(message: string, okCallback: () => void, cancelCallback?: () => void) {
-        this.globalService.openConfirm(message, okCallback, cancelCallback);
+    protected openConfirm(message: string, okCallback: () => void, noCallback?: () => void, cancelCallback?: () => void) {
+        this.globalService.openConfirm(message, okCallback, noCallback, cancelCallback);
     }
 }

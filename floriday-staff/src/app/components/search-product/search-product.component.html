@@ -18,6 +18,10 @@
                 <button (click)="imageUpload.click()" class="main-bg"><img src="../../../assets/images/attach.svg"
                         alt="" class="main-filter"></button>
             </div>
+            <div class="filterAdd">
+                <button class="main-bg"><img src="../../../assets/images/price.svg" alt="" class="main-filter"
+                        onclick="openTagMenu()"></button>
+            </div>
         </div>
         <div class="row prodList cusScroll">
             <div *ngFor='let product of pagingProducts' onclick="selectItem(this,'.product-item')"

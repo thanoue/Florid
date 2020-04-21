@@ -718,10 +718,11 @@ div.actionMenu a:hover {
     font-size: 14px;
 }
 .actionMenu input.form-check-input {
-    height: 16px;
-    width: 16px;
+    height: 20px;
+    width: 20px;
     margin-top: 2px;
     margin-left: -25px;
+    opacity: 0;
 }
 /* ================================================ADD ORDER */
 form.addOrderForm .form-group {
@@ -1042,6 +1043,7 @@ select.mainForm {
     white-space: nowrap;
     overflow: hidden;
 }
+
 .newInfo {
     margin-top: 20px;
 }
@@ -1285,11 +1287,13 @@ span.main-bg.vatCustom::before {
     color: #fff;
     display: none;
 }
-input#VATIncluded:checked + span.vatCustom.main-bg 
+input#VATIncluded:checked + span.vatCustom.main-bg,
+input:checked + span.vatCustom.main-bg
 {
     background:var(--main-green);
 }
-input#VATIncluded:checked + span.vatCustom.main-bg::before
+input#VATIncluded:checked + span.vatCustom.main-bg::before,
+input:checked + span.vatCustom.main-bg::before
 {
     display: block;
 }
@@ -1314,7 +1318,7 @@ input#VATIncluded:checked + span.vatCustom.main-bg::before
 .orderTotal p.totalOld span.orderPrice
 {
     font-weight: 400;
-    text-decoration: line-through;
+    /* text-decoration: line-through; */
 }
 .orderConfirm span 
 {
@@ -1863,4 +1867,9 @@ span.bankName {
 .bankItem:focus img.bankImg
 {
     border-color: var(--main-blue);
+}
+
+.checkMenu span.main-bg.vatCustom {
+    background-color: var(--main-grey);
+    left: 0;
 }

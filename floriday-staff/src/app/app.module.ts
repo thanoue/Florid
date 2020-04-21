@@ -17,7 +17,6 @@ import { TextBoxComponent } from './controls/text-box/text-box.component';
 import { FormsModule } from '@angular/forms';
 import { InvalidTypeDirective } from './directives/invalid-type.directive';
 import { InvalidmessageDirective } from './directives/invalid-message.directive';
-import * as firebase from 'firebase/app';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
 import { OrdersManageComponent } from './components/orders-manage/orders-manage.component';
@@ -25,12 +24,13 @@ import { AddOrderComponent } from './components/add-order/add-order.component';
 import { SelectCustomerComponent } from './components/select-customer/select-customer.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { SelectReceiverComponent } from './components/select-receiver/select-receiver.component';
-import es from '@angular/common/locales/es';
 import { registerLocaleData, CommonModule } from '@angular/common';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SearchProductComponent } from './components/search-product/search-product.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import es from '@angular/common/locales/es';
+import * as firebase from 'firebase/app';
 import vi from '@angular/common/locales/vi';
 import { SaleOptionComponent } from './components/sale-option/sale-option.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -93,4 +93,5 @@ export class AppModule {
     registerLocaleData(es);
     registerLocaleData(vi);
   }
+
 }

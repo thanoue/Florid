@@ -56,6 +56,7 @@ export class AuthService {
       .then(async userInfo => {
 
         LocalService.clear();
+
         try {
 
           const res = await FunctionsService.excuteFunction('getUserInfo');
@@ -68,8 +69,8 @@ export class AuthService {
           } else {
 
             firebase.auth().currentUser.getIdToken(true).then(idToken => {
-              LocalService.setAccessToken(idToken);
               LocalService.setUserName(userInfo.user.displayName);
+              LocalService.setAccessToken(idToken);
               LocalService.setPhoneNumber(userInfo.user.phoneNumber);
               LocalService.setRole(res.role);
               LocalService.setUserEmail(userInfo.user.email);

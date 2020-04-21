@@ -37,6 +37,25 @@ export class OrderDetailService extends BaseService<OrderDetail>  {
 
   }
 
+  async deleteAllByOrderId(orderId: string): Promise<boolean> {
+
+    return await this.tableRef.orderByChild('OrderId').equalTo(orderId).once('value').then(snapshot => {
+
+      if (!snapshot || snapshot.numChildren() <= 0) {
+        return true;
+      }
+
+      snapshot.forEach((item) => {
+        this.delete(item.key);
+      });
+      return true;
+    })
+      .catch(error => {
+        this.globalService.showError(error);
+        return false;
+      });
+  }
+
   getHardcodeImageSavedCounting(name: string, callback: (count: number) => void): void {
 
     if (!name || name === '') {
@@ -48,8 +67,6 @@ export class OrderDetailService extends BaseService<OrderDetail>  {
     this.tableRef.orderByChild('HardcodeProductImageName').equalTo(name).once('value').then(snapshot => {
 
       this.globalService.stopLoading();
-
-
 
       if (snapshot) {
         callback(snapshot.numChildren());

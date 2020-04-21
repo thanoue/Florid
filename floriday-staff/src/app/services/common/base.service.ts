@@ -25,10 +25,51 @@ export abstract class BaseService<T extends BaseEntity> {
         this.globalService.stopLoading();
     }
 
+    protected errorToast(message: string) {
+        this.globalService.showError(message);
+    }
+    protected infoToast(message: string) {
+        this.globalService.showInfo(message);
+    }
+    protected warningToast(message: string) {
+        this.globalService.showWarning(message);
+    }
+    protected successToast(message: string) {
+        this.globalService.showSuccess(message);
+    }
+
     constructor() {
         const injector = AppInjector.getInjector();
         this.globalService = injector.get(GlobalService);
         this.db = firebase.database();
+    }
+
+
+    getByFieldName(fieldName: string, value: any): Promise<T[]> {
+        this.globalService.startLoading();
+        return this.tableRef.orderByChild(fieldName).equalTo(value).once('value')
+            .then(snapShot => {
+
+                this.globalService.stopLoading();
+
+                const items: T[] = [];
+
+                snapShot.forEach(data => {
+
+                    const prd = data.val() as T;
+
+                    items.push(prd);
+
+                });
+
+                return items;
+
+            })
+            .catch(error => {
+                this.globalService.stopLoading();
+                this.globalService.showError(error);
+                return [];
+            });
     }
 
     public set(model: T): Promise<T> {
@@ -145,7 +186,7 @@ export abstract class BaseService<T extends BaseEntity> {
                 return res;
             })
             .catch(error => {
-                console.log(error);
+                this.errorToast(error);
                 this.stopLoading();
                 return [];
             });

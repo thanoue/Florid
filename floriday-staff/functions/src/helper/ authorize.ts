@@ -14,9 +14,12 @@ export async function authorizeFunction(token: string, roles: Role[] | string = 
         role = roles;
     }
     try {
-        const decodedToken: admin.auth.DecodedIdToken = await adminSdk.defaultAuth.verifyIdToken(token);
 
-        console.log("decodedToken", JSON.stringify(decodedToken));
+        if (role.length <= 0) {
+            return true;
+        }
+
+        const decodedToken: admin.auth.DecodedIdToken = await adminSdk.defaultAuth.verifyIdToken(token);
 
         const loggedRole: string = decodedToken.role ? decodedToken.role : Role.None;
 

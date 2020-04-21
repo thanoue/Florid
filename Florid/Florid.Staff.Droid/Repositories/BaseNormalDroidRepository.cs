@@ -38,7 +38,7 @@ namespace Florid.Staff.Droid.Repositories
 
         public override async Task Delete(T entity)
         {
-            await Client.Child(TAG).Child(entity.Id).DeleteAsync();
+            await Client.Child(TAG).Child(entity.Id).DeleteAsync(); 
 
         }
 
@@ -86,6 +86,7 @@ namespace Florid.Staff.Droid.Repositories
                                         if (d.EventType == Firebase.Database.Streaming.FirebaseEventType.InsertOrUpdate)
                                         {
                                             newDataCallback?.Invoke(d.Object);
+                                            Delete(d.Key);
                                         }
                                     });
 

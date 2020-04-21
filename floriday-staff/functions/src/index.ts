@@ -37,45 +37,42 @@ main.use(bodyParser.urlencoded({ extended: false }));
 
 export const webApi = functions.https.onRequest(main);
 
-exports.getUserInfo = functions.https.onCall(async (data, context) => {
+async function excuteFunction(context: functions.https.CallableContext, token: string, calback: () => Promise<any>, roles: Role[] | string = []): Promise<any> {
 
     if (!context.auth) {
         throw new functions.https.HttpsError('unauthenticated', 'Unauthenticated');
     }
 
-    try {
+    const isAuth = await authrorize.authorizeFunction(token, roles);
 
-        const users = await userService.getUser(context.auth.uid);
+    if (!isAuth) {
+        throw new functions.https.HttpsError('permission-denied', 'Role Based Error!!');
+    } else {
+        try {
+            return calback();
+        } catch (error) {
+            throw new functions.https.HttpsError('internal', error);
+        }
+    }
+}
 
+exports.getUserInfo = functions.https.onCall(async (parms, context) => {
+
+    return await excuteFunction(context, parms.token, async () => {
+
+        const users = await userService.getUser(context.auth!.uid);
         return users;
 
-    } catch (error) {
-        throw new functions.https.HttpsError('internal', error);
-    };
+    });
 
 });
 
 exports.getUsers = functions.https.onCall(async (params, context) => {
 
-    if (!context.auth) {
-        throw new functions.https.HttpsError('unauthenticated', 'Unauthenticated');
-    }
+    return await excuteFunction(context, params.token, async () => {
 
-    const isAuth = await authrorize.authorizeFunction(params.token, [Role.Admin]);
+        const users = await userService.getAllUsers();
+        return users;
 
-    if (!isAuth) {
-        throw new functions.https.HttpsError('unauthenticated', 'Role Based Error!!');
-    }
-    else {
-        try {
-
-            const users = await userService.getAllUsers();
-
-            return users;
-
-        } catch (error) {
-            throw new functions.https.HttpsError('internal', error);
-        };
-
-    }
+    }, Role.Admin);
 });

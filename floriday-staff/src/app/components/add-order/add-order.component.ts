@@ -34,6 +34,8 @@ export class AddOrderComponent extends BaseComponent {
 
   totalBalance = 0;
 
+  isResetPaidAmount = false;
+
   constructor(private orderDetailService: OrderDetailService, private router: Router,
     // tslint:disable-next-line: align
     private orderService: OrderService, public auth: AngularFireAuth,
@@ -83,19 +85,38 @@ export class AddOrderComponent extends BaseComponent {
       return;
     }
 
-    if (!this.order.TotalAmount || this.order.TotalAmount === 0) {
-      this.showWarning('Chưa nhập Sản phẩm!');
+    if (!this.order.OrderDetails || this.order.OrderDetails.length <= 0) {
+      this.showWarning('Chưa chọn sản phẩm nào!');
       return;
     }
 
-    if (this.totalBalance <= 0) {
+    if (!this.order.TotalAmount || this.order.TotalAmount <= 0) {
+      this.showWarning('Thành tiền không hợp lệ!');
+      return;
+    }
+
+    if (this.totalBalance < 0) {
+
+      this.openConfirm('Trả lại tiền thừa cho khách hàng : ' + this.totalBalance.toString(), () => {
+
+        this.isResetPaidAmount = true;
+        this.totalBalance = 0;
+
+        this.printConfirm();
+
+      });
+
+      return;
+    }
+
+    if (this.totalBalance === 0) {
       this.printConfirm();
       return;
     }
 
     getNumberValidateInput((res, validateCallback) => {
 
-      if (res > this.order.TotalAmount) {
+      if (res > this.totalBalance) {
         validateCallback(false, 'Thanh toán vượt quá thành tiền!');
         return;
       } else if (res <= 0) {
@@ -112,7 +133,9 @@ export class AddOrderComponent extends BaseComponent {
 
   doingPay(res: number) {
 
-    this.order.TotalPaidAmount = res;
+    this.order.TotalPaidAmount += res;
+
+    this.totalBalance = this.order.TotalAmount - this.order.TotalPaidAmount;
 
     if (!this.order.CreatedDate) { this.order.CreatedDate = new Date(); }
 
@@ -143,6 +166,10 @@ export class AddOrderComponent extends BaseComponent {
   printConfirm() {
 
     this.openConfirm('Có muốn in bill không?', () => {
+
+      if (this.isResetPaidAmount) {
+        this.order.TotalPaidAmount = this.order.TotalAmount;
+      }
 
       let tempSummary = 0;
       const products: PrintSaleItem[] = [];
@@ -188,11 +215,22 @@ export class AddOrderComponent extends BaseComponent {
 
       this.orderConfirm();
 
+    }, () => {
+
+      if (this.isResetPaidAmount) {
+        this.isResetPaidAmount = false;
+        this.totalBalance = this.order.TotalAmount - this.order.TotalPaidAmount;
+      }
+
     });
 
   }
 
   orderConfirm() {
+
+    if (this.isResetPaidAmount) {
+      this.order.TotalPaidAmount = this.order.TotalAmount;
+    }
 
     this.startLoading();
 
@@ -209,7 +247,7 @@ export class AddOrderComponent extends BaseComponent {
     orderDB.ScoreUsed = this.order.CustomerInfo.ScoreUsed;
 
     this.orderService.set(orderDB)
-      .then(res => {
+      .then(async res => {
 
         const orderDetais: OrderDetail[] = [];
         const receiverInfos: CustomerReceiverDetail[] = [];
@@ -218,7 +256,7 @@ export class AddOrderComponent extends BaseComponent {
 
           const detail = new OrderDetail();
 
-          detail.Id = `${orderDB.Id}_${detailVM.Index}`;
+          detail.Id = Guid.create().toString();
 
           detail.OrderId = orderDB.Id;
           detail.IsHardcodeProduct = detailVM.IsFromHardCodeProduct;
@@ -281,22 +319,34 @@ export class AddOrderComponent extends BaseComponent {
 
         });
 
+        const removeOldRes = await this.orderDetailService.deleteAllByOrderId(orderDB.Id);
 
-        this.orderDetailService.setList(orderDetais)
-          .then(() => {
-            this.customerService.updateReceiverList(orderDB.CustomerId, receiverInfos).then(isSuccess => {
-              this.stopLoading();
-              if (isSuccess) {
-                this.OnBackNaviage();
-              }
+        if (!removeOldRes) {
+
+          this.globalService.stopLoading();
+          return;
+
+        } else {
+
+          this.orderDetailService.setList(orderDetais)
+            .then(() => {
+
+              this.customerService.updateReceiverList(orderDB.CustomerId, receiverInfos).then(isSuccess => {
+                this.stopLoading();
+                if (isSuccess) {
+                  this.OnBackNaviage();
+                }
+              });
+
+            })
+            .catch(error => {
+
+              console.log(error);
+              this.globalService.stopLoading();
+              this.showError(error.toString());
+
             });
-          })
-          .catch(error => {
-            console.log(error);
-            this.globalService.stopLoading();
-            this.showError(error.toString());
-          });
-
+        }
       });
   }
 
@@ -305,10 +355,13 @@ export class AddOrderComponent extends BaseComponent {
     this.order.TotalAmount = 0;
 
     this.order.OrderDetails.forEach(detail => {
+
       if (!detail.AdditionalFee) {
         detail.AdditionalFee = 0;
       }
+
       this.order.TotalAmount += ExchangeService.getFinalPrice(detail.ModifiedPrice, this.order.CustomerInfo.DiscountPercent, detail.AdditionalFee);
+
     });
 
     this.order.TotalAmount -= ExchangeService.geExchangableAmount(this.order.CustomerInfo.ScoreUsed);
@@ -323,6 +376,7 @@ export class AddOrderComponent extends BaseComponent {
     } else {
       this.totalAmountCalculate();
       this.order.TotalAmount += (this.order.TotalAmount / 100) * 10;
+      this.totalBalance = this.order.TotalAmount - this.order.TotalPaidAmount;
     }
   }
 
@@ -336,16 +390,32 @@ export class AddOrderComponent extends BaseComponent {
 
         validateCalback.call(this, false);
 
-      } else {
-
-        validateCalback.call(this, true);
-
-        this.order.CustomerInfo.ScoreUsed = res;
-
-        this.totalAmountCalculate();
+        return;
 
       }
+
+      const exchangeAmount = ExchangeService.geExchangableAmount(res);
+
+      if (exchangeAmount >= this.totalBalance) {
+
+        this.showError('Vượt quá tổng tiền thanh toán!');
+
+        validateCalback.call(this, false);
+
+        return;
+
+      }
+
+      validateCalback.call(this, true);
+
+      console.log('exchange amout:', res);
+
+      this.order.CustomerInfo.ScoreUsed = res;
+
+      this.totalAmountCalculate();
+
     });
+
   }
 
   addNewOrderDetail() {
@@ -381,7 +451,4 @@ export class AddOrderComponent extends BaseComponent {
 
     });
   }
-
-
-
 }

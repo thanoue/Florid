@@ -7,11 +7,12 @@ import { AlertType } from 'src/app/models/enums';
 import { ToastrService } from 'ngx-toastr';
 import { OrderReceiverDetail } from 'src/app/models/entities/order.entity';
 import { District, Ward } from 'src/app/models/entities/address.entity';
+import { Product } from 'src/app/models/entities/product.entity';
 
 declare function setStatusBarColor(isDark: boolean): any;
 declare function isOnTerminal(): any;
 declare function alert(message: string, alertType: number): any;
-declare function openConfirm(message: string, okCallback: () => void, cancelCallback: () => void): any;
+declare function openConfirm(message: string, okCallback: () => void, noCallback: () => void, cancelCallback: () => void): any;
 
 
 @Injectable({
@@ -33,12 +34,14 @@ export class GlobalService {
     currentOrderDetailViewModel: OrderDetailViewModel;
     currentDistricts: District[];
     currentWards: Ward[];
+    cacheProducts: Product[];
 
     constructor(private toastr: ToastrService, private ngZone: NgZone) {
 
         this.currentOrderViewModel = new OrderViewModel();
         this.currentDistricts = [];
         this.currentWards = [];
+        this.cacheProducts = [];
 
         this.notifySetup = { timeOut: 5000, tapToDismiss: true, progressBar: false, progressAnimation: 'decreasing', positionClass: 'toast-bottom-full-width', closeButton: true, extendedTimeOut: 3000 };
 
@@ -121,8 +124,8 @@ export class GlobalService {
         alert(message, +AlertType.Warning);
     }
 
-    openConfirm(message: string, okCallback: () => void, cancelCallback?: () => void) {
-        openConfirm(message, okCallback, cancelCallback);
+    openConfirm(message: string, okCallback: () => void, noCallback?: () => void, cancelCallback?: () => void) {
+        openConfirm(message, okCallback, noCallback, cancelCallback);
     }
 
 
