@@ -122,7 +122,6 @@ hideUserEdit = (e) => {
         <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
     </td>
     `);
-    
 }
 
 
@@ -264,9 +263,150 @@ showAddNew = (obj) => {
             </form>
             </div>
             `; break;
+            case "product": html = `<div class="popupContent" id="userAdd">
+        <h4 class="userName">Thêm mới Sản phẩm</h4>
+        <hr class="adminSeperate">
+        <form action="">
+        
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputName">Mã Sản Phẩm</label>
+            <input type="text" class="form-control" id="inputName" placeholder="SP-009">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputPrice">Giá Gốc (vnđ)</label>
+            <input type="number" class="form-control" id="inputPrice" placeholder="200000">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="inputDesc">Mô tả</label>
+            <textarea id="inputDesc" class="form-control" cols="100" rows="5" placeholder="Mô tả sản phẩm"></textarea>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputCate">Loại Sản Phẩm</label>
+                <select id="inputCate" class="form-control">
+                <option selected>Choose...</option>
+                <option >Hoa Hồng</option>
+                <option>Hoa Hướng Dương</option>
+                <option>Hoa Lyly</option>
+                <option>Hoa Cẩm Chướng</option>
+                </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputTag">Tag</label>
+            <textarea id="inputTag" class="form-control" cols="100" rows="3" placeholder="Ngăn cách bằng dấu phẩy"></textarea>
+        </div>
+    </div>
+          <div class="form-group avatarChange">
+            <label for="">Chọn ảnh đại diện</label>
+            <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
+          </div>
+          <div class="form-action row">
+            <div class="col-md-2"><button type="" class="btn btn-outline-success w-100" onclick="">Thêm Mới</button></div>
+            <div class="col-md-1"><a href="javascript:void(0)" class="btn btn-outline-secondary w-100" onclick="hideUserAdd()">Hủy</a></div>
+        </div> 
+        </form>
+      </div>
+        `; break;
         default:
             break;
     }
     jQuery(".adminWrapper").append(html);
     jQuery(".popupContent").slideDown(350);
+}
+
+showProductEdit = (e) => {
+    var trCurrent = jQuery(e.target).parents("tr");
+    jQuery(trCurrent).html(`
+        <td scope="row" colspan="7">
+            <form class="userEdit">
+                <div class="row">
+                    <div class="col-md-2 col-xs-12">
+                        <div class="userAvatar">
+                            <img src="../images/product-img.jpg" alt="..." class="img-thumbnail rounded-circle">
+                        </div>
+                        <div class="form-group avatarChange">
+                            <label for="">Thay đổi ảnh đại diện</label>
+                            <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-xs-12">
+                        <h4 class="userName">MS-1505 | ID: 211</h4>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Mã Sản Phẩm</label>
+                                <input type="text" class="form-control" id="inputName" value="MS-1505">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPrice">Giá Gốc</label>
+                                <input type="number" class="form-control" id="inputPrice" value="200000">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="inputDesc">Mô tả</label>
+                                <textarea id="inputDesc" class="form-control" cols="100" rows="5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla quos libero atque quisquam officiis facere laboriosam dignissimos explicabo, in iste debitis illum dicta iure earum. Sequi quis voluptatum sapiente reprehenderit.</textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCate">Loại Sản Phẩm</label>
+                                    <select id="inputCate" class="form-control">
+                                    <option>Choose...</option>
+                                    <option >Hoa Hồng</option>
+                                    <option selected>Bó Hoa Tươi</option>
+                                    <option>Hoa Lyly</option>
+                                    <option>Hoa Cẩm Chướng</option>
+                                    </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputTag">Tag</label>
+                                <textarea id="inputTag" class="form-control" cols="100" rows="3" placeholder="Ngăn cách bằng dấu phẩy">hoa, hoa-tuoi, hoa-hong, bo-hoa, hong
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <div class="form-action row">
+                    <div class="col-md-2"><button type="" class="btn btn-outline-success w-100" onclick="hideProductEdit(event)">Lưu</button></div>
+                    <div class="col-md-1"><button type="" class="btn btn-outline-secondary w-100" onclick="hideProductEdit(event)">Hủy</button></div>
+                </div> 
+            </form>
+        </td>
+    `);
+    
+}
+hideProductEdit = (e) => {
+    var trCurrent = jQuery(e.target).parents("tr");
+    jQuery(trCurrent).html(`
+    <td scope="row">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+            1
+          </label>
+        </div>
+      </td>
+      <td>
+        <a href="javascript:void(0)" class="tdName" onclick="showProductEdit(event)">MS 1505</a>
+      </td>
+      <td>200.000 vnđ</td>
+      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
+      <td>
+        Bó Hoa Tươi
+      </td>
+      <td>
+          <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa</span>
+          <span class="badge badge-pill badge-success d-block p-1 mb-1">Tươi</span>
+          <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa hong</span>
+          <span class="badge badge-pill badge-success d-block p-1 mb-1">Hồng</span>
+      </td>
+      <td>
+          <button type="button" class="btn btn-outline-info"  onclick="showProductEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+          <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+      </td>
+    `);
 }
