@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Florid - Khách hàng</title>
+    <title>Florid - Sản phẩm</title>
     <link rel="icon" type="image/gif" href="../favicon.png" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap&subset=vietnamese" rel="stylesheet">
     <!-- Latest compiled and minified CSS -->
@@ -25,36 +25,36 @@
           <img src="../images/logo.svg" alt="" class="mw-100 w-100"> 
         </div>
         <ul class="mainMenu">
-          <li class="menuItem active">
-            <a href="#" class="menuItem-link"><i class="fa fa-dashboard"></i>Dashboard</a>
-          </li>
-          <li class="menuItem">
-            <a href="./user.html" class="menuItem-link"><i class="fa fa-user"></i>Nhân Viên</a>
-          </li>
-          <li class="menuItem">
-            <a href="./customer.html" class="menuItem-link"><i class="fa fa-user"></i>Khách Hàng</a>
-          </li>
-          <li class="menuItem hasChildren">
-            <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Sản Phẩm</a>
-            <ul class="subMenu">
-              <li class="menuItem">
-                <a href="./product.html" class="menuItem-link">Tất Cả</a>
-              </li>
-              <li class="menuItem">
-                <a href="./productCategory.html" class="menuItem-link">Danh mục Sản phẩm</a>
-              </li>
-              <li class="menuItem">
-                <a href="./productTag.html" class="menuItem-link">Tag Sản phẩm</a>
-              </li>
-            </ul>
-          </li>
-          <li class="menuItem">
-            <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Đơn Hàng</a>
-          </li>
-          <li class="menuItem">
-            <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Thống Kê</a>
-          </li>
-        </ul>
+            <li class="menuItem">
+              <a href="#" class="menuItem-link"><i class="fa fa-dashboard"></i>Dashboard</a>
+            </li>
+            <li class="menuItem">
+              <a href="./user.html" class="menuItem-link"><i class="fa fa-user"></i>Nhân Viên</a>
+            </li>
+            <li class="menuItem">
+              <a href="./customer.html" class="menuItem-link"><i class="fa fa-user"></i>Khách Hàng</a>
+            </li>
+            <li class="menuItem hasChildren active">
+              <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Sản Phẩm</a>
+              <ul class="subMenu">
+                <li class="menuItem">
+                  <a href="./product.html" class="menuItem-link active">Tất Cả</a>
+                </li>
+                <li class="menuItem">
+                  <a href="./productCategory.html" class="menuItem-link">Danh mục Sản phẩm</a>
+                </li>
+                <li class="menuItem">
+                  <a href="./productTag.html" class="menuItem-link">Tag Sản phẩm</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menuItem">
+              <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Đơn Hàng</a>
+            </li>
+            <li class="menuItem">
+              <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Thống Kê</a>
+            </li>
+          </ul>
       </nav>
       <div class="mainContent">
         <div class="contentHeader">
@@ -67,7 +67,7 @@
           </div>
           <div class="col-9 headerCen">
             <h1 class="pageTitle">
-              Quản lý Khách hàng
+              Quản lý Sản phẩm
             </h1>
             <div class="form-group">
               <input type="text" name="" id="" class="form-control" placeholder="Tìm kiếm..." aria-describedby="helpId">
@@ -94,7 +94,7 @@
                 <div class="listHeader">
                     <div class="row listAddNew">
                         <div class="col-xs-12 col-md-2">
-                            <button  class="btn btn-outline-info d-block w-100" onclick="showAddNew('customer')" role="button">Thêm Mới</button>
+                            <button  class="btn btn-outline-info d-block w-100" onclick="showAddNew('product')" role="button">Thêm Mới</button>
                         </div>
                     </div>
                     <div class="row listOptions">
@@ -130,10 +130,11 @@
                     <thead class="table-info">
                       <tr>
                         <th scope="col"  style="width: 5%">STT</th>
-                        <th scope="col">Họ và Tên</th>
-                        <th scope="col">Số điện thoại</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Mã Sản phẩm</th>
+                        <th scope="col">Giá gốc</th>
+                        <th scope="col" style="width: 35%">Mô tả</th>
+                        <th scope="col">Loại Sản phẩm</th>
+                        <th scope="col">Tag</th>
                         <th scope="col">Thao tác</th>
                       </tr>
                     </thead>
@@ -148,14 +149,77 @@
                           </div>
                         </td>
                         <td>
-                          <a href="./customerDetail.html" class="tdName">Adriana C. Ocampo Uria</a>
+                          <a href="javascript:void(0)" class="tdName" onclick="showProductEdit(event)">MS 1505</a>
                         </td>
-                        <td>0898222999</td>
-                        <td>example@gmail.com</td>
-                        <td>Adriana C. Ocampo Uria st. TP. Hồ Chí Minh</td>
+                        <td>200.000 vnđ</td>
+                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
                         <td>
-                            <a href="./customerDetail.html" type="button" class="btn btn-outline-secondary" ><i class="fa fa-eye"></i> Chi tiết</a>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                          Bó Hoa Tươi
+                        </td>
+                        <td>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa</span>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Tươi</span>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa hong</span>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Hồng</span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-info"  onclick="showProductEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td scope="row">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                              2
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <a href="javascript:void(0)" class="tdName" onclick="showProductEdit(event)">MS 1505</a>
+                        </td>
+                        <td>200.000 vnđ</td>
+                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
+                        <td>
+                          Bó Hoa Tươi
+                        </td>
+                        <td>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa</span>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Tươi</span>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa hong</span>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Hồng</span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-info"  onclick="showProductEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td scope="row">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                              3
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <a href="javascript:void(0)" class="tdName" onclick="showProductEdit(event)">MS 1505</a>
+                        </td>
+                        <td>200.000 vnđ</td>
+                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
+                        <td>
+                          Bó Hoa Tươi
+                        </td>
+                        <td>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa</span>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Tươi</span>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa hong</span>
+                            <span class="badge badge-pill badge-success d-block p-1 mb-1">Hồng</span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-outline-info"  onclick="showProductEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
                         </td>
                       </tr>
