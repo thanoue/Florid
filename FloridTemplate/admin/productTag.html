@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Florid - Tag Sản phẩm</title>
+    <link rel="icon" type="image/gif" href="../favicon.png" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900&display=swap&subset=vietnamese" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet"  type="text/css" href="../css/style.css">
+    <link rel="stylesheet"  type="text/css" href="../css/admin.css">
+    <script type='text/javascript' src='../js/admin.js'></script>
+  </head>
+  <body>
+    <div class="adminWrapper">
+      <nav id="sideContent">
+        <div class="adminLogo">
+          <img src="../images/logo.svg" alt="" class="mw-100 w-100"> 
+        </div>
+        <ul class="mainMenu">
+            <li class="menuItem">
+              <a href="#" class="menuItem-link"><i class="fa fa-dashboard"></i>Dashboard</a>
+            </li>
+            <li class="menuItem">
+              <a href="./user.html" class="menuItem-link"><i class="fa fa-user"></i>Nhân Viên</a>
+            </li>
+            <li class="menuItem">
+              <a href="./customer.html" class="menuItem-link"><i class="fa fa-user"></i>Khách Hàng</a>
+            </li>
+            <li class="menuItem hasChildren active">
+              <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Sản Phẩm</a>
+              <ul class="subMenu">
+                <li class="menuItem">
+                  <a href="./product.html" class="menuItem-link active">Tất Cả</a>
+                </li>
+                <li class="menuItem">
+                  <a href="./productCategory.html" class="menuItem-link">Danh mục Sản phẩm</a>
+                </li>
+                <li class="menuItem">
+                  <a href="./productTag.html" class="menuItem-link">Tag Sản phẩm</a>
+                </li>
+              </ul>
+            </li>
+            <li class="menuItem">
+              <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Đơn Hàng</a>
+            </li>
+            <li class="menuItem">
+              <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Thống Kê</a>
+            </li>
+          </ul>
+      </nav>
+      <div class="mainContent">
+        <div class="contentHeader">
+          <div class="col-1 headerLeft">
+            <button class="menuToggle" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="icon-bar top-bar"></span>
+              <span class="icon-bar middle-bar"></span>
+              <span class="icon-bar bottom-bar"></span>				
+            </button>
+          </div>
+          <div class="col-9 headerCen">
+            <h1 class="pageTitle">
+              Quản lý Tag Sản phẩm
+            </h1>
+            <div class="form-group">
+              <input type="text" name="" id="" class="form-control" placeholder="Tìm kiếm..." aria-describedby="helpId">
+              <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+          <div class="col-2  headerRight dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              <span>Vĩnh Kha</span>
+              <img src="../images/product-img.jpg" alt="" class="rounded-circle mw-100">
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Account</a>
+              <a class="dropdown-item" href="#">Change Password</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Log Out</a>
+            </div>
+          </div>
+        </div>
+        <div class="contentContent container-fluid cusScroll">
+            <!-- Start List Component -->
+            <div class="listWrap">
+                <!-- Top of List Component -->
+                <div class="listHeader">
+                    <div class="row listAddNew">
+                        <div class="col-xs-12 col-md-2">
+                            <button  class="btn btn-outline-info d-block w-100" onclick="showAddNew('tag')" role="button">Thêm Mới</button>
+                        </div>
+                    </div>
+                    <div class="row listOptions">
+                        <div class="col-md-2 col-xs-12  optionDelete">
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                                <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12  optionSearch">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Tìm kiếm...">
+                                <button type="submit" class="btn btn-info position-absolute "><i class="fa fa-search"></i></button>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-4 col-xs-12  text-right optionPerPage">
+                            <div class="form-group">
+                              <label>Hiển thị </label>
+                              <select class="form-control w-25 d-inline" name="" id="">
+                                <option>10</option>
+                                <option>20</option>
+                                <option>30</option>
+                              </select>
+                              <label> dòng / <strong>23 dòng</strong></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Content of List Component -->
+                <div class="listContent">
+                  <table class="table table-bordered table-hover table-responsive-xl">
+                    <thead class="table-info">
+                      <tr>
+                        <th scope="col"  style="width: 5%">STT</th>
+                        <th scope="col">Tên hiển thị</th>
+                        <th scope="col">Giá trị</th>
+                        <th scope="col" style="width:50%">Mô tả</th>
+                        <th scope="col">Thao tác</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td scope="row">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                              1
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <a href="javascript:void(0)" class="tdName" onclick="showTagEdit(event)">Hoa Hồng</a>
+                        </td>
+                        <td>hoa-hong</td>
+                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-info"  onclick="showTagEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td scope="row">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                              2
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <a href="javascript:void(0)" class="tdName" onclick="showTagEdit(event)">Bó Hoa Tươi</a>
+                        </td>
+                        <td>bo-hoa-tuoi</td>
+                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-info"  onclick="showTagEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td scope="row">
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                              3
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <a href="javascript:void(0)" class="tdName" onclick="showTagEdit(event)">Hoa LyLy</a>
+                        </td>
+                        <td>hoa-ly-ly</td>
+                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-info"  onclick="showTagEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Bottom of List Component -->
+                <div class="listFooter">
+                    <ul class="pagination text-right">
+                      <li class="page-item">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fa fa-angle-left"></i></a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- End List Component -->
+        </div>
+        <div class="contentFooter">
+          Power by Florid
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>
