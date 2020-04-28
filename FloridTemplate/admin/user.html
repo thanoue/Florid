@@ -26,25 +26,25 @@
         </div>
         <ul class="mainMenu">
           <li class="menuItem">
-            <a href="#" class="menuItem-link"><i class="fa fa-dashboard"></i>Dashboard</a>
+            <a href="./dashboard.html" class="menuItem-link"><i class="fa fa-dashboard"></i>Dashboard</a>
           </li>
           <li class="menuItem active">
-            <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Nhân Viên</a>
+            <a href="./user.html" class="menuItem-link"><i class="fa fa-user"></i>Nhân Viên</a>
           </li>
           <li class="menuItem">
-            <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Khách Hàng</a>
+            <a href="./customer.html" class="menuItem-link"><i class="fa fa-user"></i>Khách Hàng</a>
           </li>
           <li class="menuItem hasChildren">
             <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Sản Phẩm</a>
             <ul class="subMenu">
               <li class="menuItem">
-                <a href="#" class="menuItem-link">Tất Cả</a>
+                <a href="./product.html" class="menuItem-link active">Tất Cả</a>
               </li>
               <li class="menuItem">
-                <a href="#" class="menuItem-link">Danh mục Sản phẩm</a>
+                <a href="./productCategory.html" class="menuItem-link">Danh mục Sản phẩm</a>
               </li>
               <li class="menuItem">
-                <a href="#" class="menuItem-link">Tag Sản phẩm</a>
+                <a href="./productTag.html" class="menuItem-link">Tag Sản phẩm</a>
               </li>
             </ul>
           </li>
@@ -131,7 +131,7 @@
                       <tr>
                         <th scope="col"  style="width: 5%">STT</th>
                         <th scope="col">Họ và Tên</th>
-                        <th scope="col">Số điện thoại</th>
+                        <th scope="col">Điện thoại</th>
                         <th scope="col">Địa chỉ</th>
                         <th scope="col">Quyền</th>
                         <th scope="col">Thao tác</th>
@@ -156,8 +156,10 @@
                           <span class="badge badge-pill badge-success d-block p-2">Account</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"  onclick="showUserEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
-                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"  onclick="showUserEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                              <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -178,9 +180,11 @@
                           <span class="badge badge-pill badge-info d-block p-2">Shipper</span>
                         </td>
                         <td>
-                          <button type="button" class="btn btn-outline-info"  onclick="showUserEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                          <div class="btn-group">
+                            <button type="button" class="btn btn-outline-info"  onclick="showUserEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
                           <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
-                          <a href="./saleItems.html" type="button" class="btn btn-outline-primary"><i class="fa fa-eye"></i> Đơn hàng</a>
+                          <a href="./saleItems.html" type="button" class="btn btn-outline-primary"><i class="fa fa-eye"></i> Chi tiết</a>
+                          </div>
                         </td>
                       </tr>
                       <tr>
@@ -201,9 +205,11 @@
                           <span class="badge badge-pill badge-danger d-block p-2">Florist</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
-                            <a  href="./saleItems.html" type="button" class="btn btn-outline-primary"><i class="fa fa-eye"></i> Đơn hàng</a>
+                            <a  href="./saleItems.html" type="button" class="btn btn-outline-primary"><i class="fa fa-eye"></i> Chi tiết</a>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -224,8 +230,10 @@
                           <span class="badge badge-pill badge-secondary d-block p-2">Other</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -246,8 +254,10 @@
                           <span class="badge badge-pill badge-success d-block p-2">Account</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -268,8 +278,10 @@
                           <span class="badge badge-pill badge-success d-block p-2">Account</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -290,8 +302,10 @@
                           <span class="badge badge-pill badge-info d-block p-2">Shipper</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -312,8 +326,10 @@
                           <span class="badge badge-pill badge-danger d-block p-2">Florist</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -334,8 +350,10 @@
                           <span class="badge badge-pill badge-secondary d-block p-2">Other</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -356,8 +374,10 @@
                           <span class="badge badge-pill badge-success d-block p-2">Account</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr><tr>
                         <td scope="row">
@@ -377,8 +397,10 @@
                           <span class="badge badge-pill badge-success d-block p-2">Account</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -399,8 +421,10 @@
                           <span class="badge badge-pill badge-info d-block p-2">Shipper</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -421,8 +445,10 @@
                           <span class="badge badge-pill badge-danger d-block p-2">Florist</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -443,8 +469,10 @@
                           <span class="badge badge-pill badge-secondary d-block p-2">Other</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                       <tr>
@@ -465,8 +493,10 @@
                           <span class="badge badge-pill badge-success d-block p-2">Account</span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button>
                             <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
                         </td>
                       </tr>
                     </tbody>

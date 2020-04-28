@@ -3,14 +3,13 @@ jQuery(document).ready(function(){
     jQuery(".showSubMenu").click(function(){
         jQuery(this).parent().toggleClass("show");
     });
-
     jQuery(".menuToggle").click(function(){
         jQuery(".adminWrapper").toggleClass("mini");
     });
-
     jQuery(".openOrderProducts").click(function(){
         jQuery(this).next().toggle(200);
-    })
+    });
+    
 })
 
 //Add New Object
@@ -83,8 +82,12 @@ showAddNew = (obj) => {
             <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
           </div>
           <div class="form-action row">
-            <div class="col-md-2"><button type="" class="btn btn-outline-success w-100" onclick="">Thêm Mới</button></div>
-            <div class="col-md-1"><a href="javascript:void(0)" class="btn btn-outline-secondary w-100" onclick="hideAdd()">Hủy</a></div>
+            <div class="col-md-3">
+                <div class="btn-group w-100">
+                    <button type="" class="btn btn-outline-success w-100" onclick="">Thêm Mới</button>
+                    <a href="javascript:void(0)" class="btn btn-outline-secondary" onclick="hideAdd()">Hủy</a>
+                </div>
+            </div>
         </div> 
         </form>
       </div>
@@ -139,8 +142,12 @@ showAddNew = (obj) => {
             </div>
         </div>
                 <div class="form-action row">
-                <div class="col-md-2"><button type="" class="btn btn-outline-success w-100" onclick="">Thêm Mới</button></div>
-                <div class="col-md-1"><a href="javascript:void(0)" class="btn btn-outline-secondary w-100" onclick="hideAdd()">Hủy</a></div>
+                <div class="col-md-3">
+                    <div class="btn-group w-100">
+                        <button type="" class="btn btn-outline-success w-100" onclick="">Thêm Mới</button>
+                        <a href="javascript:void(0)" class="btn btn-outline-secondary" onclick="hideAdd()">Hủy</a>
+                    </div>
+                </div>
             </div> 
             </form>
             </div>
@@ -151,23 +158,15 @@ showAddNew = (obj) => {
         <form action="">
         
     <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="inputName">Mã Sản Phẩm</label>
             <input type="text" class="form-control" id="inputName" placeholder="SP-009">
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="inputPrice">Giá Gốc (vnđ)</label>
             <input type="number" class="form-control" id="inputPrice" placeholder="200000">
         </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-12">
-            <label for="inputDesc">Mô tả</label>
-            <textarea id="inputDesc" class="form-control" cols="100" rows="5" placeholder="Mô tả sản phẩm"></textarea>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="inputCate">Loại Sản Phẩm</label>
                 <select id="inputCate" class="form-control">
                 <option selected>Choose...</option>
@@ -177,12 +176,25 @@ showAddNew = (obj) => {
                 <option>Hoa Cẩm Chướng</option>
                 </select>
         </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputDesc">Mô tả</label>
+            <textarea id="inputDesc" class="form-control" cols="100" rows="5" placeholder="Mô tả sản phẩm"></textarea>
+        </div>
         <div class="form-group col-md-6">
             <label for="inputTag">Tag</label>
-            <textarea id="inputTag" class="form-control" cols="100" rows="3" placeholder="Ngăn cách bằng dấu phẩy"></textarea>
+            <textarea id="inputTag" class="form-control" cols="100" rows="2" placeholder="Ngăn cách bằng dấu phẩy"></textarea>
+            <ul class="tagList">
+                <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa</span></li>
+                <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-tuoi</span></li>
+                <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
+                <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+            </ul>
         </div>
     </div>
-          <div class="form-group avatarChange">
+    <div class="form-group avatarChange">
             <label for="">Chọn ảnh đại diện</label>
             <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
           </div>
@@ -214,8 +226,12 @@ showAddNew = (obj) => {
         </div>
     </div>
           <div class="form-action row">
-            <div class="col-md-2"><button type="" class="btn btn-outline-success w-100" onclick="">Thêm Mới</button></div>
-            <div class="col-md-1"><a href="javascript:void(0)" class="btn btn-outline-secondary w-100" onclick="hideAdd()">Hủy</a></div>
+            <div class="col-md-3">
+                <div class="btn-group w-100">
+                    <button type="" class="btn btn-outline-success w-100" onclick="">Thêm Mới</button>
+                    <a href="javascript:void(0)" class="btn btn-outline-secondary" onclick="hideAdd()">Hủy</a>
+                </div>
+            </div>
         </div> 
         </form>
       </div>
@@ -340,8 +356,10 @@ hideUserEdit = (e) => {
         <span class="badge badge-pill badge-success d-block p-2">Account</span>
     </td>
     <td>
-        <button type="button" class="btn btn-outline-info"  onclick="showUserEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
-        <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-info"  onclick="showUserEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+        </div>
     </td>
     `);
 }
@@ -365,23 +383,15 @@ showProductEdit = (e) => {
                     <div class="col-md-10 col-xs-12">
                         <h4 class="userName">MS-1505 | ID: 211</h4>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="inputName">Mã Sản Phẩm</label>
                                 <input type="text" class="form-control" id="inputName" value="MS-1505">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="inputPrice">Giá Gốc</label>
                                 <input type="number" class="form-control" id="inputPrice" value="200000">
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="inputDesc">Mô tả</label>
-                                <textarea id="inputDesc" class="form-control" cols="100" rows="5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla quos libero atque quisquam officiis facere laboriosam dignissimos explicabo, in iste debitis illum dicta iure earum. Sequi quis voluptatum sapiente reprehenderit.</textarea>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="inputCate">Loại Sản Phẩm</label>
                                     <select id="inputCate" class="form-control">
                                     <option>Choose...</option>
@@ -391,10 +401,22 @@ showProductEdit = (e) => {
                                     <option>Hoa Cẩm Chướng</option>
                                     </select>
                             </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputDesc">Mô tả</label>
+                                <textarea id="inputDesc" class="form-control" cols="100" rows="5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla quos libero atque quisquam officiis facere laboriosam dignissimos explicabo, in iste debitis illum dicta iure earum. Sequi quis voluptatum sapiente reprehenderit.</textarea>
+                            </div>
                             <div class="form-group col-md-6">
                                 <label for="inputTag">Tag</label>
-                                <textarea id="inputTag" class="form-control" cols="100" rows="3" placeholder="Ngăn cách bằng dấu phẩy">hoa, hoa-tuoi, hoa-hong, bo-hoa, hong
-                                </textarea>
+                                <textarea id="inputTag" class="form-control" cols="100" rows="2" placeholder="Ngăn cách bằng dấu phẩy">hoa, hoa-tuoi,</textarea>
+                                <ul class="tagList">
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-tuoi</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -434,8 +456,10 @@ hideProductEdit = (e) => {
           <span class="badge badge-pill badge-success d-block p-1 mb-1">Hồng</span>
       </td>
       <td>
-          <button type="button" class="btn btn-outline-info"  onclick="showProductEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
-          <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-info"  onclick="showProductEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+          </div>
       </td>
     `);
 }
@@ -493,8 +517,17 @@ hideTagEdit = (e) => {
     <td>hoa-hong</td>
     <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
     <td>
-        <button type="button" class="btn btn-outline-info"  onclick="showTagEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-info"  onclick="showTagEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
         <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+        </div>
     </td>
     `);
+}
+
+selectTag = (e) => {
+    var currentTags = jQuery("textarea#inputTag").val();
+    var selectedTag = jQuery(e.target).text();
+    jQuery("textarea#inputTag").val(currentTags + selectedTag + ",");
+    jQuery(e.target).parent("li").remove();
 }
