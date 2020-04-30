@@ -9,7 +9,24 @@ jQuery(document).ready(function(){
     jQuery(".openOrderProducts").click(function(){
         jQuery(this).next().toggle(200);
     });
-    
+
+    var cateOpt = [];
+    jQuery( '.cateFilter .dropdown-menu a' ).on( 'click', function( event ) {
+    var $target = jQuery( event.currentTarget ),
+        val = $target.attr( 'data-value' ),
+        $inp = $target.find( 'input' ),
+        idx;
+    if ( ( idx = cateOpt.indexOf( val ) ) > -1 ) {
+        cateOpt.splice( idx, 1 );
+        setTimeout( function() { $inp.prop( 'checked', false ) }, 0);
+    } else {
+        cateOpt.push( val );
+        setTimeout( function() { $inp.prop( 'checked', true ) }, 0);
+    }
+    jQuery( event.target ).blur();
+    console.log( cateOpt );
+    return false;
+    });
 })
 
 //Add New Object
@@ -184,7 +201,11 @@ showAddNew = (obj) => {
         </div>
         <div class="form-group col-md-6">
             <label for="inputTag">Tag</label>
-            <textarea id="inputTag" class="form-control" cols="100" rows="2" placeholder="Ngăn cách bằng dấu phẩy"></textarea>
+            <div class="tagAdd">
+                <input type="text" class="form-control" value="" placeholder="Nhập tag mới">
+                <span class="addTagBtn">Thêm</span>
+            </div>
+            <div class="showTags"></div>
             <ul class="tagList">
                 <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa</span></li>
                 <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
@@ -233,6 +254,31 @@ showAddNew = (obj) => {
                 </div>
             </div>
         </div> 
+        </form>
+      </div>
+        `; break;
+        case "cate": html = `<div class="popupContent" id="cateAdd">
+        <h4 class="userName">Thêm mới Danh mục Sản phẩm</h4>
+        <hr class="adminSeperate">
+        <form action="">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputName">Mã Danh Mục</label>
+                    <input type="text" class="form-control" id="inputName" placeholder="DM_01">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPrice">Tên Danh Mục</label>
+                    <input type="text" class="form-control" id="inputValue" placeholder="Giỏ hoa tươi">
+                </div>
+            </div>
+            <div class="form-action row">
+                <div class="col-md-3">
+                    <div class="btn-group w-100">
+                        <button type="" class="btn btn-outline-success w-100" onclick="">Thêm Mới</button>
+                        <a href="javascript:void(0)" class="btn btn-outline-secondary" onclick="hideAdd()">Hủy</a>
+                    </div>
+                </div>
+            </div> 
         </form>
       </div>
         `; break;
@@ -409,11 +455,13 @@ showProductEdit = (e) => {
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputTag">Tag</label>
-                                <textarea id="inputTag" class="form-control" cols="100" rows="2" placeholder="Ngăn cách bằng dấu phẩy">hoa, hoa-tuoi,</textarea>
+                                <div class="tagAdd">
+                                    <input type="text" class="form-control" value="" placeholder="Nhập tag mới">
+                                    <span class="addTagBtn">Thêm</span>
+                                </div>
+                                <div class="showTags"><span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span></div>
                                 <ul class="tagList">
-                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa</span></li>
                                     <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
-                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-tuoi</span></li>
                                     <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
                                     <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
                                 </ul>
@@ -450,10 +498,15 @@ hideProductEdit = (e) => {
         Bó Hoa Tươi
       </td>
       <td>
-          <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa</span>
-          <span class="badge badge-pill badge-success d-block p-1 mb-1">Tươi</span>
-          <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa hong</span>
-          <span class="badge badge-pill badge-success d-block p-1 mb-1">Hồng</span>
+      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Hoa</span>
+      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Tươi</span>
+      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Hoa hong</span>
+      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Hồng</span>
+      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">tươi</span>
+      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">test</span>
+      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">bó hoa</span>
+      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">bóa hoa tươi</span>
+      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">florid</span>
       </td>
       <td>
           <div class="btn-group">
@@ -526,8 +579,67 @@ hideTagEdit = (e) => {
 }
 
 selectTag = (e) => {
-    var currentTags = jQuery("textarea#inputTag").val();
     var selectedTag = jQuery(e.target).text();
-    jQuery("textarea#inputTag").val(currentTags + selectedTag + ",");
+    var currentShow = jQuery(".showTags").html();
+
+    jQuery(".showTags").html(currentShow + "<span onclick='removeTag(event)'>"+ selectedTag +"</span>");
     jQuery(e.target).parent("li").remove();
+}
+removeTag = (e) => {
+    var removedTag = jQuery(e.target).text();
+    jQuery("ul.tagList").append("<li><span class='badge badge-pill badge-info p-2' onclick='selectTag(event)'>"+ removedTag +"</span></li>");
+    jQuery(e.target).remove();
+}
+
+showCateEdit = (e) => {
+    var trCurrent = jQuery(e.target).parents("tr");
+    jQuery(trCurrent).html(`
+        <td scope="row" colspan="4">
+            <form class="cateEdit">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <h4 class="userName">Giỏ Hoa Tươi | ID: DM_01</h4>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Mã Danh mục</label>
+                                <input type="text" class="form-control" id="inputName" value="DM_01">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputPrice">Tên Danh mục</label>
+                                <input type="text" class="form-control" id="inputValue" value="Giỏ Hoa Tươi">
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <div class="form-action row">
+                    <div class="col-md-2"><button type="" class="btn btn-outline-success w-100" onclick="hideCateEdit(event)">Lưu</button></div>
+                    <div class="col-md-1"><button type="" class="btn btn-outline-secondary w-100" onclick="hideCateEdit(event)">Hủy</button></div>
+                </div> 
+            </form>
+        </td>
+    `);
+    
+}
+hideCateEdit = (e) => {
+    var trCurrent = jQuery(e.target).parents("tr");
+    jQuery(trCurrent).html(`
+    <td scope="row">
+        <div class="form-check">
+        <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+            1
+        </label>
+        </div>
+    </td>
+    <td>
+        <a href="javascript:void(0)" class="tdName" onclick="showCateEdit(event)">DM_01</a>
+    </td>
+    <td>Giỏ Hoa Tươi</td>
+    <td>
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-info"  onclick="showCateEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+        <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+        </div>
+    </td>
+    `);
 }

@@ -191,15 +191,15 @@ button.menuToggle {
 span.icon-bar.top-bar {
     width: 20px;
     transform: translateY(-50%) rotate(-45deg);
-    top: calc(50% - 8px);
-    left: -1px;
+    top: calc(50% - 7px);
+    left: -2px;
 }
 span.icon-bar.bottom-bar
 {
     width: 20px;
     transform: translateY(-50%) rotate(45deg);
-    top: calc(50% + 8px);
-    left: -1px;
+    top: calc(50% + 7px);
+    left: -2px;
 }
 .mini span.icon-bar.top-bar, 
 .mini span.icon-bar.bottom-bar, 
@@ -324,6 +324,18 @@ span.icon-bar.bottom-bar
     font-size: 14px;
 }
 /* ============================================CONTENT  */
+.col-md-4.optionPerPage
+{
+    max-width: 28%;
+}
+.col-md-4.optionSearch {
+    max-width: 38%;
+    flex: 0 0 38%;
+}
+.col-md-6.optionSearch {
+    flex: 0 0 55%;
+    max-width: 55%;
+}
 .contentContent.container-fluid {
     padding: 30px;
     height: calc(100vh - 150px);
@@ -569,4 +581,51 @@ ul.tagList li {
     margin-top: 5px;
     margin-right: 5px;
     cursor: pointer;
+}
+
+.tagAdd input.form-control {
+    width: 80%;
+    display: inline-block;
+}
+
+span.addTagBtn {
+    display: inline-block;
+    width: 19%;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #17a2b8;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #17a2b8;
+}
+.showTags {
+    min-height: 50px;
+    margin-top: 5px;
+}
+.showTags span {
+    display: inline-block;
+    border: 1px solid #aaa;
+    font-size: 13px;
+    padding: 0 7px;
+    margin-right: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #666;
+}
+.showTags span:before 
+{
+    content: "\f00d";
+    font-family: fontawesome;
+    margin-right: 5px;
+}
+.cateFilter ul.dropdown-menu {
+    padding: 10px;
+    background: #f8f8f8;
+}
+.cateFilter ul.dropdown-menu a {
+    color: #666;
+}
+.cateFilter ul.dropdown-menu a input {
+    margin-right: 5px;
 }
