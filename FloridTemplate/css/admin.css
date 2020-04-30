@@ -629,3 +629,46 @@ span.addTagBtn {
 .cateFilter ul.dropdown-menu a input {
     margin-right: 5px;
 }
+.orderDetail .productList {
+    width: 100%;
+    float: left;
+    margin-top: 15px;
+    display: none;
+}
+
+.orderDetail .productItem:not(:last-child) {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px dotted #ddd;
+    width: 100%;
+    float: left;
+}
+.orderDetail .productItem .itemTop {
+    width: 100%;
+    float: left;
+    padding: 10px;
+    background: #ddd;
+    font-weight: 600;
+    font-size: 16px;
+}
+.orderDetail .productItem .itemBot {
+    width: 100%;
+    float: left;
+}
+.orderDetail .productItem .itemBot img.itemImg {
+    width: 30%;
+    float: left;
+    height: 175px;
+    object-fit: cover;
+    object-position: center;
+}
+.orderDetail .productItem .itemBot .itemBotInfo {
+    width: 70%;
+    float: left;
+    padding-left: 20px;
+    padding-top: 20px;
+}
+.orderDetail .productItem .itemBot label 
+{
+    font-weight: 600;
+}

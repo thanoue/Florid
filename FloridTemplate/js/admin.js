@@ -7,7 +7,7 @@ jQuery(document).ready(function(){
         jQuery(".adminWrapper").toggleClass("mini");
     });
     jQuery(".openOrderProducts").click(function(){
-        jQuery(this).next().toggle(200);
+        jQuery(this).next().toggle(250);
     });
 
     var cateOpt = [];
