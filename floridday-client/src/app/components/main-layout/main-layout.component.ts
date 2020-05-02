@@ -8,8 +8,9 @@ import { LocalService } from 'src/app/services/common/local.service';
 import { OnlineUserService } from 'src/app/services/online.user.service';
 import { AuthService } from 'src/app/services/common/auth.service';
 import { PrintJobService } from 'src/app/services/print-job.service';
+import { MenuItems } from 'src/app/models/enums';
 
-declare function doPrintJob(data: {}): any;
+declare function initLeftMenu(): any;
 
 @Component({
   selector: 'app-main-layout',
@@ -21,26 +22,21 @@ export class MainLayoutComponent implements OnDestroy, OnInit {
   navigateClass: string;
   title: string;
   headerUpdate: Subscription;
+  currentMenu: MenuItems;
 
-  constructor(public router: Router, private globalService: GlobalService, private onlineUserService: OnlineUserService, private authService: AuthService
-    , private printJobService: PrintJobService) {
+  userName: string;
+  userAvt: string;
 
-    this.navigateClass = '';
-    this.title = '';
+  menus = MenuItems;
 
-    this.headerUpdate = this.globalService.updateHeader
-      .subscribe(headerInfo => {
-
-        if (headerInfo === null || !headerInfo) {
-          return;
-        }
-
-        this.updateHeaderBar(headerInfo.Title, headerInfo.NavigateClass);
-
-      });
-
+  constructor(private globalService: GlobalService, public router: Router, private onlineUserService: OnlineUserService, private authService: AuthService) {
   }
+
   ngOnInit(): void {
+
+    this.currentMenu = MenuItems.None;
+
+    initLeftMenu();
 
     this.onlineUserService.loginTimeChanging(LocalService.getUserId(), (userId) => {
       this.authService.loutOutFirebase((loggedOut) => {
@@ -50,30 +46,27 @@ export class MainLayoutComponent implements OnDestroy, OnInit {
       });
     });
 
-    this.globalService.setStatusBarColor(false);
+    this.userName = LocalService.getUserName();
 
-    // if (LocalService.isPrinter()) {
-    //   this.printJobService.printJobAdd(data => {
-    //     console.log('print data:', data);
-    //     doPrintJob(data);
-    //   });
-    // }
+    console.log(LocalService.getUserAvtUrl());
 
-  }
+    this.headerUpdate = this.globalService.updateHeader
+      .subscribe(pageComponent => {
 
-  public updateHeaderBar(title: string, navigateClass: string) {
-    setTimeout(() => {
-      this.navigateClass = navigateClass;
-      this.title = title;
-    }, 100);
+        if (pageComponent == null) {
+          return;
+        }
+
+        this.title = pageComponent.Title;
+        this.currentMenu = pageComponent.Menu;
+
+      });
+
+
   }
 
   ngOnDestroy(): void {
     this.headerUpdate.unsubscribe();
-  }
-
-  navigateOnClick() {
-    this.globalService.clickOnNavigateButton();
   }
 
 

@@ -43,6 +43,7 @@ export class LocalService {
         // tslint:disable-next-line:radix
         return parseInt(LocalService.getItem(LOCAL_STORAGE_VARIABLE.role));
     }
+
     static setRole(role: Roles) {
         LocalService.setItem(LOCAL_STORAGE_VARIABLE.role, role);
     }
@@ -71,11 +72,11 @@ export class LocalService {
     }
 
     static getUserEmail() {
-        return LocalService.getItem(LOCAL_STORAGE_VARIABLE.user_avt_url);
+        return LocalService.getItem(LOCAL_STORAGE_VARIABLE.user_email);
     }
 
     static setUserEmail(email: string) {
-        LocalService.setItem(LOCAL_STORAGE_VARIABLE.user_avt_url, email);
+        LocalService.setItem(LOCAL_STORAGE_VARIABLE.user_email, email);
     }
 
     static getPhoneNumber() {

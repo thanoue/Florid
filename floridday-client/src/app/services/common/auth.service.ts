@@ -5,11 +5,8 @@ import { Local } from 'protractor/built/driverProviders';
 import { LoginModel } from 'src/app/models/entities/user.entity';
 import * as firebase from 'firebase';
 import { GlobalService } from './global.service';
-import { async } from '@angular/core/testing';
 import { UserService } from '../user.service';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpService } from './http.service';
-import { API_END_POINT } from 'src/app/app.constants';
 import { OnlineUserService } from '../online.user.service';
 import { OnlineUser } from 'src/app/models/entities/online.user.entity';
 import { FunctionsService } from './functions.service';
@@ -21,7 +18,7 @@ import { FunctionsService } from './functions.service';
 })
 export class AuthService {
 
-  constructor(private onlineUserService: OnlineUserService, private globalService: GlobalService, private userService: UserService, public auth: AngularFireAuth, private httpService: HttpService) {
+  constructor(private onlineUserService: OnlineUserService, private globalService: GlobalService, private userService: UserService, private httpService: HttpService) {
   }
 
   static getCurrentRole(): any {
@@ -33,7 +30,7 @@ export class AuthService {
 
     this.globalService.startLoading();
 
-    this.auth.auth.signOut().then(() => {
+    firebase.auth().signOut().then(() => {
 
       LocalService.clear();
       this.globalService.stopLoading();
@@ -52,7 +49,7 @@ export class AuthService {
   login(model: LoginModel, loginCallback: (isSuccess: boolean) => void) {
 
     this.globalService.startLoading();
-    this.auth.auth.signInWithEmailAndPassword(model.userName, model.passcode)
+    firebase.auth().signInWithEmailAndPassword(model.userName, model.passcode)
       .then(async userInfo => {
 
         LocalService.clear();
@@ -73,6 +70,7 @@ export class AuthService {
               LocalService.setAccessToken(idToken);
               LocalService.setPhoneNumber(userInfo.user.phoneNumber);
               LocalService.setRole(res.role);
+              LocalService.setUserAvtUrl(userInfo.user.photoURL);
               LocalService.setUserEmail(userInfo.user.email);
               LocalService.setUserId(userInfo.user.uid);
               LocalService.setIsPrinter(!res.isPrinter ? false : res.isPrinter);

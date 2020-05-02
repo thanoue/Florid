@@ -34,6 +34,19 @@ export enum MembershipTypes {
     VVipMember
 }
 
+
+export enum MenuItems {
+    None,
+    Home,
+    User,
+    Customer,
+    Product,
+    ProductCategory,
+    ProductTag,
+    Order,
+    Summary
+}
+
 export enum OrderDetailStates {
     Waiting = 'Waiting',
     Making = 'Making',

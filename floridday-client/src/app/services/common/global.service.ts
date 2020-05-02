@@ -8,12 +8,10 @@ import { ToastrService } from 'ngx-toastr';
 import { OrderReceiverDetail } from 'src/app/models/entities/order.entity';
 import { District, Ward } from 'src/app/models/entities/address.entity';
 import { Product } from 'src/app/models/entities/product.entity';
+import { PageComponent } from 'src/app/models/view.models/menu.model';
 
-declare function setStatusBarColor(isDark: boolean): any;
-declare function isOnTerminal(): any;
 declare function alert(message: string, alertType: number): any;
 declare function openConfirm(message: string, okCallback: () => void, noCallback: () => void, cancelCallback: () => void): any;
-
 
 @Injectable({
     providedIn: 'root'
@@ -23,25 +21,17 @@ export class GlobalService {
     notifySetup: any;
 
     spinnerInvoke: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    updateHeader: BehaviorSubject<RouteModel> = new BehaviorSubject<RouteModel>(null);
-
-    navigateOnClick = new Subject<boolean>();
-    navigateOnClickEmitter$ = this.navigateOnClick.asObservable;
+    updateHeader: BehaviorSubject<PageComponent> = new BehaviorSubject<PageComponent>(null);
 
     private loadingCount = 0;
 
-    currentOrderViewModel: OrderViewModel;
-    currentOrderDetailViewModel: OrderDetailViewModel;
     currentDistricts: District[];
     currentWards: Ward[];
-    cacheProducts: Product[];
 
     constructor(private toastr: ToastrService, private ngZone: NgZone) {
 
-        this.currentOrderViewModel = new OrderViewModel();
         this.currentDistricts = [];
         this.currentWards = [];
-        this.cacheProducts = [];
 
         this.notifySetup = { timeOut: 5000, tapToDismiss: true, progressBar: false, progressAnimation: 'decreasing', positionClass: 'toast-bottom-full-width', closeButton: true, extendedTimeOut: 3000 };
 
@@ -77,17 +67,6 @@ export class GlobalService {
         }
     }
 
-    setStatusBarColor(isDark: boolean) {
-        setStatusBarColor(isDark);
-    }
-
-    updateHeaderInfo(info: RouteModel) {
-        this.updateHeader.next(info);
-    }
-
-    clickOnNavigateButton() {
-        this.navigateOnClick.next(true);
-    }
 
     toastTrShowing(message: string, alertType: number) {
         switch (alertType) {
@@ -126,10 +105,5 @@ export class GlobalService {
 
     openConfirm(message: string, okCallback: () => void, noCallback?: () => void, cancelCallback?: () => void) {
         openConfirm(message, okCallback, noCallback, cancelCallback);
-    }
-
-
-    isRunOnTerimal(): boolean {
-        return isOnTerminal();
     }
 }

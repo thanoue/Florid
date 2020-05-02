@@ -3,40 +3,27 @@ import { NgModule, Injector } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { QRCodeModule } from 'angularx-qrcode';
-import { AngularFireModule } from '@angular/fire';
-import { environment } from '../environments/environment';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AppInjector } from './services/common/base.injector';
-import { GlobalService } from './services/common/global.service';
 import { LoginComponent } from './components/login/login.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
-import { PrinterComponent } from './components/printer/printer.component';
 import { TextBoxComponent } from './controls/text-box/text-box.component';
 import { FormsModule } from '@angular/forms';
 import { InvalidTypeDirective } from './directives/invalid-type.directive';
 import { InvalidmessageDirective } from './directives/invalid-message.directive';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
-import { OrdersManageComponent } from './components/orders-manage/orders-manage.component';
-import { AddOrderComponent } from './components/add-order/add-order.component';
-import { SelectCustomerComponent } from './components/select-customer/select-customer.component';
-import { OrderDetailComponent } from './components/order-detail/order-detail.component';
-import { SelectReceiverComponent } from './components/select-receiver/select-receiver.component';
 import { registerLocaleData, CommonModule } from '@angular/common';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { SearchProductComponent } from './components/search-product/search-product.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import es from '@angular/common/locales/es';
 import * as firebase from 'firebase/app';
 import vi from '@angular/common/locales/vi';
-import { SaleOptionComponent } from './components/sale-option/sale-option.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
-
-declare function getFirebaseConfig(): any;
+import { ProductsComponent } from './components/products/products.component';
+import { PageSegmentComponent } from './controls/page-segment/page-segment.component';
 
 @NgModule({
   declarations: [
@@ -47,24 +34,15 @@ declare function getFirebaseConfig(): any;
     TextBoxComponent,
     InvalidTypeDirective,
     InvalidmessageDirective,
-    OrdersManageComponent,
-    AddOrderComponent,
-    SelectCustomerComponent,
-    OrderDetailComponent,
-    SelectReceiverComponent,
     NotFoundComponent,
-    SearchProductComponent,
-    SaleOptionComponent,
-    PrinterComponent
+    ProductsComponent,
+    PageSegmentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     QRCodeModule,
     FormsModule,
-    AngularFireModule.initializeApp(getFirebaseConfig()),
-    AngularFireDatabaseModule, // for database,
-    AngularFireAuthModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
@@ -89,7 +67,16 @@ export class AppModule {
 
   constructor(injector: Injector) {
     AppInjector.setInjector(injector);
-    firebase.initializeApp(getFirebaseConfig());
+    firebase.initializeApp({
+      apiKey: 'AIzaSyDZGFKjLZH4h0SCRdmJVAP0QsRxo_9qYwA',
+      authDomain: 'lorid-e9c34.firebaseapp.com',
+      databaseURL: 'https://lorid-e9c34.firebaseio.com',
+      projectId: 'lorid-e9c34',
+      storageBucket: 'lorid-e9c34.appspot.com',
+      messagingSenderId: '907493762076',
+      appId: '1:907493762076:web:41a83454c12029c3c6abd9',
+      measurementId: 'G-DMM406R71M'
+    });
     registerLocaleData(es);
     registerLocaleData(vi);
   }

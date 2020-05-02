@@ -3,8 +3,8 @@ import { BaseComponent } from '../base.component';
 import { AuthService } from 'src/app/services/common/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FunctionsService } from 'src/app/services/common/functions.service';
-
-declare function customerSupport(): any;
+import { PageComponent } from 'src/app/models/view.models/menu.model';
+import { MenuItems } from 'src/app/models/enums';
 
 @Component({
   selector: 'app-home',
@@ -13,20 +13,13 @@ declare function customerSupport(): any;
 })
 export class HomeComponent extends BaseComponent {
 
-  Title = 'Trang chủ';
-  NavigateClass = 'nav-icon';
-  IsDataLosingWarning = false;
-
-  protected OnBackNaviage() {
-    customerSupport();
-  }
+  protected PageCompnent = new PageComponent('Trang chủ', MenuItems.Home);
 
   constructor(private router: Router, protected activatedRoute: ActivatedRoute) {
     super();
   }
 
   protected Init() {
-    this.setStatusBarColor(false);
   }
 
   logout() {

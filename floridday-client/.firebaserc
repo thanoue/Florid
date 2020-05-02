@@ -8,8 +8,8 @@
         "client": [
           "floridapi"
         ],
-        "floridStaff": [
-          "floridstaff"
+        "floridAdmin": [
+          "florid-admin"
         ]
       }
     }

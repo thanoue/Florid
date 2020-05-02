@@ -14,41 +14,20 @@ import { OrderViewModel, OrderDetailViewModel } from '../models/view.models/orde
 import { DistrictAddressService } from '../services/address/district-address.service';
 import { WardAddressService } from '../services/address/ward-address.service';
 import { District, Ward } from '../models/entities/address.entity';
-import { FunctionsService } from '../services/common/functions.service';
+import { PageComponent } from '../models/view.models/menu.model';
 
-declare function pickFile(): any;
 declare function addressRequest(districts: District[], resCallback: (res: string) => void, onDistrictChange: (res: string, newWardCallback: (wards: Ward[]) => void) => void): any;
 
 export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    abstract Title: string;
-    protected IsDataLosingWarning = true;
-    protected NavigateClass = 'prev-icon';
+    protected abstract PageCompnent: PageComponent;
 
     protected globalService: GlobalService;
     protected authService: AuthService;
     protected location: Location;
-
     private ngZone: NgZone;
-    private navigateOnClick: Subscription;
     private districtService: DistrictAddressService;
     private wardService: WardAddressService;
-
-    public IsOnTerminal: boolean;
-
-    get globalOrder(): OrderViewModel {
-        return this.globalService.currentOrderViewModel;
-    }
-    set globalOrder(value: OrderViewModel) {
-        this.globalService.currentOrderViewModel = value;
-    }
-
-    get globalOrderDetail(): OrderDetailViewModel {
-        return this.globalService.currentOrderDetailViewModel;
-    }
-    set globalOrderDetail(value: OrderDetailViewModel) {
-        this.globalService.currentOrderDetailViewModel = value;
-    }
 
     get globalDistricts(): District[] {
         return this.globalService.currentDistricts;
@@ -66,6 +45,8 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         this.globalService.currentWards = value;
     }
 
+    protected abstract Init(): any;
+
     constructor() {
         const injector = AppInjector.getInjector();
         this.globalService = injector.get(GlobalService);
@@ -76,39 +57,24 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         this.wardService = injector.get(WardAddressService);
     }
 
+
     ngOnInit(): void {
 
-        const key = 'BaseReference';
-        window[key] = {
-            component: this,
-            zone: this.ngZone,
-            dateTimeSelected: (year, month, day, hour, minute) => this.dateTimeSelected(year, month, day, hour, minute),
-            forceBackNavigate: () => this.backNavigateOnClick(),
-            fileChosen: (path) => this.fileChosen(path)
-        };
+        setTimeout(() => {
 
-        this.IsOnTerminal = this.globalService.isRunOnTerimal();
-        this.Init();
+            this.globalService.updateHeader.next(this.PageCompnent);
+            this.Init();
+
+        }, 100);
+
     }
 
     ngOnDestroy(): void {
-        this.navigateOnClick.unsubscribe();
         this.destroy();
     }
 
     ngAfterViewInit(): void {
 
-        this.globalService.updateHeaderInfo(new RouteModel(this.Title, this.NavigateClass));
-
-        this.navigateOnClick = this.globalService.navigateOnClick
-            .subscribe((res) => {
-
-                if (!res) {
-                    return;
-                }
-
-                this.backNavigateOnClick();
-            });
     }
 
     protected selectAddress(resCallback: (res: string) => void) {
@@ -141,10 +107,6 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
     }
 
-    protected dateTimeSelected(year: number, month: number, day: number, hour: number, minute: number) {
-
-    }
-
     showError(message: string) {
         this.globalService.showError(message);
     }
@@ -161,10 +123,6 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         this.globalService.showWarning(message);
     }
 
-    public openFile() {
-        pickFile();
-    }
-
     protected startLoading() {
         this.globalService.startLoading();
     }
@@ -173,34 +131,9 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         this.globalService.stopLoading();
     }
 
-    protected setStatusBarColor(isDark: boolean) {
-        this.globalService.setStatusBarColor(isDark);
-    }
-
-
-    protected OnBackNaviage() {
-        this.location.back();
-    }
-
-    private backNavigateOnClick() {
-
-        if (this.IsDataLosingWarning) {
-            this.openConfirm('Dữ liệu hiện tại sẽ bị mất! Bạn có chắc chắn?', () => {
-                this.OnBackNaviage();
-            });
-
-        } else {
-            this.OnBackNaviage();
-        }
-    }
-
-    protected abstract Init();
 
     protected destroy() {
 
-    }
-
-    protected fileChosen(path: string) {
     }
 
     protected openConfirm(message: string, okCallback: () => void, noCallback?: () => void, cancelCallback?: () => void) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
+import { PageComponent } from 'src/app/models/view.models/menu.model';
 
 @Component({
   selector: 'app-not-found',
@@ -8,8 +9,7 @@ import { BaseComponent } from '../base.component';
 })
 export class NotFoundComponent extends BaseComponent {
 
-
-  Title: string;
+  PageCompnent: PageComponent;
 
   protected Init() {
   }

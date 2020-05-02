@@ -7,7 +7,8 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/common/auth.service';
 import { LoginModel } from 'src/app/models/entities/user.entity';
 import { OnlineUserService } from 'src/app/services/online.user.service';
-declare function deviceLogin(email: string, pasword: string, isPrinter: boolean, idToken: string): any;
+import { PageComponent } from 'src/app/models/view.models/menu.model';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,8 +16,7 @@ declare function deviceLogin(email: string, pasword: string, isPrinter: boolean,
 })
 export class LoginComponent extends BaseComponent {
 
-  Title = '';
-  NavigateClass = '';
+  protected PageCompnent: PageComponent;
 
   model: LoginModel = new LoginModel();
 
@@ -25,8 +25,6 @@ export class LoginComponent extends BaseComponent {
   }
 
   protected Init() {
-
-    this.setStatusBarColor(true);
 
     this.model.passcode = '123456';
     this.model.userName = 'florid.admin@florid.com';
@@ -39,9 +37,8 @@ export class LoginComponent extends BaseComponent {
     }
 
     this.authService.login(this.model, isSuccess => {
-      if (isSuccess) {
 
-        deviceLogin(this.model.userName, this.model.passcode, LocalService.isPrinter(), LocalService.getAccessToken());
+      if (isSuccess) {
 
         this.router.navigate(['']);
 

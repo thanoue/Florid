@@ -27,13 +27,13 @@
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "./node_modules/ng-pick-datetime/assets/style/picker.min.css",
               "src/assets/style/style.css",
+              "src/assets/style/admin.css",
               "./node_modules/font-awesome/css/font-awesome.css",
               "./node_modules/ngx-toastr/toastr.css",
               "src/assets/style/styles-app-loading.css"
             ],
             "scripts": [
-              "src/assets/js/binding.native.js",
-              "src/assets/js/frontend.js"
+              "src/assets/js/admin.js"
             ]
           },
           "configurations": {
