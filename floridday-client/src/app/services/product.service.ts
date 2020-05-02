@@ -5,7 +5,7 @@ import { from, of } from 'rxjs';
 import { promise } from 'protractor';
 import 'firebase/database';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Product, Products } from '../models/entities/product.entity';
+import { Product } from '../models/entities/product.entity';
 import { ProductCategories } from '../models/enums';
 import { async } from '@angular/core/testing';
 import { constants } from 'crypto';
