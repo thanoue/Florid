@@ -25,7 +25,13 @@ export class ProductService extends BaseService<Product> {
     getCount(): Promise<number> {
         return this.tableRef.orderByChild('Index').limitToLast(1).once('value')
             .then(snapshot => {
-                return (snapshot.val() as Product).Index;
+
+                let product: Product;
+                snapshot.forEach(snap => {
+                    product = snap.val() as Product;
+                });
+
+                return product.Index;
             })
             .catch(error => {
                 this.errorToast(error);
@@ -40,7 +46,13 @@ export class ProductService extends BaseService<Product> {
             .endAt(9999 + category * 10000)
             .limitToLast(1).once('value')
             .then(snapshot => {
-                return (snapshot.val() as Product).CategoryIndex % 10000;
+
+                let product: Product;
+                snapshot.forEach(snap => {
+                    product = snap.val() as Product;
+                });
+
+                return product.CategoryIndex % 10000;
             })
             .catch(error => {
                 this.errorToast(error);
@@ -48,33 +60,38 @@ export class ProductService extends BaseService<Product> {
             });
     }
 
-    getByPage(page: number, itemCount: number, category?: ProductCategories): Promise<Product[]> {
+    getByPage(page: number, itemsPerPage: number, category?: ProductCategories): Promise<Product[]> {
+
+        this.startLoading();
 
         let query: Promise<firebase.database.DataSnapshot>;
 
         if (category === undefined || category === null) {
             query = this.tableRef.orderByChild('Index')
-                .startAt((page - 1) * itemCount + 1)
-                .endAt(itemCount * page)
+                .startAt((page - 1) * itemsPerPage + 1)
+                .endAt(itemsPerPage * page)
                 .once('value');
 
         } else {
-            console.log(category);
             query = this.tableRef.orderByChild('CategoryIndex')
-                .startAt((page - 1) * itemCount + 1 + category * 10000)
-                .endAt(itemCount * page + category * 10000)
+                .startAt((page - 1) * itemsPerPage + 1 + category * 10000)
+                .endAt(itemsPerPage * page + category * 10000)
                 .once('value');
         }
 
         return query
             .then(snapshot => {
+                this.stopLoading();
                 const products = [];
                 snapshot.forEach(snap => {
-                    products.push(snap.val() as Product);
+                    const product = snap.val() as Product;
+                    product.ImageUrl = 'http://florid.com.vn/' + product.ImageUrl;
+                    products.push(product);
                 });
                 return products;
             })
             .catch(error => {
+                this.stopLoading();
                 this.errorToast(error);
                 return [];
             });
