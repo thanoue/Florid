@@ -1,5 +1,7 @@
 import { ProductCategories } from '../enums';
 import { BaseEntity } from './base.entity';
+import { Tag } from './tag.entity';
+import { ProductTagViewModel } from '../view.models/product.tag.model';
 
 export class Product extends BaseEntity {
     Name: string;
@@ -7,8 +9,13 @@ export class Product extends BaseEntity {
     ImageUrl: string;
     ProductCategories: ProductCategories;
     Page: number;
-}
+    Index: number;
+    CategoryIndex: number;
+    Tags: ProductTagViewModel[];
 
-export class Products {
-    Products: Product[];
+    constructor() {
+        super();
+        this.Tags = [];
+    }
+
 }
