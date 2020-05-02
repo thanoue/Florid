@@ -11,11 +11,6 @@ export class Tag extends BaseEntity {
     }
 }
 
-export class ProductTag extends BaseEntity {
-    TagId: string;
-    ProductId: string;
-}
-
 export enum TagTypes {
     Product = 'Product',
     Customer = 'Customer'
