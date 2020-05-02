@@ -48,8 +48,6 @@ export class MainLayoutComponent implements OnDestroy, OnInit {
 
     this.userName = LocalService.getUserName();
 
-    console.log(LocalService.getUserAvtUrl());
-
     this.headerUpdate = this.globalService.updateHeader
       .subscribe(pageComponent => {
 

@@ -1,5 +1,4 @@
 <div class="listWrap">
-    <!-- Top of List Component -->
     <div class="listHeader">
         <div class="row listAddNew">
             <div class="col-xs-12 col-md-2">
@@ -14,13 +13,29 @@
                     <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
                 </div>
             </div>
-            <div class="col-md-6 col-xs-12  optionSearch">
+            <div class="col-md-4 col-xs-12  optionSearch">
                 <div class="form-group">
                     <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
                         placeholder="Tìm kiếm...">
                     <button type="submit" class="btn btn-info position-absolute "><i class="fa fa-search"></i></button>
                 </div>
-
+            </div>
+            <div class="col-md-2 col-xs-12  cateFilter">
+                <div class="button-group">
+                    <button type="button" class="btn btn-outline-info w-100 dropdown-toggle"
+                        data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret">Danh
+                            mục</span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox" />Giỏ
+                                Hoa Tươi</a></li>
+                        <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox" />Kệ Hoa
+                                Tươi</a></li>
+                        <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox" />Bó Hoa
+                                Tươi</a></li>
+                        <li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox" />Hoa Sự
+                                Kiện</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="col-md-4 col-xs-12  text-right optionPerPage">
                 <div class="form-group">
@@ -30,7 +45,7 @@
                         <option>20</option>
                         <option>30</option>
                     </select>
-                    <label> dòng / <strong>23 dòng</strong></label>
+                    <label> dòng / <strong>{{itemTotalCount}} dòng</strong></label>
                 </div>
             </div>
         </div>
@@ -43,105 +58,38 @@
                     <th scope="col" style="width: 5%">STT</th>
                     <th scope="col">Mã Sản phẩm</th>
                     <th scope="col">Giá gốc</th>
-                    <th scope="col" style="width: 35%">Mô tả</th>
+                    <th scope="col" style="width: 15%">Mô tả</th>
+                    <th scope="col" style="width: 20%;">Hình ảnh</th>
                     <th scope="col">Loại Sản phẩm</th>
-                    <th scope="col">Tag</th>
+                    <th scope="col" style="width:15%">Tag</th>
                     <th scope="col">Thao tác</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr *ngFor="let product of products">
                     <td scope="row">
                         <div class="form-check">
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                                1
+                                {{product.Index}}
                             </label>
                         </div>
                     </td>
                     <td>
-                        <a href="javascript:void(0)" class="tdName" onclick="showProductEdit(event)">MS 1505</a>
+                        <a href="javascript:void(0)" class="tdName"
+                            onclick="showProductEdit(event)">{{product.Name}}</a>
                     </td>
-                    <td>200.000 vnđ</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis
-                        perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione
-                        distinctio iusto harum sequi!</td>
+                    <td>{{product.Price}}</td>
+                    <td>{{product.Description}}</td>
                     <td>
-                        Bó Hoa Tươi
-                    </td>
-                    <td>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa</span>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Tươi</span>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa hong</span>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Hồng</span>
+                        <img style="height: 100px;" [src]="product.ImageUrl" />
                     </td>
                     <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-outline-info" onclick="showProductEdit(event)"><i
-                                    class="fa fa-pencil"></i> Sửa</button>
-                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i>
-                                Xóa</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row">
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                                2
-                            </label>
-                        </div>
+                        {{product.ProductCategories}}
                     </td>
                     <td>
-                        <a href="javascript:void(0)" class="tdName" onclick="showProductEdit(event)">MS 1505</a>
-                    </td>
-                    <td>200.000 vnđ</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis
-                        perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione
-                        distinctio iusto harum sequi!</td>
-                    <td>
-                        Bó Hoa Tươi
-                    </td>
-                    <td>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa</span>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Tươi</span>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa hong</span>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Hồng</span>
-                    </td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-outline-info" onclick="showProductEdit(event)"><i
-                                    class="fa fa-pencil"></i> Sửa</button>
-                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i>
-                                Xóa</button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td scope="row">
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                                3
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <a href="javascript:void(0)" class="tdName" onclick="showProductEdit(event)">MS 1505</a>
-                    </td>
-                    <td>200.000 vnđ</td>
-                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis
-                        perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione
-                        distinctio iusto harum sequi!</td>
-                    <td>
-                        Bó Hoa Tươi
-                    </td>
-                    <td>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa</span>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Tươi</span>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Hoa hong</span>
-                        <span class="badge badge-pill badge-success d-block p-1 mb-1">Hồng</span>
+                        <span *ngFo="let tag of product.Tags"
+                            class="badge badge-pill badge-success d-inline-block p-1 mb-1">{{tag.TagAlias}}</span>
                     </td>
                     <td>
                         <div class="btn-group">
