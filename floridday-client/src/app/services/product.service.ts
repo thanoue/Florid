@@ -25,6 +25,64 @@ export class ProductService extends BaseService<Product> {
         super();
     }
 
+    getCount(): Promise<number> {
+        return this.tableRef.orderByChild('Index').limitToLast(1).once('value')
+            .then(snapshot => {
+                return (snapshot.val() as Product).Index;
+            })
+            .catch(error => {
+                this.errorToast(error);
+                return 0;
+            });
+    }
+
+    getCategoryCount(category: ProductCategories): Promise<number> {
+
+        return this.tableRef.orderByChild('CategoryIndex')
+            .startAt(1 + category * 10000)
+            .endAt(9999 + category * 10000)
+            .limitToLast(1).once('value')
+            .then(snapshot => {
+                return (snapshot.val() as Product).CategoryIndex % 10000;
+            })
+            .catch(error => {
+                this.errorToast(error);
+                return 0;
+            });
+    }
+
+    getByPage(page: number, itemCount: number, category?: ProductCategories): Promise<Product[]> {
+
+        let query: Promise<firebase.database.DataSnapshot>;
+
+        if (category === undefined || category === null) {
+            query = this.tableRef.orderByChild('Index')
+                .startAt((page - 1) * itemCount + 1)
+                .endAt(itemCount * page)
+                .once('value');
+
+        } else {
+            console.log(category);
+            query = this.tableRef.orderByChild('CategoryIndex')
+                .startAt((page - 1) * itemCount + 1 + category * 10000)
+                .endAt(itemCount * page + category * 10000)
+                .once('value');
+        }
+
+        return query
+            .then(snapshot => {
+                const products = [];
+                snapshot.forEach(snap => {
+                    products.push(snapshot.val() as Product);
+                });
+                return products;
+            })
+            .catch(error => {
+                this.errorToast(error);
+                return [];
+            });
+    }
+
     getProductsFromCache(category): any {
 
         if (this.globalService.isRunOnTerimal()) {

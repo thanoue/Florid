@@ -169,6 +169,30 @@ export abstract class BaseService<T extends BaseEntity> {
         });
     }
 
+
+    public getAllWithOrder(orderField: string): Promise<T[]> {
+
+        this.startLoading();
+
+        return this.tableRef.orderByChild(orderField).once('value')
+            .then(dataSnapShot => {
+
+                const res: T[] = [];
+                dataSnapShot.forEach(data => {
+                    res.push(data.val() as T);
+                });
+
+                this.stopLoading();
+
+                return res;
+            })
+            .catch(error => {
+                this.errorToast(error);
+                this.stopLoading();
+                return [];
+            });
+    }
+
     public getAll(): Promise<T[]> {
 
         this.startLoading();

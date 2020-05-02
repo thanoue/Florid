@@ -7,6 +7,8 @@ export class Product extends BaseEntity {
     ImageUrl: string;
     ProductCategories: ProductCategories;
     Page: number;
+    Index: number;
+    CategoryIndex: number;
 }
 
 export class Products {
