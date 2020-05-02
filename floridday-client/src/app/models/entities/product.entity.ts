@@ -12,10 +12,11 @@ export class Product extends BaseEntity {
     Index: number;
     CategoryIndex: number;
     Tags: ProductTagViewModel[];
-
+    Description: string;
     constructor() {
         super();
         this.Tags = [];
+        this.Description = '';
     }
 
 }
