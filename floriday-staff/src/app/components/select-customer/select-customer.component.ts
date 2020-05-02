@@ -6,6 +6,7 @@ import { Customer } from 'src/app/models/entities/customer.entity';
 import { CustomerService } from 'src/app/services/customer.service';
 import { OrderCustomerInfoViewModel, OrderDetailDeliveryInfo } from 'src/app/models/view.models/order.model';
 import { MembershipTypes } from 'src/app/models/enums';
+import { FunctionsService } from 'src/app/services/common/functions.service';
 
 declare function closeAddCustomerDialog(): any;
 declare function setSelectedCustomerItem(id: string): any;
@@ -43,7 +44,6 @@ export class SelectCustomerComponent extends BaseComponent {
     this.newCustomer = new CustomerViewModel();
     this.getCustomerList();
     this.selectedCustomer = null;
-
   }
 
   addCustomer(form: NgForm) {
@@ -97,15 +97,33 @@ export class SelectCustomerComponent extends BaseComponent {
   }
 
   getCustomerList() {
-    this.customerService.getAll().then(customers => {
-      this.customers = customers;
-      setTimeout(() => {
-        if (this.globalOrder.CustomerInfo.Id) {
-          setSelectedCustomerItem(this.globalOrder.CustomerInfo.Id);
-          this.selectedCustomer = customers.find(p => p.Id === this.globalOrder.CustomerInfo.Id);
-        }
-      }, 50);
-    });
+
+    try {
+      FunctionsService.excuteFunction('searchCustomer', '0988712')
+        .then((customers) => {
+          console.log(customers);
+          this.customers = customers;
+          setTimeout(() => {
+            if (this.globalOrder.CustomerInfo.Id) {
+              setSelectedCustomerItem(this.globalOrder.CustomerInfo.Id);
+              this.selectedCustomer = customers.find(p => p.Id === this.globalOrder.CustomerInfo.Id);
+            }
+          }, 50);
+        });
+    } catch (error) {
+      this.showError(error);
+      return;
+    }
+
+    // this.customerService.getAll().then(customers => {
+    //   this.customers = customers;
+    //   setTimeout(() => {
+    //     if (this.globalOrder.CustomerInfo.Id) {
+    //       setSelectedCustomerItem(this.globalOrder.CustomerInfo.Id);
+    //       this.selectedCustomer = customers.find(p => p.Id === this.globalOrder.CustomerInfo.Id);
+    //     }
+    //   }, 50);
+    // });
   }
 
 

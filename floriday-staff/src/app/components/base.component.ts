@@ -14,6 +14,7 @@ import { OrderViewModel, OrderDetailViewModel } from '../models/view.models/orde
 import { DistrictAddressService } from '../services/address/district-address.service';
 import { WardAddressService } from '../services/address/ward-address.service';
 import { District, Ward } from '../models/entities/address.entity';
+import { FunctionsService } from '../services/common/functions.service';
 
 declare function pickFile(): any;
 declare function addressRequest(districts: District[], resCallback: (res: string) => void, onDistrictChange: (res: string, newWardCallback: (wards: Ward[]) => void) => void): any;
@@ -27,6 +28,7 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     protected globalService: GlobalService;
     protected authService: AuthService;
     protected location: Location;
+
     private ngZone: NgZone;
     private navigateOnClick: Subscription;
     private districtService: DistrictAddressService;
