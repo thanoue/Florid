@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "floriday-staff": {
+    "floridday-client": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/floriday-staff",
+            "outputPath": "dist/floridday-client",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -70,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "floriday-staff:build"
+            "browserTarget": "floridday-client:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "floriday-staff:build:production"
+              "browserTarget": "floridday-client:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "floriday-staff:build"
+            "browserTarget": "floridday-client:build"
           }
         },
         "test": {
@@ -121,18 +121,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "floriday-staff:serve"
+            "devServerTarget": "floridday-client:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "floriday-staff:serve:production"
+              "devServerTarget": "floridday-client:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "floriday-staff",
+  "defaultProject": "floridday-client",
   "cli": {
     "analytics": "7797043f-7a9b-4048-9d54-cf93793c6f90"
   }
