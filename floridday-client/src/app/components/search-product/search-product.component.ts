@@ -4,15 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductCategories } from 'src/app/models/enums';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/entities/product.entity';
-import { max } from 'rxjs/operators';
 import { PRODUCTCATEGORIES } from 'src/app/app.constants';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { TempProduct } from 'src/app/models/entities/file.entity';
 import { TempProductService } from 'src/app/services/tempProduct.service';
 import { OrderDetailService } from 'src/app/services/order-detail.service';
-import { Tag, TagTypes, ProductTag } from 'src/app/models/entities/tag.entity';
+import { Tag, TagTypes } from 'src/app/models/entities/tag.entity';
 import { TagService } from 'src/app/services/tag.service';
-import { ProductTagService } from 'src/app/services/product-tag.service';
 
 declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: any) => void): any;
 declare function filterFocus(): any;
@@ -39,13 +37,12 @@ export class SearchProductComponent extends BaseComponent {
   protected IsDataLosingWarning = false;
 
   globalTags: Tag[];
-  globalProductTags: ProductTag[];
 
   constructor(private route: ActivatedRoute, private router: Router, private orderDetailService: OrderDetailService,
     // tslint:disable-next-line: align
     private productService: ProductService, private _ngZone: NgZone, private tempProductService: TempProductService,
     // tslint:disable-next-line: align
-    private tagService: TagService, private productTagService: ProductTagService) {
+    private tagService: TagService) {
 
     super();
 
@@ -62,13 +59,6 @@ export class SearchProductComponent extends BaseComponent {
         this.tagService.getAll().then(tags => {
 
           this.globalTags = tags;
-
-          this.productTagService.getAll().then(productTags => {
-
-            this.globalProductTags = productTags;
-
-            this.getProductByCategory(+params.category);
-          });
 
         });
 
@@ -94,32 +84,6 @@ export class SearchProductComponent extends BaseComponent {
           this.currentHardcodeUsedCount++;
         }
       });
-
-    });
-
-  }
-
-  tagsLoading() {
-
-    const currentTags: Tag[] = [];
-
-    this.globalTags.forEach(tag => {
-      let isAdd = false;
-
-      this.globalProducts.forEach(product => {
-
-        const maps = this.globalProductTags.filter(p => p.ProductId === product.Id && p.TagId === tag.Id);
-
-        if (maps.length > 0) {
-          isAdd = true;
-          return;
-        }
-
-      });
-
-      if (isAdd) {
-        currentTags.push(tag);
-      }
 
     });
 
@@ -274,7 +238,6 @@ export class SearchProductComponent extends BaseComponent {
       this.currentMaxPage = Math.max.apply(Math, this.globalProducts.map(function (o) { return o.Page; }));
 
       this.getProductsByPage(1);
-      this.tagsLoading();
     });
   }
 
