@@ -73,7 +73,7 @@ export class ProductService extends BaseService<Product> {
             .then(snapshot => {
                 const products = [];
                 snapshot.forEach(snap => {
-                    products.push(snapshot.val() as Product);
+                    products.push(snap.val() as Product);
                 });
                 return products;
             })
