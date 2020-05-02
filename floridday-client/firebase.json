@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/floriday-staff",
+    "public": "dist/floridday-client",
     "target": "floridStaff",
     "ignore": [
       "firebase.json",
