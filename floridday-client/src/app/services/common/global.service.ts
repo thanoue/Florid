@@ -34,14 +34,12 @@ export class GlobalService {
     currentOrderDetailViewModel: OrderDetailViewModel;
     currentDistricts: District[];
     currentWards: Ward[];
-    cacheProducts: Product[];
 
     constructor(private toastr: ToastrService, private ngZone: NgZone) {
 
         this.currentOrderViewModel = new OrderViewModel();
         this.currentDistricts = [];
         this.currentWards = [];
-        this.cacheProducts = [];
 
         this.notifySetup = { timeOut: 5000, tapToDismiss: true, progressBar: false, progressAnimation: 'decreasing', positionClass: 'toast-bottom-full-width', closeButton: true, extendedTimeOut: 3000 };
 
