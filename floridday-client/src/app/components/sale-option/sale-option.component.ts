@@ -88,12 +88,12 @@ export class SaleOptionComponent extends BaseComponent {
         signature: transConfirmSig
       };
 
-      setTimeout(() => {
-        this.httpServce.post(API_END_POINT.momo_qr_confirm, params)
-          .subscribe(res => {
-            console.log(res);
-          });
-      }, 1000);
+      // setTimeout(() => {
+      //   this.httpServce.post(API_END_POINT.momo_qr_confirm, params)
+      //     .subscribe(res => {
+      //       console.log(res);
+      //     });
+      // }, 1000);
 
     });
 

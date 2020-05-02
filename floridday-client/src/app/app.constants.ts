@@ -15,7 +15,6 @@ export const LOCAL_STORAGE_VARIABLE = {
 export const API_END_POINT = {
     login: '/users/login',
     force_user_logout: '/users/forceUserLogout',
-    momo_qr_confirm: '/sale/momo/qr/confirm',
     logout: '/users/logout'
 };
 
