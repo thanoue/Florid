@@ -8,6 +8,7 @@ import * as saleRouter from './sale/sale.controller';
 import * as adminSdk from './helper/admin.sdk';
 import * as authrorize from './helper/ authorize';
 import { Role } from './helper/role';
+import * as customerService from '././customer/customer.service';
 
 const express = require('express');
 const jwt = require('express-jwt');
@@ -75,4 +76,14 @@ exports.getUsers = functions.https.onCall(async (params, context) => {
         return users;
 
     }, Role.Admin);
+});
+
+exports.searchCustomer = functions.https.onCall(async (params, context) => {
+
+    return await excuteFunction(context, params.token, async () => {
+
+        const customers = await customerService.searchCustomer(params.data);
+        return customers;
+
+    }, [Role.Account, Role.Admin, Role.None]);
 });
