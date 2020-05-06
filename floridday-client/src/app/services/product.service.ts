@@ -22,25 +22,23 @@ export class ProductService extends BaseService<Product> {
         super();
     }
 
-    getCount(): Promise<number> {
-        return this.tableRef.orderByChild('Index').limitToLast(1).once('value')
-            .then(snapshot => {
-
-                let product: Product;
-                snapshot.forEach(snap => {
-                    product = snap.val() as Product;
-                });
-
-                return product.Index;
-            })
-            .catch(error => {
-                this.errorToast(error);
-                return 0;
-            });
-    }
-
     getCategoryCount(category: ProductCategories): Promise<number> {
+        if (category === ProductCategories.All) {
+            return this.tableRef.orderByChild('Index').limitToLast(1).once('value')
+                .then(snapshot => {
 
+                    let product: Product;
+                    snapshot.forEach(snap => {
+                        product = snap.val() as Product;
+                    });
+
+                    return product.Index;
+                })
+                .catch(error => {
+                    this.errorToast(error);
+                    return 0;
+                });
+        }
         return this.tableRef.orderByChild('CategoryIndex')
             .startAt(1 + category * 10000)
             .endAt(9999 + category * 10000)
@@ -66,7 +64,7 @@ export class ProductService extends BaseService<Product> {
 
         let query: Promise<firebase.database.DataSnapshot>;
 
-        if (category === undefined || category === null) {
+        if (category === undefined || category === null || category === ProductCategories.All) {
             query = this.tableRef.orderByChild('Index')
                 .startAt((page - 1) * itemsPerPage + 1)
                 .endAt(itemsPerPage * page)

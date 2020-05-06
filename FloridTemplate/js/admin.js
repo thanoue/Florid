@@ -373,6 +373,7 @@ showUserEdit = (e) => {
     `);
     
 }
+
 hideUserEdit = (e) => {
     var trCurrent = jQuery(e.target).parents("tr");
     jQuery(trCurrent).html(`

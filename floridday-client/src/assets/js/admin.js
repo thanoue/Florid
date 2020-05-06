@@ -4,29 +4,25 @@ function initLeftMenu() {
     jQuery(".showSubMenu").click(function () {
         jQuery(this).parent().toggleClass("show");
     });
+
     jQuery(".menuToggle").click(function () {
         jQuery(".adminWrapper").toggleClass("mini");
     });
+
     jQuery(".openOrderProducts").click(function () {
         jQuery(this).next().toggle(250);
     });
 
-    var cateOpt = [];
-    jQuery('.cateFilter .dropdown-menu a').on('click', function (event) {
-        var $target = jQuery(event.currentTarget),
-            val = $tartget.attr('data-value'),
-            $inp = $target.find('input'),
-            idx;
-        if ((idx = cateOpt.indexOf(val)) > -1) {
-            cateOpt.splice(idx, 1);
-            setTimeout(function () { $inp.prop('checked', false) }, 0);
-        } else {
-            cateOpt.push(val);
-            setTimeout(function () { $inp.prop('checked', true) }, 0);
-        }
-        jQuery(event.target).blur();
-        console.log(cateOpt);
-        return false;
+    jQuery(".showConfirm").click(function () {
+        jQuery("#confirm").show(250);
+    });
+
+    jQuery(".showMessage").click(function () {
+        jQuery("#message").show(250)
+    });
+
+    jQuery("button.no").click(function () {
+        jQuery(".popupDialog").hide(250);
     });
 }
 
@@ -306,7 +302,7 @@ showUserEdit = (e) => {
                 <div class="row">
                     <div class="col-md-2 col-xs-12">
                         <div class="userAvatar">
-                            <img src="../../../assets/images/product-img.jpg" alt="..." class="img-thumbnail rounded-circle">
+                            <img src="../images/product-img.jpg" alt="..." class="img-thumbnail rounded-circle">
                         </div>
                         <div class="form-group avatarChange">
                             <label for="">Thay đổi ảnh đại diện</label>
@@ -383,6 +379,7 @@ showUserEdit = (e) => {
     `);
 
 }
+
 hideUserEdit = (e) => {
     var trCurrent = jQuery(e.target).parents("tr");
     jQuery(trCurrent).html(`
@@ -420,7 +417,7 @@ showProductEdit = (e) => {
                 <div class="row">
                     <div class="col-md-2 col-xs-12">
                         <div class="userAvatar">
-                            <img src="../../../assets/images/product-img.jpg" alt="..." class="img-thumbnail rounded-circle">
+                            <img src="../images/product-img.jpg" alt="..." class="img-thumbnail rounded-circle">
                         </div>
                         <div class="form-group avatarChange">
                             <label for="">Thay đổi ảnh đại diện</label>
@@ -483,38 +480,35 @@ hideProductEdit = (e) => {
     var trCurrent = jQuery(e.target).parents("tr");
     jQuery(trCurrent).html(`
     <td scope="row">
-        <div class="form-check">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-            1
-          </label>
-        </div>
-      </td>
-      <td>
-        <a href="javascript:void(0)" class="tdName" onclick="showProductEdit(event)">MS 1505</a>
-      </td>
-      <td>200.000 vnđ</td>
-      <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
-      <td>
-        Bó Hoa Tươi
-      </td>
-      <td>
-      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Hoa</span>
-      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Tươi</span>
-      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Hoa hong</span>
-      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Hồng</span>
-      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">tươi</span>
-      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">test</span>
-      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">bó hoa</span>
-      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">bóa hoa tươi</span>
-      <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">florid</span>
-      </td>
-      <td>
-          <div class="btn-group">
-            <button type="button" class="btn btn-outline-info"  onclick="showProductEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
-            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
-          </div>
-      </td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                              2
+                            </label>
+                          </div>
+                        </td>
+                        <td>
+                          <img src="../images/product-img.jpg" alt="" class="productImg">
+                        </td>
+                        <td>
+                          <a href="javascript:void(0)" class="tdName" onclick="showProductEdit(event)">MS 1505</a>
+                        </td>
+                        <td>200.000 vnđ</td>
+                        <td>
+                          Bó Hoa Tươi
+                        </td>
+                        <td>
+                          <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Hoa</span>
+                          <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Tươi</span>
+                          <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Hoa hong</span>
+                          <span class="badge badge-pill badge-success d-inline-block p-1 mb-1">Hồng</span>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info"  onclick="showProductEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                            </div>
+                        </td>
     `);
 }
 

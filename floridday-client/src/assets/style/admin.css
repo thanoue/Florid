@@ -672,3 +672,35 @@ span.addTagBtn {
 {
     font-weight: 600;
 }
+
+.productImg
+{
+    width: 100%;
+    max-width: 60px;
+    height: 70px;
+    object-fit: cover;
+}
+
+div.popupDialog {
+    position: fixed;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px -6px #999;
+    transform: translate(-50%,-50%);
+    display: none;
+}
+h4.confirmText {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.confirmAct {
+    text-align: center;
+}
+.confirmAct button{
+    width: 100px;
+}
