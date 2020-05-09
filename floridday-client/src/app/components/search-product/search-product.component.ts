@@ -28,7 +28,6 @@ export class SearchProductComponent extends BaseComponent {
   currentMaxPage = 0;
 
   pagingProducts: Product[];
-  globalProducts: Product[];
 
   categoryName = '';
   selectedProduct: Product;
@@ -37,6 +36,7 @@ export class SearchProductComponent extends BaseComponent {
   protected IsDataLosingWarning = false;
 
   globalTags: Tag[];
+  itemsPerPage = 21;
 
   constructor(private route: ActivatedRoute, private router: Router, private orderDetailService: OrderDetailService,
     // tslint:disable-next-line: align
@@ -47,7 +47,6 @@ export class SearchProductComponent extends BaseComponent {
     super();
 
     this.pagingProducts = [];
-    this.globalProducts = [];
   }
 
   protected async Init() {
@@ -56,6 +55,7 @@ export class SearchProductComponent extends BaseComponent {
 
     this.route.queryParams
       .subscribe(params => {
+        this.getProductByCategory(+params.category);
         this.tagService.getAll().then(tags => {
 
           this.globalTags = tags;
@@ -223,22 +223,20 @@ export class SearchProductComponent extends BaseComponent {
 
     this.productCategory = category;
 
+    console.log(category);
+
     this.categoryName = PRODUCTCATEGORIES.filter(p => p.Value === this.productCategory)[0].Name;
 
-    this.currentMaxPage = 0;
-    this.currentPage = 0;
+    this.productService.getCategoryCount(category)
+      .then(count => {
 
-    this.productService.getAllByCategory(category).then(res => {
+        this.currentMaxPage = count % this.itemsPerPage === 0 ? count / this.itemsPerPage : Math.floor(count / this.itemsPerPage) + 1;
 
-      this.globalProducts = [];
-      this.pagingProducts = [];
+        this.currentPage = 1;
+        this.getProductsByPage(this.currentPage);
 
-      this.globalProducts = res as Product[];
+      });
 
-      this.currentMaxPage = Math.max.apply(Math, this.globalProducts.map(function (o) { return o.Page; }));
-
-      this.getProductsByPage(1);
-    });
   }
 
   filter() {
@@ -258,11 +256,14 @@ export class SearchProductComponent extends BaseComponent {
       return;
     }
 
-    this.pagingProducts = this.globalProducts.filter(p => p.Page === page);
+    this.productService.getByPage(page, this.itemsPerPage, this.productCategory).then(res => {
 
-    this.currentPage = page;
+      this.pagingProducts = res;
+      this.currentPage = page;
 
-    this.selectedProduct = new Product();
+      this.selectedProduct = new Product();
+
+    });
 
   }
 
