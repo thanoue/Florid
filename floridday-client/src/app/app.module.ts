@@ -3,10 +3,7 @@ import { NgModule, Injector } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { QRCodeModule } from 'angularx-qrcode';
-import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AppInjector } from './services/common/base.injector';
 import { GlobalService } from './services/common/global.service';
 import { LoginComponent } from './components/login/login.component';
@@ -62,9 +59,6 @@ declare function getFirebaseConfig(): any;
     AppRoutingModule,
     QRCodeModule,
     FormsModule,
-    AngularFireModule.initializeApp(getFirebaseConfig()),
-    AngularFireDatabaseModule, // for database,
-    AngularFireAuthModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
