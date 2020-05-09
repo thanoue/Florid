@@ -23,6 +23,10 @@ export const REQUEST_TIMEOUT = 30000;
 
 export const PRODUCTCATEGORIES = [
     {
+        Name: 'Tất cả',
+        Value: ProductCategories.All
+    },
+    {
         Name: 'Valentine',
         Value: ProductCategories.Valentine
     },

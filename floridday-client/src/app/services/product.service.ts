@@ -40,23 +40,27 @@ export class ProductService extends BaseService<Product> {
 
     getCategoryCount(category: ProductCategories): Promise<number> {
 
-        return this.tableRef.orderByChild('CategoryIndex')
-            .startAt(1 + category * 10000)
-            .endAt(9999 + category * 10000)
-            .limitToLast(1).once('value')
-            .then(snapshot => {
+        if (category === ProductCategories.All) {
+            return this.getCount();
+        } else {
+            return this.tableRef.orderByChild('CategoryIndex')
+                .startAt(1 + category * 10000)
+                .endAt(9999 + category * 10000)
+                .limitToLast(1).once('value')
+                .then(snapshot => {
 
-                let product: Product;
-                snapshot.forEach(snap => {
-                    product = snap.val() as Product;
+                    let product: Product;
+                    snapshot.forEach(snap => {
+                        product = snap.val() as Product;
+                    });
+
+                    return product.CategoryIndex % 10000;
+                })
+                .catch(error => {
+                    this.errorToast(error);
+                    return 0;
                 });
-
-                return product.CategoryIndex % 10000;
-            })
-            .catch(error => {
-                this.errorToast(error);
-                return 0;
-            });
+        }
     }
 
     getByPage(page: number, itemsPerPage: number, category?: ProductCategories): Promise<Product[]> {
