@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { BaseService } from './common/base.service';
 import { Customer } from '../models/entities/customer.entity';
 import * as firebase from 'firebase';
