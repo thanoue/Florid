@@ -2,7 +2,6 @@ import { BaseService } from './common/base.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { User } from '../models/entities/user.entity';
 
 @Injectable({
