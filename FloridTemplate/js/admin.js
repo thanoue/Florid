@@ -10,14 +10,27 @@ jQuery(document).ready(function(){
         jQuery(this).next().toggle(250);
     });
     jQuery(".showConfirm").click(function(){
+        jQuery("body").append("<div class='overlayDiv'></div>");
         jQuery("#confirm").show(250);
+        
+    jQuery(".overlayDiv").click(function(){
+        jQuery(this).remove();
+        jQuery(".popupDialog").hide(250);
+    });
     })
     jQuery(".showMessage").click(function(){
-        jQuery("#message").show(250)
+        jQuery("body").append("<div class='overlayDiv'></div>");
+        jQuery("#message").show(250);
+        
+    jQuery(".overlayDiv").click(function(){
+        jQuery(this).remove();
+        jQuery(".popupDialog").hide(250);
+    });
     })
     jQuery("button.no").click(function(){
+        jQuery(".overlayDiv").remove();
         jQuery(".popupDialog").hide(250);
-    })
+    });
 })
 
 //Add New Object

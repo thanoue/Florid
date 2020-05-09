@@ -12,7 +12,6 @@ import { OnlineUser } from 'src/app/models/entities/online.user.entity';
 import { FunctionsService } from './functions.service';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
