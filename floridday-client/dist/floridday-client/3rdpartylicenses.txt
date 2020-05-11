@@ -396,6 +396,8 @@ Apache-2.0
 
 firebase/app
 
+firebase/database
+
 font-awesome
 (OFL-1.1 AND MIT)
 
