@@ -644,3 +644,48 @@ hideCateEdit = (e) => {
     </td>
     `);
 }
+
+showItemOrder = (e) => {
+    jQuery("body").append(`
+    <div class="popupDialog" id="itemOrder">
+      <h4 class="confirmText">Thay đổi độ ưu tiên</h4>
+      <select class="form-control" name="" id="">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+      <div class="confirmAct">
+        <button class="no btn btn-info">OK</button>
+      </div>
+    </div>
+    `);
+    jQuery("body").append("<div class='overlayDiv'></div>");
+    jQuery("#itemOrder").show(250);
+    jQuery(".overlayDiv").click(function(){
+        jQuery(this).remove();
+        jQuery(".popupDialog").hide(250);
+    });
+}
+
+showStatusEdit = (e) => {
+    jQuery("body").append(`
+    <div class="popupDialog" id="itemStatus">
+      <h4 class="confirmText">Trạng thái</h4>
+      <select class="form-control" name="" id="">
+          <option>Chờ cắm</option>
+          <option>Đang cắm</option>
+          <option>Chờ giao</option>
+          <option>Đang giao</option>
+        </select>
+      <div class="confirmAct">
+        <button class="no btn btn-info">OK</button>
+      </div>
+    </div>
+    `);
+    jQuery("body").append("<div class='overlayDiv'></div>");
+    jQuery("#itemStatus").show(250);
+    jQuery(".overlayDiv").click(function(){
+        jQuery(this).remove();
+        jQuery(".popupDialog").hide(250);
+    });
+}
