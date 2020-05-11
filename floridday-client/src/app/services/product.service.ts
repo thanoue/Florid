@@ -69,7 +69,7 @@ export class ProductService extends BaseService<Product> {
 
         let query: Promise<firebase.database.DataSnapshot>;
 
-        if (category === undefined || category === null) {
+        if (category === undefined || category === null || category === ProductCategories.All) {
             query = this.tableRef.orderByChild('Index')
                 .startAt((page - 1) * itemsPerPage + 1)
                 .endAt(itemsPerPage * page)
