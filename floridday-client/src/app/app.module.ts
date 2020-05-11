@@ -24,6 +24,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
 import { ProductsComponent } from './components/products/products.component';
 import { PageSegmentComponent } from './controls/page-segment/page-segment.component';
+import { ProductTagComponent } from './components/product-tag/product-tag.component';
+import { ProductCategoryComponent } from './components/product-category/product-category.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { PageSegmentComponent } from './controls/page-segment/page-segment.compo
     InvalidmessageDirective,
     NotFoundComponent,
     ProductsComponent,
-    PageSegmentComponent
+    PageSegmentComponent,
+    ProductTagComponent,
+    ProductCategoryComponent
   ],
   imports: [
     BrowserModule,

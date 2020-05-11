@@ -12,6 +12,7 @@ import { PRODUCTCATEGORIES } from 'src/app/app.constants';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent extends BaseComponent {
+
   protected PageCompnent: PageComponent = new PageComponent('Danh sách sản phẩm', MenuItems.Product);
 
   pageCount = 0;
@@ -56,7 +57,6 @@ export class ProductsComponent extends BaseComponent {
     this.categories = PRODUCTCATEGORIES;
 
     this.categoryChange();
-
   }
 
   constructor(private productService: ProductService) {
@@ -65,17 +65,17 @@ export class ProductsComponent extends BaseComponent {
 
   categoryChange() {
 
+    this.startLoading();
     this.productService.getCategoryCount(this._selectedCategory).then(count => {
 
       this.itemTotalCount = count;
 
       this.pageCount = count % this._itemsPerPage === 0 ? count / this._itemsPerPage : Math.floor(count / this._itemsPerPage) + 1;
 
-      console.log('page count:', this.pageCount);
-
       this.productService.getByPage(1, this._itemsPerPage, this._selectedCategory)
         .then(products => {
           this.products = products;
+          this.stopLoading();
         });
 
     });

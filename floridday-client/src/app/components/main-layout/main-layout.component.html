@@ -20,12 +20,12 @@
                         <a routerLink="/products" class="menuItem-link">Danh sách</a>
                     </li>
                     <li [ngClass]="(currentMenu !== menus.ProductCategory)?'menuItem':'menuItem active'">
-                        <a href="./productCategory.html" class="menuItem-link">Danh mục Sản phẩm</a>
+                        <a routerLink="/product-categories" class="menuItem-link">Danh mục Sản phẩm</a>
                     </li>
                     <li [ngClass]="(currentMenu !== menus.ProductTag)?'menuItem':'menuItem active'">
-                        <a href="./productTag.html" class="menuItem-link">Tag Sản phẩm</a>
+                        <a routerLink="/product-tags" class="menuItem-link">Tag Sản phẩm</a>
                     </li>
-                </ul>
+                </ul>   
             </li>
             <li [ngClass]="(currentMenu !== menus.Order)?'menuItem':'menuItem active'">
                 <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Đơn Hàng</a>

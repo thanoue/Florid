@@ -61,11 +61,9 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     ngOnInit(): void {
 
         setTimeout(() => {
-
             this.globalService.updateHeader.next(this.PageCompnent);
             this.Init();
-
-        }, 100);
+        },0);
 
     }
 

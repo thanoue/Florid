@@ -692,6 +692,7 @@ div.popupDialog {
     box-shadow: 0px 0px 20px -6px #999;
     transform: translate(-50%,-50%);
     display: none;
+    z-index: 9;
 }
 h4.confirmText {
     font-size: 20px;
@@ -703,4 +704,21 @@ h4.confirmText {
 }
 .confirmAct button{
     width: 100px;
+}
+a.openOrderProducts
+{
+    display: block;
+    width: 200px;
+}
+.overlayDiv {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1;
+}
+div.popupDialog select {
+    margin-bottom: 20px;
 }

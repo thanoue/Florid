@@ -1,0 +1,131 @@
+<div class="listWrap">
+    <!-- Top of List Component -->
+    <div class="listHeader">
+        <div class="row listAddNew">
+            <div class="col-xs-12 col-md-2">
+                <button  class="btn btn-outline-info d-block w-100" onclick="showAddNew('tag')" role="button">Thêm Mới</button>
+            </div>
+        </div>
+        <div class="row listOptions">
+            <div class="col-md-2 col-xs-12  optionDelete">
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                    <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12  optionSearch">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Tìm kiếm...">
+                    <button type="submit" class="btn btn-info position-absolute "><i class="fa fa-search"></i></button>
+                </div>
+                
+            </div>
+            <div class="col-md-4 col-xs-12  text-right optionPerPage">
+                <div class="form-group">
+                  <label>Hiển thị </label>
+                  <select class="form-control w-25 d-inline" name="" id="">
+                    <option>10</option>
+                    <option>20</option>
+                    <option>30</option>
+                  </select>
+                  <label> dòng / <strong>23 dòng</strong></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content of List Component -->
+    <div class="listContent">
+      <table class="table table-bordered table-hover table-responsive-xl">
+        <thead class="table-info">
+          <tr>
+            <th scope="col"  style="width: 5%">STT</th>
+            <th scope="col">Tên hiển thị</th>
+            <th scope="col">Giá trị</th>
+            <th scope="col" style="width:50%">Mô tả</th>
+            <th scope="col">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  1
+                </label>
+              </div>
+            </td>
+            <td>
+              <a href="javascript:void(0)" class="tdName" onclick="showTagEdit(event)">Hoa Hồng</a>
+            </td>
+            <td>hoa-hong</td>
+            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
+            <td>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-outline-info"  onclick="showTagEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  2
+                </label>
+              </div>
+            </td>
+            <td>
+              <a href="javascript:void(0)" class="tdName" onclick="showTagEdit(event)">Bó Hoa Tươi</a>
+            </td>
+            <td>bo-hoa-tuoi</td>
+            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
+            <td>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-outline-info"  onclick="showTagEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
+                  3
+                </label>
+              </div>
+            </td>
+            <td>
+              <a href="javascript:void(0)" class="tdName" onclick="showTagEdit(event)">Hoa LyLy</a>
+            </td>
+            <td>hoa-ly-ly</td>
+            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis beatae, commodi in quis perferendis nostrum mollitia, quaerat nihil neque ducimus earum ad nisi quam doloribus ratione distinctio iusto harum sequi!</td>
+            <td>
+               <div class="btn-group">
+                <button type="button" class="btn btn-outline-info"  onclick="showTagEdit(event)"><i class="fa fa-pencil"></i> Sửa</button>
+                <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+               </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Bottom of List Component -->
+    <div class="listFooter">
+        <ul class="pagination text-right">
+          <li class="page-item">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="fa fa-angle-left"></i></a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#"><i class="fa fa-angle-right"></i></a>
+          </li>
+        </ul>
+    </div>
+</div>

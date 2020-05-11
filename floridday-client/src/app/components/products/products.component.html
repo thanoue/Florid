@@ -79,7 +79,7 @@
                         {{product.ProductCategories}}
                     </td>
                     <td>
-                        <span *ngFo="let tag of product.Tags"
+                        <span *ngFor="let tag of product.Tags"
                             class="badge badge-pill badge-success d-inline-block p-1 mb-1">{{tag.TagAlias}}</span>
                     </td>
                     <td>

@@ -6,6 +6,8 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ProductTagComponent } from './components/product-tag/product-tag.component';
+import { ProductCategoryComponent } from './components/product-category/product-category.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +23,14 @@ const routes: Routes = [
       {
         path: 'products',
         component: ProductsComponent,
+      },
+      {
+        path: 'product-tags',
+        component: ProductTagComponent,
+      },
+      {
+        path: 'product-categories',
+        component: ProductCategoryComponent,
       }
     ]
   },

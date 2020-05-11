@@ -54,6 +54,8 @@ export class MainLayoutComponent implements OnDestroy, OnInit {
         if (pageComponent == null) {
           return;
         }
+        
+        console.log(pageComponent);
 
         this.title = pageComponent.Title;
         this.currentMenu = pageComponent.Menu;
