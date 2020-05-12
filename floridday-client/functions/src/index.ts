@@ -9,6 +9,7 @@ import * as adminSdk from './helper/admin.sdk';
 import * as authrorize from './helper/ authorize';
 import { Role } from './helper/role';
 import * as customerService from '././customer/customer.service';
+import * as tagService from '././tag/tag.service';
 
 const express = require('express');
 const jwt = require('express-jwt');
@@ -84,6 +85,15 @@ exports.searchCustomer = functions.https.onCall(async (params, context) => {
 
         const customers = await customerService.searchCustomer(params.data);
         return customers;
+
+    }, [Role.Account, Role.Admin, Role.None]);
+});
+
+exports.updateTagIndex = functions.https.onCall(async (params, context) => {
+    return await excuteFunction(context, params.token, async () => {
+
+        const updateIndex = await tagService.updateIndex(params.data);
+        return updateIndex;
 
     }, [Role.Account, Role.Admin, Role.None]);
 });
