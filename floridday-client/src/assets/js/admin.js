@@ -13,16 +13,109 @@ function initLeftMenu() {
         jQuery(this).next().toggle(250);
     });
 
-    jQuery(".showConfirm").click(function () {
-        jQuery("#confirm").show(250);
+}
+
+function confirmDialog(message, yesCallback, noCallback, cancelCallback) {
+
+    var htmlConfirm = `<div class="popupDialog" id="confirmDialog">
+    <h4 class="confirmText">${message}</h4>
+    <div class="confirmAct">
+        <button class="yes btn btn-info" id="yesBtnConfirmDialog">Yes</button>
+        <button class="no btn btn-outline-info" id="noBtnConfirmDialog">No</button>
+    </div>
+        </div>`;
+
+    jQuery("body").append("<div class='overlayDiv'></div>");
+
+    jQuery("body").append(htmlConfirm);
+
+    jQuery("#confirmDialog").fadeIn(350);
+
+    jQuery('#yesBtnConfirmDialog').one('click', function () {
+
+        jQuery("#confirmDialog").hide(250, function () {
+
+            jQuery('.overlayDiv').remove();
+            jQuery(this).remove();
+
+            if (yesCallback == undefined)
+                return;
+
+            yesCallback();
+        });
+
+        jQuery('.overlayDiv').off('click');
+        jQuery('#noBtnConfirmDialog').off('click');
+    })
+
+    jQuery('#noBtnConfirmDialog').one('click', function () {
+
+        jQuery("#confirmDialog").hide(250, function () {
+
+            jQuery('.overlayDiv').remove();
+            jQuery(this).remove();
+
+            if (noCallback == undefined)
+                return;
+
+            noCallback();
+
+        });
+
+        jQuery('.overlayDiv').off('click');
+        jQuery('#yesBtnConfirmDialog').off('click');
+    })
+
+    jQuery('.overlayDiv').one("click", function () {
+
+        jQuery("#confirmDialog").hide(250, function () {
+
+            jQuery('.overlayDiv').remove();
+            jQuery(this).remove();
+
+            if (cancelCallback == undefined)
+                return;
+
+            cancelCallback();
+
+        });
+
+        jQuery('#yesBtnConfirmDialog').off('click');
+        jQuery('#noBtnConfirmDialog').off('click');
     });
 
-    jQuery(".showMessage").click(function () {
-        jQuery("#message").show(250)
-    });
+}
 
-    jQuery("button.no").click(function () {
-        jQuery(".popupDialog").hide(250);
+function messageDialog(message, okCallback = undefined) {
+
+    jQuery("body").append("<div class='overlayDiv'></div>");
+
+    var html = `<div class="popupDialog" id="messageDialog">
+    <h4 class="confirmText">${message}</h4>
+    <div class="confirmAct">
+        <button class="no btn btn-info" id="okBtnMsgDialog">OK</button>
+    </div>
+    </div>`
+
+    jQuery("body").append(html);
+
+    jQuery("#messageDialog").fadeIn(350);
+
+    jQuery('#okBtnMsgDialog').one('click', function () {
+        jQuery("#messageDialog").hide(250, function () {
+            jQuery('.overlayDiv').remove();
+            jQuery(this).remove();
+            if (okCallback == undefined)
+                return;
+            okCallback();
+        });
+    })
+
+    jQuery('.overlayDiv').one("click", function () {
+        jQuery("#messageDialog").hide(250, function () {
+            jQuery('.overlayDiv').remove();
+            jQuery(this).remove();
+        });
     });
 }
 
