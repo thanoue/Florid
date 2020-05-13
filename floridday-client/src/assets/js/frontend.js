@@ -310,7 +310,7 @@ function openAddInfo() {
         });
     });
 
-    jQuery('#infoAdd #cancel-button').on('click', function () {
+    jQuery('#infoAdd #cancel-button').one('click', function () {
         jQuery("#infoAdd").hide(250, function () {
             jQuery(".overlay-dark").remove();
         });

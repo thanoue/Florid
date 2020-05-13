@@ -28,6 +28,7 @@
     <AndroidSdkBuildToolsVersion>26.0.3</AndroidSdkBuildToolsVersion>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>  
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,13 +40,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidSupportedAbis>armeabi-v7a;arm64-v8a</AndroidSupportedAbis>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <BundleAssemblies>false</BundleAssemblies>
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
-    <EnableProguard>false</EnableProguard>
-    <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -63,9 +58,6 @@
     <AndroidSigningStorePass>florid123</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>florid_staff_key</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>florid123</AndroidSigningKeyPass>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
