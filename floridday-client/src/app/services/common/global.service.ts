@@ -11,8 +11,7 @@ import { Product } from 'src/app/models/entities/product.entity';
 import { PageComponent } from 'src/app/models/view.models/menu.model';
 
 declare function alert(message: string, alertType: number): any;
-declare function confirmDialog(message: string, okCallback: () => void, noCallback: () => void, cancelCallback: () => void): any;
-declare function messageDialog(message: string, okCallback: () => void): any;
+declare function openConfirm(message: string, okCallback: () => void, noCallback: () => void, cancelCallback: () => void): any;
 
 @Injectable({
     providedIn: 'root'
@@ -44,7 +43,7 @@ export class GlobalService {
         };
     }
 
-    public startLoading() {
+    startLoading() {
         if (this.loadingCount === 0) {
             this.spinnerInvoke.next(true);
         }
@@ -55,7 +54,7 @@ export class GlobalService {
         }
     }
 
-    public stopLoading() {
+    stopLoading() {
 
         if (this.loadingCount <= 1) {
             this.spinnerInvoke.next(false);
@@ -105,10 +104,6 @@ export class GlobalService {
     }
 
     openConfirm(message: string, okCallback: () => void, noCallback?: () => void, cancelCallback?: () => void) {
-        confirmDialog(message, okCallback, noCallback, cancelCallback);
-    }
-
-    openMessage(message: string, okCallback?: () => void) {
-        messageDialog(message, okCallback);
+        openConfirm(message, okCallback, noCallback, cancelCallback);
     }
 }
