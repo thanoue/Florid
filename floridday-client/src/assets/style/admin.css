@@ -403,6 +403,7 @@ span.icon-bar.bottom-bar
 }
 
 .popupContent {
+    z-index: 9999;
     position: fixed;
     width: 1200px;
     bottom: 0;

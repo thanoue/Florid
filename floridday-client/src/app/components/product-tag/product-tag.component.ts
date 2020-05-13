@@ -6,6 +6,7 @@ import { Tag } from 'src/app/models/entities/tag.entity';
 import { TagService } from 'src/app/services/tag.service';
 import { FunctionsService } from 'src/app/services/common/functions.service';
 import { threadId } from 'worker_threads';
+import { NgForm } from '@angular/forms';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 @Component({
   selector: 'app-product-tag',
@@ -18,6 +19,10 @@ export class ProductTagComponent extends BaseComponent {
 
   isSelectAll: boolean = false;
   currentPage = 1;
+
+  tagAlias = '';
+
+  currentTag: Tag;
 
   tags: {
     Tag: Tag,
@@ -43,8 +48,68 @@ export class ProductTagComponent extends BaseComponent {
 
   constructor(private tagService: TagService) {
     super();
+    this.currentTag = new Tag();
   }
 
+  onTagNameChange(tagName: string) {
+    this.updateTagAlias();
+  }
+
+  updateTagAlias() {
+
+    var str = this.currentTag.Name.toLowerCase();
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+    str = str.replace(/đ/g, "d");
+    str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
+    str = str.replace(/ + /g, " ");
+    str = str.trim().replace(/ /g, '-');
+    this.tagAlias = str;
+    this.currentTag.Id = str;
+  }
+
+  addTag(form: NgForm) {
+
+    if (!form.valid) {
+      return;
+    }
+
+    this.startLoading();
+
+    this.tagService.getById(this.currentTag.Id).then(res => {
+
+      if (res != null) {
+        this.showError('Tag bị trùng!!');
+        return;
+      }
+
+      this.tagService.getCount()
+        .then(count => {
+
+          this.currentTag.Index = count + 1;
+
+          this.tagService.set(this.currentTag).then(res => {
+
+            this.stopLoading();
+
+            this.itemTotalCount = this.currentTag.Index;
+
+            this.pageCount = this.itemTotalCount % this._itemsPerPage === 0 ? this.itemTotalCount / this._itemsPerPage : Math.floor(this.itemTotalCount / this._itemsPerPage) + 1;
+
+            if (this.currentPage === this.pageCount) {
+
+              this.pageChanged(this.currentPage);
+
+            }
+
+          })
+        });
+    })
+  }
 
   protected Init() {
     this.tagService.getCount().then(count => {
@@ -59,7 +124,6 @@ export class ProductTagComponent extends BaseComponent {
 
     });
   }
-
 
   pageChanged(page: number) {
     this.currentPage = page;
@@ -140,8 +204,9 @@ export class ProductTagComponent extends BaseComponent {
   deleteTag(tag: Tag) {
 
     this.openConfirm('Chắc chắn xoá tag sản phẩm?', () => {
+
       this.startLoading();
-      console.log(tag.Id);
+
       this.tagService.delete(tag.Id).then(() => {
 
         FunctionsService.excuteFunction("updateTagIndex", tag.Index).then(res => {

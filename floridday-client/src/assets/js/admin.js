@@ -123,7 +123,8 @@ function messageDialog(message, okCallback = undefined) {
 showAddNew = (obj) => {
     var html;
     switch (obj) {
-        case "user": html = `<div class="popupContent" id="userAdd">
+        case "user":
+            html = `<div class="popupContent" id="userAdd">
         <h4 class="userName">Thêm mới Nhân Viên</h4>
         <hr class="adminSeperate">
         <form action="">
@@ -259,7 +260,8 @@ showAddNew = (obj) => {
             </form>
             </div>
             `; break;
-        case "product": html = `<div class="popupContent" id="productAdd">
+        case "product":
+            html = `<div class="popupContent" id="productAdd">
         <h4 class="userName">Thêm mới Sản phẩm</h4>
         <hr class="adminSeperate">
         <form action="">
@@ -316,7 +318,8 @@ showAddNew = (obj) => {
         </form>
       </div>
         `; break;
-        case "tag": html = `<div class="popupContent" id="tagAdd">
+        case "tag":
+            html = `<div class="popupContent" id="tagAdd">
         <h4 class="userName">Thêm mới Tag Sản phẩm</h4>
         <hr class="adminSeperate">
         <form action="">
@@ -347,7 +350,8 @@ showAddNew = (obj) => {
         </form>
       </div>
         `; break;
-        case "cate": html = `<div class="popupContent" id="cateAdd">
+        case "cate":
+            html = `<div class="popupContent" id="cateAdd">
         <h4 class="userName">Thêm mới Danh mục Sản phẩm</h4>
         <hr class="adminSeperate">
         <form action="">
@@ -379,10 +383,13 @@ showAddNew = (obj) => {
     jQuery(".popupContent").slideDown(350);
 }
 
+function addTag() {
+    jQuery("#tagAddPopup").slideDown(350);
+}
+
 
 hideAdd = () => {
     jQuery(".popupContent").slideUp(250, function () {
-        jQuery(this).remove();
     });
 
 }
