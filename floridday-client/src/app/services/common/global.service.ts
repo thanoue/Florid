@@ -12,6 +12,7 @@ import { PageComponent } from 'src/app/models/view.models/menu.model';
 
 declare function alert(message: string, alertType: number): any;
 declare function openConfirm(message: string, okCallback: () => void, noCallback: () => void, cancelCallback: () => void): any;
+declare function messageDialog(message: string, okCallback: () => void): any;
 
 @Injectable({
     providedIn: 'root'
@@ -105,5 +106,9 @@ export class GlobalService {
 
     openConfirm(message: string, okCallback: () => void, noCallback?: () => void, cancelCallback?: () => void) {
         openConfirm(message, okCallback, noCallback, cancelCallback);
+    }
+
+    openMessage(message: string, okCallback?: () => void) {
+        messageDialog(message, okCallback);
     }
 }
