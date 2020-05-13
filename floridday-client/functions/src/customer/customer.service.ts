@@ -1,7 +1,6 @@
 import * as adminSdk from '../helper/admin.sdk';
 
 export async function searchCustomer(term: string): Promise<any> {
-    console.log(term);
     return adminSdk.defauDatabase.ref('customers')
         .orderByChild('FullName')
         .startAt(term)
@@ -16,7 +15,6 @@ export async function searchCustomer(term: string): Promise<any> {
             });
 
             if (customers.length > 0) {
-                console.log('search by name');
                 return customers;
             } else {
                 return adminSdk.defauDatabase.ref('customers')
@@ -31,7 +29,6 @@ export async function searchCustomer(term: string): Promise<any> {
                         phoneRes.forEach((snapShot: any) => {
                             _customers.push(snapShot.val());
                         });
-                        console.log('search by phone num');
 
                         return _customers
                     })

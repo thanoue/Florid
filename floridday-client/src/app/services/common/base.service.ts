@@ -91,7 +91,7 @@ export abstract class BaseService<T extends BaseEntity> {
         return this.update(model);
     }
 
-    async setList(data: T[]): Promise<any> {
+    async setList(data: T[], callback: (item: T) => void = null): Promise<any> {
 
         const list = [];
 
@@ -102,6 +102,7 @@ export abstract class BaseService<T extends BaseEntity> {
             });
 
             if (newItem) {
+                callback.call(newItem);
                 list.push(newItem);
             } else {
                 continue;
@@ -167,6 +168,21 @@ export abstract class BaseService<T extends BaseEntity> {
         return this.db.ref(`${this.tableName}/${id}`).remove().then(() => {
             this.stopLoading();
         });
+    }
+
+    public async deleteMany(ids: string[]): Promise<void> {
+        this.startLoading();
+
+        var rem: any = null;
+        ids.forEach(async id => {
+
+            rem = await this.db.ref(`${this.tableName}/${id}`).remove();
+
+        });
+        if (rem)
+            this.stopLoading();
+        else
+            this.stopLoading();
     }
 
 
