@@ -5,7 +5,6 @@ import { from, of } from 'rxjs';
 import { promise } from 'protractor';
 import 'firebase/database';
 import { Product } from '../models/entities/product.entity';
-import { ProductCategories } from '../models/enums';
 import { async } from '@angular/core/testing';
 import { constants } from 'crypto';
 import { GlobalService } from './common/global.service';
@@ -38,9 +37,9 @@ export class ProductService extends BaseService<Product> {
             });
     }
 
-    getCategoryCount(category: ProductCategories): Promise<number> {
+    getCategoryCount(category: number): Promise<number> {
 
-        if (category === ProductCategories.All) {
+        if (category === -1) {
             return this.getCount();
         } else {
             return this.tableRef.orderByChild('CategoryIndex')
@@ -63,13 +62,13 @@ export class ProductService extends BaseService<Product> {
         }
     }
 
-    getByPage(page: number, itemsPerPage: number, category?: ProductCategories): Promise<Product[]> {
+    getByPage(page: number, itemsPerPage: number, category?: number): Promise<Product[]> {
 
         this.startLoading();
 
         let query: Promise<firebase.database.DataSnapshot>;
 
-        if (category === undefined || category === null || category === ProductCategories.All) {
+        if (category === undefined || category === null || category === -1) {
             query = this.tableRef.orderByChild('Index')
                 .startAt((page - 1) * itemsPerPage + 1)
                 .endAt(itemsPerPage * page)
