@@ -86,7 +86,7 @@ function confirmDialog(message, yesCallback, noCallback, cancelCallback) {
 
 }
 
-function messageDialog(message, okCallback = undefined) {
+function messageDialog(message, okCallback) {
 
     jQuery("body").append("<div class='overlayDiv'></div>");
 
@@ -381,6 +381,10 @@ showAddNew = (obj) => {
     }
     jQuery(".adminWrapper").append(html);
     jQuery(".popupContent").slideDown(350);
+}
+
+function addProduct() {
+    jQuery('#productAdd').slideDown(350);
 }
 
 function addTag() {

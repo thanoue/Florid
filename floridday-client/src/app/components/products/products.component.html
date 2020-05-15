@@ -3,7 +3,7 @@
     <div class="listHeader">
         <div class="row listAddNew">
             <div class="col-xs-12 col-md-2">
-                <button class="btn btn-outline-info d-block w-100" onclick="showAddNew('product')" role="button">Thêm
+                <button class="btn btn-outline-info d-block w-100" onclick="addProduct()" role="button">Thêm
                     Mới</button>
             </div>
         </div>
@@ -98,4 +98,101 @@
     <app-page-segment [pageCount]="pageCount" (pageChanged)="pageChanged($event)">
 
     </app-page-segment>
+</div>
+<div class="popupContent" id="productAdd">
+    <h4 class="userName">Thêm mới Sản phẩm</h4>
+    <hr class="adminSeperate">
+    <form #form="ngForm" (submit)="addProduct(form)" autocomplete="on">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputName">Mã Sản Phẩm</label>
+                <input type="text" class="form-control" name="Name" [(ngModel)]="edittingProduct.Name" id="Name"
+                    required minlength="3" #Name="ngModel">
+                <div *ngIf="Name.invalid && (Name.dirty || Name.touched)" class="alert alert-danger">
+
+                    <div *ngIf="Name.errors.required">
+                        Mã là bắt buộc
+                    </div>
+                    <div *ngIf="Name.errors.minlength">
+                        Mã tối thiểu 3 ký tự
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputPrice">Giá Gốc (vnđ)</label>
+                <input type="number" class="form-control" name="Price" [(ngModel)]="edittingProduct.Price" id="Price"
+                    required #Price="ngModel">
+
+                <div *ngIf="Price.invalid && (Price.dirty || Price.touched)" class="alert alert-danger">
+
+                    <div *ngIf="Price.errors.required">
+                        Giá là bắt buộc
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="inputCate">Loại Sản Phẩm</label>
+                <select [(ngModel)]="edittingProduct.ProductCategories" name="ProductCategories" id="ProductCategories"
+                    class="form-control">
+                    <option selected>Choose...</option>
+                    <option *ngFor="let edittingCate of edittingCategories" [ngValue]="edittingCate.Value">
+                        {{edittingCate.Name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputDesc">Mô tả</label>
+                <textarea (ngModel)]="edittingProduct.Description" name="Description" id="Description"
+                    class="form-control" cols="100" rows="5" placeholder="Mô tả sản phẩm"></textarea>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputTag">Tag</label>
+                <div class="tagAdd">
+                    <input type="text" class="form-control" value="" placeholder="Nhập tag mới">
+                    <span class="addTagBtn">Thêm</span>
+                </div>
+                <div class="showTags">
+
+                </div>
+                <ul class="tagList">
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-tuoi</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-tuoi</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group avatarChange">
+            <label for="">Chọn ảnh đại diện</label>
+            <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
+        </div>
+        <div class="form-action row">
+            <div class="col-md-2"><button type="submit" class="btn btn-outline-success w-100">Thêm
+                    Mới</button>
+            </div>
+            <div class="col-md-1"><a href="javascript:void(0)" class="btn btn-outline-secondary w-100"
+                    onclick="hideAdd()">Hủy</a></div>
+        </div>
+    </form>
 </div>

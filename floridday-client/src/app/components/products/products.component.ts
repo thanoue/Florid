@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { PageComponent } from 'src/app/models/view.models/menu.model';
-import { MenuItems, ProductCategories } from 'src/app/models/enums';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/entities/product.entity';
-import { PRODUCTCATEGORIES } from 'src/app/app.constants';
+import { ProductCategoryService } from 'src/app/services/product.categpory.service';
+import { MenuItems } from 'src/app/models/enums';
+import { NgForm } from '@angular/forms';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-products',
@@ -20,13 +22,13 @@ export class ProductsComponent extends BaseComponent {
 
   products: Product[];
 
-  _selectedCategory: ProductCategories;
+  _selectedCategory: number;
 
-  get selectedCategory(): ProductCategories {
+  get selectedCategory(): number {
     return this._selectedCategory;
   }
 
-  set selectedCategory(val: ProductCategories) {
+  set selectedCategory(val: number) {
     this._selectedCategory = val;
     this.categoryChange();
   }
@@ -44,22 +46,51 @@ export class ProductsComponent extends BaseComponent {
 
   categories: {
     Name: string,
-    Value: ProductCategories
+    Value: number
   }[];
+
+  edittingCategories: {
+    Name: string,
+    Value: number
+  }[];
+
+
+  edittingProduct: Product;
 
   protected Init() {
 
     this.products = [];
-
-    this._selectedCategory = ProductCategories.All;
     this._itemsPerPage = 10;
+    this.categories = [];
+    this.edittingCategories = [];
+    this.edittingProduct = new Product();
 
-    this.categories = PRODUCTCATEGORIES;
+    this.productCategoryService.getAllWithOrder('Index').then(categories => {
 
-    this.categoryChange();
+      categories.forEach(category => {
+
+        this.categories.push({
+          Name: category.Name,
+          Value: category.Index
+        });
+
+        if (category.Index !== -1) {
+          this.edittingCategories.push({
+            Name: category.Name,
+            Value: category.Index
+          });
+        }
+
+      });
+
+      this._selectedCategory = categories[0].Index;
+
+      this.categoryChange();
+
+    });
   }
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private productCategoryService: ProductCategoryService) {
     super();
   }
 
@@ -80,6 +111,15 @@ export class ProductsComponent extends BaseComponent {
 
     });
 
+  }
+
+  addProduct(form: NgForm) {
+
+    if (!form.valid) {
+      return;
+    }
+
+    console.log(this.edittingProduct);
   }
 
   pageChanged(page) {

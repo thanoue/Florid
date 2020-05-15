@@ -83,6 +83,7 @@ export class ProductTagComponent extends BaseComponent {
     this.tagService.getById(this.currentTag.Id).then(res => {
 
       if (res != null) {
+        this.stopLoading();
         this.showError('Tag bị trùng!!');
         return;
       }
@@ -105,6 +106,8 @@ export class ProductTagComponent extends BaseComponent {
               this.pageChanged(this.currentPage);
 
             }
+
+            this.globalService.hidePopup();
 
           })
         });
