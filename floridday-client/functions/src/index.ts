@@ -10,6 +10,7 @@ import * as authrorize from './helper/ authorize';
 import { Role } from './helper/role';
 import * as customerService from '././customer/customer.service';
 import * as tagService from '././tag/tag.service';
+import * as productService from '././product/product.service';
 
 const express = require('express');
 const jwt = require('express-jwt');
@@ -97,3 +98,13 @@ exports.updateTagIndex = functions.https.onCall(async (params, context) => {
 
     }, [Role.Account, Role.Admin, Role.None]);
 });
+
+exports.updateProductIndex = functions.https.onCall(async (params, context) => {
+    return await excuteFunction(context, params.token, async () => {
+
+        const updateIndex = await productService.updateIndex(params.data.startIndex, params.data.delta);
+        return updateIndex;
+
+    }, [Role.Account, Role.Admin, Role.None]);
+});
+
