@@ -23,7 +23,8 @@
             </div>
             <div class="col-md-2 col-xs-12  cateFilter">
                 <div class="form-group">
-                    <select class="form-control d-inline" [(ngModel)]="selectedCategory" name="selectedCategory" id="">
+                    <select class="form-control d-inline" [(ngModel)]="selectedCategory" name="selectedCategory"
+                        id="selectedCategory">
                         <option *ngFor="let category of categories" [ngValue]="category.Value">{{category.Name}}
                         </option>
                     </select>
@@ -105,7 +106,7 @@
     <form #form="ngForm" (submit)="addProduct(form)" autocomplete="on">
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="inputName">Mã Sản Phẩm</label>
+                <label>Mã Sản Phẩm</label>
                 <input type="text" class="form-control" name="Name" [(ngModel)]="edittingProduct.Name" id="Name"
                     required minlength="3" #Name="ngModel">
                 <div *ngIf="Name.invalid && (Name.dirty || Name.touched)" class="alert alert-danger">
@@ -119,8 +120,8 @@
                 </div>
             </div>
             <div class="form-group col-md-4">
-                <label for="inputPrice">Giá Gốc (vnđ)</label>
-                <input type="number" class="form-control" name="Price" [(ngModel)]="edittingProduct.Price" id="Price"
+                <label>Giá Gốc (vnđ)</label>
+                <input type="text" class="form-control" name="Price" [(ngModel)]="edittingProduct.Price" id="Price"
                     required #Price="ngModel">
 
                 <div *ngIf="Price.invalid && (Price.dirty || Price.touched)" class="alert alert-danger">
@@ -135,7 +136,6 @@
                 <label for="inputCate">Loại Sản Phẩm</label>
                 <select [(ngModel)]="edittingProduct.ProductCategories" name="ProductCategories" id="ProductCategories"
                     class="form-control">
-                    <option selected>Choose...</option>
                     <option *ngFor="let edittingCate of edittingCategories" [ngValue]="edittingCate.Value">
                         {{edittingCate.Name}}
                     </option>
@@ -145,46 +145,29 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputDesc">Mô tả</label>
-                <textarea (ngModel)]="edittingProduct.Description" name="Description" id="Description"
+                <textarea [(ngModel)]="edittingProduct.Description" name="Description" id="Description"
                     class="form-control" cols="100" rows="5" placeholder="Mô tả sản phẩm"></textarea>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputTag">Tag</label>
                 <div class="tagAdd">
-                    <input type="text" class="form-control" value="" placeholder="Nhập tag mới">
-                    <span class="addTagBtn">Thêm</span>
+                    <input type="text" class="form-control" value="" [(ngModel)]="newTagName" name="newTagName"
+                        placeholder="Nhập tag mới">
+                    <span class="addTagBtn" (click)="addTag()">Thêm</span>
                 </div>
                 <div class="showTags">
-
+                    <span *ngFor="let tag of edittingProduct.Tags"
+                        (click)="unselectTag(tag.TagAlias)">{{tag.TagName}}</span>
                 </div>
                 <ul class="tagList">
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-tuoi</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-tuoi</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
-                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                    <li *ngFor="let notSelectedTag of globalTags"><span *ngIf="!notSelectedTag.IsSelected"
+                            class="badge badge-pill badge-info p-2"
+                            (click)="selectTag(notSelectedTag.Tag.Id)">{{notSelectedTag.Tag.Name}}</span></li>
                 </ul>
             </div>
         </div>
         <div class="form-group avatarChange">
-            <label for="">Chọn ảnh đại diện</label>
+            <label>Chọn ảnh đại diện</label>
             <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
         </div>
         <div class="form-action row">

@@ -7,6 +7,11 @@ import { ProductCategoryService } from 'src/app/services/product.categpory.servi
 import { MenuItems } from 'src/app/models/enums';
 import { NgForm } from '@angular/forms';
 import { ThrowStmt } from '@angular/compiler';
+import { TagService } from 'src/app/services/tag.service';
+import { Tag } from 'src/app/models/entities/tag.entity';
+import { threadId } from 'worker_threads';
+import { borderTopRightRadius } from 'html2canvas/dist/types/css/property-descriptors/border-radius';
+import { ExchangeService } from 'src/app/services/exchange.service';
 
 @Component({
   selector: 'app-products',
@@ -19,26 +24,22 @@ export class ProductsComponent extends BaseComponent {
 
   pageCount = 0;
   itemTotalCount = 0;
-
   products: Product[];
+  newTagName = "";
 
   _selectedCategory: number;
-
   get selectedCategory(): number {
     return this._selectedCategory;
   }
-
   set selectedCategory(val: number) {
     this._selectedCategory = val;
     this.categoryChange();
   }
 
   _itemsPerPage: number;
-
   get itemPerpage(): number {
     return this._itemsPerPage;
   }
-
   set itemPerpage(val: number) {
     this._itemsPerPage = val;
     this.categoryChange();
@@ -54,16 +55,14 @@ export class ProductsComponent extends BaseComponent {
     Value: number
   }[];
 
+  globalTags: {
+    Tag: Tag,
+    IsSelected: boolean
+  }[];
 
   edittingProduct: Product;
 
   protected Init() {
-
-    this.products = [];
-    this._itemsPerPage = 10;
-    this.categories = [];
-    this.edittingCategories = [];
-    this.edittingProduct = new Product();
 
     this.productCategoryService.getAllWithOrder('Index').then(categories => {
 
@@ -88,10 +87,26 @@ export class ProductsComponent extends BaseComponent {
       this.categoryChange();
 
     });
+
+    this.tagService.getAll().then(tags => {
+      tags.forEach(tag => {
+        this.globalTags.push({
+          Tag: tag,
+          IsSelected: false
+        });
+      });
+    })
   }
 
-  constructor(private productService: ProductService, private productCategoryService: ProductCategoryService) {
+  constructor(private productService: ProductService, private productCategoryService: ProductCategoryService, private tagService: TagService) {
     super();
+
+    this.edittingProduct = new Product();
+    this.products = [];
+    this._itemsPerPage = 10;
+    this.categories = [];
+    this.edittingCategories = [];
+    this.globalTags = [];
   }
 
   categoryChange() {
@@ -128,6 +143,73 @@ export class ProductsComponent extends BaseComponent {
       .then(products => {
         this.products = products;
       });
+
+  }
+
+  unselectTag(tagId: string) {
+
+    var unseletedTag = this.edittingProduct.Tags.filter(p => p.TagAlias === unseletedTag)[0];
+    this.edittingProduct.Tags.splice(this.edittingProduct.Tags.indexOf(unseletedTag), 1);
+
+    this.globalTags.forEach(tag => {
+      if (tagId === tag.Tag.Id) {
+        tag.IsSelected = false;
+      }
+    });
+
+  }
+
+  selectTag(tagId: string) {
+
+    this.globalTags.forEach(tag => {
+      if (tagId === tag.Tag.Id) {
+
+        this.edittingProduct.Tags.push({
+          TagName: tag.Tag.Name,
+          TagAlias: tag.Tag.Id
+        });
+
+        tag.IsSelected = true;
+      }
+    });
+  }
+
+  addTag() {
+
+    const alias = ExchangeService.getAlias(this.newTagName);
+
+    this.startLoading();
+    this.tagService.getById(alias).then(res => {
+
+      if (res != null) {
+        this.stopLoading();
+        this.showError('Tag bị trùng!!');
+        return;
+      }
+
+      this.tagService.getCount()
+        .then(count => {
+
+          let tag = new Tag();
+
+          tag.Index = count + 1;
+          tag.Name = this.newTagName;
+          tag.Id = alias;
+
+          console.log(tag);
+
+          this.tagService.set(tag).then(res => {
+
+            this.stopLoading();
+
+            this.globalTags.push({
+              Tag: tag,
+              IsSelected: false
+            });
+
+          })
+        });
+    });
 
   }
 
