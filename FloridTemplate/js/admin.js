@@ -464,11 +464,36 @@ showProductEdit = (e) => {
                                     <input type="text" class="form-control" value="" placeholder="Nhập tag mới">
                                     <span class="addTagBtn">Thêm</span>
                                 </div>
-                                <div class="showTags"><span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span></div>
-                                <ul class="tagList">
+                                <div class="showTags cusScroll"><span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span><span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span><span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span>
+                                <span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span><span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span><span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span>
+                                <span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span><span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span><span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span>
+                                <span onclick='removeTag(event)'>hoa</span><span onclick='removeTag(event)'>hoa-tuoi</span></div>
+                                <ul class="tagList cusScroll">
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
                                     <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
                                     <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
                                     <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">bo-hoa</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-hong</span></li>
+                                    <li><span class="badge badge-pill badge-info p-2" onclick="selectTag(event)">hoa-lyly</span></li>
+
                                 </ul>
                             </div>
                         </div>
