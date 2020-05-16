@@ -14,6 +14,13 @@ export class Receipt extends BaseFile {
     }
 }
 
+export class ProductImage extends BaseFile {
+    constructor() {
+        super();
+        this.FolderName = '/products';
+    }
+}
+
 export class TempProduct extends BaseFile {
     constructor() {
         super();
