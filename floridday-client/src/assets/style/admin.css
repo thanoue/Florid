@@ -603,7 +603,16 @@ span.addTagBtn {
 .showTags {
     min-height: 50px;
     margin-top: 5px;
+    max-height: 105px;
+    overflow-y: scroll;
 }
+
+ul.tagList {
+    max-height: 124px;
+    overflow-y: scroll;
+    margin-top: 10px;
+}
+
 .showTags span {
     display: inline-block;
     border: 1px solid #aaa;
@@ -612,8 +621,14 @@ span.addTagBtn {
     margin-right: 5px;
     border-radius: 10px;
     cursor: pointer;
-    color: #666;
+    color: #666; 
+    margin-bottom: 5px;
 }
+
+.showTags span:hover {
+    font-weight: 600;
+}
+
 .showTags span:before 
 {
     content: "\f00d";

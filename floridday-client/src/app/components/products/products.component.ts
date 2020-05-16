@@ -26,6 +26,7 @@ export class ProductsComponent extends BaseComponent {
   itemTotalCount = 0;
   products: Product[];
   newTagName = "";
+  edittingFile: any;
 
   _selectedCategory: number;
   get selectedCategory(): number {
@@ -174,6 +175,26 @@ export class ProductsComponent extends BaseComponent {
     });
   }
 
+  onChange(event) {
+    const filesUpload: File = event.target.files[0];
+
+    var mimeType = filesUpload.type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.showError('Phải chọn hình !!');
+      return;
+    }
+
+    this.edittingFile = filesUpload;
+
+    var reader = new FileReader();
+
+    reader.readAsDataURL(filesUpload);
+    reader.onload = (_event) => {
+      this.edittingProduct.ImageUrl = reader.result.toString();
+    }
+
+  }
+
   addTag() {
 
     const alias = ExchangeService.getAlias(this.newTagName);
@@ -196,16 +217,21 @@ export class ProductsComponent extends BaseComponent {
           tag.Name = this.newTagName;
           tag.Id = alias;
 
-          console.log(tag);
-
           this.tagService.set(tag).then(res => {
 
             this.stopLoading();
 
             this.globalTags.push({
               Tag: tag,
-              IsSelected: false
+              IsSelected: true
             });
+
+            this.edittingProduct.Tags.push({
+              TagName: tag.Name,
+              TagAlias: tag.Id
+            });
+
+            this.newTagName = "";
 
           })
         });
