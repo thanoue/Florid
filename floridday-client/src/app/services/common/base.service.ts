@@ -72,6 +72,16 @@ export abstract class BaseService<T extends BaseEntity> {
             });
     }
 
+    public setAnotherEntity(model: any, tableName: string): Promise<any> {
+
+        return this.db.ref(`${tableName}/${model.Id}`).set(model).then(res => {
+            if (res) {
+                return model;
+            }
+        });
+
+    }
+
     public set(model: T): Promise<T> {
         return this.db.ref(`${this.tableName}/${model.Id}`).set(model).then(res => {
             if (res) {

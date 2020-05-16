@@ -8,6 +8,8 @@ import { Product } from '../models/entities/product.entity';
 import { async } from '@angular/core/testing';
 import { constants } from 'crypto';
 import { GlobalService } from './common/global.service';
+import { ProductImage } from '../models/entities/file.entity';
+import { StorageService } from './storage.service';
 
 @Injectable({
     providedIn: 'root'
@@ -38,7 +40,6 @@ export class ProductService extends BaseService<Product> {
     }
 
     getCategoryCount(category: number): Promise<number> {
-
         if (category === -1) {
             return this.getCount();
         } else {
@@ -60,6 +61,21 @@ export class ProductService extends BaseService<Product> {
                     return 0;
                 });
         }
+    }
+
+    getByCategoryIndex(index: number): Promise<Product> {
+        return this.tableRef.orderByChild('CategoryIndex').equalTo(index)
+            .once('value')
+            .then(snapshot => {
+
+                let product: Product;
+                snapshot.forEach(snap => {
+                    product = snap.val() as Product;
+                });
+
+                return product;
+
+            });
     }
 
     getByPage(page: number, itemsPerPage: number, category?: number): Promise<Product[]> {
