@@ -6,12 +6,13 @@ import { Product } from 'src/app/models/entities/product.entity';
 import { ProductCategoryService } from 'src/app/services/product.categpory.service';
 import { MenuItems } from 'src/app/models/enums';
 import { NgForm } from '@angular/forms';
-import { ThrowStmt } from '@angular/compiler';
 import { TagService } from 'src/app/services/tag.service';
 import { Tag } from 'src/app/models/entities/tag.entity';
-import { threadId } from 'worker_threads';
-import { borderTopRightRadius } from 'html2canvas/dist/types/css/property-descriptors/border-radius';
 import { ExchangeService } from 'src/app/services/exchange.service';
+import { ProductImageService } from 'src/app/services/product.image.service';
+import { ProductImage } from 'src/app/models/entities/file.entity';
+import { Guid } from 'guid-typescript';
+import { FunctionsService } from 'src/app/services/common/functions.service';
 
 @Component({
   selector: 'app-products',
@@ -27,6 +28,7 @@ export class ProductsComponent extends BaseComponent {
   products: Product[];
   newTagName = "";
   edittingFile: any;
+  edittingImageUrl: any;
 
   _selectedCategory: number;
   get selectedCategory(): number {
@@ -99,7 +101,8 @@ export class ProductsComponent extends BaseComponent {
     })
   }
 
-  constructor(private productService: ProductService, private productCategoryService: ProductCategoryService, private tagService: TagService) {
+  constructor(private productService: ProductService, private productCategoryService: ProductCategoryService, private tagService: TagService
+    , private productImageService: ProductImageService) {
     super();
 
     this.edittingProduct = new Product();
@@ -113,6 +116,7 @@ export class ProductsComponent extends BaseComponent {
   categoryChange() {
 
     this.startLoading();
+
     this.productService.getCategoryCount(this._selectedCategory).then(count => {
 
       this.itemTotalCount = count;
@@ -135,7 +139,63 @@ export class ProductsComponent extends BaseComponent {
       return;
     }
 
-    console.log(this.edittingProduct);
+    this.startLoading();
+
+    if (this.edittingProduct.Id) {
+
+      if (this.edittingProduct.ImageUrl) {
+
+        this.productImageService.deleteFileFromUrl(this.edittingProduct.ImageUrl)
+          .then(() => {
+
+            try {
+              const prodImg = new ProductImage();
+              prodImg.Name = Guid.create().toString();
+
+              this.productImageService.addFile(this.edittingFile, prodImg, (url) => {
+
+                this.edittingProduct.ImageUrl = url;
+
+                this.productService.getCategoryCount(this.edittingProduct.ProductCategories)
+                  .then(categoryIndex => {
+
+                    this.edittingProduct.CategoryIndex = categoryIndex + 1;
+
+                    this.productService.getByCategoryIndex(categoryIndex)
+                      .then(product => {
+
+                        this.edittingProduct.Index = product.Index + 1;
+
+                        FunctionsService.excuteFunction('updateProductIndex', {
+                          startIndex: product.Index + 1,
+                          delta: 1
+                        }).then(() => {
+                          this.productService.set(this.edittingProduct).then(res => {
+                            this.stopLoading();
+                            this.categoryChange();
+                          });
+                        })
+                      });
+                  });
+              });
+            }
+            catch (err) {
+              this.stopLoading();
+              this.showError(err);
+              return;
+            }
+
+          })
+          .catch(err => {
+            this.stopLoading();
+            this.showError(err);
+            return;
+          })
+      }
+    } else {
+
+    }
+
   }
 
   pageChanged(page) {
@@ -190,7 +250,7 @@ export class ProductsComponent extends BaseComponent {
 
     reader.readAsDataURL(filesUpload);
     reader.onload = (_event) => {
-      this.edittingProduct.ImageUrl = reader.result.toString();
+      this.edittingImageUrl = reader.result.toString();
     }
 
   }
