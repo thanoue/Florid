@@ -108,3 +108,12 @@ exports.updateProductIndex = functions.https.onCall(async (params, context) => {
     }, [Role.Account, Role.Admin, Role.None]);
 });
 
+exports.updateProductCategoryIndex = functions.https.onCall(async (params, context) => {
+    return await excuteFunction(context, params.token, async () => {
+
+        const firstIndex = await productService.updateCategoryIndex(params.data.category, params.data.startIndex, params.data.delta);
+        if (firstIndex > 0)
+            return await productService.updateIndex(firstIndex, params.data.delta);
+
+    }, [Role.Account, Role.Admin, Role.None]);
+});
