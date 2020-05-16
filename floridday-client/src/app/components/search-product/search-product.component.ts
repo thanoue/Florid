@@ -9,7 +9,7 @@ import { ExchangeService } from 'src/app/services/exchange.service';
 import { TempProduct } from 'src/app/models/entities/file.entity';
 import { TempProductService } from 'src/app/services/tempProduct.service';
 import { OrderDetailService } from 'src/app/services/order-detail.service';
-import { Tag, TagTypes } from 'src/app/models/entities/tag.entity';
+import { Tag } from 'src/app/models/entities/tag.entity';
 import { TagService } from 'src/app/services/tag.service';
 
 declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: any) => void): any;
