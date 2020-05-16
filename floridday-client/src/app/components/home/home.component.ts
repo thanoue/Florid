@@ -10,6 +10,7 @@ import { TagService } from 'src/app/services/tag.service';
 import { ProductCategoryService } from 'src/app/services/product.categpory.service';
 import { ProductCategory } from 'src/app/models/entities/product.category.entity';
 import { Guid } from 'guid-typescript';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-home',
@@ -20,11 +21,31 @@ export class HomeComponent extends BaseComponent {
 
   protected PageCompnent = new PageComponent('Trang chủ', MenuItems.Home);
 
-  constructor(private router: Router, protected activatedRoute: ActivatedRoute, private tagService: TagService, private productCategoryService: ProductCategoryService) {
+  constructor(private router: Router, protected activatedRoute: ActivatedRoute, private productService: ProductService) {
     super();
   }
 
   protected Init() {
+  }
+
+  updateProductImg() {
+
+    this.startLoading();
+    this.productService.getAll()
+      .then(products => {
+
+        var updates = {};
+
+        products.forEach(product => {
+
+          updates[`/${product.Id}/ImageUrl`] = 'http://florid.com.vn/' + product.ImageUrl;
+
+        });
+
+        this.productService.updateList(updates, () => {
+          this.stopLoading();
+        });
+      });
   }
 
   // initCate() {

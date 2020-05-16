@@ -3,7 +3,7 @@
     <div class="listHeader">
         <div class="row listAddNew">
             <div class="col-xs-12 col-md-2">
-                <button class="btn btn-outline-info d-block w-100" onclick="addProduct()" role="button">Thêm
+                <button class="btn btn-outline-info d-block w-100" onclick="showProductSetupPopup()" role="button">Thêm
                     Mới</button>
             </div>
         </div>
@@ -51,9 +51,10 @@
                 <tr>
                     <th scope="col" style="width: 5%">STT</th>
                     <th scope="col">Hình ảnh</th>
-                    <th scope="col">Mã Sản phẩm</th>
+                    <th scope="col" style="width:10%">Mã Sản phẩm</th>
                     <th scope="col">Giá gốc</th>
-                    <th scope="col">Loại Sản phẩm</th>
+                    <th scope="col">Loại sản phẩm</th>
+                    <th scope="col">Mô tả</th>
                     <th scope="col" style="width:15%">Tag</th>
                     <th scope="col">Thao tác</th>
                 </tr>
@@ -80,14 +81,18 @@
                         {{product.ProductCategories}}
                     </td>
                     <td>
+                        {{product.Description}}
+                    </td>
+                    <td>
                         <span *ngFor="let tag of product.Tags"
-                            class="badge badge-pill badge-success d-inline-block p-1 mb-1">{{tag.TagAlias}}</span>
+                            class="badge badge-pill badge-success d-inline-block p-1 mb-1">{{tag.TagName}}</span>
                     </td>
                     <td>
                         <div class="btn-group">
-                            <button type="button" class="btn btn-outline-info" onclick="showProductEdit(event)"><i
-                                    class="fa fa-pencil"></i> Sửa</button>
-                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i>
+                            <button type="button" class="btn btn-outline-info"
+                                (click)="selectProductToEdit(product.Id)"><i class="fa fa-pencil"></i> Sửa</button>
+                            <button type="button" class="btn btn-outline-danger" (click)="deleteProduct(product.Id)"><i
+                                    class="fa fa-remove"></i>
                                 Xóa</button>
                         </div>
                     </td>

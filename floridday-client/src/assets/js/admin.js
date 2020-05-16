@@ -383,7 +383,7 @@ showAddNew = (obj) => {
     jQuery(".popupContent").slideDown(350);
 }
 
-function addProduct() {
+function showProductSetupPopup() {
     jQuery('#productAdd').slideDown(350);
 }
 

@@ -14,6 +14,8 @@ import { ProductImage } from 'src/app/models/entities/file.entity';
 import { Guid } from 'guid-typescript';
 import { FunctionsService } from 'src/app/services/common/functions.service';
 
+declare function showProductSetupPopup();
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -117,9 +119,17 @@ export class ProductsComponent extends BaseComponent {
 
     this.startLoading();
 
+    this.products = [];
+
     this.productService.getCategoryCount(this._selectedCategory).then(count => {
 
       this.itemTotalCount = count;
+
+      if (count <= 0) {
+        this.stopLoading();
+        this.pageCount = 0;
+        return;
+      }
 
       this.pageCount = count % this._itemsPerPage === 0 ? count / this._itemsPerPage : Math.floor(count / this._itemsPerPage) + 1;
 
@@ -141,61 +151,93 @@ export class ProductsComponent extends BaseComponent {
 
     this.startLoading();
 
-    if (this.edittingProduct.Id) {
+    try {
 
-      if (this.edittingProduct.ImageUrl) {
+      const prodImg = new ProductImage();
 
-        this.productImageService.deleteFileFromUrl(this.edittingProduct.ImageUrl)
-          .then(() => {
+      prodImg.Name = Guid.create().toString();
 
-            try {
-              const prodImg = new ProductImage();
-              prodImg.Name = Guid.create().toString();
+      this.productImageService.addFile(this.edittingFile, prodImg, (url) => {
 
-              this.productImageService.addFile(this.edittingFile, prodImg, (url) => {
+        this.edittingProduct.ImageUrl = url;
 
-                this.edittingProduct.ImageUrl = url;
+        this.productService.getlastCategoryIndex(this.edittingProduct.ProductCategories)
+          .then(categoryIndex => {
 
-                this.productService.getCategoryCount(this.edittingProduct.ProductCategories)
-                  .then(categoryIndex => {
+            this.edittingProduct.CategoryIndex = categoryIndex + 1;
 
-                    this.edittingProduct.CategoryIndex = categoryIndex + 1;
+            let newCate = false;
 
-                    this.productService.getByCategoryIndex(categoryIndex)
-                      .then(product => {
+            if (categoryIndex % 10000 === 0) {
+              newCate = true;
+              categoryIndex = 1 + (this.edittingProduct.ProductCategories + 1) * 10000;
+            }
 
-                        this.edittingProduct.Index = product.Index + 1;
+            this.productService.getByCategoryIndex(categoryIndex)
+              .then(product => {
 
-                        FunctionsService.excuteFunction('updateProductIndex', {
-                          startIndex: product.Index + 1,
-                          delta: 1
-                        }).then(() => {
-                          this.productService.set(this.edittingProduct).then(res => {
-                            this.stopLoading();
-                            this.categoryChange();
-                          });
-                        })
-                      });
+                this.edittingProduct.Index = newCate ? product.Index : product.Index + 1;
+
+                FunctionsService.excuteFunction('updateProductIndex', {
+                  startIndex: newCate ? product.Index : product.Index + 1,
+                  delta: 1
+                }).then(() => {
+                  this.productService.set(this.edittingProduct).then(res => {
+                    this.stopLoading();
+                    this.globalService.hidePopup();
+                    this.categoryChange();
+                    this.edittingProduct = new Product();
                   });
+                })
               });
-            }
-            catch (err) {
-              this.stopLoading();
-              this.showError(err);
-              return;
-            }
-
-          })
-          .catch(err => {
-            this.stopLoading();
-            this.showError(err);
-            return;
-          })
-      }
-    } else {
-
+          });
+      });
+    }
+    catch (err) {
+      this.stopLoading();
+      this.showError(err);
+      return;
     }
 
+  }
+
+  deleteProduct(id: string) {
+
+
+    this.openConfirm('Chắc chắn xoá sản phẩm này?', () => {
+      this.startLoading();
+
+      var product = this.products.filter(p => p.Id === id)[0];
+      if (!product) {
+        return;
+      }
+
+      this.productService.delete(id)
+        .then(() => {
+
+          FunctionsService.excuteFunction('updateProductCategoryIndex', {
+            category: product.ProductCategories,
+            startIndex: product.CategoryIndex + 1,
+            delta: -1
+          }).then(() => {
+
+            this.stopLoading();
+            this.categoryChange();
+
+          }).catch(err => {
+
+            this.stopLoading();
+            this.showWarning(err);
+            return;
+
+          });
+
+        })
+        .catch(error => {
+          this.showError('Xoá lỗi!');
+          this.stopLoading();
+        });
+    });
   }
 
   pageChanged(page) {
@@ -253,6 +295,12 @@ export class ProductsComponent extends BaseComponent {
       this.edittingImageUrl = reader.result.toString();
     }
 
+  }
+
+  selectProductToEdit(id: string) {
+    this.edittingProduct = this.products.filter(p => p.Id === id)[0];
+    this.edittingImageUrl = this.edittingProduct.ImageUrl;
+    showProductSetupPopup();
   }
 
   addTag() {
