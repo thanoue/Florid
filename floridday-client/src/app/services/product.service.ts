@@ -57,10 +57,21 @@ export class ProductService extends BaseService<Product> {
                     return product.CategoryIndex % 10000;
                 })
                 .catch(error => {
-                    this.errorToast(error);
+                    this.warningToast('Không tìm thấy sản phẩm nào');
                     return 0;
                 });
         }
+    }
+
+    getlastCategoryIndex(category: number): Promise<number> {
+
+        if (category == -1) {
+            return this.getCount();
+        }
+        else return this.getCategoryCount(category)
+            .then(count => {
+                return count + 10000 * category;
+            });
     }
 
     getByCategoryIndex(index: number): Promise<Product> {
@@ -103,7 +114,6 @@ export class ProductService extends BaseService<Product> {
                 const products = [];
                 snapshot.forEach(snap => {
                     const product = snap.val() as Product;
-                    product.ImageUrl = 'http://florid.com.vn/' + product.ImageUrl;
                     products.push(product);
                 });
                 return products;
