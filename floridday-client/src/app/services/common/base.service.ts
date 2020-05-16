@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { GlobalService } from './global.service';
 import * as firebase from 'firebase';
 import { BaseEntity } from 'src/app/models/entities/base.entity';
+import { Guid } from 'guid-typescript';
 
 export abstract class BaseService<T extends BaseEntity> {
 
@@ -44,6 +45,16 @@ export abstract class BaseService<T extends BaseEntity> {
         this.db = firebase.database();
     }
 
+    updateList(updates: {}, onDone: () => void): Promise<void> {
+        return this.tableRef.update(updates, (err) => {
+            if (err) {
+                this.errorToast(err.message);
+            } else {
+                onDone();
+            }
+        })
+    }
+
 
     getByFieldName(fieldName: string, value: any): Promise<T[]> {
         this.globalService.startLoading();
@@ -72,7 +83,22 @@ export abstract class BaseService<T extends BaseEntity> {
             });
     }
 
+    public setAnotherEntity(model: any, tableName: string): Promise<any> {
+
+        return this.db.ref(`${tableName}/${model.Id}`).set(model).then(res => {
+            if (res) {
+                return model;
+            }
+        });
+
+    }
+
     public set(model: T): Promise<T> {
+
+        if (!model.Id || model.Id == '') {
+            model.Id = Guid.create().toString();
+        }
+
         return this.db.ref(`${this.tableName}/${model.Id}`).set(model).then(res => {
             if (res) {
                 return model;

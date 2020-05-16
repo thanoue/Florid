@@ -13,20 +13,6 @@ export enum Roles {
     Florist = 'Florist'
 };
 
-export enum ProductCategories {
-    All = -1,
-    Valentine = 0,
-    BoHoaTuoi,
-    BinhHoaTuoi,
-    HopHoaTuoi,
-    GioHoaTuoi,
-    HoaCuoi,
-    HoaNgheThuat,
-    KeHoaTuoi,
-    HoaSuKien,
-    LanHoDiep
-}
-
 export enum MembershipTypes {
     NewCustomer,
     StandardMember,

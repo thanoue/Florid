@@ -2,7 +2,8 @@ import * as adminSdk from '../helper/admin.sdk';
 
 export async function updateIndex(deletedIndex: number): Promise<any> {
 
-    return adminSdk.defauDatabase.ref("tags").orderByChild('Index').once('value')
+    return adminSdk.defauDatabase.ref("tags").orderByChild('Index')
+        .startAt(deletedIndex + 1).once('value')
         .then((snapshot: any) => {
 
             try {

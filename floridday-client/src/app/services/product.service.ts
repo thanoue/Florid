@@ -5,10 +5,11 @@ import { from, of } from 'rxjs';
 import { promise } from 'protractor';
 import 'firebase/database';
 import { Product } from '../models/entities/product.entity';
-import { ProductCategories } from '../models/enums';
 import { async } from '@angular/core/testing';
 import { constants } from 'crypto';
 import { GlobalService } from './common/global.service';
+import { ProductImage } from '../models/entities/file.entity';
+import { StorageService } from './storage.service';
 
 @Injectable({
     providedIn: 'root'
@@ -38,9 +39,8 @@ export class ProductService extends BaseService<Product> {
             });
     }
 
-    getCategoryCount(category: ProductCategories): Promise<number> {
-
-        if (category === ProductCategories.All) {
+    getCategoryCount(category: number): Promise<number> {
+        if (category === -1) {
             return this.getCount();
         } else {
             return this.tableRef.orderByChild('CategoryIndex')
@@ -57,19 +57,45 @@ export class ProductService extends BaseService<Product> {
                     return product.CategoryIndex % 10000;
                 })
                 .catch(error => {
-                    this.errorToast(error);
+                    this.warningToast('Không tìm thấy sản phẩm nào');
                     return 0;
                 });
         }
     }
 
-    getByPage(page: number, itemsPerPage: number, category?: ProductCategories): Promise<Product[]> {
+    getlastCategoryIndex(category: number): Promise<number> {
+
+        if (category == -1) {
+            return this.getCount();
+        }
+        else return this.getCategoryCount(category)
+            .then(count => {
+                return count + 10000 * category;
+            });
+    }
+
+    getByCategoryIndex(index: number): Promise<Product> {
+        return this.tableRef.orderByChild('CategoryIndex').equalTo(index)
+            .once('value')
+            .then(snapshot => {
+
+                let product: Product;
+                snapshot.forEach(snap => {
+                    product = snap.val() as Product;
+                });
+
+                return product;
+
+            });
+    }
+
+    getByPage(page: number, itemsPerPage: number, category?: number): Promise<Product[]> {
 
         this.startLoading();
 
         let query: Promise<firebase.database.DataSnapshot>;
 
-        if (category === undefined || category === null || category === ProductCategories.All) {
+        if (category === undefined || category === null || category === -1) {
             query = this.tableRef.orderByChild('Index')
                 .startAt((page - 1) * itemsPerPage + 1)
                 .endAt(itemsPerPage * page)
@@ -88,7 +114,6 @@ export class ProductService extends BaseService<Product> {
                 const products = [];
                 snapshot.forEach(snap => {
                     const product = snap.val() as Product;
-                    product.ImageUrl = 'http://florid.com.vn/' + product.ImageUrl;
                     products.push(product);
                 });
                 return products;
