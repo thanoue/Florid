@@ -26,13 +26,19 @@ export class ProductImageService extends BaseService<ProductImage> {
     return this.tableRef.orderByChild('Url').equalTo(url).once('value')
       .then(res => {
 
-        let prodImg = new ProductImage();
+        let prodImg: ProductImage = null;
         res.forEach(snap => {
           prodImg = snap.val() as ProductImage;
         });
 
+        if (prodImg == null)
+          return;
+
         return this.storageService.deleteFile(prodImg.Name, prodImg.FolderName);
 
+      }).catch(err => {
+        console.error(err);
+        return;
       });
   }
 
