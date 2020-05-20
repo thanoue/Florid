@@ -25,8 +25,9 @@ export class StorageService {
                 // in progress
             },
             (error) => {
-                // fail
-                console.log(error);
+                // fail  
+                uploadedCallback(null);
+                this.globalService.showError(error.message);
             },
             () => {
                 // success

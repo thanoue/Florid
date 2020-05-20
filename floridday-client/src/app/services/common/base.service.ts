@@ -100,10 +100,13 @@ export abstract class BaseService<T extends BaseEntity> {
         }
 
         return this.db.ref(`${this.tableName}/${model.Id}`).set(model).then(res => {
-            if (res) {
-                return model;
-            }
-        });
+            return model;
+        })
+            .catch(err => {
+                this.errorToast(err.message);
+                this.stopLoading();
+                throw new err;
+            });
     }
 
     public insert(model: T): Promise<T> {
