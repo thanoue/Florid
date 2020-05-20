@@ -13,6 +13,9 @@ import { ProductImageService } from 'src/app/services/product.image.service';
 import { ProductImage } from 'src/app/models/entities/file.entity';
 import { Guid } from 'guid-typescript';
 import { FunctionsService } from 'src/app/services/common/functions.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { runInThisContext } from 'vm';
+import { ProductTagViewModel } from 'src/app/models/view.models/product.tag.model';
 
 declare function showProductSetupPopup();
 
@@ -27,10 +30,11 @@ export class ProductsComponent extends BaseComponent {
 
   pageCount = 0;
   itemTotalCount = 0;
-  products: Product[];
   newTagName = "";
   edittingFile: any;
   edittingImageUrl: any;
+  isSelectAll = false;
+  edittingProduct: Product;
 
   _selectedCategory: number;
   get selectedCategory(): number {
@@ -52,7 +56,7 @@ export class ProductsComponent extends BaseComponent {
 
   categories: {
     Name: string,
-    Value: number
+    Value: number,
   }[];
 
   edittingCategories: {
@@ -65,7 +69,11 @@ export class ProductsComponent extends BaseComponent {
     IsSelected: boolean
   }[];
 
-  edittingProduct: Product;
+  products: {
+    Product: Product,
+    IsSelect: boolean,
+    CategoryName: string
+  }[];
 
   protected Init() {
 
@@ -100,7 +108,8 @@ export class ProductsComponent extends BaseComponent {
           IsSelected: false
         });
       });
-    })
+    });
+
   }
 
   constructor(private productService: ProductService, private productCategoryService: ProductCategoryService, private tagService: TagService
@@ -135,12 +144,82 @@ export class ProductsComponent extends BaseComponent {
 
       this.productService.getByPage(1, this._itemsPerPage, this._selectedCategory)
         .then(products => {
-          this.products = products;
+          products.forEach(product => {
+            this.products.push({
+              Product: product,
+              CategoryName: this.categories.filter(p => p.Value === product.ProductCategories)[0].Name,
+              IsSelect: false
+            });
+          });
           this.stopLoading();
         });
 
     });
 
+  }
+
+  editProduct() {
+
+    this.startLoading();
+
+    if (this.edittingProduct.ImageUrl && this.edittingFile && this.edittingFile != null) {
+
+      this.productImageService.deleteFileFromUrl(this.edittingProduct.ImageUrl)
+        .then(() => {
+
+          const prodImg = new ProductImage();
+          prodImg.Name = Guid.create().toString();
+
+          this.productImageService.addFile(this.edittingFile, prodImg, (url) => {
+
+            if (url == 'ERROR') {
+              this.stopLoading();
+              return;
+            }
+
+            this.edittingProduct.ImageUrl = url;
+            this.edittingFile = null;
+
+            this.productService.set(this.edittingProduct)
+              .then(() => {
+
+                this.stopLoading();
+                this.globalService.hidePopup();
+                this.categoryChange();
+                this.edittingProduct = new Product();
+              })
+              .catch(err => {
+                this.showError(err);
+                this.stopLoading();
+                return;
+              });
+
+          });
+
+        })
+        .catch(err => {
+          this.showError(err);
+          this.stopLoading();
+          return;
+        })
+    } else {
+
+      this.productService.set(this.edittingProduct)
+        .then(() => {
+
+          this.stopLoading();
+          this.globalService.hidePopup();
+          this.categoryChange();
+          this.edittingProduct = new Product();
+
+        })
+        .catch(err => {
+          this.showError(err);
+          this.stopLoading();
+          return;
+        });
+
+    }
   }
 
   addProduct(form: NgForm) {
@@ -149,12 +228,16 @@ export class ProductsComponent extends BaseComponent {
       return;
     }
 
+    if (this.edittingProduct.Id) {
+      this.editProduct();
+      return
+    }
+
     this.startLoading();
 
     try {
 
       const prodImg = new ProductImage();
-
       prodImg.Name = Guid.create().toString();
 
       this.productImageService.addFile(this.edittingFile, prodImg, (url) => {
@@ -175,6 +258,19 @@ export class ProductsComponent extends BaseComponent {
 
             this.productService.getByCategoryIndex(categoryIndex)
               .then(product => {
+
+                if (!product || product == null) {
+
+                  this.edittingProduct.Index = this.itemTotalCount + 1;
+
+                  this.productService.set(this.edittingProduct).then(res => {
+                    this.stopLoading();
+                    this.globalService.hidePopup();
+                    this.categoryChange();
+                    this.edittingProduct = new Product();
+                  });
+                  return;
+                }
 
                 this.edittingProduct.Index = newCate ? product.Index : product.Index + 1;
 
@@ -203,11 +299,11 @@ export class ProductsComponent extends BaseComponent {
 
   deleteProduct(id: string) {
 
-
     this.openConfirm('Chắc chắn xoá sản phẩm này?', () => {
+
       this.startLoading();
 
-      var product = this.products.filter(p => p.Id === id)[0];
+      var product = this.products.filter(p => p.Product.Id === id)[0].Product;
       if (!product) {
         return;
       }
@@ -216,10 +312,14 @@ export class ProductsComponent extends BaseComponent {
         .then(() => {
 
           FunctionsService.excuteFunction('updateProductCategoryIndex', {
-            category: product.ProductCategories,
             startIndex: product.CategoryIndex + 1,
             delta: -1
           }).then(() => {
+
+            this.productImageService.deleteFileFromUrl(product.ImageUrl)
+              .then(res => {
+                console.log(res);
+              });
 
             this.stopLoading();
             this.categoryChange();
@@ -241,23 +341,31 @@ export class ProductsComponent extends BaseComponent {
   }
 
   pageChanged(page) {
-
+    this.products = [];
     this.productService.getByPage(page, this._itemsPerPage, this._selectedCategory)
       .then(products => {
-        this.products = products;
+        products.forEach(product => {
+          this.products.push({
+            Product: product,
+            CategoryName: this.categories.filter(p => p.Value === product.ProductCategories)[0].Name,
+            IsSelect: false
+          });
+        });
+        this.stopLoading();
       });
 
   }
 
-  unselectTag(tagId: string) {
+  unselectTag(removingTag: ProductTagViewModel) {
 
-    var unseletedTag = this.edittingProduct.Tags.filter(p => p.TagAlias === unseletedTag)[0];
-    this.edittingProduct.Tags.splice(this.edittingProduct.Tags.indexOf(unseletedTag), 1);
+    this.edittingProduct.Tags.splice(this.edittingProduct.Tags.indexOf(removingTag), 1);
 
     this.globalTags.forEach(tag => {
-      if (tagId === tag.Tag.Id) {
+
+      if (removingTag.TagAlias === tag.Tag.Id) {
         tag.IsSelected = false;
       }
+
     });
 
   }
@@ -273,7 +381,9 @@ export class ProductsComponent extends BaseComponent {
         });
 
         tag.IsSelected = true;
+        return;
       }
+
     });
   }
 
@@ -298,9 +408,23 @@ export class ProductsComponent extends BaseComponent {
   }
 
   selectProductToEdit(id: string) {
-    this.edittingProduct = this.products.filter(p => p.Id === id)[0];
+
+    this.edittingProduct = this.products.filter(p => p.Product.Id === id)[0].Product;
     this.edittingImageUrl = this.edittingProduct.ImageUrl;
+
+    if (!this.edittingProduct.Tags)
+      this.edittingProduct.Tags = [];
+
+    this.globalTags.forEach(tag => {
+      if (this.edittingProduct.Tags.filter(p => p.TagAlias === tag.Tag.Id).length > 0) {
+        tag.IsSelected = true;
+      } else {
+        tag.IsSelected = false;
+      }
+    });
+
     showProductSetupPopup();
+
   }
 
   addTag() {
@@ -313,6 +437,7 @@ export class ProductsComponent extends BaseComponent {
       if (res != null) {
         this.stopLoading();
         this.showError('Tag bị trùng!!');
+        this.newTagName = "";
         return;
       }
 
@@ -330,21 +455,129 @@ export class ProductsComponent extends BaseComponent {
             this.stopLoading();
 
             this.globalTags.push({
-              Tag: tag,
+              Tag: res,
               IsSelected: true
             });
 
             this.edittingProduct.Tags.push({
-              TagName: tag.Name,
-              TagAlias: tag.Id
+              TagName: res.Name,
+              TagAlias: res.Id
             });
 
             this.newTagName = "";
 
-          })
+          });
+
         });
     });
 
   }
 
+  checkAllChange(isCheck: boolean) {
+    this.isSelectAll = isCheck;
+    this.products.forEach(product => {
+      product.IsSelect = isCheck;
+    });
+  }
+
+  deleteMany() {
+    const deletingProdIds = this.products.filter(p => p.IsSelect === true);
+
+    if (!deletingProdIds || deletingProdIds.length <= 0) {
+      return;
+    }
+
+    this.openConfirm('Chắc chắn muốn xoá các sản phẩm này?', () => {
+
+      this.startLoading();
+
+      let ids: string[] = [];
+
+      let smallestCategoryIndexes: {
+        Category: number,
+        CategoryIndex: number
+      }[] = [];
+
+      let smallestIndex = deletingProdIds[0].Product.Index;
+
+      deletingProdIds.forEach(productItem => {
+
+        if (this.isContain(productItem.Product.ProductCategories, smallestCategoryIndexes)) {
+
+          smallestCategoryIndexes.forEach(item => {
+
+            if (productItem.Product.ProductCategories === item.Category) {
+
+              if (productItem.Product.CategoryIndex < item.CategoryIndex) {
+                item.CategoryIndex = productItem.Product.CategoryIndex;
+              }
+
+            }
+
+          });
+
+        } else {
+
+          smallestCategoryIndexes.push({
+            Category: productItem.Product.ProductCategories,
+            CategoryIndex: productItem.Product.CategoryIndex
+          });
+
+        }
+
+        ids.push(productItem.Product.Id);
+
+        if (smallestIndex > productItem.Product.Index) {
+          smallestIndex = productItem.Product.Index;
+        };
+
+      });
+
+      console.log(smallestCategoryIndexes);
+
+      this.productService.deleteMany(ids)
+        .then(res => {
+
+          const cateIndexes = [];
+          smallestCategoryIndexes.forEach(cateIndex => {
+            cateIndexes.push(cateIndex.CategoryIndex);
+          })
+
+          FunctionsService.excuteFunction('updateProductIndexMultiple', {
+            smallestIndex: smallestIndex,
+            smallestCateIndexes: cateIndexes
+          })
+            .then(() => {
+              this.stopLoading();
+              this.categoryChange();
+            })
+            .catch(err => {
+              this.stopLoading();
+              this.showError(err);
+              return;
+            })
+        })
+    });
+
+  }
+
+  isContain(category: number, indexes: {
+    Category: number,
+    CategoryIndex: number
+  }[]): boolean {
+
+    let isContained = false;
+
+    indexes.forEach(item => {
+
+      if (category === item.Category) {
+
+        isContained = true;
+      }
+
+    });
+
+    return isContained;
+
+  }
 }

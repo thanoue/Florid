@@ -11,6 +11,7 @@ import { ProductCategoryService } from 'src/app/services/product.categpory.servi
 import { ProductCategory } from 'src/app/models/entities/product.category.entity';
 import { Guid } from 'guid-typescript';
 import { ProductService } from 'src/app/services/product.service';
+import { Product } from 'src/app/models/entities/product.entity';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,22 @@ export class HomeComponent extends BaseComponent {
   }
 
   protected Init() {
+  }
+
+  addTempProduct() {
+
+    let prod = new Product();
+
+    prod.Name = "MS-10283";
+    prod.ProductCategories = 7;
+    prod.Index = 541;
+    prod.Page = 3;
+    prod.CategoryIndex = 70035;
+    prod.Price = "900091";
+    prod.ImageUrl = "http://florid.com.vn/uploads/medium/hoa/1383.jpg";
+
+
+    this.productService.set(prod);
   }
 
   updateProductImg() {

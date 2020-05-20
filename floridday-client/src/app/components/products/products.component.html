@@ -10,8 +10,10 @@
         <div class="row listOptions">
             <div class="col-md-2 col-xs-12  optionDelete">
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                    <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
+                    <input type="checkbox" class="form-check-input" (change)="checkAllChange(!isSelectAll)" name=""
+                        id="" value="checkedValue">
+                    <button type="button" (click)="deleteMany()" class="btn btn-outline-danger"><i
+                            class="fa fa-remove"></i> Xóa</button>
                 </div>
             </div>
             <div class="col-md-4 col-xs-12  optionSearch">
@@ -64,35 +66,37 @@
                     <td scope="row">
                         <div class="form-check">
                             <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                                {{product.Index}}
+                                <input type="checkbox" class="form-check-input" name="" id=""
+                                    [(ngModel)]="product.IsSelect" value="checkedValue">
+                                {{product.Product.Index}}
                             </label>
                         </div>
                     </td>
                     <td>
-                        <img [src]="product.ImageUrl" alt="" class="productImg">
+                        <img [src]="product.Product.ImageUrl" alt="" class="productImg">
                     </td>
                     <td>
                         <a href="javascript:void(0)" class="tdName"
-                            onclick="showProductEdit(event)">{{product.Name}}</a>
+                            onclick="showProductEdit(event)">{{product.Product.Name}}</a>
                     </td>
-                    <td>{{product.Price}}</td>
+                    <td>{{product.Product.Price}}</td>
                     <td>
-                        {{product.ProductCategories}}
-                    </td>
-                    <td>
-                        {{product.Description}}
+                        {{product.CategoryName}}
                     </td>
                     <td>
-                        <span *ngFor="let tag of product.Tags"
+                        {{product.Product.Description}}
+                    </td>
+                    <td>
+                        <span *ngFor="let tag of product.Product.Tags"
                             class="badge badge-pill badge-success d-inline-block p-1 mb-1">{{tag.TagName}}</span>
                     </td>
                     <td>
                         <div class="btn-group">
                             <button type="button" class="btn btn-outline-info"
-                                (click)="selectProductToEdit(product.Id)"><i class="fa fa-pencil"></i> Sửa</button>
-                            <button type="button" class="btn btn-outline-danger" (click)="deleteProduct(product.Id)"><i
-                                    class="fa fa-remove"></i>
+                                (click)="selectProductToEdit(product.Product.Id)"><i class="fa fa-pencil"></i>
+                                Sửa</button>
+                            <button type="button" class="btn btn-outline-danger"
+                                (click)="deleteProduct(product.Product.Id)"><i class="fa fa-remove"></i>
                                 Xóa</button>
                         </div>
                     </td>
@@ -161,8 +165,7 @@
                     <span class="addTagBtn" (click)="addTag()">Thêm</span>
                 </div>
                 <div class="showTags cusScroll">
-                    <span *ngFor="let tag of edittingProduct.Tags"
-                        (click)="unselectTag(tag.TagAlias)">{{tag.TagName}}</span>
+                    <span *ngFor="let tag of edittingProduct.Tags" (click)="unselectTag(tag)">{{tag.TagName}}</span>
                 </div>
                 <ul class="tagList cusScroll">
                     <li *ngFor="let notSelectedTag of globalTags"><span *ngIf="!notSelectedTag.IsSelected"
