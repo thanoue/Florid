@@ -526,7 +526,7 @@ function selectItem(e, className) {
 
     jQuery(e).addClass('selected');
 
-    window.selectItemReference.zone.run(() => { window.selectItemReference.itemSelected(jQuery(e).attr('data-id')); });
+    window.searchProdReference.zone.run(() => { window.searchProdReference.itemSelected(jQuery(e).attr('data-id')); });
 
 }
 
@@ -602,46 +602,17 @@ function openConfirm(message, okCallback, noCallback, cancelCallback) {
 }
 
 function openTagMenu() {
-    var html = `<div class="actionMenu checkMenu">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                <span class="main-bg vatCustom"></span>Hoa Hồng
-              </label>
-            </div>
-            <div class="form-check">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                  <span class="main-bg vatCustom"></span>Hoa Huệ
-                </label>
-              </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                  <span class="main-bg vatCustom"></span>Hoa Lan
-                </label>
-              </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                  <span class="main-bg vatCustom"></span>Hoa Cẩm Chướng
-                </label>
-              </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                  <span class="main-bg vatCustom"></span>Hoa Lyly
-                </label>
-              </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue">
-                  <span class="main-bg vatCustom"></span>Hoa Cúc
-                </label>
-              </div>
-        </div>`;
-    slideUp(html, function (index) {
 
+    jQuery("body").append("<div class='overlay-dark' id='tags-menu-bg'></div>");
+
+    jQuery("#tagsMenu").slideDown(250);
+
+    jQuery("#tags-menu-bg").one('click', function () {
+
+        jQuery("#tagsMenu").slideUp(250, function () {
+            jQuery("#tags-menu-bg").remove();
+            window.searchProdReference.zone.run(() => { window.searchProdReference.tagsSelected(); });
+        });
     });
 }
 

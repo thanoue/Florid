@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import html2canvas from 'html2canvas';
 import { ReceiptService } from 'src/app/services/receipt.service';
 import { Receipt } from 'src/app/models/entities/file.entity';
-import { ProductCategories } from 'src/app/models/enums';
 import { OrderViewModel } from 'src/app/models/view.models/order.model';
 import { ExchangeService } from 'src/app/services/exchange.service';
 

@@ -20,7 +20,7 @@
             </div>
             <div class="filterAdd">
                 <button class="main-bg"><img src="../../../assets/images/price.svg" alt="" class="main-filter"
-                        onclick="openTagMenu()"></button>
+                        onClick="openTagMenu()"></button>
             </div>
         </div>
         <div class="row prodList cusScroll">
@@ -45,4 +45,15 @@
             </div>
         </div>
     </div>
+</div>
+<div id="tagsMenu" class="tagMenu checkMenu tagMenu">
+
+    <div *ngFor="let cateTag of cateTags" class="form-check">
+        <label class="form-check-label">
+            <input type="checkbox" [(ngModel)]="cateTag.IsSelected" class="form-check-input" name="IsSelected"
+                id="IsSelected" value="checkedValue">
+            <span class="main-bg vatCustom"></span>{{cateTag.Tag.Name}}
+        </label>
+    </div>
+
 </div>

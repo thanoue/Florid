@@ -1,18 +1,17 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductCategories } from 'src/app/models/enums';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/entities/product.entity';
-import { PRODUCTCATEGORIES } from 'src/app/app.constants';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { TempProduct } from 'src/app/models/entities/file.entity';
 import { TempProductService } from 'src/app/services/tempProduct.service';
 import { OrderDetailService } from 'src/app/services/order-detail.service';
 import { Tag } from 'src/app/models/entities/tag.entity';
 import { TagService } from 'src/app/services/tag.service';
+import { ProductCategoryService } from 'src/app/services/product.categpory.service';
 
-declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: any) => void): any;
+declare function selectProductCategory(menuitems: { Name: string; Value: number; }[], callback: (index: any) => void): any;
 declare function filterFocus(): any;
 
 @Component({
@@ -23,30 +22,47 @@ declare function filterFocus(): any;
 export class SearchProductComponent extends BaseComponent {
 
   Title = 'Chọn sản phẩm';
-  productCategory: ProductCategories;
+  productCategory: number;
   currentPage = 1;
   currentMaxPage = 0;
 
   pagingProducts: Product[];
+  categoryProducts: Product[];
 
   categoryName = '';
   selectedProduct: Product;
   currentHardcodeUsedCount = -1;
 
+  categories: {
+    Value: number,
+    Name: string
+  }[];
+
+  cateTags: {
+    Tag: Tag,
+    IsSelected: boolean
+  }[];
+
   protected IsDataLosingWarning = false;
 
   globalTags: Tag[];
+
   itemsPerPage = 21;
 
   constructor(private route: ActivatedRoute, private router: Router, private orderDetailService: OrderDetailService,
     // tslint:disable-next-line: align
     private productService: ProductService, private _ngZone: NgZone, private tempProductService: TempProductService,
     // tslint:disable-next-line: align
-    private tagService: TagService) {
+    private tagService: TagService,
+    private categoryService: ProductCategoryService) {
 
     super();
 
     this.pagingProducts = [];
+    this.categories = [];
+    this.categoryProducts = [];
+    this.cateTags = [];
+
   }
 
   protected async Init() {
@@ -55,20 +71,33 @@ export class SearchProductComponent extends BaseComponent {
 
     this.route.queryParams
       .subscribe(params => {
-        this.getProductByCategory(+params.category);
-        this.tagService.getAll().then(tags => {
 
-          this.globalTags = tags;
+        this.categoryService.getAll()
+          .then((cates) => {
 
-        });
+            cates.forEach(cate => {
+              this.categories.push({
+                Value: cate.Index,
+                Name: cate.Name
+              });
+            });
 
+            this.tagService.getAll().then(tags => {
+
+              this.globalTags = tags;
+              this.getProductByCategory(+params.category);
+
+            });
+
+          });
       });
 
-    const key = 'selectItemReference';
+    const key = 'searchProdReference';
 
     window[key] = {
       component: this, zone: this._ngZone,
-      itemSelected: (data) => this.setSelectedProduct(data)
+      itemSelected: (data) => this.setSelectedProduct(data),
+      tagsSelected: () => this.tagsSelected()
     };
 
     this.orderDetailService.getHardcodeImageSavedCounting(this.globalOrderDetail.HardcodeImageName, (count) => {
@@ -88,6 +117,52 @@ export class SearchProductComponent extends BaseComponent {
     });
 
   }
+
+  openTagMenu() {
+
+  }
+
+  tagsSelected() {
+
+    let tags: string[] = [];
+    this.cateTags.forEach(tag => {
+
+      if (tag.IsSelected) {
+        tags.push(tag.Tag.Id);
+      }
+
+    });
+
+    if (tags.length <= 0)
+      return;
+
+    this.currentPage = 1;
+
+    if (this.categoryProducts.length <= 0) {
+
+      this.productService.getAllByCategory(this.productCategory)
+        .then(products => {
+
+          this.categoryProducts = products;
+          this.filterByTags(tags);
+        });
+    }
+    else {
+      this.filterByTags(tags);
+    }
+  }
+
+  filterByTags(tags: string[]) {
+
+    this.pagingProducts = [];
+    this.categoryProducts.forEach(product => {
+
+      if (product.Tags && product.Tags.filter(p => tags.indexOf(p.TagAlias) > -1).length > 0) {
+        this.pagingProducts.push(product);
+      }
+    });
+  }
+
 
   onChange(event) {
     const filesUpload: File = event.target.files[0];
@@ -222,10 +297,9 @@ export class SearchProductComponent extends BaseComponent {
   getProductByCategory(category: number) {
 
     this.productCategory = category;
+    this.cateTags.splice(0, this.cateTags.length);
 
-    console.log(category);
-
-    this.categoryName = PRODUCTCATEGORIES.filter(p => p.Value === this.productCategory)[0].Name;
+    this.categoryName = this.categories.filter(p => p.Value === this.productCategory)[0].Name;
 
     this.productService.getCategoryCount(category)
       .then(count => {
@@ -237,16 +311,50 @@ export class SearchProductComponent extends BaseComponent {
 
       });
 
+    this.productService.getAllByCategory(this.productCategory)
+      .then(products => {
+
+        this.categoryProducts = products;
+
+        this.globalTags.forEach(tag => {
+
+          products.forEach(product => {
+
+            if (product.Tags && product.Tags.filter(g => g.TagAlias === tag.Id).length > 0) {
+
+              this.cateTags.push({
+                Tag: tag,
+                IsSelected: false
+              });
+
+            }
+
+          });
+
+        });
+
+      });
+
   }
 
   filter() {
-    selectProductCategory(PRODUCTCATEGORIES, (val) => {
+    selectProductCategory(this.categories, (val) => {
+      this.categoryProducts = [];
       filterFocus();
       this.getProductByCategory(+val);
     });
   }
 
   getProductsByPage(page: number) {
+
+    if (this.cateTags.filter(p => p.IsSelected).length > 0) {
+      page = 1;
+      this.currentPage = 1;
+      this.cateTags.forEach(tag => {
+        tag.IsSelected = false;
+      });
+
+    }
 
     if (page <= 0) {
       return;

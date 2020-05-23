@@ -4,16 +4,16 @@ import { OrderDetailViewModel } from 'src/app/models/view.models/order.model';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap, retry } from 'rxjs/operators';
 import { MenuItem } from '../../models/view.models/menu.model';
-import { ProductCategories } from 'src/app/models/enums';
-import { PRODUCTCATEGORIES } from 'src/app/app.constants';
 import { NgForm } from '@angular/forms';
 import { TempProductService } from 'src/app/services/tempProduct.service';
 import { TempProduct } from 'src/app/models/entities/file.entity';
 import { ExchangeService } from 'src/app/services/exchange.service';
+import { ProductCategory } from 'src/app/models/entities/product.category.entity';
+import { ProductCategoryService } from 'src/app/services/product.categpory.service';
 
 declare function getNumberInput(resCallback: (res: number) => void, placeHolder: string): any;
 declare function createNumbericElement(isDisabled: boolean, calback: (val: number) => void): any;
-declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: any) => void): any;
+declare function selectProductCategory(menuitems: { Name: string; Value: number; }[], callback: (index: any) => void): any;
 
 @Component({
   selector: 'app-order-detail',
@@ -27,9 +27,14 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
   orderDetail: OrderDetailViewModel;
   detailIndex: number;
 
-  constructor(private route: ActivatedRoute, private router: Router, private tempProductService: TempProductService) {
-    super();
+  categories: {
+    Value: number,
+    Name: string
+  }[];
 
+  constructor(private route: ActivatedRoute, private router: Router, private categoryService: ProductCategoryService) {
+    super();
+    this.categories = [];
   }
 
   protected Init() {
@@ -38,7 +43,6 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
       this.detailIndex = + params.id;
 
-
       this.orderDetail = this.globalOrderDetail;
 
       this.orderDetail.AdditionalFee /= 1000;
@@ -46,6 +50,19 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
       createNumbericElement(this.detailIndex > -1, (val) => {
         this.orderDetail.Quantity = val;
       });
+
+      this.categoryService.getAll()
+        .then((cates) => {
+
+          cates.forEach(cate => {
+            this.categories.push({
+              Value: cate.Index,
+              Name: cate.Name
+            })
+          });
+
+        });
+
 
     });
 
@@ -65,7 +82,7 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
   searchProduct() {
 
-    selectProductCategory(PRODUCTCATEGORIES, (val) => {
+    selectProductCategory(this.categories, (val) => {
 
       this.router.navigate(['/search-product'], { queryParams: { category: +val }, queryParamsHandling: 'merge' });
 
