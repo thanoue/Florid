@@ -111,7 +111,18 @@ exports.updateProductIndex = functions.https.onCall(async (params, context) => {
 exports.updateProductCategoryIndex = functions.https.onCall(async (params, context) => {
     return await excuteFunction(context, params.token, async () => {
 
-        const firstIndex = await productService.updateCategoryIndex(params.data.category, params.data.startIndex, params.data.delta);
+        const firstIndex = await productService.updateCategoryIndex(params.data.startIndex, params.data.delta);
+        if (firstIndex > 0)
+            return await productService.updateIndex(firstIndex, params.data.delta);
+
+    }, [Role.Account, Role.Admin, Role.None]);
+});
+
+
+exports.updateProductIndexMultiple = functions.https.onCall(async (params, context) => {
+    return await excuteFunction(context, params.token, async () => {
+
+        const firstIndex = await productService.updateProductIndexMultiple(params.data.smallestIndex, params.data.smallestCateIndexes);
         if (firstIndex > 0)
             return await productService.updateIndex(firstIndex, params.data.delta);
 

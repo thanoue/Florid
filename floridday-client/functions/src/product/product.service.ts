@@ -44,13 +44,77 @@ export async function updateIndex(startIndex: number, delta: number): Promise<an
         });
 }
 
-export async function updateCategoryIndex(category: number, startIndex: number, delta: number): Promise<number> {
+export async function updateProductIndexMultiple(smallestIndex: number, smallestCateIndexes: number[]): Promise<any> {
 
-    console.log(category, startIndex, delta);
+    let startIndex = smallestIndex + 1;
+
+    console.log(smallestIndex, smallestCateIndexes);
+
+    return adminSdk.defauDatabase.ref('products').orderByChild('Index')
+        .startAt(startIndex)
+        .once('value')
+        .then(async (snapshot: any) => {
+            if (snapshot) {
+
+                const globalProducts: any[] = [];
+
+                snapshot.forEach((snap: any) => {
+                    let product = snap.val();
+                    globalProducts.push(product);
+                });
+
+                interface IDictionary {
+                    [index: string]: number;
+                }
+
+                var updates = {} as IDictionary;
+
+                globalProducts.forEach((product: any) => {
+                    updates[`/${product.Id}/Index`] = startIndex;
+                    startIndex++;
+                });
+
+                smallestCateIndexes.forEach((categoryIndex: number) => {
+
+                    let startCateIndex = categoryIndex += 1;
+
+                    const offset = categoryIndex - (categoryIndex % 10000);
+                    const cateUpdates: any[] = [];
+
+                    globalProducts.forEach(product => {
+
+                        if (product.CategoryIndex >= startCateIndex && product.CategoryIndex <= (9999 + offset)) {
+                            cateUpdates.push(product);
+                        }
+
+                    });
+
+                    cateUpdates.forEach(product => {
+
+                        updates[`/${product.Id}/CategoryIndex`] = startCateIndex;
+                        startCateIndex += 1;
+
+                    });
+
+                });
+
+                return await adminSdk.defauDatabase.ref('/products').update(updates);
+
+            } else {
+                return;
+            }
+        })
+}
+
+export async function updateCategoryIndex(startIndex: number, delta: number): Promise<number> {
+
+    const offset = startIndex - (startIndex % 10000);
+
+    console.log(offset, startIndex, delta);
 
     return adminSdk.defauDatabase.ref("products").orderByChild('CategoryIndex')
         .startAt(startIndex)
-        .endAt(9999 + category * 10000).once('value')
+        .endAt(9999 + offset).once('value')
         .then(async (snapshot: any) => {
 
             try {
@@ -70,8 +134,8 @@ export async function updateCategoryIndex(category: number, startIndex: number, 
                 if (products.length <= 0) {
 
                     return adminSdk.defauDatabase.ref('products').orderByChild('CategoryIndex')
-                        .startAt(1 + (category + 1) * 10000)
-                        .endAt(2 + (category + 1) * 10000)
+                        .startAt(1 + offset + 10000)
+                        .endAt(2 + offset + 10000)
                         .limitToFirst(1)
                         .once('value')
                         .then((snapshot: any) => {
