@@ -1,5 +1,23 @@
 import * as adminSdk from '../helper/admin.sdk';
 
+export async function searchProduct(term: string): Promise<any> {
+    return adminSdk.defauDatabase.ref('products')
+        .orderByChild('Name')
+        .startAt(term)
+        .endAt(term + '\uf8ff')
+        .once('value')
+        .then((res: any) => {
+
+            const customers: any[] = [];
+
+            res.forEach((snapShot: any) => {
+                customers.push(snapShot.val());
+            });
+
+            return customers;
+        });
+}
+
 export async function updateIndex(startIndex: number, delta: number): Promise<any> {
 
     console.log('start index:', startIndex);

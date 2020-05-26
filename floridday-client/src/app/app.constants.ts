@@ -1,3 +1,4 @@
+import { OrderDetailStates } from './models/enums';
 
 export const LOCAL_STORAGE_VARIABLE = {
     role: 'user_role',
@@ -16,5 +17,44 @@ export const API_END_POINT = {
     force_user_logout: '/users/forceUserLogout',
     logout: '/users/logout'
 };
+
+export const ORDER_DETAIL_STATES = [
+    {
+        State: OrderDetailStates.Added,
+        DisplayName: 'Đã chốt đơn'
+    },
+    {
+        State: OrderDetailStates.Waiting,
+        DisplayName: 'Đang chờ cắm'
+    },
+    {
+        State: OrderDetailStates.Making,
+        DisplayName: 'Đang cắm'
+    },
+    {
+        State: OrderDetailStates.Comfirming,
+        DisplayName: 'Đang xác nhận thành phẩm'
+    },
+    {
+        State: OrderDetailStates.DeliveryWaiting,
+        DisplayName: 'Đã xác nhận SP, chưa có người giao'
+    },
+    {
+        State: OrderDetailStates.Delivering,
+        DisplayName: 'Đang giao'
+    },
+    {
+        State: OrderDetailStates.Delivering,
+        DisplayName: 'Đã giao, đang xác nhận giao'
+    },
+    {
+        State: OrderDetailStates.Completed,
+        DisplayName: 'Đã hoàn tất'
+    },
+    {
+        State: OrderDetailStates.Canceled,
+        DisplayName: 'Đã huỷ'
+    },
+]
 
 export const REQUEST_TIMEOUT = 30000;

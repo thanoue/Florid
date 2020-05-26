@@ -39,9 +39,9 @@ export class LocalService {
         LocalService.setItem(LOCAL_STORAGE_VARIABLE.is_printer, isPrinter);
     }
 
-    static getRole() {
+    static getRole(): string {
         // tslint:disable-next-line:radix
-        return parseInt(LocalService.getItem(LOCAL_STORAGE_VARIABLE.role));
+        return LocalService.getItem(LOCAL_STORAGE_VARIABLE.role);
     }
     static setRole(role: Roles) {
         LocalService.setItem(LOCAL_STORAGE_VARIABLE.role, role);

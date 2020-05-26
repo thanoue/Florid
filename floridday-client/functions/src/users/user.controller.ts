@@ -15,7 +15,6 @@ userRouter.post('/createUser', auth.authorize(Role.Admin), createUser);
 module.exports = userRouter;
 
 async function authenticate(req: any, res: any, next: any) {
-    console.log('before call');
     try {
         const user = await userService.authenticate(req.body);
 
@@ -47,6 +46,7 @@ async function createUser(req: any, res: any) {
             res.status(500).send('ERROR!');
         }
     } catch (error) {
+        console.log(error);
         res.status(500).send(error);
     }
 }

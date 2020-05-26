@@ -2,7 +2,8 @@ import { OrderDetailStates } from '../../models/enums';
 import { MembershipTypes } from '../enums';
 import { Customer } from '../entities/customer.entity';
 import { ExchangeService } from '../../services/exchange.service';
-import { CustomerReceiverDetail, OrderDetail, Order } from '../entities/order.entity';
+import { CustomerReceiverDetail, OrderDetail, Order, ODFloristInfo, ODShipperInfo, ODSeenUserInfo } from '../entities/order.entity';
+import { sha1 } from '@angular/compiler/src/i18n/digest';
 
 export class OrderViewModel {
     OrderId: string;
@@ -62,13 +63,24 @@ export class OrderDetailViewModel {
     ModifiedPrice = 0;
     AdditionalFee = 0;
 
+    MakingSortOrder = 0;
+    ShippingSortOrder = 0;
+
     Description = '';
 
     IsFromHardCodeProduct = false;
     HardcodeImageName = '';
 
+    FloristInfo: ODFloristInfo;
+    ShipperInfo: ODShipperInfo;
+
+    SeenUsers: ODSeenUserInfo[];
+
     constructor() {
         this.DeliveryInfo = new OrderDetailDeliveryInfo();
+        this.FloristInfo = new ODFloristInfo();
+        this.ShipperInfo = new ODShipperInfo();
+        this.SeenUsers = [];
     }
 
     static ToViewModel(entity: OrderDetail) {
@@ -79,6 +91,9 @@ export class OrderDetailViewModel {
         vm.AdditionalFee = entity.AdditionalFee;
         vm.Description = entity.Description;
         vm.Index = entity.Index;
+
+        vm.MakingSortOrder = entity.MakingSortOrder;
+        vm.ShippingSortOrder = entity.ShippingSortOrder;
 
         vm.ModifiedPrice = entity.ProductModifiedPrice;
         vm.ProductId = entity.Id;
@@ -96,6 +111,26 @@ export class OrderDetailViewModel {
 
         vm.State = entity.State;
         vm.Quantity = 1;
+
+        if (entity.SeenUsers && entity.SeenUsers.length > 0) {
+            entity.SeenUsers.forEach(user => {
+                vm.SeenUsers.push(ODSeenUserInfo.DeepCopy(user));
+            });
+        }
+
+        if (entity.FloristInfo) {
+            vm.FloristInfo.Id = entity.FloristInfo.Id;
+            vm.FloristInfo.AssignTime = entity.FloristInfo.AssignTime;
+            vm.FloristInfo.CompletedTime = entity.FloristInfo.CompletedTime;
+            vm.FloristInfo.FullName = entity.FloristInfo.FullName;
+        }
+
+        if (entity.ShipperInfo) {
+            vm.ShipperInfo.Id = entity.ShipperInfo.Id;
+            vm.ShipperInfo.AssignTime = entity.ShipperInfo.AssignTime;
+            vm.ShipperInfo.CompletedTime = entity.ShipperInfo.CompletedTime;
+            vm.ShipperInfo.FullName = entity.ShipperInfo.FullName;
+        }
 
         return vm;
     }
@@ -117,6 +152,28 @@ export class OrderDetailViewModel {
         viewModel.AdditionalFee = model.AdditionalFee;
         viewModel.Description = model.Description;
         viewModel.IsFromHardCodeProduct = model.IsFromHardCodeProduct;
+        viewModel.ShippingSortOrder = model.ShippingSortOrder;
+        viewModel.MakingSortOrder = model.MakingSortOrder;
+
+        if (model.SeenUsers && model.SeenUsers.length > 0) {
+            model.SeenUsers.forEach(user => {
+                viewModel.SeenUsers.push(ODSeenUserInfo.DeepCopy(user));
+            });
+        }
+
+        if (model.FloristInfo) {
+            viewModel.FloristInfo.Id = model.FloristInfo.Id;
+            viewModel.FloristInfo.AssignTime = model.FloristInfo.AssignTime;
+            viewModel.FloristInfo.CompletedTime = model.FloristInfo.CompletedTime;
+            viewModel.FloristInfo.FullName = model.FloristInfo.FullName;
+        }
+
+        if (model.ShipperInfo) {
+            viewModel.ShipperInfo.Id = model.ShipperInfo.Id;
+            viewModel.ShipperInfo.AssignTime = model.ShipperInfo.AssignTime;
+            viewModel.ShipperInfo.CompletedTime = model.ShipperInfo.CompletedTime;
+            viewModel.ShipperInfo.FullName = model.ShipperInfo.FullName;
+        }
 
         return viewModel;
     }

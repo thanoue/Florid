@@ -23,13 +23,44 @@ export class LoggedInGuard implements CanActivate {
 @Injectable({
     providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class AccountGuard implements CanActivate {
+
+    constructor(private router: Router) {
+    }
+
+    canActivate() {
+        let loggedInGuard = new LoggedInGuard(this.router);
+
+        const role = (AuthService.getCurrentRole());
+        return loggedInGuard.canActivate() && (role == Roles.Admin || role == Roles.Account);
+    }
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class FloristGuard implements CanActivate {
 
     constructor(private router: Router) {
     }
 
     canActivate() {
         const role = (AuthService.getCurrentRole());
-        return role == Roles.Admin;
+        return role == Roles.Florist;
+    }
+}
+
+
+@Injectable({
+    providedIn: 'root'
+})
+export class ShipperGuard implements CanActivate {
+
+    constructor(private router: Router) {
+    }
+
+    canActivate() {
+        const role = (AuthService.getCurrentRole());
+        return role == Roles.Shipper;
     }
 }
