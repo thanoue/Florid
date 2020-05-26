@@ -27,7 +27,7 @@ export class SelectCustomerComponent extends BaseComponent {
   constructor(private customerService: CustomerService, private _ngZone: NgZone) {
     super();
 
-    const key = 'selectItemReference';
+    const key = 'searchProdReference';
 
     window[key] = {
       component: this, zone: this._ngZone,
@@ -98,34 +98,42 @@ export class SelectCustomerComponent extends BaseComponent {
 
   getCustomerList() {
 
-    try {
-      FunctionsService.excuteFunction('searchCustomer', '0988712')
-        .then((customers) => {
-          console.log(customers);
-          this.customers = customers;
-          setTimeout(() => {
-            if (this.globalOrder.CustomerInfo.Id) {
-              setSelectedCustomerItem(this.globalOrder.CustomerInfo.Id);
-              this.selectedCustomer = customers.find(p => p.Id === this.globalOrder.CustomerInfo.Id);
-            }
-          }, 50);
-        });
-    } catch (error) {
-      this.showError(error);
-      return;
-    }
+    this.customerService.getAll().then(customers => {
+      this.customers = customers;
+      setTimeout(() => {
+        if (this.globalOrder.CustomerInfo.Id) {
+          setSelectedCustomerItem(this.globalOrder.CustomerInfo.Id);
+          this.selectedCustomer = customers.find(p => p.Id === this.globalOrder.CustomerInfo.Id);
+        }
+      }, 50);
+    });
 
-    // this.customerService.getAll().then(customers => {
-    //   this.customers = customers;
-    //   setTimeout(() => {
-    //     if (this.globalOrder.CustomerInfo.Id) {
-    //       setSelectedCustomerItem(this.globalOrder.CustomerInfo.Id);
-    //       this.selectedCustomer = customers.find(p => p.Id === this.globalOrder.CustomerInfo.Id);
-    //     }
-    //   }, 50);
-    // });
   }
 
+  searchCustomer(term) {
+
+    if (!term || term == '') {
+      this.getCustomerList();
+      return;
+    }
+    this.startLoading();
+
+    FunctionsService.excuteFunction('searchCustomer', term)
+      .then(customers => {
+
+        this.customers = customers;
+
+        this.stopLoading();
+
+        setTimeout(() => {
+          if (this.globalOrder.CustomerInfo.Id) {
+            setSelectedCustomerItem(this.globalOrder.CustomerInfo.Id);
+            this.selectedCustomer = customers.find(p => p.Id === this.globalOrder.CustomerInfo.Id);
+          }
+        }, 50);
+
+      })
+  }
 
 
 }

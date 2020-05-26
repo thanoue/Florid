@@ -268,7 +268,7 @@ export class AddOrderComponent extends BaseComponent {
           detail.ProductName = detailVM.ProductName;
           detail.Description = detailVM.Description;
           detail.Index = detailVM.Index;
-          detail.State = OrderDetailStates.Waiting;
+          detail.State = OrderDetailStates.Added;
           detail.ProductModifiedPrice = detailVM.ModifiedPrice;
 
           detail.DeliveryInfo.ReceivingTime = detailVM.DeliveryInfo.DateTime.getTime();
@@ -327,7 +327,6 @@ export class AddOrderComponent extends BaseComponent {
           return;
 
         } else {
-
           this.orderDetailService.setList(orderDetais)
             .then(() => {
 

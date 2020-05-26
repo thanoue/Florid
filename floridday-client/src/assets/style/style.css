@@ -625,6 +625,12 @@ span.item-address {
     font-size: 14px;
     text-align: center;
 }
+
+.item-status.p span
+{
+    background:pink;
+}
+
 .item-status.r span
 {
     background:#d81d1d;

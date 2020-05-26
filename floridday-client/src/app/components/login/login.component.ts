@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/common/auth.service';
 import { LoginModel } from 'src/app/models/entities/user.entity';
 import { OnlineUserService } from 'src/app/services/online.user.service';
+import { Roles } from 'src/app/models/enums';
 declare function deviceLogin(email: string, pasword: string, isPrinter: boolean, idToken: string): any;
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class LoginComponent extends BaseComponent {
     this.setStatusBarColor(true);
 
     this.model.passcode = '123456';
-    this.model.userName = 'florid.admin@florid.com';
+    this.model.userName = 'florid.florist.main@floridday.com'; // florist
+    // this.model.userName = 'florid.admin.printer@floridday.com'; admin
   }
 
   login(form: NgForm) {
@@ -43,7 +45,16 @@ export class LoginComponent extends BaseComponent {
 
         deviceLogin(this.model.userName, this.model.passcode, LocalService.isPrinter(), LocalService.getAccessToken());
 
-        this.router.navigate(['']);
+        var role = LocalService.getRole();
+        console.log(role);
+        switch (role) {
+          case Roles.Admin:
+          case Roles.Account:
+            this.router.navigate(['/orders-manager']);
+            break;
+
+        }
+
 
       } else {
 

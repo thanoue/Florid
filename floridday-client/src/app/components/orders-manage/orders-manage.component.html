@@ -20,7 +20,8 @@
                 <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
             </div>
             <div class="col-2 order-check text-right">
-                <a class="main-bg"><img src="../../../assets/images/check.svg" alt="" class="main-filter"></a>
+                <a class="main-bg" routerLink="/sort-order-changing"><img src="../../../assets/images/check.svg" alt=""
+                        class="main-filter"></a>
             </div>
         </div>
         <div class="row order-list-bot">
@@ -43,40 +44,11 @@
                         [attr.aria-labelledby]="'heading' + orderIndex" [attr.data-parent]="'#order' + orderIndex">
                         <ul class="order-product-list cusScroll">
                             <li *ngFor="let orderDetail of order.OrderDetails" class="order-product-item">
-                                <div [ngSwitch]="orderDetail.State">
-                                    <div *ngSwitchCase="states.Waiting" class="item-status r"
-                                        onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index +1}}</span>
-                                    </div>
-                                    <div *ngSwitchCase="states.Making" class="item-status o" onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index +1}}</span>
-                                    </div>
-                                    <div *ngSwitchCase="states.Comfirming" class="item-status y"
-                                        onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index +1}}</span>
-                                    </div>
-                                    <div *ngSwitchCase="states.DeliveryWaiting" class="item-status p"
-                                        onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index +1}}</span>
-                                    </div>
-                                    <div *ngSwitchCase="states.Delivering" class="item-status b"
-                                        onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index +1}}</span>
-                                    </div>
-                                    <div *ngSwitchCase="states.Deliveried" class="item-status bl"
-                                        onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index +1}}</span>
-                                    </div>
-                                    <div *ngSwitchCase="states.Completed" class="item-status g"
-                                        onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index +1}}</span>
-                                    </div>
-                                    <div *ngSwitchCase="states.Canceled" class="item-status x"
-                                        onclick="openColorBoard()">
-                                        <span>{{orderDetail.Index +1}}</span>
-                                    </div>
-                                </div>
-                                <div class="item-detail" onclick="openOrderMenu()">
+                                <app-status-point [state]="orderDetail.State" [id]="orderDetail.OrderDetailId"
+                                    [index]="orderDetail.Index +1" (onClicked)="openDetailInfo($event)">
+
+                                </app-status-point>
+                                <div class="item-detail" (click)="updateOrderDetailState(orderDetail.OrderDetailId)">
                                     <img [src]="orderDetail.ProductImageUrl" alt="" class="item-detail-thumb">
                                     <div class="item-detail-info">
                                         <h5 class="item-code">{{orderDetail.ProductName}}</h5>
@@ -91,7 +63,8 @@
                                 </div>
                             </li>
                         </ul>
-                        <a href="javascript:void(0);" (click)="editOrder(order.OrderId)" class="order-edit"><i class="fa fa-pencil"></i> Chỉnh sửa</a>
+                        <a href="javascript:void(0);" (click)="editOrder(order.OrderId)" class="order-edit"><i
+                                class="fa fa-pencil"></i> Chỉnh sửa</a>
                     </div>
                 </li>
             </ul>
@@ -102,14 +75,23 @@
 <div id="colorBoard" class="popup-content">
     <ul class="colorList">
         <li class="colorInfo colorItem">
-            <div class="item-status r"><span></span></div>
-            <label>Đang chờ</label>
+            <app-status-point [state]="selectedDetail.State">
+
+            </app-status-point>
+            <label>{{selectedDetail.StateDisplay}}</label>
         </li>
         <li class="colorInfo">
-            <label>Người cắm hoa: </label><span>Nguyễn Văn A</span>
+            <label>Người cắm hoa: </label><span>{{selectedDetail.FloristName}}</span>
         </li>
         <li class="colorInfo">
-            <label>Người giao hoa: </label><span>Lê Thị Bình</span>
+            <label>Người giao hoa: </label><span>{{selectedDetail.ShipperName}}</span>
         </li>
     </ul>
+</div>
+<div class="customer-support">
+    <img src="../../../assets/images/support-team.png" alt="" class="customer-avatar">
+    <p class="customer-name">Mai văn bá</p>
+    <a class="customer-phone" href="tel:0000">0909 696 969</a>
+    <p class="customer-position">Chăm sóc khách hàng</p>
+    <p class="customer-position" id="logoutBtn" (click)="logout()">Đăng xuất</p>
 </div>

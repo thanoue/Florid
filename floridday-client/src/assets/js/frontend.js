@@ -108,24 +108,25 @@ function customerSupport() {
 }
 
 // Menu Đơn hàng
-function openOrderMenu() {
+function updateODStateMenuOpen(callback, items) {
+
+    var itemsContent = "";
+    let index = 0;
+
+    items.forEach(function (item) {
+        itemsContent += `<li><a class="menu-item-dynamic" data-value="${index}" >${item}</a></li>`;
+        index += 1;
+    });
+
+
     var html = `<div class="actionMenu">
         <ul>
-            <li><a class="menu-item-dynamic" data-index="0" >Chuyển cho florist</a></li>
-            <li><a class="menu-item-dynamic" data-index="1" >Nhận thành phẩm</a></li>
-            <li><a class="menu-item-dynamic" data-index="2" >Giao hàng</a></li>
-            <li><a class="menu-item-dynamic" data-index="3" >Hoàn thành</a></li>
-            <li><a class="menu-item-dynamic" data-index="4" >Chi tiết sản phẩm</a></li>
+           ${itemsContent}
         </ul>
     </div>`;
+
     slideUp(html, function (index) {
-        switch (index) {
-            case '0': window.location = '#' + index; break;
-            case '1': window.location = '#' + index; break;
-            case '2': window.location = '#' + index; break;
-            case '3': window.location = '#' + index; break;
-            case '4': openProductDetail();
-        }
+        callback(index);
     });
 }
 

@@ -11,7 +11,7 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 import { HomeComponent } from './components/home/home.component';
 import { PrinterComponent } from './components/printer/printer.component';
 import { TextBoxComponent } from './controls/text-box/text-box.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvalidTypeDirective } from './directives/invalid-type.directive';
 import { InvalidmessageDirective } from './directives/invalid-message.directive';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
@@ -32,6 +32,10 @@ import vi from '@angular/common/locales/vi';
 import { SaleOptionComponent } from './components/sale-option/sale-option.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
+import { SearchBoxComponent } from './controls/search-box/search-box.component';
+import { ViewOrderDetailComponent } from './components/view-order-detail/view-order-detail.component';
+import { StatusPointComponent } from './controls/status-point/status-point.component';
+import { SortOrderChangingComponent } from './components/sort-order-changing/sort-order-changing.component';
 
 declare function getFirebaseConfig(): any;
 
@@ -52,13 +56,18 @@ declare function getFirebaseConfig(): any;
     NotFoundComponent,
     SearchProductComponent,
     SaleOptionComponent,
-    PrinterComponent
+    PrinterComponent,
+    SearchBoxComponent,
+    ViewOrderDetailComponent,
+    StatusPointComponent,
+    SortOrderChangingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     QRCodeModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,

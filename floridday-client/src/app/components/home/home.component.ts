@@ -47,7 +47,6 @@ export class HomeComponent extends BaseComponent {
     try {
       this.startLoading();
       const users = await FunctionsService.excuteFunction('getUsers');
-      console.log(users);
       this.stopLoading();
     } catch (error) {
       this.showWarning(error);

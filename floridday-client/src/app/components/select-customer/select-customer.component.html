@@ -2,7 +2,9 @@
     <div class="container">
         <div class="row checkTop search">
             <div class="col-10 filterSearch">
-                <input type="text" class="form-control" placeholder="Nhập tìm kiếm...">
+                <app-search-box (searchTextInvoke)="searchCustomer($event)" [delayTimeSpan]="1000"
+                    placeholder="Tên hoặc số điện thoại KH...">
+                </app-search-box>
             </div>
             <div class="col-2 filterAdd text-right">
                 <button class="main-bg" onclick="openAddInfo()"><img src="../../../assets/images/addnew.svg" alt=""

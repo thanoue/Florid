@@ -10,6 +10,7 @@ import { OrderDetailService } from 'src/app/services/order-detail.service';
 import { Tag } from 'src/app/models/entities/tag.entity';
 import { TagService } from 'src/app/services/tag.service';
 import { ProductCategoryService } from 'src/app/services/product.categpory.service';
+import { FunctionsService } from 'src/app/services/common/functions.service';
 
 declare function selectProductCategory(menuitems: { Name: string; Value: number; }[], callback: (index: any) => void): any;
 declare function filterFocus(): any;
@@ -322,11 +323,12 @@ export class SearchProductComponent extends BaseComponent {
 
             if (product.Tags && product.Tags.filter(g => g.TagAlias === tag.Id).length > 0) {
 
-              this.cateTags.push({
-                Tag: tag,
-                IsSelected: false
-              });
-
+              if (this.cateTags.filter(p => p.Tag.Id === tag.Id).length <= 0) {
+                this.cateTags.push({
+                  Tag: tag,
+                  IsSelected: false
+                });
+              }
             }
 
           });
@@ -374,6 +376,36 @@ export class SearchProductComponent extends BaseComponent {
     });
 
   }
+
+  searchProduct(term: string) {
+
+    if (!term || term == '') {
+      this.getProductByCategory(this.productCategory);
+      return;
+    }
+
+    this.pagingProducts = [];
+
+    if (term.indexOf('MS') >= 0 || term.indexOf('ms') >= 0) {
+      term = term.replace('ms', 'MS');
+    }
+    else {
+      term = `MS ${term}`;
+    }
+
+    this.startLoading();
+
+    FunctionsService.excuteFunction('searchProduct', term)
+      .then(products => {
+
+        this.stopLoading();
+
+        this.pagingProducts = products;
+
+      });
+
+  }
+
 
   selectProduct() {
 
