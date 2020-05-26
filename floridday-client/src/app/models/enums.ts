@@ -21,6 +21,7 @@ export enum MembershipTypes {
 }
 
 export enum OrderDetailStates {
+    Added = 'Added',
     Waiting = 'Waiting',
     Making = 'Making',
     Comfirming = 'Comfirming',
