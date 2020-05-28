@@ -23,6 +23,8 @@ export class LoginComponent extends BaseComponent {
 
   constructor(private router: Router, protected activatedRoute: ActivatedRoute) {
     super();
+    LocalService.clear();
+
   }
 
   protected Init() {
@@ -30,8 +32,10 @@ export class LoginComponent extends BaseComponent {
     this.setStatusBarColor(true);
 
     this.model.passcode = '123456';
-    this.model.userName = 'florid.florist.main@floridday.com'; // florist
-    // this.model.userName = 'florid.admin.printer@floridday.com'; admin
+    // this.model.userName = 'florid.florist.main@floridday.com'; // florist
+    this.model.userName = 'florid.admin.printer@floridday.com'; //admin
+    this.model.userName = 'florid.florist.main@floridday.com'; //florist
+
   }
 
   login(form: NgForm) {
@@ -46,13 +50,15 @@ export class LoginComponent extends BaseComponent {
         deviceLogin(this.model.userName, this.model.passcode, LocalService.isPrinter(), LocalService.getAccessToken());
 
         var role = LocalService.getRole();
-        console.log(role);
+
         switch (role) {
           case Roles.Admin:
           case Roles.Account:
-            this.router.navigate(['/orders-manager']);
+            this.router.navigate(['/account-main']);
             break;
-
+          case Roles.Florist:
+            this.router.navigate(['/florist-main']);
+            break;
         }
 
 

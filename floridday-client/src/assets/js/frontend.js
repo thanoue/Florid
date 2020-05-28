@@ -108,7 +108,7 @@ function customerSupport() {
 }
 
 // Menu Đơn hàng
-function updateODStateMenuOpen(callback, items) {
+function menuOpen(callback, items) {
 
     var itemsContent = "";
     let index = 0;

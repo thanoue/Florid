@@ -1,5 +1,5 @@
 <div *ngIf="index >-1" [ngSwitch]="state">
-    <div *ngSwitchCase="states.Added" class="item-status p" (click)="pointClicked()">
+    <div *ngSwitchCase="states.Added" class="item-status pi" (click)="pointClicked()">
         <span>{{index}}</span>
     </div>
     <div *ngSwitchCase="states.Waiting" class="item-status r" (click)="pointClicked()">
@@ -26,9 +26,9 @@
     <div *ngSwitchCase="states.Canceled" class="item-status x" (click)="pointClicked()">
         <span>{{index}}</span>
     </div>
-</div>
+</div>  
 <div *ngIf="index==-1" [ngSwitch]="state">
-    <div *ngSwitchCase="states.Added" class="item-status p" (click)="pointClicked()">
+    <div *ngSwitchCase="states.Added" class="item-status pi" (click)="pointClicked()">
         <span></span>
     </div>
     <div *ngSwitchCase="states.Waiting" class="item-status r" (click)="pointClicked()">

@@ -249,7 +249,7 @@ export class AddOrderComponent extends BaseComponent {
     this.orderService.set(orderDB)
       .then(async res => {
 
-        const orderDetais: OrderDetail[] = [];
+        const orderDetails: OrderDetail[] = [];
         const receiverInfos: CustomerReceiverDetail[] = [];
 
         this.order.OrderDetails.forEach(detailVM => {
@@ -270,6 +270,10 @@ export class AddOrderComponent extends BaseComponent {
           detail.Index = detailVM.Index;
           detail.State = OrderDetailStates.Added;
           detail.ProductModifiedPrice = detailVM.ModifiedPrice;
+          detail.IsVATIncluded = orderDB.VATIncluded;
+          
+          detail.CustomerName = this.order.CustomerInfo.Name;
+          detail.CustomerPhoneNumber = this.order.CustomerInfo.PhoneNumber;
 
           detail.DeliveryInfo.ReceivingTime = detailVM.DeliveryInfo.DateTime.getTime();
 
@@ -281,7 +285,7 @@ export class AddOrderComponent extends BaseComponent {
 
           detail.DeliveryInfo.ReceiverDetail = receiverInfo;
 
-          orderDetais.push(detail);
+          orderDetails.push(detail);
 
           let isAdd = true;
 
@@ -327,7 +331,7 @@ export class AddOrderComponent extends BaseComponent {
           return;
 
         } else {
-          this.orderDetailService.setList(orderDetais)
+          this.orderDetailService.setList(orderDetails)
             .then(() => {
 
               this.customerService.updateReceiverList(orderDB.CustomerId, receiverInfos).then(isSuccess => {
@@ -370,6 +374,7 @@ export class AddOrderComponent extends BaseComponent {
   }
 
   onVATIncludedChange() {
+
     if (this.order.VATIncluded) {
       this.totalAmountCalculate();
     } else {
@@ -377,6 +382,7 @@ export class AddOrderComponent extends BaseComponent {
       this.order.TotalAmount += (this.order.TotalAmount / 100) * 10;
       this.totalBalance = this.order.TotalAmount - this.order.TotalPaidAmount;
     }
+
   }
 
   scoreExchange() {
@@ -411,8 +417,7 @@ export class AddOrderComponent extends BaseComponent {
 
       this.order.CustomerInfo.ScoreUsed = res;
 
-      this.totalAmountCalculate();
-
+      this.onVATIncludedChange();
     });
 
   }

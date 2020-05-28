@@ -3,9 +3,7 @@ import { NgModule, Injector } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { QRCodeModule } from 'angularx-qrcode';
-import { environment } from '../environments/environment';
 import { AppInjector } from './services/common/base.injector';
-import { GlobalService } from './services/common/global.service';
 import { LoginComponent } from './components/login/login.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
@@ -21,13 +19,11 @@ import { AddOrderComponent } from './components/add-order/add-order.component';
 import { SelectCustomerComponent } from './components/select-customer/select-customer.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 import { SelectReceiverComponent } from './components/select-receiver/select-receiver.component';
-import { registerLocaleData, CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SearchProductComponent } from './components/search-product/search-product.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import es from '@angular/common/locales/es';
-import * as firebase from 'firebase/app';
 import vi from '@angular/common/locales/vi';
 import { SaleOptionComponent } from './components/sale-option/sale-option.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -36,8 +32,9 @@ import { SearchBoxComponent } from './controls/search-box/search-box.component';
 import { ViewOrderDetailComponent } from './components/view-order-detail/view-order-detail.component';
 import { StatusPointComponent } from './controls/status-point/status-point.component';
 import { SortOrderChangingComponent } from './components/sort-order-changing/sort-order-changing.component';
-
-declare function getFirebaseConfig(): any;
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FloristMainComponent } from './components/florist-main/florist-main.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +57,8 @@ declare function getFirebaseConfig(): any;
     SearchBoxComponent,
     ViewOrderDetailComponent,
     StatusPointComponent,
-    SortOrderChangingComponent
+    SortOrderChangingComponent,
+    FloristMainComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +80,7 @@ declare function getFirebaseConfig(): any;
     }),
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    DragDropModule
   ],
   providers: [
     { provide: OWL_DATE_TIME_LOCALE, useValue: 'vi' },
@@ -92,7 +91,6 @@ export class AppModule {
 
   constructor(injector: Injector) {
     AppInjector.setInjector(injector);
-    firebase.initializeApp(getFirebaseConfig());
     registerLocaleData(es);
     registerLocaleData(vi);
   }

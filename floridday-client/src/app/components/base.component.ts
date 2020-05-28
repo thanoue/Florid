@@ -15,6 +15,8 @@ import { DistrictAddressService } from '../services/address/district-address.ser
 import { WardAddressService } from '../services/address/ward-address.service';
 import { District, Ward } from '../models/entities/address.entity';
 import { FunctionsService } from '../services/common/functions.service';
+import { LocalService } from '../services/common/local.service';
+import { Roles } from '../models/enums';
 
 declare function pickFile(): any;
 declare function addressRequest(districts: District[], resCallback: (res: string) => void, onDistrictChange: (res: string, newWardCallback: (wards: Ward[]) => void) => void): any;
@@ -64,6 +66,15 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
     set globalwards(value: Ward[]) {
         this.globalService.currentWards = value;
+    }
+
+    get CurrentUser(): { Id: string, FullName: string, Role: Roles, Avt: string } {
+        return {
+            FullName: LocalService.getUserName(),
+            Role: LocalService.getRole() as Roles,
+            Avt: LocalService.getUserAvtUrl(),
+            Id: LocalService.getUserId(),
+        }
     }
 
     constructor() {

@@ -9,7 +9,7 @@ import { OrderDetailService } from 'src/app/services/order-detail.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { ORDER_DETAIL_STATES } from 'src/app/app.constants';
 
-declare function updateODStateMenuOpen(callBack: (index: any) => void, items: string[]): any;
+declare function menuOpen(callBack: (index: any) => void, items: string[]): any;
 declare function openColorBoard(): any;
 declare function customerSupport(): any;
 
@@ -209,7 +209,8 @@ export class OrdersManageComponent extends BaseComponent {
       'Xem chi tiết',
       'Huỷ đơn'
     ];
-    updateODStateMenuOpen((index) => {
+
+    menuOpen((index) => {
       switch ((+index)) {
         case 0:
 
@@ -256,7 +257,7 @@ export class OrdersManageComponent extends BaseComponent {
       'Huỷ đơn'
     ];
 
-    updateODStateMenuOpen((index) => {
+    menuOpen((index) => {
       switch ((+index)) {
         case 0:
 

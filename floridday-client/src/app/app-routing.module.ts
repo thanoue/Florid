@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { AccountGuard, LoggedInGuard } from './guards/login.guard';
+import { AccountGuard, LoggedInGuard, FloristGuard } from './guards/login.guard';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { PrinterComponent } from './components/printer/printer.component';
 import { HomeComponent } from './components/home/home.component';
@@ -16,6 +16,7 @@ import { SearchProductComponent } from './components/search-product/search-produ
 import { SaleOptionComponent } from './components/sale-option/sale-option.component';
 import { ViewOrderDetailComponent } from './components/view-order-detail/view-order-detail.component';
 import { SortOrderChangingComponent } from './components/sort-order-changing/sort-order-changing.component';
+import { FloristMainComponent } from './components/florist-main/florist-main.component';
 
 const routes: Routes = [
   { path: 'print-job', component: PrinterComponent, canActivate: [LoggedInGuard] },
@@ -35,7 +36,7 @@ const routes: Routes = [
         canActivate: [AccountGuard]
       },
       {
-        path: 'orders-manager',
+        path: 'account-main',
         component: OrdersManageComponent,
         canActivate: [AccountGuard]
       },
@@ -77,6 +78,11 @@ const routes: Routes = [
       {
         path: 'order-detail-view',
         component: ViewOrderDetailComponent,
+      },
+      {
+        path: 'florist-main',
+        component: FloristMainComponent,
+        canActivate: [FloristGuard]
       },
     ]
   },

@@ -12,103 +12,43 @@
         </ul>
         <div class="tab-content order-list-bot" id="listContent">
             <div class="tab-pane fade show active" id="camhoa" role="tabpanel" aria-labelledby="nav1">
-                <ul class="order-content cusScroll">
-                    <div class="order-content-item product-item">
+                <ul class="order-content cusScroll" cdkDropList (cdkDropListDropped)="dropMakingList($event)">
+                    <div *ngFor="let makDetail of makingOrderDetails" cdkDrag cdkDragStartDelay="500"
+                        class="order-content-item product-item">
                         <div class="item-top">
-                            <span class="item-code">756-01</span>
+                            <span class="item-code">{{makDetail.OrderId}}_{{makDetail.Index+1}}</span>
                             <div class="item-info">
-                                <h4 class="item-name">Mã SP</h4>
-                                <span class="item-quantity">Số lượng: 1</span>
+                                <h4 class="item-name">{{makDetail.ProductName}}</h4>
+                                <span
+                                    class="item-quantity">{{makDetail.CustomerName}}-{{makDetail.CustomerPhoneNumber}}</span>
                             </div>
-                            <div class="item-status r" onclick="openOrdChange()"><span>1</span></div>
+                            <app-status-point [state]="makDetail.State" [id]="makDetail.OrderDetailId"
+                                [index]="makDetail.MakingSortOrder">
+
+                            </app-status-point>
                         </div>
                         <div class="item-bot">
                             <ul class="order-product-list cusScroll">
                                 <li class="">
                                     <div class="changeOrder">
-                                        <button class="inOrder navOrder">tăng</button>
-                                        <button class="deOrder navOrder">giảm</button>
+                                        <button class="inOrder navOrder" (click)="move(makDetail,-1)">tăng</button>
+                                        <button class="deOrder navOrder" (click)="move(makDetail,1)">giảm</button>
                                     </div>
-                                    <div class="item-detail">
-                                        <a href="./chi-tiet.html" class="absLink"></a>
-                                        <img src="../../../assets/images/product-img.jpg" alt=""
-                                            class="item-detail-thumb">
+                                    <div class="item-detail" (click)="viewDetail(makDetail)">
+                                        <img [src]="makDetail.ProductImageUrl" alt="" class="item-detail-thumb">
                                         <div class="item-detail-info">
-                                            <span class="prodPriceOld">222.000 vnđ</span>
-                                            <span class="prodCharge">Phụ phí: 10%</span>
-                                            <span class="prodPrice">200.000 vnđ</span>
-                                            <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí
-                                                Minh</span>
-                                            <span class="item-time">17:30</span> <span
-                                                class="item-date">12/02/2020</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="order-content-item product-item">
-                        <div class="item-top">
-                            <span class="item-code">756-01</span>
-                            <div class="item-info">
-                                <h4 class="item-name">Mã SP</h4>
-                                <span class="item-quantity">Số lượng: 1</span>
-                            </div>
-                            <div class="item-status r" onclick="openOrdChange()"><span>1</span></div>
-                        </div>
-                        <div class="item-bot">
-                            <ul class="order-product-list cusScroll">
-                                <li class="">
-                                    <div class="changeOrder">
-                                        <button class="inOrder navOrder">tăng</button>
-                                        <button class="deOrder navOrder">giảm</button>
-                                    </div>
-                                    <div class="item-detail">
-                                        <a href="./chi-tiet.html" class="absLink"></a>
-                                        <img src="../../../assets/images/product-img.jpg" alt=""
-                                            class="item-detail-thumb">
-                                        <div class="item-detail-info">
-                                            <span class="prodPriceOld">222.000 vnđ</span>
-                                            <span class="prodCharge">Phụ phí: 10%</span>
-                                            <span class="prodPrice">200.000 vnđ</span>
-                                            <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí
-                                                Minh</span>
-                                            <span class="item-time">17:30</span> <span
-                                                class="item-date">12/02/2020</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="order-content-item product-item">
-                        <div class="item-top">
-                            <span class="item-code">756-01</span>
-                            <div class="item-info">
-                                <h4 class="item-name">Mã SP</h4>
-                                <span class="item-quantity">Số lượng: 1</span>
-                            </div>
-                            <div class="item-status r" onclick="openOrdChange()"><span>1</span></div>
-                        </div>
-                        <div class="item-bot">
-                            <ul class="order-product-list cusScroll">
-                                <li class="">
-                                    <div class="changeOrder">
-                                        <button class="inOrder navOrder">tăng</button>
-                                        <button class="deOrder navOrder">giảm</button>
-                                    </div>
-                                    <div class="item-detail">
-                                        <a href="./chi-tiet.html" class="absLink"></a>
-                                        <img src="../../../assets/images/product-img.jpg" alt=""
-                                            class="item-detail-thumb">
-                                        <div class="item-detail-info">
-                                            <span class="prodPriceOld">222.000 vnđ</span>
-                                            <span class="prodCharge">Phụ phí: 10%</span>
-                                            <span class="prodPrice">200.000 vnđ</span>
-                                            <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí
-                                                Minh</span>
-                                            <span class="item-time">17:30</span> <span
-                                                class="item-date">12/02/2020</span>
+                                            <span
+                                                class="prodPriceOld">{{makDetail.OriginalPrice| currency:'VND':'symbol-narrow':'':'vi-VN'}}</span>
+                                            <span
+                                                class="prodCharge">{{makDetail.AdditionalFee| currency:'VND':'symbol-narrow':'':'vi-VN'}}</span>
+                                            <span
+                                                class="prodPrice">{{makDetail.ModifiedPrice| currency:'VND':'symbol-narrow':'':'vi-VN'}}</span>
+                                            <span class="item-address">{{makDetail.DeliveryInfo.Address}}</span>
+                                            <span
+                                                class="item-time">{{makDetail.DeliveryInfo.DateTime | date: 'hh:mm a'}}
+                                            </span>
+                                            <span class="item-date">
+                                                {{makDetail.DeliveryInfo.DateTime | date: 'dd/MM/yyyy'}}</span>
                                         </div>
                                     </div>
                                 </li>
@@ -118,35 +58,42 @@
                 </ul>
             </div>
             <div class="tab-pane fade" id="giaohoa" role="tabpanel" aria-labelledby="nav2">
-                <ul class="order-content cusScroll">
-                    <div class="order-content-item product-item">
+                <ul class="order-content cusScroll" cdkDropList (cdkDropListDropped)="dropShippingList($event)">
+                    <div *ngFor="let shipDetail of shippingOrderDetails" cdkDrag cdkDragStartDelay="500"
+                        class="order-content-item product-item">
                         <div class="item-top">
-                            <span class="item-code">756-01</span>
+                            <span class="item-code">{{shipDetail.OrderId}}_{{shipDetail.Index+1}}</span>
                             <div class="item-info">
-                                <h4 class="item-name">Mã SP</h4>
-                                <span class="item-quantity">Số lượng: 1</span>
+                                <h4 class="item-name">{{shipDetail.ProductName}}</h4>
+                                <span
+                                    class="item-quantity">{{shipDetail.CustomerName}}-{{shipDetail  .CustomerPhoneNumber}}</span>
                             </div>
-                            <div class="item-status r" onclick="openOrdChange()"><span>1</span></div>
+                            <app-status-point [state]="shipDetail.State" [id]="shipDetail.OrderDetailId"
+                                [index]="shipDetail.MakingSortOrder">
+
+                            </app-status-point>
                         </div>
                         <div class="item-bot">
                             <ul class="order-product-list cusScroll">
                                 <li class="">
                                     <div class="changeOrder">
-                                        <button class="inOrder navOrder">tăng</button>
-                                        <button class="deOrder navOrder">giảm</button>
+                                        <button class="inOrder navOrder" (click)="move(shipDetail,-1)">tăng</button>
+                                        <button class="deOrder navOrder" (click)="move(shipDetail,1)">giảm</button>
                                     </div>
-                                    <div class="item-detail">
-                                        <a href="./chi-tiet.html" class="absLink"></a>
-                                        <img src="../../../assets/images/product-img.jpg" alt=""
-                                            class="item-detail-thumb">
+                                    <div class="item-detail" (click)="viewDetail(shipDetail)">
+                                        <img [src]="shipDetail.ProductImageUrl" alt="" class="item-detail-thumb">
                                         <div class="item-detail-info">
-                                            <span class="prodPriceOld">222.000 vnđ</span>
-                                            <span class="prodCharge">Phụ phí: 10%</span>
-                                            <span class="prodPrice">200.000 vnđ</span>
-                                            <span class="item-address">248 Phan Văn Trị, P.12, Q. Bình Thạnh, TP. Hồ Chí
-                                                Minh</span>
-                                            <span class="item-time">17:30</span> <span
-                                                class="item-date">12/02/2020</span>
+                                            <span
+                                                class="prodPriceOld">{{shipDetail.OriginalPrice| currency:'VND':'symbol-narrow':'':'vi-VN'}}</span>
+                                            <span
+                                                class="prodCharge">{{shipDetail.AdditionalFee| currency:'VND':'symbol-narrow':'':'vi-VN'}}</span>
+                                            <span
+                                                class="prodPrice">{{shipDetail.ModifiedPrice| currency:'VND':'symbol-narrow':'':'vi-VN'}}</span>
+                                            <span class="item-address">{{shipDetail.DeliveryInfo.Address}}</span>
+                                            <span
+                                                class="item-time">{{shipDetail.DeliveryInfo.DateTime | date: 'hh:mm a'}}</span>
+                                            <span
+                                                class="item-date">{{shipDetail.DeliveryInfo.DateTime | date: 'dd/MM/yyyy'}}</span>
                                         </div>
                                     </div>
                                 </li>

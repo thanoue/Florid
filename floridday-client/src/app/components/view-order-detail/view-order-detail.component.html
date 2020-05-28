@@ -24,15 +24,27 @@
                     <span class="itemVal">{{state}}</span>
                 </div>
                 <div class="prodTime infoGroup">
-                    <span class="itemlabel">Thời gian:</span>
+                    <span class="itemlabel">Thời gian giao:</span>
                     <span class="itemVal">{{orderDetail.DeliveryInfo.DateTime | date: 'hh:mm a dd/MM/yyyy'}}</span>
                 </div>
-                <div class="prodName infoGroup">
+                <div class="prodName infoGroup" *ngIf="CurrentUser.Role != 'Shipper'">
+                    <span class="itemlabel">Tên KH</span>
+                    <span class="itemVal">{{orderDetail.CustomerName}}</span>
+                </div>
+                <div class="prodName infoGroup" *ngIf="CurrentUser.Role != 'Shipper'">
+                    <span class="itemlabel">SDT KH</span>
+                    <span class="itemVal">{{orderDetail.CustomerPhoneNumber}}</span>
+                </div>
+                <div class="prodName infoGroup" *ngIf="CurrentUser.Role != 'Florist'">
                     <span class="itemlabel">Tên người nhận:</span>
                     <span class="itemVal">{{orderDetail.DeliveryInfo.FullName}}</span>
                 </div>
-                <div class="prodAddr infoGroup">
-                    <span class="itemlabel">Địa chỉ:</span>
+                <div class="prodAddr infoGroup" *ngIf="CurrentUser.Role != 'Florist'">
+                    <span class="itemlabel">SDT người nhận:</span>
+                    <span class="itemVal">{{orderDetail.DeliveryInfo.PhoneNumber}}</span>
+                </div>
+                <div class="prodAddr infoGroup" *ngIf="CurrentUser.Role != 'Florist'">
+                    <span class="itemlabel">Địa chỉ giao:</span>
                     <span class="itemVal">{{orderDetail.DeliveryInfo.Address}}</span>
                 </div>
                 <div class="prodDesc infoGroup">
@@ -41,8 +53,8 @@
                     </span>
                 </div>
             </div>
-            <div class="viewed" onclick="openViewed()"><img src="../../../assets/images/eye.svg" alt=""
-                    class="main-filter">Đã xem
+            <div *ngIf="CurrentUser.Role == 'Admin'" class="viewed" (click)="openViewed()"><img
+                    src="../../../assets/images/eye.svg" alt="" class="main-filter">Đã xem
             </div>
         </div>
     </div>
@@ -53,7 +65,8 @@
         <li class="viewItem" *ngFor="let user of orderDetail.SeenUsers">
             <img [src]="user.Avt" alt="" class="itemAva">
             <span class="itemName">{{user.FullName}}</span>
-            <span class="itemRole">{{user.Role}}</span>
+            <span class="itemRole" *ngIf="user.Role=='Florist'">Thợ cắm</span>
+            <span class="itemRole" *ngIf="user.Role=='Shipper'">Người giao hàng </span>
         </li>
     </ul>
 </div>

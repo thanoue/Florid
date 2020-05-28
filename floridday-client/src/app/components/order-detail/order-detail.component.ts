@@ -62,9 +62,7 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
           });
 
         });
-
-
-    });
+      });
 
   }
 
