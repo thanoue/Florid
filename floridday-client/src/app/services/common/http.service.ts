@@ -39,7 +39,7 @@ export class HttpService {
 
   private loadToken(isForm: boolean = false) {
 
-    const token = LocalService.getAccessToken();
+    const token = LocalService.getApiAccessToken();
 
     if (token === '' || !token) {
       this.headers = new HttpHeaders(isForm ? HttpService.formdataHeader : HttpService.defaultHeader);

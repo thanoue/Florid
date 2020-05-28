@@ -8,18 +8,17 @@ import { GlobalService } from './global.service';
 import { async } from '@angular/core/testing';
 import { UserService } from '../user.service';
 import { HttpService } from './http.service';
-import { API_END_POINT } from 'src/app/app.constants';
+import { API_END_POINT, LOCAL_STORAGE_VARIABLE } from 'src/app/app.constants';
 import { OnlineUserService } from '../online.user.service';
 import { OnlineUser } from 'src/app/models/entities/online.user.entity';
 import { FunctionsService } from './functions.service';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private onlineUserService: OnlineUserService, private globalService: GlobalService, private userService: UserService,  private httpService: HttpService) {
+  constructor(private onlineUserService: OnlineUserService, private globalService: GlobalService, private userService: UserService, private httpService: HttpService) {
   }
 
   static getCurrentRole(): any {
@@ -50,6 +49,28 @@ export class AuthService {
   login(model: LoginModel, loginCallback: (isSuccess: boolean) => void) {
 
     this.globalService.startLoading();
+
+    this.httpService.post(API_END_POINT.login, {
+      username: model.userName,
+      password: model.passcode
+    }, true)
+      .subscribe(result => {
+
+        console.log(result);
+
+        if (!this.globalService.firebaseIsInitialized) {
+
+          firebase.initializeApp(result.firebaseConfig);
+          this.globalService.firebaseIsInitialized = true;
+
+        }
+
+        this.acctualLogin(model, result.IsPrinter, result.Role, loginCallback);
+
+      });
+  }
+
+  acctualLogin(model: LoginModel, isPrinter: boolean, role: string, loginCallback: (isSuccess: boolean) => void) {
     firebase.auth().signInWithEmailAndPassword(model.userName, model.passcode)
       .then(async userInfo => {
 
@@ -57,40 +78,35 @@ export class AuthService {
 
         try {
 
-          const res = await FunctionsService.excuteFunction('getUserInfo');
+          firebase.auth().currentUser.getIdToken(true).then(idToken => {
 
-          if (!res) {
+            LocalService.setUserName(userInfo.user.displayName);
+            LocalService.setAccessToken(idToken);
+            LocalService.setPhoneNumber(userInfo.user.phoneNumber);
+            LocalService.setRole(role);
+            LocalService.setUserEmail(userInfo.user.email);
+            LocalService.setUserId(userInfo.user.uid);
+            LocalService.setIsPrinter(isPrinter);
+            LocalService.setUserAvtUrl(userInfo.user.photoURL)
 
-            this.globalService.stopLoading();
-            loginCallback(false);
+            const onlineUser = new OnlineUser();
+            onlineUser.Id = userInfo.user.uid;
 
-          } else {
-
-            firebase.auth().currentUser.getIdToken(true).then(idToken => {
-              LocalService.setUserName(userInfo.user.displayName);
-              LocalService.setAccessToken(idToken);
-              LocalService.setPhoneNumber(userInfo.user.phoneNumber);
-              LocalService.setRole(res.role);
-              LocalService.setUserEmail(userInfo.user.email);
-              LocalService.setUserId(userInfo.user.uid);
-              LocalService.setIsPrinter(!res.isPrinter ? false : res.isPrinter);
-
-              const onlineUser = new OnlineUser();
-              onlineUser.Id = userInfo.user.uid;
-
-              this.onlineUserService.set(onlineUser).then(() => {
-                this.globalService.stopLoading();
-                loginCallback(true);
-              });
-
-            }).catch(error => {
-              throw new Error(error);
+            this.onlineUserService.set(onlineUser).then(() => {
+              this.globalService.stopLoading();
+              loginCallback(true);
             });
-          }
+
+          }).catch(error => {
+            throw new Error(error);
+          });
+
         } catch (error) {
+
           this.globalService.showError(error);
           this.globalService.stopLoading();
           loginCallback(false);
+
         }
 
       })

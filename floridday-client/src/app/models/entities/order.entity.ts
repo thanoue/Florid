@@ -28,9 +28,14 @@ export class OrderDetail extends BaseEntity {
     State = OrderDetailStates.Added;
     MakingSortOrder = 0;
     ShippingSortOrder = 0;
+    IsVATIncluded = false;
 
     IsHardcodeProduct = false;
     HardcodeProductImageName = '';
+
+    CustomerName = '';
+    CustomerPhoneNumber = '';
+
 
     FloristInfo: ODFloristInfo;
     ShipperInfo: ODShipperInfo;
@@ -48,10 +53,12 @@ export class OrderDetail extends BaseEntity {
 }
 
 export class ODSeenUserInfo {
+
     FullName: string;
     UserId: string;
     Role: Roles;
     Avt: string;
+    SeenTime: number;
 
     static DeepCopy(model: ODSeenUserInfo): ODSeenUserInfo {
 
@@ -61,6 +68,7 @@ export class ODSeenUserInfo {
         vm.FullName = model.FullName;
         vm.Role = model.Role;
         vm.UserId = model.UserId;
+        vm.SeenTime = model.SeenTime;
 
         return vm;
     }

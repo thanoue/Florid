@@ -35,6 +35,8 @@ export class GlobalService {
     currentDistricts: District[];
     currentWards: Ward[];
 
+    public firebaseIsInitialized = false;
+
     constructor(private toastr: ToastrService, private ngZone: NgZone) {
 
         this.currentOrderViewModel = new OrderViewModel();
@@ -52,6 +54,7 @@ export class GlobalService {
     }
 
     startLoading() {
+
         if (this.loadingCount === 0) {
             this.spinnerInvoke.next(true);
         }

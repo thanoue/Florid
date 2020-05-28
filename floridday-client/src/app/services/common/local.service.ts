@@ -43,7 +43,7 @@ export class LocalService {
         // tslint:disable-next-line:radix
         return LocalService.getItem(LOCAL_STORAGE_VARIABLE.role);
     }
-    static setRole(role: Roles) {
+    static setRole(role: string) {
         LocalService.setItem(LOCAL_STORAGE_VARIABLE.role, role);
     }
 
@@ -54,12 +54,21 @@ export class LocalService {
         return LocalService.getItem(LOCAL_STORAGE_VARIABLE.user_name);
     }
 
+
     static getAccessToken() {
         return LocalService.getItem(LOCAL_STORAGE_VARIABLE.access_token);
     }
 
     static setAccessToken(token: string) {
         LocalService.setItem(LOCAL_STORAGE_VARIABLE.access_token, token);
+    }
+
+    static getApiAccessToken() {
+        return LocalService.getItem(LOCAL_STORAGE_VARIABLE.api_access_token);
+    }
+
+    static setApiAccessToken(token: string) {
+        LocalService.setItem(LOCAL_STORAGE_VARIABLE.api_access_token, token);
     }
 
     static getUserAvtUrl() {
@@ -71,11 +80,11 @@ export class LocalService {
     }
 
     static getUserEmail() {
-        return LocalService.getItem(LOCAL_STORAGE_VARIABLE.user_avt_url);
+        return LocalService.getItem(LOCAL_STORAGE_VARIABLE.user_email);
     }
 
     static setUserEmail(email: string) {
-        LocalService.setItem(LOCAL_STORAGE_VARIABLE.user_avt_url, email);
+        LocalService.setItem(LOCAL_STORAGE_VARIABLE.user_email, email);
     }
 
     static getPhoneNumber() {

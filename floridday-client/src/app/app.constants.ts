@@ -6,6 +6,7 @@ export const LOCAL_STORAGE_VARIABLE = {
     is_logged_in: 'is_logged_in',
     user_name: 'user_name',
     access_token: 'access_token',
+    api_access_token: 'api_access_token',
     phone_number: 'phone_number',
     user_avt_url: 'user_avt_url',
     user_email: 'user_email',
