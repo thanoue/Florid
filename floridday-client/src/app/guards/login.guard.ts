@@ -11,19 +11,21 @@ export class LoggedInGuard implements CanActivate {
 
     constructor(private router: Router, private globalServie: GlobalService) {
     }
-    canActivate() { 
+    canActivate() {
+
         if (this.globalServie.firebaseIsInitialized) {
             const user = firebase.auth().currentUser;
-            if (user) { 
+            if (user) {
                 return true;
             } else {
-                this.router.navigate(['login']);        
+                this.router.navigate(['login']);
                 return false;
             }
+        } else {
+            this.router.navigate(['login']);
+            return false;
         }
-        this.router.navigate(['login']);
-        console.log('not init yet');
-        return false;
+
     }
 }
 
