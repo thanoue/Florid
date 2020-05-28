@@ -65,8 +65,11 @@ export class OrderDetailViewModel {
 
     MakingSortOrder = 0;
     ShippingSortOrder = 0;
-
+    IsVATIncluded = false;
     Description = '';
+
+    CustomerName = '';
+    CustomerPhoneNumber = '';
 
     IsFromHardCodeProduct = false;
     HardcodeImageName = '';
@@ -86,6 +89,9 @@ export class OrderDetailViewModel {
     static ToViewModel(entity: OrderDetail) {
         const vm = new OrderDetailViewModel();
 
+        vm.CustomerName = entity.CustomerName;
+        vm.CustomerPhoneNumber = entity.CustomerPhoneNumber;
+        vm.IsVATIncluded = entity.IsVATIncluded;
         vm.OrderDetailId = entity.Id;
         vm.OrderId = entity.OrderId;
         vm.AdditionalFee = entity.AdditionalFee;
@@ -139,6 +145,9 @@ export class OrderDetailViewModel {
 
         const viewModel = new OrderDetailViewModel();
 
+        viewModel.CustomerName = model.CustomerName;
+        viewModel.CustomerPhoneNumber = model.CustomerPhoneNumber;
+        viewModel.IsVATIncluded = model.IsVATIncluded;
         viewModel.ProductName = model.ProductName;
         viewModel.OrderDetailId = model.OrderDetailId;
         viewModel.State = model.State;

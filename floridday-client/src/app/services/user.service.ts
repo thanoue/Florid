@@ -9,7 +9,6 @@ import { User } from '../models/entities/user.entity';
 })
 export class UserService extends BaseService<User> {
 
-    datab: firebase.database.Database;
 
     protected get tableName(): string {
         return '/users';
@@ -17,14 +16,13 @@ export class UserService extends BaseService<User> {
 
     constructor() {
         super();
-        this.datab = firebase.database();
     }
 
     async getByLoginId(loginId: string): Promise<User> {
 
         this.globalService.startLoading();
 
-        return this.datab.ref(`${this.tableName}/${loginId}`).once('value').then(user => {
+        return this.db.ref(`${this.tableName}/${loginId}`).once('value').then(user => {
             this.globalService.stopLoading();
             return (user.val() as User);
         });
