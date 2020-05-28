@@ -1,5 +1,5 @@
 
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 import * as adminSdk from '../helper/admin.sdk';
 const sha256 = require('js-sha256');
 
@@ -25,13 +25,15 @@ export async function authenticate(body: any): Promise<any> {
                     return false;
                 }
 
-                const token = jwt.sign({ sub: key, role: user.Role }, adminSdk.OAuthPrivateKey);
+                //const token = jwt.sign({ sub: key, role: user.Role }, adminSdk.OAuthPrivateKey);
                 const { Password, ...userWithoutPassword } = user;
+                const firebaseConfig = adminSdk.firebaseConfig;
 
                 return {
                     ...userWithoutPassword,
-                    token,
-                    key
+                    //  token,
+                    key,
+                    firebaseConfig
                 };
             } else {
                 return false;

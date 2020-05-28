@@ -1,5 +1,5 @@
 import { BaseEntity } from './base.entity';
-import { OrderDetailStates } from '../enums';
+import { OrderDetailStates, Roles } from '../enums';
 
 export class Order extends BaseEntity {
     CustomerId = '';
@@ -25,15 +25,67 @@ export class OrderDetail extends BaseEntity {
     DeliveryInfo: OrderReceiverDetail;
     Description = '';
     Index = -1;
-    State = OrderDetailStates.Waiting;
+    State = OrderDetailStates.Added;
+    MakingSortOrder = 0;
+    ShippingSortOrder = 0;
+    IsVATIncluded = false;
 
     IsHardcodeProduct = false;
     HardcodeProductImageName = '';
 
+    CustomerName = '';
+    CustomerPhoneNumber = '';
+
+
+    FloristInfo: ODFloristInfo;
+    ShipperInfo: ODShipperInfo;
+
+    SeenUsers: ODSeenUserInfo[];
+
     constructor() {
         super();
+
         this.DeliveryInfo = new OrderReceiverDetail();
+        this.FloristInfo = new ODFloristInfo();
+        this.ShipperInfo = new ODShipperInfo();
+        this.SeenUsers = [];
     }
+}
+
+export class ODSeenUserInfo {
+
+    FullName: string;
+    UserId: string;
+    Role: Roles;
+    Avt: string;
+    SeenTime: number;
+
+    static DeepCopy(model: ODSeenUserInfo): ODSeenUserInfo {
+
+        var vm = new ODSeenUserInfo();
+
+        vm.Avt = model.Avt;
+        vm.FullName = model.FullName;
+        vm.Role = model.Role;
+        vm.UserId = model.UserId;
+        vm.SeenTime = model.SeenTime;
+
+        return vm;
+    }
+}
+
+export class ODFloristInfo {
+    Id: string;
+    FullName: string;
+    AssignTime: number;
+    CompletedTime: number;
+}
+
+export class ODShipperInfo {
+    Id: string;
+    FullName: string;
+    AssignTime: number;
+    CompletedTime: number;
 }
 
 export class OrderReceiverDetail {

@@ -48,11 +48,29 @@ export class OrderDetailService extends BaseService<OrderDetail>  {
       snapshot.forEach((item) => {
         this.delete(item.key);
       });
+
       return true;
     })
       .catch(error => {
         this.globalService.showError(error);
         return false;
+      });
+  }
+
+  getNextMakingSortOrder(): Promise<number> {
+    return this.tableRef.orderByChild('State').equalTo(OrderDetailStates.Waiting)
+      .once('value')
+      .then(snapshot => {
+
+        let maxOrder = 0;
+
+        snapshot.forEach(snap => {
+          var detail = snap.val() as OrderDetail;
+          if (detail.MakingSortOrder > maxOrder)
+            maxOrder = detail.MakingSortOrder;
+        });
+
+        return maxOrder + 1;
       });
   }
 

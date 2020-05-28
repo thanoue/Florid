@@ -34,6 +34,7 @@ export enum MenuItems {
 }
 
 export enum OrderDetailStates {
+    Added = 'Added',
     Waiting = 'Waiting',
     Making = 'Making',
     Comfirming = 'Comfirming',

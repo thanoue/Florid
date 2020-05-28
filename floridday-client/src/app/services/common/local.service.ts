@@ -39,12 +39,11 @@ export class LocalService {
         LocalService.setItem(LOCAL_STORAGE_VARIABLE.is_printer, isPrinter);
     }
 
-    static getRole() {
+    static getRole(): string {
         // tslint:disable-next-line:radix
-        return parseInt(LocalService.getItem(LOCAL_STORAGE_VARIABLE.role));
+        return LocalService.getItem(LOCAL_STORAGE_VARIABLE.role);
     }
-
-    static setRole(role: Roles) {
+    static setRole(role: string) {
         LocalService.setItem(LOCAL_STORAGE_VARIABLE.role, role);
     }
 
@@ -55,12 +54,21 @@ export class LocalService {
         return LocalService.getItem(LOCAL_STORAGE_VARIABLE.user_name);
     }
 
+
     static getAccessToken() {
         return LocalService.getItem(LOCAL_STORAGE_VARIABLE.access_token);
     }
 
     static setAccessToken(token: string) {
         LocalService.setItem(LOCAL_STORAGE_VARIABLE.access_token, token);
+    }
+
+    static getApiAccessToken() {
+        return LocalService.getItem(LOCAL_STORAGE_VARIABLE.api_access_token);
+    }
+
+    static setApiAccessToken(token: string) {
+        LocalService.setItem(LOCAL_STORAGE_VARIABLE.api_access_token, token);
     }
 
     static getUserAvtUrl() {

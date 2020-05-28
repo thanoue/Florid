@@ -25,6 +25,7 @@ app.use(jwt({ secret: adminSdk.OAuthPrivateKey, isRevoked: blacklist.isRevoked }
     path: [
         // public routes that don't require authentication
         '/api/v1/users/login',
+        '/api/v1/users/logout',
         '/api/v1/sale/momo/qr/request'
     ]
 }));
@@ -88,6 +89,17 @@ exports.searchCustomer = functions.https.onCall(async (params, context) => {
         return customers;
 
     }, [Role.Account, Role.Admin, Role.None]);
+});
+
+exports.searchProduct = functions.https.onCall(async (params, context) => {
+
+    return await excuteFunction(context, params.token, async () => {
+
+        const customers = await productService.searchProduct(params.data);
+        return customers;
+
+    }, [Role.Account, Role.Admin, Role.None]);
+
 });
 
 exports.updateTagIndex = functions.https.onCall(async (params, context) => {

@@ -8,7 +8,6 @@ import { Guid } from 'guid-typescript';
 
 export abstract class BaseService<T extends BaseEntity> {
 
-    protected db: firebase.database.Database;
 
     protected globalService: GlobalService;
 
@@ -39,10 +38,14 @@ export abstract class BaseService<T extends BaseEntity> {
         this.globalService.showSuccess(message);
     }
 
+    protected get db(): firebase.database.Database {
+        return firebase.database();
+    }
+
+
     constructor() {
         const injector = AppInjector.getInjector();
         this.globalService = injector.get(GlobalService);
-        this.db = firebase.database();
     }
 
     updateList(updates: {}, onDone: () => void): Promise<void> {
@@ -57,7 +60,9 @@ export abstract class BaseService<T extends BaseEntity> {
 
 
     getByFieldName(fieldName: string, value: any): Promise<T[]> {
+
         this.globalService.startLoading();
+
         return this.tableRef.orderByChild(fieldName).equalTo(value).once('value')
             .then(snapShot => {
 
@@ -120,7 +125,7 @@ export abstract class BaseService<T extends BaseEntity> {
         return this.update(model);
     }
 
-    async setList(data: T[], callback: (item: T) => void = null): Promise<any> {
+    async setList(data: T[]): Promise<any> {
 
         const list = [];
 
@@ -131,7 +136,6 @@ export abstract class BaseService<T extends BaseEntity> {
             });
 
             if (newItem) {
-                callback.call(newItem);
                 list.push(newItem);
             } else {
                 continue;
@@ -179,6 +183,36 @@ export abstract class BaseService<T extends BaseEntity> {
             return null;
         });
 
+    }
+
+    public updateSingleField(id: string, fieldName: string, value: any): Promise<any> {
+
+        this.startLoading();
+        var updates = {};
+
+        updates[`/${id}/${fieldName}`] = value;
+        return this.tableRef.update(updates, (err) => {
+
+            this.stopLoading();
+            if (err != null) {
+                this.errorToast(err.message);
+            }
+
+        });
+    }
+
+    public updateFields(updates: {}): Promise<any> {
+
+        this.startLoading();
+
+        return this.tableRef.update(updates, (err) => {
+
+            this.stopLoading();
+            if (err != null) {
+                this.errorToast(err.message);
+            }
+
+        });
     }
 
     public update(value: T): Promise<T> {

@@ -128,12 +128,6 @@ export class ProductService extends BaseService<Product> {
     getAllByCategory(category: number): Promise<Product[]> {
 
         return this.getByFieldName('ProductCategories', category).then(products => {
-
-            products.forEach(product => {
-                product.ImageUrl = 'http://florid.com.vn/' + product.ImageUrl;
-
-            });
-
             return products;
         });
     }
