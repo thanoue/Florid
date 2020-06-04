@@ -43,7 +43,7 @@ export class GlobalService {
         this.currentDistricts = [];
         this.currentWards = [];
 
-        this.notifySetup = { timeOut: 5000, tapToDismiss: true, progressBar: false, progressAnimation: 'decreasing', positionClass: 'toast-bottom-full-width', closeButton: true, extendedTimeOut: 3000 };
+        this.notifySetup = { timeOut: 5000, tapToDismiss: true, progressBar: false, progressAnimation: 'decreasing', positionClass: 'toast-bottom-full-width', closeButton: true, extendedTimeOut: 9000 };
 
         const key = 'ToastReference';
         window[key] = {

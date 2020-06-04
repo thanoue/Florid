@@ -215,6 +215,8 @@ export abstract class BaseService<T extends BaseEntity> {
         });
     }
 
+
+
     public update(value: T): Promise<T> {
 
         return this.tableRef.child(value.Id).set(value).then(() => {
