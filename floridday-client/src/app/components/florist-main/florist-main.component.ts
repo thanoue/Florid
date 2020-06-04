@@ -103,7 +103,9 @@ export class FloristMainComponent extends BaseComponent {
               updates[`/${orderDetail.OrderDetailId}/State`] = OrderDetailStates.Making;
               updates[`/${orderDetail.OrderDetailId}/MakingSortOrder`] = 0;
 
-              if (orderDetail.SeenUsers.filter(p => p.UserId == this.CurrentUser.Id).length <= 0) {
+              if (!orderDetail.SeenUsers
+                || orderDetail.SeenUsers.length <= 0
+                || orderDetail.SeenUsers.filter(p => p.UserId == this.CurrentUser.Id).length <= 0) {
 
                 let seen = new ODSeenUserInfo();
 
@@ -112,6 +114,9 @@ export class FloristMainComponent extends BaseComponent {
                 seen.Role = this.CurrentUser.Role as Roles;
                 seen.UserId = this.CurrentUser.Id;
                 seen.SeenTime = (new Date).getTime();
+
+                if (!orderDetail.SeenUsers)
+                  orderDetail.SeenUsers = [];
 
                 orderDetail.SeenUsers.push(seen);
 
@@ -123,8 +128,10 @@ export class FloristMainComponent extends BaseComponent {
               floristInfo.AssignTime = (new Date).getTime();
               floristInfo.FullName = this.CurrentUser.FullName;
               floristInfo.Id = this.CurrentUser.Id;
+
               updates[`/${orderDetail.OrderDetailId}/FloristInfo`] = floristInfo;
 
+              console.log(updates);
               this.orderDetailService.updateFields(updates)
                 .then(() => {
 
@@ -141,6 +148,7 @@ export class FloristMainComponent extends BaseComponent {
                 var updates = {};
 
                 updates[`/${orderDetail.OrderDetailId}/State`] = OrderDetailStates.Comfirming;
+                updates[`/${orderDetail.OrderDetailId}/FloristInfo/CompletedTime`] = (new Date).getTime();
 
                 this.orderDetailService.updateFields(updates)
                   .then(() => {

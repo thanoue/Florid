@@ -67,17 +67,17 @@
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors" />
     <Reference Include="Mono.Android.Export" />
-    <Reference Include="Florid.PosPrinter.Lib">
-      <HintPath>..\..\Libs\Florid.PosPrinter.Lib.dll</HintPath>
-    </Reference>
-    <Reference Include="Florid.Droid.Secure.Lib">
-      <HintPath>..\..\Libs\Florid.Droid.Secure.Lib.dll</HintPath>
+    <Reference Include="CloudBanking.ResizerLib">
+      <HintPath>..\Libs\CloudBanking.ResizerLib.dll</HintPath>
     </Reference>
     <Reference Include="Florid.Droid.Htl2BitmapLib">
-      <HintPath>..\..\Libs\Florid.Droid.Htl2BitmapLib.dll</HintPath>
+      <HintPath>..\Libs\Florid.Droid.Htl2BitmapLib.dll</HintPath>
     </Reference>
-    <Reference Include="CloudBanking.ResizerLib">
-      <HintPath>..\..\Libs\CloudBanking.ResizerLib.dll</HintPath>
+    <Reference Include="Florid.Droid.Secure.Lib">
+      <HintPath>..\Libs\Florid.Droid.Secure.Lib.dll</HintPath>
+    </Reference>
+    <Reference Include="Florid.PosPrinter.Lib">
+      <HintPath>..\Libs\Florid.PosPrinter.Lib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +151,14 @@
       <Generator>
       </Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\xml\folder_path.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\xml\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FirebaseDatabase.net">

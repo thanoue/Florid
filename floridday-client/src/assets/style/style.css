@@ -1880,3 +1880,23 @@ span.bankName {
     background-color: var(--main-grey);
     left: 0;
 }
+
+.image-top {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+.image-top  img {
+    height: 50vh;
+    width: 100%;
+    object-fit: cover;
+}
+.image-action a {
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 15px;
+    margin-bottom: 2vh;
+    border-radius: 30px;
+    font-weight: 600;
+}

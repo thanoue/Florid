@@ -166,9 +166,41 @@ namespace Florid.Staff.Droid.Services
                 .Build());
 
             _activity.StartActivityForResult(intent, MainActivity.REQUEST_FILE_PICKER);
-
         }
-        
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("pickFileForShare")]
+        public void PickFileForShare()
+        {
+
+            var intent = new Intent(_activity, typeof(FilePickerActivity));
+            intent.PutExtra(FilePickerActivity.Configs, new Configurations.Builder()
+                .SetCheckPermission(true)
+                .SetShowAudios(false)
+                .SetShowImages(true)
+                .EnableImageCapture(true)
+                .SetMaxSelection(1)
+                .SetSingleClickSelection(true)
+                .SetSkipZeroSizeFiles(true)
+                .SetShowVideos(false)
+                .Build());
+
+            _activity.StartActivityForResult(intent, MainActivity.REQUEST_FILE_PICKER_SHARE);
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("shareImage")]
+        public void ShareImage()
+        {
+            _activity.ShareImage();
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("releaseTempImage")]
+        public void ReleaseTempImage()
+        {
+            _activity.ReleaseTempImage();
+        }
 
         [Android.Webkit.JavascriptInterface]
         [Export("requestDateSelecting")]

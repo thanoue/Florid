@@ -24,7 +24,7 @@ namespace Florid.Droid.Lib
         public List<Product> GlobalProducts = new List<Product>();
 
         //public string RootWebUrl { get; set; } = "https://floridstaff.web.app";
-        public string RootWebUrl { get; set; } = "http://192.168.1.16:4200";
+        public string RootWebUrl { get; set; } = "http://172.16.2.216:4200";
     }
 }
     

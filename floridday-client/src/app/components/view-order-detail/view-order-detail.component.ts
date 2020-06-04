@@ -32,8 +32,12 @@ export class ViewOrderDetailComponent extends BaseComponent {
       if (!this.canSeen)
         return;
 
-      if (this.CurrentUser.Role == Roles.Florist) {
-        if (this.orderDetail.SeenUsers.filter(p => p.UserId == this.CurrentUser.Id).length <= 0) {
+      if (this.CurrentUser.Role == Roles.Florist || this.CurrentUser.Role === Roles.Shipper) {
+
+        if (!this.orderDetail.SeenUsers
+          || this.orderDetail.SeenUsers.length <= 0
+          || this.orderDetail.SeenUsers.filter(p => p.UserId == this.CurrentUser.Id).length <= 0) {
+
           let seen = new ODSeenUserInfo();
 
           seen.FullName = this.CurrentUser.FullName;
@@ -42,11 +46,10 @@ export class ViewOrderDetailComponent extends BaseComponent {
           seen.UserId = this.CurrentUser.Id;
           seen.SeenTime = (new Date).getTime();
 
+          if (!this.orderDetail.SeenUsers)
+            this.orderDetail.SeenUsers = [];
+
           this.orderDetail.SeenUsers.push(seen);
-
-          let updates = {};
-
-          updates[`/${this.orderDetail.OrderDetailId}/SeenUsers`] = this.orderDetail.SeenUsers;
 
           this.orderDetailService.updateSingleField(this.orderDetail.OrderDetailId, 'SeenUsers', this.orderDetail.SeenUsers)
             .then(() => {

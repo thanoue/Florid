@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { AccountGuard, LoggedInGuard, FloristGuard } from './guards/login.guard';
+import { AccountGuard, LoggedInGuard, FloristGuard, ShipperGuard, AccountAndShipperGuard } from './guards/login.guard';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { PrinterComponent } from './components/printer/printer.component';
 import { HomeComponent } from './components/home/home.component';
@@ -17,6 +17,10 @@ import { SaleOptionComponent } from './components/sale-option/sale-option.compon
 import { ViewOrderDetailComponent } from './components/view-order-detail/view-order-detail.component';
 import { SortOrderChangingComponent } from './components/sort-order-changing/sort-order-changing.component';
 import { FloristMainComponent } from './components/florist-main/florist-main.component';
+import { OrderDetailConfirmingComponent } from './components/order-detail-confirming/order-detail-confirming.component';
+import { CustomerConfirmComponent } from './components/customer-confirm/customer-confirm.component';
+import { ShipperMainComponent } from './components/shipper-main/shipper-main.component';
+import { FinalConfirmComponent } from './components/final-confirm/final-confirm.component';
 
 const routes: Routes = [
   { path: 'print-job', component: PrinterComponent, canActivate: [LoggedInGuard] },
@@ -76,6 +80,16 @@ const routes: Routes = [
         canActivate: [AccountGuard]
       },
       {
+        path: 'order-detail-confirming',
+        component: OrderDetailConfirmingComponent,
+        canActivate: [AccountAndShipperGuard]
+      },
+      {
+        path: 'customer-confirming',
+        component: CustomerConfirmComponent,
+        canActivate: [AccountAndShipperGuard]
+      },
+      {
         path: 'order-detail-view',
         component: ViewOrderDetailComponent,
       },
@@ -84,6 +98,16 @@ const routes: Routes = [
         component: FloristMainComponent,
         canActivate: [FloristGuard]
       },
+      {
+        path: 'shipper-main',
+        component: ShipperMainComponent,
+        canActivate: [ShipperGuard]
+      },
+      {
+        path: 'final-cofirm',
+        component: FinalConfirmComponent,
+        canActivate: [AccountGuard]
+      }
     ]
   },
   { path: '404', component: NotFoundComponent },

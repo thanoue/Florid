@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{19A7AA86-7A09-40AE-865B-1E15C3ADF2EE}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
+    <Files>
+      <File FileName="Program.cs" Line="80" Column="40" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="DownloadImage" expanded="True">
+            <Node name="DownloadImage" expanded="True" selected="True">
+              <Node name="References" expanded="True" />
+              <Node name="Packages" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.DownloadImage PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|anycpu" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/sin/Code/Florid-Staff/DownloadImage/Program.cs" relfile="Program.cs" line="21" column="1" />
+      <Breakpoint file="/Users/sin/Code/Florid-Staff/DownloadImage/Program.cs" relfile="Program.cs" line="85" column="1" />
+      <Breakpoint file="/Users/sin/Code/Florid-Staff/DownloadImage/Program.cs" relfile="Program.cs" line="23" column="1" />
+      <Breakpoint file="/Users/sin/Code/Florid-Staff/DownloadImage/Program.cs" relfile="Program.cs" line="32" column="1" />
+      <Breakpoint file="/Users/sin/Code/Florid-Staff/DownloadImage/Program.cs" relfile="Program.cs" line="34" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

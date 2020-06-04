@@ -1,15 +1,16 @@
 ﻿<Properties StartupConfiguration="{A03672A6-E69A-493D-B9DC-F279688F50E9}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="FloridCrawler/Program.cs">
     <Files>
-      <File FileName="FloridCrawler/Program.cs" Line="49" Column="38" />
+      <File FileName="FloridCrawler/Program.cs" Line="167" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="FloridCrawler" expanded="True">
             <Node name="FloridCrawler" expanded="True">
+              <Node name="References" expanded="True" />
+              <Node name="Packages" expanded="True" selected="True" />
               <Node name="Properties" expanded="True" />
-              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
@@ -21,8 +22,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/khatran/Data/Florid/FloridCrawler/FloridCrawler/Program.cs" relfile="FloridCrawler/Program.cs" line="120" column="1" />
-      <Breakpoint file="/Users/khatran/Data/Florid/FloridCrawler/FloridCrawler/Program.cs" relfile="FloridCrawler/Program.cs" line="147" column="1" />
+      <Breakpoint file="/Users/sin/Code/Florid-Staff/FloridCrawler/FloridCrawler/Program.cs" relfile="FloridCrawler/Program.cs" line="120" column="1" />
+      <Breakpoint file="/Users/sin/Code/Florid-Staff/FloridCrawler/FloridCrawler/Program.cs" relfile="FloridCrawler/Program.cs" line="147" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

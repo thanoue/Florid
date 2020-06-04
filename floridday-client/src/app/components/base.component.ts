@@ -1,24 +1,18 @@
 import { OnInit, Inject, forwardRef, Injector, AfterViewInit, OnDestroy, NgZone } from '@angular/core';
-import { AppComponent } from '../app.component';
 import { AppInjector } from '../services/common/base.injector';
-import { GenericModel } from '../models/view.models/generic.model';
 import { GlobalService } from '../services/common/global.service';
 import { AuthService } from '../services/common/auth.service';
-import { ActivatedRoute } from '@angular/router';
-import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { RouteModel } from '../models/view.models/route.model';
-import { map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Location } from '@angular/common';
 import { OrderViewModel, OrderDetailViewModel } from '../models/view.models/order.model';
 import { DistrictAddressService } from '../services/address/district-address.service';
 import { WardAddressService } from '../services/address/ward-address.service';
 import { District, Ward } from '../models/entities/address.entity';
-import { FunctionsService } from '../services/common/functions.service';
 import { LocalService } from '../services/common/local.service';
 import { Roles } from '../models/enums';
 
-declare function pickFile(): any;
+declare function pickFile(isSaveUrl: boolean): any;
 declare function addressRequest(districts: District[], resCallback: (res: string) => void, onDistrictChange: (res: string, newWardCallback: (wards: Ward[]) => void) => void): any;
 
 export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -68,12 +62,13 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         this.globalService.currentWards = value;
     }
 
-    get CurrentUser(): { Id: string, FullName: string, Role: Roles, Avt: string } {
+    get CurrentUser(): { Id: string, FullName: string, Role: Roles, Avt: string, PhoneNumber: string } {
         return {
             FullName: LocalService.getUserName(),
             Role: LocalService.getRole() as Roles,
             Avt: LocalService.getUserAvtUrl(),
             Id: LocalService.getUserId(),
+            PhoneNumber: LocalService.getPhoneNumber()
         }
     }
 
@@ -173,7 +168,11 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     public openFile() {
-        pickFile();
+        pickFile(false);
+    }
+
+    public openFileForShare() {
+        pickFile(true);
     }
 
     protected startLoading() {
@@ -212,6 +211,7 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     }
 
     protected fileChosen(path: string) {
+
     }
 
     protected openConfirm(message: string, okCallback: () => void, noCallback?: () => void, cancelCallback?: () => void) {

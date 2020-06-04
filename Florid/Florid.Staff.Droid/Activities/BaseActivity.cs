@@ -107,6 +107,16 @@ namespace Florid.Staff.Droid.Activity
             }
         }
 
+        public virtual void ShareImage()
+        {
+
+        }
+
+        public virtual void ReleaseTempImage()
+        {
+
+        }
+
         protected bool IsLoggedIn()
         {
             if (_firebaseAuth.CurrentUser != null)

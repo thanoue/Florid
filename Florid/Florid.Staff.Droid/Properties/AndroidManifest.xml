@@ -11,6 +11,9 @@
 			</intent-filter>
 		</receiver>
 		<service android:name="florid.staff.froid.MyService" />
+		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.florid.staff.fileprovider" android:exported="false" android:grantUriPermissions="true">
+			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/folder_path"></meta-data>
+		</provider>
 	</application>
 	<uses-permission android:name="android.hardware.usb.UsbAccessory" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

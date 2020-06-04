@@ -13,7 +13,7 @@
         <div class="tab-content order-list-bot" id="listContent">
             <div class="tab-pane fade show active" id="camhoa" role="tabpanel" aria-labelledby="nav1">
                 <ul class="order-content cusScroll" cdkDropList (cdkDropListDropped)="dropMakingList($event)">
-                    <div *ngFor="let makDetail of makingOrderDetails" cdkDrag cdkDragStartDelay="500"
+                    <div *ngFor="let makDetail of makingOrderDetails; let i = index" cdkDrag cdkDragStartDelay="500"
                         class="order-content-item product-item">
                         <div class="item-top">
                             <span class="item-code">{{makDetail.OrderId}}_{{makDetail.Index+1}}</span>
@@ -31,8 +31,10 @@
                             <ul class="order-product-list cusScroll">
                                 <li class="">
                                     <div class="changeOrder">
-                                        <button class="inOrder navOrder" (click)="move(makDetail,-1)">tăng</button>
-                                        <button class="deOrder navOrder" (click)="move(makDetail,1)">giảm</button>
+                                        <button class="inOrder navOrder"
+                                            (click)="move(makDetail.State,i,true)">tăng</button>
+                                        <button class="deOrder navOrder"
+                                            (click)="move(makDetail.State,i,false)">giảm</button>
                                     </div>
                                     <div class="item-detail" (click)="viewDetail(makDetail)">
                                         <img [src]="makDetail.ProductImageUrl" alt="" class="item-detail-thumb">
@@ -59,17 +61,17 @@
             </div>
             <div class="tab-pane fade" id="giaohoa" role="tabpanel" aria-labelledby="nav2">
                 <ul class="order-content cusScroll" cdkDropList (cdkDropListDropped)="dropShippingList($event)">
-                    <div *ngFor="let shipDetail of shippingOrderDetails" cdkDrag cdkDragStartDelay="500"
+                    <div *ngFor="let shipDetail of shippingOrderDetails; let j = index" cdkDrag cdkDragStartDelay="500"
                         class="order-content-item product-item">
                         <div class="item-top">
                             <span class="item-code">{{shipDetail.OrderId}}_{{shipDetail.Index+1}}</span>
                             <div class="item-info">
                                 <h4 class="item-name">{{shipDetail.ProductName}}</h4>
                                 <span
-                                    class="item-quantity">{{shipDetail.CustomerName}}-{{shipDetail  .CustomerPhoneNumber}}</span>
+                                    class="item-quantity">{{shipDetail.CustomerName}}-{{shipDetail.CustomerPhoneNumber}}</span>
                             </div>
                             <app-status-point [state]="shipDetail.State" [id]="shipDetail.OrderDetailId"
-                                [index]="shipDetail.MakingSortOrder">
+                                [index]="shipDetail.ShippingSortOrder">
 
                             </app-status-point>
                         </div>
@@ -77,8 +79,10 @@
                             <ul class="order-product-list cusScroll">
                                 <li class="">
                                     <div class="changeOrder">
-                                        <button class="inOrder navOrder" (click)="move(shipDetail,-1)">tăng</button>
-                                        <button class="deOrder navOrder" (click)="move(shipDetail,1)">giảm</button>
+                                        <button class="inOrder navOrder"
+                                            (click)="move(shipDetail.State,j,true)">tăng</button>
+                                        <button class="deOrder navOrder"
+                                            (click)="move(shipDetail.State,j,false)">giảm</button>
                                     </div>
                                     <div class="item-detail" (click)="viewDetail(shipDetail)">
                                         <img [src]="shipDetail.ProductImageUrl" alt="" class="item-detail-thumb">

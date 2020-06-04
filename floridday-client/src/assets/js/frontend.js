@@ -702,3 +702,10 @@ function addressRequest(districts, resCallback, requestNewWards) {
     });
 }
 
+let rotationAmount = 0;
+function rotateImage() {
+    rotationAmount += 90;
+
+    document.querySelector('#selected-image').style.transform = `rotate(${rotationAmount}deg)`;
+
+}

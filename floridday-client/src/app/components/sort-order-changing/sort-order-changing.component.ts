@@ -30,6 +30,7 @@ export class SortOrderChangingComponent extends BaseComponent {
   }
 
   loadMakingDetails() {
+
     this.makingOrderDetails = [];
     this.orderDetailService.getByFieldName('State', OrderDetailStates.Waiting)
       .then(details => {
@@ -44,6 +45,7 @@ export class SortOrderChangingComponent extends BaseComponent {
   }
 
   loadShippingDetails() {
+
     this.shippingOrderDetails = [];
     this.orderDetailService.getByFieldName('State', OrderDetailStates.DeliveryWaiting)
       .then(details => {
@@ -51,7 +53,8 @@ export class SortOrderChangingComponent extends BaseComponent {
         details.forEach(detail => {
           this.shippingOrderDetails.push(OrderDetailViewModel.ToViewModel(detail));
         });
-        this.shippingOrderDetails.sort((a, b) => a.MakingSortOrder < b.MakingSortOrder ? -1 : a.MakingSortOrder > b.MakingSortOrder ? 1 : 0)
+
+        this.shippingOrderDetails.sort((a, b) => a.ShippingSortOrder < b.ShippingSortOrder ? -1 : a.ShippingSortOrder > b.ShippingSortOrder ? 1 : 0)
 
       });
   }
@@ -63,8 +66,10 @@ export class SortOrderChangingComponent extends BaseComponent {
 
   dropMakingList(event: CdkDragDrop<string[]>) {
 
-    var oldOrder = event.previousIndex + 1;
-    var newOrder = event.currentIndex + 1;
+    var oldOrder = this.makingOrderDetails[event.previousIndex].MakingSortOrder;
+    var newOrder = this.makingOrderDetails[event.currentIndex].MakingSortOrder;
+
+    console.log(oldOrder, newOrder);
 
     if (oldOrder === newOrder)
       return;
@@ -97,8 +102,8 @@ export class SortOrderChangingComponent extends BaseComponent {
 
   dropShippingList(event: CdkDragDrop<string[]>) {
 
-    var oldOrder = event.previousIndex + 1;
-    var newOrder = event.currentIndex + 1;
+    var oldOrder = this.shippingOrderDetails[event.previousIndex].ShippingSortOrder;
+    var newOrder = this.shippingOrderDetails[event.currentIndex].ShippingSortOrder;
 
     if (oldOrder === newOrder)
       return;
@@ -129,22 +134,21 @@ export class SortOrderChangingComponent extends BaseComponent {
       });
   }
 
-  move(od: OrderDetailViewModel, delta: number) {
+  move(state: OrderDetailStates, index: number, isUp: boolean) {
+
     let orderDetail: OrderDetailViewModel;
     let secondDetail: OrderDetailViewModel;
 
-    switch (od.State) {
+    switch (state) {
 
       case OrderDetailStates.Waiting:
 
-        orderDetail = this.makingOrderDetails.filter(p => p.OrderDetailId == od.OrderDetailId)[0];
+        orderDetail = this.makingOrderDetails[index];
 
-        this.makingOrderDetails.forEach(detail => {
-          if (detail.MakingSortOrder == orderDetail.MakingSortOrder + delta) {
-            secondDetail = detail;
-            return;
-          }
-        });
+        if ((isUp && index <= 0) || (!isUp && index >= this.makingOrderDetails.length - 1))
+          return;
+
+        secondDetail = this.makingOrderDetails[isUp ? index - 1 : index + 1];
 
         if (secondDetail) {
 
@@ -166,14 +170,12 @@ export class SortOrderChangingComponent extends BaseComponent {
 
       case OrderDetailStates.DeliveryWaiting:
 
-        orderDetail = this.shippingOrderDetails.filter(p => p.OrderDetailId == od.OrderDetailId)[0];
+        orderDetail = this.shippingOrderDetails[index]
 
-        this.shippingOrderDetails.forEach(detail => {
-          if (detail.ShippingSortOrder == orderDetail.ShippingSortOrder + delta) {
-            secondDetail = detail;
-            return;
-          }
-        });
+        if ((isUp && index <= 0) || (!isUp && index >= this.shippingOrderDetails.length - 1))
+          return;
+
+        secondDetail = this.shippingOrderDetails[isUp ? index - 1 : index + 1];
 
         if (secondDetail) {
 
@@ -194,8 +196,6 @@ export class SortOrderChangingComponent extends BaseComponent {
         }
 
         break;
-
     }
-
   }
 }

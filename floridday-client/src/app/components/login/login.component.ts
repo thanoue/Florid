@@ -33,8 +33,9 @@ export class LoginComponent extends BaseComponent {
 
     this.model.passcode = '123456';
     // this.model.userName = 'florid.florist.main@floridday.com'; // florist
-    this.model.userName = 'florid.admin.printer@floridday.com'; //admin
-    this.model.userName = 'florid.florist.main@floridday.com'; //florist
+    //this.model.userName = 'florid.admin.printer@floridday.com'; //admin
+    //   this.model.userName = 'florid.florist.main@floridday.com'; //florist
+    this.model.userName = 'florid.shipper.main@floridday.com'; //shipper
 
   }
 
@@ -59,13 +60,13 @@ export class LoginComponent extends BaseComponent {
           case Roles.Florist:
             this.router.navigate(['/florist-main']);
             break;
+          case Roles.Shipper:
+            this.router.navigate(['/shipper-main']);
+            break;
         }
 
 
-      } else {
-
       }
-
     });
 
   }

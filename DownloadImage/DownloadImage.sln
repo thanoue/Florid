@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DownloadImage", "DownloadImage.csproj", "{19A7AA86-7A09-40AE-865B-1E15C3ADF2EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19A7AA86-7A09-40AE-865B-1E15C3ADF2EE}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{19A7AA86-7A09-40AE-865B-1E15C3ADF2EE}.Debug|anycpu.Build.0 = Debug|anycpu
+		{19A7AA86-7A09-40AE-865B-1E15C3ADF2EE}.Release|anycpu.ActiveCfg = Release|anycpu
+		{19A7AA86-7A09-40AE-865B-1E15C3ADF2EE}.Release|anycpu.Build.0 = Release|anycpu
+	EndGlobalSection
+EndGlobal

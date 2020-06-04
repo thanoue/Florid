@@ -183,10 +183,59 @@ function warningToast(message) {
     alert(message, 3)
 }
 
-function pickFile() {
+function pickFile(isSaveUrl) {
     if (typeof Android !== "undefined" && Android !== null) {
-        Android.pickFile();
+        if (isSaveUrl) {
+            Android.pickFileForShare();
+        } else {
+            Android.pickFile();
+        }
     }
 
     return;
+}
+
+function shareImageCus() {
+    if (typeof Android !== "undefined" && Android !== null) {
+        Android.shareImage();
+    }
+
+    return;
+}
+
+function deleteTempImage() {
+    if (typeof Android !== "undefined" && Android !== null) {
+        Android.releaseTempImage();
+    }
+
+    return;
+}
+
+// function shareOnWeb(blobFile) {
+//     if (navigator.share) {
+//         var file = new File([blobFile], 'shareImage.png', { type: 'image/png' });
+//         var filesArray = [file];
+//         console.log(filesArray);
+
+//         navigator
+//             .share({
+//                 files: filesArray
+//             })
+//             .then(() => console.log('Share was successful.'))
+//             .catch((error) => {
+//                 errorToast(error);
+//             });
+//     }
+//     else {
+//         errorToast("Trình duyệt không hỗ trợ chức năng này!!");
+//     }
+
+// }
+
+function shareOnWeb(data) {
+    try {
+        webkit.messageHandlers.callback.postMessage(data);
+    } catch (err) {
+        console.log('Can not reach native code');
+    }
 }

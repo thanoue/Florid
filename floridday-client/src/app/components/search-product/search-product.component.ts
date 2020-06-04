@@ -166,6 +166,7 @@ export class SearchProductComponent extends BaseComponent {
 
 
   onChange(event) {
+
     const filesUpload: File = event.target.files[0];
 
     this.globalOrderDetail.IsFromHardCodeProduct = true;

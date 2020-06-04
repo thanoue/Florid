@@ -35,6 +35,10 @@ import { SortOrderChangingComponent } from './components/sort-order-changing/sor
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { FloristMainComponent } from './components/florist-main/florist-main.component';
+import { OrderDetailConfirmingComponent } from './components/order-detail-confirming/order-detail-confirming.component';
+import { CustomerConfirmComponent } from './components/customer-confirm/customer-confirm.component';
+import { ShipperMainComponent } from './components/shipper-main/shipper-main.component';
+import { FinalConfirmComponent } from './components/final-confirm/final-confirm.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +62,11 @@ import { FloristMainComponent } from './components/florist-main/florist-main.com
     ViewOrderDetailComponent,
     StatusPointComponent,
     SortOrderChangingComponent,
-    FloristMainComponent
+    FloristMainComponent,
+    OrderDetailConfirmingComponent,
+    CustomerConfirmComponent,
+    ShipperMainComponent,
+    FinalConfirmComponent
   ],
   imports: [
     BrowserModule,

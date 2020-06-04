@@ -54,6 +54,32 @@ export class AccountGuard implements CanActivate {
     }
 }
 
+
+@Injectable({
+    providedIn: 'root'
+})
+export class AccountAndShipperGuard implements CanActivate {
+
+    constructor(private router: Router, private globalServie: GlobalService) {
+    }
+
+    canActivate() {
+
+        let loggedInGuard = new LoggedInGuard(this.router, this.globalServie);
+
+        if (!loggedInGuard.canActivate())
+            return false;
+
+        const role = (AuthService.getCurrentRole());
+        if (role == Roles.Admin || role == Roles.Account || role == Roles.Shipper) {
+            return true;
+        } else {
+            this.router.navigate(['login']);
+            return false;
+        }
+    }
+}
+
 @Injectable({
     providedIn: 'root'
 })
