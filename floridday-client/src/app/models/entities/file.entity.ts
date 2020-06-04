@@ -27,3 +27,17 @@ export class TempProduct extends BaseFile {
         this.FolderName = '/tempProduct';
     }
 }
+
+export class ResultImage extends BaseFile {
+    constructor() {
+        super();
+        this.FolderName = '/resultImages';
+    }
+}
+
+export class DeliveryImage extends BaseFile {
+    constructor() {
+        super();
+        this.FolderName = '/deliveryImages';
+    }
+}

@@ -56,7 +56,7 @@ export class AuthService {
     }, true)
       .subscribe(result => {
 
-        console.log(result);
+        // console.log(result);
 
         if (!this.globalService.firebaseIsInitialized) {
 
@@ -92,10 +92,10 @@ export class AuthService {
             const onlineUser = new OnlineUser();
             onlineUser.Id = userInfo.user.uid;
 
-            this.onlineUserService.set(onlineUser).then(() => {
-              this.globalService.stopLoading();
-              loginCallback(true);
-            });
+            loginCallback(true);
+            this.globalService.stopLoading();
+
+            this.onlineUserService.set(onlineUser);
 
           }).catch(error => {
             throw new Error(error);

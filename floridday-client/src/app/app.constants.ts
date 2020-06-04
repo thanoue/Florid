@@ -46,7 +46,7 @@ export const ORDER_DETAIL_STATES = [
         DisplayName: 'Đang giao'
     },
     {
-        State: OrderDetailStates.Delivering,
+        State: OrderDetailStates.Deliveried,
         DisplayName: 'Đã giao, đang xác nhận giao'
     },
     {

@@ -42,6 +42,9 @@ export class OrderDetail extends BaseEntity {
 
     SeenUsers: ODSeenUserInfo[];
 
+    ResultImageUrl: string;
+    DeliveryImageUrl: string;
+
     constructor() {
         super();
 
