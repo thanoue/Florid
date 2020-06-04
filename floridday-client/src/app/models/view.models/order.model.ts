@@ -77,6 +77,9 @@ export class OrderDetailViewModel {
     FloristInfo: ODFloristInfo;
     ShipperInfo: ODShipperInfo;
 
+    ResultImageUrl: string;
+    DeliveryImageUrl: string;
+
     SeenUsers: ODSeenUserInfo[];
 
     constructor() {
@@ -115,6 +118,9 @@ export class OrderDetailViewModel {
         vm.DeliveryInfo.FullName = entity.DeliveryInfo.ReceiverDetail.FullName;
         vm.DeliveryInfo.PhoneNumber = entity.DeliveryInfo.ReceiverDetail.PhoneNumber;
 
+        vm.ResultImageUrl = entity.ResultImageUrl;
+        vm.DeliveryImageUrl = entity.DeliveryImageUrl;
+
         vm.State = entity.State;
         vm.Quantity = 1;
 
@@ -145,6 +151,8 @@ export class OrderDetailViewModel {
 
         const viewModel = new OrderDetailViewModel();
 
+        viewModel.ResultImageUrl = model.ResultImageUrl;
+        viewModel.DeliveryImageUrl = model.DeliveryImageUrl;
         viewModel.CustomerName = model.CustomerName;
         viewModel.CustomerPhoneNumber = model.CustomerPhoneNumber;
         viewModel.IsVATIncluded = model.IsVATIncluded;

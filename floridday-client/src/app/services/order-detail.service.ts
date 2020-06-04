@@ -74,6 +74,23 @@ export class OrderDetailService extends BaseService<OrderDetail>  {
       });
   }
 
+  getNextShippingSortOrder(): Promise<number> {
+    return this.tableRef.orderByChild('State').equalTo(OrderDetailStates.DeliveryWaiting)
+      .once('value')
+      .then(snapshot => {
+
+        let maxOrder = 0;
+
+        snapshot.forEach(snap => {
+          var detail = snap.val() as OrderDetail;
+          if (detail.ShippingSortOrder > maxOrder)
+            maxOrder = detail.ShippingSortOrder;
+        });
+
+        return maxOrder + 1;
+      });
+  }
+
   getHardcodeImageSavedCounting(name: string, callback: (count: number) => void): void {
 
     if (!name || name === '') {

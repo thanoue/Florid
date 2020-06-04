@@ -39,6 +39,38 @@ export class StorageService {
         );
     }
 
+    async  push(file: ArrayBuffer | Blob | File, folderName: string, fileName): Promise<string> {
+
+        if (file == null) {
+            return;
+        }
+
+        var promise = new Promise<string>((resolve, rejects) => {
+
+            const storageRef = firebase.storage().ref();
+            const uploadTask = storageRef.child(`${folderName}/${fileName}`).put(file);
+
+            uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+                (snapshot) => {
+                    // in progress
+                },
+                (error) => {
+                    // fail  
+                    rejects(error.message);
+                    console.warn(error.message);
+                },
+                () => {
+                    // success
+                    uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+                        resolve(url);
+                    });
+                }
+            );
+        });
+
+        return promise;
+    }
+
     deleteFile(name: string, folderName: string): Promise<any> {
         return firebase.storage().ref().child(`${folderName}/${name}`).delete();
     }
