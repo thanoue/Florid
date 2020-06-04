@@ -31,6 +31,7 @@ jQuery(document).ready(function(){
         jQuery(".overlayDiv").remove();
         jQuery(".popupDialog").hide(250);
     });
+      
 })
 
 //Add New Object
@@ -424,11 +425,11 @@ showProductEdit = (e) => {
                 <div class="row">
                     <div class="col-md-2 col-xs-12">
                         <div class="userAvatar">
-                            <img src="../images/product-img.jpg" alt="..." class="img-thumbnail rounded-circle">
+                            <img src="../images/product-img.jpg" alt="..." class="img-thumbnail rounded-circle" id="previewImage">
                         </div>
                         <div class="form-group avatarChange">
                             <label for="">Thay đổi ảnh đại diện</label>
-                            <input type="file" class="form-control-file" name="" id="" placeholder="" aria-describedby="fileHelpId">
+                            <input type="file" class="form-control-file" name="" id="changeImage" placeholder="" aria-describedby="fileHelpId">
                         </div>
                     </div>
                     <div class="col-md-10 col-xs-12">
@@ -506,6 +507,10 @@ showProductEdit = (e) => {
             </form>
         </td>
     `);
+    jQuery('#changeImage').change(function () {
+        var imageURL  = window.URL.createObjectURL(this.files[0]);
+        jQuery("#previewImage").attr('src',imageURL);
+    });
     
 }
 hideProductEdit = (e) => {
