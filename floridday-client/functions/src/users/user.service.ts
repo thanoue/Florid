@@ -102,16 +102,67 @@ export function getAllUsers(): Promise<any> {
         });
 }
 
-export async function createUser(body: any): Promise<any> {
+export async function editUser(user: any): Promise<any> {
 
-    body.emailVerified = true;
+    const editUser = {
+        email: user.Email,
+        phoneNumber: user.PhoneNumber,
+        emailVerified: true,
+        password: user.Password,
+        displayName: user.FullName,
+        photoURL: user.AvtUrl,
+        disabled: false
+    }
 
-    return adminSdk.defaultAuth.createUser(body)
+    const { password, ...userWithoutPassword } = editUser;
+
+    return adminSdk.defaultAuth.updateUser(user.Id, !user.password || user.Password == '' ? userWithoutPassword : editUser)
+        .then(async (userRecord: any) => {
+            // See the UserRecord reference doc for the contents of userRecord.
+            console.log('Successfully updated user', userRecord.toJSON());
+
+            await adminSdk.defaultAuth.setCustomUserClaims(userRecord.uid, { role: user.Role, isPrinter: user.IsPrinter })
+
+            const hashedPassword = sha256.hmac.create(adminSdk.momoConfig.secretKey).update(user.Password).hex();
+
+            adminSdk.defauDatabase.ref('users').child(user.Id).set({
+                PhoneNumber: user.PhoneNumber,
+                FullName: user.FullName,
+                Email: user.Email,
+                AvtUrl: user.photoURL,
+                Active: true,
+                Role: user.Role,
+                IsPrinter: user.IsPrinter,
+                Password: hashedPassword,
+                Id: user.Id
+            });
+
+            return userRecord;
+
+        })
+        .catch(function (error: any) {
+            console.log('Error updating user:', error);
+            throw error
+        });
+
+}
+
+export async function createUser(user: any): Promise<any> {
+
+    return adminSdk.defaultAuth.createUser({
+        email: user.Email,
+        phoneNumber: user.PhoneNumber,
+        emailVerified: true,
+        password: user.Password,
+        displayName: user.FullName,
+        photoURL: user.AvtUrl,
+        disabled: false
+    })
         .then(async (userRecord: any) => {
 
-            await adminSdk.defaultAuth.setCustomUserClaims(userRecord.uid, { role: body.Role, isPrinter: body.IsPrinter })
+            await adminSdk.defaultAuth.setCustomUserClaims(userRecord.uid, { role: user.Role, isPrinter: user.IsPrinter })
 
-            const hashedPassword = sha256.hmac.create(adminSdk.momoConfig.secretKey).update(body.password).hex();
+            const hashedPassword = sha256.hmac.create(adminSdk.momoConfig.secretKey).update(user.Password).hex();
 
             adminSdk.defauDatabase.ref('users').child(userRecord.uid).set({
                 PhoneNumber: userRecord.phoneNumber,
@@ -119,9 +170,10 @@ export async function createUser(body: any): Promise<any> {
                 Email: userRecord.email,
                 AvtUrl: userRecord.photoURL,
                 Active: true,
-                Role: body.Role,
-                IsPrinter: body.IsPrinter,
+                Role: user.Role,
+                IsPrinter: user.IsPrinter,
                 Password: hashedPassword,
+                Id: userRecord.uid
             });
 
             return userRecord;

@@ -12,7 +12,7 @@ export class ProductImageService extends BaseService<ProductImage> {
 
   protected tableName = '/productImages';
 
-  constructor(private storageService: StorageService) {
+  constructor() {
     super()
   }
 
