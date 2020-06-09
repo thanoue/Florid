@@ -27,7 +27,7 @@ export class LoginComponent extends BaseComponent {
   protected Init() {
 
     this.model.passcode = '123456';
-    this.model.userName = 'florid.admin@florid.com';
+    this.model.userName = 'florid.admin@floridday.com';
   }
 
   login(form: NgForm) {
@@ -43,7 +43,7 @@ export class LoginComponent extends BaseComponent {
         this.router.navigate(['']);
 
       } else {
-
+        
       }
 
     });

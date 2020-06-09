@@ -391,6 +391,10 @@ function addTag() {
     jQuery("#tagAddPopup").slideDown(350);
 }
 
+function showUserEditPopup() {
+    jQuery('#userAdd').slideDown(350);
+}
+
 
 hideAdd = () => {
     jQuery(".popupContent").slideUp(250, function () {

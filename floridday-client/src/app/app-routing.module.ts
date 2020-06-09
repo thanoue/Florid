@@ -8,6 +8,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductTagComponent } from './components/product-tag/product-tag.component';
 import { ProductCategoryComponent } from './components/product-category/product-category.component';
+import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'product-categories',
         component: ProductCategoryComponent,
+      },
+      {
+        path: 'users',
+        component: UsersComponent,
       }
     ]
   },

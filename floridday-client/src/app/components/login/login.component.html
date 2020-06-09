@@ -5,18 +5,18 @@
         </div>
         <div class="loginRight">
             <img src="../../../assets/images/logo.svg" alt="" class="loginLogo">
-            <form #form="ngForm" (submit)="login(form)" autocomplete="on">
+            <form #form="ngForm" (submit)="login(form)" autocomplete="off">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" name="userName" [(ngModel)]="model.userName" class="form-control"
-                        id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="email" name="userName" autocomplete="off" [(ngModel)]="model.userName"
+                        class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                         else.</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" name="passcode" [(ngModel)]="model.passcode"
-                        id="exampleInputPassword1">
+                    <input type="password" autocomplete="off" class="form-control" name="passcode"
+                        [(ngModel)]="model.passcode" id="exampleInputPassword1">
                 </div>
                 <div class="form-group row">
                     <div class="col-8"><a class="form-check-label" href="forgot-pass.html">Forgot your password?</a>

@@ -8,7 +8,7 @@
                 <a routerLink="" class="menuItem-link"><i class="fa fa-dashboard"></i>Trang chủ</a>
             </li>
             <li [ngClass]="(currentMenu !== menus.User)?'menuItem':'menuItem active'">
-                <a href="./user.html" class="menuItem-link"><i class="fa fa-user"></i>Nhân Viên</a>
+                <a routerLink="/users" class="menuItem-link"><i class="fa fa-user"></i>Nhân Viên</a>
             </li>
             <li [ngClass]="(currentMenu !== menus.Customer)?'menuItem':'menuItem active'">
                 <a href="./customer.html" class="menuItem-link"><i class="fa fa-user"></i>Khách Hàng</a>

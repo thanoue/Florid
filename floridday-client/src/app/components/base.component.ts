@@ -63,7 +63,7 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         setTimeout(() => {
             this.globalService.updateHeader.next(this.PageCompnent);
             this.Init();
-        },0);
+        },200);
 
     }
 

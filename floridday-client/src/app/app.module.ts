@@ -26,6 +26,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { PageSegmentComponent } from './controls/page-segment/page-segment.component';
 import { ProductTagComponent } from './components/product-tag/product-tag.component';
 import { ProductCategoryComponent } from './components/product-category/product-category.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ProductCategoryComponent } from './components/product-category/product-
     ProductsComponent,
     PageSegmentComponent,
     ProductTagComponent,
-    ProductCategoryComponent
+    ProductCategoryComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
