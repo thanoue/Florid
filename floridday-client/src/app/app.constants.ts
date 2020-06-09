@@ -1,4 +1,4 @@
-import { OrderDetailStates } from './models/enums';
+import { OrderDetailStates, Roles } from './models/enums';
 
 export const LOCAL_STORAGE_VARIABLE = {
     role: 'user_role',
@@ -19,6 +19,25 @@ export const API_END_POINT = {
     momo_qr_confirm: '/sale/momo/qr/confirm',
     logout: '/users/logout'
 };
+
+export const ROLES = [
+    {
+        Role: Roles.Account,
+        DisplayName: 'Chăm sóc khách hàng'
+    },
+    {
+        Role: Roles.Admin,
+        DisplayName: 'Quản trị viên'
+    },
+    {
+        Role: Roles.Florist,
+        DisplayName: 'Thợ cắm hoa'
+    },
+    {
+        Role: Roles.Shipper,
+        DisplayName: 'Người giao hàng'
+    },
+]
 
 export const ORDER_DETAIL_STATES = [
     {

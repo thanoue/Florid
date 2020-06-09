@@ -15,7 +15,10 @@ export class User extends BaseEntity {
     PhoneNumber: string;
     FullName: string;
     Role: Roles;
-    LoginId: string;
+    Email: string;
+    IsPrinter = false;
+    Password = "";
+
     constructor() {
         super();
     }
