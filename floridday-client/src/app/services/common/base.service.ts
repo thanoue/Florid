@@ -68,8 +68,11 @@ export abstract class BaseService<T extends BaseEntity> {
                     image = snap.val();
                 });
 
-                if (!image)
+                if (!image) {
+                    this.stopLoading();
+                    callback(true);
                     return;
+                }
 
                 this.storageService.deleteFile(image.Name, image.FolderName)
                     .then(() => {

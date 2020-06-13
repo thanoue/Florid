@@ -10,7 +10,7 @@ import { Receipt, TempProduct, ResultImage, DeliveryImage, UserAvtImage } from '
 export class UserAvtService extends BaseService<UserAvtImage> {
 
     protected get tableName(): string {
-        return '/deliveryImageFiles';
+        return '/userAvtImgFiles';
     }
 
     constructor() {
@@ -25,7 +25,9 @@ export class UserAvtService extends BaseService<UserAvtImage> {
     }
 
     public addFile(file: ArrayBuffer | Blob | File, model: UserAvtImage, updateCompletedCallback: (fileUrl: string) => void) {
+
         this.startLoading();
+
         this.storageService.pushFileToStorage(file, model, (res) => {
 
             if (!res || res === null) {
