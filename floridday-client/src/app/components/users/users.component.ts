@@ -26,7 +26,7 @@ export class UsersComponent extends BaseComponent {
 
   isSelectAll: boolean;
   currrentEditUser: User = new User();
-  passcode = "";
+  selectedPassword = "";
   edittingImageUrl: any;
   edittingFile: File;
 
@@ -93,9 +93,16 @@ export class UsersComponent extends BaseComponent {
 
   selectUserToEdit(user: User) {
 
+    console.log(user);
+
     Object.assign(this.currrentEditUser, user);
 
-    this.edittingImageUrl = user.AvtUrl;
+    this.edittingImageUrl = this.currrentEditUser.AvtUrl;
+
+    this.edittingFile = null;
+
+    this.selectedPassword = this.currrentEditUser.Password;
+
     this.currrentEditUser.Password = '';
 
     showUserEditPopup();
@@ -106,6 +113,17 @@ export class UsersComponent extends BaseComponent {
 
     if (!form.valid)
       return;
+
+    if (this.currrentEditUser.Password == '') {
+
+      if (!this.currrentEditUser.Id) {
+        this.showError('Thiếu mật khẩu!!');
+        return;
+      } else {
+        this.currrentEditUser.Password = this.selectedPassword;
+      }
+
+    }
 
     console.log(this.currrentEditUser);
 
@@ -130,11 +148,12 @@ export class UsersComponent extends BaseComponent {
         this.currrentEditUser.AvtUrl = url;
 
         this.updateUser('createUser');
+
       });
 
     } else {
 
-      this.currrentEditUser.AvtUrl = '';
+      this.currrentEditUser.AvtUrl = 'https://i2.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1';
 
       this.updateUser('createUser');
 
@@ -166,13 +185,9 @@ export class UsersComponent extends BaseComponent {
         });
 
       } else {
-
-        this.currrentEditUser.AvtUrl = '';
-
+        console.log('edit user without change avt');
         this.updateUser('editUser');
-
       }
-
     });
   }
 
