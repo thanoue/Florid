@@ -129,7 +129,7 @@ export async function editUser(user: any): Promise<any> {
                 PhoneNumber: user.PhoneNumber,
                 FullName: user.FullName,
                 Email: user.Email,
-                AvtUrl: user.photoURL,
+                AvtUrl: user.AvtUrl,
                 Active: true,
                 Role: user.Role,
                 IsPrinter: user.IsPrinter,
