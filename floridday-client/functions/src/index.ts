@@ -26,6 +26,7 @@ app.use(jwt({ secret: adminSdk.OAuthPrivateKey, isRevoked: blacklist.isRevoked }
         // public routes that don't require authentication
         '/api/v1/users/login',
         '/api/v1/users/logout',
+        '/api/v1/users/createUser',
         '/api/v1/sale/momo/qr/request'
     ]
 }));
@@ -139,4 +140,24 @@ exports.updateProductIndexMultiple = functions.https.onCall(async (params, conte
             return await productService.updateIndex(firstIndex, params.data.delta);
 
     }, [Role.Account, Role.Admin, Role.None]);
+});
+
+exports.createUser = functions.https.onCall(async (params, context) => {
+
+    return await excuteFunction(context, params.token, async () => {
+
+        return await userService.createUser(params.data);
+
+    }, [Role.Admin]);
+
+});
+
+exports.editUser = functions.https.onCall(async (params, context) => {
+
+    return await excuteFunction(context, params.token, async () => {
+
+        return await userService.editUser(params.data);
+
+    }, [Role.Admin]);
+
 });

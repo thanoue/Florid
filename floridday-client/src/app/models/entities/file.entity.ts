@@ -41,3 +41,10 @@ export class DeliveryImage extends BaseFile {
         this.FolderName = '/deliveryImages';
     }
 }
+
+export class UserAvtImage extends BaseFile {
+    constructor() {
+        super();
+        this.FolderName = '/userAvtImg';
+    }
+}

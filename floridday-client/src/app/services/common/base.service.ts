@@ -5,11 +5,13 @@ import { GlobalService } from './global.service';
 import * as firebase from 'firebase';
 import { BaseEntity } from 'src/app/models/entities/base.entity';
 import { Guid } from 'guid-typescript';
+import { StorageService } from '../storage.service';
 
 export abstract class BaseService<T extends BaseEntity> {
 
 
     protected globalService: GlobalService;
+    protected storageService: StorageService;
 
     protected abstract get tableName(): string;
 
@@ -42,11 +44,50 @@ export abstract class BaseService<T extends BaseEntity> {
         return firebase.database();
     }
 
-
     constructor() {
         const injector = AppInjector.getInjector();
         this.globalService = injector.get(GlobalService);
+        this.storageService = injector.get(StorageService);
     }
+
+    deleteFileByUrl(url: string, callback: (isDeleted: boolean) => void): void {
+
+        if (!url || url === '') {
+            callback(true);
+            return;
+        }
+
+        this.startLoading();
+        this.tableRef.orderByChild("Url").equalTo(url)
+            .once('value')
+            .then(snapShot => {
+
+                var image: any;
+
+                snapShot.forEach(snap => {
+                    image = snap.val();
+                });
+
+                if (!image) {
+                    this.stopLoading();
+                    callback(true);
+                    return;
+                }
+
+                this.storageService.deleteFile(image.Name, image.FolderName)
+                    .then(() => {
+                        this.stopLoading();
+                        callback(true);
+                        this.delete(image.Id);
+                    })
+                    .catch((err) => {
+                        callback(false);
+                        this.stopLoading();
+                        this.errorToast(err);
+                    });
+            })
+    }
+
 
     updateList(updates: {}, onDone: () => void): Promise<void> {
         return this.tableRef.update(updates, (err) => {
@@ -57,7 +98,6 @@ export abstract class BaseService<T extends BaseEntity> {
             }
         })
     }
-
 
     getByFieldName(fieldName: string, value: any): Promise<T[]> {
 

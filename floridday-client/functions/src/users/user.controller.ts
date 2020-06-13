@@ -1,14 +1,12 @@
 const express = require('express');
 const userRouter = express.Router();
 import * as userService from './user.service';
-import * as auth from '../helper/ authorize';
-import { Role } from '../helper/role';
 const blacklist = require('express-jwt-blacklist');
 
 // routes
 userRouter.post('/login', authenticate);
 userRouter.post('/logout', logout);
-userRouter.post('/createUser', auth.authorize(Role.Admin), createUser);
+userRouter.post('/createUser', createUser);
 // userRouter.get('/', auth.authorize(Role.Admin), getAll);
 // userRouter.get('/getUser', auth.authorize(Role.Admin), getUser);
 

@@ -42,6 +42,7 @@ export class AuthService {
       signedOutCallback(false);
 
       this.globalService.stopLoading();
+
     });
 
   }
@@ -50,24 +51,32 @@ export class AuthService {
 
     this.globalService.startLoading();
 
-    this.httpService.post(API_END_POINT.login, {
-      username: model.userName,
-      password: model.passcode
-    }, true)
-      .subscribe(result => {
+    try {
+      this.httpService.post(API_END_POINT.login, {
+        username: model.userName,
+        password: model.passcode
+      }, true)
+        .subscribe(result => {
 
-        // console.log(result);
+          console.log(result);
 
-        if (!this.globalService.firebaseIsInitialized) {
+          if (!this.globalService.firebaseIsInitialized) {
 
-          firebase.initializeApp(result.firebaseConfig);
-          this.globalService.firebaseIsInitialized = true;
+            firebase.initializeApp(result.firebaseConfig);
+            this.globalService.firebaseIsInitialized = true;
 
-        }
+          }
 
-        this.acctualLogin(model, result.IsPrinter, result.Role, loginCallback);
+          this.acctualLogin(model, result.IsPrinter, result.Role, loginCallback);
 
-      });
+        });
+    }
+    catch (exception) {
+      console.log(exception);
+      this.globalService.stopLoading();
+      return;
+    }
+
   }
 
   acctualLogin(model: LoginModel, isPrinter: boolean, role: string, loginCallback: (isSuccess: boolean) => void) {
@@ -93,6 +102,7 @@ export class AuthService {
             onlineUser.Id = userInfo.user.uid;
 
             loginCallback(true);
+
             this.globalService.stopLoading();
 
             this.onlineUserService.set(onlineUser);

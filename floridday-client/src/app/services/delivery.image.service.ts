@@ -51,7 +51,6 @@ export class DeliveryImageService extends BaseService<DeliveryImage> {
                 updateCompletedCallback('ERROR');
             }
 
-
             this.insert(res as DeliveryImage).then(re => {
                 this.stopLoading();
                 updateCompletedCallback(res.Url);
