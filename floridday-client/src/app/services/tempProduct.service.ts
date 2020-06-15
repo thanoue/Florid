@@ -13,7 +13,7 @@ export class TempProductService extends BaseService<TempProduct> {
     return '/tempProducts';
   }
 
-  constructor(private storageService: StorageService) {
+  constructor() {
     super();
   }
 

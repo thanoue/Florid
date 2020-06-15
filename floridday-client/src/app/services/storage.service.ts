@@ -39,7 +39,7 @@ export class StorageService {
         );
     }
 
-    async  push(file: ArrayBuffer | Blob | File, folderName: string, fileName): Promise<string> {
+    async push(file: ArrayBuffer | Blob | File, folderName: string, fileName): Promise<string> {
 
         if (file == null) {
             return;
@@ -73,6 +73,19 @@ export class StorageService {
 
     deleteFile(name: string, folderName: string): Promise<any> {
         return firebase.storage().ref().child(`${folderName}/${name}`).delete();
+    }
+
+    downloadFIle(url: string, callback: (file: Blob) => void) {
+
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function (event) {
+            var blob = xhr.response;
+            callback(blob);
+        };
+
+        xhr.open('GET', url);
+        xhr.send();
     }
 
     pushStringToStorage(file: string, fileUpload: BaseFile, uploadedCallback: (fileUpload: BaseFile) => void): void {

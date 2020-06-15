@@ -13,7 +13,7 @@ export class ResultImageService extends BaseService<ResultImage> {
         return '/resultImageFiles';
     }
 
-    constructor(private storageService: StorageService) {
+    constructor() {
         super();
     }
 
