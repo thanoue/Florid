@@ -11,7 +11,7 @@ export class ReceiptService extends BaseService<Receipt> {
 
   protected tableName = '/receipts';
 
-  constructor(private storageService: StorageService) {
+  constructor() {
     super();
   }
 
