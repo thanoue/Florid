@@ -13,7 +13,7 @@ export class DeliveryImageService extends BaseService<DeliveryImage> {
         return '/deliveryImageFiles';
     }
 
-    constructor(private storageService: StorageService) {
+    constructor() {
         super();
     }
 
