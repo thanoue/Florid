@@ -117,6 +117,11 @@ namespace Florid.Staff.Droid.Activity
 
         }
 
+        public virtual void ShareImage(string img)
+        {
+
+        }
+
         protected bool IsLoggedIn()
         {
             if (_firebaseAuth.CurrentUser != null)

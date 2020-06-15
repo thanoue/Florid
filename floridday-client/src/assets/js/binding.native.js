@@ -195,13 +195,7 @@ function pickFile(isSaveUrl) {
     return;
 }
 
-function shareImageCus() {
-    if (typeof Android !== "undefined" && Android !== null) {
-        Android.shareImage();
-    }
 
-    return;
-}
 
 function deleteTempImage() {
     if (typeof Android !== "undefined" && Android !== null) {
@@ -238,4 +232,38 @@ function shareOnWeb(data) {
     } catch (err) {
         console.log('Can not reach native code');
     }
+}
+
+function shareImageCus() {
+    if (typeof Android !== "undefined" && Android !== null) {
+        Android.shareImage();
+    }
+
+    return;
+}
+
+
+function shareImageCusWithData(img) {
+    if (typeof Android !== "undefined" && Android !== null) {
+        Android.shareNewImage(img);
+    } else {
+        if (navigator.share) {
+
+            navigator
+                .share({
+                    title: 'Hình ảnh giao hàng',
+                    text: 'Nhấn vào link để xem',
+                    url: img
+                })
+                .then(() => console.log('Share was successful.'))
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+        else {
+            errorToast("Trình duyệt không hỗ trợ chức năng này!!");
+        }
+    }
+
+    return;
 }

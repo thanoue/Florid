@@ -152,12 +152,41 @@ namespace Florid.Staff.Droid.Activity
             base.StartActivityForResult(intent, requestCode);
         }
 
+        public override void ShareImage(string img)
+        {
+            var clipBoard = this.GetSystemService(Context.ClipboardService).JavaCast<ClipboardManager>();
+            var clip = ClipData.NewPlainText("tel", "0974395735");
+            clipBoard.PrimaryClip = clip;
+
+            img = img.Replace("data:image/png;base64,", "").Replace("data:image/jpeg;base64,", "");
+
+            byte[] decodedString = Base64.GetDecoder().Decode(img);
+
+            using (Bitmap decodedByte = BitmapFactory.DecodeByteArray(decodedString, 0, decodedString.Length))
+            {
+                var newImg = CreateNewFilePath(".png");
+
+                using (var stream = new FileStream(newImg.AbsolutePath,FileMode.Create))
+                {
+                    decodedByte.Compress(Bitmap.CompressFormat.Png, 1, stream);
+
+                    ShareImgFile(newImg.AbsolutePath);
+                }
+
+            }
+        }
+
         public override void  ShareImage()
         {
-            Intent share = new Intent(Intent.ActionSend);
-            share.SetType(_savedFileUrl.Contains(".png") ? "image/png" : "image/jpeg");
+            ShareImgFile(_savedFileUrl);
+        }
 
-            var photoFile = new Java.IO.File(_savedFileUrl);
+        void ShareImgFile(string filePath)
+        {
+            Intent share = new Intent(Intent.ActionSend);
+            share.SetType(filePath.Contains(".png") ? "image/png" : "image/jpeg");
+
+            var photoFile = new Java.IO.File(filePath);
 
             if (Build.VERSION.SdkInt >= BuildVersionCodes.N)
             {
@@ -188,6 +217,15 @@ namespace Florid.Staff.Droid.Activity
         {
             var ext = sourceFilePath.Contains(".png") ? ".png" : ".jpeg";
 
+            var image = CreateNewFilePath(ext);
+
+            File.Copy(sourceFilePath, image.AbsolutePath);
+
+            return image.AbsolutePath;
+        }
+
+        Java.IO.File CreateNewFilePath(string ext)
+        {
             var storageDir = GetExternalFilesDir(Android.OS.Environment.DirectoryPictures);
 
             var imagePath = new Java.IO.File(storageDir, "Florid_images");
@@ -202,10 +240,7 @@ namespace Florid.Staff.Droid.Activity
             string imageFileName = (System.DateTime.Now).ToString("yyyyMMdd_HHmmss") + ext;
             var image = new Java.IO.File(imagePath, imageFileName);
 
-
-            File.Copy(sourceFilePath, image.AbsolutePath);
-
-            return image.AbsolutePath;
+            return image;
         }
 
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)

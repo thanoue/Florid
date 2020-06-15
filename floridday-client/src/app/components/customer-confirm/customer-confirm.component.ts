@@ -196,10 +196,14 @@ export class CustomerConfirmComponent extends BaseComponent {
     }
 
     if (this.IsOnTerminal) {
+
       shareImageCus();
+
     } else {
+
       if (this.edittingImageUrl)
         shareOnWeb(this.edittingImageUrl);
+
     }
   }
 }

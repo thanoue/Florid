@@ -148,6 +148,7 @@ namespace Florid.Staff.Droid.Services
             _activity.MainApp.ShowSnackbar(message, (AlertType)type);
         }
 
+      
 
         [Android.Webkit.JavascriptInterface]
         [Export("pickFile")]
@@ -200,6 +201,13 @@ namespace Florid.Staff.Droid.Services
         public void ReleaseTempImage()
         {
             _activity.ReleaseTempImage();
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("shareNewImage")]
+        public void ShareNewImage(string img)
+        {
+            _activity.ShareImage(img);
         }
 
         [Android.Webkit.JavascriptInterface]
