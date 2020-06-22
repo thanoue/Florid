@@ -21,10 +21,10 @@ namespace Florid.Droid.Lib
 
         public IReceiptPrintJobRepository ReceiptPrintJobRepo => ServiceLocator.Instance.Get<IReceiptPrintJobRepository>();
 
-        public List<Product> GlobalProducts = new List<Product>();
+        public List<Product> GlobalProducts = new List<Product>();  
 
         //public string RootWebUrl { get; set; } = "https://floridstaff.web.app";
-        public string RootWebUrl { get; set; } = "http://172.16.2.216:4200";
+        public string RootWebUrl { get; set; } = "http://192.168.1.157:4200";
     }
 }
     

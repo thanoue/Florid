@@ -41,6 +41,7 @@ namespace Florid.Staff.Droid.Activity
         public const int REQUEST_FILE_PICKER = 2;
         public const int REQUEST_FILE_PICKER_SHARE = 4;
         public const int REQUEST_INTERNET_SALE_REQUEST = 3;
+        public const int REQUEST_SHARING_NEW_IMG = 5;
         protected override int LayoutId => Resource.Layout.activity_main;
         protected override bool UseOwnLayout => true;
 
@@ -48,6 +49,7 @@ namespace Florid.Staff.Droid.Activity
         private View _mask;
         private JavascriptClient _javascriptClient;
         private string _savedFileUrl = "";
+        private string _newSharingImgPath;
 
         private INormalDBSession<FirebaseClient> _normalDbSession => ServiceLocator.Instance.Get<INormalDBSession<FirebaseClient>>();
 
@@ -146,7 +148,6 @@ namespace Florid.Staff.Droid.Activity
         {
             DroidUtility.ExecJavaScript(_mainWebView.WebView, "backNavigate()");
         }
-
         public override void StartActivityForResult(Intent intent, int requestCode)
         {
             base.StartActivityForResult(intent, requestCode);
@@ -165,6 +166,8 @@ namespace Florid.Staff.Droid.Activity
             using (Bitmap decodedByte = BitmapFactory.DecodeByteArray(decodedString, 0, decodedString.Length))
             {
                 var newImg = CreateNewFilePath(".png");
+
+                Log.Debug("URL", newImg.AbsolutePath);
 
                 using (var stream = new FileStream(newImg.AbsolutePath,FileMode.Create))
                 {
@@ -188,6 +191,8 @@ namespace Florid.Staff.Droid.Activity
 
             var photoFile = new Java.IO.File(filePath);
 
+            _newSharingImgPath = filePath;
+
             if (Build.VERSION.SdkInt >= BuildVersionCodes.N)
             {
                 Uri photoURI = FileProvider.GetUriForFile(this,
@@ -201,7 +206,7 @@ namespace Florid.Staff.Droid.Activity
 
                 share.PutExtra(Intent.ExtraStream, Uri.FromFile(photoFile));
 
-            StartActivity(Intent.CreateChooser(share, "Share Image"));
+            StartActivityForResult(Intent.CreateChooser(share, "Share Image"), REQUEST_SHARING_NEW_IMG);
         }
 
         public override void ReleaseTempImage()
@@ -246,6 +251,16 @@ namespace Florid.Staff.Droid.Activity
         protected override void OnActivityResult(int requestCode, [GeneratedEnum] Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
+
+            if(requestCode == REQUEST_SHARING_NEW_IMG)
+            {
+                if (!string.IsNullOrEmpty(_newSharingImgPath))
+                {
+                    File.Delete(_newSharingImgPath);
+                    Log.Debug("Florid", "New image is deleted");
+                }
+                return;
+            }
 
             if (resultCode != Result.Ok)
                 return;

@@ -244,8 +244,11 @@ function shareImageCus() {
 
 
 function shareImageCusWithData(img) {
+
     if (typeof Android !== "undefined" && Android !== null) {
+
         Android.shareNewImage(img);
+
     } else {
         if (navigator.share) {
 
