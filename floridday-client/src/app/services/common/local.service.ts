@@ -16,7 +16,9 @@ export class LocalService {
     }
 
     static clear() {
+        var firebaseConfig = this.getFirebaseConfig();
         localStorage.clear();
+        this.setFirebaseConfig(firebaseConfig);
     }
 
     static logout() {
@@ -95,6 +97,18 @@ export class LocalService {
         LocalService.setItem(LOCAL_STORAGE_VARIABLE.phone_number, phoneNumber);
     }
 
+    static setFirebaseConfig(config: {}) {
+        LocalService.setItem(LOCAL_STORAGE_VARIABLE.firebase_config, JSON.stringify(config));
+    }
+
+    static getFirebaseConfig(): any {
+
+        let raw = LocalService.getItem(LOCAL_STORAGE_VARIABLE.firebase_config);
+        if (raw) {
+            return JSON.parse(raw);
+        }
+        return '';
+    }
 }
 
 

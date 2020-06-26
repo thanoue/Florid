@@ -1,16 +1,19 @@
 import { BaseEntity } from './base.entity';
-import { MembershipTypes } from '../enums';
+import { MembershipTypes, Sexes, CusContactInfoTypes } from '../enums';
 import { CustomerReceiverDetail } from './order.entity';
 
 export class Customer extends BaseEntity {
     FullName: string;
     PhoneNumber: string;
-    Birthday: Date;
-    SpecialDays: Date[];
+    Birthday: number;
+    SpecialDays: number[];
     ContactInfo: CustomerContactInfo;
     Address: CustomerAddress;
     MembershipInfo: MembershipInfo;
     ReceiverInfos: CustomerReceiverDetail[];
+    Index = 0;
+    Sex: Sexes = Sexes.Male;
+    MainContactInfo: CusContactInfoTypes
 
     constructor() {
         super();
@@ -19,9 +22,9 @@ export class Customer extends BaseEntity {
         this.MembershipInfo = new MembershipInfo();
         this.FullName = '';
         this.PhoneNumber = '';
-        this.Birthday = new Date();
         this.SpecialDays = [];
         this.ReceiverInfos = [];
+        this.MainContactInfo = CusContactInfoTypes.Zalo;
     }
 }
 
@@ -36,7 +39,7 @@ export class MembershipInfo {
 export class CustomerContactInfo {
     Zalo = '';
     Viber = '';
-    Facebook = '';
+    Facebook: string    ;
     Instagram = '';
     Skype = '';
 }
