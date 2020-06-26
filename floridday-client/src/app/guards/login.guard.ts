@@ -13,7 +13,7 @@ export class LoggedInGuard implements CanActivate {
     }
     canActivate() {
 
-        if (this.globalServie.firebaseIsInitialized) {
+        if (this.globalServie.firebaseConfig) {
             const user = firebase.auth().currentUser;
             if (user) {
                 return true;

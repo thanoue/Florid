@@ -387,6 +387,10 @@ function showProductSetupPopup() {
     jQuery('#productAdd').slideDown(350);
 }
 
+function showCustomerSetupPopup() {
+    jQuery('#customerAdd').slideDown(350);
+}
+
 function addTag() {
     jQuery("#tagAddPopup").slideDown(350);
 }

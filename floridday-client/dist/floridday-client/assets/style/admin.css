@@ -403,6 +403,7 @@ span.icon-bar.bottom-bar
 }
 
 .popupContent {
+    z-index: 9999;
     position: fixed;
     width: 1200px;
     bottom: 0;
@@ -602,7 +603,16 @@ span.addTagBtn {
 .showTags {
     min-height: 50px;
     margin-top: 5px;
+    max-height: 105px;
+    overflow-y: scroll;
 }
+
+ul.tagList {
+    max-height: 124px;
+    overflow-y: scroll;
+    margin-top: 10px;
+}
+
 .showTags span {
     display: inline-block;
     border: 1px solid #aaa;
@@ -611,8 +621,14 @@ span.addTagBtn {
     margin-right: 5px;
     border-radius: 10px;
     cursor: pointer;
-    color: #666;
+    color: #666; 
+    margin-bottom: 5px;
 }
+
+.showTags span:hover {
+    font-weight: 600;
+}
+
 .showTags span:before 
 {
     content: "\f00d";
@@ -692,6 +708,7 @@ div.popupDialog {
     box-shadow: 0px 0px 20px -6px #999;
     transform: translate(-50%,-50%);
     display: none;
+    z-index: 9;
 }
 h4.confirmText {
     font-size: 20px;
@@ -703,4 +720,21 @@ h4.confirmText {
 }
 .confirmAct button{
     width: 100px;
+}
+a.openOrderProducts
+{
+    display: block;
+    width: 200px;
+}
+.overlayDiv {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1;
+}
+div.popupDialog select {
+    margin-bottom: 20px;
 }

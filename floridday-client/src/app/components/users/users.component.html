@@ -123,7 +123,7 @@
                 <label for="FullName">Họ và Tên</label>
                 <input type="text" class="form-control" required minlength="3" #FullName="ngModel"
                     [(ngModel)]="currrentEditUser.FullName" id="FullName" name="FullName" placeholder="">
-                <div *ngIf="FullName.invalid && (Password.dirty || FullName.touched)" class="alert alert-danger">
+                <div *ngIf="FullName.invalid && (FullName.dirty || FullName.touched)" class="alert alert-danger">
 
                     <div *ngIf="FullName.errors.required">
                         Bắt buộc

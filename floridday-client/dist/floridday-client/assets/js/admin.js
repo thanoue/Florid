@@ -13,16 +13,109 @@ function initLeftMenu() {
         jQuery(this).next().toggle(250);
     });
 
-    jQuery(".showConfirm").click(function () {
-        jQuery("#confirm").show(250);
+}
+
+function confirmDialog(message, yesCallback, noCallback, cancelCallback) {
+
+    var htmlConfirm = `<div class="popupDialog" id="confirmDialog">
+    <h4 class="confirmText">${message}</h4>
+    <div class="confirmAct">
+        <button class="yes btn btn-info" id="yesBtnConfirmDialog">Yes</button>
+        <button class="no btn btn-outline-info" id="noBtnConfirmDialog">No</button>
+    </div>
+        </div>`;
+
+    jQuery("body").append("<div class='overlayDiv'></div>");
+
+    jQuery("body").append(htmlConfirm);
+
+    jQuery("#confirmDialog").fadeIn(350);
+
+    jQuery('#yesBtnConfirmDialog').one('click', function () {
+
+        jQuery("#confirmDialog").hide(250, function () {
+
+            jQuery('.overlayDiv').remove();
+            jQuery(this).remove();
+
+            if (yesCallback == undefined)
+                return;
+
+            yesCallback();
+        });
+
+        jQuery('.overlayDiv').off('click');
+        jQuery('#noBtnConfirmDialog').off('click');
+    })
+
+    jQuery('#noBtnConfirmDialog').one('click', function () {
+
+        jQuery("#confirmDialog").hide(250, function () {
+
+            jQuery('.overlayDiv').remove();
+            jQuery(this).remove();
+
+            if (noCallback == undefined)
+                return;
+
+            noCallback();
+
+        });
+
+        jQuery('.overlayDiv').off('click');
+        jQuery('#yesBtnConfirmDialog').off('click');
+    })
+
+    jQuery('.overlayDiv').one("click", function () {
+
+        jQuery("#confirmDialog").hide(250, function () {
+
+            jQuery('.overlayDiv').remove();
+            jQuery(this).remove();
+
+            if (cancelCallback == undefined)
+                return;
+
+            cancelCallback();
+
+        });
+
+        jQuery('#yesBtnConfirmDialog').off('click');
+        jQuery('#noBtnConfirmDialog').off('click');
     });
 
-    jQuery(".showMessage").click(function () {
-        jQuery("#message").show(250)
-    });
+}
 
-    jQuery("button.no").click(function () {
-        jQuery(".popupDialog").hide(250);
+function messageDialog(message, okCallback) {
+
+    jQuery("body").append("<div class='overlayDiv'></div>");
+
+    var html = `<div class="popupDialog" id="messageDialog">
+    <h4 class="confirmText">${message}</h4>
+    <div class="confirmAct">
+        <button class="no btn btn-info" id="okBtnMsgDialog">OK</button>
+    </div>
+    </div>`
+
+    jQuery("body").append(html);
+
+    jQuery("#messageDialog").fadeIn(350);
+
+    jQuery('#okBtnMsgDialog').one('click', function () {
+        jQuery("#messageDialog").hide(250, function () {
+            jQuery('.overlayDiv').remove();
+            jQuery(this).remove();
+            if (okCallback == undefined)
+                return;
+            okCallback();
+        });
+    })
+
+    jQuery('.overlayDiv').one("click", function () {
+        jQuery("#messageDialog").hide(250, function () {
+            jQuery('.overlayDiv').remove();
+            jQuery(this).remove();
+        });
     });
 }
 
@@ -30,7 +123,8 @@ function initLeftMenu() {
 showAddNew = (obj) => {
     var html;
     switch (obj) {
-        case "user": html = `<div class="popupContent" id="userAdd">
+        case "user":
+            html = `<div class="popupContent" id="userAdd">
         <h4 class="userName">Thêm mới Nhân Viên</h4>
         <hr class="adminSeperate">
         <form action="">
@@ -166,7 +260,8 @@ showAddNew = (obj) => {
             </form>
             </div>
             `; break;
-        case "product": html = `<div class="popupContent" id="productAdd">
+        case "product":
+            html = `<div class="popupContent" id="productAdd">
         <h4 class="userName">Thêm mới Sản phẩm</h4>
         <hr class="adminSeperate">
         <form action="">
@@ -223,7 +318,8 @@ showAddNew = (obj) => {
         </form>
       </div>
         `; break;
-        case "tag": html = `<div class="popupContent" id="tagAdd">
+        case "tag":
+            html = `<div class="popupContent" id="tagAdd">
         <h4 class="userName">Thêm mới Tag Sản phẩm</h4>
         <hr class="adminSeperate">
         <form action="">
@@ -254,7 +350,8 @@ showAddNew = (obj) => {
         </form>
       </div>
         `; break;
-        case "cate": html = `<div class="popupContent" id="cateAdd">
+        case "cate":
+            html = `<div class="popupContent" id="cateAdd">
         <h4 class="userName">Thêm mới Danh mục Sản phẩm</h4>
         <hr class="adminSeperate">
         <form action="">
@@ -286,10 +383,21 @@ showAddNew = (obj) => {
     jQuery(".popupContent").slideDown(350);
 }
 
+function showProductSetupPopup() {
+    jQuery('#productAdd').slideDown(350);
+}
+
+function addTag() {
+    jQuery("#tagAddPopup").slideDown(350);
+}
+
+function showUserEditPopup() {
+    jQuery('#userAdd').slideDown(350);
+}
+
 
 hideAdd = () => {
     jQuery(".popupContent").slideUp(250, function () {
-        jQuery(this).remove();
     });
 
 }

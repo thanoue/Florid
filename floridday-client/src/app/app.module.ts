@@ -27,6 +27,8 @@ import { PageSegmentComponent } from './controls/page-segment/page-segment.compo
 import { ProductTagComponent } from './components/product-tag/product-tag.component';
 import { ProductCategoryComponent } from './components/product-category/product-category.component';
 import { UsersComponent } from './components/users/users.component';
+import { CustomersComponent } from './components/customers/customers.component';
+import { LocalService } from './services/common/local.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { UsersComponent } from './components/users/users.component';
     PageSegmentComponent,
     ProductTagComponent,
     ProductCategoryComponent,
-    UsersComponent
+    UsersComponent,
+    CustomersComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +78,14 @@ export class AppModule {
     AppInjector.setInjector(injector);
     registerLocaleData(es);
     registerLocaleData(vi);
+
+    let firebaseConfig = LocalService.getFirebaseConfig();
+
+    if (firebaseConfig != '') {
+      console.log('config:', firebaseConfig);
+      firebase.initializeApp(firebaseConfig);
+    }
+
   }
 
 }
