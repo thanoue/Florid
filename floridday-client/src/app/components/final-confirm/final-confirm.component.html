@@ -6,9 +6,12 @@
                 <img [src]="orderDetail.DeliveryImageUrl" alt="" class="item-detail-thumb">
                 <div class="item-detail-info">
                     <h5 class="item-code">{{orderDetail.ProductName}}</h5>
-                    <span class="prodPriceOld">222.000 vnđ</span>
-                    <span class="prodCharge">Phụ phí: 10%</span>
-                    <span class="prodPrice">200.000 vnđ</span>
+                    <span
+                        class="prodPriceOld">{{orderDetail.OriginalPrice| currency:'VND':'symbol-narrow':'':'vi-VN'}}</span>
+                    <span class="prodCharge">Phụ phí:
+                        {{orderDetail.AdditionalFee| currency:'VND':'symbol-narrow':'':'vi-VN'}}</span>
+                    <span
+                        class="prodPrice">{{orderDetail.ModifiedPrice| currency:'VND':'symbol-narrow':'':'vi-VN'}}</span>
                 </div>
             </div>
             <div class="prodInfo cusScroll">
