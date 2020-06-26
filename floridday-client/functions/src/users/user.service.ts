@@ -8,14 +8,11 @@ export async function authenticate(body: any): Promise<any> {
     return adminSdk.defauDatabase.ref('/users').orderByChild('Email').equalTo(body.username).once('value')
         .then((snapshot: any) => {
 
-            let key = '';
             let user: any;
 
             snapshot.forEach((data: any) => {
-                key = data.key;
                 user = data.val()
             });
-
 
             if (user) {
 
@@ -26,13 +23,13 @@ export async function authenticate(body: any): Promise<any> {
                 }
 
                 //const token = jwt.sign({ sub: key, role: user.Role }, adminSdk.OAuthPrivateKey);
-                const { Password, ...userWithoutPassword } = user;
+                //  const { Password, ...userWithoutPassword } = user;
                 const firebaseConfig = adminSdk.firebaseConfig;
 
                 return {
-                    ...userWithoutPassword,
+                    //  ...userWithoutPassword,
                     //  token,
-                    key,
+                    //  key,
                     firebaseConfig
                 };
             } else {

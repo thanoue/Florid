@@ -10,7 +10,9 @@ export const LOCAL_STORAGE_VARIABLE = {
     phone_number: 'phone_number',
     user_avt_url: 'user_avt_url',
     user_email: 'user_email',
-    is_printer: 'is_printer'
+    is_printer: 'is_printer',
+    firebase_config: 'firebase_config'
+
 };
 
 export const API_END_POINT = {

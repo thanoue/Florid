@@ -5,7 +5,7 @@ const cors = require('cors');
 import * as userService from '././users/user.service';
 import * as  userRouter from './users/user.controller';
 import * as saleRouter from './sale/sale.controller';
-import * as adminSdk from './helper/admin.sdk';
+// import * as adminSdk from './helper/admin.sdk';
 import * as authrorize from './helper/ authorize';
 import { Role } from './helper/role';
 import * as customerService from '././customer/customer.service';
@@ -13,23 +13,23 @@ import * as tagService from '././tag/tag.service';
 import * as productService from '././product/product.service';
 
 const express = require('express');
-const jwt = require('express-jwt');
-const blacklist = require('express-jwt-blacklist');
+// const jwt = require('express-jwt');
+// const blacklist = require('express-jwt-blacklist');
 const app = new express();
 const main = new express();
 
 app.use(cors({ origin: true }));
 
 
-app.use(jwt({ secret: adminSdk.OAuthPrivateKey, isRevoked: blacklist.isRevoked }).unless({
-    path: [
-        // public routes that don't require authentication
-        '/api/v1/users/login',
-        '/api/v1/users/logout',
-        '/api/v1/users/createUser',
-        '/api/v1/sale/momo/qr/request'
-    ]
-}));
+// app.use(jwt({ secret: adminSdk.OAuthPrivateKey, isRevoked: blacklist.isRevoked }).unless({
+//     path: [
+//         // public routes that don't require authentication
+//         '/api/v1/users/login',
+//         '/api/v1/users/logout',
+//         '/api/v1/users/createUser',
+//         '/api/v1/sale/momo/qr/request'
+//     ]
+// }));
 
 app.use('/users', userRouter);
 app.use('/sale', saleRouter);
@@ -40,7 +40,7 @@ main.use(bodyParser.json());
 // tslint:disable-next-line: deprecation
 main.use(bodyParser.urlencoded({ extended: false }));
 
-export const webApi = functions.https.onRequest(main);
+ export const webApi = functions.https.onRequest(main);
 
 async function excuteFunction(context: functions.https.CallableContext, token: string, calback: () => Promise<any>, roles: Role[] | string = []): Promise<any> {
 
