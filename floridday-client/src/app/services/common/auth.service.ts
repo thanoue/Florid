@@ -50,6 +50,14 @@ export class AuthService {
 
     this.globalService.startLoading();
 
+    if (this.globalService.firebaseConfig != '') {
+
+      this.acctualLogin(model, loginCallback);
+
+      return;
+
+    }
+
     try {
       this.httpService.post(API_END_POINT.login, {
         username: model.userName,
@@ -59,14 +67,10 @@ export class AuthService {
 
           console.log(result);
 
-          if (!this.globalService.firebaseIsInitialized) {
+          firebase.initializeApp(result.firebaseConfig);
+          this.globalService.firebaseConfig = result.firebaseConfig;
 
-            firebase.initializeApp(result.firebaseConfig);
-            this.globalService.firebaseIsInitialized = true;
-
-          }
-
-          this.acctualLogin(model, result.IsPrinter, result.Role, loginCallback);
+          this.acctualLogin(model, loginCallback);
 
         });
     }
@@ -78,7 +82,8 @@ export class AuthService {
 
   }
 
-  acctualLogin(model: LoginModel, isPrinter: boolean, role: string, loginCallback: (isSuccess: boolean) => void) {
+  acctualLogin(model: LoginModel, loginCallback: (isSuccess: boolean) => void) {
+
     firebase.auth().signInWithEmailAndPassword(model.userName, model.passcode)
       .then(async userInfo => {
 
@@ -88,23 +93,28 @@ export class AuthService {
 
           firebase.auth().currentUser.getIdToken(true).then(idToken => {
 
-            LocalService.setUserName(userInfo.user.displayName);
-            LocalService.setAccessToken(idToken);
-            LocalService.setPhoneNumber(userInfo.user.phoneNumber);
-            LocalService.setRole(role);
-            LocalService.setUserEmail(userInfo.user.email);
-            LocalService.setUserId(userInfo.user.uid);
-            LocalService.setIsPrinter(isPrinter);
-            LocalService.setUserAvtUrl(userInfo.user.photoURL)
+            this.userService.getById(userInfo.user.uid)
+              .then(user => {
 
-            const onlineUser = new OnlineUser();
-            onlineUser.Id = userInfo.user.uid;
+                LocalService.setUserName(userInfo.user.displayName);
+                LocalService.setAccessToken(idToken);
+                LocalService.setPhoneNumber(userInfo.user.phoneNumber);
+                LocalService.setRole(user.Role);
+                LocalService.setUserEmail(userInfo.user.email);
+                LocalService.setUserId(userInfo.user.uid);
+                LocalService.setIsPrinter(user.IsPrinter);
+                LocalService.setUserAvtUrl(userInfo.user.photoURL)
 
-            loginCallback(true);
+                const onlineUser = new OnlineUser();
+                onlineUser.Id = userInfo.user.uid;
 
-            this.globalService.stopLoading();
+                loginCallback(true);
 
-            this.onlineUserService.set(onlineUser);
+                this.globalService.stopLoading();
+
+                this.onlineUserService.set(onlineUser);
+
+              });
 
           }).catch(error => {
             throw new Error(error);

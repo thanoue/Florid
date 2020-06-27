@@ -1,3 +1,5 @@
+import { emit } from 'process';
+
 export enum EntityType {
     User,
     Product,
@@ -14,10 +16,17 @@ export enum Roles {
 };
 
 export enum MembershipTypes {
-    NewCustomer,
-    StandardMember,
-    VipMember,
-    VVipMember
+    NewCustomer = 'NewCustomer',
+    Member = 'Member',  
+    Vip = 'Vip',
+    VVip = 'VVip'
+}
+
+export enum CusContactInfoTypes {
+    Zalo = 'Zalo',
+    Viber = 'Viber',
+    Facebook = 'Facebook',
+    Skype = 'Skype',
 }
 
 
@@ -43,6 +52,12 @@ export enum OrderDetailStates {
     Deliveried = 'Deliveried',
     Completed = 'Completed',
     Canceled = 'Canceled'
+}
+
+export enum Sexes {
+    Male = 'Male',
+    Female = 'Female',
+    Others = 'Others'
 }
 
 export enum AlertType {

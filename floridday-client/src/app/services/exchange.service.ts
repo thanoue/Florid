@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { OrderDetailDeliveryInfo } from '../models/view.models/order.model';
 import { OrderReceiverDetail, CustomerReceiverDetail } from '../models/entities/order.entity';
 import { getTranslationDeclStmts } from '@angular/compiler/src/render3/view/template';
+import { float } from 'html2canvas/dist/types/css/property-descriptors/float';
 
 @Injectable({
     providedIn: 'root'
@@ -13,11 +14,11 @@ export class ExchangeService {
         switch (membershipTypes) {
             case MembershipTypes.NewCustomer:
                 return 0;
-            case MembershipTypes.StandardMember:
+            case MembershipTypes.Member:
                 return 5;
-            case MembershipTypes.VipMember:
+            case MembershipTypes.Vip:
                 return 10;
-            case MembershipTypes.VVipMember:
+            case MembershipTypes.VVip:
                 return 15;
         }
     }
@@ -27,7 +28,7 @@ export class ExchangeService {
     }
 
     static getGainedScore(totalAmount: number): number {
-        return Math.trunc(totalAmount / 100000);
+        return totalAmount / 100000;
     }
 
     static geExchangableAmount(gainedScore: number) {

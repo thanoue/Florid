@@ -9,6 +9,7 @@ import { OrderReceiverDetail } from 'src/app/models/entities/order.entity';
 import { District, Ward } from 'src/app/models/entities/address.entity';
 import { Product } from 'src/app/models/entities/product.entity';
 import { PageComponent } from 'src/app/models/view.models/menu.model';
+import { LocalService } from './local.service';
 
 declare function alert(message: string, alertType: number): any;
 declare function confirmDialog(message: string, okCallback: () => void, noCallback: () => void, cancelCallback: () => void): any;
@@ -30,7 +31,13 @@ export class GlobalService {
     currentDistricts: District[];
     currentWards: Ward[];
 
-    public firebaseIsInitialized = false;
+    public get firebaseConfig(): any {
+        return LocalService.getFirebaseConfig();
+    }
+
+    public set firebaseConfig(config: any) {
+        LocalService.setFirebaseConfig(config);
+    }
 
     constructor(private toastr: ToastrService, private ngZone: NgZone) {
 
