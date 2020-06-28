@@ -71,6 +71,36 @@ export class ExchangeService {
             return true;
         }
     }
+    
+
+    static getTimeFromExcel(res: any): number {
+        if (res && res != '') {
+
+            if (res.toString().indexOf('/') > -1) {
+
+                var nums = res.split('/', 3);
+
+                console.log(nums);
+                if (nums.length == 3) {
+                    let year = parseInt(nums[2]);
+                    let month = parseInt(nums[1]) - 1;
+                    let day = parseInt(nums[0]);
+
+                    let date = new Date(year, month, day, 0, 0, 0, 0);
+
+                    return date.getTime();
+
+                }
+            } else {
+
+                let dateVal = parseInt(res);
+                var date = new Date((dateVal - (25567 + 2)) * 86400 * 1000)
+                return date.getTime();
+            }
+
+        } else
+            return -1;
+    }
 
     static stringPriceToNumber(res: string): number {
         // tslint:disable-next-line: no-debugger
@@ -79,7 +109,7 @@ export class ExchangeService {
         const finalString = num.replace(/,/g, '');
         const final = parseFloat(finalString);
 
-        return final;
+        return final ? final : 0;
     }
 
     static getAlias(source: string): string {

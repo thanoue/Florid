@@ -30,6 +30,8 @@ export class OrderDetail extends BaseEntity {
     ShippingSortOrder = 0;
     IsVATIncluded = false;
 
+    PurposeOf = '';
+
     IsHardcodeProduct = false;
     HardcodeProductImageName = '';
 
