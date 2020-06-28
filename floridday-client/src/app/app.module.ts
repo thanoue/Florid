@@ -39,6 +39,8 @@ import { OrderDetailConfirmingComponent } from './components/order-detail-confir
 import { CustomerConfirmComponent } from './components/customer-confirm/customer-confirm.component';
 import { ShipperMainComponent } from './components/shipper-main/shipper-main.component';
 import { FinalConfirmComponent } from './components/final-confirm/final-confirm.component';
+import { LocalService } from './services/common/local.service';
+import * as firebase from 'firebase/app';
 
 @NgModule({
   declarations: [
@@ -101,6 +103,14 @@ export class AppModule {
     AppInjector.setInjector(injector);
     registerLocaleData(es);
     registerLocaleData(vi);
+
+    let firebaseConfig = LocalService.getFirebaseConfig();
+
+    if (firebaseConfig != '') {
+      console.log('config:', firebaseConfig);
+      firebase.initializeApp(firebaseConfig);
+    }
+
   }
 
 }

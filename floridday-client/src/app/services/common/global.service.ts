@@ -8,7 +8,6 @@ import { ToastrService } from 'ngx-toastr';
 import { OrderReceiverDetail } from 'src/app/models/entities/order.entity';
 import { District, Ward } from 'src/app/models/entities/address.entity';
 import { Product } from 'src/app/models/entities/product.entity';
-import { PageComponent } from 'src/app/models/view.models/menu.model';
 import { LocalService } from './local.service';
 
 declare function setStatusBarColor(isDark: boolean): any;

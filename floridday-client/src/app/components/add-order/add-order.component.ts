@@ -62,13 +62,13 @@ export class AddOrderComponent extends BaseComponent {
       case MembershipTypes.NewCustomer:
         this.memberShipTitle = 'New Customer';
         break;
-      case MembershipTypes.StandardMember:
-        this.memberShipTitle = 'Standard Member';
+      case MembershipTypes.Member:
+        this.memberShipTitle = 'Member';
         break;
-      case MembershipTypes.VipMember:
+      case MembershipTypes.Vip:
         this.memberShipTitle = 'VIP';
         break;
-      case MembershipTypes.VVipMember:
+      case MembershipTypes.VVip:
         this.memberShipTitle = 'VVIP';
         break;
       default:
@@ -271,7 +271,7 @@ export class AddOrderComponent extends BaseComponent {
           detail.State = OrderDetailStates.Added;
           detail.ProductModifiedPrice = detailVM.ModifiedPrice;
           detail.IsVATIncluded = orderDB.VATIncluded;
-          
+
           detail.CustomerName = this.order.CustomerInfo.Name;
           detail.CustomerPhoneNumber = this.order.CustomerInfo.PhoneNumber;
 
