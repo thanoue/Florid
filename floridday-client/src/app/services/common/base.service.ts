@@ -138,13 +138,16 @@ export abstract class BaseService<T extends BaseEntity> {
 
     }
 
-    public  set(model: T): Promise<T> {
+    public set(model: T): Promise<T> {
 
         if (!model.Id || model.Id == '') {
             model.Id = Guid.create().toString();
         }
 
+        this.startLoading();
+
         return this.db.ref(`${this.tableName}/${model.Id}`).set(model).then(res => {
+            this.stopLoading();
             return model;
         })
             .catch(err => {

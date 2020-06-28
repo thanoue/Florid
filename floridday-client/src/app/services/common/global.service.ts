@@ -10,6 +10,7 @@ import { District, Ward } from 'src/app/models/entities/address.entity';
 import { Product } from 'src/app/models/entities/product.entity';
 import { PageComponent } from 'src/app/models/view.models/menu.model';
 import { LocalService } from './local.service';
+import { Customer } from 'src/app/models/entities/customer.entity';
 
 declare function alert(message: string, alertType: number): any;
 declare function confirmDialog(message: string, okCallback: () => void, noCallback: () => void, cancelCallback: () => void): any;
@@ -30,6 +31,7 @@ export class GlobalService {
 
     currentDistricts: District[];
     currentWards: Ward[];
+    globalCustomer: Customer;
 
     public get firebaseConfig(): any {
         return LocalService.getFirebaseConfig();
