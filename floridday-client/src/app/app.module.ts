@@ -29,6 +29,10 @@ import { ProductCategoryComponent } from './components/product-category/product-
 import { UsersComponent } from './components/users/users.component';
 import { CustomersComponent } from './components/customers/customers.component';
 import { LocalService } from './services/common/local.service';
+import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
+import { CustomerOrdersComponent } from './components/customer-orders/customer-orders.component';
+import { CustomerReceiversComponent } from './components/customer-receivers/customer-receivers.component';
+import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { LocalService } from './services/common/local.service';
     ProductTagComponent,
     ProductCategoryComponent,
     UsersComponent,
-    CustomersComponent
+    CustomersComponent,
+    CustomerDetailComponent,
+    CustomerOrdersComponent,
+    CustomerReceiversComponent,
+    CustomerEditComponent
   ],
   imports: [
     BrowserModule,

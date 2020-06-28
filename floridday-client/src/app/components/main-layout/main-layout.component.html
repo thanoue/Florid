@@ -8,30 +8,31 @@
                 <a routerLink="" class="menuItem-link"><i class="fa fa-dashboard"></i>Trang chủ</a>
             </li>
             <li [ngClass]="(currentMenu !== menus.User)?'menuItem':'menuItem active'">
-                <a routerLink="/users" class="menuItem-link"><i class="fa fa-user"></i>Nhân Viên</a>
+                <a routerLink="/users" class="menuItem-link"><i class="fa fa-user-circle-o"></i>Nhân Viên</a>
             </li>
             <li [ngClass]="(currentMenu !== menus.Customer)?'menuItem':'menuItem active'">
-                <a routerLink="/customers" class="menuItem-link"><i class="fa fa-user"></i>Khách Hàng</a>
+                <a routerLink="/customers" class="menuItem-link"><i class="fa fa-users"></i>Khách Hàng</a>
             </li>
             <li class="menuItem hasChildren">
-                <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Sản Phẩm</a>
+                <a href="#" class="menuItem-link"><i class="fa fa-tasks"></i>Sản Phẩm</a>
                 <ul class="subMenu">
                     <li [ngClass]="(currentMenu !== menus.Product)?'menuItem':'menuItem active'">
-                        <a routerLink="/products" class="menuItem-link">Danh sách</a>
+                        <a routerLink="/products" class="menuItem-link"><i class="fa fa-list"> </i>Danh sách</a>
                     </li>
                     <li [ngClass]="(currentMenu !== menus.ProductCategory)?'menuItem':'menuItem active'">
-                        <a routerLink="/product-categories" class="menuItem-link">Danh mục Sản phẩm</a>
+                        <a routerLink="/product-categories" class="menuItem-link"><i class="fa fa-th-large"> </i>Danh
+                            mục Sản phẩm</a>
                     </li>
                     <li [ngClass]="(currentMenu !== menus.ProductTag)?'menuItem':'menuItem active'">
-                        <a routerLink="/product-tags" class="menuItem-link">Tag Sản phẩm</a>
+                        <a routerLink="/product-tags" class="menuItem-link"><i class="fa fa-tags"> </i>Tag Sản phẩm</a>
                     </li>
                 </ul>
             </li>
             <li [ngClass]="(currentMenu !== menus.Order)?'menuItem':'menuItem active'">
-                <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Đơn Hàng</a>
+                <a href="#" class="menuItem-link"><i class="fa fa-file-text"></i>Đơn Hàng</a>
             </li>
             <li [ngClass]="(currentMenu !== menus.Summary)?'menuItem':'menuItem active'">
-                <a href="#" class="menuItem-link"><i class="fa fa-user"></i>Thống Kê</a>
+                <a href="#" class="menuItem-link"><i class="fa fa-line-chart"></i>Thống Kê</a>
             </li>
         </ul>
     </nav>

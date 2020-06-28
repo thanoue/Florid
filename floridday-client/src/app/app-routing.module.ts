@@ -10,6 +10,11 @@ import { ProductTagComponent } from './components/product-tag/product-tag.compon
 import { ProductCategoryComponent } from './components/product-category/product-category.component';
 import { UsersComponent } from './components/users/users.component';
 import { CustomersComponent } from './components/customers/customers.component';
+import { CustomerDetailComponent } from './components/customer-detail/customer-detail.component';
+import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
+import { CustomerReceiverDetail } from './models/entities/order.entity';
+import { CustomerOrdersComponent } from './components/customer-orders/customer-orders.component';
+import { CustomerReceiversComponent } from './components/customer-receivers/customer-receivers.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -41,6 +46,22 @@ const routes: Routes = [
       {
         path: 'customers',
         component: CustomersComponent,
+      },
+      {
+        path: 'customer-detail',
+        component: CustomerDetailComponent,
+      },
+      {
+        path: 'customer-orders',
+        component: CustomerOrdersComponent,
+      },
+      {
+        path: 'customer-edit',
+        component: CustomerEditComponent,
+      },
+      {
+        path: 'customer-receivers',
+        component: CustomerReceiversComponent,
       }
     ]
   },

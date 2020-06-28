@@ -47,6 +47,7 @@
                     <th scope="col" style="width: 5%">STT</th>
                     <th scope="col">Họ và Tên</th>
                     <th scope="col">Số điện thoại</th>
+                    <th scope="col">Sinh nhật</th>
                     <th scope="col">Xưng danh</th>
                     <th scope="col">Giá trị mua hàng</th>
                     <th scope="col">Hạng thẻ</th>
@@ -65,12 +66,14 @@
                         </div>
                     </td>
                     <td>
-                        <a href="./customerDetail.html" class="tdName">{{customer.Customer.FullName}}</a>
+                        <a (click)="viewCusDetail(customer.Customer)" class="tdName">{{customer.Customer.FullName}}</a>
                     </td>
                     <td>{{customer.Customer.PhoneNumber}}</td>
-                    <td *ngIf="customer.Customer.Sex ==sexes.Male">Anh</td>
-                    <td *ngIf="customer.Customer.Sex ==sexes.Female">Chị</td>
-                    <td *ngIf="customer.Customer.Sex ==sexes.Others">Khác</td>
+                    <td *ngIf="customer.Customer.Birthday">{{customer.Customer.Birthday |  date: 'dd/MM'}}</td>
+                    <td *ngIf="!customer.Customer.Birthday">--</td>
+                    <td *ngIf="customer.Customer.Sex == sexes.Male">Anh</td>
+                    <td *ngIf="customer.Customer.Sex == sexes.Female">Chị</td>
+                    <td *ngIf="customer.Customer.Sex == sexes.Others">Khác</td>
                     <td>{{customer.Customer.MembershipInfo.AccumulatedAmount | currency:'VND':'symbol-narrow':'':'vi-VN' }}
                     </td>
                     <td>
@@ -78,10 +81,11 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            <a href="./customerDetail.html" type="button" class="btn btn-outline-secondary"><i
-                                    class="fa fa-eye"></i> Chi tiết</a>
+                            <a type="button" (click)="viewCusDetail(customer.Customer)"
+                                class="btn btn-outline-secondary"><i class="fa fa-eye"></i> Chi tiết</a>
                             <!-- <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button> -->
-                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i>
+                            <button type="button" (click)="deleteCustomer(customer.Customer)"
+                                class="btn btn-outline-danger"><i class="fa fa-remove"></i>
                                 Xóa</button>
                         </div>
                     </td>
@@ -142,15 +146,21 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="Skype">Skype</label>
                 <input type="text" class="form-control" [(ngModel)]="currentCustomer.ContactInfo.Skype" id="Skype"
                     name="Skype" placeholder="nguyenvana">
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="Viber">Viber</label>
                 <input type="text" class="form-control" [(ngModel)]="currentCustomer.ContactInfo.Viber" id="Viber"
                     name="Viber" placeholder="092836233">
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="Viber">Instagram</label>
+                <input type="text" class="form-control" [(ngModel)]="currentCustomer.ContactInfo.Instagram"
+                    id="Instagram" name="Instagram" placeholder="092836233">
             </div>
         </div>
         <div class="form-row">
@@ -160,9 +170,10 @@
                     id="MainContactInfo">
                     <option selected>Chọn...</option>
                     <option [ngValue]="'Zalo'">Zalo</option>
-                    <option [ngValue]="'Viber'">Viber</option>
                     <option [ngValue]="'Facebook'">Facebook</option>
+                    <option [ngValue]="'Viber'">Viber</option>
                     <option [ngValue]="'Skype'">Skype</option>
+                    <option [ngValue]="'Instagram'">Instagram</option>
                 </select>
             </div>
             <div class="form-group col-md-4">
@@ -171,6 +182,7 @@
                     <option selected>Chọn...</option>
                     <option [ngValue]="'Male'">Anh</option>
                     <option [ngValue]="'Female'">Chị</option>
+                    <option [ngValue]="'Others'">Khác</option>
                 </select>
             </div>
             <div class="form-group col-md-4">

@@ -15,6 +15,7 @@ import { DistrictAddressService } from '../services/address/district-address.ser
 import { WardAddressService } from '../services/address/ward-address.service';
 import { District, Ward } from '../models/entities/address.entity';
 import { PageComponent } from '../models/view.models/menu.model';
+import { Customer } from '../models/entities/customer.entity';
 
 declare function addressRequest(districts: District[], resCallback: (res: string) => void, onDistrictChange: (res: string, newWardCallback: (wards: Ward[]) => void) => void): any;
 
@@ -28,6 +29,14 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
     private ngZone: NgZone;
     private districtService: DistrictAddressService;
     private wardService: WardAddressService;
+
+    get globalCustomer(): Customer {
+        return this.globalService.globalCustomer;
+    }
+
+    set globalCustomer(val: Customer) {
+        this.globalService.globalCustomer = val;
+    }
 
     get globalDistricts(): District[] {
         return this.globalService.currentDistricts;
@@ -63,7 +72,7 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
         setTimeout(() => {
             this.globalService.updateHeader.next(this.PageCompnent);
             this.Init();
-        },200);
+        }, 200);
 
     }
 

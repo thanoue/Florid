@@ -9,9 +9,6 @@ function initLeftMenu() {
         jQuery(".adminWrapper").toggleClass("mini");
     });
 
-    jQuery(".openOrderProducts").click(function () {
-        jQuery(this).next().toggle(250);
-    });
 
 }
 
@@ -117,6 +114,14 @@ function messageDialog(message, okCallback) {
             jQuery(this).remove();
         });
     });
+}
+
+function cusOrdersBinding() {
+
+    jQuery(".openOrderProducts").click(function () {
+        jQuery(this).next().toggle(250);
+    });
+
 }
 
 //Add New Object
@@ -381,6 +386,10 @@ showAddNew = (obj) => {
     }
     jQuery(".adminWrapper").append(html);
     jQuery(".popupContent").slideDown(350);
+}
+
+function showReceiverSetupPopup() {
+    jQuery('#receiverAdd').slideDown(350);
 }
 
 function showProductSetupPopup() {

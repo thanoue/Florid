@@ -6,6 +6,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { Customer } from 'src/app/models/entities/customer.entity';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -15,7 +16,7 @@ import { NgForm } from '@angular/forms';
 export class CustomersComponent extends BaseComponent {
 
 
-  protected PageCompnent: PageComponent = new PageComponent('Tag Sản Phẩm', MenuItems.ProductTag);
+  protected PageCompnent: PageComponent = new PageComponent('Khách hàng', MenuItems.Customer);
 
   isSelectAll: boolean = false;
   currentPage = 1;
@@ -47,11 +48,15 @@ export class CustomersComponent extends BaseComponent {
     this.pageChanged(1);
   }
 
-  constructor(private customerService: CustomerService) {
+  constructor(private customerService: CustomerService, private router: Router) {
     super();
     this.currentCustomer = new Customer();
   }
 
+  viewCusDetail(cus: Customer) {
+    this.globalCustomer = cus;
+    this.router.navigate(['customer-detail']);
+  }
 
   addCustomer(form: NgForm) {
 
@@ -117,11 +122,16 @@ export class CustomersComponent extends BaseComponent {
     this.currentPage = page;
     this.customerService.getByPage(page, this._itemsPerPage).then(customers => {
       this.customers = [];
+
       customers.forEach(customer => {
+
+        let cus: any = {};
+
         this.customers.push({
           Customer: customer,
           IsChecked: false
         });
+
       })
     });
   }
@@ -141,7 +151,7 @@ export class CustomersComponent extends BaseComponent {
       return;
     }
 
-    this.openConfirm('Chắc chắn xoá các tag sản phẩm?', () => {
+    this.openConfirm('Chắc chắn xoá những khách hàng này ?', () => {
 
       this.startLoading();
 
@@ -180,6 +190,7 @@ export class CustomersComponent extends BaseComponent {
           }
 
           this.pageChanged(1);
+
         })
           .catch(error => {
             this.stopLoading();
@@ -190,15 +201,15 @@ export class CustomersComponent extends BaseComponent {
     });
   }
 
-  deleteTag(tag: Customer) {
+  deleteCustomer(customer: Customer) {
 
-    this.openConfirm('Chắc chắn xoá tag sản phẩm?', () => {
+    this.openConfirm('Chắc chắn xoá khách hàng?', () => {
 
       this.startLoading();
 
-      this.customerService.delete(tag.Id).then(() => {
+      this.customerService.delete(customer.Id).then(() => {
 
-        this.customerService.updateIndex(tag.Index).then(res => {
+        this.customerService.updateIndex(customer.Index).then(res => {
           this.stopLoading();
 
           this.itemTotalCount -= 1;

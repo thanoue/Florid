@@ -652,6 +652,10 @@ ul.tagList {
     display: none;
 }
 
+.left-margin-10{
+    margin-left: 10px;
+}
+
 .orderDetail .productItem:not(:last-child) {
     margin-bottom: 10px;
     padding-bottom: 10px;
