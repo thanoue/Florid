@@ -10,6 +10,7 @@ import { District, Ward } from 'src/app/models/entities/address.entity';
 import { Product } from 'src/app/models/entities/product.entity';
 import { PageComponent } from 'src/app/models/view.models/menu.model';
 import { LocalService } from './local.service';
+import { Customer } from 'src/app/models/entities/customer.entity';
 
 declare function setStatusBarColor(isDark: boolean): any;
 declare function isOnTerminal(): any;
@@ -36,6 +37,7 @@ export class GlobalService {
     currentOrderDetailViewModel: OrderDetailViewModel;
     currentDistricts: District[];
     currentWards: Ward[];
+    globalCustomer: Customer;
 
     public get firebaseConfig(): any {
         return LocalService.getFirebaseConfig();

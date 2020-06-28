@@ -6,11 +6,13 @@ import { CustomerReceiverDetail, OrderDetail, Order, ODFloristInfo, ODShipperInf
 import { sha1 } from '@angular/compiler/src/i18n/digest';
 
 export class OrderViewModel {
+    
     OrderId: string;
     TotalAmount: number;
     TotalPaidAmount: number;
     CreatedDate: Date;
     VATIncluded = false;
+
     CustomerInfo: OrderCustomerInfoViewModel;
 
     OrderDetails: OrderDetailViewModel[];
@@ -19,6 +21,7 @@ export class OrderViewModel {
     static ToViewModel(entity: Order, customer: Customer): OrderViewModel {
 
         const vm = new OrderViewModel();
+
         vm.OrderId = entity.Id;
         vm.TotalAmount = entity.TotalAmount;
         vm.TotalPaidAmount = entity.TotalPaidAmount;
@@ -58,6 +61,7 @@ export class OrderDetailViewModel {
     Quantity = 1;
     Index = 0;
     DeliveryInfo: OrderDetailDeliveryInfo;
+    PurposeOf = '';
 
     OriginalPrice = 0;
     ModifiedPrice = 0;
@@ -112,6 +116,8 @@ export class OrderDetailViewModel {
 
         vm.IsFromHardCodeProduct = entity.IsHardcodeProduct;
         vm.HardcodeImageName = entity.HardcodeProductImageName;
+
+        vm.PurposeOf = entity.PurposeOf;
 
         vm.DeliveryInfo.DateTime = new Date(entity.DeliveryInfo.ReceivingTime);
         vm.DeliveryInfo.Address = entity.DeliveryInfo.ReceiverDetail.Address;
@@ -171,6 +177,7 @@ export class OrderDetailViewModel {
         viewModel.IsFromHardCodeProduct = model.IsFromHardCodeProduct;
         viewModel.ShippingSortOrder = model.ShippingSortOrder;
         viewModel.MakingSortOrder = model.MakingSortOrder;
+        viewModel.PurposeOf = model.PurposeOf;
 
         if (model.SeenUsers && model.SeenUsers.length > 0) {
             model.SeenUsers.forEach(user => {

@@ -6,15 +6,16 @@ export class Customer extends BaseEntity {
     FullName: string;
     PhoneNumber: string;
     Birthday: number;
-    SpecialDays: number[];
+    SpecialDays: SpecialDay[];
     ContactInfo: CustomerContactInfo;
     Address: CustomerAddress;
     MembershipInfo: MembershipInfo;
     ReceiverInfos: CustomerReceiverDetail[];
     Index = 0;
     Sex: Sexes = Sexes.Male;
-    MainContactInfo: CusContactInfoTypes
+    MainContactInfo: CusContactInfoTypes;
 
+   
     constructor() {
         super();
         this.ContactInfo = new CustomerContactInfo();
@@ -28,6 +29,11 @@ export class Customer extends BaseEntity {
     }
 }
 
+export class SpecialDay {
+    Date: number;
+    Description: string;
+}
+
 export class MembershipInfo {
     UsedScoreTotal = 0;
     AvailableScore = 0;
@@ -39,7 +45,7 @@ export class MembershipInfo {
 export class CustomerContactInfo {
     Zalo = '';
     Viber = '';
-    Facebook: string    ;
+    Facebook: string;
     Instagram = '';
     Skype = '';
 }
