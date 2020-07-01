@@ -166,7 +166,8 @@ export class ProductTagComponent extends BaseComponent {
       })
 
       this.tagService.deleteMany(ids).then(() => {
-        FunctionsService.excuteFunction("updateTagIndex", smallestTagIndex).then(res => {
+
+        this.tagService.updateIndex(smallestTagIndex).then(res => {
           this.stopLoading();
 
           this.itemTotalCount -= seletedTags.length;
@@ -204,7 +205,7 @@ export class ProductTagComponent extends BaseComponent {
 
       this.tagService.delete(tag.Id).then(() => {
 
-        FunctionsService.excuteFunction("updateTagIndex", tag.Index).then(res => {
+        this.tagService.updateIndex(tag.Index).then(res => {
           this.stopLoading();
 
           this.itemTotalCount -= 1;

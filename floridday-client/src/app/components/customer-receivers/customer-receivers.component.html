@@ -11,11 +11,22 @@
                                 <th>Tên người nhận</th>
                                 <th>Địa chỉ nhận hàng</th>
                                 <th>Điện thoại</th>
+                                <th scope="col">Thao tác</th>
                             </tr>
-                            <tr *ngFor="let receiver of receivers">
+                            <tr *ngFor="let receiver of receivers; let i = index">
                                 <td>{{receiver.FullName}}</td>
                                 <td>{{receiver.Address}}</td>
                                 <td>{{receiver.PhoneNumber}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a type="button" (click)="editReceiver(i)" class="btn btn-outline-secondary"><i
+                                                class="fa fa-pencil"></i>Sửa</a>
+                                        <!-- <button type="button" class="btn btn-outline-info"><i class="fa fa-pencil"></i> Sửa</button> -->
+                                        <button type="button" (click)="removeReceiver(i)"
+                                            class="btn btn-outline-danger"><i class="fa fa-remove"></i>
+                                            Xóa</button>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -103,7 +114,7 @@
         <div class="form-action row">
             <div class="col-md-3">
                 <div class="btn-group w-100">
-                    <button type="submit" class="btn btn-outline-success w-100">Thêm Mới</button>
+                    <button type="submit" class="btn btn-outline-success w-100">Lưu</button>
                     <a href="javascript:void(0)" class="btn btn-outline-secondary" onclick="hideAdd()">Hủy</a>
                 </div>
             </div>

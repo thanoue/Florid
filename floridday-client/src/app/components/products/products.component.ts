@@ -274,10 +274,7 @@ export class ProductsComponent extends BaseComponent {
 
                 this.edittingProduct.Index = newCate ? product.Index : product.Index + 1;
 
-                FunctionsService.excuteFunction('updateProductIndex', {
-                  startIndex: newCate ? product.Index : product.Index + 1,
-                  delta: 1
-                }).then(() => {
+                this.productService.updateIndex(newCate ? product.Index : product.Index + 1, 1).then(() => {
                   this.productService.set(this.edittingProduct).then(res => {
                     this.stopLoading();
                     this.globalService.hidePopup();
@@ -311,10 +308,7 @@ export class ProductsComponent extends BaseComponent {
       this.productService.delete(id)
         .then(() => {
 
-          FunctionsService.excuteFunction('updateProductCategoryIndex', {
-            startIndex: product.CategoryIndex + 1,
-            delta: -1
-          }).then(() => {
+          this.productService.updateCategoryIndex(product.CategoryIndex + 1, -1).then(() => {
 
             this.productImageService.deleteFileFromUrl(product.ImageUrl)
               .then(res => {
@@ -543,10 +537,7 @@ export class ProductsComponent extends BaseComponent {
             cateIndexes.push(cateIndex.CategoryIndex);
           })
 
-          FunctionsService.excuteFunction('updateProductIndexMultiple', {
-            smallestIndex: smallestIndex,
-            smallestCateIndexes: cateIndexes
-          })
+          this.productService.updateProductIndexMultiple(smallestIndex, cateIndexes)
             .then(() => {
               this.stopLoading();
               this.categoryChange();
