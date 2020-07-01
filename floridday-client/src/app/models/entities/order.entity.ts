@@ -10,6 +10,8 @@ export class Order extends BaseEntity {
 
     GainedScore = 0;
     ScoreUsed = 0;
+
+    Index: number;
 }
 
 export class OrderDetail extends BaseEntity {
