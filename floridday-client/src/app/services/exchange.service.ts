@@ -71,7 +71,7 @@ export class ExchangeService {
             return true;
         }
     }
-    
+
 
     static getTimeFromExcel(res: any): number {
         if (res && res != '') {
@@ -99,7 +99,7 @@ export class ExchangeService {
             }
 
         } else
-            return -1;
+            return 0;
     }
 
     static stringPriceToNumber(res: string): number {

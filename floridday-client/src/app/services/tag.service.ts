@@ -15,6 +15,44 @@ export class TagService extends BaseService<Tag> {
     super();
   }
 
+  updateIndex(deletedIndex: number): Promise<any> {
+
+    return this.tableRef.orderByChild('Index')
+      .startAt(deletedIndex + 1).once('value')
+      .then((snapshot: any) => {
+
+        try {
+          const tags: any[] = [];
+
+          snapshot.forEach((snap: any) => {
+            const tag = snap.val();
+            if (tag.Index > deletedIndex) {
+              tags.push(tag);
+            }
+          });
+
+          interface IDictionary {
+            [index: string]: number;
+          }
+
+          var updates = {} as IDictionary;
+
+          tags.forEach((tag: any) => {
+
+            updates[`/${tag.Id}/Index`] = deletedIndex;
+            deletedIndex += 1;
+
+          });
+
+          return this.tableRef.update(updates);
+        }
+        catch (error) {
+          throw error;
+        }
+
+      });
+  }
+
   getByPage(page: number, itemsPerPage: number): Promise<Tag[]> {
 
     this.startLoading();
