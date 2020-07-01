@@ -8,10 +8,6 @@ import * as saleRouter from './sale/sale.controller';
 // import * as adminSdk from './helper/admin.sdk';
 import * as authrorize from './helper/ authorize';
 import { Role } from './helper/role';
-import * as customerService from '././customer/customer.service';
-import * as tagService from '././tag/tag.service';
-import * as productService from '././product/product.service';
-
 const express = require('express');
 // const jwt = require('express-jwt');
 // const blacklist = require('express-jwt-blacklist');
@@ -40,7 +36,7 @@ main.use(bodyParser.json());
 // tslint:disable-next-line: deprecation
 main.use(bodyParser.urlencoded({ extended: false }));
 
- export const webApi = functions.https.onRequest(main);
+export const webApi = functions.https.onRequest(main);
 
 async function excuteFunction(context: functions.https.CallableContext, token: string, calback: () => Promise<any>, roles: Role[] | string = []): Promise<any> {
 
@@ -82,66 +78,6 @@ exports.getUsers = functions.https.onCall(async (params, context) => {
     }, Role.Admin);
 });
 
-exports.searchCustomer = functions.https.onCall(async (params, context) => {
-
-    return await excuteFunction(context, params.token, async () => {
-
-        const customers = await customerService.searchCustomer(params.data);
-        return customers;
-
-    }, [Role.Account, Role.Admin, Role.None]);
-});
-
-exports.searchProduct = functions.https.onCall(async (params, context) => {
-
-    return await excuteFunction(context, params.token, async () => {
-
-        const customers = await productService.searchProduct(params.data);
-        return customers;
-
-    }, [Role.Account, Role.Admin, Role.None]);
-
-});
-
-exports.updateTagIndex = functions.https.onCall(async (params, context) => {
-    return await excuteFunction(context, params.token, async () => {
-
-        const updateIndex = await tagService.updateIndex(params.data);
-        return updateIndex;
-
-    }, [Role.Account, Role.Admin, Role.None]);
-});
-
-exports.updateProductIndex = functions.https.onCall(async (params, context) => {
-    return await excuteFunction(context, params.token, async () => {
-
-        const updateIndex = await productService.updateIndex(params.data.startIndex, params.data.delta);
-        return updateIndex;
-
-    }, [Role.Account, Role.Admin, Role.None]);
-});
-
-exports.updateProductCategoryIndex = functions.https.onCall(async (params, context) => {
-    return await excuteFunction(context, params.token, async () => {
-
-        const firstIndex = await productService.updateCategoryIndex(params.data.startIndex, params.data.delta);
-        if (firstIndex > 0)
-            return await productService.updateIndex(firstIndex, params.data.delta);
-
-    }, [Role.Account, Role.Admin, Role.None]);
-});
-
-
-exports.updateProductIndexMultiple = functions.https.onCall(async (params, context) => {
-    return await excuteFunction(context, params.token, async () => {
-
-        const firstIndex = await productService.updateProductIndexMultiple(params.data.smallestIndex, params.data.smallestCateIndexes);
-        if (firstIndex > 0)
-            return await productService.updateIndex(firstIndex, params.data.delta);
-
-    }, [Role.Account, Role.Admin, Role.None]);
-});
-
 exports.createUser = functions.https.onCall(async (params, context) => {
 
     return await excuteFunction(context, params.token, async () => {
@@ -161,3 +97,63 @@ exports.editUser = functions.https.onCall(async (params, context) => {
     }, [Role.Admin]);
 
 });
+// exports.searchCustomer = functions.https.onCall(async (params, context) => {
+
+//     return await excuteFunction(context, params.token, async () => {
+
+//         const customers = await customerService.searchCustomer(params.data);
+//         return customers;
+
+//     }, [Role.Account, Role.Admin, Role.None]);
+// });
+
+// exports.searchProduct = functions.https.onCall(async (params, context) => {
+
+//     return await excuteFunction(context, params.token, async () => {
+
+//         const customers = await productService.searchProduct(params.data);
+//         return customers;
+
+//     }, [Role.Account, Role.Admin, Role.None]);
+
+// });
+
+// exports.updateTagIndex = functions.https.onCall(async (params, context) => {
+//     return await excuteFunction(context, params.token, async () => {
+
+//         const updateIndex = await tagService.updateIndex(params.data);
+//         return updateIndex;
+
+//     }, [Role.Account, Role.Admin, Role.None]);
+// });
+
+// exports.updateProductIndex = functions.https.onCall(async (params, context) => {
+//     return await excuteFunction(context, params.token, async () => {
+
+//         const updateIndex = await productService.updateIndex(params.data.startIndex, params.data.delta);
+//         return updateIndex;
+
+//     }, [Role.Account, Role.Admin, Role.None]);
+// });
+
+// exports.updateProductCategoryIndex = functions.https.onCall(async (params, context) => {
+//     return await excuteFunction(context, params.token, async () => {
+
+//         const firstIndex = await productService.updateCategoryIndex(params.data.startIndex, params.data.delta);
+//         if (firstIndex > 0)
+//             return await productService.updateIndex(firstIndex, params.data.delta);
+
+//     }, [Role.Account, Role.Admin, Role.None]);
+// });
+
+
+// exports.updateProductIndexMultiple = functions.https.onCall(async (params, context) => {
+//     return await excuteFunction(context, params.token, async () => {
+
+//         const firstIndex = await productService.updateProductIndexMultiple(params.data.smallestIndex, params.data.smallestCateIndexes);
+//         if (firstIndex > 0)
+//             return await productService.updateIndex(firstIndex, params.data.delta);
+
+//     }, [Role.Account, Role.Admin, Role.None]);
+// });
+

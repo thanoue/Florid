@@ -168,6 +168,22 @@ export abstract class BaseService<T extends BaseEntity> {
         return this.update(model);
     }
 
+
+    async setListSeperate(data: T[]): Promise<any> {
+
+        const list = [];
+
+        for (const item of data) {
+
+            this.set(item).catch(error => {
+                throw error;
+            });
+
+        }
+
+        return list;
+    }
+
     async setList(data: T[]): Promise<any> {
 
         const list = [];

@@ -76,6 +76,42 @@ export class CustomerService extends BaseService<Customer> {
       });
   }
 
+  searchCustomer(term: string): Promise<any> {
+    return this.tableRef
+      .orderByChild('FullName')
+      .startAt(term)
+      .endAt(term + '\uf8ff')
+      .once('value')
+      .then((res: any) => {
+
+        const customers: any[] = [];
+
+        res.forEach((snapShot: any) => {
+          customers.push(snapShot.val());
+        });
+
+        if (customers.length > 0) {
+          return customers;
+        } else {
+          return this.tableRef
+            .orderByChild('PhoneNumber')
+            .startAt(term)
+            .endAt(term + '\uf8ff')
+            .once('value')
+            .then((phoneRes: any) => {
+
+              const _customers: any[] = [];
+
+              phoneRes.forEach((snapShot: any) => {
+                _customers.push(snapShot.val());
+              });
+
+              return _customers
+            })
+        }
+      });
+  }
+
   updateIndex(deletedIndex: number): Promise<any> {
 
     return this.tableRef.orderByChild('Index')
