@@ -6,12 +6,13 @@ import { CustomerReceiverDetail, OrderDetail, Order, ODFloristInfo, ODShipperInf
 import { sha1 } from '@angular/compiler/src/i18n/digest';
 
 export class OrderViewModel {
-    
+
     OrderId: string;
     TotalAmount: number;
     TotalPaidAmount: number;
     CreatedDate: Date;
     VATIncluded = false;
+    Index: number;
 
     CustomerInfo: OrderCustomerInfoViewModel;
 
@@ -27,6 +28,7 @@ export class OrderViewModel {
         vm.TotalPaidAmount = entity.TotalPaidAmount;
         vm.VATIncluded = entity.VATIncluded;
         vm.CreatedDate = new Date(entity.Created);
+        vm.Index = entity.Index;
 
         vm.CustomerInfo.ScoreUsed = entity.ScoreUsed;
         vm.CustomerInfo.GainedScore = entity.GainedScore;
@@ -55,6 +57,7 @@ export class OrderDetailViewModel {
     ProductName = '';
     OrderDetailId = '';
     OrderId = '';
+    OrderIndex = 0;
     State = OrderDetailStates.Waiting;
     ProductId = '';
     ProductImageUrl = '';
