@@ -396,7 +396,7 @@ export class SearchProductComponent extends BaseComponent {
 
     this.startLoading();
 
-    FunctionsService.excuteFunction('searchProduct', term)
+    this.productService.searchProduct(term)
       .then(products => {
 
         this.stopLoading();

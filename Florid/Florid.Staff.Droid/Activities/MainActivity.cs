@@ -153,10 +153,10 @@ namespace Florid.Staff.Droid.Activity
             base.StartActivityForResult(intent, requestCode);
         }
 
-        public override void ShareImage(string img)
+        public override void ShareImage(string img,string contactInfo)
         {
             var clipBoard = this.GetSystemService(Context.ClipboardService).JavaCast<ClipboardManager>();
-            var clip = ClipData.NewPlainText("tel", "0974395735");
+            var clip = ClipData.NewPlainText("tel", contactInfo);
             clipBoard.PrimaryClip = clip;
 
             img = img.Replace("data:image/png;base64,", "").Replace("data:image/jpeg;base64,", "");

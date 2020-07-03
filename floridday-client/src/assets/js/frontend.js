@@ -389,8 +389,8 @@ function openExcForm(callback) {
 
         let val = input.val();
 
-        if (!val || parseInt(val) === 0) {
-            warningToast('Yêu cầu nhập số lớn hơn 0');
+        if (!val || parseInt(val) < 0) {
+            warningToast('Yêu cầu nhập số dương');
             return;
         }
 

@@ -150,7 +150,8 @@ export class AddOrderComponent extends BaseComponent {
 
           this.stopLoading();
 
-          this.order.OrderId = `DON_${nextIndex}`;
+          this.order.OrderId = Guid.create().toString();
+          this.order.Index = nextIndex;
 
           this.printConfirm();
 
@@ -165,7 +166,7 @@ export class AddOrderComponent extends BaseComponent {
 
   printConfirm() {
 
-    this.openConfirm('Có muốn in bill không?', () => {
+    this.openConfirm('In hoá đơn?', () => {
 
       if (this.isResetPaidAmount) {
         this.order.TotalPaidAmount = this.order.TotalAmount;
@@ -191,7 +192,7 @@ export class AddOrderComponent extends BaseComponent {
         IsDeleted: false,
         saleItems: products,
         createdDate: this.order.CreatedDate.toLocaleString('vi-VN', { hour12: true }),
-        orderId: this.order.OrderId,
+        orderId: this.order.Index.toString(),
         summary: tempSummary,
         totalAmount: this.order.TotalAmount,
         totalPaidAmount: this.order.TotalPaidAmount,
@@ -245,6 +246,7 @@ export class AddOrderComponent extends BaseComponent {
     orderDB.TotalPaidAmount = this.order.TotalPaidAmount;
     orderDB.GainedScore = this.order.CustomerInfo.GainedScore;
     orderDB.ScoreUsed = this.order.CustomerInfo.ScoreUsed;
+    orderDB.Index = this.order.Index;
 
     this.orderService.set(orderDB)
       .then(async res => {
@@ -353,7 +355,7 @@ export class AddOrderComponent extends BaseComponent {
       });
   }
 
-  totalAmountCalculate() {
+  totalAmountCalculate(isVATIncluded: boolean) {
 
     this.order.TotalAmount = 0;
 
@@ -367,6 +369,10 @@ export class AddOrderComponent extends BaseComponent {
 
     });
 
+    if (!isVATIncluded) {
+      this.order.TotalAmount += (this.order.TotalAmount / 100) * 10;
+    }
+
     this.order.TotalAmount -= ExchangeService.geExchangableAmount(this.order.CustomerInfo.ScoreUsed);
 
     this.totalBalance = this.order.TotalAmount - this.order.TotalPaidAmount;
@@ -374,15 +380,7 @@ export class AddOrderComponent extends BaseComponent {
   }
 
   onVATIncludedChange() {
-
-    if (this.order.VATIncluded) {
-      this.totalAmountCalculate();
-    } else {
-      this.totalAmountCalculate();
-      this.order.TotalAmount += (this.order.TotalAmount / 100) * 10;
-      this.totalBalance = this.order.TotalAmount - this.order.TotalPaidAmount;
-    }
-
+    this.totalAmountCalculate(this.order.VATIncluded);
   }
 
   scoreExchange() {

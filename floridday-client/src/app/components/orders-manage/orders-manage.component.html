@@ -32,7 +32,7 @@
                 <li *ngFor="let order of orders; let orderIndex = index" class="order-content-item"
                     [id]="'order' + orderIndex">
                     <div class="item-top" [id]="'heading' + orderIndex">
-                        <span class="item-code">{{order.OrderId}}</span>
+                        <span class="item-code">{{order.Index}}</span>
                         <div class="item-info">
                             <h4 class="item-name">{{order.CustomerInfo.Name}}</h4>
                             <span class="item-price">{{order.TotalAmount| currency:'VND':'symbol-narrow':'':'vi-VN'}}

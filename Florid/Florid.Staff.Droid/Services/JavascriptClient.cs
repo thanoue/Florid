@@ -205,9 +205,9 @@ namespace Florid.Staff.Droid.Services
 
         [Android.Webkit.JavascriptInterface]
         [Export("shareNewImage")]
-        public void ShareNewImage(string img)
+        public void ShareNewImage(string img,string contactInfo)
         {
-            _activity.ShareImage(img);
+            _activity.ShareImage(img,contactInfo);
         }
 
         [Android.Webkit.JavascriptInterface]

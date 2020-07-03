@@ -58,12 +58,12 @@ export class SelectCustomerComponent extends BaseComponent {
 
     customer.FullName = this.newCustomer.Name;
     customer.PhoneNumber = this.newCustomer.PhoneNumber;
-    customer.MembershipInfo.MembershipType = MembershipTypes.VVip;
-    customer.MembershipInfo.AccumulatedAmount = 99999999;
-    customer.MembershipInfo.AvailableScore = 30000;
-    customer.MembershipInfo.UsedScoreTotal = 5000;
+    customer.MembershipInfo.MembershipType = MembershipTypes.NewCustomer;
+    customer.MembershipInfo.AccumulatedAmount = 0;
+    customer.MembershipInfo.AvailableScore = 0;
+    customer.MembershipInfo.UsedScoreTotal = 0;
 
-    this.customerService.insert(customer).then(res => {
+    this.customerService.set(customer).then(res => {
 
       this.newCustomer = new CustomerViewModel();
 
@@ -118,7 +118,7 @@ export class SelectCustomerComponent extends BaseComponent {
     }
     this.startLoading();
 
-    FunctionsService.excuteFunction('searchCustomer', term)
+    this.customerService.searchCustomer(term)
       .then(customers => {
 
         this.customers = customers;

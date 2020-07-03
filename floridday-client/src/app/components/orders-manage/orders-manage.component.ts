@@ -299,6 +299,7 @@ export class OrdersManageComponent extends BaseComponent {
       switch ((+index)) {
         case 0:
           this.globalOrderDetail = orderDetail;
+          this.globalOrder = order;
           this.router.navigate(['order-detail-view']);
 
           break;
@@ -386,6 +387,7 @@ export class OrdersManageComponent extends BaseComponent {
         case 0:
 
           this.globalOrderDetail = orderDetail;
+          this.globalOrder = order;
           this.router.navigate(['final-cofirm']);
 
           break;
