@@ -51,7 +51,7 @@ export class AuthService {
     this.globalService.startLoading();
 
     if (this.globalService.firebaseConfig != '') {
-
+      console.log(this.globalService.firebaseConfig);
       this.acctualLogin(model, loginCallback);
 
       return;
