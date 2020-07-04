@@ -102,6 +102,8 @@ export class HttpService {
     this.loadToken();
     const fullUrl = this.createAPIURL(url);
 
+    console.log(fullUrl);
+
     if (loader) {
       this.globalService.startLoading();
     }
