@@ -189,18 +189,19 @@ namespace Florid.Staff.Droid.Services
             _activity.StartActivityForResult(intent, MainActivity.REQUEST_FILE_PICKER_SHARE);
         }
 
-        [Android.Webkit.JavascriptInterface]
-        [Export("shareImage")]
-        public void ShareImage()
-        {
-            _activity.ShareImage();
-        }
-
+  
         [Android.Webkit.JavascriptInterface]
         [Export("releaseTempImage")]
         public void ReleaseTempImage()
         {
             _activity.ReleaseTempImage();
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("shareImage")]
+        public void ShareImage(string contactInfo)
+        {
+            _activity.ShareImage(contactInfo);
         }
 
         [Android.Webkit.JavascriptInterface]

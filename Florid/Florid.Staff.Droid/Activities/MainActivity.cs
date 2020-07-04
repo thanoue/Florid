@@ -179,8 +179,12 @@ namespace Florid.Staff.Droid.Activity
             }
         }
 
-        public override void  ShareImage()
+        public override void  ShareImage(string contactInfo)
         {
+            var clipBoard = this.GetSystemService(Context.ClipboardService).JavaCast<ClipboardManager>();
+            var clip = ClipData.NewPlainText("tel", contactInfo);
+            clipBoard.PrimaryClip = clip;
+
             ShareImgFile(_savedFileUrl);
         }
 

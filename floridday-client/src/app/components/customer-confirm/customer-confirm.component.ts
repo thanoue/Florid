@@ -12,10 +12,15 @@ import { DeliveryImageService } from 'src/app/services/delivery.image.service';
 import { Router } from '@angular/router';
 import { Order } from 'src/app/models/entities/order.entity';
 import { OrderService } from 'src/app/services/order.service';
+import { CustomerService } from 'src/app/services/customer.service';
+import { Customer } from 'src/app/models/entities/customer.entity';
+import { ExchangeService } from 'src/app/services/exchange.service';
+import { basename } from 'path';
 
-declare function shareImageCus(): any;
+declare function shareImageCus(contactInfo: string): any;
+declare function shareImageCusWithData(img: string, contactInfo: string): any;
+
 declare function deleteTempImage(): any;
-declare function shareOnWeb(file: string): any;
 declare function getNumberValidateInput(resCallback: (res: number, validCallback: (isvalid: boolean, error: string) => void) => void, placeHolder: string, oldValue: number): any;
 
 @Component({
@@ -32,6 +37,7 @@ export class CustomerConfirmComponent extends BaseComponent {
   orderDetail: OrderDetailViewModel;
   order: Order;
   totalBalance = 0;
+  customer: Customer;
 
   protected Init() {
     this.orderDetail = this.globalOrderDetail;
@@ -39,11 +45,18 @@ export class CustomerConfirmComponent extends BaseComponent {
       .then(order => {
         this.order = order;
         this.totalBalance = this.order.TotalAmount - this.order.TotalPaidAmount;
+
+        this.customerService.getById(this.order.CustomerId)
+          .then(cus => {
+            this.customer = cus;
+          });
+
       });
   }
 
   constructor(private orderDetailService: OrderDetailService,
     private resultImageService: ResultImageService,
+    private customerService: CustomerService,
     private deliveryImageService: DeliveryImageService,
     private router: Router,
     private orderService: OrderService) {
@@ -96,6 +109,11 @@ export class CustomerConfirmComponent extends BaseComponent {
 
     }, 'Số tiền thanh toán...', this.totalBalance);
 
+  }
+
+  destroy() {
+    super.destroy();
+    deleteTempImage();
   }
 
   confirm() {
@@ -164,7 +182,7 @@ export class CustomerConfirmComponent extends BaseComponent {
 
             this.orderDetailService.updateFields(updates)
               .then(() => {
-                super.OnBackNaviage();
+                this.router.navigate(['/account-main']);
               });
 
           });
@@ -197,12 +215,11 @@ export class CustomerConfirmComponent extends BaseComponent {
 
     if (this.IsOnTerminal) {
 
-      shareImageCus();
+      shareImageCus(ExchangeService.getMainContact(this.customer));
 
     } else {
 
-      if (this.edittingImageUrl)
-        shareOnWeb(this.edittingImageUrl);
+      shareImageCusWithData(this.edittingImageUrl, ExchangeService.getMainContact(this.customer));
 
     }
   }

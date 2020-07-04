@@ -195,77 +195,32 @@ function pickFile(isSaveUrl) {
     return;
 }
 
-
-
 function deleteTempImage() {
     if (typeof Android !== "undefined" && Android !== null) {
         Android.releaseTempImage();
     }
-
-    return;
-}
-
-// function shareOnWeb(blobFile) {
-//     if (navigator.share) {
-//         var file = new File([blobFile], 'shareImage.png', { type: 'image/png' });
-//         var filesArray = [file];
-//         console.log(filesArray);
-
-//         navigator
-//             .share({
-//                 files: filesArray
-//             })
-//             .then(() => console.log('Share was successful.'))
-//             .catch((error) => {
-//                 errorToast(error);
-//             });
-//     }
-//     else {
-//         errorToast("Trình duyệt không hỗ trợ chức năng này!!");
-//     }
-
-// }
-
-function shareOnWeb(data) {
-    try {
-        webkit.messageHandlers.callback.postMessage(data);
-    } catch (err) {
-        console.log('Can not reach native code');
-    }
-}
-
-function shareImageCus() {
-    if (typeof Android !== "undefined" && Android !== null) {
-        Android.shareImage();
-    }
-
     return;
 }
 
 
-function shareImageCusWithData(img) {
+function shareImageCus(contactInfo) {
+
+    if (typeof Android !== "undefined" && Android !== null) {
+        Android.shareImage(contactInfo);
+    }
+    return;
+}
+
+
+function shareImageCusWithData(img, contactInfo) {
 
     if (typeof Android !== "undefined" && Android !== null) {
 
-        Android.shareNewImage(img);
+        Android.shareNewImage(img, contactInfo);
 
     } else {
-        if (navigator.share) {
-
-            navigator
-                .share({
-                    title: 'Hình ảnh giao hàng',
-                    text: 'Nhấn vào link để xem',
-                    url: img
-                })
-                .then(() => console.log('Share was successful.'))
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-        else {
-            errorToast("Trình duyệt không hỗ trợ chức năng này!!");
-        }
+        var res = `${contactInfo}FLORID${img}`;
+        webkit.messageHandlers.callback.postMessage(res);
     }
 
     return;

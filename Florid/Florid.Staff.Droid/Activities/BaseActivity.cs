@@ -107,7 +107,7 @@ namespace Florid.Staff.Droid.Activity
             }
         }
 
-        public virtual void ShareImage()
+        public virtual void ShareImage(string contactInfo)
         {
 
         }
@@ -117,7 +117,7 @@ namespace Florid.Staff.Droid.Activity
 
         }
 
-        public virtual void ShareImage(string img)
+        public virtual void ShareImage(string img,string contactInfo)
         {
 
         }

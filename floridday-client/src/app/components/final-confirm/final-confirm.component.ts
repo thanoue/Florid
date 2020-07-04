@@ -11,7 +11,8 @@ import { ExchangeService } from 'src/app/services/exchange.service';
 import { TagService } from 'src/app/services/tag.service';
 import { switchMapTo } from 'rxjs/operators';
 
-declare function shareImageCusWithData(img: string): any;
+declare function shareImageCusWithData(img: string, contactInfo: string): any;
+declare function deleteTempImage(): any;
 
 @Component({
   selector: 'app-final-confirm',
@@ -39,6 +40,13 @@ export class FinalConfirmComponent extends BaseComponent {
     super();
   }
 
+
+  protected destroy() {
+
+    super.destroy();
+    deleteTempImage();
+
+  }
 
   confirmOrderDetail() {
 
@@ -72,7 +80,7 @@ export class FinalConfirmComponent extends BaseComponent {
 
           let newMemberInfo = new MembershipInfo();
           newMemberInfo.AccumulatedAmount = this.customer.MembershipInfo.AccumulatedAmount + totalAmount;
-          newMemberInfo.AvailableScore = this.customer.MembershipInfo.AvailableScore + ExchangeService.getGainedScore(totalAmount);
+          newMemberInfo.AvailableScore = this.customer.MembershipInfo.AvailableScore - this.globalOrder.CustomerInfo.ScoreUsed + ExchangeService.getGainedScore(totalAmount);
           newMemberInfo.UsedScoreTotal = this.customer.MembershipInfo.UsedScoreTotal + this.globalOrder.CustomerInfo.ScoreUsed;
 
           if (newMemberInfo.AccumulatedAmount < 5000000) {
@@ -105,38 +113,26 @@ export class FinalConfirmComponent extends BaseComponent {
 
   shareToCus() {
 
-    if (this.IsOnTerminal) {
-      if (this.sharingImage == '') {
+    this.startLoading();
 
-        this.startLoading();
+    this.storageService.downloadFIle(this.orderDetail.DeliveryImageUrl, (file) => {
 
-        this.storageService.downloadFIle(this.orderDetail.DeliveryImageUrl, (file) => {
+      this.stopLoading();
 
-          this.stopLoading();
+      var reader = new FileReader();
 
-          var reader = new FileReader();
+      reader.readAsDataURL(file);
 
-          reader.readAsDataURL(file);
+      reader.onloadend = () => {
 
-          reader.onloadend = () => {
+        var base64data = reader.result.toString();
+        this.sharingImage = base64data;
 
-            var base64data = reader.result.toString();
-            this.sharingImage = base64data;
-
-            shareImageCusWithData(this.sharingImage);
-
-          }
-
-        });
-      } else {
-
-        shareImageCusWithData(this.sharingImage);
+        shareImageCusWithData(this.sharingImage, ExchangeService.getMainContact(this.customer));
 
       }
 
-    } else {
-      shareImageCusWithData(this.orderDetail.DeliveryImageUrl);
-    }
+    });
 
 
   }
