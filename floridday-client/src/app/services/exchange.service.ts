@@ -24,7 +24,7 @@ export class ExchangeService {
         }
     }
 
-    static getMainContact(customer: Customer) {
+    static getMainContact(customer: Customer): string {
         switch (customer.MainContactInfo) {
             case CusContactInfoTypes.Facebook:
                 return customer.ContactInfo.Facebook;
@@ -34,11 +34,10 @@ export class ExchangeService {
                 return customer.ContactInfo.Skype;
             case CusContactInfoTypes.Viber:
                 return customer.ContactInfo.Viber;
-            case CusContactInfoTypes.:
-                return customer.ContactInfo.Viber;
-
+            case CusContactInfoTypes.Instagram:
+                return customer.ContactInfo.Instagram;
             default:
-                break;
+                return customer.ContactInfo.Zalo;
         }
     }
 
