@@ -9,23 +9,10 @@ import * as saleRouter from './sale/sale.controller';
 import * as authrorize from './helper/ authorize';
 import { Role } from './helper/role';
 const express = require('express');
-// const jwt = require('express-jwt');
-// const blacklist = require('express-jwt-blacklist');
 const app = new express();
 const main = new express();
 
 app.use(cors({ origin: true }));
-
-
-// app.use(jwt({ secret: adminSdk.OAuthPrivateKey, isRevoked: blacklist.isRevoked }).unless({
-//     path: [
-//         // public routes that don't require authentication
-//         '/api/v1/users/login',
-//         '/api/v1/users/logout',
-//         '/api/v1/users/createUser',
-//         '/api/v1/sale/momo/qr/request'
-//     ]
-// }));
 
 app.use('/users', userRouter);
 app.use('/sale', saleRouter);
