@@ -33,16 +33,20 @@ export class CustomerEditComponent extends BaseComponent {
       return;
 
     let specialDays: SpecialDay[] = [];
-    this.customer.SpecialDays.forEach(day => {
+    
+    if (this.customer.SpecialDays) {
+      this.customer.SpecialDays.forEach(day => {
 
-      if (day.Description && day.Description != '') {
-        specialDays.push({
-          Description: day.Description,
-          Date: new Date(day.Date).getTime()
-        });
-      }
+        if (day.Description && day.Description != '') {
+          specialDays.push({
+            Description: day.Description,
+            Date: new Date(day.Date).getTime()
+          });
+        }
 
-    });
+      });
+    }
+
 
     this.customer.SpecialDays = specialDays;
 

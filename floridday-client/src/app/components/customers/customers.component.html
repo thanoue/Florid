@@ -19,8 +19,9 @@
             </div>
             <div class="col-md-6 col-xs-12  optionSearch">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                        placeholder="Tìm kiếm...">
+                    <app-search-box (searchTextInvoke)="searchCustomer($event)" [delayTimeSpan]="1000"
+                        placeholder="Nhập tên hoặc SDT">
+                    </app-search-box>
                     <button type="submit" class="btn btn-info position-absolute "><i class="fa fa-search"></i></button>
                 </div>
 

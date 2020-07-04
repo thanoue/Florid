@@ -8,7 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { TextBoxComponent } from './controls/text-box/text-box.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InvalidTypeDirective } from './directives/invalid-type.directive';
 import { InvalidmessageDirective } from './directives/invalid-message.directive';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
@@ -33,6 +33,7 @@ import { CustomerDetailComponent } from './components/customer-detail/customer-d
 import { CustomerOrdersComponent } from './components/customer-orders/customer-orders.component';
 import { CustomerReceiversComponent } from './components/customer-receivers/customer-receivers.component';
 import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
+import { SearchBoxComponent } from './controls/search-box/search-box.component';
 
 @NgModule({
   declarations: [
@@ -53,12 +54,14 @@ import { CustomerEditComponent } from './components/customer-edit/customer-edit.
     CustomerDetailComponent,
     CustomerOrdersComponent,
     CustomerReceiversComponent,
-    CustomerEditComponent
+    CustomerEditComponent,
+    SearchBoxComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     QRCodeModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),

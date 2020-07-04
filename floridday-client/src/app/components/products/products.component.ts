@@ -571,4 +571,41 @@ export class ProductsComponent extends BaseComponent {
     return isContained;
 
   }
+
+  searchProduct(term) {
+
+    this.products = [];
+    if (term == '') {
+      this.pageChanged(1);
+      return;
+    }
+
+    if (term.indexOf('MS') >= 0 || term.indexOf('ms') >= 0) {
+      term = term.replace('ms', 'MS');
+    }
+    else {
+      term = `MS ${term}`;
+    }
+
+    console.log(term);
+
+    this.startLoading();
+
+    this.productService.searchProduct(term)
+      .then(products => {
+
+        console.log(products);
+
+        products.forEach(product => {
+          this.products.push({
+            Product: product,
+            CategoryName: this.categories.filter(p => p.Value === product.ProductCategories)[0].Name,
+            IsSelect: false
+          });
+        });
+        this.stopLoading();
+      });
+
+
+  }
 }

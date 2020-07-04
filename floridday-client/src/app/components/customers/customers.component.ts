@@ -104,6 +104,32 @@ export class CustomersComponent extends BaseComponent {
       });
   }
 
+  searchCustomer(term) {
+
+    this.customers = [];
+
+    if (term == '') {
+      this.pageChanged(1);
+      return;
+    }
+
+    this.startLoading();
+
+    this.customerService.searchCustomer(term)
+      .then(products => {
+
+        console.log(products);
+
+        products.forEach(customer => {
+          this.customers.push({
+            Customer: customer,
+            IsChecked: false
+          });
+        });
+        this.stopLoading();
+      });
+  }
+
   protected Init() {
     this.customerService.getCount().then(count => {
 
