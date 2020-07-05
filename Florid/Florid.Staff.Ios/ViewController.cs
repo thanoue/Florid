@@ -24,8 +24,8 @@ namespace Florid.Staff.Ios
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
 
-           // var url = new NSUrl("https://floridstaff.web.app");
-            var url = new NSUrl("http://192.168.1.157:4200");
+            var url = new NSUrl("https://floridstaff.web.app");
+           // var url = new NSUrl("http://192.168.1.157:4200");
 
             _webView.LoadRequest(new NSUrlRequest(url));
 

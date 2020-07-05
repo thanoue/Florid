@@ -71,6 +71,9 @@ export class CustomerConfirmComponent extends BaseComponent {
 
     const filesUpload: File = event.target.files[0];
 
+    if (!filesUpload)
+      return;
+
     var mimeType = filesUpload.type;
     if (mimeType.match(/image\/*/) == null) {
       this.showError('Phải chọn hình !!');

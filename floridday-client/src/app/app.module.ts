@@ -100,6 +100,7 @@ import * as firebase from 'firebase/app';
 export class AppModule {
 
   constructor(injector: Injector) {
+    
     AppInjector.setInjector(injector);
     registerLocaleData(es);
     registerLocaleData(vi);
