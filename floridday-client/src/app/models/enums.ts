@@ -17,7 +17,7 @@ export enum Roles {
 
 export enum MembershipTypes {
     NewCustomer = 'NewCustomer',
-    Member = 'Member',  
+    Member = 'Member',
     Vip = 'Vip',
     VVip = 'VVip'
 }
@@ -27,6 +27,7 @@ export enum CusContactInfoTypes {
     Viber = 'Viber',
     Facebook = 'Facebook',
     Skype = 'Skype',
+    Instagram = 'Instagram'
 }
 
 export enum OrderDetailStates {
