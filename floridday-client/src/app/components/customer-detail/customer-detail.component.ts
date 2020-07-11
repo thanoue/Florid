@@ -32,7 +32,7 @@ export class CustomerDetailComponent extends BaseComponent {
         return 'Member (giảm giá 5%)';
       case MembershipTypes.Vip:
         return 'Vip (giảm giá 10%)';
-      case MembershipTypes.Vip:
+      case MembershipTypes.VVip:
         return 'VVip (giảm giá 15%)';
     }
   }

@@ -24,12 +24,15 @@
                 <div class="infoCard">
                     <h3 class="infoTitle">Thông tin liên hệ</h3>
                     <ul class="infoList snsLinks">
-                        <li><a class="fb-sns"
+                        <li style="margin-top:10px;"><a class="fb-sns"
                                 *ngIf="customer.ContactInfo.Facebook">{{customer.ContactInfo.Facebook}}</a></li>
-                        <li><a class="zl-sns" *ngIf="customer.ContactInfo.Zalo">{{customer.ContactInfo.Zalo}}</a></li>
-                        <li><a class="vb-sns" *ngIf="customer.ContactInfo.Viber">{{customer.ContactInfo.Viber}}</a></li>
-                        <li><a class="sk-sns" *ngIf="customer.ContactInfo.Skype">{{customer.ContactInfo.Skype}}</a></li>
-                        <li><a class="ig-sns"
+                        <li style="margin-top:10px;"><a class="zl-sns"
+                                *ngIf="customer.ContactInfo.Zalo">{{customer.ContactInfo.Zalo}}</a></li>
+                        <li style="margin-top:10px;"><a class="vb-sns"
+                                *ngIf="customer.ContactInfo.Viber">{{customer.ContactInfo.Viber}}</a></li>
+                        <li style="margin-top:10px;"><a class="sk-sns"
+                                *ngIf="customer.ContactInfo.Skype">{{customer.ContactInfo.Skype}}</a></li>
+                        <li style="margin-top:10px;"><a class="ig-sns"
                                 *ngIf="customer.ContactInfo.Instagram">{{customer.ContactInfo.Instagram}}</a></li>
                     </ul>
                 </div>

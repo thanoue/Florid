@@ -33,7 +33,7 @@ export class CustomerEditComponent extends BaseComponent {
       return;
 
     let specialDays: SpecialDay[] = [];
-    
+
     if (this.customer.SpecialDays) {
       this.customer.SpecialDays.forEach(day => {
 
@@ -52,7 +52,8 @@ export class CustomerEditComponent extends BaseComponent {
 
     this.customer.Birthday = new Date(this.customer.Birthday).getTime();
 
-    console.log(this.customer.SpecialDays);
+    if (!this.customer.Birthday || this.customer.Birthday == NaN)
+      this.customer.Birthday = 0;
 
     this.customer.MembershipInfo.AvailableScore = ExchangeService.getGainedScore(this.customer.MembershipInfo.AccumulatedAmount) - this.customer.MembershipInfo.UsedScoreTotal;
 

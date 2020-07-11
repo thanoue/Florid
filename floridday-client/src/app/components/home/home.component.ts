@@ -246,7 +246,9 @@ export class HomeComponent extends BaseComponent {
           let index = 1;
 
           orders.forEach(order => {
+
             let duplicates = newOrders.filter(p => p.CustomerId == order.CustomerId && p.Id == order.Id);
+
             if (duplicates && duplicates[0]) {
 
               duplicates[0].TotalAmount += order.TotalAmount;
@@ -281,7 +283,7 @@ export class HomeComponent extends BaseComponent {
             if (cus && cus.length > 0) {
 
               cus[0].TotalAmount += order.TotalAmount;
-
+              
             }
             else {
 
