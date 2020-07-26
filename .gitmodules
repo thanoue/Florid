@@ -1,0 +1,3 @@
+[submodule "Florid-SPA"]
+	path = Florid-SPA
+	url = https://github.com/thanoue/Florid-SPA.git
