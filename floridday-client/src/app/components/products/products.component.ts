@@ -3,21 +3,19 @@ import { BaseComponent } from '../base.component';
 import { PageComponent } from 'src/app/models/view.models/menu.model';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/entities/product.entity';
-import { ProductCategoryService } from 'src/app/services/product.categpory.service';
 import { MenuItems } from 'src/app/models/enums';
 import { NgForm } from '@angular/forms';
 import { TagService } from 'src/app/services/tag.service';
 import { Tag } from 'src/app/models/entities/tag.entity';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { ProductImageService } from 'src/app/services/product.image.service';
-import { ProductImage } from 'src/app/models/entities/file.entity';
-import { Guid } from 'guid-typescript';
-import { FunctionsService } from 'src/app/services/common/functions.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { runInThisContext } from 'vm';
 import { ProductTagViewModel } from 'src/app/models/view.models/product.tag.model';
+import { Category } from 'src/app/models/entities/category.entity';
+import { CategoryService } from 'src/app/services/category.service';
+import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 declare function showProductSetupPopup();
+declare function hideAdd();
 
 @Component({
   selector: 'app-products',
@@ -35,8 +33,10 @@ export class ProductsComponent extends BaseComponent {
   edittingImageUrl: any;
   isSelectAll = false;
   edittingProduct: Product;
+  currentPage = 0;
+  searchTerm = '';
 
-  _selectedCategory: number;
+  _selectedCategory: number = 0;
   get selectedCategory(): number {
     return this._selectedCategory;
   }
@@ -51,17 +51,12 @@ export class ProductsComponent extends BaseComponent {
   }
   set itemPerpage(val: number) {
     this._itemsPerPage = val;
-    this.categoryChange();
+    this.pageChanged(1);
   }
 
-  categories: {
-    Name: string,
-    Value: number,
-  }[];
-
-  edittingCategories: {
-    Name: string,
-    Value: number
+  globalCategories: {
+    Category: Category,
+    IsSelected: boolean
   }[];
 
   globalTags: {
@@ -72,154 +67,94 @@ export class ProductsComponent extends BaseComponent {
   products: {
     Product: Product,
     IsSelect: boolean,
-    CategoryName: string
+    Categories: Category[],
+    Tags: Tag[]
   }[];
 
-  protected Init() {
-
-    this.productCategoryService.getAllWithOrder('Index').then(categories => {
-
-      categories.forEach(category => {
-
-        this.categories.push({
-          Name: category.Name,
-          Value: category.Index
-        });
-
-        if (category.Index !== -1) {
-          this.edittingCategories.push({
-            Name: category.Name,
-            Value: category.Index
-          });
-        }
-
-      });
-
-      this._selectedCategory = categories[0].Index;
-
-      this.categoryChange();
-
-    });
-
-    this.tagService.getAll().then(tags => {
-      tags.forEach(tag => {
-        this.globalTags.push({
-          Tag: tag,
-          IsSelected: false
-        });
-      });
-    });
-
-  }
-
-  constructor(private productService: ProductService, private productCategoryService: ProductCategoryService, private tagService: TagService
-    , private productImageService: ProductImageService) {
+  constructor(private productService: ProductService, private tagService: TagService, private categoryService: CategoryService) {
     super();
 
     this.edittingProduct = new Product();
     this.products = [];
     this._itemsPerPage = 10;
-    this.categories = [];
-    this.edittingCategories = [];
+    this.globalCategories = [];
     this.globalTags = [];
   }
 
-  categoryChange() {
-
-    this.startLoading();
+  protected Init() {
 
     this.products = [];
+    this.itemTotalCount = 0;
+    this.pageCount = 0;
 
-    this.productService.getCategoryCount(this._selectedCategory).then(count => {
-
-      this.itemTotalCount = count;
-
-      if (count <= 0) {
-        this.stopLoading();
-        this.pageCount = 0;
-        return;
-      }
-
-      this.pageCount = count % this._itemsPerPage === 0 ? count / this._itemsPerPage : Math.floor(count / this._itemsPerPage) + 1;
-
-      this.productService.getByPage(1, this._itemsPerPage, this._selectedCategory)
-        .then(products => {
-          products.forEach(product => {
-            this.products.push({
-              Product: product,
-              CategoryName: this.categories.filter(p => p.Value === product.ProductCategories)[0].Name,
-              IsSelect: false
-            });
+    this.categoryService.getAll()
+      .then(categories => {
+        categories.forEach(category => {
+          this.globalCategories.push({
+            Category: category,
+            IsSelected: false
           });
-          this.stopLoading();
-        });
+        })
+      });
 
+    this.tagService.getAll()
+      .then(tags => {
+        tags.forEach(tag => {
+          this.globalTags.push({
+            Tag: tag,
+            IsSelected: false
+          });
+        })
+      });
+
+    this.pageChanged(1);
+  }
+
+  unselectCategory(category: Category) {
+    this.globalCategories.forEach(cate => {
+      if (category.Id == cate.Category.Id) {
+        cate.IsSelected = false;
+      }
     });
+  }
 
+  selectCategory(category: Category) {
+    this.globalCategories.forEach(cate => {
+      if (category.Id == cate.Category.Id) {
+        cate.IsSelected = true;
+      }
+    });
+  }
+
+
+
+  categoryChange() {
+    this.searchTerm = '';
+    this.products = [];
+    this.pageChanged(1);
   }
 
   editProduct() {
 
-    this.startLoading();
+    let categoryIds: number[] = [];
+    this.globalCategories.forEach(category => {
+      if (category.IsSelected)
+        categoryIds.push(category.Category.Id);
+    });
 
-    if (this.edittingProduct.ImageUrl && this.edittingFile && this.edittingFile != null) {
+    let tagIds: number[] = [];
+    this.globalTags.forEach(tag => {
+      if (tag.IsSelected)
+        tagIds.push(tag.Tag.Id);
+    });
 
-      this.productImageService.deleteFileFromUrl(this.edittingProduct.ImageUrl)
-        .then(() => {
 
-          const prodImg = new ProductImage();
-          prodImg.Name = Guid.create().toString();
+    this.productService.updateProduct(this.edittingProduct, categoryIds, tagIds, this.edittingFile)
+      .then(res => {
+        hideAdd();
+        this.pageChanged(this.currentPage);
+      });
 
-          this.productImageService.addFile(this.edittingFile, prodImg, (url) => {
-
-            if (url == 'ERROR') {
-              this.stopLoading();
-              return;
-            }
-
-            this.edittingProduct.ImageUrl = url;
-            this.edittingFile = null;
-
-            this.productService.set(this.edittingProduct)
-              .then(() => {
-
-                this.stopLoading();
-                this.globalService.hidePopup();
-                this.categoryChange();
-                this.edittingProduct = new Product();
-              })
-              .catch(err => {
-                this.showError(err);
-                this.stopLoading();
-                return;
-              });
-
-          });
-
-        })
-        .catch(err => {
-          this.showError(err);
-          this.stopLoading();
-          return;
-        })
-    } else {
-
-      this.productService.set(this.edittingProduct)
-        .then(() => {
-
-          this.stopLoading();
-          this.globalService.hidePopup();
-          this.categoryChange();
-          this.edittingProduct = new Product();
-
-        })
-        .catch(err => {
-          this.showError(err);
-          this.stopLoading();
-          return;
-        });
-
-    }
   }
 
   addProduct(form: NgForm) {
@@ -233,152 +168,86 @@ export class ProductsComponent extends BaseComponent {
       return
     }
 
-    this.startLoading();
+    let categoryIds: number[] = [];
+    this.globalCategories.forEach(category => {
+      if (category.IsSelected)
+        categoryIds.push(category.Category.Id);
+    });
 
-    try {
+    let tagIds: number[] = [];
+    this.globalTags.forEach(tag => {
+      if (tag.IsSelected)
+        tagIds.push(tag.Tag.Id);
+    });
 
-      const prodImg = new ProductImage();
-      prodImg.Name = Guid.create().toString();
 
-      this.productImageService.addFile(this.edittingFile, prodImg, (url) => {
-
-        this.edittingProduct.ImageUrl = url;
-
-        this.productService.getlastCategoryIndex(this.edittingProduct.ProductCategories)
-          .then(categoryIndex => {
-
-            this.edittingProduct.CategoryIndex = categoryIndex + 1;
-
-            let newCate = false;
-
-            if (categoryIndex % 10000 === 0) {
-              newCate = true;
-              categoryIndex = 1 + (this.edittingProduct.ProductCategories + 1) * 10000;
-            }
-
-            this.productService.getByCategoryIndex(categoryIndex)
-              .then(product => {
-
-                if (!product || product == null) {
-
-                  this.edittingProduct.Index = this.itemTotalCount + 1;
-
-                  this.productService.set(this.edittingProduct).then(res => {
-                    this.stopLoading();
-                    this.globalService.hidePopup();
-                    this.categoryChange();
-                    this.edittingProduct = new Product();
-                  });
-                  return;
-                }
-
-                this.edittingProduct.Index = newCate ? product.Index : product.Index + 1;
-
-                this.productService.updateIndex(newCate ? product.Index : product.Index + 1, 1).then(() => {
-                  this.productService.set(this.edittingProduct).then(res => {
-                    this.stopLoading();
-                    this.globalService.hidePopup();
-                    this.categoryChange();
-                    this.edittingProduct = new Product();
-                  });
-                })
-              });
-          });
+    this.productService.createProduct(this.edittingProduct, categoryIds, tagIds, this.edittingFile)
+      .then(res => {
+        this.pageChanged(this.currentPage);
+        hideAdd();
       });
-    }
-    catch (err) {
-      this.stopLoading();
-      this.showError(err);
-      return;
-    }
 
   }
 
-  deleteProduct(id: string) {
-
-    this.openConfirm('Chắc chắn xoá sản phẩm này?', () => {
-
-      this.startLoading();
-
-      var product = this.products.filter(p => p.Product.Id === id)[0].Product;
-      if (!product) {
-        return;
-      }
-
-      this.productService.delete(id)
-        .then(() => {
-
-          this.productService.updateCategoryIndex(product.CategoryIndex + 1, -1).then(() => {
-
-            this.productImageService.deleteFileFromUrl(product.ImageUrl)
-              .then(res => {
-                console.log(res);
-              });
-
-            this.stopLoading();
-            this.categoryChange();
-
-          }).catch(err => {
-
-            this.stopLoading();
-            this.showWarning(err);
-            return;
-
+  deleteProduct(id: number) {
+    this.openConfirm('Chắc chắn xoá sản phẩm này ? ', () => {
+      let product = this.products.filter(p => p.Product.Id == id)[0].Product;
+      if (product) {
+        this.productService.deleteProduct(product.Id, product.ImageUrl)
+          .then(() => {
+            this.pageChanged(this.currentPage);
           });
-
-        })
-        .catch(error => {
-          this.showError('Xoá lỗi!');
-          this.stopLoading();
-        });
+      }
     });
   }
 
-  pageChanged(page) {
+  pageChanged(page: number) {
     this.products = [];
-    this.productService.getByPage(page, this._itemsPerPage, this._selectedCategory)
-      .then(products => {
-        products.forEach(product => {
-          this.products.push({
-            Product: product,
-            CategoryName: this.categories.filter(p => p.Value === product.ProductCategories)[0].Name,
-            IsSelect: false
-          });
-        });
+    this.currentPage = page;
+
+    this.productService.getRecords(page, this.itemPerpage, this._selectedCategory, this.searchTerm)
+      .then(data => {
+
         this.stopLoading();
+
+        if (data == null)
+          return;
+
+        this.itemTotalCount = data.totalItemCount;
+        this.pageCount = data.totalPages;
+
+        data.products.forEach(rawProduct => {
+          this.products.push({
+            Product: rawProduct.Product,
+            Categories: rawProduct.Categories,
+            IsSelect: false,
+            Tags: rawProduct.Tags
+          });
+
+        });
+
       });
 
   }
 
-  unselectTag(removingTag: ProductTagViewModel) {
-
-    this.edittingProduct.Tags.splice(this.edittingProduct.Tags.indexOf(removingTag), 1);
+  unselectTag(removingTag: Tag) {
 
     this.globalTags.forEach(tag => {
-
-      if (removingTag.TagAlias === tag.Tag.Id) {
+      if (removingTag.Id == tag.Tag.Id) {
         tag.IsSelected = false;
       }
-
     });
 
   }
 
-  selectTag(tagId: string) {
+  selectTag(removingTag: Tag) {
 
     this.globalTags.forEach(tag => {
-      if (tagId === tag.Tag.Id) {
-
-        this.edittingProduct.Tags.push({
-          TagName: tag.Tag.Name,
-          TagAlias: tag.Tag.Id
-        });
-
+      if (removingTag.Id == tag.Tag.Id) {
         tag.IsSelected = true;
-        return;
       }
-
     });
+
   }
 
   onChange(event) {
@@ -401,70 +270,83 @@ export class ProductsComponent extends BaseComponent {
 
   }
 
-  selectProductToEdit(id: string) {
+  resetData() {
+    this.edittingProduct = new Product();
 
-    this.edittingProduct = this.products.filter(p => p.Product.Id === id)[0].Product;
-    this.edittingImageUrl = this.edittingProduct.ImageUrl;
-
-    if (!this.edittingProduct.Tags)
-      this.edittingProduct.Tags = [];
+    this.globalCategories.forEach(category => {
+      category.IsSelected = false;
+    });
 
     this.globalTags.forEach(tag => {
-      if (this.edittingProduct.Tags.filter(p => p.TagAlias === tag.Tag.Id).length > 0) {
+      tag.IsSelected = false;
+    });
+
+    this.edittingImageUrl = '';
+    this.edittingFile = null;
+
+  }
+
+
+  addingRequest() {
+
+    this.resetData();
+    showProductSetupPopup();
+  }
+
+  selectProductToEdit(id: number) {
+
+    this.resetData();
+
+    let product = this.products.filter(p => p.Product.Id == id)[0];
+    this.edittingProduct = product.Product;
+    this.edittingFile = null;
+    this.edittingImageUrl = this.edittingProduct.ImageUrl;
+
+    this.globalCategories.forEach(category => {
+      let contain = product.Categories.filter(p => p.Id == category.Category.Id);
+      if (contain && contain.length > 0) {
+        category.IsSelected = true;
+      }
+      else {
+        category.IsSelected = false;
+      }
+    });
+
+    this.globalTags.forEach(tag => {
+      let contain = product.Tags.filter(p => p.Id == tag.Tag.Id);
+      if (contain && contain.length > 0) {
         tag.IsSelected = true;
-      } else {
+      }
+      else {
         tag.IsSelected = false;
       }
     });
 
     showProductSetupPopup();
-
   }
 
   addTag() {
 
     const alias = ExchangeService.getAlias(this.newTagName);
 
-    this.startLoading();
-    this.tagService.getById(alias).then(res => {
+    var tag = new Tag();
+    tag.Alias = alias;
+    tag.Description = "tag moi";
+    tag.Name = this.newTagName;
 
-      if (res != null) {
-        this.stopLoading();
-        this.showError('Tag bị trùng!!');
-        this.newTagName = "";
-        return;
-      }
-
-      this.tagService.getCount()
-        .then(count => {
-
-          let tag = new Tag();
-
-          tag.Index = count + 1;
-          tag.Name = this.newTagName;
-          tag.Id = alias;
-
-          this.tagService.set(tag).then(res => {
-
-            this.stopLoading();
-
-            this.globalTags.push({
-              Tag: res,
-              IsSelected: true
-            });
-
-            this.edittingProduct.Tags.push({
-              TagName: res.Name,
-              TagAlias: res.Id
-            });
-
-            this.newTagName = "";
-
+    this.tagService.createTag(tag)
+      .then((newTag) => {
+        if (newTag) {
+          this.newTagName = '';
+          this.globalTags.push({
+            Tag: newTag,
+            IsSelected: true
           });
+        }
+      })
+      .catch(() => {
 
-        });
-    });
-
+      });
   }
 
   checkAllChange(isCheck: boolean) {
@@ -475,137 +357,32 @@ export class ProductsComponent extends BaseComponent {
   }
 
   deleteMany() {
-    const deletingProdIds = this.products.filter(p => p.IsSelect === true);
+    this.openConfirm('Chắc chắn xoá các sản phẩm này?', () => {
+      let ids = [];
+      let prodImages = [];
 
-    if (!deletingProdIds || deletingProdIds.length <= 0) {
-      return;
-    }
+      this.products.forEach(product => {
+        if (product.IsSelect) {
 
-    this.openConfirm('Chắc chắn muốn xoá các sản phẩm này?', () => {
-
-      this.startLoading();
-
-      let ids: string[] = [];
-
-      let smallestCategoryIndexes: {
-        Category: number,
-        CategoryIndex: number
-      }[] = [];
-
-      let smallestIndex = deletingProdIds[0].Product.Index;
-
-      deletingProdIds.forEach(productItem => {
-
-        if (this.isContain(productItem.Product.ProductCategories, smallestCategoryIndexes)) {
-
-          smallestCategoryIndexes.forEach(item => {
-
-            if (productItem.Product.ProductCategories === item.Category) {
-
-              if (productItem.Product.CategoryIndex < item.CategoryIndex) {
-                item.CategoryIndex = productItem.Product.CategoryIndex;
-              }
-
-            }
-
-          });
-
-        } else {
-
-          smallestCategoryIndexes.push({
-            Category: productItem.Product.ProductCategories,
-            CategoryIndex: productItem.Product.CategoryIndex
-          });
+          ids.push(product.Product.Id);
+          if (product.Product.ImageUrl)
+            prodImages.push(product.Product.ImageUrl);
 
         }
-
-        ids.push(productItem.Product.Id);
-
-        if (smallestIndex > productItem.Product.Index) {
-          smallestIndex = productItem.Product.Index;
-        };
-
       });
 
-      console.log(smallestCategoryIndexes);
-
-      this.productService.deleteMany(ids)
-        .then(res => {
-
-          const cateIndexes = [];
-          smallestCategoryIndexes.forEach(cateIndex => {
-            cateIndexes.push(cateIndex.CategoryIndex);
-          })
-
-          this.productService.updateProductIndexMultiple(smallestIndex, cateIndexes)
-            .then(() => {
-              this.stopLoading();
-              this.categoryChange();
-            })
-            .catch(err => {
-              this.stopLoading();
-              this.showError(err);
-              return;
-            })
-        })
-    });
-
-  }
-
-  isContain(category: number, indexes: {
-    Category: number,
-    CategoryIndex: number
-  }[]): boolean {
-
-    let isContained = false;
-
-    indexes.forEach(item => {
-
-      if (category === item.Category) {
-
-        isContained = true;
-      }
+      this.productService.deleteManyProducts(ids, prodImages)
+        .then(() => {
+          this.pageChanged(this.currentPage);
+        });
 
     });
-
-    return isContained;
-
   }
+
 
   searchProduct(term) {
-
-    this.products = [];
-    if (term == '') {
-      this.pageChanged(1);
-      return;
-    }
-
-    if (term.indexOf('MS') >= 0 || term.indexOf('ms') >= 0) {
-      term = term.replace('ms', 'MS');
-    }
-    else {
-      term = `MS ${term}`;
-    }
-
-    console.log(term);
-
-    this.startLoading();
-
-    this.productService.searchProduct(term)
-      .then(products => {
-
-        console.log(products);
-
-        products.forEach(product => {
-          this.products.push({
-            Product: product,
-            CategoryName: this.categories.filter(p => p.Value === product.ProductCategories)[0].Name,
-            IsSelect: false
-          });
-        });
-        this.stopLoading();
-      });
-
+    this.searchTerm = term;
+    this.pageChanged(1);
 
   }
 }

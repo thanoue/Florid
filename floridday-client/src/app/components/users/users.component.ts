@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { PageComponent } from 'src/app/models/view.models/menu.model';
-import { MenuItems } from 'src/app/models/enums';
+import { MenuItems, Roles } from 'src/app/models/enums';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/entities/user.entity';
-import { ROLES } from 'src/app/app.constants';
+import { ROLES, IMAGE_FOLDER_PATHS } from 'src/app/app.constants';
 import { NgForm } from '@angular/forms';
 import { UserAvtService } from 'src/app/services/userr.avt.service';
 import { UserAvtImage } from 'src/app/models/entities/file.entity';
 import { FunctionsService } from 'src/app/services/common/functions.service';
 import { Guid } from 'guid-typescript';
+import { ExchangeService } from 'src/app/services/exchange.service';
 declare function hideAdd(): any;
 declare function showUserEditPopup(): any;
 @Component({
@@ -26,7 +27,6 @@ export class UsersComponent extends BaseComponent {
 
   isSelectAll: boolean;
   currrentEditUser: User = new User();
-  selectedPassword = "";
   edittingImageUrl: any;
   edittingFile: File;
 
@@ -42,6 +42,18 @@ export class UsersComponent extends BaseComponent {
     this.loadUsers();
   }
 
+  deleteUser(userId: number) {
+    this.openConfirm("Chắn chắn xoá User này ?", () => {
+
+      let user = this.users.filter(p => p.User.Id == userId)[0];
+
+      this.userService.deleteUser(userId, user.User.AvtUrl).then(() => {
+        this.loadUsers();
+      });
+    });
+
+  }
+
   loadUsers() {
 
     this.users = [];
@@ -50,16 +62,17 @@ export class UsersComponent extends BaseComponent {
 
         users.forEach(user => {
 
+          let role = ROLES.filter(p => p.Role.toString() == user.Role.toString())[0];
+
           this.users.push({
             User: user,
-            Role: ROLES.filter(p => p.Role == user.Role)[0].DisplayName,
+            Role: user.Role,
             IsSelected: false
           });
 
         });
 
       });
-
   }
 
   onChange(event) {
@@ -90,18 +103,20 @@ export class UsersComponent extends BaseComponent {
     this.isSelectAll = isSelected;
   }
 
+  addUserRequest() {
+    this.edittingFile = null;
+    this.edittingImageUrl = "";
+    this.currrentEditUser = new User();
+    showUserEditPopup();
+  }
 
   selectUserToEdit(user: User) {
 
-    console.log(user);
-
     Object.assign(this.currrentEditUser, user);
 
-    this.edittingImageUrl = this.currrentEditUser.AvtUrl;
+    // this.edittingImageUrl = ExchangeService.getFullImgUrl(IMAGE_FOLDER_PATHS.user_avt, this.currrentEditUser.AvtUrl);
 
     this.edittingFile = null;
-
-    this.selectedPassword = this.currrentEditUser.Password;
 
     this.currrentEditUser.Password = '';
 
@@ -119,101 +134,49 @@ export class UsersComponent extends BaseComponent {
       if (!this.currrentEditUser.Id) {
         this.showError('Thiếu mật khẩu!!');
         return;
-      } else {
-        this.currrentEditUser.Password = this.selectedPassword;
       }
-
     }
 
-    console.log(this.currrentEditUser);
 
     if (this.currrentEditUser.Id) {
-      this.deleteOldImageAndEdit();
-      return;
-    }
 
-    console.log('is add');
+      this.userService.updateUser(this.currrentEditUser, this.edittingFile).then(user => {
 
-    if (this.edittingFile && this.edittingFile != null) {
-
-      let newAvt = new UserAvtImage();
-      newAvt.Name = Guid.create().toString();
-
-      this.userAvtImageService.addFile(this.edittingFile, newAvt, (url) => {
-
-        if (url == 'ERROR')
-          return;
-
-        console.log(url);
-        this.currrentEditUser.AvtUrl = url;
-
-        this.updateUser('createUser');
-
-      });
-
-    } else {
-
-      this.currrentEditUser.AvtUrl = 'https://i2.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1';
-
-      this.updateUser('createUser');
-
-    }
-
-  }
-
-  deleteOldImageAndEdit() {
-
-    this.userAvtImageService.deleteFileByUrl(this.currrentEditUser.AvtUrl, (isDeleted) => {
-
-      if (!isDeleted) {
-        return;
-      }
-
-      let newAvt = new UserAvtImage();
-      newAvt.Name = Guid.create().toString();
-
-      if (this.edittingFile && this.edittingFile != null) {
-
-        this.userAvtImageService.addFile(this.edittingFile, newAvt, (url) => {
-
-          if (url == 'ERROR')
-            return;
-
-          this.currrentEditUser.AvtUrl = url;
-
-          this.updateUser('editUser');
-        });
-
-      } else {
-        console.log('edit user without change avt');
-        this.updateUser('editUser');
-      }
-    });
-  }
-
-  updateUser(functionName: string) {
-
-    this.startLoading();
-
-    FunctionsService.excuteFunction(functionName, this.currrentEditUser)
-      .then(() => {
+        this.stopLoading();
 
         this.currrentEditUser = new User();
         this.edittingImageUrl = '';
         this.edittingFile = null;
-        this.stopLoading();
-        this.loadUsers();
-        hideAdd();
 
-      })
-      .catch(err => {
-        this.edittingFile = null;
-        this.edittingImageUrl = '';
-        this.stopLoading();
-        this.showError(err);
-        return;
+        if (user == null) {
+          return;
+        }
+
+        hideAdd();
+        this.loadUsers();
 
       });
-  }
 
+      return;
+    }
+
+    this.userService.insertUser(this.currrentEditUser, this.edittingFile).then(user => {
+
+      this.stopLoading();
+
+      if (user == null) {
+        return;
+      }
+
+      this.loadUsers();
+      this.currrentEditUser = new User();
+      this.edittingImageUrl = '';
+      this.edittingFile = null;
+      this.stopLoading();
+
+      hideAdd();
+
+    });
+
+  }
 }

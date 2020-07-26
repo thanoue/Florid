@@ -3,7 +3,7 @@
   <div class="listHeader">
     <div class="row listAddNew">
       <div class="col-xs-12 col-md-2">
-        <button class="btn btn-outline-info d-block w-100" onclick="addTag()" role="button">Thêm Mới</button>
+        <button class="btn btn-outline-info d-block w-100" onclick="showTagEditPopup()" role="button">Thêm Mới</button>
       </div>
     </div>
     <div class="row listOptions">
@@ -55,19 +55,19 @@
               <label class="form-check-label">
                 <input type="checkbox" class="form-check-input" name="" id="" [(ngModel)]="tag.IsChecked"
                   value="checkedValue">
-                {{tag.Tag.Index}}
+                {{tag.Tag.Id}}
               </label>
             </div>
           </td>
           <td>
-            <a href="javascript:void(0)" class="tdName" onclick="showTagEdit(event)">{{tag.Tag.Name}}</a>
+            <a href="javascript:void(0)" class="tdName">{{tag.Tag.Name}}</a>
           </td>
-          <td>{{tag.Tag.Id}}</td>
+          <td>{{tag.Tag.Alias}}</td>
           <td>{{tag.Tag.Description}}
           </td>
           <td>
             <div class="btn-group">
-              <button type="button" class="btn btn-outline-info" onclick="showTagEdit(event)"><i
+              <button type="button" class="btn btn-outline-info" (click)="editRequest(tag.Tag)"><i
                   class="fa fa-pencil"></i> Sửa</button>
               <button type="button" (click)="deleteTag(tag.Tag)" class="btn btn-outline-danger"><i
                   class="fa fa-remove"></i>

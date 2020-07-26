@@ -9,10 +9,11 @@ export enum EntityType {
 
 
 export enum Roles {
+    User = 'User',
     Admin = 'Admin',
+    Florist = 'Florist',
     Account = 'Account',
-    Shipper = 'Shipper',
-    Florist = 'Florist'
+    Shipper = 'Shipper'
 };
 
 export enum MembershipTypes {

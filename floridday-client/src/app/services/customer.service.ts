@@ -1,152 +1,200 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './common/base.service';
-import { Customer } from '../models/entities/customer.entity';
+import { Customer, CustomerAddress, CustomerContactInfo, MembershipInfo, SpecialDay } from '../models/entities/customer.entity';
 import * as firebase from 'firebase';
 import { CustomerReceiverDetail } from '../models/entities/order.entity';
+import { HttpService } from './common/http.service';
+import { GlobalService } from './common/global.service';
+import { API_END_POINT } from '../app.constants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService extends BaseService<Customer> {
-
-  protected tableName = '/customers';
-
-  constructor() {
-    super();
-
-  }
-
-  public updateReceiverList(customerId: string, data: CustomerReceiverDetail[]): Promise<boolean> {
-    return this.db.ref(`${this.tableName}/${customerId}/ReceiverInfos`).set(data).then(res => {
-      return true;
-    }).catch(error => {
-      console.log(error);
-      return false;
-    });
+export class CustomerService {
+  updateSingleField(Id: string, arg1: string, currentReceiver: CustomerReceiverDetail) {
+    throw new Error("Method not implemented.");
   }
 
 
-  getByPage(page: number, itemsPerPage: number): Promise<Customer[]> {
+  constructor(private httpService: HttpService, private globalService: GlobalService) {
 
-    this.startLoading();
+  }
 
-    let query = this.tableRef.orderByChild('Index')
-      .startAt((page - 1) * itemsPerPage + 1)
-      .endAt(itemsPerPage * page)
-      .once('value');
+  getById(id: string): Promise<Customer> {
+    return this.httpService.get(API_END_POINT.getCustomeById, {
+      id: id
+    }).then(data => {
 
-    return query.then(snapshot => {
-      this.stopLoading();
-      const Customers = [];
-      snapshot.forEach(snap => {
-        const Customer = snap.val() as Customer;
+      let item = data.customer;
 
-        Customers.push(Customer);
+      let customer = new Customer();
+
+      customer.Id = item.Id;
+      customer.FullName = item.FullName;
+      customer.PhoneNumber = item.PhoneNumber;
+      customer.Birthday = item.Birthday;
+      customer.Sex = item.Sex;
+
+      customer.Address = new CustomerAddress();
+      customer.Address.Work = item.WorkAddress;
+      customer.Address.Home = item.HomeAddress;
+
+      customer.ContactInfo = new CustomerContactInfo();
+      customer.ContactInfo.Facebook = item.ContactInfo_Facebook;
+      customer.ContactInfo.Zalo = item.ContactInfo_Zalo;
+      customer.ContactInfo.Skype = item.ContactInfo_Skype;
+      customer.ContactInfo.Viber = item.ContactInfo_Viber;
+      customer.ContactInfo.Instagram = item.ContactInfo_Instagram;
+
+      customer.MainContactInfo = item.MainContactInfo;
+
+      customer.MembershipInfo = new MembershipInfo();
+      customer.MembershipInfo.AccumulatedAmount = item.AccumulatedAmount;
+      customer.MembershipInfo.UsedScoreTotal = item.UsedScoreTotal;
+      customer.MembershipInfo.AvailableScore = item.AvailableScore;
+      customer.MembershipInfo.MembershipType = item.MembershipType;
+
+      customer.ReceiverInfos = [];
+      customer.SpecialDays = [];
+
+      item.customerReceivers.forEach(receiver => {
+        let item = new CustomerReceiverDetail();
+        item.PhoneNumber = receiver.PhoneNumber;
+        item.FullName = receiver.FullName;
+        customer.ReceiverInfos.push(item);
       });
 
-      return Customers;
+      item.customerSpecialDays.forEach(date => {
+        let item = new SpecialDay();
+        item.Date = date.Date;
+        item.Description = date.Description;
+        customer.SpecialDays.push(item);
+      });
 
-    }).catch(error => {
-      this.stopLoading();
-      this.errorToast(error);
-      return [];
-    })
+      return customer;
+
+    }).catch(err => {
+      this.httpService.handleError(err);
+      throw err;
+    });;
   }
 
   getCount(): Promise<number> {
-    this.startLoading();
-    return this.tableRef.orderByChild('Index').limitToLast(1).once('value')
-      .then(snapshot => {
-
-        this.stopLoading();
-
-        let customer: Customer;
-        snapshot.forEach(snap => {
-          customer = snap.val() as Customer;
-        });
-
-        if (!customer)
-          return 0;
-
-        return customer.Index;
+    return this.httpService.get(API_END_POINT.getCustomeCount)
+      .then(data => {
+        return data.count;
       })
-      .catch(error => {
-        this.errorToast(error);
-        return 0;
+      .catch(err => {
+        this.httpService.handleError(err);
+        throw err;
       });
   }
 
-  searchCustomer(term: string): Promise<any> {
-    return this.tableRef
-      .orderByChild('FullName')
-      .startAt(term)
-      .endAt(term + '\uf8ff')
-      .once('value')
-      .then((res: any) => {
+  createCustomer(customer: Customer): Promise<any> {
+    console.log(customer);
+    return this.httpService.post(API_END_POINT.createCustomer, {
+      fullName: customer.FullName,
+      phoneNumber: customer.PhoneNumber,
+      birthday: customer.Birthday,
+      sex: customer.Sex,
+      usedScoreTotal: customer.MembershipInfo.UsedScoreTotal,
+      availableScore: customer.MembershipInfo.AvailableScore,
+      accumulatedAmount: customer.MembershipInfo.AccumulatedAmount,
+      membershipType: customer.MembershipInfo.MembershipType,
+      facebook: customer.ContactInfo.Facebook,
+      zalo: customer.ContactInfo.Zalo,
+      skype: customer.ContactInfo.Skype,
+      viber: customer.ContactInfo.Viber,
+      instagram: customer.ContactInfo.Instagram,
+      mainContactInfo: customer.MainContactInfo,
+      id: customer.Id
+    }).then((customer) => {
+      return customer;
+    })
+      .catch(err => {
+        this.httpService.handleError(err);
+      })
+  }
 
-        const customers: any[] = [];
 
-        res.forEach((snapShot: any) => {
-          customers.push(snapShot.val());
+  getList(page: number, itemsPerPage: number, term: string = ''): Promise<{
+    Customers: Customer[],
+    totalItemCount: number,
+    totalPages: number
+  }> {
+    return this.httpService.get(API_END_POINT.getCustomers, {
+      page: page - 1,
+      size: itemsPerPage,
+      term: term
+    }).then(data => {
+
+      let res: {
+        Customers: Customer[],
+        totalItemCount: number,
+        totalPages: number
+      } = {
+        totalItemCount: 0,
+        totalPages: 0,
+        Customers: []
+      };
+
+      res.totalItemCount = data.totalItemCount;
+      res.totalPages = data.totalPages;
+
+      data.items.forEach(item => {
+
+        let customer = new Customer();
+
+        customer.Id = item.Id;
+        customer.FullName = item.FullName;
+        customer.PhoneNumber = item.PhoneNumber;
+        customer.Birthday = item.Birthday;
+        customer.Sex = item.Sex;
+
+        customer.Address = new CustomerAddress();
+        customer.Address.Work = item.WorkAddress;
+        customer.Address.Home = item.HomeAddress;
+
+        customer.ContactInfo = new CustomerContactInfo();
+        customer.ContactInfo.Facebook = item.ContactInfo_Facebook;
+        customer.ContactInfo.Zalo = item.ContactInfo_Zalo;
+        customer.ContactInfo.Skype = item.ContactInfo_Skype;
+        customer.ContactInfo.Viber = item.ContactInfo_Viber;
+        customer.ContactInfo.Instagram = item.ContactInfo_Instagram;
+
+        customer.MainContactInfo = item.MainContactInfo;
+
+        customer.MembershipInfo = new MembershipInfo();
+        customer.MembershipInfo.AccumulatedAmount = item.AccumulatedAmount;
+        customer.MembershipInfo.UsedScoreTotal = item.UsedScoreTotal;
+        customer.MembershipInfo.AvailableScore = item.AvailableScore;
+        customer.MembershipInfo.MembershipType = item.MembershipType;
+
+        customer.ReceiverInfos = [];
+        customer.SpecialDays = [];
+
+        item.customerReceivers.forEach(receiver => {
+          let item = new CustomerReceiverDetail();
+          item.PhoneNumber = receiver.PhoneNumber;
+          item.FullName = receiver.FullName;
+          customer.ReceiverInfos.push(item);
         });
 
-        if (customers.length > 0) {
-          return customers;
-        } else {
-          return this.tableRef
-            .orderByChild('PhoneNumber')
-            .startAt(term)
-            .endAt(term + '\uf8ff')
-            .once('value')
-            .then((phoneRes: any) => {
+        item.customerSpecialDays.forEach(date => {
+          let item = new SpecialDay();
+          item.Date = date.Date;
+          item.Description = date.Description;
+        });
 
-              const _customers: any[] = [];
-
-              phoneRes.forEach((snapShot: any) => {
-                _customers.push(snapShot.val());
-              });
-
-              return _customers
-            })
-        }
+        res.Customers.push(customer);
       });
+
+      return res;
+
+    }).catch(err => {
+      this.httpService.handleError(err);
+      throw err;
+    });
   }
 
-  updateIndex(deletedIndex: number): Promise<any> {
-
-    return this.tableRef.orderByChild('Index')
-      .startAt(deletedIndex + 1).once('value')
-      .then((snapshot: any) => {
-
-        try {
-          const customers: Customer[] = [];
-
-          snapshot.forEach((snap: any) => {
-            const tag = snap.val() as Customer;
-            if (tag.Index > deletedIndex) {
-              customers.push(tag);
-            }
-          });
-
-          interface IDictionary {
-            [index: string]: number;
-          }
-
-          var updates = {} as IDictionary;
-
-          customers.forEach((customer: any) => {
-
-            updates[`/${customer.Id}/Index`] = deletedIndex;
-            deletedIndex += 1;
-
-          });
-
-          return this.tableRef.update(updates);
-        }
-        catch (error) {
-          throw error;
-        }
-
-      });
-  }
 }

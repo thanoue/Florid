@@ -3,21 +3,21 @@
     <div class="listHeader">
         <div class="row listAddNew">
             <div class="col-xs-12 col-md-2">
-                <button class="btn btn-outline-info d-block w-100" onclick="showUserEditPopup()" role="button">Thêm
+                <button class="btn btn-outline-info d-block w-100" (click)="addUserRequest()" role="button">Thêm
                     Mới</button>
             </div>
         </div>
         <div class="row listOptions">
             <div class="col-md-2 col-xs-12  optionDelete">
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue"
+                    <input type="checkbox" class="form-check-input" name="" id="checkbox" value="checkedValue"
                         (change)="checkAllChange(!isSelectAll)">
                     <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i> Xóa</button>
                 </div>
             </div>
             <div class="col-md-6 col-xs-12  optionSearch">
                 <div class="form-group">
-                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
+                    <input type="text" class="form-control" name="" id="searchbox" aria-describedby="helpId"
                         placeholder="Tìm kiếm...">
                     <button type="submit" class="btn btn-info position-absolute "><i class="fa fa-search"></i></button>
                 </div>
@@ -57,14 +57,7 @@
                     <td>{{user.User.PhoneNumber}}</td>
                     <td>{{user.User.Email}}</td>
                     <td>
-                        <span *ngIf="user.User.Role =='Account'"
-                            class="badge badge-pill badge-danger d-block p-2">{{user.Role}}</span>
-                        <span *ngIf="user.User.Role =='Admin'"
-                            class="badge badge-pill badge-success d-block p-2">{{user.Role}}</span>
-                        <span *ngIf="user.User.Role =='Florist'"
-                            class="badge badge-pill badge-secondary d-block p-2">{{user.Role}}</span>
-                        <span *ngIf="user.User.Role =='Shipper'"
-                            class="badge badge-pill badge-info d-block p-2">{{user.Role}}</span>
+                        <span class="badge badge-pill badge-success d-block p-2">{{user.Role}}</span>
                     </td>
                     <td *ngIf="user.User.IsPrinter">
                         In ấn
@@ -75,7 +68,8 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-outline-info" (click)="selectUserToEdit(user.User)"><i
                                     class="fa fa-pencil"></i> Sửa</button>
-                            <button type="button" class="btn btn-outline-danger"><i class="fa fa-remove"></i>
+                            <button type="button" class="btn btn-outline-danger" (click)="deleteUser(user.User.Id)"><i
+                                    class="fa fa-remove"></i>
                                 Xóa</button>
                             <a href="./saleItems.html" type="button" class="btn btn-outline-primary"><i
                                     class="fa fa-eye"></i> Chi tiết</a>
@@ -93,8 +87,9 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="Email">Tên đăng nhập</label>
-                <input [(ngModel)]="currrentEditUser.Email" id="Email" name="Email" required minlength="6" type="text"
-                    class="form-control" placeholder="tên đăng nhập..." #LoginName="ngModel" autocomplete="off">
+                <input [(ngModel)]="currrentEditUser.LoginName" id="LoginName" name="LoginName" required minlength="6"
+                    type="text" class="form-control" placeholder="tên đăng nhập..." #LoginName="ngModel"
+                    autocomplete="off">
                 <div *ngIf="LoginName.invalid && (LoginName.dirty || LoginName.touched)" class="alert alert-danger">
 
                     <div *ngIf="LoginName.errors.required">
@@ -119,7 +114,7 @@
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="FullName">Họ và Tên</label>
                 <input type="text" class="form-control" required minlength="3" #FullName="ngModel"
                     [(ngModel)]="currrentEditUser.FullName" id="FullName" name="FullName" placeholder="">
@@ -133,7 +128,12 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+                <label for="FullName">Email</label>
+                <input type="text" class="form-control" [(ngModel)]="currrentEditUser.Email" id="Email" name="Email"
+                    placeholder="">
+            </div>
+            <div class="form-group col-md-4">
                 <label for="inputPhone">Số điện thoại</label>
                 <input type="text" class="form-control" [(ngModel)]="currrentEditUser.PhoneNumber" id="PhoneNumber"
                     name="PhoneNumber" placeholder="+84" #PhoneNumber="ngModel" required minlength="7">
@@ -159,6 +159,7 @@
                     <option [ngValue]="'Shipper'">Người giao hàng</option>
                     <option [ngValue]="'Account'">Chăm sóc KH</option>
                     <option [ngValue]="'Admin'">Quản trị viên</option>
+                    <option [ngValue]="'User'">Khác</option>
                 </select>
             </div>
             <div class="form-check  col-md-3">
@@ -171,7 +172,8 @@
         </div>
         <div class="form-group avatarChange">
             <label>Chọn ảnh đại diện</label>
-            <img [src]="edittingImageUrl" *ngIf="edittingImageUrl" style="width: 100px; height: 100px;" />
+            <img src="{{edittingImageUrl | ImgPipe : 'UserAvt'}}" *ngIf="edittingImageUrl"
+                style="width: 100px; height: 100px;" />
             <input type="file" id="uploadedFile" class="form-control-file" accept='image/*' (change)="onChange($event)"
                 name="uploadedFile" aria-describedby="fileHelpId">
 

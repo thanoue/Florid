@@ -5,6 +5,8 @@ import { OrderReceiverDetail, CustomerReceiverDetail } from '../models/entities/
 import { getTranslationDeclStmts } from '@angular/compiler/src/render3/view/template';
 import { float } from 'html2canvas/dist/types/css/property-descriptors/float';
 import { Customer } from '../models/entities/customer.entity';
+import { env } from 'process';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +24,31 @@ export class ExchangeService {
             case MembershipTypes.VVip:
                 return 15;
         }
+    }
+
+    static detectCustomerId(count: number): string {
+        if (count > 9999) {
+            return `FD-${count.toString()}`;
+        }
+
+        if (count > 999) {
+            return `FD-0${count.toString()}`
+        }
+
+        if (count > 99) {
+            return `FD-00${count.toString()}`
+        }
+
+        if (count > 9) {
+            return `FD-000${count.toString()}`
+        }
+
+        return `FD-0000${count.toString()}`
+    }
+
+    static getFullImgUrl(relativeFolderPath: string, fileName: string): string {
+        console.log(fileName);
+        return fileName.indexOf('http') >= 0 ? fileName : `${environment.base_domain}${relativeFolderPath}${fileName}`;
     }
 
     static getMainContact(customer: Customer): string {
@@ -127,6 +154,11 @@ export class ExchangeService {
     }
 
     static getAlias(source: string): string {
+
+        if (!source) {
+            return '';
+        }
+
         var str = source.toLowerCase();
         str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
         str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");

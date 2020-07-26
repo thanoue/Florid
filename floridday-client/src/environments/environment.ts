@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  base_domain: 'https://us-central1-lorid-e9c34.cloudfunctions.net/webApi',
+  base_domain: '',
   momo_generate_qr_domain: 'https://test-payment.momo.vn'
 };
 

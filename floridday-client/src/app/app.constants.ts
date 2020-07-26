@@ -12,15 +12,56 @@ export const LOCAL_STORAGE_VARIABLE = {
     user_email: 'user_email',
     is_printer: 'is_printer',
     firebase_config: 'firebase_config'
-
 };
 
 export const API_END_POINT = {
-    login: '/users/login',
-    force_user_logout: '/users/forceUserLogout',
-    momo_qr_confirm: '/sale/momo/qr/confirm',
-    logout: '/users/logout'
+    login: '/auth/signin',
+    logout: '/auth/signout',
+
+    getAllUser: '/user/getAll',
+    createUser: '/user/createUser',
+    updateUser: '/user/editUser',
+    deleteUser: '/user/deleteUser',
+
+    deleteTag: '/tag/delete',
+    deleteTags: '/tag/deletemany',
+    createTag: '/tag/create',
+    updateTag: '/tag/update',
+    getTags: '/tag/getList',
+    getAllTags: '/tag/getall',
+
+    deleteCategory: '/category/delete',
+    deleteCategories: '/category/deletemany',
+    createCategory: '/category/create',
+    updateCategory: '/category/update',
+    getCategories: '/category/getList',
+    getAllCategories: '/category/getAll',
+
+    deleteProduct: '/product/delete',
+    deleteManyProduct: '/product/deletemany',
+    createProduct: '/product/create',
+    updateProduct: '/product/update',
+    getProducts: '/product/getList',
+
+    deleteCustomer: '/customer/delete',
+    deleteManyCustomer: '/customer/deletemany',
+    createCustomer: '/customer/create',
+    updateCustomer: '/customer/update',
+    getCustomers: '/customer/getList',
+    getCustomeCount: '/customer/getCount',
+    getCustomeById: '/customer/getById',
 };
+
+export const IMAGE_FOLDER_PATHS = {
+    user_avt: '/user/avt/',
+    product_img: '/product/img/'
+}
+
+export enum ImgType {
+    UserAvt = 'UserAvt',
+    ProductImg = "ProductImg",
+    OrderImg = "OrderImg",
+}
 
 export const ROLES = [
     {
@@ -39,6 +80,10 @@ export const ROLES = [
         Role: Roles.Shipper,
         DisplayName: 'Người giao hàng'
     },
+    {
+        Role: Roles.User,
+        DisplayName: 'Khác'
+    }
 ]
 
 export const ORDER_DETAIL_STATES = [

@@ -29,6 +29,7 @@ export class CustomerEditComponent extends BaseComponent {
   constructor(private customerService: CustomerService, private router: Router) { super(); }
 
   editCustomer(form: NgForm) {
+
     if (form.invalid)
       return;
 
@@ -38,10 +39,12 @@ export class CustomerEditComponent extends BaseComponent {
       this.customer.SpecialDays.forEach(day => {
 
         if (day.Description && day.Description != '') {
+
           specialDays.push({
             Description: day.Description,
             Date: new Date(day.Date).getTime()
           });
+
         }
 
       });
@@ -62,11 +65,6 @@ export class CustomerEditComponent extends BaseComponent {
       return;
     }
 
-    this.customerService.set(this.customer)
-      .then(() => {
-        this.globalCustomer = this.customer;
-        this.router.navigate(['/customer-detail']);
-      });
 
   }
 

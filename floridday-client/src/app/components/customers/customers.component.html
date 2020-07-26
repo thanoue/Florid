@@ -3,7 +3,7 @@
     <div class="listHeader">
         <div class="row listAddNew">
             <div class="col-xs-12 col-md-2">
-                <button class="btn btn-outline-info d-block w-100" onclick="showCustomerSetupPopup()" role="button">Thêm
+                <button class="btn btn-outline-info d-block w-100" (click)="addRequest()" role="button">Thêm
                     Mới</button>
             </div>
         </div>
@@ -45,7 +45,7 @@
         <table class="table table-bordered table-hover table-responsive-xl">
             <thead class="table-info">
                 <tr>
-                    <th scope="col" style="width: 5%">STT</th>
+                    <th scope="col" style="width: 10%">ID</th>
                     <th scope="col">Họ và Tên</th>
                     <th scope="col">Số điện thoại</th>
                     <th scope="col">Sinh nhật</th>
@@ -62,7 +62,7 @@
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="" id=""
                                     [(ngModel)]="customer.IsChecked" value="checkedValue">
-                                {{customer.Customer.Index}}
+                                {{customer.Customer.Id}}
                             </label>
                         </div>
                     </td>
@@ -104,7 +104,21 @@
     <hr class="adminSeperate">
     <form #form="ngForm" (submit)="addCustomer(form)" autocomplete="off">
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+                <label for="FullName">Mã số</label>
+                <input type="text" class="form-control" [(ngModel)]="currentCustomer.Id" id="Id" name="Id" #Id="ngModel"
+                    required minlength="3">
+                <div *ngIf="Id.invalid && (Id.dirty || Id.touched)" class="alert alert-danger">
+
+                    <div *ngIf="Id.errors.required">
+                        Bắt buộc
+                    </div>
+                    <div *ngIf="Id.errors.minlength">
+                        Tối thiểu 3 ký tự
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-4">
                 <label for="FullName">Họ và Tên</label>
                 <input type="text" class="form-control" [(ngModel)]="currentCustomer.FullName" id="FullName"
                     name="FullName" placeholder="Nguyễn Văn A" #FullName="ngModel" required minlength="5">
@@ -118,7 +132,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="PhoneNumber">Số điện thoại</label>
                 <input type="text" class="form-control" [(ngModel)]="currentCustomer.PhoneNumber" id="PhoneNumber"
                     name="PhoneNumber" placeholder="0898443222" minlength="9" required #PhoneNumber="ngModel">
@@ -132,6 +146,34 @@
                         Tối thiểu 9 ký tự
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="selectDist">Liên hệ chính</label>
+                <select class="form-control" [(ngModel)]="currentCustomer.MainContactInfo" name="MainContactInfo"
+                    id="MainContactInfo">
+                    <option selected>Chọn...</option>
+                    <option [ngValue]="'Zalo'">Zalo</option>
+                    <option [ngValue]="'Facebook'">Facebook</option>
+                    <option [ngValue]="'Viber'">Viber</option>
+                    <option [ngValue]="'Skype'">Skype</option>
+                    <option [ngValue]="'Instagram'">Instagram</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="selectDist">Danh Xưng</label>
+                <select class="form-control" [(ngModel)]="currentCustomer.Sex" name="Sex" id="Sex">
+                    <option selected>Chọn...</option>
+                    <option [ngValue]="'Male'">Anh</option>
+                    <option [ngValue]="'Female'">Chị</option>
+                    <option [ngValue]="'Others'">Khác</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label>Sinh nhật: </label>
+                <input class="form-control" type="date" [ngModel]="currentCustomer.Birthday | date:'yyyy-MM-dd'"
+                    (ngModelChange)="currentCustomer.Birthday = $event" id="Birthday" name="Birthday">
             </div>
         </div>
         <div class="form-row">
@@ -164,28 +206,8 @@
                     id="Instagram" name="Instagram" placeholder="092836233">
             </div>
         </div>
+
         <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="selectDist">Liên hệ chính</label>
-                <select class="form-control" [(ngModel)]="currentCustomer.MainContactInfo" name="MainContactInfo"
-                    id="MainContactInfo">
-                    <option selected>Chọn...</option>
-                    <option [ngValue]="'Zalo'">Zalo</option>
-                    <option [ngValue]="'Facebook'">Facebook</option>
-                    <option [ngValue]="'Viber'">Viber</option>
-                    <option [ngValue]="'Skype'">Skype</option>
-                    <option [ngValue]="'Instagram'">Instagram</option>
-                </select>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="selectDist">Danh Xưng</label>
-                <select class="form-control" [(ngModel)]="currentCustomer.Sex" name="Sex" id="Sex">
-                    <option selected>Chọn...</option>
-                    <option [ngValue]="'Male'">Anh</option>
-                    <option [ngValue]="'Female'">Chị</option>
-                    <option [ngValue]="'Others'">Khác</option>
-                </select>
-            </div>
             <div class="form-group col-md-4">
                 <label for="selectDist">Hạng thẻ</label>
                 <select class="form-control" [(ngModel)]="currentCustomer.MembershipInfo.MembershipType"
@@ -197,14 +219,12 @@
                     <option [ngValue]="'VVip'">VVIP</option>
                 </select>
             </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="selectWard">Tổng tiền đã mua (K)</label>
                 <input type="number" class="form-control" id="AccumulatedAmount" name="AccumulatedAmount"
                     [(ngModel)]="currentCustomer.MembershipInfo.AccumulatedAmount" placeholder="900000">
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label for="selectWard">Điểm đã sử Dụng</label>
                 <input type="number" class="form-control" id="UsedScoreTotal" name="UsedScoreTotal"
                     [(ngModel)]="currentCustomer.MembershipInfo.UsedScoreTotal" placeholder="0">

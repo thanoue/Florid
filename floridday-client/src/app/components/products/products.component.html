@@ -3,7 +3,7 @@
     <div class="listHeader">
         <div class="row listAddNew">
             <div class="col-xs-12 col-md-2">
-                <button class="btn btn-outline-info d-block w-100" onclick="showProductSetupPopup()" role="button">Thêm
+                <button class="btn btn-outline-info d-block w-100" (click)="addingRequest()" role="button">Thêm
                     Mới</button>
             </div>
         </div>
@@ -25,7 +25,11 @@
                 <div class="form-group">
                     <select class="form-control d-inline" [(ngModel)]="selectedCategory" name="selectedCategory"
                         id="selectedCategory">
-                        <option *ngFor="let category of categories" [ngValue]="category.Value">{{category.Name}}
+                        <option [ngValue]="0">
+                            Tất cả
+                        </option>
+                        <option *ngFor="let category of globalCategories" [ngValue]="category.Category.Id">
+                            {{category.Category.Name}}
                         </option>
                     </select>
                 </div>
@@ -49,13 +53,13 @@
         <table class="table table-bordered table-hover table-responsive-xl">
             <thead class="table-info">
                 <tr>
-                    <th scope="col" style="width: 5%">STT</th>
+                    <th scope="col" style="width: 5%">ID</th>
                     <th scope="col">Hình ảnh</th>
                     <th scope="col" style="width:10%">Mã Sản phẩm</th>
                     <th scope="col">Giá gốc</th>
-                    <th scope="col">Loại sản phẩm</th>
+                    <th scope="col" style="width: 25%">Danh mục sản phẩm</th>
                     <th scope="col">Mô tả</th>
-                    <th scope="col" style="width:15%">Tag</th>
+                    <th scope="col" style="width:20%">Tag</th>
                     <th scope="col">Thao tác</th>
                 </tr>
             </thead>
@@ -66,12 +70,12 @@
                             <label class="form-check-label">
                                 <input type="checkbox" class="form-check-input" name="" id=""
                                     [(ngModel)]="product.IsSelect" value="checkedValue">
-                                {{product.Product.Index}}
+                                {{product.Product.Id}}
                             </label>
                         </div>
                     </td>
                     <td>
-                        <img [src]="product.Product.ImageUrl" alt="" class="productImg">
+                        <img src="{{product.Product.ImageUrl |  ImgPipe : 'ProductImg'}}" alt="" class="productImg">
                     </td>
                     <td>
                         <a href="javascript:void(0)" class="tdName"
@@ -79,14 +83,15 @@
                     </td>
                     <td>{{product.Product.Price}}</td>
                     <td>
-                        {{product.CategoryName}}
+                        <span *ngFor="let category of product.Categories"
+                            class="badge badge-pill badge-warning d-inline-block p-1 mb-1">{{category.Name}}</span>
                     </td>
                     <td>
                         {{product.Product.Description}}
                     </td>
                     <td>
-                        <span *ngFor="let tag of product.Product.Tags"
-                            class="badge badge-pill badge-success d-inline-block p-1 mb-1">{{tag.TagName}}</span>
+                        <span *ngFor="let tag of product.Tags"
+                            class="badge badge-pill badge-success d-inline-block p-1 mb-1">{{tag.Name}}</span>
                     </td>
                     <td>
                         <div class="btn-group">
@@ -107,12 +112,13 @@
 
     </app-page-segment>
 </div>
+
 <div class="popupContent" id="productAdd">
     <h4 class="userName">Thêm mới Sản phẩm</h4>
     <hr class="adminSeperate">
     <form #form="ngForm" (submit)="addProduct(form)" autocomplete="on">
         <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <label>Mã Sản Phẩm</label>
                 <input type="text" class="form-control" name="Name" [(ngModel)]="edittingProduct.Name" id="Name"
                     required minlength="3" #Name="ngModel">
@@ -126,7 +132,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <label>Giá Gốc (vnđ)</label>
                 <input type="text" class="form-control" name="Price" [(ngModel)]="edittingProduct.Price" id="Price"
                     required #Price="ngModel">
@@ -139,21 +145,25 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-4">
-                <label for="inputCate">Loại Sản Phẩm</label>
-                <select [(ngModel)]="edittingProduct.ProductCategories" name="ProductCategories" id="ProductCategories"
-                    class="form-control">
-                    <option *ngFor="let edittingCate of edittingCategories" [ngValue]="edittingCate.Value">
-                        {{edittingCate.Name}}
-                    </option>
-                </select>
-            </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputDesc">Mô tả</label>
                 <textarea [(ngModel)]="edittingProduct.Description" name="Description" id="Description"
                     class="form-control" cols="100" rows="5" placeholder="Mô tả sản phẩm"></textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Danh mục sản phẩm</label>
+                <ul class="tagList cusScroll">
+                    <li *ngFor="let category of globalCategories">
+                        <span *ngIf="!category.IsSelected" class="badge badge-pill badge-warning p-2"
+                            (click)="selectCategory(category.Category)">{{category.Category.Name}}</span>
+                        <span *ngIf="category.IsSelected" class="badge badge-pill badge-success p-2"
+                            (click)="unselectCategory(category.Category)">{{category.Category.Name}}</span>
+                    </li>
+                </ul>
             </div>
             <div class="form-group col-md-6">
                 <label for="inputTag">Tag</label>
@@ -162,26 +172,26 @@
                         placeholder="Nhập tag mới">
                     <span class="addTagBtn" (click)="addTag()">Thêm</span>
                 </div>
-                <div class="showTags cusScroll">
-                    <span *ngFor="let tag of edittingProduct.Tags" (click)="unselectTag(tag)">{{tag.TagName}}</span>
-                </div>
                 <ul class="tagList cusScroll">
-                    <li *ngFor="let notSelectedTag of globalTags"><span *ngIf="!notSelectedTag.IsSelected"
-                            class="badge badge-pill badge-info p-2"
-                            (click)="selectTag(notSelectedTag.Tag.Id)">{{notSelectedTag.Tag.Name}}</span></li>
+                    <li *ngFor="let tag of globalTags">
+                        <span *ngIf="!tag.IsSelected" class="badge badge-pill badge-warning p-2"
+                            (click)="selectTag(tag.Tag)">{{tag.Tag.Name}}</span>
+                        <span *ngIf="tag.IsSelected" class="badge badge-pill badge-success p-2"
+                            (click)="unselectTag(tag.Tag)">{{tag.Tag.Name}}</span>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="form-group avatarChange">
             <label>Chọn ảnh đại diện</label>
-            <img [src]="edittingImageUrl" *ngIf="edittingImageUrl" style="width: 100px; height: 100px;" />
+            <img src="{{edittingImageUrl | ImgPipe : 'ProductImg'}}" *ngIf="edittingImageUrl"
+                style="width: 100px; height: 100px;" />
             <input type="file" class="form-control-file" accept='image/*' (change)="onChange($event)"
                 name="uploadedFile" aria-describedby="fileHelpId">
 
         </div>
         <div class="form-action row">
-            <div class="col-md-2"><button type="submit" class="btn btn-outline-success w-100">Thêm
-                    Mới</button>
+            <div class="col-md-2"><button type="submit" class="btn btn-outline-success w-100">Lưu</button>
             </div>
             <div class="col-md-1"><a href="javascript:void(0)" class="btn btn-outline-secondary w-100"
                     onclick="hideAdd()">Hủy</a></div>

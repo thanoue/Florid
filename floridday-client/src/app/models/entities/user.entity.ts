@@ -10,16 +10,18 @@ export class LoginModel {
     }
 }
 
-export class User extends BaseEntity {
+export class User {
+    Id: number;
     AvtUrl: string;
     PhoneNumber: string;
     FullName: string;
+    LoginName: string;
     Role: Roles;
     Email: string;
     IsPrinter = false;
     Password = "";
 
+
     constructor() {
-        super();
     }
 }

@@ -33,13 +33,6 @@ export class GlobalService {
     currentWards: Ward[];
     globalCustomer: Customer;
 
-    public get firebaseConfig(): any {
-        return LocalService.getFirebaseConfig();
-    }
-
-    public set firebaseConfig(config: any) {
-        LocalService.setFirebaseConfig(config);
-    }
 
     constructor(private toastr: ToastrService, private ngZone: NgZone) {
 

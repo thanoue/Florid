@@ -18,7 +18,6 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import es from '@angular/common/locales/es';
-import * as firebase from 'firebase/app';
 import vi from '@angular/common/locales/vi';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { OWL_DATE_TIME_LOCALE } from 'ng-pick-datetime';
@@ -34,6 +33,7 @@ import { CustomerOrdersComponent } from './components/customer-orders/customer-o
 import { CustomerReceiversComponent } from './components/customer-receivers/customer-receivers.component';
 import { CustomerEditComponent } from './components/customer-edit/customer-edit.component';
 import { SearchBoxComponent } from './controls/search-box/search-box.component';
+import { ImgPipe } from './pipes/img.pipe';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,8 @@ import { SearchBoxComponent } from './controls/search-box/search-box.component';
     CustomerOrdersComponent,
     CustomerReceiversComponent,
     CustomerEditComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    ImgPipe
   ],
   imports: [
     BrowserModule,
@@ -89,14 +90,6 @@ export class AppModule {
     AppInjector.setInjector(injector);
     registerLocaleData(es);
     registerLocaleData(vi);
-
-    let firebaseConfig = LocalService.getFirebaseConfig();
-
-    if (firebaseConfig != '') {
-      console.log('config:', firebaseConfig);
-      firebase.initializeApp(firebaseConfig);
-    }
-
   }
 
 }

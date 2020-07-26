@@ -39,9 +39,9 @@ export class CustomerReceiversComponent extends BaseComponent {
   protected destroy() {
     this.globalCustomer.ReceiverInfos = this.receivers;
     this.startLoading();  
-    this.customerService.updateSingleField(this.globalCustomer.Id, 'ReceiverInfos', this.currentReceiver).then(() => {
-      this.stopLoading();
-    });
+    // this.customerService.updateSingleField(this.globalCustomer.Id, 'ReceiverInfos', this.currentReceiver).then(() => {
+    //   this.stopLoading();
+    // });
   }
 
   removeReceiver(index) {

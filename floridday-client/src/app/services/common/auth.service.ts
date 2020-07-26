@@ -25,116 +25,63 @@ export class AuthService {
     return role;
   }
 
-  loutOutFirebase(signedOutCallback: (isSuccess: boolean) => void) {
+  logOut(signedOutCallback: (isSuccess: boolean) => void) {
 
-    this.globalService.startLoading();
 
-    firebase.auth().signOut().then(() => {
+    this.httpService.post(API_END_POINT.logout)
+      .then(() => {
 
-      LocalService.clear();
-      this.globalService.stopLoading();
-      signedOutCallback(true);
+        LocalService.clear();
 
-    }).catch(error => {
+        this.globalService.stopLoading();
+        signedOutCallback(true);
 
-      console.log(error.code, error.message);
-      signedOutCallback(false);
-
-      this.globalService.stopLoading();
-
-    });
+      })
+      .catch(err => {
+        LocalService.clear();
+        this.globalService.stopLoading();
+        signedOutCallback(true);
+        throw err;
+      });
 
   }
 
   login(model: LoginModel, loginCallback: (isSuccess: boolean) => void) {
 
-    this.globalService.startLoading();
-
-    if (this.globalService.firebaseConfig != '') {
-      console.log(this.globalService.firebaseConfig);
-      this.acctualLogin(model, loginCallback);
-
-      return;
-
-    }
-
     try {
       this.httpService.post(API_END_POINT.login, {
-        username: model.userName,
+        loginName: model.userName,
         password: model.passcode
       }, true)
-        .subscribe(result => {
+        .then(result => {
 
-          console.log(result);
+          this.globalService.stopLoading();
+          LocalService.clear();
 
-          firebase.initializeApp(result.firebaseConfig);
-          this.globalService.firebaseConfig = result.firebaseConfig;
+          LocalService.setUserEmail(result.email);
+          LocalService.setApiAccessToken(result.accessToken);
+          LocalService.setUserAvtUrl(result.avtUrl);
+          LocalService.setPhoneNumber(result.phoneNumber);
+          LocalService.setIsPrinter(result.phoneNumber);
+          LocalService.setRole(result.roles[0]);
+          LocalService.setUserName(result.fullName);
+          LocalService.setUserId(result.id);
 
-          this.acctualLogin(model, loginCallback);
+          loginCallback(true);
 
+        })
+        .catch(err => {
+          this.globalService.stopLoading();
+          this.globalService.showError(err.error.message);
+          return;
         });
     }
     catch (exception) {
       console.log(exception);
       this.globalService.stopLoading();
+      loginCallback(false);
       return;
     }
 
-  }
-
-  acctualLogin(model: LoginModel, loginCallback: (isSuccess: boolean) => void) {
-
-    firebase.auth().signInWithEmailAndPassword(model.userName, model.passcode)
-      .then(async userInfo => {
-
-        LocalService.clear();
-
-        try {
-
-          firebase.auth().currentUser.getIdToken(true).then(idToken => {
-
-            this.userService.getById(userInfo.user.uid)
-              .then(user => {
-
-                LocalService.setUserName(userInfo.user.displayName);
-                LocalService.setAccessToken(idToken);
-                LocalService.setPhoneNumber(userInfo.user.phoneNumber);
-                LocalService.setRole(user.Role);
-                LocalService.setUserEmail(userInfo.user.email);
-                LocalService.setUserId(userInfo.user.uid);
-                LocalService.setIsPrinter(user.IsPrinter);
-                LocalService.setUserAvtUrl(userInfo.user.photoURL)
-
-                const onlineUser = new OnlineUser();
-                onlineUser.Id = userInfo.user.uid;
-
-                loginCallback(true);
-
-                this.globalService.stopLoading();
-
-                this.onlineUserService.set(onlineUser);
-
-              });
-
-          }).catch(error => {
-            throw new Error(error);
-          });
-
-        } catch (error) {
-
-          this.globalService.showError(error);
-          this.globalService.stopLoading();
-          loginCallback(false);
-
-        }
-
-      })
-      .catch(error => {
-
-        this.globalService.showError(error);
-        this.globalService.stopLoading();
-        loginCallback(false);
-
-      });
   }
 }

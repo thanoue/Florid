@@ -400,8 +400,12 @@ function showCustomerSetupPopup() {
     jQuery('#customerAdd').slideDown(350);
 }
 
-function addTag() {
+function showTagEditPopup() {
     jQuery("#tagAddPopup").slideDown(350);
+}
+
+function showCategoryEditPopup() {
+    jQuery("#categoryAddPopup").slideDown(350);
 }
 
 function showUserEditPopup() {

@@ -38,15 +38,8 @@ export class MainLayoutComponent implements OnDestroy, OnInit {
 
     initLeftMenu();
 
-    this.onlineUserService.loginTimeChanging(LocalService.getUserId(), (userId) => {
-      this.authService.loutOutFirebase((loggedOut) => {
-        if (loggedOut) {
-          this.router.navigate(['login']);
-        }
-      });
-    });
-
     this.userName = LocalService.getUserName();
+    this.userAvt = LocalService.getUserAvtUrl();
 
     this.headerUpdate = this.globalService.updateHeader
       .subscribe(pageComponent => {
@@ -60,6 +53,18 @@ export class MainLayoutComponent implements OnDestroy, OnInit {
 
       });
 
+  }
+
+
+  logout() {
+
+    this.authService.logOut(isSuccess => {
+
+      if (isSuccess) {
+        this.router.navigate(['login']);
+      }
+
+    });
 
   }
 

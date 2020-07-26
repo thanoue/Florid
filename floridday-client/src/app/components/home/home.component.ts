@@ -7,8 +7,6 @@ import { PageComponent } from 'src/app/models/view.models/menu.model';
 import { MenuItems, Sexes, CusContactInfoTypes, MembershipTypes, OrderDetailStates } from 'src/app/models/enums';
 import { Tag } from 'src/app/models/entities/tag.entity';
 import { TagService } from 'src/app/services/tag.service';
-import { ProductCategoryService } from 'src/app/services/product.categpory.service';
-import { ProductCategory } from 'src/app/models/entities/product.category.entity';
 import { Guid } from 'guid-typescript';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/entities/product.entity';
@@ -133,22 +131,22 @@ export class HomeComponent extends BaseComponent {
   }
 
   resetCusIndex() {
-    this.customerService.getAllWithOrder('Id')
-      .then(customers => {
+    // this.customerService.getAllWithOrder('Id')
+    //   .then(customers => {
 
-        let updates = {};
-        let index = 1;
+    //     let updates = {};
+    //     let index = 1;
 
-        customers.forEach(customer => {
-          updates[`/${customer.Id}/Index`] = index;
-          index++;
-        });
+    //     customers.forEach(customer => {
+    //       updates[`/${customer.Id}/Index`] = index;
+    //       index++;
+    //     });
 
-        console.log(updates);
+    //     console.log(updates);
 
-        this.customerService.updateFields(updates);
+    //     this.customerService.updateFields(updates);
 
-      });
+    //   });
   }
 
   onFileChange(evt: any) {
@@ -174,167 +172,167 @@ export class HomeComponent extends BaseComponent {
 
       this.startLoading();
 
-      this.productService.getAll()
-        .then(async products => {
+      // this.productService.getAll()
+      //   .then(async products => {
 
-          this.stopLoading();
+      //     this.stopLoading();
 
-          for (let i = 0; i < data.length; i++) {
+      //     for (let i = 0; i < data.length; i++) {
 
-            if (i == 0)
-              continue;
+      //       if (i == 0)
+      //         continue;
 
-            const row = data[i];
-            const order = new Order();
+      //       const row = data[i];
+      //       const order = new Order();
 
-            if (!row[0])
-              break;
+      //       if (!row[0])
+      //         break;
 
-            order.CustomerId = row[0] ? row[0].toString() : Guid.create().toString();
-            order.Id = row[1] ? row[1].toString() : Guid.create().toString();
-            order.Created = ExchangeService.getTimeFromExcel(row[3]);
-            order.TotalAmount = row[6] && row[6] != '' ? parseInt(row[6]) : 0;
-            order.GainedScore = ExchangeService.getGainedScore(order.TotalAmount);
-            order.TotalPaidAmount = order.TotalAmount;
+      //       order.CustomerId = row[0] ? row[0].toString() : Guid.create().toString();
+      //       order.Id = row[1] ? row[1].toString() : Guid.create().toString();
+      //       order.Created = ExchangeService.getTimeFromExcel(row[3]);
+      //       order.TotalAmount = row[6] && row[6] != '' ? parseInt(row[6]) : 0;
+      //       order.GainedScore = ExchangeService.getGainedScore(order.TotalAmount);
+      //       order.TotalPaidAmount = order.TotalAmount;
 
-            order.Id = order.Id.replace('/', '-').replace('.', '_');
+      //       order.Id = order.Id.replace('/', '-').replace('.', '_');
 
-            let duplicates = orders.filter(p => p.Id == order.Id && p.CustomerId != order.CustomerId);
-            if (duplicates && duplicates.length > 0) {
-              order.Id += "_";
-            }
+      //       let duplicates = orders.filter(p => p.Id == order.Id && p.CustomerId != order.CustomerId);
+      //       if (duplicates && duplicates.length > 0) {
+      //         order.Id += "_";
+      //       }
 
-            var detail = new OrderDetail();
+      //       var detail = new OrderDetail();
 
-            detail.TotalAmount = order.TotalAmount;
-            detail.OrderId = order.Id;
-            detail.Id = Guid.create().toString();
-            detail.PurposeOf = row[4] ? row[4] : '';
-            detail.Index = 0;
-            detail.State = OrderDetailStates.Completed;
-            detail.ProductModifiedPrice = order.TotalAmount;
+      //       detail.TotalAmount = order.TotalAmount;
+      //       detail.OrderId = order.Id;
+      //       detail.Id = Guid.create().toString();
+      //       detail.PurposeOf = row[4] ? row[4] : '';
+      //       detail.Index = 0;
+      //       detail.State = OrderDetailStates.Completed;
+      //       detail.ProductModifiedPrice = order.TotalAmount;
 
-            detail.ProductName = row[2] ? row[2] : '';
+      //       detail.ProductName = row[2] ? row[2] : '';
 
-            let productIdNum = this.getNumFromString(detail.ProductName);
+      //       let productIdNum = this.getNumFromString(detail.ProductName);
 
-            var pros = products.filter(p => p.Name.indexOf(productIdNum) > -1);
+      //       var pros = products.filter(p => p.Name.indexOf(productIdNum) > -1);
 
-            if (productIdNum != '' && pros && pros[0]) {
+      //       if (productIdNum != '' && pros && pros[0]) {
 
-              let product = pros[0];
+      //         let product = pros[0];
 
-              detail.ProductImageUrl = product.ImageUrl;
-              detail.ProductPrice = ExchangeService.stringPriceToNumber(product.Price);
-              detail.ProductId = product.Id;
-              detail.IsHardcodeProduct = false;
+      //         detail.ProductImageUrl = product.ImageUrl;
+      //         detail.ProductPrice = ExchangeService.stringPriceToNumber(product.Price);
+      //         detail.ProductId = product.Id;
+      //         detail.IsHardcodeProduct = false;
 
-            } else {
+      //       } else {
 
-              detail.ProductImageUrl = 'https://firebasestorage.googleapis.com/v0/b/lorid-e9c34.appspot.com/o/products%2FLOGO%20FLORID.png?alt=media&token=be8bd572-4e06-44ba-aa3e-0a709c3e519c';
-              detail.IsHardcodeProduct = true;
-              detail.ProductPrice = detail.ProductModifiedPrice;
+      //         detail.ProductImageUrl = 'https://firebasestorage.googleapis.com/v0/b/lorid-e9c34.appspot.com/o/products%2FLOGO%20FLORID.png?alt=media&token=be8bd572-4e06-44ba-aa3e-0a709c3e519c';
+      //         detail.IsHardcodeProduct = true;
+      //         detail.ProductPrice = detail.ProductModifiedPrice;
 
-            }
+      //       }
 
-            orderDetails.push(detail);
-            orders.push(order);
+      //       orderDetails.push(detail);
+      //       orders.push(order);
 
-          };
+      //     };
 
-          let newOrders: Order[] = [];
-          let index = 1;
+      //     let newOrders: Order[] = [];
+      //     let index = 1;
 
-          orders.forEach(order => {
+      //     orders.forEach(order => {
 
-            let duplicates = newOrders.filter(p => p.CustomerId == order.CustomerId && p.Id == order.Id);
+      //       let duplicates = newOrders.filter(p => p.CustomerId == order.CustomerId && p.Id == order.Id);
 
-            if (duplicates && duplicates[0]) {
+      //       if (duplicates && duplicates[0]) {
 
-              duplicates[0].TotalAmount += order.TotalAmount;
-              duplicates[0].TotalPaidAmount += order.TotalPaidAmount;
-              duplicates[0].GainedScore = ExchangeService.getGainedScore(duplicates[0].TotalAmount);
+      //         duplicates[0].TotalAmount += order.TotalAmount;
+      //         duplicates[0].TotalPaidAmount += order.TotalPaidAmount;
+      //         duplicates[0].GainedScore = ExchangeService.getGainedScore(duplicates[0].TotalAmount);
 
-            }
-            else {
-              order.Index = index;
-              newOrders.push(order);
-              index++;
-            }
+      //       }
+      //       else {
+      //         order.Index = index;
+      //         newOrders.push(order);
+      //         index++;
+      //       }
 
-          });
+      //     });
 
-          let cuses = await this.customerService.getAll();
+      //     let cuses = await this.customerService.getAll();
 
-          let editCustomers: {
-            Id: string,
-            TotalAmount: number,
-            MemberType: MembershipTypes,
-            TotalUsedScore: number
-          }[] = [];
+      //     let editCustomers: {
+      //       Id: string,
+      //       TotalAmount: number,
+      //       MemberType: MembershipTypes,
+      //       TotalUsedScore: number
+      //     }[] = [];
 
-          console.log(newOrders);
-          console.log(orderDetails);
+      //     console.log(newOrders);
+      //     console.log(orderDetails);
 
-          newOrders.forEach(order => {
+      //     newOrders.forEach(order => {
 
-            let cus = editCustomers.filter(p => p.Id == order.CustomerId);
+      //       let cus = editCustomers.filter(p => p.Id == order.CustomerId);
 
-            if (cus && cus.length > 0) {
+      //       if (cus && cus.length > 0) {
 
-              cus[0].TotalAmount += order.TotalAmount;
-              
-            }
-            else {
+      //         cus[0].TotalAmount += order.TotalAmount;
 
-              let currentCus = cuses.filter(p => p.Id == order.CustomerId);
+      //       }
+      //       else {
 
-              if (currentCus && currentCus.length > 0) {
+      //         let currentCus = cuses.filter(p => p.Id == order.CustomerId);
 
-                let memberInfo = currentCus[0].MembershipInfo ? currentCus[0].MembershipInfo : new MembershipInfo();
+      //         if (currentCus && currentCus.length > 0) {
 
-                editCustomers.push({
-                  Id: order.CustomerId,
-                  TotalAmount: order.TotalAmount,
-                  MemberType: memberInfo.MembershipType,
-                  TotalUsedScore: memberInfo.UsedScoreTotal
-                });
+      //           let memberInfo = currentCus[0].MembershipInfo ? currentCus[0].MembershipInfo : new MembershipInfo();
 
-              }
+      //           editCustomers.push({
+      //             Id: order.CustomerId,
+      //             TotalAmount: order.TotalAmount,
+      //             MemberType: memberInfo.MembershipType,
+      //             TotalUsedScore: memberInfo.UsedScoreTotal
+      //           });
 
-            }
-          });
+      //         }
 
-          console.log(editCustomers);
+      //       }
+      //     });
 
-          let updates = {};
+      //     console.log(editCustomers);
 
-          editCustomers.forEach(customer => {
+      //     let updates = {};
 
-            let infor = new MembershipInfo();
+      //     editCustomers.forEach(customer => {
 
-            infor.AvailableScore = ExchangeService.getGainedScore(customer.TotalAmount);
-            infor.UsedScoreTotal = customer.TotalUsedScore;
-            infor.AccumulatedAmount = customer.TotalAmount;
-            infor.MembershipType = customer.MemberType;
+      //       let infor = new MembershipInfo();
 
-            updates[`/${customer.Id}/MembershipInfo`] = infor;
+      //       infor.AvailableScore = ExchangeService.getGainedScore(customer.TotalAmount);
+      //       infor.UsedScoreTotal = customer.TotalUsedScore;
+      //       infor.AccumulatedAmount = customer.TotalAmount;
+      //       infor.MembershipType = customer.MemberType;
 
-          });
+      //       updates[`/${customer.Id}/MembershipInfo`] = infor;
 
-          this.orderDetailService.setListSeperate(orderDetails)
-            .then(() => {
-            });
+      //     });
 
-          this.orderService.setListSeperate(newOrders)
-            .then(() => {
-            });
+      //     this.orderDetailService.setListSeperate(orderDetails)
+      //       .then(() => {
+      //       });
 
-          this.customerService.updateFields(updates)
-            .then(() => {
-            });
+      //     this.orderService.setListSeperate(newOrders)
+      //       .then(() => {
+      //       });
 
-        });
+      //     this.customerService.updateFields(updates)
+      //       .then(() => {
+      //       });
+
+      //   });
     }
 
 
@@ -447,40 +445,25 @@ export class HomeComponent extends BaseComponent {
   //   reader.readAsBinaryString(target.files[0]);
   // }
 
-  addTempProduct() {
-
-    let prod = new Product();
-
-    prod.Name = "MS-10283";
-    prod.ProductCategories = 7;
-    prod.Index = 541;
-    prod.Page = 3;
-    prod.CategoryIndex = 70035;
-    prod.Price = "900091";
-    prod.ImageUrl = "http://florid.com.vn/uploads/medium/hoa/1383.jpg";
-
-
-    this.productService.set(prod);
-  }
 
   updateProductImg() {
 
     this.startLoading();
-    this.productService.getAll()
-      .then(products => {
+    // this.productService.getAll()
+    //   .then(products => {
 
-        var updates = {};
+    //     var updates = {};
 
-        products.forEach(product => {
+    //     products.forEach(product => {
 
-          updates[`/${product.Id}/ImageUrl`] = 'http://florid.com.vn/' + product.ImageUrl;
+    //       updates[`/${product.Id}/ImageUrl`] = 'http://florid.com.vn/' + product.ImageUrl;
 
-        });
+    //     });
 
-        this.productService.updateList(updates, () => {
-          this.stopLoading();
-        });
-      });
+    //     this.productService.updateList(updates, () => {
+    //       this.stopLoading();
+    //     });
+    //   });
   }
 
   // initCate() {
@@ -567,28 +550,8 @@ export class HomeComponent extends BaseComponent {
 
   // }
 
-  logout() {
-
-    this.authService.loutOutFirebase(isSuccess => {
-
-      if (isSuccess) {
-        this.router.navigate(['login']);
-      }
-
-    });
-  }
-
   goToPrintJob() {
   }
 
-  async getUsers() {
-    try {
-      this.startLoading();
-      const users = await FunctionsService.excuteFunction('getUsers');
-      console.log(users);
-      this.stopLoading();
-    } catch (error) {
-      this.showWarning(error);
-    }
-  }
+
 }

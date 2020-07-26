@@ -16,7 +16,7 @@ export class FunctionsService {
 
     const params = {
       data: dataObject,
-      token: LocalService.getAccessToken()
+      //   token: LocalService.getAccessToken()
     };
 
     return func(params).then(res => {

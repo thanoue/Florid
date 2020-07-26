@@ -3,6 +3,7 @@ import { MembershipTypes, Sexes, CusContactInfoTypes } from '../enums';
 import { CustomerReceiverDetail } from './order.entity';
 
 export class Customer extends BaseEntity {
+    
     FullName: string;
     PhoneNumber: string;
     Birthday: number;

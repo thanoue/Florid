@@ -25,7 +25,7 @@ export class HttpService {
 
   private caches = {};
   protected apiHost = environment.base_domain;
-  protected apiUrlPrefix = '/api/v1';
+  protected apiUrlPrefix = '/api';
 
   protected headers: HttpHeaders;
 
@@ -46,12 +46,36 @@ export class HttpService {
     } else {
       this.headers = new HttpHeaders({
         ...isForm ? HttpService.formdataHeader : HttpService.defaultHeader,
-        ...{ 'Authorization': `Bearer ${token}` }
+        ...{ 'x-access-token': `${token}` }
       });
     }
   }
 
-  public get(url: string, params?: HttpParams | any, cache: boolean = false): Observable<Object | any> {
+  public handleError(err) {
+
+    this.globalService.stopLoading();
+
+    if (err.error.message) {
+      this.globalService.showError(err.error.message);
+      return;
+    }
+
+    if (err.message) {
+      this.globalService.showError(err.message);
+      return;
+    }
+
+    if (err.error) {
+      this.globalService.showError(err.error);
+      return;
+    }
+
+    this.globalService.showError(err);
+
+  }
+
+  public get(url: string, params?: HttpParams | any, cache: boolean = false): Promise<Object | any> {
+
     this.loadToken();
 
     if (cache && this.caches[url]) {
@@ -65,68 +89,76 @@ export class HttpService {
 
     const res = this.http.get(fullUrl, { headers: this.headers, params: params })
       .pipe(shareReplay(1),
-        timeout(REQUEST_TIMEOUT),
-        catchError(this.handleError)
+        timeout(REQUEST_TIMEOUT)
       );
 
-    res.subscribe(() => {
-      this.globalService.stopLoading();
-    });
+    var promise = res.toPromise();
 
     if (cache) {
       this.caches[url] = res;
     }
 
-    return res;
-  }
-
-
-  public sendMomoTransRes(url: string, params?: HttpParams | any, loader = true): Observable<object | any> {
-
-    const fullUrl = environment.momo_generate_qr_domain + url;
-    this.globalService.startLoading();
-
-    let request = this.http.post(fullUrl, params, { headers: this.headers })
-      .pipe(timeout(REQUEST_TIMEOUT),
-        catchError(this.handleError));
-
-    request.subscribe(() => {
+    return promise.then((res) => {
       this.globalService.stopLoading();
+      return res;
     });
 
-    return request;
   }
 
-  public post(url: string, params?: HttpParams | any, loader = true): Observable<object | any> {
+  public post(url: string, params?: HttpParams | any, loader = true): Promise<object | any> {
 
     this.loadToken();
     const fullUrl = this.createAPIURL(url);
-
-    console.log(fullUrl);
 
     if (loader) {
       this.globalService.startLoading();
     }
 
     const request = this.http.post(fullUrl, params, { headers: this.headers })
-      .pipe(timeout(REQUEST_TIMEOUT),
-        catchError(this.handleError));
+      .pipe(timeout(REQUEST_TIMEOUT));
 
-    request.subscribe(() => {
+    var promise = request.toPromise();
+
+    return promise.then((res) => {
       if (loader) {
         this.globalService.stopLoading();
       }
+      return res;
     });
-
-    return request;
-
   }
 
-  private handleError(error: HttpErrorResponse) {
-    console.log(error.error.message);
-    // return an observable with a user-facing error message
-    return throwError(
-      error.error.message);
+  public postForm(url: string, params?: HttpParams | any, loader = true): Promise<object | any> {
+
+    this.loadToken(true);
+
+    const fullUrl = this.createAPIURL(url);
+
+    if (loader) {
+      this.globalService.startLoading();
+    }
+
+    var body = this.parseFormdata(params);
+
+    const request = this.http.post(fullUrl, body, { headers: this.headers })
+      .pipe(timeout(REQUEST_TIMEOUT));
+
+    var promise = request.toPromise();
+
+    return promise.then((res) => {
+      if (loader) {
+        this.globalService.stopLoading();
+      }
+      return res;
+    });
+  }
+
+  private parseFormdata(model: any) {
+    const formdata = new FormData();
+    Object.keys(model || {}).forEach(p => {
+      formdata.append(p, model[p]);
+    });
+
+    return formdata;
   }
 
 }

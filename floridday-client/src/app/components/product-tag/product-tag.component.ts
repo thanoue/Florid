@@ -9,6 +9,8 @@ import { threadId } from 'worker_threads';
 import { NgForm } from '@angular/forms';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ExchangeService } from 'src/app/services/exchange.service';
+declare function hideAdd(): any;
+declare function showTagEditPopup(): any;
 
 @Component({
   selector: 'app-product-tag',
@@ -41,10 +43,9 @@ export class ProductTagComponent extends BaseComponent {
   }
 
   set itemPerpage(val: number) {
-    this._itemsPerPage = val;
-    this.pageCount = 0;
 
-    this.pageCount = this.itemTotalCount % this._itemsPerPage === 0 ? this.itemTotalCount / this._itemsPerPage : Math.floor(this.itemTotalCount / this._itemsPerPage) + 1;
+    this._itemsPerPage = val;
+
     this.pageChanged(1);
   }
 
@@ -61,7 +62,20 @@ export class ProductTagComponent extends BaseComponent {
 
     const str = ExchangeService.getAlias(this.currentTag.Name);
     this.tagAlias = str;
-    this.currentTag.Id = str;
+    this.currentTag.Alias = str;
+  }
+
+  
+
+  editRequest(tag: Tag) {
+
+    this.currentTag = new Tag();
+    this.currentTag.Id = tag.Id;
+    this.currentTag.Description = tag.Description;
+    this.currentTag.Name = tag.Name;
+    this.updateTagAlias();
+
+    showTagEditPopup();
   }
 
   addTag(form: NgForm) {
@@ -70,61 +84,37 @@ export class ProductTagComponent extends BaseComponent {
       return;
     }
 
-    this.startLoading();
-
-    this.tagService.getById(this.currentTag.Id).then(res => {
-
-      if (res != null) {
-        this.stopLoading();
-        this.showError('Tag bị trùng!!');
-        return;
-      }
-
-      this.tagService.getCount()
-        .then(count => {
-
-          this.currentTag.Index = count + 1;
-
-          this.tagService.set(this.currentTag).then(res => {
-
-            this.stopLoading();
-
-            this.itemTotalCount = this.currentTag.Index;
-
-            this.pageCount = this.itemTotalCount % this._itemsPerPage === 0 ? this.itemTotalCount / this._itemsPerPage : Math.floor(this.itemTotalCount / this._itemsPerPage) + 1;
-
-            if (this.currentPage === this.pageCount) {
-
-              this.pageChanged(this.currentPage);
-
-            }
-
-            this.globalService.hidePopup();
-
-          })
-        });
-    })
+    if (!this.currentTag.Id || this.currentTag.Id <= 0) {
+      this.tagService.createTag(this.currentTag).then(res => {
+        hideAdd();
+        this.currentTag = new Tag();
+        this.pageChanged(this.currentPage);
+      });
+    } else {
+      this.tagService.updateTag(this.currentTag).then(res => {
+        hideAdd();
+        this.currentTag = new Tag();
+        this.pageChanged(this.currentPage);
+      });
+    }
   }
 
   protected Init() {
-    this.tagService.getCount().then(count => {
-
-      this.itemTotalCount = count;
-      this._itemsPerPage = 10
-      this.tags = [];
-
-      this.pageCount = this.itemTotalCount % this._itemsPerPage === 0 ? this.itemTotalCount / this._itemsPerPage : Math.floor(this.itemTotalCount / this._itemsPerPage) + 1;
-
-      this.pageChanged(1);
-
-    });
+    this._itemsPerPage = 10;
+    this.pageChanged(1);
   }
 
   pageChanged(page: number) {
+
     this.currentPage = page;
-    this.tagService.getByPage(page, this._itemsPerPage).then(tags => {
+
+    this.tagService.getRecords(page, this._itemsPerPage).then(tags => {
+
       this.tags = [];
-      tags.forEach(tag => {
+      this.itemTotalCount = tags.totalItemCount;
+      this.pageCount = tags.totalPages;
+
+      tags.tags.forEach(tag => {
         this.tags.push({
           Tag: tag,
           IsChecked: false
@@ -142,58 +132,24 @@ export class ProductTagComponent extends BaseComponent {
 
   deleteTags() {
 
-    var seletedTags = this.tags.filter(p => p.IsChecked);
+    let tagIds: number[] = [];
 
-    if (seletedTags.length <= 0) {
+    this.tags.forEach(tag => {
+      if (tag.IsChecked) {
+        tagIds.push(tag.Tag.Id);
+      }
+    });
+
+    if (tagIds.length <= 0) {
       return;
     }
 
     this.openConfirm('Chắc chắn xoá các tag sản phẩm?', () => {
+      this.tagService.deleteTags(tagIds).then(re => {
 
-      this.startLoading();
+        this.pageChanged(this.currentPage);
 
-      let ids: string[] = [];
-      let smallestTagIndex = seletedTags[0].Tag.Index;
-
-      seletedTags.forEach(tag => {
-
-        ids.push(tag.Tag.Id);
-
-        if (smallestTagIndex > tag.Tag.Index) {
-          smallestTagIndex = tag.Tag.Index;
-        }
-
-      })
-
-      this.tagService.deleteMany(ids).then(() => {
-
-        this.tagService.updateIndex(smallestTagIndex).then(res => {
-          this.stopLoading();
-
-          this.itemTotalCount -= seletedTags.length;
-          this.tags = [];
-
-          var newPageCount = this.itemTotalCount % this._itemsPerPage === 0 ? this.itemTotalCount / this._itemsPerPage : Math.floor(this.itemTotalCount / this._itemsPerPage) + 1;
-
-          if (newPageCount != this.pageCount) {
-
-            this.pageCount = newPageCount;
-            this.pageChanged(1);
-
-          } else {
-
-            this.pageChanged(this.currentPage);
-
-          }
-
-          this.pageChanged(1);
-        })
-          .catch(error => {
-            this.stopLoading();
-            this.showError(error);
-          });
       });
-
     });
   }
 
@@ -201,36 +157,13 @@ export class ProductTagComponent extends BaseComponent {
 
     this.openConfirm('Chắc chắn xoá tag sản phẩm?', () => {
 
-      this.startLoading();
+      this.tagService.deleteTag(tag.Id).then(re => {
 
-      this.tagService.delete(tag.Id).then(() => {
-
-        this.tagService.updateIndex(tag.Index).then(res => {
-          this.stopLoading();
-
-          this.itemTotalCount -= 1;
-          this.tags = [];
-
-          var newPageCount = this.itemTotalCount % this._itemsPerPage === 0 ? this.itemTotalCount / this._itemsPerPage : Math.floor(this.itemTotalCount / this._itemsPerPage) + 1;
-
-          if (newPageCount != this.pageCount) {
-
-            this.pageCount = newPageCount;
-            this.pageChanged(1);
-
-          } else {
-
-            this.pageChanged(this.currentPage);
-
-          }
-
-        })
-          .catch(error => {
-            this.stopLoading();
-            this.showError(error);
-          });
+        this.pageChanged(this.currentPage);
 
       });
+
     });
+
   }
 }

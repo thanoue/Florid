@@ -8,6 +8,9 @@ import { ExchangeService } from 'src/app/services/exchange.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 
+declare function showCustomerSetupPopup(): any;
+declare function hideAdd(): any;
+
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
@@ -20,9 +23,9 @@ export class CustomersComponent extends BaseComponent {
 
   isSelectAll: boolean = false;
   currentPage = 1;
-
-  tagAlias = '';
   sexes = Sexes;
+  searchTerm = '';
+  totalCount = 0;
 
   currentCustomer: Customer;
 
@@ -42,15 +45,19 @@ export class CustomersComponent extends BaseComponent {
 
   set itemPerpage(val: number) {
     this._itemsPerPage = val;
-    this.pageCount = 0;
 
-    this.pageCount = this.itemTotalCount % this._itemsPerPage === 0 ? this.itemTotalCount / this._itemsPerPage : Math.floor(this.itemTotalCount / this._itemsPerPage) + 1;
     this.pageChanged(1);
   }
 
   constructor(private customerService: CustomerService, private router: Router) {
     super();
     this.currentCustomer = new Customer();
+  }
+
+  addRequest() {
+    this.currentCustomer = new Customer();
+    this.currentCustomer.Id = ExchangeService.detectCustomerId(this.totalCount);
+    showCustomerSetupPopup();
   }
 
   viewCusDetail(cus: Customer) {
@@ -64,7 +71,6 @@ export class CustomersComponent extends BaseComponent {
       return;
     }
 
-
     this.currentCustomer.MembershipInfo.AccumulatedAmount *= 1000;
 
     this.currentCustomer.MembershipInfo.AvailableScore = ExchangeService.getGainedScore(this.currentCustomer.MembershipInfo.AccumulatedAmount) - this.currentCustomer.MembershipInfo.UsedScoreTotal;
@@ -75,33 +81,17 @@ export class CustomersComponent extends BaseComponent {
       return;
     }
 
-    this.startLoading();
 
-    this.customerService.getCount()
-      .then(count => {
-
-        this.currentCustomer.Index = count + 1;
-
-        this.customerService.set(this.currentCustomer).then(res => {
-
-          this.stopLoading();
-
-          this.itemTotalCount = this.currentCustomer.Index;
-
-          this.pageCount = this.itemTotalCount % this._itemsPerPage === 0 ? this.itemTotalCount / this._itemsPerPage : Math.floor(this.itemTotalCount / this._itemsPerPage) + 1;
-
-          if (this.currentPage === this.pageCount) {
-
-            this.pageChanged(this.currentPage);
-
-          }
-
-          this.currentCustomer = new Customer();
-
-          this.globalService.hidePopup();
-
-        })
+    this.currentCustomer.Birthday = new Date(this.currentCustomer.Birthday).getTime();
+    this.customerService.createCustomer(this.currentCustomer)
+      .then(cus => {
+        this.pageChanged(this.currentPage);
+        this.customerService.getCount().then(res => {
+          this.totalCount = res + 1
+        });
+        hideAdd();
       });
+
   }
 
   searchCustomer(term) {
@@ -113,53 +103,36 @@ export class CustomersComponent extends BaseComponent {
       return;
     }
 
-    this.startLoading();
+    this.searchTerm = term;
+    this.pageChanged(1);
 
-    this.customerService.searchCustomer(term)
-      .then(products => {
-
-        console.log(products);
-
-        products.forEach(customer => {
-          this.customers.push({
-            Customer: customer,
-            IsChecked: false
-          });
-        });
-        this.stopLoading();
-      });
   }
 
   protected Init() {
-    this.customerService.getCount().then(count => {
-
-      this.itemTotalCount = count;
-      this._itemsPerPage = 10
-      this.customers = [];
-
-      this.pageCount = this.itemTotalCount % this._itemsPerPage === 0 ? this.itemTotalCount / this._itemsPerPage : Math.floor(this.itemTotalCount / this._itemsPerPage) + 1;
-
-      this.pageChanged(1);
-
+    this._itemsPerPage = 10;
+    this.pageChanged(1);
+    this.customerService.getCount().then(res => {
+      this.totalCount = res + 1
     });
   }
 
   pageChanged(page: number) {
     this.currentPage = page;
-    this.customerService.getByPage(page, this._itemsPerPage).then(customers => {
-      this.customers = [];
+    this.customerService.getList(page, this._itemsPerPage, this.searchTerm)
+      .then(data => {
+        this.customers = [];
+        this.itemTotalCount = data.totalItemCount;
+        this.pageCount = data.totalPages;
 
-      customers.forEach(customer => {
+        data.Customers.forEach(customer => {
+          this.customers.push({
+            Customer: customer,
+            IsChecked: false
+          });
 
-        let cus: any = {};
-
-        this.customers.push({
-          Customer: customer,
-          IsChecked: false
         });
 
-      })
-    });
+      });
   }
 
   checkAllChange(isCheck: boolean) {
@@ -181,48 +154,6 @@ export class CustomersComponent extends BaseComponent {
 
       this.startLoading();
 
-      let ids: string[] = [];
-      let smallestTagIndex = seletedcustomers[0].Customer.Index;
-
-      seletedcustomers.forEach(customer => {
-
-        ids.push(customer.Customer.Id);
-
-        if (smallestTagIndex > customer.Customer.Index) {
-          smallestTagIndex = customer.Customer.Index;
-        }
-
-      })
-
-      this.customerService.deleteMany(ids).then(() => {
-        this.customerService.updateIndex(smallestTagIndex).then(res => {
-
-          this.stopLoading();
-
-          this.itemTotalCount -= seletedcustomers.length;
-          this.customers = [];
-
-          var newPageCount = this.itemTotalCount % this._itemsPerPage === 0 ? this.itemTotalCount / this._itemsPerPage : Math.floor(this.itemTotalCount / this._itemsPerPage) + 1;
-
-          if (newPageCount != this.pageCount) {
-
-            this.pageCount = newPageCount;
-            this.pageChanged(1);
-
-          } else {
-
-            this.pageChanged(this.currentPage);
-
-          }
-
-          this.pageChanged(1);
-
-        })
-          .catch(error => {
-            this.stopLoading();
-            this.showError(error);
-          });
-      });
 
     });
   }
@@ -233,34 +164,6 @@ export class CustomersComponent extends BaseComponent {
 
       this.startLoading();
 
-      this.customerService.delete(customer.Id).then(() => {
-
-        this.customerService.updateIndex(customer.Index).then(res => {
-          this.stopLoading();
-
-          this.itemTotalCount -= 1;
-          this.customers = [];
-
-          var newPageCount = this.itemTotalCount % this._itemsPerPage === 0 ? this.itemTotalCount / this._itemsPerPage : Math.floor(this.itemTotalCount / this._itemsPerPage) + 1;
-
-          if (newPageCount != this.pageCount) {
-
-            this.pageCount = newPageCount;
-            this.pageChanged(1);
-
-          } else {
-
-            this.pageChanged(this.currentPage);
-
-          }
-
-        })
-          .catch(error => {
-            this.stopLoading();
-            this.showError(error);
-          });
-
-      });
     });
   }
 
