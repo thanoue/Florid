@@ -16,7 +16,6 @@ declare function isOnTerminal(): any;
 declare function alert(message: string, alertType: number): any;
 declare function openConfirm(message: string, okCallback: () => void, noCallback: () => void, cancelCallback: () => void): any;
 
-
 @Injectable({
     providedIn: 'root'
 })

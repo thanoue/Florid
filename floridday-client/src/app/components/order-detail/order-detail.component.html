@@ -24,6 +24,10 @@
                 <input type="number" name="AdditionalFee" id="AdditionalFee" class="orderField"
                     [(ngModel)]="orderDetail.AdditionalFee" placeholder="Phụ phí (k)...">
             </div>
+            <div class="form-group orderInfo">
+                <input type="text" name="PurposeOf" id="PurposeOf" class="orderField"
+                    [(ngModel)]="orderDetail.PurposeOf" placeholder="Mục đích mua hàng...">
+            </div>
             <div class="form-group orderDesc">
                 <textarea name="Description" id="Description" class="orderField" placeholder="Mô tả..."
                     [(ngModel)]="orderDetail.Description"></textarea>

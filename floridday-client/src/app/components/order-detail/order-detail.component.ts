@@ -47,6 +47,8 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
       this.orderDetail.AdditionalFee /= 1000;
 
+      if (!this.orderDetail.PurposeOf) this.orderDetail.PurposeOf = 'Mua tặng';
+
       createNumbericElement(this.detailIndex > -1, (val) => {
         this.orderDetail.Quantity = val;
       });
@@ -62,7 +64,7 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
           });
 
         });
-      });
+    });
 
   }
 

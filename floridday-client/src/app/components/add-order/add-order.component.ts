@@ -273,6 +273,7 @@ export class AddOrderComponent extends BaseComponent {
           detail.State = OrderDetailStates.Added;
           detail.ProductModifiedPrice = detailVM.ModifiedPrice;
           detail.IsVATIncluded = orderDB.VATIncluded;
+          detail.PurposeOf = detailVM.PurposeOf;
 
           detail.CustomerName = this.order.CustomerInfo.Name;
           detail.CustomerPhoneNumber = this.order.CustomerInfo.PhoneNumber;

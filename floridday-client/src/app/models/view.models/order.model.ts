@@ -64,7 +64,7 @@ export class OrderDetailViewModel {
     Quantity = 1;
     Index = 0;
     DeliveryInfo: OrderDetailDeliveryInfo;
-    PurposeOf = '';
+    PurposeOf: string;
 
     OriginalPrice = 0;
     ModifiedPrice = 0;
