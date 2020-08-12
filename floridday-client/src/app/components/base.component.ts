@@ -31,8 +31,8 @@ export abstract class BaseComponent implements OnInit, AfterViewInit, OnDestroy 
 
     private ngZone: NgZone;
     private navigateOnClick: Subscription;
-    private districtService: DistrictAddressService;
-    private wardService: WardAddressService;
+    protected districtService: DistrictAddressService;
+    protected wardService: WardAddressService;
 
     public IsOnTerminal: boolean;
 

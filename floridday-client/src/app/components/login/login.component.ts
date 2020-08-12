@@ -7,6 +7,11 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/services/common/auth.service';
 import { LoginModel } from 'src/app/models/entities/user.entity';
 import { OnlineUserService } from 'src/app/services/online.user.service';
+import { ProductService } from 'src/app/services/product.service';
+import { strict } from 'assert';
+import { DistrictAddressService } from 'src/app/services/address/district-address.service';
+import { WardAddressService } from 'src/app/services/address/ward-address.service';
+import { CustomerService } from 'src/app/services/customer.service';
 declare function deviceLogin(email: string, pasword: string, isPrinter: boolean, idToken: string): any;
 @Component({
   selector: 'app-login',
@@ -20,7 +25,8 @@ export class LoginComponent extends BaseComponent {
 
   model: LoginModel = new LoginModel();
 
-  constructor(private router: Router, protected activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private customerService: CustomerService, protected activatedRoute: ActivatedRoute,
+    private productService: ProductService,) {
     super();
   }
 
@@ -33,23 +39,58 @@ export class LoginComponent extends BaseComponent {
   }
 
   login(form: NgForm) {
+    this.loadCustomers();
+    //this.loadWards();
+  }
 
-    if (!form.valid) {
-      return;
-    }
+  loadCustomers() {
+    this.customerService.getAll()
+      .then(customers => {
+        console.log(JSON.stringify(customers));
+      })
+  }
 
-    this.authService.login(this.model, isSuccess => {
-      if (isSuccess) {
+  loadDistrict() {
+    this.districtService.getAll()
+      .then(districts => {
+        console.log(JSON.stringify(districts));
+      });
+  }
 
-        deviceLogin(this.model.userName, this.model.passcode, LocalService.isPrinter(), LocalService.getAccessToken());
+  loadWards() {
+    this.wardService.getAll()
+      .then(wards => {
+        console.log(JSON.stringify(wards));
+      });
+  }
 
-        this.router.navigate(['']);
 
-      } else {
+  loadProduct() {
+    this.productService.getAll()
+      .then(products => {
 
-      }
+        console.log(products);
 
-    });
+        var data: {
+          Id: string,
+          Name: string,
+          Category: number,
+          Price: string
+        }[] = [];
 
+        products.forEach(product => {
+
+          data.push({
+            Id: product.Id,
+            Name: product.Name,
+            Category: product.ProductCategories,
+            Price: product.Price
+          });
+
+        });
+
+        console.log(JSON.stringify(data));
+
+      })
   }
 }

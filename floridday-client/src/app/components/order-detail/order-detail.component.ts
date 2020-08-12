@@ -4,8 +4,6 @@ import { OrderDetailViewModel } from 'src/app/models/view.models/order.model';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { switchMap, retry } from 'rxjs/operators';
 import { MenuItem } from '../../models/view.models/menu.model';
-import { ProductCategories } from 'src/app/models/enums';
-import { PRODUCTCATEGORIES } from 'src/app/app.constants';
 import { NgForm } from '@angular/forms';
 import { TempProductService } from 'src/app/services/tempProduct.service';
 import { TempProduct } from 'src/app/models/entities/file.entity';
@@ -13,7 +11,7 @@ import { ExchangeService } from 'src/app/services/exchange.service';
 
 declare function getNumberInput(resCallback: (res: number) => void, placeHolder: string): any;
 declare function createNumbericElement(isDisabled: boolean, calback: (val: number) => void): any;
-declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: any) => void): any;
+// declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: any) => void): any;
 
 @Component({
   selector: 'app-order-detail',
@@ -65,11 +63,11 @@ export class OrderDetailComponent extends BaseComponent implements OnDestroy {
 
   searchProduct() {
 
-    selectProductCategory(PRODUCTCATEGORIES, (val) => {
+    // selectProductCategory(PRODUCTCATEGORIES, (val) => {
 
-      this.router.navigate(['/search-product'], { queryParams: { category: +val }, queryParamsHandling: 'merge' });
+    //   this.router.navigate(['/search-product'], { queryParams: { category: +val }, queryParamsHandling: 'merge' });
 
-    });
+    // });
 
   }
 

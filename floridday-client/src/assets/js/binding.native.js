@@ -3,14 +3,13 @@ function getFirebaseConfig() {
         return JSON.parse(Android.getFirebaseConfig());
     }
     else return {
-        apiKey: 'AIzaSyDZGFKjLZH4h0SCRdmJVAP0QsRxo_9qYwA',
-        authDomain: 'lorid-e9c34.firebaseapp.com',
-        databaseURL: 'https://lorid-e9c34.firebaseio.com',
-        projectId: 'lorid-e9c34',
-        storageBucket: 'lorid-e9c34.appspot.com',
-        messagingSenderId: '907493762076',
-        appId: '1:907493762076:web:41a83454c12029c3c6abd9',
-        measurementId: 'G-DMM406R71M'
+        apiKey: "AIzaSyCYohfoo1UCHIwa9sFWKX6cS0VU-spqW0I",
+        authDomain: "florid-b0462.firebaseapp.com",
+        databaseURL: "https://florid-b0462.firebaseio.com",
+        projectId: "florid-b0462",
+        storageBucket: "florid-b0462.appspot.com",
+        messagingSenderId: "327956365101",
+        appId: "1:327956365101:web:f778673744074f15489da4"
     }
 }
 

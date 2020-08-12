@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { OrderService } from 'src/app/services/order.service';
 import { Order, OrderDetail, CustomerReceiverDetail } from 'src/app/models/entities/order.entity';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { OrderDetailService } from 'src/app/services/order-detail.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { District, Ward } from 'src/app/models/entities/address.entity';
@@ -38,7 +37,7 @@ export class AddOrderComponent extends BaseComponent {
 
   constructor(private orderDetailService: OrderDetailService, private router: Router,
     // tslint:disable-next-line: align
-    private orderService: OrderService, public auth: AngularFireAuth,
+    private orderService: OrderService,
     // tslint:disable-next-line: align
     private customerService: CustomerService,
 
@@ -238,7 +237,6 @@ export class AddOrderComponent extends BaseComponent {
 
     orderDB.CustomerId = this.order.CustomerInfo.Id;
     orderDB.Id = this.order.OrderId;
-    orderDB.AccountId = this.auth.auth.currentUser.uid;
     orderDB.Created = this.order.CreatedDate.getTime();
     orderDB.VATIncluded = this.order.VATIncluded;
     orderDB.TotalAmount = this.order.TotalAmount;

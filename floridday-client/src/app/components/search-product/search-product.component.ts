@@ -1,20 +1,16 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { BaseComponent } from '../base.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductCategories } from 'src/app/models/enums';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/entities/product.entity';
 import { max } from 'rxjs/operators';
-import { PRODUCTCATEGORIES } from 'src/app/app.constants';
 import { ExchangeService } from 'src/app/services/exchange.service';
 import { TempProduct } from 'src/app/models/entities/file.entity';
 import { TempProductService } from 'src/app/services/tempProduct.service';
 import { OrderDetailService } from 'src/app/services/order-detail.service';
-import { Tag, TagTypes, ProductTag } from 'src/app/models/entities/tag.entity';
+import { Tag } from 'src/app/models/entities/tag.entity';
 import { TagService } from 'src/app/services/tag.service';
-import { ProductTagService } from 'src/app/services/product-tag.service';
 
-declare function selectProductCategory(menuitems: { Name: string; Value: ProductCategories; }[], callback: (index: any) => void): any;
 declare function filterFocus(): any;
 
 @Component({
@@ -25,7 +21,6 @@ declare function filterFocus(): any;
 export class SearchProductComponent extends BaseComponent {
 
   Title = 'Chọn sản phẩm';
-  productCategory: ProductCategories;
   currentPage = 1;
   currentMaxPage = 0;
 
@@ -39,13 +34,12 @@ export class SearchProductComponent extends BaseComponent {
   protected IsDataLosingWarning = false;
 
   globalTags: Tag[];
-  globalProductTags: ProductTag[];
 
   constructor(private route: ActivatedRoute, private router: Router, private orderDetailService: OrderDetailService,
     // tslint:disable-next-line: align
     private productService: ProductService, private _ngZone: NgZone, private tempProductService: TempProductService,
     // tslint:disable-next-line: align
-    private tagService: TagService, private productTagService: ProductTagService) {
+    private tagService: TagService) {
 
     super();
 
@@ -63,12 +57,6 @@ export class SearchProductComponent extends BaseComponent {
 
           this.globalTags = tags;
 
-          this.productTagService.getAll().then(productTags => {
-
-            this.globalProductTags = productTags;
-
-            this.getProductByCategory(+params.category);
-          });
 
         });
 
@@ -108,12 +96,7 @@ export class SearchProductComponent extends BaseComponent {
 
       this.globalProducts.forEach(product => {
 
-        const maps = this.globalProductTags.filter(p => p.ProductId === product.Id && p.TagId === tag.Id);
 
-        if (maps.length > 0) {
-          isAdd = true;
-          return;
-        }
 
       });
 
@@ -257,9 +240,7 @@ export class SearchProductComponent extends BaseComponent {
 
   getProductByCategory(category: number) {
 
-    this.productCategory = category;
 
-    this.categoryName = PRODUCTCATEGORIES.filter(p => p.Value === this.productCategory)[0].Name;
 
     this.currentMaxPage = 0;
     this.currentPage = 0;
@@ -279,10 +260,7 @@ export class SearchProductComponent extends BaseComponent {
   }
 
   filter() {
-    selectProductCategory(PRODUCTCATEGORIES, (val) => {
-      filterFocus();
-      this.getProductByCategory(+val);
-    });
+
   }
 
   getProductsByPage(page: number) {
