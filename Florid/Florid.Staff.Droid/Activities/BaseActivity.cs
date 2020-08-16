@@ -11,7 +11,6 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-using Firebase.Auth;
 using Florid.Droid.Widgets;
 
 namespace Florid.Staff.Droid.Activity
@@ -23,7 +22,6 @@ namespace Florid.Staff.Droid.Activity
         protected virtual bool ShowBackButton  => false;
         protected virtual bool UseOwnLayout => false;
         protected virtual new string Title => "Base Activity";
-        protected FirebaseAuth _firebaseAuth;
 
         protected virtual void OnBacktbnClicking()
         {
@@ -86,7 +84,6 @@ namespace Florid.Staff.Droid.Activity
                 SetContentView(_mainContent);
             }
 
-            _firebaseAuth = FirebaseAuth.Instance;
 
             InitView(_mainContent);
 
@@ -124,8 +121,6 @@ namespace Florid.Staff.Droid.Activity
 
         protected bool IsLoggedIn()
         {
-            if (_firebaseAuth.CurrentUser != null)
-                return true;
             return false;
         }
 

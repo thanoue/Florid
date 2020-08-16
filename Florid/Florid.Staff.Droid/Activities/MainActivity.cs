@@ -21,8 +21,6 @@ using Android.Content.Res;
 using Asksira.WebViewSuiteLib;
 using static Asksira.WebViewSuiteLib.WebViewSuite;
 using ME.Echodev.Resizer;
-using Firebase.Auth;
-using Android.Gms.Tasks;
 using Android.Widget;
 using Florid.Core.Service;
 using Firebase.Database;
@@ -69,30 +67,8 @@ namespace Florid.Staff.Droid.Activity
             webView.SetWebViewClient(new WebViewClient());
             webView.SetWebChromeClient(new MyWebChromeClient());
 
-            _javascriptClient = new JavascriptClient(this, webView, (email, password, idToken) =>
-              {
-                  if (MainApp.IsPrinter())
-                  {
-                      _normalDbSession.Authenticate(idToken);
-                      BaseModelHelper.Instance.ReceiptPrintJobRepo.ItemAddedRegister(item =>
-                      {
-                          MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
-                          {
-                              if (!isSuccess)
-                                  return;
+            _javascriptClient = new JavascriptClient(this, webView);
 
-                              var task = new CustomAsyncTask(this, this.BindingReceiptData(item));
-                              task.Execute();
-                          });
-
-                      });
-                  }
-              });
-
-            _javascriptClient.LogoutCallback = () =>
-            {
-                _normalDbSession.Logout();
-            };
 
             _javascriptClient.SetPrimaryDarkStatusBar = (isDark) =>
             {
@@ -112,7 +88,6 @@ namespace Florid.Staff.Droid.Activity
             };
 
             webView.AddJavascriptInterface(_javascriptClient, "Android");
-
         }
 
         protected override void InitView(ViewGroup viewGroup)
@@ -330,7 +305,6 @@ namespace Florid.Staff.Droid.Activity
                         DroidUtility.ExecJavaScript(_mainWebView.WebView, "fileChosen(\"" + encoded + "\")");
 
                         stream.Close();
-
                     }
 
                     break;

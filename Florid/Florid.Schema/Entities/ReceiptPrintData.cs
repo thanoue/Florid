@@ -37,13 +37,13 @@ namespace Florid.Entity
         public int MemberDiscount { get; set; }
 
         [JsonProperty("scoreUsed")]
-        public int ScoreUsed { get; set; }
+        public double ScoreUsed { get; set; }
 
         [JsonProperty("gainedScore")]
-        public int GainedScore { get; set; }
+        public  double GainedScore { get; set; }
 
         [JsonProperty("totalScore")]
-        public int TotalScore { get; set; }
+        public double TotalScore { get; set; }
 
         public ReceiptPrintData()
         {

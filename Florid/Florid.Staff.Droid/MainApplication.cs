@@ -16,8 +16,6 @@ using Android.Views;
 using Android.Widget;
 using Com.Khoideptrai.Posprinter;
 using Firebase.Database;
-using Firebase.Storage;
-using Florid.Core;
 using Florid.Core.Service;
 using Florid.Droid.Lib;
 using Florid.Entity;
@@ -32,10 +30,7 @@ using Net.Posprinter.Service;
 using Net.Posprinter.Utils;
 using Plugin.CurrentActivity;
 using Plugin.Iconize;
-using static Firebase.Storage.FileDownloadTask;
-using static Firebase.Storage.StreamDownloadTask;
 using static Net.Posprinter.Utils.PosPrinterDev;
-using TaskSnapshot = Firebase.Storage.StreamDownloadTask.TaskSnapshot;
 
 namespace Florid.Staff.Droid
 {
@@ -73,11 +68,6 @@ namespace Florid.Staff.Droid
 
             CrossCurrentActivity.Current.Init(this);
 
-            ServiceLocator.Instance.Register<INormalDBSession<FirebaseClient>, FirebaseDBSession>(Constants.MAIN_DATABASE_PATH);
-            ServiceLocator.Instance.Register<IUserRepository, UserRepository>();
-            ServiceLocator.Instance.Register<IReceiptPrintJobRepository, ReceiptPrintJobRepository>();
-            ServiceLocator.Instance.Register<ISecureConfig, NativeDroidSecureConfig>();
-
             _serviceConnection = new MyServiceConnection((binder) =>
             {
                 _binder = (IMyCustomBinder)binder;
@@ -95,56 +85,6 @@ namespace Florid.Staff.Droid
         public void SetIsPrinter(bool isPrinter)
         {
             _isPrinter = isPrinter;
-        }
-
-        public class MyFirebaseStreamProcessor : Java.Lang.Object, IStreamProcessor
-        {
-            Action<Stream> _streamDownloadCallback;
-            public MyFirebaseStreamProcessor(Action<Stream> streamDownloadCallback)
-            {
-                _streamDownloadCallback = streamDownloadCallback;
-            }
-
-            public void DoInBackground(TaskSnapshot state, Stream stream)
-            {
-                _streamDownloadCallback?.Invoke(stream);
-            }
-        }
-
-
-        public void DoPrintJob(string url)
-        {
-            if (!ISCONNECT)
-                return;
-
-            FirebaseStorage storage = FirebaseStorage.Instance;
-
-            StorageReference httpsReference = storage.GetReferenceFromUrl(url);//https://firebasestorage.googleapis.com/v0/b/lorid-e9c34.appspot.com/o/receipts%2Freceipt1.png?alt=media&token=174fb53c-d25e-4ebe-8b8d-48b7cbb3e575
-
-            httpsReference.GetStream(new MyFirebaseStreamProcessor((str) =>
-            {
-                using (var bitmap = BitmapFactory.DecodeStream(str).ResizeImage(440, false))
-                {
-                    var manualEvent = new ManualResetEvent(false);
-
-                    manualEvent.Reset();
-
-                    _binder.WriteDataByYouself(new MyUiExecute(() =>
-                    {
-
-                    }, () =>
-                    {
-                        ShowSnackbar("Printing Error!!!!", AlertType.Error);
-
-                    }), new MyProcessDataCallback(bitmap, () =>
-                    {
-                        ShowSnackbar("Printing Completed!", AlertType.Info);
-                        manualEvent.Set();
-                    }));
-
-                    manualEvent.WaitOne();
-                }
-            }));
         }
 
         public void DoPrintJob(Bitmap bitmap)

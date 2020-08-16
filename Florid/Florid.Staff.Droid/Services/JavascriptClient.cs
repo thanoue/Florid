@@ -31,13 +31,10 @@ namespace Florid.Staff.Droid.Services
 
         public Action<bool> SetPrimaryDarkStatusBar;
         public Action<ReceiptPrintData> DoPrintJob;
-        public Action<string> BankingSaleReturn;
-        public Action<string> BankingSaleRequest;
         public Action LogoutCallback;
 
-        public JavascriptClient(BaseActivity activity, WebView webview, Action<string, string,string> login)
+        public JavascriptClient(BaseActivity activity, WebView webview)
         {
-            _login = login;
             _activity = activity;
             _mainWebView = webview;
         }
@@ -58,42 +55,6 @@ namespace Florid.Staff.Droid.Services
 
 
         [Android.Webkit.JavascriptInterface]
-        [Export("bankingSaleRequestSending")]
-        public void BankingSaleRequestSending(string url)
-        {
-            BankingSaleRequest?.Invoke(url);
-        }
-
-        [Android.Webkit.JavascriptInterface]
-        [Export("bankingSaleCallback")]
-        public void BankingSaleCallback(string data)
-        {
-            BankingSaleReturn?.Invoke(data);
-        }
-
-        [Android.Webkit.JavascriptInterface]
-        [Export("documentReady")]
-        public void DocumentReady()
-        {
-            _documentReady();
-        }
-
-        [Android.Webkit.JavascriptInterface]
-        [Export("login")]
-        public void Login(string email, string password,bool isPrinter,string idToken)
-        {
-            _activity.MainApp.SetIsPrinter(isPrinter);
-            _login(email, password,idToken);
-        }
-
-        [Android.Webkit.JavascriptInterface]
-        [Export("logout")]
-        public void Logout()
-        {
-            LogoutCallback?.Invoke();
-        }
-
-        [Android.Webkit.JavascriptInterface]
         [Export("setStatusBarColor")]
         public void SetStatusBarColor(bool isDark)
         {
@@ -105,50 +66,11 @@ namespace Florid.Staff.Droid.Services
 
 
         [Android.Webkit.JavascriptInterface]
-        [Export("getFirebaseConfig")]
-        public string GetFirebaseConfig()
-        {
-            var config = BaseModelHelper.Instance.SecureConfig.GetFirebaseConfig();
-
-            return JsonConvert.SerializeObject(config);
-        }
-
-        [Android.Webkit.JavascriptInterface]
-        [Export("geMomoConfig")]
-        public string GeMomoConfig()
-        {
-            var config = BaseModelHelper.Instance.SecureConfig.GetMomoConfig();
-
-            return JsonConvert.SerializeObject(config);
-        }
-
-        [Android.Webkit.JavascriptInterface]
-        [Export("addProductsToCache")]
-        public void AddProductsToCache(string data)
-        {
-            var newData = JsonConvert.DeserializeObject<List<Product>>(data);
-            BaseModelHelper.Instance.GlobalProducts.AddRange(newData);
-        }
-
-        [Android.Webkit.JavascriptInterface]
-        [Export("getProductsFromCache")]
-        public string GetProductsFromCache(int category)
-        {
-            var newData = BaseModelHelper.Instance.GlobalProducts.Where(p => p.productCategories == (ProductCategories)category).ToList();
-            if (newData == null || !newData.Any())
-                return "NONE";
-
-            return JsonConvert.SerializeObject(newData);
-        }
-
-        [Android.Webkit.JavascriptInterface]
         [Export("alert")]
         public void Alert(string message,int type)
         {
             _activity.MainApp.ShowSnackbar(message, (AlertType)type);
         }
-
-      
 
         [Android.Webkit.JavascriptInterface]
         [Export("pickFile")]

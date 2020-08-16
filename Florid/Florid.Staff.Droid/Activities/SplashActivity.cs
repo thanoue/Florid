@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
@@ -16,7 +10,6 @@ using Android.Webkit;
 using Android.Widget;
 using Com.Izettle.Html2bitmap;
 using Com.Izettle.Html2bitmap.Content;
-using Firebase.Auth;
 using Florid.Droid.Lib;
 using Florid.Droid.Lib.Static;
 using Java.IO;
