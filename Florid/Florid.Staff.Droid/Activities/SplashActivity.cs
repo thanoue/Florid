@@ -49,7 +49,7 @@ namespace Florid.Staff.Droid.Activity
             .SetScreenshotDelay(10)
             .SetStrictMode(true)
             .SetTimeout(5)
-            .SetTextZoom((Java.Lang.Integer)130)
+            .SetTextZoom((Java.Lang.Integer)100)
             .SetConfigurator(html2BitmapConfigurator)
             .Build();
 

@@ -88,6 +88,7 @@ namespace Florid.Staff.Droid
             template = template.Replace("{{ScoreUsed}}", data.ScoreUsed.ToString());
             template = template.Replace("{{GainedScore}}", data.GainedScore.ToString());
             template = template.Replace("{{TotalScore}}", data.TotalScore.ToString());
+            template = template.Replace("{{CustomerName}}", data.CustomerName);
 
             return template;
         }

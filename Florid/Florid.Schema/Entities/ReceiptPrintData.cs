@@ -45,6 +45,9 @@ namespace Florid.Entity
         [JsonProperty("totalScore")]
         public double TotalScore { get; set; }
 
+        [JsonProperty("customerName")]
+        public string CustomerName { get; set; }
+
         public ReceiptPrintData()
         {
             SaleItems = new List<SaleItem>();

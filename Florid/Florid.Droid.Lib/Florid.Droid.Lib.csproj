@@ -57,7 +57,6 @@
     <Compile Include="BaseMainApplication.cs" />
     <Compile Include="Services\DroidSecure.cs" />
     <Compile Include="Services\DroidContext.cs" />
-    <Compile Include="Widgets\CustomWebView.cs" />
     <Compile Include="Statics\DatetimePickerCallback.cs" />
     <Compile Include="Statics\UtilEnums.cs" />
     <Compile Include="Statics\MyWebChromeClient.cs" />

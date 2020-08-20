@@ -23,8 +23,8 @@ namespace Florid.Droid.Lib
 
         public List<Product> GlobalProducts = new List<Product>();
 
-        public string RootWebUrl { get; set; } = "https://kha-test-mysql.herokuapp.com/staff-login";
-        //public string RootWebUrl { get; set; } = "http://192.168.1.10:4200/staff-login";
+     //   public string RootWebUrl { get; set; } = "https://kha-test-mysql.herokuapp.com/staff-login";
+        public string RootWebUrl { get; set; } = "http://192.168.1.10:4200/staff-login";
     }
 }
     
