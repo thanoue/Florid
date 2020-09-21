@@ -17,21 +17,20 @@
     <style>
 
         body {
-            font-weight:700;
+            font-weight:600;
             font-style:normal;
         }
 
-
         .wrapper {
             background-color: #fff;
-            padding: 30px 20px;
+            padding: 5px 0px;
             text-align: center;
-            font-size: 18px;
+            font-size: 19px;
             width: 350px;
-            margin: auto
+            margin: auto    
         }
 
-        .shop-info {
+        .shop-info {    
             margin-top: 10px;
             margin-bottom: 10px;
         }
@@ -53,6 +52,10 @@
             border-top: 2.5px dashed #333;
             padding-top: 20px;
             margin-bottom: 20px;
+        }
+
+        .recipe-summary {
+            border-top: 2.5px dashed #333;
         }
 
         .recipe-summary {
@@ -80,14 +83,14 @@
             }
 
 
-
         .recipe-info table tr td:first-child,
         .recipe-info table tr th:first-child {
-            width: 40%;
+            width: 30%;
         }
 
         .recipe-info table tr td:last-child {
-            font-size: 14px;
+            font-size: 16px;
+            width: 70%;
         }
 
         .recipe-detail table {
@@ -122,12 +125,12 @@
             }
 
                 .recipe-detail table tr td {
-                    padding-bottom: 10px;
+                    padding-bottom: 2px;
                 }
 
                     .recipe-detail table tr td p {
                         margin-top: 0;
-                        margin-bottom: 7px;
+                        margin-bottom: 1px;
                         font-weight: 600;
                     }
 
@@ -146,14 +149,13 @@
 
         .recipe-detail table tr td:last-child span {
             display: block;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 600;
         }
 
 
         table tr.custom-row .small-width {
             background-color: red;
-        }
 
         table tr.custom-row .large-width {
             background-color:blue;
@@ -187,7 +189,7 @@
                         <td>{{OrderId}}</td>
                     </tr>
                     <tr>
-                        <td>Thời gian:</td>
+                        <td>Ngày tạo:</td>
                         <td>{{CreatedDate}}</td>
                     </tr>
                 </tbody>
@@ -198,20 +200,22 @@
                 <tbody>
                     <tr>
                         <th></th>
-                        <th>Mặt hàng</th>
-                        <th>Số tiền</th>
+                        <th>Tên</th>
+                        <th>Giá trị</th>
                     </tr>
                     {{SaleItems}}
                 </tbody>
             </table>
         </div>
+        <br/>
         <div class="recipe-summary">
             <table>
                 <tbody>
                     <tr>
-                        <td><strong>Tổng:</strong></td>
+                        <td><strong>Tạm tính: </strong></td>
                         <td>{{SaleTotal}}</td>
                     </tr>
+                    {{OrderDiscount}}
                     <tr>
                         <td>Thành tiền:</td>
                         <td>{{TotalAmount}}</td>
@@ -233,10 +237,7 @@
             <strong class="recipe-vat">{{CustomerName}}</strong>
             <table>
                 <tbody>
-                    <tr>
-                        <td>Giảm giá thành viên</td>
-                        <td>{{DiscountPercent}}%</td>
-                    </tr>
+                    {{MemberDiscount}}
                     <tr>
                         <td>Điểm sử dụng</td>
                         <td>{{ScoreUsed}}</td>
@@ -253,8 +254,8 @@
             </table>
         </div>
         <div class="recipe-thank">
-            <p>Cảm ơn & chúc bạn một ngày tuyệt vời!</p>
-            <br style="height:50px;width:100%"/>
+            <p>chúc bạn một ngày tuyệt vời!</p>
+            <br style="height:10px;width:100%"/>
         </div>
     </div>
 </body>

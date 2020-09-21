@@ -48,6 +48,9 @@ namespace Florid.Entity
         [JsonProperty("customerName")]
         public string CustomerName { get; set; }
 
+       [JsonProperty("discount")]
+        public long Discount { get; set; }
+
         public ReceiptPrintData()
         {
             SaleItems = new List<SaleItem>();
@@ -68,5 +71,8 @@ namespace Florid.Entity
 
         [JsonProperty("additionalFee")]
         public long AdditionalFee { get; set; }
+
+        [JsonProperty("discount")]
+        public double Discount { get; set; }
     }
 }

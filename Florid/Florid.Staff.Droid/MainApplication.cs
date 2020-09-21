@@ -98,7 +98,7 @@ namespace Florid.Staff.Droid
 
             _binder.WriteDataByYouself(new MyUiExecute(() =>
             {
-                DisconnectToBluetoothDevice();
+                //DisconnectToBluetoothDevice();
             }, () =>
             {
                 ShowSnackbar("Printing Error!!!!", AlertType.Error);
@@ -163,7 +163,8 @@ namespace Florid.Staff.Droid
             _binder.DisconnectCurrentPort(new MyUiExecute(() =>
             {
                 ISCONNECT = false;
-                //ShowSnackbar( "Đã ngắt kết nối tới máy in!!!", AlertType.Info);
+                ShowSnackbar( "Đã ngắt kết nối tới máy in!!!", AlertType.Info);
+
             }, () =>
             {
                 ShowSnackbar("Xảy ra lỗi khi ngắt kết nối tới máy in!!", AlertType.Error);

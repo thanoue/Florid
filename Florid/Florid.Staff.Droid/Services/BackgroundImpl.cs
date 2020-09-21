@@ -126,14 +126,23 @@ namespace Florid.Staff.Droid.Services
         public IList<byte[]> ProcessDataBeforeSend()
         {
             var list = new List<byte[]>();
-
-            list.Add(DataForSendToPrinterPos58.InitializePrinter());
-            list.Add(BitmapToByteData.RasterBmpToSendData(0, _bitmap, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Center, 440));
-            list.Add(DataForSendToPrinterPos58.PrintAndFeedLine());
+            list.Add(DataForSendToPrinterPos80.InitializePrinter());
+            list.Add(DataForSendToPrinterPos80.PrintRasterBmp(0, _bitmap, BitmapToByteData.BmpType.Threshold, BitmapToByteData.AlignType.Left, 440));
+            list.Add(DataForSendToPrinterPos80.PrintAndFeedLine());
 
             _completeProcess?.Invoke();
 
             return list;
+        }
+
+        public byte[] StringToBytes(string str)
+        {
+            var source = new Java.Lang.String(str);
+
+            var b = source.GetBytes("utf-8");
+            var data = new Java.Lang.String(b, "utf-8").GetBytes("utf-8");
+
+            return data;
         }
     }
 

@@ -10,7 +10,7 @@ using Florid.Entity;
 using Florid.Model;
 
 namespace Florid.Staff.Droid
-{ 
+{
 
     public static class DroidUtility
     {
@@ -48,7 +48,7 @@ namespace Florid.Staff.Droid
             return resizedBitmap;
         }
 
-        public static string BindingReceiptData(this Context context,ReceiptPrintData data)
+        public static string BindingReceiptData(this Context context, ReceiptPrintData data)
         {
             AssetManager assets = context.Assets;
             var sr = new StreamReader(assets.Open("receiptTemplate.html"));
@@ -62,19 +62,128 @@ namespace Florid.Staff.Droid
                         <td>
                             <p>{1}</p>
                         </td>
-                        <td>{2}<span> +{3} </span></td>
+                        <td>{2}</td>
    
                        </tr>";
+
+            var productTemplateWithOnlyAdditionalFee = @"<tr>
+                        <td>{0}</td>
+                        <td>
+                            <p>{1}</p>
+                        </td>
+                        <td>{2}</td>
+   
+                       </tr><tr>
+                        <td></td>
+                        <td>
+                            <p>Phụ phí:</p>
+                        </td>
+                        <td>{3}</td>
+   
+                       </tr>";
+
+            var productTemplateWithOnlyDiscount = @"
+                      <tr>
+                        <td>{0}</td>
+                        <td>
+                            <p>{1}</p>
+                        </td>
+                        <td>{2}</td>
+   
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td>
+                            <p>Giảm giá:</p>
+                        </td>
+                        <td>{3}</td>
+   
+                       </tr>";
+            
+            var productTemplateWithAdditionalFeeDiscount = @"
+                       <tr>
+                        <td>{0}</td>
+                        <td>
+                            <p>{1}</p>
+                        </td>
+                        <td>{2}</td>
+   
+                       </tr>
+
+                       <tr>
+                        <td></td>
+                        <td>
+                            <p>Giảm giá:</p>
+                        </td>
+                        <td>{3}</td>
+                       </tr>
+
+                       <tr>
+                        <td></td>
+                        <td>
+                            <p>Phụ phí:</p>
+                        </td>
+                        <td>{4}</td>
+                       </tr>";
+
+
 
             long saleTotal = 0;
             var saleItemContainer = "";
 
-            foreach (var product in data.SaleItems)
+            bool isHasMemberDiscount = true;
+
+            if (data.Discount > 0)
+                isHasMemberDiscount = false;
+
+            foreach(var prod in data.SaleItems)
             {
-                saleItemContainer += string.Format(productTemplate, product.Index, product.ProductName, product.Price.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat());
-                saleTotal += product.Price;
+                if(prod.Discount > 0)
+                {
+                    isHasMemberDiscount = false;
+                    break;
+                }
             }
 
+            foreach (var product in data.SaleItems)
+            {
+                var discount = (long)product.Discount;
+
+                if (isHasMemberDiscount)
+                {
+                    discount =(long)((((float)product.Price) / 100f) * data.MemberDiscount);
+                }
+
+                if(discount > 0)
+                {
+                    if(product.AdditionalFee > 0)
+                    {
+                        saleItemContainer += string.Format(productTemplateWithAdditionalFeeDiscount, product.Index, product.ProductName, product.Price.VNCurrencyFormat(),discount.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat());
+                    }
+                    else
+                    {
+                        saleItemContainer += string.Format(productTemplateWithOnlyDiscount, product.Index, product.ProductName, product.Price.VNCurrencyFormat(), discount.VNCurrencyFormat());
+                    }
+                }
+                else
+                {
+                    if (product.AdditionalFee > 0)
+                    {
+                        saleItemContainer += string.Format(productTemplateWithOnlyAdditionalFee, product.Index, product.ProductName, product.Price.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat());
+                    }
+                    else
+                    {
+                        saleItemContainer += string.Format(productTemplate, product.Index, product.ProductName, product.Price.VNCurrencyFormat());
+                    }
+                }
+
+                saleTotal += product.Price;
+
+                if (product.Discount > 0)
+                    isHasMemberDiscount = false;
+            }
+
+          
             template = template.Replace("{{SaleItems}}", saleItemContainer);
 
             template = template.Replace("{{SaleTotal}}", saleTotal.VNCurrencyFormat());
@@ -84,11 +193,35 @@ namespace Florid.Staff.Droid
 
             template = template.Replace("{{VATIncluded}}", data.VATIncluded ? "Đã bao gồm VAT" : "");
 
-            template = template.Replace("{{DiscountPercent}}", data.MemberDiscount.ToString());
             template = template.Replace("{{ScoreUsed}}", data.ScoreUsed.ToString());
             template = template.Replace("{{GainedScore}}", data.GainedScore.ToString());
             template = template.Replace("{{TotalScore}}", data.TotalScore.ToString());
             template = template.Replace("{{CustomerName}}", data.CustomerName);
+
+            if (data.Discount > 0)
+            {
+                var discountTeemplate = @"<tr>
+                        <td>Giảm giá:</td>
+                        <td>{0}</td>
+                    </tr>";
+
+                template = template.Replace("{{OrderDiscount}}", string.Format(discountTeemplate, data.Discount.VNCurrencyFormat()));
+            }
+            else
+                template = template.Replace("{{OrderDiscount}}", "");
+
+
+            if (isHasMemberDiscount)
+            {
+                var memberDiscountTemplate = @" <tr>
+                        <td>Giảm giá thành viên</td>
+                        <td>{0}%</td>
+                    </tr>";
+
+                template = template.Replace("{{MemberDiscount}}", string.Format(memberDiscountTemplate, data.MemberDiscount.ToString()));
+            }
+            else
+                template = template.Replace("{{MemberDiscount}}", "");
 
             return template;
         }

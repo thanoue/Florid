@@ -14,7 +14,7 @@ public class StringUtils {
         byte[] b=null,data=null;
         try {
             b = str.getBytes("utf-8");
-            data=new String(b,"utf-8").getBytes("gbk");
+            data = new String(b,"utf-8").getBytes("gbk");
         } catch (UnsupportedEncodingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
