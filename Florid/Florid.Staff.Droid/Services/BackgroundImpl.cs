@@ -154,6 +154,7 @@ namespace Florid.Staff.Droid.Services
             _onSuccess = onSuccess;
             _onFailed = onFailed;
         }
+
         public void Onfailed()
         {
             _onFailed?.Invoke();

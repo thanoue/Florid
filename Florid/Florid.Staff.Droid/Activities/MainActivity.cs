@@ -42,6 +42,7 @@ namespace Florid.Staff.Droid.Activity
         public const int REQUEST_SHARING_NEW_IMG = 5;
         protected override int LayoutId => Resource.Layout.activity_main;
         protected override bool UseOwnLayout => true;
+        const int PRINTER_DISCONNECT_TIMEOUT = 60 * 1000;
 
         private WebViewSuite _mainWebView;
         private View _mask;
@@ -65,9 +66,11 @@ namespace Florid.Staff.Droid.Activity
             webView.ClearCache(true);
 
             webView.SetWebViewClient(new WebViewClient());
-            webView.SetWebChromeClient(new MyWebChromeClient());
+          //  webView.SetWebChromeClient(new MyWebChromeClient());
 
             _javascriptClient = new JavascriptClient(this, webView);
+
+            var printerDisconnectHandler = new Handler();
 
 
             _javascriptClient.SetPrimaryDarkStatusBar = (isDark) =>
@@ -76,18 +79,36 @@ namespace Florid.Staff.Droid.Activity
             };
 
             _javascriptClient.DoPrintJob = (data) =>
-            {
+             {
                 MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
                 {
-                    if (!isSuccess)
-                        return;
+                    printerDisconnectHandler.RemoveCallbacks(DisConnectPrinter);
 
-                    var task = new CustomAsyncTask(this, this.BindingReceiptData(data));
+                    if (!isSuccess)
+                    {
+                        MainApp.ShowSnackbar("In lỗi!",AlertType.Error);
+                        return;
+                    }
+
+                    MainApp.CurrentPrintJob = data;
+
+                    var task = new CustomAsyncTask(this, this.BindingReceiptData(data),()=> {
+                        printerDisconnectHandler.PostDelayed(DisConnectPrinter, PRINTER_DISCONNECT_TIMEOUT);
+                        DroidUtility.ExecJavaScript(_mainWebView.WebView, "reprintOrderConfirm()");
+                    });
+
                     task.Execute();
+
                 });
             };
 
             webView.AddJavascriptInterface(_javascriptClient, "Android");
+
+        }
+
+        void DisConnectPrinter()
+        {
+            MainApp.DisconnectToBluetoothDevice();
         }
 
         protected override void InitView(ViewGroup viewGroup)

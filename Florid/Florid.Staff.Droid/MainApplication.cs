@@ -43,6 +43,14 @@ namespace Florid.Staff.Droid
         public static bool ISCONNECT;
         private bool _isPrinter = false;
 
+        private ReceiptPrintData _currentPrintJob;
+
+        public ReceiptPrintData CurrentPrintJob
+        {
+            get { return _currentPrintJob; }
+            set { _currentPrintJob = value; }
+        }
+
         public IMyCustomBinder MyBinder
         {
             get
@@ -87,7 +95,12 @@ namespace Florid.Staff.Droid
             _isPrinter = isPrinter;
         }
 
-        public void DoPrintJob(Bitmap bitmap)
+        public void ReleasePrintJob()
+        {
+
+        }
+
+        public void DoPrintJob(Bitmap bitmap, Action doneCallback)
         {
             if (!ISCONNECT)
                 return;
@@ -99,17 +112,21 @@ namespace Florid.Staff.Droid
             _binder.WriteDataByYouself(new MyUiExecute(() =>
             {
                 //DisconnectToBluetoothDevice();
+                bitmap.Dispose();
+
+
             }, () =>
             {
-                ShowSnackbar("Printing Error!!!!", AlertType.Error);
+                ShowSnackbar("In lỗi!!!", AlertType.Error);
 
             }), new MyProcessDataCallback(bitmap, () =>
             {
                 manualEvent.Set();
+
+                doneCallback?.Invoke();
             }));
 
             manualEvent.WaitOne();
-
         }
 
         public void ConnectToBluetoothDevice(string macAddress, Action<bool> callback)
@@ -117,6 +134,7 @@ namespace Florid.Staff.Droid
             if (ISCONNECT)
             {
                 callback?.Invoke(true);
+                callback = null;
                 return;
             }
 
@@ -127,6 +145,7 @@ namespace Florid.Staff.Droid
                 ShowSnackbar("Đã kết nối tới máy in!!", AlertType.Success);
 
                 callback?.Invoke(true);
+                callback = null;
 
                 _binder.Write(DataForSendToPrinterPos80.OpenOrCloseAutoReturnPrintState(0x1f), new MyUiExecute(() =>
                 {
@@ -136,10 +155,12 @@ namespace Florid.Staff.Droid
                     }, () =>
                     {
                         ISCONNECT = false;
-                        ShowSnackbar("Máy in bị ngắt kết nối !!", AlertType.Warning);
+                        ShowSnackbar("Máy in bị ngắt kết nối !!", AlertType.Info);
                         callback?.Invoke(false);
+                        callback = null;
 
                     }));
+
                 }, () =>
                 {
 
@@ -151,6 +172,7 @@ namespace Florid.Staff.Droid
                 ISCONNECT = false;
                 ShowSnackbar("Không thể kết nối tới máy in !!", AlertType.Error);
                 callback?.Invoke(false);
+                callback = null;
 
             }));
         }
@@ -163,7 +185,7 @@ namespace Florid.Staff.Droid
             _binder.DisconnectCurrentPort(new MyUiExecute(() =>
             {
                 ISCONNECT = false;
-                ShowSnackbar( "Đã ngắt kết nối tới máy in!!!", AlertType.Info);
+                ShowSnackbar("Đã ngắt kết nối tới máy in!!!", AlertType.Info);
 
             }, () =>
             {

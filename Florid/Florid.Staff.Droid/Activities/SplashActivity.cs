@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
@@ -30,15 +31,17 @@ namespace Florid.Staff.Droid.Activity
     {
         BaseActivity _context;
         string _content;
-        public CustomAsyncTask(BaseActivity context,string content)
+        Action _doneCallback;
+        public CustomAsyncTask(BaseActivity context, string content, Action doneCallback)
         {
             _content = content;
             _context = context;
+            _doneCallback = doneCallback;
         }
 
         protected override Java.Lang.Object DoInBackground(params Java.Lang.Object[] @params)
         {
-           
+
             var html2BitmapConfigurator = new CustomConfig();
 
             var build = new Html2Bitmap.Builder()
@@ -61,12 +64,12 @@ namespace Florid.Staff.Droid.Activity
 
         protected override void OnPostExecute(Java.Lang.Object result)
         {
-            _context.MainApp.DoPrintJob((Bitmap)result);
             base.OnPostExecute(result);
+            _context.MainApp.DoPrintJob((Bitmap)result, _doneCallback);
         }
     }
 
-    [Activity(MainLauncher = false  )]
+    [Activity(MainLauncher = false)]
     public class SplashActivity : BaseActivity
     {
         protected override int LayoutId => Resource.Layout.SplashLayout;
@@ -84,19 +87,19 @@ namespace Florid.Staff.Droid.Activity
 
             FindViewById<Button>(Resource.Id.goBtn).Click += delegate
             {
-                //MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
-                //{
-                //    if (isSuccess)
-                //    {
-                //        var task = new CustomAsyncTask(this);
-                //        task.Execute();
-                //    }
+            //MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
+            //{
+            //    if (isSuccess)
+            //    {
+            //        var task = new CustomAsyncTask(this);
+            //        task.Execute();
+            //    }
 
-                //});
+            //});
 
 
 
-                BaseModelHelper.Instance.RootWebUrl = FindViewById<EditText>(Resource.Id.urlTxt).Text;
+            BaseModelHelper.Instance.RootWebUrl = FindViewById<EditText>(Resource.Id.urlTxt).Text;
 
                 StartActivity(new Intent(this, typeof(MainActivity)));
             };

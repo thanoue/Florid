@@ -53,6 +53,13 @@ namespace Florid.Staff.Droid.Services
             DoPrintJob?.Invoke(data);
         }
 
+        [Android.Webkit.JavascriptInterface]
+        [Export("doOldPrintJob")]
+        public void DoOldPrintJob()
+        {
+            DoPrintJob?.Invoke(_activity.MainApp.CurrentPrintJob);
+        }
+
 
         [Android.Webkit.JavascriptInterface]
         [Export("setStatusBarColor")]
@@ -111,6 +118,7 @@ namespace Florid.Staff.Droid.Services
             _activity.StartActivityForResult(intent, MainActivity.REQUEST_FILE_PICKER_SHARE);
         }
 
+     
   
         [Android.Webkit.JavascriptInterface]
         [Export("releaseTempImage")]
