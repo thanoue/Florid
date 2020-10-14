@@ -16,7 +16,9 @@ using Android.Views;
 using Android.Widget;
 using Com.Khoideptrai.Posprinter;
 using Firebase.Database;
+using Florid.Core;
 using Florid.Core.Service;
+using Florid.Core.Services;
 using Florid.Droid.Lib;
 using Florid.Entity;
 using Florid.Staff.Droid.Activity;
@@ -73,6 +75,8 @@ namespace Florid.Staff.Droid
         public override void OnCreate()
         {
             base.OnCreate();
+
+            ServiceLocator.Instance.Register<ISecureStorageService, DroidSecureStorageService>(this);
 
             CrossCurrentActivity.Current.Init(this);
 

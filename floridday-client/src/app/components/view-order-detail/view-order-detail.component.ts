@@ -7,6 +7,7 @@ import { ODSeenUserInfo } from 'src/app/models/entities/order.entity';
 import { OrderDetailService } from 'src/app/services/order-detail.service';
 
 declare function openViewed(): any;
+
 @Component({
   selector: 'app-view-order-detail',
   templateUrl: './view-order-detail.component.html',

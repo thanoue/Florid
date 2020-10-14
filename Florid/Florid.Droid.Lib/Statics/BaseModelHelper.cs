@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Android.Graphics;
 using Florid.Core;
 using Florid.Core.Service;
+using Florid.Core.Services;
 using Florid.Entity;
 
 namespace Florid.Droid.Lib
@@ -20,11 +21,12 @@ namespace Florid.Droid.Lib
         public ISecureConfig SecureConfig => ServiceLocator.Instance.Get<ISecureConfig>();
 
         public IReceiptPrintJobRepository ReceiptPrintJobRepo => ServiceLocator.Instance.Get<IReceiptPrintJobRepository>();
+        public ISecureStorageService SecureStorage => ServiceLocator.Instance.Get<ISecureStorageService>();
 
         public List<Product> GlobalProducts = new List<Product>();
 
-     //   public string RootWebUrl { get; set; } = "https://kha-test-mysql.herokuapp.com/staff-login";
-        public string RootWebUrl { get; set; } = "http://192.168.0.126:4200/staff-login";
+     //   public string RootWebUrl { get; set; } = "https://kha-test-mysql.herokuapp.com";
+        public string RootWebUrl { get; set; } = "http://172.16.0.254:4200";
     }
 }
     

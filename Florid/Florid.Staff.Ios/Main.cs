@@ -1,4 +1,6 @@
-﻿using UIKit;
+﻿using Florid.Core;
+using Florid.Core.Services;
+using UIKit;
 
 namespace Florid.Staff.Ios
 {
@@ -10,6 +12,7 @@ namespace Florid.Staff.Ios
             // if you want to use a different Application Delegate class from "AppDelegate"
             // you can specify it here.
             UIApplication.Main(args, null, "AppDelegate");
+
         }
     }
 }

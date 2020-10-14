@@ -71,6 +71,9 @@
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+      <PackageReference Include="Newtonsoft.Json">
+        <Version>12.0.3</Version>
+      </PackageReference>
     </ItemGroup>
     <ItemGroup>
         <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -126,6 +129,17 @@
         <Compile Include="ViewController.designer.cs">
             <DependentUpon>ViewController.cs</DependentUpon>
         </Compile>
+        <Compile Include="IOSSecureStorageService.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Florid.Core\Florid.Core.csproj">
+        <Project>{90724680-1978-4627-90EE-7BBF62345E54}</Project>
+        <Name>Florid.Core</Name>
+      </ProjectReference>
+      <ProjectReference Include="..\Florid.Schema\Florid.Schema.csproj">
+        <Project>{FB9D4177-71CF-4471-8F03-10D0C9A8CF29}</Project>
+        <Name>Florid.Schema</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

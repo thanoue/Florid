@@ -1,4 +1,6 @@
-﻿using Foundation;
+﻿using Florid.Core;
+using Florid.Core.Services;
+using Foundation;
 using UIKit;
 
 namespace Florid.Staff.Ios
@@ -15,6 +17,7 @@ namespace Florid.Staff.Ios
         [Export("application:didFinishLaunchingWithOptions:")]
         public bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
+            ServiceLocator.Instance.Register<ISecureStorageService, IOSSecureStorageService>();
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
             return true;

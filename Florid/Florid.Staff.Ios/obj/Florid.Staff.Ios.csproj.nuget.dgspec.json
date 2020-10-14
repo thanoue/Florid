@@ -4,6 +4,58 @@
     "/Users/sin/Code/Florid-Staff/Florid/Florid.Staff.Ios/Florid.Staff.Ios.csproj": {}
   },
   "projects": {
+    "/Users/sin/Code/Florid-Staff/Florid/Florid.Core/Florid.Core.csproj": {
+      "restore": {
+        "projectUniqueName": "/Users/sin/Code/Florid-Staff/Florid/Florid.Core/Florid.Core.csproj",
+        "projectName": "Florid.Core",
+        "projectPath": "/Users/sin/Code/Florid-Staff/Florid/Florid.Core/Florid.Core.csproj",
+        "packagesPath": "/Users/sin/.nuget/packages/",
+        "projectStyle": "PackagesConfig",
+        "configFilePaths": [
+          "/Users/sin/.config/NuGet/NuGet.Config"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "portable45-net45+wp8": {
+            "projectReferences": {
+              "/Users/sin/Code/Florid-Staff/Florid/Florid.Schema/Florid.Schema.csproj": {
+                "projectPath": "/Users/sin/Code/Florid-Staff/Florid/Florid.Schema/Florid.Schema.csproj"
+              }
+            }
+          }
+        },
+        "packagesConfigPath": "/Users/sin/Code/Florid-Staff/Florid/Florid.Core/packages.config"
+      },
+      "frameworks": {
+        "portable45-net45+wp8": {}
+      }
+    },
+    "/Users/sin/Code/Florid-Staff/Florid/Florid.Schema/Florid.Schema.csproj": {
+      "restore": {
+        "projectUniqueName": "/Users/sin/Code/Florid-Staff/Florid/Florid.Schema/Florid.Schema.csproj",
+        "projectName": "Florid.Schema",
+        "projectPath": "/Users/sin/Code/Florid-Staff/Florid/Florid.Schema/Florid.Schema.csproj",
+        "packagesPath": "/Users/sin/.nuget/packages/",
+        "projectStyle": "PackagesConfig",
+        "configFilePaths": [
+          "/Users/sin/.config/NuGet/NuGet.Config"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "portable45-net45+wp8": {
+            "projectReferences": {}
+          }
+        },
+        "packagesConfigPath": "/Users/sin/Code/Florid-Staff/Florid/Florid.Schema/packages.config"
+      },
+      "frameworks": {
+        "portable45-net45+wp8": {}
+      }
+    },
     "/Users/sin/Code/Florid-Staff/Florid/Florid.Staff.Ios/Florid.Staff.Ios.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -25,13 +77,24 @@
         },
         "frameworks": {
           "xamarinios10": {
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/sin/Code/Florid-Staff/Florid/Florid.Core/Florid.Core.csproj": {
+                "projectPath": "/Users/sin/Code/Florid-Staff/Florid/Florid.Core/Florid.Core.csproj"
+              },
+              "/Users/sin/Code/Florid-Staff/Florid/Florid.Schema/Florid.Schema.csproj": {
+                "projectPath": "/Users/sin/Code/Florid-Staff/Florid/Florid.Schema/Florid.Schema.csproj"
+              }
+            }
           }
         }
       },
       "frameworks": {
         "xamarinios10": {
           "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
             "Xamarin.Essentials": {
               "target": "Package",
               "version": "[1.5.3.2, )"

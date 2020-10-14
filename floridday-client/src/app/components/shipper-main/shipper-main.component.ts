@@ -83,7 +83,7 @@ export class ShipperMainComponent extends BaseComponent {
           if (detail.ShipperInfo.Id === this.CurrentUser.Id) {
             this.shippingOrderDetails.push(OrderDetailViewModel.ToViewModel(detail));
           }
-        });
+        }); 
 
       });
   }

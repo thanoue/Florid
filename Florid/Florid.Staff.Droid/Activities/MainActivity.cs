@@ -28,6 +28,7 @@ using Android.Net;
 using Android.Util;
 using Base64 = Java.Util.Base64;
 using Android.Support.V4.Content;
+using Florid.Core.Services;
 
 namespace Florid.Staff.Droid.Activity
 {
@@ -41,6 +42,8 @@ namespace Florid.Staff.Droid.Activity
         public const int REQUEST_INTERNET_SALE_REQUEST = 3;
         public const int REQUEST_SHARING_NEW_IMG = 5;
         protected override int LayoutId => Resource.Layout.activity_main;
+
+
         protected override bool UseOwnLayout => true;
         const int PRINTER_DISCONNECT_TIMEOUT = 60 * 1000;
 
@@ -49,6 +52,9 @@ namespace Florid.Staff.Droid.Activity
         private JavascriptClient _javascriptClient;
         private string _savedFileUrl = "";
         private string _newSharingImgPath;
+
+        private string _sessionLoginName = "";
+        private string _sessionPassCode = "";
 
         private INormalDBSession<FirebaseClient> _normalDbSession => ServiceLocator.Instance.Get<INormalDBSession<FirebaseClient>>();
 
@@ -66,7 +72,7 @@ namespace Florid.Staff.Droid.Activity
             webView.ClearCache(true);
 
             webView.SetWebViewClient(new WebViewClient());
-          //  webView.SetWebChromeClient(new MyWebChromeClient());
+            webView.SetWebChromeClient(new MyWebChromeClient());
 
             _javascriptClient = new JavascriptClient(this, webView);
 
@@ -80,30 +86,77 @@ namespace Florid.Staff.Droid.Activity
 
             _javascriptClient.DoPrintJob = (data) =>
              {
-                MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
+                 MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
+                 {
+                     printerDisconnectHandler.RemoveCallbacks(DisConnectPrinter);
+
+                     if (!isSuccess)
+                     {
+                         MainApp.ShowSnackbar("In lỗi!", AlertType.Error);
+                         return;
+                     }
+
+                     MainApp.CurrentPrintJob = data;
+
+                     var task = new CustomAsyncTask(this, this.BindingReceiptData(data), () =>
+                     {
+                         printerDisconnectHandler.PostDelayed(DisConnectPrinter, PRINTER_DISCONNECT_TIMEOUT);
+                         DroidUtility.ExecJavaScript(_mainWebView.WebView, "reprintOrderConfirm()");
+                     });
+
+                     task.Execute();
+
+                 });
+             };
+
+            _javascriptClient.MobileLoginCallback = (loginName, passCode) =>
+            {
+                _sessionLoginName = loginName;
+                _sessionPassCode = passCode;
+            };
+
+            _javascriptClient.RememberPassCheckingCallback = () =>
+            {
+                if (!BaseModelHelper.Instance.SecureStorage.Exist(Constants.SECURE_LOGIN_NAME) || !BaseModelHelper.Instance.SecureStorage.Exist(Constants.SECURE_PASSCODE))
                 {
-                    printerDisconnectHandler.RemoveCallbacks(DisConnectPrinter);
+                    //check
+                    DroidUtility.ExecJavaScript(_mainWebView.WebView, "rememberPassConfirm()");
+                    return;
+                }
 
-                    if (!isSuccess)
-                    {
-                        MainApp.ShowSnackbar("In lỗi!",AlertType.Error);
-                        return;
-                    }
+                if (BaseModelHelper.Instance.SecureStorage.Fetch(Constants.SECURE_LOGIN_NAME) != (_sessionLoginName))
+                {
+                    //check
+                    DroidUtility.ExecJavaScript(_mainWebView.WebView, "rememberPassConfirm()");
+                    return;
+                }
+            };
 
-                    MainApp.CurrentPrintJob = data;
+            _javascriptClient.PasscodeClearingCallback = () =>
+            {
+                BaseModelHelper.Instance.SecureStorage.Remove(Constants.SECURE_LOGIN_NAME);
+                BaseModelHelper.Instance.SecureStorage.Remove(Constants.SECURE_PASSCODE);
+            };
 
-                    var task = new CustomAsyncTask(this, this.BindingReceiptData(data),()=> {
-                        printerDisconnectHandler.PostDelayed(DisConnectPrinter, PRINTER_DISCONNECT_TIMEOUT);
-                        DroidUtility.ExecJavaScript(_mainWebView.WebView, "reprintOrderConfirm()");
-                    });
+            _javascriptClient.PasscodeSavingCallback = () =>
+            {
+                BaseModelHelper.Instance.SecureStorage.Store(Constants.SECURE_LOGIN_NAME, _sessionLoginName);
+                BaseModelHelper.Instance.SecureStorage.Store(Constants.SECURE_PASSCODE, _sessionPassCode);
+            };
 
-                    task.Execute();
+            _javascriptClient.SavedLoginInforGettingRequesCallback = () =>
+            {
+                var password = BaseModelHelper.Instance.SecureStorage.Fetch(Constants.SECURE_PASSCODE);
+                var loginName = BaseModelHelper.Instance.SecureStorage.Fetch(Constants.SECURE_LOGIN_NAME);
 
-                });
+                if (string.IsNullOrEmpty(loginName))
+                    return;
+
+                DroidUtility.ExecJavaScript(_mainWebView.WebView, "savedLoginInforReturn(\"" + loginName + "\",\"" + password + "\")");
+
             };
 
             webView.AddJavascriptInterface(_javascriptClient, "Android");
-
         }
 
         void DisConnectPrinter()
@@ -149,7 +202,7 @@ namespace Florid.Staff.Droid.Activity
             base.StartActivityForResult(intent, requestCode);
         }
 
-        public override void ShareImage(string img,string contactInfo)
+        public override void ShareImage(string img, string contactInfo)
         {
             var clipBoard = this.GetSystemService(Context.ClipboardService).JavaCast<ClipboardManager>();
             var clip = ClipData.NewPlainText("tel", contactInfo);
@@ -165,7 +218,7 @@ namespace Florid.Staff.Droid.Activity
 
                 Log.Debug("URL", newImg.AbsolutePath);
 
-                using (var stream = new FileStream(newImg.AbsolutePath,FileMode.Create))
+                using (var stream = new FileStream(newImg.AbsolutePath, FileMode.Create))
                 {
                     decodedByte.Compress(Bitmap.CompressFormat.Png, 1, stream);
 
@@ -175,7 +228,7 @@ namespace Florid.Staff.Droid.Activity
             }
         }
 
-        public override void  ShareImage(string contactInfo)
+        public override void ShareImage(string contactInfo)
         {
             var clipBoard = this.GetSystemService(Context.ClipboardService).JavaCast<ClipboardManager>();
             var clip = ClipData.NewPlainText("tel", contactInfo);
@@ -214,6 +267,7 @@ namespace Florid.Staff.Droid.Activity
             if (!string.IsNullOrEmpty(_savedFileUrl))
             {
                 File.Delete(_savedFileUrl);
+                _savedFileUrl = "";
                 Log.Debug("Florid", "Temp image is deleted");
             }
         }
@@ -252,7 +306,7 @@ namespace Florid.Staff.Droid.Activity
         {
             base.OnActivityResult(requestCode, resultCode, data);
 
-            if(requestCode == REQUEST_SHARING_NEW_IMG)
+            if (requestCode == REQUEST_SHARING_NEW_IMG)
             {
                 if (!string.IsNullOrEmpty(_newSharingImgPath))
                 {
@@ -273,8 +327,14 @@ namespace Florid.Staff.Droid.Activity
             {
                 case REQUEST_FILE_PICKER_SHARE:
 
-                     file = (MediaFile)data.GetParcelableArrayListExtra(FilePickerActivity.MediaFiles)[0];
-                     path = file.Path;
+                    if (!string.IsNullOrEmpty(_savedFileUrl))
+                    {
+                        File.Delete(_savedFileUrl);
+                        Log.Debug("Florid", "New image is deleted");
+                    }
+
+                    file = (MediaFile)data.GetParcelableArrayListExtra(FilePickerActivity.MediaFiles)[0];
+                    path = file.Path;
 
                     _savedFileUrl = CreateImageFile(path);
 
@@ -282,35 +342,35 @@ namespace Florid.Staff.Droid.Activity
 
                     using (var resizedImage = new Resizer(this)
                        .SetTargetLength(1080)
-                       .SetQuality(40)
+                       .SetQuality(80)
                        .SetSourceImage(sourceFile)
                        .SetOutputFormat("png")
                        .ResizedBitmap)
                     {
-                        var stream = new MemoryStream();
+                        using (var stream = new MemoryStream())
+                        {
+                            resizedImage.Compress(Bitmap.CompressFormat.Png, 1, stream);
 
-                        resizedImage.Compress(Bitmap.CompressFormat.Png, 1, stream);
+                            var bytes = stream.ToArray();
 
-                        var bytes = stream.ToArray();
+                            var encoded = Base64.GetEncoder().EncodeToString(bytes);
 
-                        var encoded = Base64.GetEncoder().EncodeToString(bytes);
+                            DroidUtility.ExecJavaScript(_mainWebView.WebView, "fileChosen(\"" + encoded + "\")");
 
-                        DroidUtility.ExecJavaScript(_mainWebView.WebView, "fileChosen(\"" + encoded + "\")");
-
-                        stream.Close();
+                        }
                     }
                     break;
 
                 case REQUEST_FILE_PICKER:
 
-                     file = (MediaFile)data.GetParcelableArrayListExtra(FilePickerActivity.MediaFiles)[0];
-                     path = file.Path;
+                    file = (MediaFile)data.GetParcelableArrayListExtra(FilePickerActivity.MediaFiles)[0];
+                    path = file.Path;
 
-                     sourceFile = new Java.IO.File(path);
+                    sourceFile = new Java.IO.File(path);
 
                     using (var resizedImage = new Resizer(this)
                         .SetTargetLength(1080)
-                        .SetQuality(40)
+                        .SetQuality(80)
                         .SetSourceImage(sourceFile)
                         .SetOutputFormat("png")
                         .ResizedBitmap)

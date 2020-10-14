@@ -24,7 +24,7 @@ namespace Florid.Staff.Droid.Services
 {
     public class JavascriptClient : Java.Lang.Object
     {
-        Action<string, string,string> _login;
+        Action<string, string, string> _login;
         WebView _mainWebView;
         BaseActivity _activity;
         Action _documentReady;
@@ -32,6 +32,11 @@ namespace Florid.Staff.Droid.Services
         public Action<bool> SetPrimaryDarkStatusBar;
         public Action<ReceiptPrintData> DoPrintJob;
         public Action LogoutCallback;
+        public Action<string, string> MobileLoginCallback;
+        public Action RememberPassCheckingCallback;
+        public Action PasscodeSavingCallback;
+        public Action PasscodeClearingCallback;
+        public Action SavedLoginInforGettingRequesCallback;
 
         public JavascriptClient(BaseActivity activity, WebView webview)
         {
@@ -74,7 +79,7 @@ namespace Florid.Staff.Droid.Services
 
         [Android.Webkit.JavascriptInterface]
         [Export("alert")]
-        public void Alert(string message,int type)
+        public void Alert(string message, int type)
         {
             _activity.MainApp.ShowSnackbar(message, (AlertType)type);
         }
@@ -118,8 +123,8 @@ namespace Florid.Staff.Droid.Services
             _activity.StartActivityForResult(intent, MainActivity.REQUEST_FILE_PICKER_SHARE);
         }
 
-     
-  
+
+
         [Android.Webkit.JavascriptInterface]
         [Export("releaseTempImage")]
         public void ReleaseTempImage()
@@ -136,9 +141,44 @@ namespace Florid.Staff.Droid.Services
 
         [Android.Webkit.JavascriptInterface]
         [Export("shareNewImage")]
-        public void ShareNewImage(string img,string contactInfo)
+        public void ShareNewImage(string img, string contactInfo)
         {
-            _activity.ShareImage(img,contactInfo);
+            _activity.ShareImage(img, contactInfo);
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("mobileLogin")]
+        public void MobileLogin(string loginName, string passcode)
+        {
+            MobileLoginCallback?.Invoke(loginName, passcode);
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("isRememberPassChecking")]
+        public void IsRememberPassChecking()
+        {
+            RememberPassCheckingCallback?.Invoke();
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("passwordSaving")]
+        public void PasswordSaving()
+        {
+            PasscodeSavingCallback?.Invoke();
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("passwordClearing")]
+        public void PasswordClearing()
+        {
+            PasscodeClearingCallback?.Invoke();
+        }
+
+        [Android.Webkit.JavascriptInterface]
+        [Export("savedLoginInforGettingRequest")]
+        public void SavedLoginInforGettingRequest()
+        {
+            SavedLoginInforGettingRequesCallback?.Invoke();
         }
 
         [Android.Webkit.JavascriptInterface]

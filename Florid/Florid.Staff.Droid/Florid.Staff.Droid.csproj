@@ -96,6 +96,7 @@
     <Compile Include="Services\BackgroundImpl.cs" />
     <Compile Include="Services\JavascriptClient.cs" />
     <Compile Include="Activities\CameraActivity.cs" />
+    <Compile Include="Services\DroidSecureStorageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -201,6 +202,9 @@
     </PackageReference>
     <PackageReference Include="Karamunting.Android.SiraLam.WebViewSuite">
       <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="PCLCrypto">
+      <Version>2.0.147</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

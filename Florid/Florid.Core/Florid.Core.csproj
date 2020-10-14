@@ -50,6 +50,8 @@
     <Compile Include="Services\IContext.cs" />
     <Compile Include="Services\ISecure.cs" />
     <Compile Include="Services\ISecureConfig.cs" />
+    <Compile Include="Services\ISecureStorageService.cs" />
+    <Compile Include="SecureStorageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

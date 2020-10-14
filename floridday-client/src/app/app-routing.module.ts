@@ -84,7 +84,7 @@ const routes: Routes = [
         component: OrderDetailConfirmingComponent,
         canActivate: [AccountAndShipperGuard]
       },
-      {
+      { 
         path: 'customer-confirming',
         component: CustomerConfirmComponent,
         canActivate: [AccountAndShipperGuard]
