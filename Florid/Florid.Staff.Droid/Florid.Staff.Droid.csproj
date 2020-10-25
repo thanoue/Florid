@@ -81,6 +81,9 @@
     <Reference Include="Florid.PosPrinter.Lib">
       <HintPath>..\Libs\Florid.PosPrinter.Lib.dll</HintPath>
     </Reference>
+    <Reference Include="Esc.PosPrinter.Lib">
+      <HintPath>..\Libs\Esc.PosPrinter.Lib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\MainActivity.cs" />
@@ -97,6 +100,10 @@
     <Compile Include="Services\JavascriptClient.cs" />
     <Compile Include="Activities\CameraActivity.cs" />
     <Compile Include="Services\DroidSecureStorageService.cs" />
+    <Compile Include="AsyncTasks\AsyncEscPosPrint.cs" />
+    <Compile Include="AsyncTasks\AsyncEscPosPrinter.cs" />
+    <Compile Include="AsyncTasks\AsyncBluetoothEscPosPrint.cs" />
+    <Compile Include="Activities\TestPrintActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -113,23 +120,6 @@
     <AndroidResource Include="Resources\values\ic_launcher_background.xml" />
     <AndroidResource Include="Resources\values\strings.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
-    <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher.xml" />
-    <AndroidResource Include="Resources\mipmap-anydpi-v26\ic_launcher_round.xml" />
-    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher_round.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher_round.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher_round.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher_round.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_foreground.png" />
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
     <AndroidResource Include="Resources\layout\BaseLayout.axml">
       <SubType>
       </SubType>
@@ -152,10 +142,19 @@
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\printer_layout.xml">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\mipmap\logo_black.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
     <Folder Include="Resources\xml\" />
+    <Folder Include="AsyncTasks\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FirebaseDatabase.net">
@@ -206,6 +205,12 @@
     <PackageReference Include="PCLCrypto">
       <Version>2.0.147</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Google.ZXing.Core">
+      <Version>3.3.3</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>1.5.3.2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Florid.Core\Florid.Core.csproj">
@@ -234,6 +239,10 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\fonts\bold.ttf" />
     <AndroidAsset Include="Assets\fonts\regular.ttf" />
+    <AndroidAsset Include="Assets\logo_black.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidAsset>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap\logo.jpg" />

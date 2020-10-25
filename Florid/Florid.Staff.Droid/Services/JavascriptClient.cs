@@ -123,6 +123,12 @@ namespace Florid.Staff.Droid.Services
             _activity.StartActivityForResult(intent, MainActivity.REQUEST_FILE_PICKER_SHARE);
         }
 
+        [Android.Webkit.JavascriptInterface]
+        [Export("locationDetected")]
+        public void LocationDetected(string location)
+        {
+            Console.WriteLine(location);
+        }
 
 
         [Android.Webkit.JavascriptInterface]

@@ -1829,6 +1829,188 @@ namespace Florid.Staff.Droid
 			global::Florid.Droid.Lib.Resource.Styleable.WheelPicker_wheel_visible_item_count = global::Florid.Staff.Droid.Resource.Styleable.WheelPicker_wheel_visible_item_count;
 			global::PCLCrypto.Resource.String.ApplicationName = global::Florid.Staff.Droid.Resource.String.ApplicationName;
 			global::PCLCrypto.Resource.String.Hello = global::Florid.Staff.Droid.Resource.String.Hello;
+			global::Xamarin.Essentials.Resource.Attribute.alpha = global::Florid.Staff.Droid.Resource.Attribute.alpha;
+			global::Xamarin.Essentials.Resource.Attribute.coordinatorLayoutStyle = global::Florid.Staff.Droid.Resource.Attribute.coordinatorLayoutStyle;
+			global::Xamarin.Essentials.Resource.Attribute.font = global::Florid.Staff.Droid.Resource.Attribute.font;
+			global::Xamarin.Essentials.Resource.Attribute.fontProviderAuthority = global::Florid.Staff.Droid.Resource.Attribute.fontProviderAuthority;
+			global::Xamarin.Essentials.Resource.Attribute.fontProviderCerts = global::Florid.Staff.Droid.Resource.Attribute.fontProviderCerts;
+			global::Xamarin.Essentials.Resource.Attribute.fontProviderFetchStrategy = global::Florid.Staff.Droid.Resource.Attribute.fontProviderFetchStrategy;
+			global::Xamarin.Essentials.Resource.Attribute.fontProviderFetchTimeout = global::Florid.Staff.Droid.Resource.Attribute.fontProviderFetchTimeout;
+			global::Xamarin.Essentials.Resource.Attribute.fontProviderPackage = global::Florid.Staff.Droid.Resource.Attribute.fontProviderPackage;
+			global::Xamarin.Essentials.Resource.Attribute.fontProviderQuery = global::Florid.Staff.Droid.Resource.Attribute.fontProviderQuery;
+			global::Xamarin.Essentials.Resource.Attribute.fontStyle = global::Florid.Staff.Droid.Resource.Attribute.fontStyle;
+			global::Xamarin.Essentials.Resource.Attribute.fontVariationSettings = global::Florid.Staff.Droid.Resource.Attribute.fontVariationSettings;
+			global::Xamarin.Essentials.Resource.Attribute.fontWeight = global::Florid.Staff.Droid.Resource.Attribute.fontWeight;
+			global::Xamarin.Essentials.Resource.Attribute.keylines = global::Florid.Staff.Droid.Resource.Attribute.keylines;
+			global::Xamarin.Essentials.Resource.Attribute.layout_anchor = global::Florid.Staff.Droid.Resource.Attribute.layout_anchor;
+			global::Xamarin.Essentials.Resource.Attribute.layout_anchorGravity = global::Florid.Staff.Droid.Resource.Attribute.layout_anchorGravity;
+			global::Xamarin.Essentials.Resource.Attribute.layout_behavior = global::Florid.Staff.Droid.Resource.Attribute.layout_behavior;
+			global::Xamarin.Essentials.Resource.Attribute.layout_dodgeInsetEdges = global::Florid.Staff.Droid.Resource.Attribute.layout_dodgeInsetEdges;
+			global::Xamarin.Essentials.Resource.Attribute.layout_insetEdge = global::Florid.Staff.Droid.Resource.Attribute.layout_insetEdge;
+			global::Xamarin.Essentials.Resource.Attribute.layout_keyline = global::Florid.Staff.Droid.Resource.Attribute.layout_keyline;
+			global::Xamarin.Essentials.Resource.Attribute.statusBarBackground = global::Florid.Staff.Droid.Resource.Attribute.statusBarBackground;
+			global::Xamarin.Essentials.Resource.Attribute.ttcIndex = global::Florid.Staff.Droid.Resource.Attribute.ttcIndex;
+			global::Xamarin.Essentials.Resource.Color.browser_actions_bg_grey = global::Florid.Staff.Droid.Resource.Color.browser_actions_bg_grey;
+			global::Xamarin.Essentials.Resource.Color.browser_actions_divider_color = global::Florid.Staff.Droid.Resource.Color.browser_actions_divider_color;
+			global::Xamarin.Essentials.Resource.Color.browser_actions_text_color = global::Florid.Staff.Droid.Resource.Color.browser_actions_text_color;
+			global::Xamarin.Essentials.Resource.Color.browser_actions_title_color = global::Florid.Staff.Droid.Resource.Color.browser_actions_title_color;
+			global::Xamarin.Essentials.Resource.Color.notification_action_color_filter = global::Florid.Staff.Droid.Resource.Color.notification_action_color_filter;
+			global::Xamarin.Essentials.Resource.Color.notification_icon_bg_color = global::Florid.Staff.Droid.Resource.Color.notification_icon_bg_color;
+			global::Xamarin.Essentials.Resource.Color.ripple_material_light = global::Florid.Staff.Droid.Resource.Color.ripple_material_light;
+			global::Xamarin.Essentials.Resource.Color.secondary_text_default_material_light = global::Florid.Staff.Droid.Resource.Color.secondary_text_default_material_light;
+			global::Xamarin.Essentials.Resource.Dimension.browser_actions_context_menu_max_width = global::Florid.Staff.Droid.Resource.Dimension.browser_actions_context_menu_max_width;
+			global::Xamarin.Essentials.Resource.Dimension.browser_actions_context_menu_min_padding = global::Florid.Staff.Droid.Resource.Dimension.browser_actions_context_menu_min_padding;
+			global::Xamarin.Essentials.Resource.Dimension.compat_button_inset_horizontal_material = global::Florid.Staff.Droid.Resource.Dimension.compat_button_inset_horizontal_material;
+			global::Xamarin.Essentials.Resource.Dimension.compat_button_inset_vertical_material = global::Florid.Staff.Droid.Resource.Dimension.compat_button_inset_vertical_material;
+			global::Xamarin.Essentials.Resource.Dimension.compat_button_padding_horizontal_material = global::Florid.Staff.Droid.Resource.Dimension.compat_button_padding_horizontal_material;
+			global::Xamarin.Essentials.Resource.Dimension.compat_button_padding_vertical_material = global::Florid.Staff.Droid.Resource.Dimension.compat_button_padding_vertical_material;
+			global::Xamarin.Essentials.Resource.Dimension.compat_control_corner_material = global::Florid.Staff.Droid.Resource.Dimension.compat_control_corner_material;
+			global::Xamarin.Essentials.Resource.Dimension.compat_notification_large_icon_max_height = global::Florid.Staff.Droid.Resource.Dimension.compat_notification_large_icon_max_height;
+			global::Xamarin.Essentials.Resource.Dimension.compat_notification_large_icon_max_width = global::Florid.Staff.Droid.Resource.Dimension.compat_notification_large_icon_max_width;
+			global::Xamarin.Essentials.Resource.Dimension.notification_action_icon_size = global::Florid.Staff.Droid.Resource.Dimension.notification_action_icon_size;
+			global::Xamarin.Essentials.Resource.Dimension.notification_action_text_size = global::Florid.Staff.Droid.Resource.Dimension.notification_action_text_size;
+			global::Xamarin.Essentials.Resource.Dimension.notification_big_circle_margin = global::Florid.Staff.Droid.Resource.Dimension.notification_big_circle_margin;
+			global::Xamarin.Essentials.Resource.Dimension.notification_content_margin_start = global::Florid.Staff.Droid.Resource.Dimension.notification_content_margin_start;
+			global::Xamarin.Essentials.Resource.Dimension.notification_large_icon_height = global::Florid.Staff.Droid.Resource.Dimension.notification_large_icon_height;
+			global::Xamarin.Essentials.Resource.Dimension.notification_large_icon_width = global::Florid.Staff.Droid.Resource.Dimension.notification_large_icon_width;
+			global::Xamarin.Essentials.Resource.Dimension.notification_main_column_padding_top = global::Florid.Staff.Droid.Resource.Dimension.notification_main_column_padding_top;
+			global::Xamarin.Essentials.Resource.Dimension.notification_media_narrow_margin = global::Florid.Staff.Droid.Resource.Dimension.notification_media_narrow_margin;
+			global::Xamarin.Essentials.Resource.Dimension.notification_right_icon_size = global::Florid.Staff.Droid.Resource.Dimension.notification_right_icon_size;
+			global::Xamarin.Essentials.Resource.Dimension.notification_right_side_padding_top = global::Florid.Staff.Droid.Resource.Dimension.notification_right_side_padding_top;
+			global::Xamarin.Essentials.Resource.Dimension.notification_small_icon_background_padding = global::Florid.Staff.Droid.Resource.Dimension.notification_small_icon_background_padding;
+			global::Xamarin.Essentials.Resource.Dimension.notification_small_icon_size_as_large = global::Florid.Staff.Droid.Resource.Dimension.notification_small_icon_size_as_large;
+			global::Xamarin.Essentials.Resource.Dimension.notification_subtext_size = global::Florid.Staff.Droid.Resource.Dimension.notification_subtext_size;
+			global::Xamarin.Essentials.Resource.Dimension.notification_top_pad = global::Florid.Staff.Droid.Resource.Dimension.notification_top_pad;
+			global::Xamarin.Essentials.Resource.Dimension.notification_top_pad_large_text = global::Florid.Staff.Droid.Resource.Dimension.notification_top_pad_large_text;
+			global::Xamarin.Essentials.Resource.Drawable.notification_action_background = global::Florid.Staff.Droid.Resource.Drawable.notification_action_background;
+			global::Xamarin.Essentials.Resource.Drawable.notification_bg = global::Florid.Staff.Droid.Resource.Drawable.notification_bg;
+			global::Xamarin.Essentials.Resource.Drawable.notification_bg_low = global::Florid.Staff.Droid.Resource.Drawable.notification_bg_low;
+			global::Xamarin.Essentials.Resource.Drawable.notification_bg_low_normal = global::Florid.Staff.Droid.Resource.Drawable.notification_bg_low_normal;
+			global::Xamarin.Essentials.Resource.Drawable.notification_bg_low_pressed = global::Florid.Staff.Droid.Resource.Drawable.notification_bg_low_pressed;
+			global::Xamarin.Essentials.Resource.Drawable.notification_bg_normal = global::Florid.Staff.Droid.Resource.Drawable.notification_bg_normal;
+			global::Xamarin.Essentials.Resource.Drawable.notification_bg_normal_pressed = global::Florid.Staff.Droid.Resource.Drawable.notification_bg_normal_pressed;
+			global::Xamarin.Essentials.Resource.Drawable.notification_icon_background = global::Florid.Staff.Droid.Resource.Drawable.notification_icon_background;
+			global::Xamarin.Essentials.Resource.Drawable.notification_template_icon_bg = global::Florid.Staff.Droid.Resource.Drawable.notification_template_icon_bg;
+			global::Xamarin.Essentials.Resource.Drawable.notification_template_icon_low_bg = global::Florid.Staff.Droid.Resource.Drawable.notification_template_icon_low_bg;
+			global::Xamarin.Essentials.Resource.Drawable.notification_tile_bg = global::Florid.Staff.Droid.Resource.Drawable.notification_tile_bg;
+			global::Xamarin.Essentials.Resource.Drawable.notify_panel_notification_icon_bg = global::Florid.Staff.Droid.Resource.Drawable.notify_panel_notification_icon_bg;
+			global::Xamarin.Essentials.Resource.Id.actions = global::Florid.Staff.Droid.Resource.Id.actions;
+			global::Xamarin.Essentials.Resource.Id.action_container = global::Florid.Staff.Droid.Resource.Id.action_container;
+			global::Xamarin.Essentials.Resource.Id.action_divider = global::Florid.Staff.Droid.Resource.Id.action_divider;
+			global::Xamarin.Essentials.Resource.Id.action_image = global::Florid.Staff.Droid.Resource.Id.action_image;
+			global::Xamarin.Essentials.Resource.Id.action_text = global::Florid.Staff.Droid.Resource.Id.action_text;
+			global::Xamarin.Essentials.Resource.Id.all = global::Florid.Staff.Droid.Resource.Id.all;
+			global::Xamarin.Essentials.Resource.Id.async = global::Florid.Staff.Droid.Resource.Id.async;
+			global::Xamarin.Essentials.Resource.Id.blocking = global::Florid.Staff.Droid.Resource.Id.blocking;
+			global::Xamarin.Essentials.Resource.Id.bottom = global::Florid.Staff.Droid.Resource.Id.bottom;
+			global::Xamarin.Essentials.Resource.Id.browser_actions_header_text = global::Florid.Staff.Droid.Resource.Id.browser_actions_header_text;
+			global::Xamarin.Essentials.Resource.Id.browser_actions_menu_items = global::Florid.Staff.Droid.Resource.Id.browser_actions_menu_items;
+			global::Xamarin.Essentials.Resource.Id.browser_actions_menu_item_icon = global::Florid.Staff.Droid.Resource.Id.browser_actions_menu_item_icon;
+			global::Xamarin.Essentials.Resource.Id.browser_actions_menu_item_text = global::Florid.Staff.Droid.Resource.Id.browser_actions_menu_item_text;
+			global::Xamarin.Essentials.Resource.Id.browser_actions_menu_view = global::Florid.Staff.Droid.Resource.Id.browser_actions_menu_view;
+			global::Xamarin.Essentials.Resource.Id.center = global::Florid.Staff.Droid.Resource.Id.center;
+			global::Xamarin.Essentials.Resource.Id.center_horizontal = global::Florid.Staff.Droid.Resource.Id.center_horizontal;
+			global::Xamarin.Essentials.Resource.Id.center_vertical = global::Florid.Staff.Droid.Resource.Id.center_vertical;
+			global::Xamarin.Essentials.Resource.Id.chronometer = global::Florid.Staff.Droid.Resource.Id.chronometer;
+			global::Xamarin.Essentials.Resource.Id.clip_horizontal = global::Florid.Staff.Droid.Resource.Id.clip_horizontal;
+			global::Xamarin.Essentials.Resource.Id.clip_vertical = global::Florid.Staff.Droid.Resource.Id.clip_vertical;
+			global::Xamarin.Essentials.Resource.Id.end = global::Florid.Staff.Droid.Resource.Id.end;
+			global::Xamarin.Essentials.Resource.Id.fill = global::Florid.Staff.Droid.Resource.Id.fill;
+			global::Xamarin.Essentials.Resource.Id.fill_horizontal = global::Florid.Staff.Droid.Resource.Id.fill_horizontal;
+			global::Xamarin.Essentials.Resource.Id.fill_vertical = global::Florid.Staff.Droid.Resource.Id.fill_vertical;
+			global::Xamarin.Essentials.Resource.Id.forever = global::Florid.Staff.Droid.Resource.Id.forever;
+			global::Xamarin.Essentials.Resource.Id.icon = global::Florid.Staff.Droid.Resource.Id.icon;
+			global::Xamarin.Essentials.Resource.Id.icon_group = global::Florid.Staff.Droid.Resource.Id.icon_group;
+			global::Xamarin.Essentials.Resource.Id.info = global::Florid.Staff.Droid.Resource.Id.info;
+			global::Xamarin.Essentials.Resource.Id.italic = global::Florid.Staff.Droid.Resource.Id.italic;
+			global::Xamarin.Essentials.Resource.Id.left = global::Florid.Staff.Droid.Resource.Id.left;
+			global::Xamarin.Essentials.Resource.Id.line1 = global::Florid.Staff.Droid.Resource.Id.line1;
+			global::Xamarin.Essentials.Resource.Id.line3 = global::Florid.Staff.Droid.Resource.Id.line3;
+			global::Xamarin.Essentials.Resource.Id.none = global::Florid.Staff.Droid.Resource.Id.none;
+			global::Xamarin.Essentials.Resource.Id.normal = global::Florid.Staff.Droid.Resource.Id.normal;
+			global::Xamarin.Essentials.Resource.Id.notification_background = global::Florid.Staff.Droid.Resource.Id.notification_background;
+			global::Xamarin.Essentials.Resource.Id.notification_main_column = global::Florid.Staff.Droid.Resource.Id.notification_main_column;
+			global::Xamarin.Essentials.Resource.Id.notification_main_column_container = global::Florid.Staff.Droid.Resource.Id.notification_main_column_container;
+			global::Xamarin.Essentials.Resource.Id.right = global::Florid.Staff.Droid.Resource.Id.right;
+			global::Xamarin.Essentials.Resource.Id.right_icon = global::Florid.Staff.Droid.Resource.Id.right_icon;
+			global::Xamarin.Essentials.Resource.Id.right_side = global::Florid.Staff.Droid.Resource.Id.right_side;
+			global::Xamarin.Essentials.Resource.Id.start = global::Florid.Staff.Droid.Resource.Id.start;
+			global::Xamarin.Essentials.Resource.Id.tag_transition_group = global::Florid.Staff.Droid.Resource.Id.tag_transition_group;
+			global::Xamarin.Essentials.Resource.Id.tag_unhandled_key_event_manager = global::Florid.Staff.Droid.Resource.Id.tag_unhandled_key_event_manager;
+			global::Xamarin.Essentials.Resource.Id.tag_unhandled_key_listeners = global::Florid.Staff.Droid.Resource.Id.tag_unhandled_key_listeners;
+			global::Xamarin.Essentials.Resource.Id.text = global::Florid.Staff.Droid.Resource.Id.text;
+			global::Xamarin.Essentials.Resource.Id.text2 = global::Florid.Staff.Droid.Resource.Id.text2;
+			global::Xamarin.Essentials.Resource.Id.time = global::Florid.Staff.Droid.Resource.Id.time;
+			global::Xamarin.Essentials.Resource.Id.title = global::Florid.Staff.Droid.Resource.Id.title;
+			global::Xamarin.Essentials.Resource.Id.top = global::Florid.Staff.Droid.Resource.Id.top;
+			global::Xamarin.Essentials.Resource.Integer.status_bar_notification_info_maxnum = global::Florid.Staff.Droid.Resource.Integer.status_bar_notification_info_maxnum;
+			global::Xamarin.Essentials.Resource.Layout.browser_actions_context_menu_page = global::Florid.Staff.Droid.Resource.Layout.browser_actions_context_menu_page;
+			global::Xamarin.Essentials.Resource.Layout.browser_actions_context_menu_row = global::Florid.Staff.Droid.Resource.Layout.browser_actions_context_menu_row;
+			global::Xamarin.Essentials.Resource.Layout.notification_action = global::Florid.Staff.Droid.Resource.Layout.notification_action;
+			global::Xamarin.Essentials.Resource.Layout.notification_action_tombstone = global::Florid.Staff.Droid.Resource.Layout.notification_action_tombstone;
+			global::Xamarin.Essentials.Resource.Layout.notification_template_custom_big = global::Florid.Staff.Droid.Resource.Layout.notification_template_custom_big;
+			global::Xamarin.Essentials.Resource.Layout.notification_template_icon_group = global::Florid.Staff.Droid.Resource.Layout.notification_template_icon_group;
+			global::Xamarin.Essentials.Resource.Layout.notification_template_part_chronometer = global::Florid.Staff.Droid.Resource.Layout.notification_template_part_chronometer;
+			global::Xamarin.Essentials.Resource.Layout.notification_template_part_time = global::Florid.Staff.Droid.Resource.Layout.notification_template_part_time;
+			global::Xamarin.Essentials.Resource.String.status_bar_notification_info_overflow = global::Florid.Staff.Droid.Resource.String.status_bar_notification_info_overflow;
+			global::Xamarin.Essentials.Resource.Style.TextAppearance_Compat_Notification = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Compat_Notification;
+			global::Xamarin.Essentials.Resource.Style.TextAppearance_Compat_Notification_Info = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Compat_Notification_Info;
+			global::Xamarin.Essentials.Resource.Style.TextAppearance_Compat_Notification_Line2 = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Compat_Notification_Line2;
+			global::Xamarin.Essentials.Resource.Style.TextAppearance_Compat_Notification_Time = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Compat_Notification_Time;
+			global::Xamarin.Essentials.Resource.Style.TextAppearance_Compat_Notification_Title = global::Florid.Staff.Droid.Resource.Style.TextAppearance_Compat_Notification_Title;
+			global::Xamarin.Essentials.Resource.Style.Widget_Compat_NotificationActionContainer = global::Florid.Staff.Droid.Resource.Style.Widget_Compat_NotificationActionContainer;
+			global::Xamarin.Essentials.Resource.Style.Widget_Compat_NotificationActionText = global::Florid.Staff.Droid.Resource.Style.Widget_Compat_NotificationActionText;
+			global::Xamarin.Essentials.Resource.Style.Widget_Support_CoordinatorLayout = global::Florid.Staff.Droid.Resource.Style.Widget_Support_CoordinatorLayout;
+			global::Xamarin.Essentials.Resource.Styleable.ColorStateListItem = global::Florid.Staff.Droid.Resource.Styleable.ColorStateListItem;
+			global::Xamarin.Essentials.Resource.Styleable.ColorStateListItem_alpha = global::Florid.Staff.Droid.Resource.Styleable.ColorStateListItem_alpha;
+			global::Xamarin.Essentials.Resource.Styleable.ColorStateListItem_android_alpha = global::Florid.Staff.Droid.Resource.Styleable.ColorStateListItem_android_alpha;
+			global::Xamarin.Essentials.Resource.Styleable.ColorStateListItem_android_color = global::Florid.Staff.Droid.Resource.Styleable.ColorStateListItem_android_color;
+			global::Xamarin.Essentials.Resource.Styleable.CoordinatorLayout = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout;
+			global::Xamarin.Essentials.Resource.Styleable.CoordinatorLayout_keylines = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_keylines;
+			global::Xamarin.Essentials.Resource.Styleable.CoordinatorLayout_Layout = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout;
+			global::Xamarin.Essentials.Resource.Styleable.CoordinatorLayout_Layout_android_layout_gravity = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_android_layout_gravity;
+			global::Xamarin.Essentials.Resource.Styleable.CoordinatorLayout_Layout_layout_anchor = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_anchor;
+			global::Xamarin.Essentials.Resource.Styleable.CoordinatorLayout_Layout_layout_anchorGravity = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_anchorGravity;
+			global::Xamarin.Essentials.Resource.Styleable.CoordinatorLayout_Layout_layout_behavior = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_behavior;
+			global::Xamarin.Essentials.Resource.Styleable.CoordinatorLayout_Layout_layout_dodgeInsetEdges = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_dodgeInsetEdges;
+			global::Xamarin.Essentials.Resource.Styleable.CoordinatorLayout_Layout_layout_insetEdge = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_insetEdge;
+			global::Xamarin.Essentials.Resource.Styleable.CoordinatorLayout_Layout_layout_keyline = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_Layout_layout_keyline;
+			global::Xamarin.Essentials.Resource.Styleable.CoordinatorLayout_statusBarBackground = global::Florid.Staff.Droid.Resource.Styleable.CoordinatorLayout_statusBarBackground;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamily = global::Florid.Staff.Droid.Resource.Styleable.FontFamily;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamilyFont = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamilyFont_android_font = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_android_font;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamilyFont_android_fontStyle = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_android_fontStyle;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamilyFont_android_fontVariationSettings = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_android_fontVariationSettings;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamilyFont_android_fontWeight = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_android_fontWeight;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamilyFont_android_ttcIndex = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_android_ttcIndex;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamilyFont_font = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_font;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamilyFont_fontStyle = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_fontStyle;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamilyFont_fontVariationSettings = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_fontVariationSettings;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamilyFont_fontWeight = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_fontWeight;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamilyFont_ttcIndex = global::Florid.Staff.Droid.Resource.Styleable.FontFamilyFont_ttcIndex;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamily_fontProviderAuthority = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderAuthority;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamily_fontProviderCerts = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderCerts;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamily_fontProviderFetchStrategy = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderFetchStrategy;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamily_fontProviderFetchTimeout = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderFetchTimeout;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamily_fontProviderPackage = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderPackage;
+			global::Xamarin.Essentials.Resource.Styleable.FontFamily_fontProviderQuery = global::Florid.Staff.Droid.Resource.Styleable.FontFamily_fontProviderQuery;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor = global::Florid.Staff.Droid.Resource.Styleable.GradientColor;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColorItem = global::Florid.Staff.Droid.Resource.Styleable.GradientColorItem;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColorItem_android_color = global::Florid.Staff.Droid.Resource.Styleable.GradientColorItem_android_color;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColorItem_android_offset = global::Florid.Staff.Droid.Resource.Styleable.GradientColorItem_android_offset;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_centerColor = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_centerColor;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_centerX = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_centerX;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_centerY = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_centerY;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_endColor = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_endColor;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_endX = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_endX;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_endY = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_endY;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_gradientRadius = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_gradientRadius;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_startColor = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_startColor;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_startX = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_startX;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_startY = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_startY;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_tileMode = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_tileMode;
+			global::Xamarin.Essentials.Resource.Styleable.GradientColor_android_type = global::Florid.Staff.Droid.Resource.Styleable.GradientColor_android_type;
+			global::Xamarin.Essentials.Resource.Xml.xamarin_essentials_fileprovider_file_paths = global::Florid.Staff.Droid.Resource.Xml.xamarin_essentials_fileprovider_file_paths;
 		}
 		
 		public partial class Animation
@@ -5782,169 +5964,172 @@ namespace Florid.Staff.Droid
 			public const int pin = 2131296420;
 			
 			// aapt resource value: 0x7F0900A5
-			public const int progress_circular = 2131296421;
+			public const int printBtn = 2131296421;
 			
 			// aapt resource value: 0x7F0900A6
-			public const int progress_horizontal = 2131296422;
+			public const int progress_circular = 2131296422;
 			
 			// aapt resource value: 0x7F0900A7
-			public const int radio = 2131296423;
+			public const int progress_horizontal = 2131296423;
+			
+			// aapt resource value: 0x7F0900A8
+			public const int radio = 2131296424;
 			
 			// aapt resource value: 0x7F090009
 			public const int Regular = 2131296265;
 			
-			// aapt resource value: 0x7F0900A8
-			public const int resImg = 2131296424;
-			
 			// aapt resource value: 0x7F0900A9
-			public const int right = 2131296425;
+			public const int resImg = 2131296425;
 			
 			// aapt resource value: 0x7F0900AA
-			public const int right_icon = 2131296426;
+			public const int right = 2131296426;
 			
 			// aapt resource value: 0x7F0900AB
-			public const int right_side = 2131296427;
+			public const int right_icon = 2131296427;
 			
 			// aapt resource value: 0x7F0900AC
-			public const int save_image_matrix = 2131296428;
+			public const int right_side = 2131296428;
 			
 			// aapt resource value: 0x7F0900AD
-			public const int save_non_transition_alpha = 2131296429;
+			public const int save_image_matrix = 2131296429;
 			
 			// aapt resource value: 0x7F0900AE
-			public const int save_scale_type = 2131296430;
+			public const int save_non_transition_alpha = 2131296430;
 			
 			// aapt resource value: 0x7F0900AF
-			public const int screen = 2131296431;
+			public const int save_scale_type = 2131296431;
 			
 			// aapt resource value: 0x7F0900B0
-			public const int scroll = 2131296432;
-			
-			// aapt resource value: 0x7F0900B4
-			public const int scrollable = 2131296436;
+			public const int screen = 2131296432;
 			
 			// aapt resource value: 0x7F0900B1
-			public const int scrollIndicatorDown = 2131296433;
-			
-			// aapt resource value: 0x7F0900B2
-			public const int scrollIndicatorUp = 2131296434;
-			
-			// aapt resource value: 0x7F0900B3
-			public const int scrollView = 2131296435;
+			public const int scroll = 2131296433;
 			
 			// aapt resource value: 0x7F0900B5
-			public const int search_badge = 2131296437;
+			public const int scrollable = 2131296437;
+			
+			// aapt resource value: 0x7F0900B2
+			public const int scrollIndicatorDown = 2131296434;
+			
+			// aapt resource value: 0x7F0900B3
+			public const int scrollIndicatorUp = 2131296435;
+			
+			// aapt resource value: 0x7F0900B4
+			public const int scrollView = 2131296436;
 			
 			// aapt resource value: 0x7F0900B6
-			public const int search_bar = 2131296438;
+			public const int search_badge = 2131296438;
 			
 			// aapt resource value: 0x7F0900B7
-			public const int search_button = 2131296439;
+			public const int search_bar = 2131296439;
 			
 			// aapt resource value: 0x7F0900B8
-			public const int search_close_btn = 2131296440;
+			public const int search_button = 2131296440;
 			
 			// aapt resource value: 0x7F0900B9
-			public const int search_edit_frame = 2131296441;
+			public const int search_close_btn = 2131296441;
 			
 			// aapt resource value: 0x7F0900BA
-			public const int search_go_btn = 2131296442;
+			public const int search_edit_frame = 2131296442;
 			
 			// aapt resource value: 0x7F0900BB
-			public const int search_mag_icon = 2131296443;
+			public const int search_go_btn = 2131296443;
 			
 			// aapt resource value: 0x7F0900BC
-			public const int search_plate = 2131296444;
+			public const int search_mag_icon = 2131296444;
 			
 			// aapt resource value: 0x7F0900BD
-			public const int search_src_text = 2131296445;
+			public const int search_plate = 2131296445;
 			
 			// aapt resource value: 0x7F0900BE
-			public const int search_voice_btn = 2131296446;
-			
-			// aapt resource value: 0x7F0900C0
-			public const int selected = 2131296448;
+			public const int search_src_text = 2131296446;
 			
 			// aapt resource value: 0x7F0900BF
-			public const int select_dialog_listview = 2131296447;
+			public const int search_voice_btn = 2131296447;
 			
 			// aapt resource value: 0x7F0900C1
-			public const int sheetContentLayout = 2131296449;
+			public const int selected = 2131296449;
+			
+			// aapt resource value: 0x7F0900C0
+			public const int select_dialog_listview = 2131296448;
 			
 			// aapt resource value: 0x7F0900C2
-			public const int sheetTitle = 2131296450;
+			public const int sheetContentLayout = 2131296450;
 			
 			// aapt resource value: 0x7F0900C3
-			public const int sheetTitleLayout = 2131296451;
+			public const int sheetTitle = 2131296451;
+			
+			// aapt resource value: 0x7F0900C4
+			public const int sheetTitleLayout = 2131296452;
 			
 			// aapt resource value: 0x7F09000A
 			public const int SHIFT = 2131296266;
 			
-			// aapt resource value: 0x7F0900C4
-			public const int shortcut = 2131296452;
-			
 			// aapt resource value: 0x7F0900C5
-			public const int showCustom = 2131296453;
+			public const int shortcut = 2131296453;
 			
 			// aapt resource value: 0x7F0900C6
-			public const int showHome = 2131296454;
+			public const int showCustom = 2131296454;
 			
 			// aapt resource value: 0x7F0900C7
-			public const int showTitle = 2131296455;
+			public const int showHome = 2131296455;
 			
 			// aapt resource value: 0x7F0900C8
-			public const int smallLabel = 2131296456;
+			public const int showTitle = 2131296456;
 			
 			// aapt resource value: 0x7F0900C9
-			public const int snackbar_action = 2131296457;
+			public const int smallLabel = 2131296457;
 			
 			// aapt resource value: 0x7F0900CA
-			public const int snackbar_text = 2131296458;
+			public const int snackbar_action = 2131296458;
 			
 			// aapt resource value: 0x7F0900CB
-			public const int snap = 2131296459;
+			public const int snackbar_text = 2131296459;
 			
 			// aapt resource value: 0x7F0900CC
-			public const int snapMargins = 2131296460;
+			public const int snap = 2131296460;
 			
 			// aapt resource value: 0x7F0900CD
-			public const int spacer = 2131296461;
+			public const int snapMargins = 2131296461;
 			
 			// aapt resource value: 0x7F0900CE
-			public const int split_action_bar = 2131296462;
+			public const int spacer = 2131296462;
 			
 			// aapt resource value: 0x7F0900CF
-			public const int spread = 2131296463;
+			public const int split_action_bar = 2131296463;
 			
 			// aapt resource value: 0x7F0900D0
-			public const int spread_inside = 2131296464;
+			public const int spread = 2131296464;
 			
 			// aapt resource value: 0x7F0900D1
-			public const int src_atop = 2131296465;
+			public const int spread_inside = 2131296465;
 			
 			// aapt resource value: 0x7F0900D2
-			public const int src_in = 2131296466;
+			public const int src_atop = 2131296466;
 			
 			// aapt resource value: 0x7F0900D3
-			public const int src_over = 2131296467;
+			public const int src_in = 2131296467;
 			
 			// aapt resource value: 0x7F0900D4
-			public const int standard = 2131296468;
+			public const int src_over = 2131296468;
 			
 			// aapt resource value: 0x7F0900D5
-			public const int start = 2131296469;
+			public const int standard = 2131296469;
 			
 			// aapt resource value: 0x7F0900D6
-			public const int status_bar_latest_event_content = 2131296470;
+			public const int start = 2131296470;
 			
 			// aapt resource value: 0x7F0900D7
-			public const int stretch = 2131296471;
+			public const int status_bar_latest_event_content = 2131296471;
 			
 			// aapt resource value: 0x7F0900D8
-			public const int submenuarrow = 2131296472;
+			public const int stretch = 2131296472;
 			
 			// aapt resource value: 0x7F0900D9
-			public const int submit_area = 2131296473;
+			public const int submenuarrow = 2131296473;
+			
+			// aapt resource value: 0x7F0900DA
+			public const int submit_area = 2131296474;
 			
 			// aapt resource value: 0x7F09000C
 			public const int SuperRegular = 2131296268;
@@ -5952,128 +6137,128 @@ namespace Florid.Staff.Droid
 			// aapt resource value: 0x7F09000B
 			public const int SYM = 2131296267;
 			
-			// aapt resource value: 0x7F0900DA
-			public const int tab0 = 2131296474;
-			
 			// aapt resource value: 0x7F0900DB
-			public const int tab1 = 2131296475;
+			public const int tab0 = 2131296475;
 			
 			// aapt resource value: 0x7F0900DC
-			public const int tabMode = 2131296476;
+			public const int tab1 = 2131296476;
 			
 			// aapt resource value: 0x7F0900DD
-			public const int tag_transition_group = 2131296477;
+			public const int tabMode = 2131296477;
 			
 			// aapt resource value: 0x7F0900DE
-			public const int tag_unhandled_key_event_manager = 2131296478;
+			public const int tag_transition_group = 2131296478;
 			
 			// aapt resource value: 0x7F0900DF
-			public const int tag_unhandled_key_listeners = 2131296479;
+			public const int tag_unhandled_key_event_manager = 2131296479;
 			
 			// aapt resource value: 0x7F0900E0
-			public const int text = 2131296480;
+			public const int tag_unhandled_key_listeners = 2131296480;
 			
 			// aapt resource value: 0x7F0900E1
-			public const int text2 = 2131296481;
-			
-			// aapt resource value: 0x7F0900E6
-			public const int textinput_counter = 2131296486;
-			
-			// aapt resource value: 0x7F0900E7
-			public const int textinput_error = 2131296487;
-			
-			// aapt resource value: 0x7F0900E8
-			public const int textinput_helper_text = 2131296488;
+			public const int text = 2131296481;
 			
 			// aapt resource value: 0x7F0900E2
-			public const int textSpacerNoButtons = 2131296482;
+			public const int text2 = 2131296482;
 			
-			// aapt resource value: 0x7F0900E3
-			public const int textSpacerNoTitle = 2131296483;
+			// aapt resource value: 0x7F0900E7
+			public const int textinput_counter = 2131296487;
 			
-			// aapt resource value: 0x7F0900E4
-			public const int textStart = 2131296484;
-			
-			// aapt resource value: 0x7F0900E5
-			public const int text_input_password_toggle = 2131296485;
+			// aapt resource value: 0x7F0900E8
+			public const int textinput_error = 2131296488;
 			
 			// aapt resource value: 0x7F0900E9
-			public const int time = 2131296489;
+			public const int textinput_helper_text = 2131296489;
+			
+			// aapt resource value: 0x7F0900E3
+			public const int textSpacerNoButtons = 2131296483;
+			
+			// aapt resource value: 0x7F0900E4
+			public const int textSpacerNoTitle = 2131296484;
+			
+			// aapt resource value: 0x7F0900E5
+			public const int textStart = 2131296485;
+			
+			// aapt resource value: 0x7F0900E6
+			public const int text_input_password_toggle = 2131296486;
 			
 			// aapt resource value: 0x7F0900EA
-			public const int title = 2131296490;
+			public const int time = 2131296490;
 			
 			// aapt resource value: 0x7F0900EB
-			public const int titleDividerNoCustom = 2131296491;
+			public const int title = 2131296491;
 			
 			// aapt resource value: 0x7F0900EC
-			public const int title_template = 2131296492;
+			public const int titleDividerNoCustom = 2131296492;
 			
 			// aapt resource value: 0x7F0900ED
-			public const int toolbar = 2131296493;
+			public const int title_template = 2131296493;
 			
 			// aapt resource value: 0x7F0900EE
-			public const int top = 2131296494;
+			public const int toolbar = 2131296494;
 			
 			// aapt resource value: 0x7F0900EF
-			public const int topPanel = 2131296495;
+			public const int top = 2131296495;
 			
 			// aapt resource value: 0x7F0900F0
-			public const int touch_outside = 2131296496;
+			public const int topPanel = 2131296496;
 			
 			// aapt resource value: 0x7F0900F1
-			public const int transition_current_scene = 2131296497;
+			public const int touch_outside = 2131296497;
 			
 			// aapt resource value: 0x7F0900F2
-			public const int transition_layout_save = 2131296498;
+			public const int transition_current_scene = 2131296498;
 			
 			// aapt resource value: 0x7F0900F3
-			public const int transition_position = 2131296499;
+			public const int transition_layout_save = 2131296499;
 			
 			// aapt resource value: 0x7F0900F4
-			public const int transition_scene_layoutid_cache = 2131296500;
+			public const int transition_position = 2131296500;
 			
 			// aapt resource value: 0x7F0900F5
-			public const int transition_transform = 2131296501;
+			public const int transition_scene_layoutid_cache = 2131296501;
 			
 			// aapt resource value: 0x7F0900F6
-			public const int uniform = 2131296502;
+			public const int transition_transform = 2131296502;
 			
 			// aapt resource value: 0x7F0900F7
-			public const int unlabeled = 2131296503;
+			public const int uniform = 2131296503;
 			
 			// aapt resource value: 0x7F0900F8
-			public const int up = 2131296504;
+			public const int unlabeled = 2131296504;
 			
 			// aapt resource value: 0x7F0900F9
-			public const int urlTxt = 2131296505;
+			public const int up = 2131296505;
 			
 			// aapt resource value: 0x7F0900FA
-			public const int useLogo = 2131296506;
+			public const int urlTxt = 2131296506;
 			
 			// aapt resource value: 0x7F0900FB
-			public const int view_offset_helper = 2131296507;
+			public const int useLogo = 2131296507;
 			
 			// aapt resource value: 0x7F0900FC
-			public const int visible = 2131296508;
+			public const int view_offset_helper = 2131296508;
 			
 			// aapt resource value: 0x7F0900FD
-			public const int webViewSuite = 2131296509;
+			public const int visible = 2131296509;
 			
 			// aapt resource value: 0x7F0900FE
-			public const int webview_stub = 2131296510;
+			public const int webViewSuite = 2131296510;
 			
 			// aapt resource value: 0x7F0900FF
-			public const int withText = 2131296511;
+			public const int webview_stub = 2131296511;
 			
 			// aapt resource value: 0x7F090100
-			public const int wrap = 2131296512;
+			public const int withText = 2131296512;
 			
 			// aapt resource value: 0x7F090101
-			public const int wrap_content = 2131296513;
+			public const int wrap = 2131296513;
 			
 			// aapt resource value: 0x7F090102
-			public const int yearPicker = 2131296514;
+			public const int wrap_content = 2131296514;
+			
+			// aapt resource value: 0x7F090103
+			public const int yearPicker = 2131296515;
 			
 			static Id()
 			{
@@ -6382,34 +6567,37 @@ namespace Florid.Staff.Droid
 			public const int notification_template_part_time = 2131492933;
 			
 			// aapt resource value: 0x7F0C0046
-			public const int select_dialog_item_material = 2131492934;
+			public const int printer_layout = 2131492934;
 			
 			// aapt resource value: 0x7F0C0047
-			public const int select_dialog_multichoice_material = 2131492935;
+			public const int select_dialog_item_material = 2131492935;
 			
 			// aapt resource value: 0x7F0C0048
-			public const int select_dialog_singlechoice_material = 2131492936;
+			public const int select_dialog_multichoice_material = 2131492936;
 			
 			// aapt resource value: 0x7F0C0049
-			public const int single_day_picker = 2131492937;
+			public const int select_dialog_singlechoice_material = 2131492937;
 			
 			// aapt resource value: 0x7F0C004A
-			public const int SplashLayout = 2131492938;
+			public const int single_day_picker = 2131492938;
 			
 			// aapt resource value: 0x7F0C004B
-			public const int support_simple_spinner_dropdown_item = 2131492939;
+			public const int SplashLayout = 2131492939;
 			
 			// aapt resource value: 0x7F0C004C
-			public const int TakePictureLayout = 2131492940;
-			
-			// aapt resource value: 0x7F0C004E
-			public const int webview_layout = 2131492942;
-			
-			// aapt resource value: 0x7F0C004F
-			public const int webview_only = 2131492943;
+			public const int support_simple_spinner_dropdown_item = 2131492940;
 			
 			// aapt resource value: 0x7F0C004D
-			public const int web_view_suite = 2131492941;
+			public const int TakePictureLayout = 2131492941;
+			
+			// aapt resource value: 0x7F0C004F
+			public const int webview_layout = 2131492943;
+			
+			// aapt resource value: 0x7F0C0050
+			public const int webview_only = 2131492944;
+			
+			// aapt resource value: 0x7F0C004E
+			public const int web_view_suite = 2131492942;
 			
 			static Layout()
 			{
@@ -6441,16 +6629,10 @@ namespace Florid.Staff.Droid
 		{
 			
 			// aapt resource value: 0x7F0E0000
-			public const int ic_launcher = 2131623936;
+			public const int logo = 2131623936;
 			
 			// aapt resource value: 0x7F0E0001
-			public const int ic_launcher_foreground = 2131623937;
-			
-			// aapt resource value: 0x7F0E0002
-			public const int ic_launcher_round = 2131623938;
-			
-			// aapt resource value: 0x7F0E0003
-			public const int logo = 2131623939;
+			public const int logo_black = 2131623937;
 			
 			static Mipmap()
 			{
@@ -11989,6 +12171,9 @@ namespace Florid.Staff.Droid
 			
 			// aapt resource value: 0x7F120001
 			public const int folder_path = 2131886081;
+			
+			// aapt resource value: 0x7F120002
+			public const int xamarin_essentials_fileprovider_file_paths = 2131886082;
 			
 			static Xml()
 			{

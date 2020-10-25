@@ -29,6 +29,16 @@ using Android.Util;
 using Base64 = Java.Util.Base64;
 using Android.Support.V4.Content;
 using Florid.Core.Services;
+using Android.Support.V4.App;
+using Android;
+using Android.Content.PM;
+using Xamarin.Essentials;
+using System;
+using Uri = Android.Net.Uri;
+using FileProvider = Android.Support.V4.Content.FileProvider;
+using System.Linq;
+using System.Threading;
+using Florid.Staff.Droid.AsyncTasks;
 
 namespace Florid.Staff.Droid.Activity
 {
@@ -43,7 +53,6 @@ namespace Florid.Staff.Droid.Activity
         public const int REQUEST_SHARING_NEW_IMG = 5;
         protected override int LayoutId => Resource.Layout.activity_main;
 
-
         protected override bool UseOwnLayout => true;
         const int PRINTER_DISCONNECT_TIMEOUT = 60 * 1000;
 
@@ -52,11 +61,8 @@ namespace Florid.Staff.Droid.Activity
         private JavascriptClient _javascriptClient;
         private string _savedFileUrl = "";
         private string _newSharingImgPath;
-
         private string _sessionLoginName = "";
         private string _sessionPassCode = "";
-
-        private INormalDBSession<FirebaseClient> _normalDbSession => ServiceLocator.Instance.Get<INormalDBSession<FirebaseClient>>();
 
         public void InterfereWebViewSetup(WebView webView)
         {
@@ -66,13 +72,18 @@ namespace Florid.Staff.Droid.Activity
             settings.SetEnableSmoothTransition(true);
             settings.DomStorageEnabled = true;
             settings.SetSupportZoom(false);
+            settings.SetGeolocationDatabasePath(this.FilesDir.AbsolutePath);
+            settings.SetGeolocationEnabled(true);
+            settings.JavaScriptCanOpenWindowsAutomatically = true;
+            settings.BuiltInZoomControls = true;
+
 
             settings.MixedContentMode = MixedContentHandling.AlwaysAllow;
 
             webView.ClearCache(true);
 
-            webView.SetWebViewClient(new WebViewClient());
             webView.SetWebChromeClient(new MyWebChromeClient());
+            webView.SetWebViewClient(new MyWebClient());
 
             _javascriptClient = new JavascriptClient(this, webView);
 
@@ -86,27 +97,41 @@ namespace Florid.Staff.Droid.Activity
 
             _javascriptClient.DoPrintJob = (data) =>
              {
-                 MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
+                 MainApp.CurrentPrintJob = data;
+                 var printText = this.BindingReceiptData(data);
+
+                 AsyncEscPosPrinter printer = new AsyncEscPosPrinter(null, 203, 48f, 32);
+                 printer.SetTextToPrint(printText);
+
+                 var task = new AsyncBluetoothEscPosPrint("DC:0D:30:2F:49:8F", this, () =>
                  {
-                     printerDisconnectHandler.RemoveCallbacks(DisConnectPrinter);
-
-                     if (!isSuccess)
-                     {
-                         MainApp.ShowSnackbar("In lỗi!", AlertType.Error);
-                         return;
-                     }
-
-                     MainApp.CurrentPrintJob = data;
-
-                     var task = new CustomAsyncTask(this, this.BindingReceiptData(data), () =>
-                     {
-                         printerDisconnectHandler.PostDelayed(DisConnectPrinter, PRINTER_DISCONNECT_TIMEOUT);
-                         DroidUtility.ExecJavaScript(_mainWebView.WebView, "reprintOrderConfirm()");
-                     });
-
-                     task.Execute();
-
+                     DroidUtility.ExecJavaScript(_mainWebView.WebView, "reprintOrderConfirm()");
                  });
+
+                 task.Execute(printer);
+
+
+                 //MainApp.ConnectToBluetoothDevice("DC:0D:30:2F:49:8F", (isSuccess) =>
+                 //{
+                 //    printerDisconnectHandler.RemoveCallbacks(DisConnectPrinter);
+
+                 //    if (!isSuccess)
+                 //    {
+                 //        MainApp.ShowSnackbar("In lỗi!", AlertType.Error);
+                 //        return;
+                 //    }
+
+                 //    MainApp.CurrentPrintJob = data;
+
+                 //    var task = new CustomAsyncTask(this, this.BindingReceiptData(data), () =>
+                 //    {
+                 //        printerDisconnectHandler.PostDelayed(DisConnectPrinter, PRINTER_DISCONNECT_TIMEOUT);
+                 //        DroidUtility.ExecJavaScript(_mainWebView.WebView, "reprintOrderConfirm()");
+                 //    });
+
+                 //    task.Execute();
+
+                 //});
              };
 
             _javascriptClient.MobileLoginCallback = (loginName, passCode) =>
@@ -170,10 +195,7 @@ namespace Florid.Staff.Droid.Activity
             _mask = FindViewById<View>(Resource.Id.mask);
 
             _mainWebView.ToggleProgressbar(false);
-
             _mainWebView.InterfereWebViewSetup(this);
-
-            _mainWebView.StartLoading(BaseModelHelper.Instance.RootWebUrl);
 
 #if DEBUG
             WebView.SetWebContentsDebuggingEnabled(true);
@@ -181,7 +203,99 @@ namespace Florid.Staff.Droid.Activity
 
             SetStatusBarColor(true);
 
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) != Android.Content.PM.Permission.Granted)
+            {
+                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessFineLocation }, 999);
+            }
+            else
+            {
+                _mainWebView.StartLoading("http://192.168.0.126:4200/");
+            }
         }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            if (grantResults.Length > 0 && grantResults[0] == Permission.Granted)
+            {
+                if (requestCode == 999)
+                {
+                    _mainWebView.StartLoading("http://192.168.0.126:4200/");
+                }
+            }
+
+        }
+
+        //CancellationTokenSource cts;
+
+        //protected override async void OnResume()
+        //{
+        //    base.OnResume();
+
+        //    //try
+        //    //{
+
+        //    //    var request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10));
+        //    //    cts = new CancellationTokenSource();
+         
+
+
+        //    //    if (location != null)
+        //    //    {
+        //    //        Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+
+        //    //        var acc = location.Accuracy;
+
+        //    //        var placemarks = await Geocoding.GetPlacemarksAsync(location);
+
+        //    //        if (location.IsFromMockProvider)
+        //    //        {
+        //    //            Console.WriteLine("is mock");
+        //    //        }
+        //    //        else
+        //    //            Console.WriteLine("not mock");
+
+        //    //        var placemark = placemarks?.FirstOrDefault();
+        //    //        if (placemark != null)
+        //    //        {
+        //    //            var geocodeAddress =
+        //    //                $"AdminArea:       {placemark.AdminArea}\n" +
+        //    //                $"CountryCode:     {placemark.CountryCode}\n" +
+        //    //                $"CountryName:     {placemark.CountryName}\n" +
+        //    //                $"FeatureName:     {placemark.FeatureName}\n" +
+        //    //                $"Locality:        {placemark.Locality}\n" +
+        //    //                $"PostalCode:      {placemark.PostalCode}\n" +
+        //    //                $"SubAdminArea:    {placemark.SubAdminArea}\n" +
+        //    //                $"SubLocality:     {placemark.SubLocality}\n" +
+        //    //                $"SubThoroughfare: {placemark.SubThoroughfare}\n" +
+        //    //                $"Thoroughfare:    {placemark.Thoroughfare}\n"+
+        //    //                $"Accuracy:    {acc}\n";
+
+        //    //            Console.WriteLine(geocodeAddress);
+        //    //        }
+        //    //    }
+        //    //}
+        //    //catch (FeatureNotSupportedException fnsEx)
+        //    //{
+        //    //    // Handle not supported on device exception
+        //    //}
+        //    //catch (FeatureNotEnabledException fneEx)
+        //    //{
+        //    //    // Handle not enabled on device exception
+        //    //}
+        //    //catch (PermissionException pEx)
+        //    //{
+        //    //    // Handle permission exception
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    // Unable to get location
+        //    //}
+        //}
+
 
         public void ShowMask()
         {
@@ -196,10 +310,6 @@ namespace Florid.Staff.Droid.Activity
         public override void OnBackPressed()
         {
             DroidUtility.ExecJavaScript(_mainWebView.WebView, "backNavigate()");
-        }
-        public override void StartActivityForResult(Intent intent, int requestCode)
-        {
-            base.StartActivityForResult(intent, requestCode);
         }
 
         public override void ShareImage(string img, string contactInfo)

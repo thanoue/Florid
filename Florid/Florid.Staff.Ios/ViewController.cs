@@ -83,7 +83,7 @@ namespace Florid.Staff.Ios
 
             View.Add(_webView);
 
-            var url = new NSUrl("http://172.16.0.254:4200");
+            var url = new NSUrl("https://192.168.0.126:4200/staff-login");
 
             _webView.LoadRequest(new NSUrlRequest(url));
 

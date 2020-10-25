@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using Android.Content;
 using Android.Content.Res;
 using Android.Graphics;
@@ -48,84 +49,123 @@ namespace Florid.Staff.Droid
             return resizedBitmap;
         }
 
+        private static readonly string[] VietnameseSigns = new string[]
+          {
+
+                "aAeEoOuUiIdD$yY",
+
+                "áàạảãâấầậẩẫăắằặẳẵ",
+
+                "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
+
+                "éèẹẻẽêếềệểễ",
+
+                "ÉÈẸẺẼÊẾỀỆỂỄ",
+
+                "óòọỏõôốồộổỗơớờợởỡ",
+
+                "ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
+
+                "úùụủũưứừựửữ",
+
+                "ÚÙỤỦŨƯỨỪỰỬỮ",
+
+                "íìịỉĩ",
+
+                "ÍÌỊỈĨ",
+
+                "đ",
+
+                "Đ",
+
+                "₫",
+
+                "ýỳỵỷỹ",
+
+                "ÝỲỴỶỸ"
+          };
+
+
+        public static string RemoveSign(string str)
+        {
+
+            for (int i = 1; i < VietnameseSigns.Length; i++)
+            {
+
+                for (int j = 0; j < VietnameseSigns[i].Length; j++)
+
+                    str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
+            }
+
+            return str;
+        }
+
+
         public static string BindingReceiptData(this Context context, ReceiptPrintData data)
         {
             AssetManager assets = context.Assets;
             var sr = new StreamReader(assets.Open("receiptTemplate.html"));
-            var template = sr.ReadToEnd();
+            var template = "[L]\n" +
+                       "[C]<b><font size='big'>FLORID</font></b>\n" +
+                       "[L]\n" +
+                       "[C]783 Phan Van Tri,Ward 7, Go Vap\n" +
+                       "[C]Ho Chi Minh City, 700000\n" +
+                       "[C]Tel: 0931281122\n" +
+                       "[C]Facebook: fb.com/floridshop\n" +
+                       "[L]\n" +
+                       "[C]<b><font size='wide'>RECEIPT</font></b>\n" +
+                        "[C]<b><font size='medium'>================================</font></b>\n" +
+                       "[C]<b><font size='small'>Id: {{OrderId}}</font></b>\n" +
+                       "[C]<b><font size='small'>Time:{{CreatedDate}}</font></b>\n" +
+                        "[C]<b><font size='medium'>================================</font></b>\n" +
+                       "[L]\n" +
+                       "[L]   Name[R]Price\n" +
+
+                       "{{SaleItems}}" +
+
+                       "[C]<b><font size='medium'>================================</font></b>\n" +
+                       "[L]\n" +
+
+                       "[L]Sum:[R]{{SaleTotal}}\n" +
+                       "{{OrderDiscount}}" +
+                       "[L]Amount:[R]{{TotalAmount}}\n" +
+                       "[L]Paid:[R]{{TotalPaidAmount}}\n" +
+                       "[L]Balance:[R]{{TotalBalance}}\n" +
+
+                       "[L]\n" +
+                       "[C]<b><font size='medium'>{{VATIncluded}}</font></b>\n" +
+
+                       "[C]<b><font size='medium'>================================</font></b>\n" +
+                       "[L]\n" +
+
+                       "[C]<b><font size='medium'>Customer Information</font></b>\n" +
+                       "[L]Name: <b>{{CustomerName}}</b>\n" +
+                       "{{MemberDiscount}}" +
+                       "[L]Using Scores:[R]{{ScoreUsed}}\n" +
+                       "[L]Receipt Scores:[R]{{GainedScore}}\n" +
+                       "[L]Total Scores:[R]{{TotalScore}}\n" +
+
+                        "[L]\n" +
+                       "[C]<qrcode size='20'>https://www.facebook.com/floridshop</qrcode>\n" +
+                       "[C]<b>Chuc ban mot ngay tuoi nhu hoa!</b>" +
+                       "[L]\n"+
+                       "[L]\n"+
+                       "[L]\n";
+
 
             template = template.Replace("{{OrderId}}", data.OrderId);
             template = template.Replace("{{CreatedDate}}", data.CreatedDate);
 
-            var productTemplate = @"<tr>
-                        <td>{0}</td>
-                        <td>
-                            <p>{1}</p>
-                        </td>
-                        <td>{2}</td>
-   
-                       </tr>";
+            var productTemplate = "[L]\n" + "[L]{0}  {1}[R]+2}\n";
 
-            var productTemplateWithOnlyAdditionalFee = @"<tr>
-                        <td>{0}</td>
-                        <td>
-                            <p>{1}</p>
-                        </td>
-                        <td>{2}</td>
-   
-                       </tr><tr>
-                        <td></td>
-                        <td>
-                            <p>Phụ phí:</p>
-                        </td>
-                        <td>{3}</td>
-   
-                       </tr>";
+            var productTemplateWithOnlyAdditionalFee = "[L]\n" + "[L]{0}  {1}[R]{2}\n" +
+                "[R]+{3}\n";
 
-            var productTemplateWithOnlyDiscount = @"
-                      <tr>
-                        <td>{0}</td>
-                        <td>
-                            <p>{1}</p>
-                        </td>
-                        <td>{2}</td>
-   
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td>
-                            <p>Giảm giá:</p>
-                        </td>
-                        <td>{3}</td>
-   
-                       </tr>";
-            
-            var productTemplateWithAdditionalFeeDiscount = @"
-                       <tr>
-                        <td>{0}</td>
-                        <td>
-                            <p>{1}</p>
-                        </td>
-                        <td>{2}</td>
-   
-                       </tr>
+            var productTemplateWithOnlyDiscount = "[L]\n" + "[L]{0}  {1}[R]{2}\n" +
+                       "[L]   Discount:[R]{3}\n";
 
-                       <tr>
-                        <td></td>
-                        <td>
-                            <p>Giảm giá:</p>
-                        </td>
-                        <td>{3}</td>
-                       </tr>
-
-                       <tr>
-                        <td></td>
-                        <td>
-                            <p>Phụ phí:</p>
-                        </td>
-                        <td>{4}</td>
-                       </tr>";
-
+            var productTemplateWithAdditionalFeeDiscount = "[L]\n" + "[L]{0}  {1}[R]{2}\n" + "[R]+{4}\n" +
+            "[L]   Discount:[R]{3}\n";
 
 
             long saleTotal = 0;
@@ -136,14 +176,16 @@ namespace Florid.Staff.Droid
             if (data.Discount > 0)
                 isHasMemberDiscount = false;
 
-            foreach(var prod in data.SaleItems)
+            foreach (var prod in data.SaleItems)
             {
-                if(prod.Discount > 0)
+                if (prod.Discount > 0)
                 {
                     isHasMemberDiscount = false;
                     break;
                 }
             }
+
+            data.SaleItems = data.SaleItems.OrderBy(p => p.Index).ToList();
 
             foreach (var product in data.SaleItems)
             {
@@ -151,39 +193,36 @@ namespace Florid.Staff.Droid
 
                 if (isHasMemberDiscount)
                 {
-                    discount =(long)((((float)product.Price) / 100f) * data.MemberDiscount);
+                    discount = (long)((((float)product.Price) / 100f) * data.MemberDiscount);
                 }
 
-                if(discount > 0)
+                if (discount > 0)
                 {
-                    if(product.AdditionalFee > 0)
+                    if (product.AdditionalFee > 0)
                     {
-                        saleItemContainer += string.Format(productTemplateWithAdditionalFeeDiscount, product.Index, product.ProductName, product.Price.VNCurrencyFormat(),discount.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat());
+                        saleItemContainer += string.Format(productTemplateWithAdditionalFeeDiscount, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat(), discount.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat());
                     }
                     else
                     {
-                        saleItemContainer += string.Format(productTemplateWithOnlyDiscount, product.Index, product.ProductName, product.Price.VNCurrencyFormat(), discount.VNCurrencyFormat());
+                        saleItemContainer += string.Format(productTemplateWithOnlyDiscount, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat(), discount.VNCurrencyFormat());
                     }
                 }
                 else
                 {
                     if (product.AdditionalFee > 0)
                     {
-                        saleItemContainer += string.Format(productTemplateWithOnlyAdditionalFee, product.Index, product.ProductName, product.Price.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat());
+                        saleItemContainer += string.Format(productTemplateWithOnlyAdditionalFee, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat());
                     }
                     else
                     {
-                        saleItemContainer += string.Format(productTemplate, product.Index, product.ProductName, product.Price.VNCurrencyFormat());
+                        saleItemContainer += string.Format(productTemplate, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat());
                     }
                 }
 
                 saleTotal += product.Price;
-
-                if (product.Discount > 0)
-                    isHasMemberDiscount = false;
             }
 
-          
+
             template = template.Replace("{{SaleItems}}", saleItemContainer);
 
             template = template.Replace("{{SaleTotal}}", saleTotal.VNCurrencyFormat());
@@ -191,19 +230,16 @@ namespace Florid.Staff.Droid
             template = template.Replace("{{TotalPaidAmount}}", data.TotalPaidAmount.VNCurrencyFormat());
             template = template.Replace("{{TotalBalance}}", data.TotalBalance.VNCurrencyFormat());
 
-            template = template.Replace("{{VATIncluded}}", data.VATIncluded ? "Đã bao gồm VAT" : "");
+            template = template.Replace("{{VATIncluded}}", data.VATIncluded ? "VAT is Included" : "");
 
             template = template.Replace("{{ScoreUsed}}", data.ScoreUsed.ToString());
             template = template.Replace("{{GainedScore}}", data.GainedScore.ToString());
             template = template.Replace("{{TotalScore}}", data.TotalScore.ToString());
-            template = template.Replace("{{CustomerName}}", data.CustomerName);
+            template = template.Replace("{{CustomerName}}", RemoveSign(data.CustomerName));
 
             if (data.Discount > 0)
             {
-                var discountTeemplate = @"<tr>
-                        <td>Giảm giá:</td>
-                        <td>{0}</td>
-                    </tr>";
+                var discountTeemplate = "[L]Discount Total:[R]{0}\n";
 
                 template = template.Replace("{{OrderDiscount}}", string.Format(discountTeemplate, data.Discount.VNCurrencyFormat()));
             }
@@ -213,10 +249,7 @@ namespace Florid.Staff.Droid
 
             if (isHasMemberDiscount)
             {
-                var memberDiscountTemplate = @" <tr>
-                        <td>Giảm giá thành viên</td>
-                        <td>{0}%</td>
-                    </tr>";
+                var memberDiscountTemplate = "[L]Member Discount:[R]{0}%\n";
 
                 template = template.Replace("{{MemberDiscount}}", string.Format(memberDiscountTemplate, data.MemberDiscount.ToString()));
             }
@@ -228,7 +261,7 @@ namespace Florid.Staff.Droid
 
         public static string VNCurrencyFormat(this long amount)
         {
-            return amount.ToString("C", CultureInfo.GetCultureInfo("vi-vn"));
+            return RemoveSign(amount.ToString("C", CultureInfo.GetCultureInfo("vi-VN")));
         }
 
         public static void ExecJavaScript(WebView webView, string jscode)

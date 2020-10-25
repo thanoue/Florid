@@ -79,7 +79,7 @@ namespace Florid.Staff.Droid
             ServiceLocator.Instance.Register<ISecureStorageService, DroidSecureStorageService>(this);
 
             CrossCurrentActivity.Current.Init(this);
-
+            Xamarin.Essentials.Platform.Init(this);
             _serviceConnection = new MyServiceConnection((binder) =>
             {
                 _binder = (IMyCustomBinder)binder;
