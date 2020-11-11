@@ -51,11 +51,26 @@ namespace Florid.Entity
        [JsonProperty("discount")]
         public long Discount { get; set; }
 
+        [JsonProperty("purchaseItems")]
+        public IList<PurchaseItem> PurchaseItems { get; set; }
+
         public ReceiptPrintData()
         {
             SaleItems = new List<SaleItem>();
+            PurchaseItems = new List<PurchaseItem>();
         }
+    }
 
+    public class PurchaseItem
+    {
+        [JsonProperty("method")]
+        public string Method { get; set; }
+
+        [JsonProperty("amount")]
+        public long Amount { get; set; }
+
+        [JsonProperty("status")]
+        public string Status { get; set; }
     }
 
     public class SaleItem

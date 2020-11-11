@@ -114,16 +114,16 @@ namespace Florid.Staff.Droid
                        "[C]Facebook: fb.com/floridshop\n" +
                        "[L]\n" +
                        "[C]<b><font size='wide'>RECEIPT</font></b>\n" +
-                        "[C]<b><font size='medium'>================================</font></b>\n" +
+                        "[C]<b><font size='medium'>-----------------------</font></b>\n" +
                        "[C]<b><font size='small'>Id: {{OrderId}}</font></b>\n" +
                        "[C]<b><font size='small'>Time:{{CreatedDate}}</font></b>\n" +
-                        "[C]<b><font size='medium'>================================</font></b>\n" +
+                        "[C]<b><font size='medium'>-----------------------</font></b>\n" +
                        "[L]\n" +
                        "[L]   Name[R]Price\n" +
 
                        "{{SaleItems}}" +
 
-                       "[C]<b><font size='medium'>================================</font></b>\n" +
+                       "[C]<b><font size='medium'>-----------------------</font></b>\n" +
                        "[L]\n" +
 
                        "[L]Sum:[R]{{SaleTotal}}\n" +
@@ -132,11 +132,11 @@ namespace Florid.Staff.Droid
                        "[L]Paid:[R]{{TotalPaidAmount}}\n" +
                        "[L]Balance:[R]{{TotalBalance}}\n" +
 
-                       "[L]\n" +
                        "[C]<b><font size='medium'>{{VATIncluded}}</font></b>\n" +
 
-                       "[C]<b><font size='medium'>================================</font></b>\n" +
-                       "[L]\n" +
+                       "[C]<b><font size='medium'>-----------------------</font></b>\n" +
+                       "{{PurchaseItems}}"+
+                       "[C]<b><font size='medium'>-----------------------</font></b>\n" +
 
                        "[C]<b><font size='medium'>Customer Information</font></b>\n" +
                        "[L]Name: <b>{{CustomerName}}</b>\n" +
@@ -147,7 +147,7 @@ namespace Florid.Staff.Droid
 
                         "[L]\n" +
                        "[C]<qrcode size='20'>https://www.facebook.com/floridshop</qrcode>\n" +
-                       "[C]<b>Chuc ban mot ngay tuoi nhu hoa!</b>" +
+                       "[C]<b>Have a florid day!</b>" +
                        "[L]\n"+
                        "[L]\n"+
                        "[L]\n";
@@ -156,7 +156,7 @@ namespace Florid.Staff.Droid
             template = template.Replace("{{OrderId}}", data.OrderId);
             template = template.Replace("{{CreatedDate}}", data.CreatedDate);
 
-            var productTemplate = "[L]\n" + "[L]{0}  {1}[R]+2}\n";
+            var productTemplate = "[L]\n" + "[L]{0}  {1}[R]{2}\n";
 
             var productTemplateWithOnlyAdditionalFee = "[L]\n" + "[L]{0}  {1}[R]{2}\n" +
                 "[R]+{3}\n";
@@ -255,6 +255,17 @@ namespace Florid.Staff.Droid
             }
             else
                 template = template.Replace("{{MemberDiscount}}", "");
+
+            var purchaseTemplate = "[L]{0} [R]{1}\n";
+
+            var purchase = "";
+
+            foreach(var item in data.PurchaseItems)
+            {
+                purchase += string.Format(purchaseTemplate, item.Method, item.Amount.VNCurrencyFormat());
+            }
+
+            template  = template.Replace("{{PurchaseItems}}", purchase);
 
             return template;
         }

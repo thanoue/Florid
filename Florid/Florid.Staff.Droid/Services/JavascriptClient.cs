@@ -12,7 +12,6 @@ using Florid.Droid.Lib;
 using Florid.Droid.Lib.Static;
 using Florid.Entity;
 using Florid.Enum;
-using Florid.Model;
 using Florid.Staff.Droid.Activity;
 using JaiselRahman.FilePickerLib.Activities;
 using JaiselRahman.FilePickerLib.Configs;

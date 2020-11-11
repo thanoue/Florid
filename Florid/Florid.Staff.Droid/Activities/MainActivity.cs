@@ -1,11 +1,9 @@
 ﻿using Android.App;
 using Android.OS;
-using Florid.Entity;
 using Android.Views;
 using Android.Webkit;
 using Florid.Droid.Lib.Static;
 using Newtonsoft.Json;
-using Florid.Model;
 using Android.Graphics;
 using Java.Util;
 using Florent37.SingleDateAndTimePickerLib.Dialogs;
@@ -201,7 +199,7 @@ namespace Florid.Staff.Droid.Activity
 
             SetStatusBarColor(true);
 
-            _mainWebView.StartLoading("https://florid-app.herokuapp.com");
+            _mainWebView.StartLoading(BaseModelHelper.Instance.RootWebUrl);
 
 
             //if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) != Android.Content.PM.Permission.Granted)

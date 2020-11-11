@@ -35,7 +35,7 @@ namespace Florid.Staff.Droid
 {
 
     [Application(UsesCleartextTraffic = true)]
-    public class MainApplication : Application
+    public class MainApplication : BaseMainApplication
     {
         private static IMyCustomBinder _binder;
         private MyServiceConnection _serviceConnection;
@@ -77,13 +77,14 @@ namespace Florid.Staff.Droid
 
             CrossCurrentActivity.Current.Init(this);
             Xamarin.Essentials.Platform.Init(this);
-            _serviceConnection = new MyServiceConnection((binder) =>
-            {
-                _binder = (IMyCustomBinder)binder;
-            });
 
-            Intent intent = new Intent(this, typeof(MyService));
-            BindService(intent, _serviceConnection, Bind.AutoCreate);
+            //_serviceConnection = new MyServiceConnection((binder) =>
+            //{
+            //    _binder = (IMyCustomBinder)binder;
+            //});
+
+            //Intent intent = new Intent(this, typeof(MyService));
+            //BindService(intent, _serviceConnection, Bind.AutoCreate);
         }
 
         public bool IsPrinter()
