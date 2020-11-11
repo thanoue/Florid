@@ -203,31 +203,34 @@ namespace Florid.Staff.Droid.Activity
 
             SetStatusBarColor(true);
 
-            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) != Android.Content.PM.Permission.Granted)
-            {
-                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessFineLocation }, 999);
-            }
-            else
-            {
-                _mainWebView.StartLoading("http://192.168.0.126:4200/");
-            }
+            _mainWebView.StartLoading("https://florid-app.herokuapp.com");
+
+
+            //if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) != Android.Content.PM.Permission.Granted)
+            //{
+            //    ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessFineLocation }, 999);
+            //}
+            //else
+            //{
+            //    _mainWebView.StartLoading("https://florid-app.herokuapp.com");
+            //}
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
-        {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        //public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        //{
+        //    Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        //    base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            if (grantResults.Length > 0 && grantResults[0] == Permission.Granted)
-            {
-                if (requestCode == 999)
-                {
-                    _mainWebView.StartLoading("http://192.168.0.126:4200/");
-                }
-            }
+        //    if (grantResults.Length > 0 && grantResults[0] == Permission.Granted)
+        //    {
+        //        if (requestCode == 999)
+        //        {
+        //            _mainWebView.StartLoading("https://florid-app.herokuapp.com");
+        //        }
+        //    }
 
-        }
+        //}
 
         //CancellationTokenSource cts;
 

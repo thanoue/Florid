@@ -29,6 +29,7 @@
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>  
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
+    <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,10 +39,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a;x86;arm64-v8a</AndroidSupportedAbis>
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
-    <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     <AndroidStoreUncompressedFileExtensions>.html;</AndroidStoreUncompressedFileExtensions>
   </PropertyGroup>
@@ -54,12 +54,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
-    <AndroidSupportedAbis>armeabi-v7a;arm64-v8a;x86;x86_64</AndroidSupportedAbis>
-    <AndroidKeyStore>true</AndroidKeyStore>
-    <AndroidSigningKeyStore>C:\Users\thano\Florid\Resources\florid_staff_key.keystore</AndroidSigningKeyStore>
+    <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
+    <AndroidSigningKeyStore>/Users/sin/Code/Florid-Staff/Resources/florid_staff_key.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>florid123</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>florid_staff_key</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>florid123</AndroidSigningKeyPass>
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidUseAapt2>false</AndroidUseAapt2>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -29,10 +29,6 @@ namespace Florid.Staff.Ios
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Perform any additional setup after loading the view, typically from a nib.
-
-            //  var url = new NSUrl("https://floridstaff.web.app");
-         
         }
 
         public override void LoadView()
@@ -43,7 +39,6 @@ namespace Florid.Staff.Ios
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-
             if (_isLoaded)
                 return;
 
@@ -83,7 +78,7 @@ namespace Florid.Staff.Ios
 
             View.Add(_webView);
 
-            var url = new NSUrl("https://192.168.0.126:4200/staff-login");
+            var url = new NSUrl("https://florid-app.herokuapp.com");
 
             _webView.LoadRequest(new NSUrlRequest(url));
 
