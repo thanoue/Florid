@@ -15,16 +15,13 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Com.Khoideptrai.Posprinter;
-using Firebase.Database;
 using Florid.Core;
 using Florid.Core.Service;
 using Florid.Core.Services;
 using Florid.Droid.Lib;
 using Florid.Entity;
 using Florid.Staff.Droid.Activity;
-using Florid.Staff.Droid.Repository;
 using Florid.Staff.Droid.Services;
-using Florid.Staff.Droid.Static;
 using Java.Lang;
 using Net.Posprinter.AsynncTask;
 using Net.Posprinter.Posprinterface;
@@ -38,7 +35,7 @@ namespace Florid.Staff.Droid
 {
 
     [Application(UsesCleartextTraffic = true)]
-    public class MainApplication : BaseMainApplication
+    public class MainApplication : Application
     {
         private static IMyCustomBinder _binder;
         private MyServiceConnection _serviceConnection;

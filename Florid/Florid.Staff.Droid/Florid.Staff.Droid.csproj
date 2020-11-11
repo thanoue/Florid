@@ -24,12 +24,13 @@
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
-    <AndroidSupportedAbis>armeabi-v7a;arm64-v8a;x86;x86_64</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a;arm64-v8a</AndroidSupportedAbis>
     <AndroidSdkBuildToolsVersion>26.0.3</AndroidSdkBuildToolsVersion>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>  
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,11 +40,11 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidSupportedAbis>armeabi-v7a;x86;arm64-v8a</AndroidSupportedAbis>
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
-    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
-    <AndroidStoreUncompressedFileExtensions>.html;</AndroidStoreUncompressedFileExtensions>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidEnableAssemblyCompression>false</AndroidEnableAssemblyCompression>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -54,14 +55,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
-    <AndroidSupportedAbis>armeabi-v7a</AndroidSupportedAbis>
     <AndroidSigningKeyStore>/Users/sin/Code/Florid-Staff/Resources/florid_staff_key.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>florid123</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>florid_staff_key</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>florid123</AndroidSigningKeyPass>
     <AndroidKeyStore>True</AndroidKeyStore>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AndroidUseAapt2>false</AndroidUseAapt2>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidEnableAssemblyCompression>false</AndroidEnableAssemblyCompression>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -77,9 +77,6 @@
     <Reference Include="Florid.Droid.Htl2BitmapLib">
       <HintPath>..\Libs\Florid.Droid.Htl2BitmapLib.dll</HintPath>
     </Reference>
-    <Reference Include="Florid.Droid.Secure.Lib">
-      <HintPath>..\Libs\Florid.Droid.Secure.Lib.dll</HintPath>
-    </Reference>
     <Reference Include="Florid.PosPrinter.Lib">
       <HintPath>..\Libs\Florid.PosPrinter.Lib.dll</HintPath>
     </Reference>
@@ -92,9 +89,6 @@
     <Compile Include="Activities\SplashActivity.cs" />
     <Compile Include="Controls\Label.cs" />
     <Compile Include="MainApplication.cs" />
-    <Compile Include="Repositories\BaseNormalDroidRepository.cs" />
-    <Compile Include="Repositories\ReceiptPrintJobRepository.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\BaseActivity.cs" />
@@ -157,11 +151,9 @@
     <Folder Include="Resources\drawable\" />
     <Folder Include="Resources\xml\" />
     <Folder Include="AsyncTasks\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FirebaseDatabase.net">
-      <Version>4.0.4</Version>
-    </PackageReference>
     <PackageReference Include="Karamunting.Android.JaiselRahman.FilePicker">
       <Version>1.1.1</Version>
     </PackageReference>
@@ -192,9 +184,6 @@
     <PackageReference Include="Xamarin.Android.Support.VersionedParcelable">
       <Version>28.0.0.3</Version>
     </PackageReference>
-    <PackageReference Include="Xam.Plugin.Iconize">
-      <Version>1.0.1</Version>
-    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
@@ -219,13 +208,13 @@
       <Project>{90724680-1978-4627-90ee-7bbf62345e54}</Project>
       <Name>Florid.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Florid.Droid.Lib\Florid.Droid.Lib.csproj">
-      <Project>{8d84da70-9605-4b39-a280-e6c1ef0181b1}</Project>
-      <Name>Florid.Droid.Lib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Florid.Schema\Florid.Schema.csproj">
       <Project>{fb9d4177-71cf-4471-8f03-10d0c9a8cf29}</Project>
       <Name>Florid.Schema</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Florid.Droid.Lib\Florid.Droid.Lib.csproj">
+      <Project>{8D84DA70-9605-4B39-A280-E6C1EF0181B1}</Project>
+      <Name>Florid.Droid.Lib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +241,7 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\receiptTemplate.html" />
   </ItemGroup>
+
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
     Other similar extension points exist, see Microsoft.Common.targets.

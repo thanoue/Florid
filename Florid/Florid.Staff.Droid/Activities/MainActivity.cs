@@ -22,8 +22,6 @@ using Asksira.WebViewSuiteLib;
 using static Asksira.WebViewSuiteLib.WebViewSuite;
 using ME.Echodev.Resizer;
 using Android.Widget;
-using Florid.Core.Service;
-using Firebase.Database;
 using Android.Net;
 using Android.Util;
 using Base64 = Java.Util.Base64;
