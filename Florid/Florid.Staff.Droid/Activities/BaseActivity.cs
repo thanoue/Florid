@@ -11,7 +11,6 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-using Florid.Droid.Widgets;
 
 namespace Florid.Staff.Droid.Activity
 {
@@ -30,8 +29,6 @@ namespace Florid.Staff.Droid.Activity
 
         private ViewGroup _baseLayout;
         private ViewGroup _mainContent;
-        private CustomTextView _backBtn;
-        private CustomTextView _titleTv;
 
         public ViewGroup ParentContainer
         {
@@ -56,26 +53,7 @@ namespace Florid.Staff.Droid.Activity
 
             if (!UseOwnLayout)
             {
-                _baseLayout = (RelativeLayout)LayoutInflater.Inflate(Resource.Layout.BaseLayout, null, false);
-
-                _mainContent = (ViewGroup)LayoutInflater.Inflate(LayoutId, _baseLayout, true);
-
-                SetContentView(_baseLayout);
-
-                _backBtn = FindViewById<CustomTextView>(Resource.Id.backBtn);
-                _titleTv = FindViewById<CustomTextView>(Resource.Id.title);
-
-                _backBtn.Click += delegate
-                {
-                    OnBacktbnClicking();
-                };
-
-                SetTitle(Title);
-
-                if (!ShowBackButton)
-                {
-                    _backBtn.Visibility = ViewStates.Gone;
-                }
+               
             }
             else
             {
@@ -122,16 +100,6 @@ namespace Florid.Staff.Droid.Activity
         protected bool IsLoggedIn()
         {
             return false;
-        }
-
-        protected void SetTitle(string title)
-        {
-            _titleTv.Text = title;
-        }
-
-        protected void SetBackBtnIcon(int resId)
-        {
-            _backBtn.SetIcon(resId);
         }
 
         protected abstract void InitView(ViewGroup viewGroup);

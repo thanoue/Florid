@@ -25,8 +25,8 @@ namespace Florid.Droid.Lib
 
         public List<Product> GlobalProducts = new List<Product>();
 
-         //public string RootWebUrl { get; set; } = "https://florid-app.herokuapp.com";
-        public string RootWebUrl { get; set; } = "http://192.168.1.27:4200";
+       public string RootWebUrl { get; set; } = "https://florid-app.herokuapp.com";
+       // public string RootWebUrl { get; set; } = "http://192.168.0.126:4200";
     }
 }
     

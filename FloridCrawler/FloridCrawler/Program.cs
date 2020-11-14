@@ -1,7 +1,7 @@
-﻿using HtmlAgilityPack;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,191 +10,284 @@ using System.Threading.Tasks;
 
 namespace FloridCrawler
 {
+    public class Product
+    {
+        public string Name { get; set; }
+        public double Price { get; set; }
+        public string ImageName { get; set; }
+        public string Description { get; set; }
+        public string Size { get; set; }
+
+        public const string SIZE_S = "S";
+        public const string SIZE_M = "M";
+        public const string SIZE_L = "L";
+    }
+
     class Program
     {
-
-        public enum ProductCategories
+        static void Main(string[] args)
         {
-            Valentine,
-            BoHoaTuoi,
-            BinhHoaTuoi,
-            HopHoaTuoi,
-            GioHoaTuoi,
-            HoaCuoi,
-            HoaNgheThuat,
-            KeHoaTuoi,
-            HoaSuKien,
-            LanHoDiep
+            //UpdateFileNames();
+            //SplitToFolders();
+            Rename();
         }
 
-        public class Product
+        static string GetSelected(string value, string[] list)
         {
-            public string Name { get; set; }
-            public string Price { get; set; }
-            public string ImageUrl { get; set; }
-            public ProductCategories ProductCategories { get; set; }
-
-            public int Page { get; set; }
-
-            public Product()
+            foreach (var item in list)
             {
+                if (Path.GetFileNameWithoutExtension(item).IndexOf(value + ".") == 0)
+                {
+                    var parts = item.Split('.');
+                    if (parts.Length == 3 && parts[1].Length == 1)
+                        continue;
 
+                    return item;
+                }
+            }
+
+            return "";
+        }
+
+        static IList<string> RemoveDuplicate(string[] items)
+        {
+            var newList = new List<string>();
+            var newNameList = new List<string>();
+
+            var removalList = new List<string>();
+            var removalNameList = new List<string>();
+
+            foreach (var item in items)
+            {
+                var name = Path.GetFileNameWithoutExtension(item);
+
+                if (newNameList.Contains(name))
+                {
+                    removalNameList.Add(name);
+                    removalList.Add(item);
+                }
+                else
+                {
+                    newList.Add(item);
+                    newNameList.Add(name);
+                }
+
+            }
+
+            return newList;
+        }
+
+        static void SplitToFolders()
+        {
+            var sourceFolderPath = "/Users/sin/Downloads/resize_small/missing/png";
+            var sourceFolderFiles = Directory.GetFiles(sourceFolderPath);
+
+            var parts = SplitList<string>(sourceFolderFiles.ToList(), 100);
+
+            var temp = 1;
+            foreach (var part in parts)
+            {
+                var newFolder = Path.Combine("/Users/sin/Downloads/resize_small/missing/png", temp.ToString());
+
+                Directory.CreateDirectory(newFolder);
+
+                foreach (var item in part)
+                {
+                    File.Copy(item, Path.Combine(newFolder, Path.GetFileName(item)));
+                }
+
+                temp += 1;
+
+                Console.WriteLine(newFolder);
             }
         }
 
-        public class District
+        static void Rename()
         {
-            public string Name { get; set; }
-            public string Id { get; set; }
-            public List<string> Wards { get; set; }
+            var sourceFolderPath = "/Users/sin/Downloads/resized_products";
+            var sourceFolderFiles = Directory.GetFiles(sourceFolderPath);
 
-            public District()
+            var destFolderPath = "/Users/sin/GoogleDrive/anh_san_pham";
+            var destFolderFiles = Directory.GetFiles(destFolderPath);
+
+            foreach (var item in sourceFolderFiles)
             {
-                Wards = new List<string>();
+                var fileName = Path.GetFileNameWithoutExtension(item);
+                var ext = Path.GetExtension(item);
+
+                if (fileName.IndexOf('.') > -1)
+                    continue;
+
+                var selected = GetSelected(fileName, destFolderFiles);
+
+                if (!string.IsNullOrEmpty(selected))
+                {
+                    var folderPath = Path.GetDirectoryName(item);
+                    var newName = Path.Combine(folderPath, Path.GetFileNameWithoutExtension(selected) + ext);
+                    try
+                    {
+
+                        File.Move(item, newName);
+                    }
+                    catch
+                    {
+
+                        Console.WriteLine("ERROR: {0} -> {1}", fileName, Path.GetFileNameWithoutExtension(selected));
+
+                    }
+
+                    Console.WriteLine("{0} -> {1}", fileName, Path.GetFileNameWithoutExtension(selected));
+
+                }
+            }
+        }
+
+
+        static void UpdateFileNames()
+        {
+            var sourceFolderPath = "/Users/sin/Downloads/resized_products";
+            var sourceFolderFiles = Directory.GetFiles(sourceFolderPath);
+
+            var destFolderPath = "/Users/sin/GoogleDrive/anh_san_pham";
+            var destFolderFiles = Directory.GetFiles(destFolderPath);
+
+            var list = new List<Product>();
+
+            var newList = RemoveDuplicate(sourceFolderFiles);
+
+            for (var i = 0; i < newList.Count; i++)
+            {
+                var fileName = Path.GetFileNameWithoutExtension(newList[i]);
+                var ext = Path.GetExtension(newList[i]);
+
+                if (fileName.IndexOf(".") < 0)
+                {
+                    var selected = GetSelected(fileName, destFolderFiles);
+
+                    if (!string.IsNullOrEmpty(selected))
+                    {
+                        list.AddRange(GetProductsFromName(Path.GetFileNameWithoutExtension(selected), ext));
+
+                        Console.WriteLine("{0} -> {1}", fileName, Path.GetFileNameWithoutExtension(selected));
+                        continue;
+                    }
+
+                    var prod = new Product()
+                    {
+                        Description = "",
+                        Name = fileName,
+                        ImageName = fileName + ext,
+                        Size = Product.SIZE_M,
+                        Price = 0
+                    };
+
+                    list.Add(prod);
+                }
+                else
+                {
+                    list.AddRange(GetProductsFromName(fileName, ext, true));
+                    Console.WriteLine("Is full infor: {0}", fileName);
+                }
             }
 
-        }
+            var parts = SplitList<Product>(list, 300);
 
-        static  void Main(string[] args)
-        {
-
-
-            //var binhHoaTuoi = Crawl("http://florid.com.vn/binh-hoa-tuoi?page=",6,ProductCategories.BinhHoaTuoi).Result;
-
-            //var hopHoaTuoi = Crawl("http://florid.com.vn/hop-hoa-tuoi?page=", 7, ProductCategories.HopHoaTuoi).Result;
-
-            //var gioHoaTuoi = Crawl("http://florid.com.vn/gio-hoa-tuoi?page=", 4, ProductCategories.GioHoaTuoi).Result;
-
-            //var hoaCuoi = Crawl("http://florid.com.vn/hoa-cuoi-1?page=", 1, ProductCategories.HoaCuoi).Result;
-
-            //var hoaNgheThuat = Crawl("http://florid.com.vn/hoa-nghe-thuat?page=", 1, ProductCategories.HoaNgheThuat).Result;
-
-            //var keHoaTuoi = Crawl("http://florid.com.vn/ke-hoa-tuoi?page=", 3, ProductCategories.KeHoaTuoi).Result;
-
-            //var lanHoDiep = Crawl("http://florid.com.vn/lan-ho-diep?page=", 4, ProductCategories.LanHoDiep).Result;
-
-            //var products = new List<Product>();
-            //products.AddRange(hoaCuoi);
-            //products.AddRange(hoaNgheThuat);
-            //products.AddRange(keHoaTuoi);
-            //products.AddRange(lanHoDiep);
-
-            //var source = JsonConvert.SerializeObject(products);
-            CrawlAddress();
-
-            Console.ReadLine();
-        }
-
-
-
-
-        private static async Task<List<Product>> Crawl(string baseUrl,int pageCount,ProductCategories productCategories)
-        {
-            var products = new List<Product>();
-
-            for (int i = 1; i <= pageCount; i++)
+            var temp = 0;
+            foreach (var item in parts)
             {
-                var prods = await CrawlerProduct(baseUrl, i, productCategories);
+                var name = string.Format("product_{0}.json", temp);
 
-                products.AddRange(prods);
+                File.WriteAllText(Path.Combine("/Users/sin/Downloads", name), JsonConvert.SerializeObject(item));
+
+                temp += 1;
             }
 
-            return products;
+
+            Console.ReadKey();
         }
 
-        private  static void CrawlAddress()
+        public static IEnumerable<List<T>> SplitList<T>(List<T> locations, int nSize = 30)
         {
-            var url = "https://bankervn.com/danh-sach-quan-huyen-tphcm/";
-
-            var webClient = new WebClient();
-
-            webClient.Encoding = Encoding.UTF8;
-
-
-            //var client = new HttpClient();
-            //client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko");
-            var html =  webClient.DownloadStringTaskAsync(url).Result;
-
-            var htmlDoc = new HtmlDocument();
-
-            htmlDoc.LoadHtml(html);
-
-            var divs = htmlDoc.DocumentNode.Descendants("div")
-               .Where(node => node.GetAttributeValue("class", "").Equals("elementor-toggle-item")).ToList();
-
-            var districts = new List<District>();
-
-            foreach(var div in divs)
+            for (int i = 0; i < locations.Count; i += nSize)
             {
-                var district = new District();
-
-                var  name = div.Descendants("a").FirstOrDefault().InnerText;
-                name = name.Replace("Các phường ", "");
-                name = name.Replace("Các xã ", "");
-
-                district.Name = name;
-           
-
-                district.Id = Guid.NewGuid().ToString();
-
-                var lies = div.Descendants("li").ToList();
-
-                district.Wards.AddRange( lies.Select(p=>p.InnerText).ToList());
-
-                districts.Add(district);
+                yield return locations.GetRange(i, Math.Min(nSize, locations.Count - i));
             }
-
-            var res = JsonConvert.SerializeObject(districts);
-            var length = res.Length;
-
         }
 
-
-        private static async Task<List<Product>> CrawlerProduct(string baseEndPoint,int page,ProductCategories productCategories)
+        static IList<Product> GetProductsFromName(string name, string ext, bool nameIsFull = false)
         {
-            var url = baseEndPoint + page;
+            var parts = name.Split('.');
+            var fileName = nameIsFull ? name : parts.Length > 0 ? parts[0] : name;
 
-            var webClient = new WebClient();
+            var prods = new List<Product>();
 
-            webClient.Encoding = Encoding.UTF8;
-
-
-            //var client = new HttpClient();
-            //client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko");
-            var html = await webClient.DownloadStringTaskAsync(url);
-
-            var htmlDoc = new HtmlDocument();
-
-
-            htmlDoc.LoadHtml(html);
-
-            var divs = htmlDoc.DocumentNode.Descendants("div")
-                .Where(node => node.GetAttributeValue("class", "").Equals("item woocommerce-pr-object box-shadow-0 box-shadow-0-hover")).ToList();
-            
-            var products = new List<Product>();
-
-            foreach(var div in divs)
+            for (var j = 1; j < parts.Length; j++)
             {
                 var product = new Product();
 
-                var priceSource = div.Descendants("span").FirstOrDefault(node => node.GetAttributeValue("class", "").Equals("product-item-price")).InnerText;
-                product.ImageUrl = div.Descendants("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
-                product.Name = div.Descendants("div").FirstOrDefault(node => node.GetAttributeValue("class", "").Equals("title")).Descendants("a").FirstOrDefault().ChildAttributes("title").FirstOrDefault().Value;
-                product.ProductCategories = productCategories;
-                product.Page = page;
+                var index = parts[j].IndexOf(' ');
 
+                var priceString = index > 0 ? parts[j].Remove(index) : parts[j];
 
-               // priceSource = priceSource.Substring(0,priceSource.Length-1).Replace(",", "");
+                product.Description = index > 0 ? parts[j].Substring(index).Trim().Replace("(", "").Replace(")", "") : "";
 
-                product.Price =priceSource;
+                if (double.TryParse(priceString, out double price))
+                {
+                    product.Price = price;
+                }
+                else
+                    product.Price = 0;
 
-                Console.WriteLine("[{0}] : [{1}]", product.Name, product.ImageUrl);
+                product.ImageName = fileName + ext;
+                product.Name = fileName;
 
-                products.Add(product);
-            
+                if (!string.IsNullOrEmpty(product.Description))
+                {
+                    Console.WriteLine("{0} - {1} - {2}", product.Name, product.Description, product.Price);
+                }
+
+                prods.Add(product);
             }
 
-            return products;
+            if (prods.Count < 1)
+            {
+                var prod = new Product()
+                {
+                    Description = "",
+                    Name = fileName,
+                    ImageName = fileName + ext,
+                    Size = Product.SIZE_M
+                };
+
+                prod.Price = 0;
+
+                prods.Add(prod);
+            }
+
+            prods = prods.OrderBy(p => p.Price).ToList();
+
+            if (prods.Count >= 3)
+            {
+                prods[0].Size = Product.SIZE_S;
+                prods[1].Size = Product.SIZE_M;
+                prods[2].Size = Product.SIZE_L;
+            }
+            else
+            {
+                if (prods.Count >= 2)
+                {
+                    prods[0].Size = Product.SIZE_M;
+                    prods[1].Size = Product.SIZE_L;
+                }
+                else
+                {
+                    prods[0].Size = Product.SIZE_M;
+                }
+            }
+
+            return prods;
         }
+
+
     }
 }

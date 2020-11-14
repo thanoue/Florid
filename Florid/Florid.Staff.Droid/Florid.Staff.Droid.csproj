@@ -43,7 +43,6 @@
     <JavaMaximumHeapSize>2G</JavaMaximumHeapSize>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
-    <AndroidEnableAssemblyCompression>false</AndroidEnableAssemblyCompression>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
     <AndroidSupportedAbis>arm64-v8a;armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
@@ -97,12 +96,10 @@
     <Compile Include="Activities\BaseActivity.cs" />
     <Compile Include="Services\BackgroundImpl.cs" />
     <Compile Include="Services\JavascriptClient.cs" />
-    <Compile Include="Activities\CameraActivity.cs" />
     <Compile Include="Services\DroidSecureStorageService.cs" />
     <Compile Include="AsyncTasks\AsyncEscPosPrint.cs" />
     <Compile Include="AsyncTasks\AsyncEscPosPrinter.cs" />
     <Compile Include="AsyncTasks\AsyncBluetoothEscPosPrint.cs" />
-    <Compile Include="Activities\TestPrintActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -119,29 +116,7 @@
     <AndroidResource Include="Resources\values\ic_launcher_background.xml" />
     <AndroidResource Include="Resources\values\strings.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
-    <AndroidResource Include="Resources\layout\BaseLayout.axml">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\TakePictureLayout.axml">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\webview_layout.axml">
-      <SubType>
-      </SubType>
-      <Generator>
-      </Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\xml\folder_path.xml">
-      <SubType></SubType>
-      <Generator></Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\printer_layout.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -219,16 +194,6 @@
       <Project>{FB9D4177-71CF-4471-8F03-10D0C9A8CF29}</Project>
       <Name>Florid.Schema</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\SplashLayout.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\LoginLayout.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\fonts\bold.ttf" />

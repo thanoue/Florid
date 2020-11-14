@@ -15,11 +15,6 @@ namespace Florid.Droid.Lib
         {
             base.OnConsoleMessage(message, lineNumber, sourceID);
         }
-
-        public override void OnGeolocationPermissionsShowPrompt(string origin, GeolocationPermissions.ICallback callback)
-        {
-            callback?.Invoke(origin, true, false);
-        }
     }
 
     public class MyWebClient : WebViewClient

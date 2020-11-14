@@ -26,9 +26,6 @@
       },
       "Florid.Core/1.0.0": {
         "type": "project",
-        "dependencies": {
-          "Florid.Schema": "1.0.0"
-        },
         "compile": {
           "bin/placeholder/Florid.Core.dll": {}
         },
@@ -71,9 +68,6 @@
       },
       "Florid.Core/1.0.0": {
         "type": "project",
-        "dependencies": {
-          "Florid.Schema": "1.0.0"
-        },
         "compile": {
           "bin/placeholder/Florid.Core.dll": {}
         },
@@ -116,9 +110,6 @@
       },
       "Florid.Core/1.0.0": {
         "type": "project",
-        "dependencies": {
-          "Florid.Schema": "1.0.0"
-        },
         "compile": {
           "bin/placeholder/Florid.Core.dll": {}
         },
@@ -161,9 +152,6 @@
       },
       "Florid.Core/1.0.0": {
         "type": "project",
-        "dependencies": {
-          "Florid.Schema": "1.0.0"
-        },
         "compile": {
           "bin/placeholder/Florid.Core.dll": {}
         },

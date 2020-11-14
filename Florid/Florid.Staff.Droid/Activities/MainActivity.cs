@@ -38,7 +38,7 @@ using Florid.Staff.Droid.AsyncTasks;
 
 namespace Florid.Staff.Droid.Activity
 {
-    [Activity(MainLauncher = true)]
+    [Activity(MainLauncher = true,WindowSoftInputMode = SoftInput.AdjustResize)]
     public class MainActivity : BaseActivity, IWebViewSetupInterference
     {
         static readonly string TAG = "MainActivity";
@@ -68,8 +68,6 @@ namespace Florid.Staff.Droid.Activity
             settings.SetEnableSmoothTransition(true);
             settings.DomStorageEnabled = true;
             settings.SetSupportZoom(false);
-            settings.SetGeolocationDatabasePath(this.FilesDir.AbsolutePath);
-            settings.SetGeolocationEnabled(true);
             settings.JavaScriptCanOpenWindowsAutomatically = true;
             settings.BuiltInZoomControls = true;
 
@@ -79,7 +77,6 @@ namespace Florid.Staff.Droid.Activity
             webView.ClearCache(true);
 
             webView.SetWebChromeClient(new MyWebChromeClient());
-            webView.SetWebViewClient(new MyWebClient());
 
             _javascriptClient = new JavascriptClient(this, webView);
 

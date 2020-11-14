@@ -127,12 +127,14 @@ namespace Florid.Staff.Droid
                        "[L]\n" +
 
                        "[L]Sum:[R]{{SaleTotal}}\n" +
+
                        "{{OrderDiscount}}" +
+
+                       "{{VATIncluded}}"+
+
                        "[L]Amount:[R]{{TotalAmount}}\n" +
                        "[L]Paid:[R]{{TotalPaidAmount}}\n" +
                        "[L]Balance:[R]{{TotalBalance}}\n" +
-
-                       "[C]<b><font size='medium'>{{VATIncluded}}</font></b>\n" +
 
                        "[C]<b><font size='medium'>-----------------------</font></b>\n" +
                        "{{PurchaseItems}}"+
@@ -147,8 +149,8 @@ namespace Florid.Staff.Droid
 
                         "[L]\n" +
                        "[C]<qrcode size='20'>https://www.facebook.com/floridshop</qrcode>\n" +
-                       "[C]<b>Have a florid day!</b>" +
-                       "[L]\n"+
+                       "[C]<b><font size='medium'>Have a Florid day</font></b>\n" +
+                       "[L]\n" +
                        "[L]\n"+
                        "[L]\n";
 
@@ -187,6 +189,7 @@ namespace Florid.Staff.Droid
 
             data.SaleItems = data.SaleItems.OrderBy(p => p.Index).ToList();
 
+
             foreach (var product in data.SaleItems)
             {
                 var discount = (long)product.Discount;
@@ -219,8 +222,12 @@ namespace Florid.Staff.Droid
                     }
                 }
 
-                saleTotal += product.Price;
+                saleTotal += (product.Price+product.AdditionalFee);
             }
+
+            var beforeVAT = data.VATIncluded ? ((long)(((double)data.TotalAmount) / 1.1d)) : data.TotalAmount;
+
+            var discountTotal = saleTotal - beforeVAT;
 
 
             template = template.Replace("{{SaleItems}}", saleItemContainer);
@@ -230,18 +237,19 @@ namespace Florid.Staff.Droid
             template = template.Replace("{{TotalPaidAmount}}", data.TotalPaidAmount.VNCurrencyFormat());
             template = template.Replace("{{TotalBalance}}", data.TotalBalance.VNCurrencyFormat());
 
-            template = template.Replace("{{VATIncluded}}", data.VATIncluded ? "VAT is Included" : "");
+            var vatTemplate = "[L]Before VAT:[R]{0}\n";
+            template = template.Replace("{{VATIncluded}}", data.VATIncluded ? string.Format(vatTemplate, beforeVAT.VNCurrencyFormat()): "");
 
             template = template.Replace("{{ScoreUsed}}", data.ScoreUsed.ToString());
             template = template.Replace("{{GainedScore}}", data.GainedScore.ToString());
             template = template.Replace("{{TotalScore}}", data.TotalScore.ToString());
             template = template.Replace("{{CustomerName}}", RemoveSign(data.CustomerName));
 
-            if (data.Discount > 0)
+            if (discountTotal > 0)
             {
                 var discountTeemplate = "[L]Discount Total:[R]{0}\n";
 
-                template = template.Replace("{{OrderDiscount}}", string.Format(discountTeemplate, data.Discount.VNCurrencyFormat()));
+                template = template.Replace("{{OrderDiscount}}", string.Format(discountTeemplate, discountTotal.VNCurrencyFormat()));
             }
             else
                 template = template.Replace("{{OrderDiscount}}", "");

@@ -28,7 +28,6 @@ using Net.Posprinter.Posprinterface;
 using Net.Posprinter.Service;
 using Net.Posprinter.Utils;
 using Plugin.CurrentActivity;
-using Plugin.Iconize;
 using static Net.Posprinter.Utils.PosPrinterDev;
 
 namespace Florid.Staff.Droid
