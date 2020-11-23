@@ -88,6 +88,8 @@ namespace Florid.Staff.Droid
 
         public static string RemoveSign(string str)
         {
+            if (string.IsNullOrEmpty(str))
+                return "";
 
             for (int i = 1; i < VietnameseSigns.Length; i++)
             {
@@ -189,7 +191,6 @@ namespace Florid.Staff.Droid
 
             data.SaleItems = data.SaleItems.OrderBy(p => p.Index).ToList();
 
-
             foreach (var product in data.SaleItems)
             {
                 var discount = (long)product.Discount;
@@ -243,7 +244,8 @@ namespace Florid.Staff.Droid
             template = template.Replace("{{ScoreUsed}}", data.ScoreUsed.ToString());
             template = template.Replace("{{GainedScore}}", data.GainedScore.ToString());
             template = template.Replace("{{TotalScore}}", data.TotalScore.ToString());
-            template = template.Replace("{{CustomerName}}", RemoveSign(data.CustomerName));
+
+            template = template.Replace("{{CustomerName}}", RemoveSign(string.IsNullOrEmpty(data.CustomerName) ? "Khach Le" : data.CustomerName));
 
             if (discountTotal > 0)
             {
@@ -268,12 +270,20 @@ namespace Florid.Staff.Droid
 
             var purchase = "";
 
-            foreach(var item in data.PurchaseItems)
+            if(data.PurchaseItems !=  null && data.PurchaseItems.Any())
             {
-                purchase += string.Format(purchaseTemplate, item.Method, item.Amount.VNCurrencyFormat());
+                foreach (var item in data.PurchaseItems)
+                {
+                    purchase += string.Format(purchaseTemplate, item.Method, item.Amount.VNCurrencyFormat());
+                }
+
+                template = template.Replace("{{PurchaseItems}}", purchase);
+            }
+            else
+            {
+                template = template.Replace("{{PurchaseItems}}", "");
             }
 
-            template  = template.Replace("{{PurchaseItems}}", purchase);
 
             return template;
         }

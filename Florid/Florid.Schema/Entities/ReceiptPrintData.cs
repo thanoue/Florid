@@ -19,37 +19,37 @@ namespace Florid.Entity
         public string OrderId { get; set; }
 
         [JsonProperty("summary")]
-        public long Summary { get; set; }
+        public long Summary { get; set; } = 0;
 
         [JsonProperty("totalAmount")]
-        public long TotalAmount { get; set; }
+        public long TotalAmount { get; set; } = 0;
 
         [JsonProperty("totalPaidAmount")]
-        public long TotalPaidAmount { get; set; }
+        public long TotalPaidAmount { get; set; } = 0;
 
         [JsonProperty("totalBalance")]
-        public long TotalBalance { get; set; }
+        public long TotalBalance { get; set; } = 0;
 
         [JsonProperty("vatIncluded")]
         public bool VATIncluded { get; set; }
 
         [JsonProperty("memberDiscount")]
-        public int MemberDiscount { get; set; }
+        public int MemberDiscount { get; set; } = 0;
 
         [JsonProperty("scoreUsed")]
-        public double ScoreUsed { get; set; }
+        public double ScoreUsed { get; set; } = 0;
 
         [JsonProperty("gainedScore")]
-        public  double GainedScore { get; set; }
+        public  double GainedScore { get; set; } = 0;
 
         [JsonProperty("totalScore")]
-        public double TotalScore { get; set; }
+        public double TotalScore { get; set; } = 0;
 
         [JsonProperty("customerName")]
         public string CustomerName { get; set; }
 
        [JsonProperty("discount")]
-        public long Discount { get; set; }
+        public long Discount { get; set; } = 0;
 
         [JsonProperty("purchaseItems")]
         public IList<PurchaseItem> PurchaseItems { get; set; }
