@@ -64,6 +64,7 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidEnableAssemblyCompression>false</AndroidEnableAssemblyCompression>
     <AndroidSupportedAbis>armeabi-v7a;arm64-v8a</AndroidSupportedAbis>
+    <AndroidPackageFormat>aab</AndroidPackageFormat>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
