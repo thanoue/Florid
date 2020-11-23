@@ -56,7 +56,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols> 
-    <AndroidSigningKeyStore>..\Resources\keys\florid_staff_key.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyStore>..\..\Resources\florid_staff_key.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>florid123</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>florid_staff_key</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>florid123</AndroidSigningKeyPass>
