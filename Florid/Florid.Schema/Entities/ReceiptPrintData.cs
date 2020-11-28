@@ -52,7 +52,7 @@ namespace Florid.Entity
         public long Discount { get; set; } = 0;
 
         [JsonProperty("customerId")]
-        public string CustomerId { get; set; };
+        public string CustomerId { get; set; }
 
         [JsonProperty("purchaseItems")]
         public IList<PurchaseItem> PurchaseItems { get; set; }
