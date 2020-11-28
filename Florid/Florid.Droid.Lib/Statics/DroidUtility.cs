@@ -142,12 +142,7 @@ namespace Florid.Staff.Droid
                        "{{PurchaseItems}}"+
                        "[C]<b><font size='medium'>-----------------------</font></b>\n" +
 
-                       "[C]<b><font size='medium'>Customer Information</font></b>\n" +
-                       "[L]Name: <b>{{CustomerName}}</b>\n" +
-                       "{{MemberDiscount}}" +
-                       "[L]Using Scores:[R]{{ScoreUsed}}\n" +
-                       "[L]Receipt Scores:[R]{{GainedScore}}\n" +
-                       "[L]Total Scores:[R]{{TotalScore}}\n" +
+                        "{{CustomerInfo}}"+
 
                         "[L]\n" +
                        "[C]<qrcode size='20'>https://www.facebook.com/floridshop</qrcode>\n" +
@@ -163,12 +158,12 @@ namespace Florid.Staff.Droid
             var productTemplate = "[L]\n" + "[L]{0}  {1}[R]{2}\n";
 
             var productTemplateWithOnlyAdditionalFee = "[L]\n" + "[L]{0}  {1}[R]{2}\n" +
-                "[R]+{3}\n";
+               "[L]   Shipping Fee:[R]{3}\n";
 
             var productTemplateWithOnlyDiscount = "[L]\n" + "[L]{0}  {1}[R]{2}\n" +
                        "[L]   Discount:[R]{3}\n";
 
-            var productTemplateWithAdditionalFeeDiscount = "[L]\n" + "[L]{0}  {1}[R]{2}\n" + "[R]+{4}\n" +
+            var productTemplateWithAdditionalFeeDiscount = "[L]\n" + "[L]{0}  {1}[R]{2}\n" + "[L]  Shipping Feet:[R]{4}\n" +
             "[L]   Discount:[R]{3}\n";
 
 
@@ -230,7 +225,6 @@ namespace Florid.Staff.Droid
 
             var discountTotal = saleTotal - beforeVAT;
 
-
             template = template.Replace("{{SaleItems}}", saleItemContainer);
 
             template = template.Replace("{{SaleTotal}}", saleTotal.VNCurrencyFormat());
@@ -241,11 +235,27 @@ namespace Florid.Staff.Droid
             var vatTemplate = "[L]Before VAT:[R]{0}\n";
             template = template.Replace("{{VATIncluded}}", data.VATIncluded ? string.Format(vatTemplate, beforeVAT.VNCurrencyFormat()): "");
 
-            template = template.Replace("{{ScoreUsed}}", data.ScoreUsed.ToString());
-            template = template.Replace("{{GainedScore}}", data.GainedScore.ToString());
-            template = template.Replace("{{TotalScore}}", data.TotalScore.ToString());
+            var customInfoTemplate = "[C]<b><font size='medium'>Customer Information</font></b>\n" +
+                       "[L]Name: <b>{{CustomerName}}</b>\n" +
+                       "{{MemberDiscount}}" +
+                       "[L]Using Scores:[R]{{ScoreUsed}}\n" +
+                       "[L]Receipt Scores:[R]{{GainedScore}}\n" +
+                       "[L]Total Scores:[R]{{TotalScore}}\n";
 
-            template = template.Replace("{{CustomerName}}", RemoveSign(string.IsNullOrEmpty(data.CustomerName) ? "Khach Le" : data.CustomerName));
+            if(string.IsNullOrEmpty(data.CustomerId) || data.CustomerId == "KHACH_LE")
+            {
+                template = template.Replace("{{CustomerInfo}}", "");
+            }
+            else
+            {
+                template = template.Replace("{{CustomerInfo}}", customInfoTemplate);
+
+                template = template.Replace("{{ScoreUsed}}", data.ScoreUsed.ToString());
+                template = template.Replace("{{GainedScore}}", data.GainedScore.ToString());
+                template = template.Replace("{{TotalScore}}", data.TotalScore.ToString());
+
+                template = template.Replace("{{CustomerName}}", RemoveSign(string.IsNullOrEmpty(data.CustomerName) ? "Khach Le" : data.CustomerName));
+            }
 
             if (discountTotal > 0)
             {

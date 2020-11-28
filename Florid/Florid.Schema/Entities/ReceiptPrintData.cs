@@ -51,6 +51,9 @@ namespace Florid.Entity
        [JsonProperty("discount")]
         public long Discount { get; set; } = 0;
 
+        [JsonProperty("customerId")]
+        public string CustomerId { get; set; };
+
         [JsonProperty("purchaseItems")]
         public IList<PurchaseItem> PurchaseItems { get; set; }
 
