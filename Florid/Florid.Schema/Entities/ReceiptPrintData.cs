@@ -92,5 +92,8 @@ namespace Florid.Entity
 
         [JsonProperty("discount")]
         public double Discount { get; set; }
+
+        [JsonProperty("quantity")]
+        public int Quantity { get; set; }
     }
 }

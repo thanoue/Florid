@@ -78,7 +78,7 @@ namespace Florid.Staff.Ios
 
             View.Add(_webView);
 
-            var url = new NSUrl("https://florid-app.herokuapp.com");
+            var url = new NSUrl("https://floridstorage.web.app");
 
             _webView.LoadRequest(new NSUrlRequest(url));
 

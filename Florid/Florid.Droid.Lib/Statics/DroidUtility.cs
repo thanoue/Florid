@@ -105,8 +105,6 @@ namespace Florid.Staff.Droid
 
         public static string BindingReceiptData(this Context context, ReceiptPrintData data)
         {
-            AssetManager assets = context.Assets;
-            var sr = new StreamReader(assets.Open("receiptTemplate.html"));
             var template = "[L]\n" +
                        "[C]<b><font size='big'>FLORID</font></b>\n" +
                        "[L]\n" +
@@ -132,39 +130,44 @@ namespace Florid.Staff.Droid
 
                        "{{OrderDiscount}}" +
 
-                       "{{VATIncluded}}"+
+                       "{{VATIncluded}}" +
 
                        "[L]Amount:[R]{{TotalAmount}}\n" +
                        "[L]Paid:[R]{{TotalPaidAmount}}\n" +
                        "[L]Balance:[R]{{TotalBalance}}\n" +
 
                        "[C]<b><font size='medium'>-----------------------</font></b>\n" +
-                       "{{PurchaseItems}}"+
+                       "{{PurchaseItems}}" +
                        "[C]<b><font size='medium'>-----------------------</font></b>\n" +
 
-                        "{{CustomerInfo}}"+
+                        "{{CustomerInfo}}" +
 
                         "[L]\n" +
                        "[C]<qrcode size='20'>https://www.facebook.com/floridshop</qrcode>\n" +
                        "[C]<b><font size='medium'>Have a Florid day</font></b>\n" +
                        "[L]\n" +
-                       "[L]\n"+
+                       "[L]\n" +
                        "[L]\n";
 
 
             template = template.Replace("{{OrderId}}", data.OrderId);
             template = template.Replace("{{CreatedDate}}", data.CreatedDate);
 
-            var productTemplate = "[L]\n" + "[L]{0}  {1}[R]{2}\n";
+            var productTemplate = "[L]\n" + "[L]{0}  {1}[R]{2}\n" +
+                "[L]   Quantity:[R]{3}\n";
 
             var productTemplateWithOnlyAdditionalFee = "[L]\n" + "[L]{0}  {1}[R]{2}\n" +
+               "[L]   Quantity:[R]{4}\n" +
                "[L]   Shipping Fee:[R]{3}\n";
 
             var productTemplateWithOnlyDiscount = "[L]\n" + "[L]{0}  {1}[R]{2}\n" +
-                       "[L]   Discount:[R]{3}\n";
+                "[L]   Quantity:[R]{4}\n" +
+                "[L]   Discount:[R]{3}\n";
 
-            var productTemplateWithAdditionalFeeDiscount = "[L]\n" + "[L]{0}  {1}[R]{2}\n" + "[L]  Shipping Feet:[R]{4}\n" +
-            "[L]   Discount:[R]{3}\n";
+            var productTemplateWithAdditionalFeeDiscount = "[L]\n" + "[L]{0}  {1}[R]{2}\n"+
+                "[L]   Quantity:[R]{5}\n" +
+                "[L]   Shipping Fee:[R]{4}\n" +
+                "[L]   Discount:[R]{3}\n";
 
 
             long saleTotal = 0;
@@ -199,26 +202,26 @@ namespace Florid.Staff.Droid
                 {
                     if (product.AdditionalFee > 0)
                     {
-                        saleItemContainer += string.Format(productTemplateWithAdditionalFeeDiscount, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat(), discount.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat());
+                        saleItemContainer += string.Format(productTemplateWithAdditionalFeeDiscount, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat(), discount.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat(),product.Quantity);
                     }
                     else
                     {
-                        saleItemContainer += string.Format(productTemplateWithOnlyDiscount, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat(), discount.VNCurrencyFormat());
+                        saleItemContainer += string.Format(productTemplateWithOnlyDiscount, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat(), discount.VNCurrencyFormat(), product.Quantity);
                     }
                 }
                 else
                 {
                     if (product.AdditionalFee > 0)
                     {
-                        saleItemContainer += string.Format(productTemplateWithOnlyAdditionalFee, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat());
+                        saleItemContainer += string.Format(productTemplateWithOnlyAdditionalFee, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat(), product.AdditionalFee.VNCurrencyFormat(), product.Quantity);
                     }
                     else
                     {
-                        saleItemContainer += string.Format(productTemplate, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat());
+                        saleItemContainer += string.Format(productTemplate, product.Index, RemoveSign(product.ProductName), product.Price.VNCurrencyFormat(), product.Quantity);
                     }
                 }
 
-                saleTotal += (product.Price+product.AdditionalFee);
+                saleTotal += (product.Price * product.Quantity + product.AdditionalFee);
             }
 
             var beforeVAT = data.VATIncluded ? ((long)(((double)data.TotalAmount) / 1.1d)) : data.TotalAmount;
@@ -233,7 +236,7 @@ namespace Florid.Staff.Droid
             template = template.Replace("{{TotalBalance}}", data.TotalBalance.VNCurrencyFormat());
 
             var vatTemplate = "[L]Before VAT:[R]{0}\n";
-            template = template.Replace("{{VATIncluded}}", data.VATIncluded ? string.Format(vatTemplate, beforeVAT.VNCurrencyFormat()): "");
+            template = template.Replace("{{VATIncluded}}", data.VATIncluded ? string.Format(vatTemplate, beforeVAT.VNCurrencyFormat()) : "");
 
             var customInfoTemplate = "[C]<b><font size='medium'>Customer Information</font></b>\n" +
                        "[L]Name: <b>{{CustomerName}}</b>\n" +
@@ -242,7 +245,7 @@ namespace Florid.Staff.Droid
                        "[L]Receipt Scores:[R]{{GainedScore}}\n" +
                        "[L]Total Scores:[R]{{TotalScore}}\n";
 
-            if(string.IsNullOrEmpty(data.CustomerId) || data.CustomerId == "KHACH_LE")
+            if (string.IsNullOrEmpty(data.CustomerId) || data.CustomerId == "KHACH_LE")
             {
                 template = template.Replace("{{CustomerInfo}}", "");
             }
@@ -280,7 +283,7 @@ namespace Florid.Staff.Droid
 
             var purchase = "";
 
-            if(data.PurchaseItems !=  null && data.PurchaseItems.Any())
+            if (data.PurchaseItems != null && data.PurchaseItems.Any())
             {
                 foreach (var item in data.PurchaseItems)
                 {
