@@ -87,6 +87,9 @@
     <Reference Include="Esc.PosPrinter.Lib">
       <HintPath>..\Libs\Esc.PosPrinter.Lib.dll</HintPath>
     </Reference>
+    <Reference Include="Zoomi.Lib">
+      <HintPath>..\Libs\Zoomi.Lib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\MainActivity.cs" />
@@ -102,6 +105,7 @@
     <Compile Include="AsyncTasks\AsyncEscPosPrint.cs" />
     <Compile Include="AsyncTasks\AsyncEscPosPrinter.cs" />
     <Compile Include="AsyncTasks\AsyncBluetoothEscPosPrint.cs" />
+    <Compile Include="Activities\ViewImgActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -123,6 +127,10 @@
       <Generator></Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\mipmap\logo_black.png">
+      <SubType></SubType>
+      <Generator></Generator>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\activity_view_img.xml">
       <SubType></SubType>
       <Generator></Generator>
     </AndroidResource>
@@ -166,9 +174,6 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="Karamunting.Android.Florent37.SingleDateAndTimePicker">
-      <Version>2.1.5</Version>
     </PackageReference>
     <PackageReference Include="Karamunting.Android.SiraLam.WebViewSuite">
       <Version>1.0.3</Version>

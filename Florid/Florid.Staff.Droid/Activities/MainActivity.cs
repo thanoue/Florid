@@ -68,10 +68,7 @@ namespace Florid.Staff.Droid.Activity
             settings.SetEnableSmoothTransition(true);
             settings.DomStorageEnabled = true;
             settings.SetSupportZoom(false);
-            settings.JavaScriptCanOpenWindowsAutomatically = true;
             settings.BuiltInZoomControls = true;
-
-
             settings.MixedContentMode = MixedContentHandling.AlwaysAllow;
 
             webView.ClearCache(true);
@@ -127,6 +124,7 @@ namespace Florid.Staff.Droid.Activity
                  //});
              };
 
+
             _javascriptClient.MobileLoginCallback = (loginName, passCode) =>
             {
                 _sessionLoginName = loginName;
@@ -172,6 +170,14 @@ namespace Florid.Staff.Droid.Activity
 
                 DroidUtility.ExecJavaScript(_mainWebView.WebView, "savedLoginInforReturn(\"" + loginName + "\",\"" + password + "\")");
 
+            };
+
+            _javascriptClient.OnViewImg = (url) =>
+            {
+                var intent = new Intent(this, typeof(ViewImgActivity));
+                intent.PutExtra("URL", url);
+
+                StartActivity(intent);
             };
 
             webView.AddJavascriptInterface(_javascriptClient, "Android");

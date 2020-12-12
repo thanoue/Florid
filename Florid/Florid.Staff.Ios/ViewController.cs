@@ -39,6 +39,7 @@ namespace Florid.Staff.Ios
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
+
             if (_isLoaded)
                 return;
 
@@ -79,6 +80,7 @@ namespace Florid.Staff.Ios
             View.Add(_webView);
 
             var url = new NSUrl("https://floridstorage.web.app");
+           // var url = new NSUrl("http://172.16.4.35:4200");
 
             _webView.LoadRequest(new NSUrlRequest(url));
 
@@ -95,6 +97,18 @@ namespace Florid.Staff.Ios
 
                 switch (dataModel.DataType)
                 {
+                    case NativeSendingModel.TYPE_VIEW_IMG:
+
+                        var url = dataModel.Data;
+
+                        var viewImg = new ViewProductImageViewController(url);
+
+                        viewImg.ModalPresentationStyle = UIModalPresentationStyle.OverCurrentContext;
+                        viewImg.ModalTransitionStyle = UIModalTransitionStyle.CrossDissolve;
+                        this.PresentModalViewController(viewImg, true);
+
+                        break;
+
                     case NativeSendingModel.TYPE_SHARING_IMG:
 
                         var imgModel = JsonConvert.DeserializeObject<ImageSharingModel>(dataModel.Data);
@@ -191,6 +205,7 @@ namespace Florid.Staff.Ios
             }
             catch (Exception EX)
             {
+                Console.WriteLine(EX);
                 return;
             }
 
@@ -214,6 +229,7 @@ namespace Florid.Staff.Ios
         public const string TYPE_MOBILE_LOGIN = "mobileLogin";
         public const string TYPE_PASSWORD_SAVING = "passwordSaving";
         public const string TYPE_PASSWORD_CLEARING = "passwordClearing";
+        public const string TYPE_VIEW_IMG = "viewImage";
 
 
         [JsonProperty("dataType")]
