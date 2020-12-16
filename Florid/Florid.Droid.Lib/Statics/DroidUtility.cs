@@ -173,29 +173,15 @@ namespace Florid.Staff.Droid
             long saleTotal = 0;
             var saleItemContainer = "";
 
-            bool isHasMemberDiscount = true;
-
-            if (data.Discount > 0)
-                isHasMemberDiscount = false;
-
-            foreach (var prod in data.SaleItems)
-            {
-                if (prod.Discount > 0)
-                {
-                    isHasMemberDiscount = false;
-                    break;
-                }
-            }
-
             data.SaleItems = data.SaleItems.OrderBy(p => p.Index).ToList();
 
             foreach (var product in data.SaleItems)
             {
                 var discount = (long)product.Discount;
 
-                if (isHasMemberDiscount)
+                if (data.IsMemberDiscountApply)
                 {
-                    discount = (long)((((float)product.Price) / 100f) * data.MemberDiscount);
+                    discount  += (long)((((float)product.Price) / 100f) * data.MemberDiscount);
                 }
 
                 if (discount > 0)
@@ -270,7 +256,7 @@ namespace Florid.Staff.Droid
                 template = template.Replace("{{OrderDiscount}}", "");
 
 
-            if (isHasMemberDiscount)
+            if (data.IsMemberDiscountApply)
             {
                 var memberDiscountTemplate = "[L]Member Discount:[R]{0}%\n";
 

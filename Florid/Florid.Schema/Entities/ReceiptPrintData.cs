@@ -57,6 +57,10 @@ namespace Florid.Entity
         [JsonProperty("purchaseItems")]
         public IList<PurchaseItem> PurchaseItems { get; set; }
 
+
+        [JsonProperty("isMemberDiscountApply")]
+        public bool IsMemberDiscountApply { get; set; }
+
         public ReceiptPrintData()
         {
             SaleItems = new List<SaleItem>();
