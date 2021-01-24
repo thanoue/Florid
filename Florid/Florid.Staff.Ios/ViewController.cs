@@ -79,7 +79,7 @@ namespace Florid.Staff.Ios
 
             View.Add(_webView);
 
-            var url = new NSUrl("https://floridstorage.web.app");
+            var url = new NSUrl("https://florid-day.xyz");
            // var url = new NSUrl("http://172.16.4.35:4200");
 
             _webView.LoadRequest(new NSUrlRequest(url));
