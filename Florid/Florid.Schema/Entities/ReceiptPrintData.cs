@@ -15,6 +15,9 @@ namespace Florid.Entity
         [JsonProperty("createdDate")]
         public string CreatedDate { get; set; }
 
+        [JsonProperty("doneTime")]
+        public string DoneTime { get; set; }
+
         [JsonProperty("orderId")]
         public string OrderId { get; set; }
 
@@ -40,7 +43,7 @@ namespace Florid.Entity
         public double ScoreUsed { get; set; } = 0;
 
         [JsonProperty("gainedScore")]
-        public  double GainedScore { get; set; } = 0;
+        public double GainedScore { get; set; } = 0;
 
         [JsonProperty("totalScore")]
         public double TotalScore { get; set; } = 0;
@@ -48,7 +51,7 @@ namespace Florid.Entity
         [JsonProperty("customerName")]
         public string CustomerName { get; set; }
 
-       [JsonProperty("discount")]
+        [JsonProperty("discount")]
         public long Discount { get; set; } = 0;
 
         [JsonProperty("customerId")]

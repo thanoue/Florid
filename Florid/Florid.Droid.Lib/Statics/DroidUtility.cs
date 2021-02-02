@@ -116,8 +116,8 @@ namespace Florid.Staff.Droid
                        "[C]<b><font size='wide'>RECEIPT</font></b>\n" +
                         "[C]<b><font size='medium'>-----------------------</font></b>\n" +
                        "[C]<b><font size='small'>Id: {{OrderId}}</font></b>\n" +
-                       "[C]<b><font size='small'>Time:{{CreatedDate}}</font></b>\n" +
-                        "[C]<b><font size='medium'>-----------------------</font></b>\n" +
+                       "[C]<b><font size='small'>Time:{{DoneTime}}</font></b>\n" +
+                       "[C]<b><font size='medium'>-----------------------</font></b>\n" +
                        "[L]\n" +
                        "[L]   Name[R]Price\n" +
 
@@ -151,7 +151,7 @@ namespace Florid.Staff.Droid
 
 
             template = template.Replace("{{OrderId}}", data.OrderId);
-            template = template.Replace("{{CreatedDate}}", data.CreatedDate);
+            template = template.Replace("{{DoneTime}}", data.DoneTime);
 
             var productTemplate = "[L]\n" + "[L]{0}  {1}[R]{2}\n" +
                 "[L]   Quantity:[R]{3}\n";
