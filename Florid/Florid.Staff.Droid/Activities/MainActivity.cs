@@ -204,7 +204,6 @@ namespace Florid.Staff.Droid.Activity
 
             _mainWebView.StartLoading(BaseModelHelper.Instance.RootWebUrl);
 
-
             //if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) != Android.Content.PM.Permission.Granted)
             //{
             //    ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessFineLocation }, 999);

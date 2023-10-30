@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="3.1" package="com.florid.staff.droid">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="28" />
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="29" />
 	<application android:allowBackup="true" android:icon="@mipmap/logo" android:label="@string/app_name" android:roundIcon="@mipmap/logo" android:supportsRtl="true" android:theme="@style/AppTheme">
-		<service android:name="florid.staff.froid.MyService" />
+		<!--<service android:name="florid.staff.froid.MyService" />-->
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.florid.staff.fileprovider" android:exported="false" android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/folder_path"></meta-data>
 		</provider>
